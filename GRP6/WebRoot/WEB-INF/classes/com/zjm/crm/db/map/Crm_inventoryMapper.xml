@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.crm.db.map.Crm_inventoryMapper">
+	<!-- 存货表信息 -->
+	<resultMap type="com.zjm.crm.db.model.Crm_inventory" id="InventoryResultMap">
+		<result property="inventory_ID" column="inventory_ID" />
+		<result property="client_ID" column="client_ID" />
+		<result property="inventoryName" column="inventoryName" />
+		<result property="inventoryCount" column="inventoryCount" />
+		<result property="inventoryPrice" column="inventoryPrice" />
+		<result property="inventorySum" column="inventorySum" />
+		<result property="remark" column="remark" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="unit_uidName" column="unit_uidName" />
+		<result property="updateUserName" column="updateUserName" />
+		<result property="updateDateTime" column="updateDateTime" />
+	</resultMap>
+
+	<!-- 新增一个存货信息 -->
+	<insert id="insertOneInventoryInfo" parameterType="com.zjm.crm.db.model.Crm_inventory">
+		<![CDATA[
+		INSERT INTO crm_inventory(
+			inventory_ID,
+			client_ID,
+			inventoryName,
+			inventoryCount,
+			inventoryPrice,
+			inventorySum,
+			remark,
+			unit_uid,
+			unit_uidName,
+			updateUserName,
+			updateDateTime
+			
+		)
+		VALUES
+		(
+			#{inventory_ID},
+			#{client_ID},
+			#{inventoryName},
+			#{inventoryCount},
+			#{inventoryPrice},
+			#{inventorySum},
+			#{remark},
+			#{unit_uid},
+			#{unit_uidName},
+			#{updateUserName},
+			NOW()
+		) ;
+		]]>
+	</insert>
+	
+
+	<!-- 查询所有的存货列表 -->
+	<select id="selectInventoryPageTables" parameterType="com.zjm.crm.db.model.Crm_inventory"
+		resultMap="InventoryResultMap">
+		<![CDATA[
+		SELECT
+			inventory_ID,
+			client_ID,
+			inventoryName,
+			inventoryCount,
+			inventoryPrice,
+			inventorySum,
+			remark,
+			unit_uid,
+			unit_uidName,
+			updateUserName,
+			updateDateTime
+		FROM crm_inventory
+		where 1=1  AND client_ID=#{client_ID}]]>
+	</select>
+	
+	<!-- 删除一个存货 -->
+	<delete id="deleteOneInventoryInfo" parameterType="java.lang.String">
+		<![CDATA[
+			delete from crm_inventory
+			where inventory_ID=#{inventory_ID}
+		]]>
+	</delete>
+	
+	<!-- 根据relationID查询存货信息 -->
+	<select id="selectOneInventoryInfo" parameterType="com.zjm.crm.db.model.Crm_inventory" resultMap="InventoryResultMap">
+		<![CDATA[
+		 	select 
+				client_ID,
+				inventoryName,
+				inventoryCount,
+				inventoryPrice,
+				inventorySum,
+				remark,
+				unit_uid,
+				unit_uidName,
+				updateUserName,
+				updateDateTime
+		 	from crm_inventory
+		 	where inventory_ID = #{inventory_ID}
+		]]>
+	</select>
+	
+	<!-- 更新存货信息 -->
+	<update id="updateOneInventoryInfo" parameterType="com.zjm.crm.db.model.Crm_inventory">
+		<![CDATA[
+			UPDATE 
+			  crm_inventory
+			SET
+			  inventoryName = #{inventoryName},
+			  inventoryCount = #{inventoryCount},
+			  inventoryPrice = #{inventoryPrice},
+			  inventorySum = #{inventorySum},
+			  remark = #{remark},
+			  updateUserName = #{updateUserName},
+			  updateDateTime = NOW()
+			WHERE inventory_ID = #{inventory_ID}
+		]]>
+	</update>
+	
+	<delete id="deleteInventoryByWheresql" parameterType="string">
+		delete from crm_inventory
+		where 1=1 ${value}
+	</delete>
+	
+</mapper>  

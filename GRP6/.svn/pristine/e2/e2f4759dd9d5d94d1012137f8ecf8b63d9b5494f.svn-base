@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><jatools Class="jatools.ReportDocument" Name="jatools report template"><VariableContext/><Page><Name>panel</Name><Children ItemClass="PagePanel"><Item0><Name>header</Name><Width>753</Width><Height>95</Height><Children><Item0 Class="Label"><Text>国资委五级分类报表</Text><Font><Face>宋体</Face><Style>1</Style><Size>36</Size></Font><HorizontalAlignment>1</HorizontalAlignment><X>50</X><Y>5</Y><Width>653</Width><Height>43</Height></Item0><Item1 Class="Text"><Variable>=if(has(endyearmonthsql)) return endyearmonthsql;else return ($today+"").substring(0,7)</Variable><X>345</X><Y>58</Y><Width>110</Width><Height>23</Height></Item1><Item2 Class="Label"><Text>统计年月：</Text><X>288</X><Y>58</Y><Width>56</Width><Height>23</Height></Item2></Children><Type>100</Type></Item0><Item1><Name>body</Name><Y>95</Y><Width>753</Width><Height>907</Height><Children ItemClass="Table"><Item0><NodePath>tab_gzwRisk</NodePath><X>45</X><Y>2</Y><Children><Item0 Class="RowPanel"><Cell><Row>1</Row><Col>0</Col><ColSpan>3</ColSpan></Cell><Children ItemClass="Text"><Item0><Variable>=$.gzwRiskLevel</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>2</Col></Cell></Item0><Item1><Variable>=$.clientName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>1</Col></Cell></Item1><Item2><Variable>=$.position+1</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>0</Col></Cell></Item2></Children><NodePath>Row</NodePath></Item0><Item1 Class="Label"><Text>五级分类（国资委）</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>2</Col></Cell></Item1><Item2 Class="Text"><Variable>=if(has(endyearmonthsql)) return endyearmonthsql+"户名"; else return ($today+"").substring(0,7)+"户名";</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col></Cell></Item2><Item3 Class="Label"><Text>序号</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>0</Row><Col>0</Col></Cell></Item3></Children><ColumnWidths>60,400,225</ColumnWidths><RowHeights>30,30</RowHeights></Item0></Children><Type>102</Type></Item1><Item2><Name>footer</Name><Y>1002</Y><Width>753</Width><Height>80</Height><Type>103</Type></Item2></Children></Page><NodeSource><Children ItemClass="DatasetNodeSource"><Item0><Children ItemClass="RowNodeSource"><Item0/></Children><Reader Class="SqlReader"><Name>tab_gzwRisk</Name><Sql>SELECT 
+   distinct cc.clientGUID,
+   cc.clientName,
+   cc.gzwRiskLevel
+FROM  pro_project  pp
+LEFT JOIN  pro_apply  pa  ON pa.`apply_ID` = pp.`apply_ID`
+LEFT JOIN  crm_client  cc  ON  cc.`client_ID`=pa.`client_ID`
+-- LEFT JOIN c_dicType dic ON dic.dicTypeName=cc.gzwRiskLevel
+WHERE 	pp.busiClass is not null 
+AND cc.clientName is not null 
+AND cc.gzwRiskLevel is not null 
+-- AND dic.dictypepid="50f858be37284937af4e6a8d3c9bee4b"
+	${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.delayBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- ORDER BY  dic.order_id
+</Sql>
+<Description>
+SELECT 
+   distinct cc.clientGUID,
+   cc.clientName,
+   cc.gzwRiskLevel
+FROM  pro_project  pp
+LEFT JOIN  pro_apply  pa  ON pa.`apply_ID` = pp.`apply_ID`
+LEFT JOIN  crm_client  cc  ON  cc.`client_ID`=pa.`client_ID`
+-- LEFT JOIN c_dicType dic ON dic.dicTypeName=cc.gzwRiskLevel
+WHERE 	pp.busiClass is not null 
+AND cc.clientName is not null 
+AND cc.gzwRiskLevel is not null 
+-- AND dic.dictypepid="50f858be37284937af4e6a8d3c9bee4b"
+	${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.delayBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+ORDER BY  dic.order_id</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><TagName>tab_gzwRisk</TagName></Item0></Children></NodeSource></jatools>

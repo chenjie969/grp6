@@ -1,0 +1,70 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ include file="/common_timestamp.jsp" %>
+<link rel="stylesheet" href="<%=path %>/plugins/viewer/viewer.min.css?v=<%=vardate%>" />
+
+<div class="page-content">
+	<input type="hidden" name="applyID" id="applyID" value="${urlParam.entityID}">
+	<input type="hidden" name="type" id="type" value="${urlParam.type}">
+	<div class="page-header">
+		<c:if test="${empty comming }">
+			<h4>制作合同</h4>
+		</c:if>
+		<c:if test="${!empty comming }">
+			<h4>合同详情</h4>
+		</c:if>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<h4 class="header smaller lighter blue">
+				项目信息
+			</h4>
+					<h5 style="line-height: 26px;"class="col-sm-6">
+						业务编号：<span class="grey">${empty apply.busiCode ? "（空）":apply.busiCode}</span>
+					</h5>
+					<h5  style="line-height: 26px;"class="col-sm-6">
+						项目名称：<span class="grey">${empty apply.projectName ? "（空）":apply.projectName}</span>
+					</h5>
+					<h5 style="line-height: 26px;"class="col-sm-6">
+						业务性质：<span class="grey">${empty apply.busiNatureName ? "（空）":apply.busiNatureName}</span>
+					</h5>
+					<h5 style="line-height: 26px;"class="col-sm-6">
+						类别：<span class="grey">${empty apply.projectType ? "（空）":apply.projectType}</span>
+					</h5>
+					<h5  style="line-height: 26px;"class="col-sm-6">
+						A角：<span class="grey">${empty apply.amanName ? "（空）":apply.amanName}</span>
+					</h5>
+					<h5 style="line-height: 26px;"class="col-sm-6">
+					    B角：<span class="grey">${empty apply.bmanName ? "（空）":apply.bmanName}</span>
+					</h5>
+					<h5 style="line-height: 26px;"class="col-sm-6">
+						风控评审人：<span class="grey">${empty apply.reviewManName ? "（空）":apply.reviewManName}</span>
+					</h5>
+					<h5  style="line-height: 26px;"class="col-sm-6">
+						经办部门：<span class="grey">${empty apply.departName ? "（空）":apply.departName}</span>
+					</h5>
+					
+				<div class="space-16 col-sm-12"></div>
+				<h4 class="header smaller lighter blue">
+					合同列表
+					<c:if test="${urlParam.type eq 'edit' }">
+						<button type="button" name="button" class="btn btn-minier btn-warning pull-right" id="btn_addHetTong">
+							<i class="icon-edit bigger-110"></i>
+							<span class="bigger-110 no-text-shadow">新增合同</span>
+						</button>
+					</c:if>
+				</h4>
+				
+				<div class="table-responsive" id="loadinfo222">
+						<table id="heTong_table" style="font-size: 13px !important;"></table>
+					</div>
+				</div>
+	</div>
+</div><!-- /.page-content -->
+<div id="HeTong_page"></div>
+<script src="<%=path %>/project/contractDoc/contractDoc.js?v=<%=vardate%>"></script>
+<%@ include file="/project/contractDoc/contractDocDel.jsp" %>
+<%@ include file="/project/contractDoc/contractDocUpload.jsp" %>
+<script src="<%=path %>/plugins/plupload/plupload.full.min.js?v=<%=vardate%>"></script>
+<script src="<%=path %>/plugins/plupload/i18n/zh_CN.js?v=<%=vardate%>"></script>
+<script src="<%=path %>/plugins/viewer/viewer.min.js?v=<%=vardate%>"></script>
+

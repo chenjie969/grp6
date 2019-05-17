@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_arcDirectoryMapper">
+	<!-- 档案移交清单表 -->
+	<resultMap id="proArcDirectoryMap" type="com.zjm.pro.db.model.Pro_arcDirectory">
+		<id column="arcDirectory_ID" property="arcDirectory_ID" />
+		<result column="apply_ID" property="apply_ID" />
+		<result column="arcTypeID" property="arcTypeID" />
+		<result column="arcTypeName" property="arcTypeName" />
+		<result column="fileTitle" property="fileTitle" />
+		<result column="createDate" property="createDate" />
+		<result column="pageCount" property="pageCount" />
+		<result column="isOldArc" property="isOldArc" />
+		<result column="remark" property="remark" />
+		<result column="unit_uid" property="unit_uid" />
+		<result column="updateUserName" property="updateUserName" />
+		<result column="updateDateTime" property="updateDateTime" />
+
+	</resultMap>
+	
+	<!-- 分页查询节点列表 -->
+	<select id="selectFilesDataTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="proArcDirectoryMap">
+		SELECT 
+			arcDirectory_ID,
+			apply_ID,
+			arcTypeID,
+			arcTypeName,
+			fileTitle,  
+			pageCount,
+			createDate,  
+			isOldArc, 
+			remark,  
+			unit_uid,
+			updateUserName,
+			updateDateTime
+		FROM pro_arcDirectory 
+		WHERE 1=1 
+			  ${wheresql}
+		LIMIT #{pageNumber},#{pageSize}  
+	</select>
+	
+	<!-- 分页查询节点列表-查询总记录数 -->
+	<select id="selectFilesDataTable_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="long">
+	 	SELECT  COUNT(1) 
+	 	FROM    pro_arcDirectory 
+	 	WHERE   1=1  ${wheresql}
+	</select>
+	
+</mapper>  

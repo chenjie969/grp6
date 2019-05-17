@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_planPayMapper">
+	<!--还款计划表 -->
+	 <resultMap id="planPayMap" type="com.zjm.pro.db.model.Pro_planPay" >
+	   	<result column="planPay_ID" property="planPay_ID"/>
+	   	<result column="apply_ID" property="apply_ID"/>
+	   	<result column="applyDetail_ID" property="applyDetail_ID"/>
+	   	<result column="loanPlan_ID" property="loanPlan_ID"/>
+	   	<result column="planPayDate" property="planPayDate"/>
+	   	<result column="planPayMonth" property="planPayMonth"/>
+	   	<result column="planPaySum" property="planPaySum"/>
+	   	<result column="payStatus" property="payStatus"/>
+	   	<result column="unit_uid" property="unit_uid"/>
+	   	<result column="updateUserName" property="updateUserName"/>
+	   	<result column="updateDateTime" property="updateDateTime"/>
+	   	<result column="project_ID" property="project_ID"/>
+  	</resultMap>
+	
+	<!-- 查询还款计划列表 -->
+	<select id="selectPlanPayListByWhereSql" parameterType="java.lang.String" resultMap="planPayMap">
+		<![CDATA[
+			SELECT 
+				planPay_ID,
+				apply_ID,
+				applyDetail_ID,
+				loanPlan_ID,
+				project_ID,
+				planPayDate,
+				planPayMonth,
+				planPaySum,
+				payStatus,
+				unit_uid,
+				updateUserName,
+				updateDateTime
+			FROM pro_planPay
+			WHERE 1=1 ${value}	
+			order by planPayMonth ASC
+		]]>
+	</select>
+	
+	<!-- 新增还款计划-->
+	<insert id="insertOnePlanPay"	parameterType="com.zjm.pro.db.model.Pro_planPay">
+		<![CDATA[
+		INSERT INTO pro_planPay (
+	        planPay_ID,
+			apply_ID,
+			applyDetail_ID,
+			loanPlan_ID,
+			project_ID,
+			planPayDate,
+			planPayMonth,
+			planPaySum,
+			payStatus,
+			unit_uid,
+			updateUserName,
+			updateDateTime
+		) VALUES (
+			#{planPay_ID},
+			#{apply_ID},
+			#{applyDetail_ID},
+			#{loanPlan_ID},
+			#{project_ID},
+			#{planPayDate},
+			#{planPayMonth},
+			#{planPaySum},
+			#{payStatus},
+			#{unit_uid},
+			#{updateUserName},
+			NOW()
+		)
+		]]>
+	</insert>
+
+	<!-- 查询一条还款计划 -->
+	<select id="selectOnePlanPay" parameterType="java.lang.String" resultMap="planPayMap">
+		<![CDATA[
+			SELECT 
+				planPay_ID,
+				apply_ID,
+				applyDetail_ID,
+				loanPlan_ID,
+				project_ID,
+				planPayDate,
+				planPayMonth,
+				planPaySum,
+				payStatus,
+				unit_uid,
+				updateUserName,
+				updateDateTime
+			FROM pro_planPay
+			WHERE 1=1 ${value}
+			LIMIT 1
+		]]>
+	</select>
+	
+	<!-- 修改一条还款计划 -->
+	<update id="updateOnePlanPay" parameterType="com.zjm.pro.db.model.Pro_planPay">
+		UPDATE pro_planPay
+		<set>
+			<if test="planPayMonth != null">planPayMonth = #{planPayMonth},</if>
+			<if test="planPayDate != null">planPayDate = #{planPayDate},</if>
+			<if test="planPaySum != null">planPaySum = #{planPaySum},</if>
+			updateUserName = #{updateUserName},
+			updateDateTime = NOW()
+		</set>
+		WHERE
+			planPay_ID=#{planPay_ID}
+		LIMIT 1
+	</update>
+	
+	<!-- 删除一条还款计划 -->
+	<delete id="deleteOnePlanPay" parameterType="java.lang.String">
+		<![CDATA[
+			DELETE 
+				FROM pro_planPay
+			WHERE 1=1 ${value}
+		]]>
+	</delete>
+	
+	<!-- 批量删除还款计划 -->
+	<delete id="deletePlanPayByWheresql" parameterType="java.lang.String">
+		<![CDATA[
+			DELETE 
+				FROM pro_planPay
+			WHERE 1=1 ${value}
+		]]>
+	</delete>
+	
+	<!-- 修改一条还款计划状态 -->
+	<update id="updatePlanPayState" parameterType="com.zjm.pro.db.model.Pro_planPay">
+		<![CDATA[
+			UPDATE pro_planPay
+			SET
+				payStatus = #{payStatus}
+			WHERE
+				planPay_ID=#{planPay_ID}
+			LIMIT 1
+		]]>
+	</update>
+	
+	<!-- 根据调价查询计划还款总金额 -->
+	<select id="totalPlanPaySumByWheresql"  parameterType="java.lang.String" resultType="java.lang.Double">
+		SELECT
+			SUM(planPaySum)
+		FROM
+			pro_planPay
+		WHERE 1=1 ${value}
+	</select>
+</mapper>  

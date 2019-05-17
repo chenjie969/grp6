@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_lawsuitProgressMapper">
+	<!-- 诉讼情况表 -->
+	 <resultMap id="ProLawsuitProgressMap" type="com.zjm.pro.db.model.Pro_lawsuitProgress" >
+        <result column="lawsuitProgress_ID" property="lawsuitProgress_ID"/>
+        <result column="applyID" property="applyID"/>
+        <result column="workDate" property="workDate"/>
+        <result column="workStatus" property="workStatus"/>
+        <result column="workDesc" property="workDesc"/>
+        <result column="operationManID" property="operationManID"/>
+        <result column="operationManName" property="operationManName"/>
+		<result column="unit_uid" property="unit_uid"/>
+		<result column="updateUserName" property="updateUserName"/>
+		<result column="updateDateTime" property="updateDateTime"/>
+		<result column="remark" property="remark"/>
+  	</resultMap>
+	<!-- 新增业务代偿信息表Pro_lawsuitProgress -->
+	<insert id="insertOneLawsuitProgressInfo"	parameterType="com.zjm.pro.db.model.Pro_lawsuitProgress">
+		<![CDATA[
+		INSERT INTO pro_lawsuitProgress (
+				lawsuitProgress_ID,
+				applyID,
+				workDate,
+				workStatus,
+				workDesc,
+				operationManID,
+				operationManName,
+				unit_uid,
+				updateUserName,
+				remark,
+				updateDateTime
+		       )
+		VALUES
+		(
+				#{lawsuitProgress_ID},
+				#{applyID},
+				#{workDate},
+				#{workStatus},
+				#{workDesc},
+				#{operationManID},
+				#{operationManName},
+				#{unit_uid},
+				#{updateUserName},
+				#{remark},
+				NOW()
+		) ;
+		]]>
+	</insert>
+	
+	<!--删除 -->
+	<delete id="delOneLawsuitProgressInfo" parameterType="java.lang.String">
+		DELETE FROM 
+			pro_lawsuitProgress
+		WHERE
+		1=1	${value}
+	</delete>
+	
+	<!-- 修改一条案件诉讼情况 -->
+	<update id="updateOneLawsuitProgressInfo" parameterType="com.zjm.pro.db.model.Pro_lawsuitProgress">
+		UPDATE pro_lawsuitProgress
+		SET
+			workDate = #{workDate},
+			workStatus = #{workStatus},
+			workDesc = #{workDesc},
+			operationManID = #{operationManID},
+			operationManName = #{operationManName}, 
+			updateUserName = #{updateUserName},
+			remark = #{remark},  
+			updateDateTime = NOW() 
+		WHERE lawsuitProgress_ID = #{lawsuitProgress_ID}
+	</update>
+	
+	<!-- 分页查询列表 -->
+	<select id="selectLawsuitProgressPageTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="ProLawsuitProgressMap">
+		<![CDATA[
+		SELECT 
+			lawsuitProgress_ID,
+			applyID,
+			workDate,
+			workStatus,
+			workDesc,
+			operationManID,
+			operationManName,
+			unit_uid,
+			updateUserName,
+			updateDateTime,
+			remark
+		FROM pro_lawsuitProgress
+		WHERE 1=1
+			  ${wheresql}
+	  	order by ${sortName}  ${sortOrder}	
+		LIMIT #{pageNumber},#{pageSize} 
+		]]>
+	</select>
+	
+	<!-- 分页查询列表-查询总记录数 -->
+	<select id="selectLawsuitProgressPageTable_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="long">
+	<![CDATA[
+	 	SELECT 
+	 		COUNT(1) 
+	 	FROM 
+	 		pro_lawsuitProgress
+	 	WHERE 1=1
+	 		${wheresql}
+	 	]]>	
+	</select>
+	
+	
+	<!-- 查询案件诉讼情况 -->
+	<select id="selectOneLawsuitProgressInfo" parameterType="java.lang.String" resultMap="ProLawsuitProgressMap">
+		<![CDATA[
+		SELECT 
+			lawsuitProgress_ID,
+			applyID,
+			workDate,
+			workStatus,
+			workDesc,
+			operationManID,
+			operationManName,
+			unit_uid,
+			updateUserName,
+			updateDateTime,
+			remark
+		FROM pro_lawsuitProgress
+		WHERE 1=1
+		  ${value}
+		]]>
+	</select>
+	
+</mapper>  

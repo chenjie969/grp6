@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.zjm.oa.db.map.Hr_staffGuaranteeMapper">
+   <resultMap type="com.zjm.oa.db.model.Hr_staffGuarantee" id="guaranteeResultMap">
+   <result property="guaranteeID" column="guaranteeID" />
+   <result property="staffcase_Id" column="staffcase_Id"/>
+   <result property="guaranteeMan" column="guaranteeMan"/>
+   <result property="guaranteeDate" column="guaranteeDate"/>
+   <result property="guaranteeUnits" column="guaranteeUnits"/>
+   <result property="guaranteeTEL" column="guaranteeTEL"/>
+   <result property="guaranteeDesc" column="guaranteeDesc"/>
+   <result property="guaranteeNotes" column="guaranteeNotes"/>
+    </resultMap>
+    
+     <!-- 插入一条担保记录 -->
+   <insert id="insertOneGuarantee" parameterType="com.zjm.oa.db.model.Hr_staffGuarantee">
+   <![CDATA[
+     INSERT INTO hr_staffguarantee(
+          guaranteeID,
+          staffcase_Id,
+          guaranteeMan,
+          guaranteeDate,
+          guaranteeUnits,
+          guaranteeTEL,
+          guaranteeDesc,
+          guaranteeNotes)
+       VALUES(
+          #{guaranteeID},
+          #{staffcase_Id},
+          #{guaranteeMan},
+          #{guaranteeDate},
+          #{guaranteeUnits},
+          #{guaranteeTEL},
+          #{guaranteeDesc},
+          #{guaranteeNotes}
+        )
+ 
+   ]]>
+    <!-- 更改一条担保记录 -->
+   </insert>
+   <update id="updateOneGuarantee" parameterType="com.zjm.oa.db.model.Hr_staffGuarantee">
+   <![CDATA[
+      UPDATE 
+          hr_staffguarantee
+      SET
+        guaranteeMan=#{guaranteeMan},
+        guaranteeDate=#{guaranteeDate},
+        guaranteeUnits=#{guaranteeUnits},
+        guaranteeTEL=#{guaranteeTEL},
+        guaranteeDesc=#{guaranteeDesc},
+        guaranteeNotes=#{guaranteeNotes}
+        
+        WHERE guaranteeID = #{guaranteeID}
+   
+   ]]>
+   </update>
+   <!-- 查询担保记录表 -->
+   <select id="selectGuaranteeTable" resultMap="guaranteeResultMap" parameterType="com.zjm.common.db.model.PageTable">
+   <![CDATA[
+ 	SELECT 
+		guaranteeID,
+		staffcase_Id,
+		guaranteeMan,
+		guaranteeDate,
+		guaranteeUnits,
+		guaranteeTEL,
+		guaranteeDesc,
+		guaranteeNotes
+   	 FROM hr_staffguarantee
+   	 WHERE 
+		staffCase_Id = #{queryCondition.staffcase_Id}
+   ]]>
+   </select>
+   <!-- 查询一条担保记录 -->
+      <select id="selectOneGuarantee" resultMap="guaranteeResultMap" parameterType="java.lang.String">
+      <![CDATA[
+ 	SELECT 
+		guaranteeID,
+		staffcase_Id,
+		guaranteeMan,
+		guaranteeDate,
+		guaranteeUnits,
+		guaranteeTEL,
+		guaranteeDesc,
+		guaranteeNotes
+   	 FROM hr_staffguarantee
+   	 WHERE 
+		guaranteeID = #{guaranteeID}
+   ]]>  
+   </select>
+   </mapper>

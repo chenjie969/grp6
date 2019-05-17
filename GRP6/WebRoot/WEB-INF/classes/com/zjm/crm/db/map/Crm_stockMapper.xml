@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjm.crm.db.map.Crm_stockMapper" >
+  <resultMap id="BaseResultMap" type="com.zjm.crm.db.model.Crm_stock" >
+    <id column="stock_ID" property="stockId"  />
+    <result column="client_ID" property="client_ID"  />
+    <result column="stockType" property="stocktype"  />
+    <result column="stockName" property="stockname"  />
+    <result column="certificateTypeID" property="certificatetypeid"  />
+    <result column="certificateName" property="certificatename"  />
+    <result column="certificateCode" property="certificatecode"  />
+    <result column="address" property="address"  />
+    <result column="phone" property="phone"  />
+    <result column="investTypeTime" property="investtypetime"  />
+    <result column="investSum" property="investsum"  />
+    <result column="factInvestSum" property="factinvestsum"  />
+    <result column="investScale" property="investscale"  />
+    <result column="unit_uid" property="unitUid"  />
+    <result column="updateUserName" property="updateusername"  />
+    <result column="updateDateTime" property="updatedatetime"  />
+    <result column="remark" property="remark"  />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    stock_ID, client_ID, stockType, stockName, certificateTypeID, certificateName, certificateCode, 
+    address, phone, investTypeTime, investSum, factInvestSum, investScale, unit_uid, 
+    updateUserName, updateDateTime ,remark
+  </sql>
+  
+  <!--  根据 股权id 删除一条股权信息 -->
+   <delete id="deleteOneStockInfo" parameterType="java.lang.String" >
+    delete from crm_stock
+    where stock_ID = #{stockId}
+  </delete>
+  
+   <!--  根据客户id 删除对应股权信息-->
+   <delete id="deleteStockInfoByClient_ID" parameterType="java.lang.String" >
+    delete from crm_stock
+    where client_ID = #{client_ID}
+  </delete>
+  
+ <!-- 添加一条股权信息 -->
+  <insert id="insertOneStockInfo" parameterType="com.zjm.crm.db.model.Crm_stock" >
+    insert into crm_stock (
+	    	stock_ID, 
+	    	client_ID, 
+	    	stockType, 
+	      	stockName, 
+	      	certificateTypeID, 
+	      	certificateName, 
+	      	certificateCode, 
+	      	address, 
+	      	phone, 
+	      	investTypeTime, 
+	      	investSum, 
+	      	factInvestSum, 
+	      	investScale, 
+	      	unit_uid, 
+	      	updateUserName, 
+	      	updateDateTime, 
+	      	remark
+      	)
+    values (
+    		#{stockId}, 
+    		#{client_ID}, 
+    		#{stocktype}, 
+      		#{stockname}, 
+      		#{certificatetypeid}, 
+      		#{certificatename}, 
+      		#{certificatecode}, 
+      		#{address}, 
+      		#{phone}, 
+      		#{investtypetime}, 
+      		#{investsum}, 
+      		#{factinvestsum}, 
+      		#{investscale}, 
+      		#{unitUid}, 
+      		#{updateusername}, 
+      		NOW(), 
+      		#{remark}
+      	)
+  </insert>
+ 
+ <!-- 根据股权id  查询一条股权信息 -->
+  <select id="selectOneStockInfo" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+	  	 stock_ID, client_ID, stockType, stockName, certificateTypeID, certificateName, certificateCode, 
+	    address, phone, investTypeTime, investSum, factInvestSum, investScale, unit_uid, 
+	    updateUserName, updateDateTime ,remark
+    from crm_stock
+    where stock_ID = #{stockId}
+  </select>
+  
+  <!-- 根据客户id 获取对应股权信息 -->
+   <select id="selectStockListByClient_ID" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+	  	 stock_ID, client_ID, stockType, stockName, certificateTypeID, certificateName, certificateCode, 
+	    address, phone, investTypeTime, investSum, factInvestSum, investScale, unit_uid, 
+	    updateUserName, updateDateTime ,remark
+    from crm_stock
+    where client_ID = #{client_ID}
+  </select>
+  
+  
+  <!-- 更新 修改一条股权信息 -->
+  <update id="updateOneStockInfo" parameterType="com.zjm.crm.db.model.Crm_stock" >
+    update crm_stock
+    <set >
+      <if test="client_ID != null" >
+        client_ID = #{client_ID},
+      </if>
+      <if test="stocktype != null" >
+        stockType = #{stocktype},
+      </if>
+      <if test="stockname != null" >
+        stockName = #{stockname},
+      </if>
+      <if test="certificatetypeid != null" >
+        certificateTypeID = #{certificatetypeid},
+      </if>
+      <if test="certificatename != null" >
+        certificateName = #{certificatename},
+      </if>
+      <if test="certificatecode != null" >
+        certificateCode = #{certificatecode},
+      </if>
+      <if test="address != null" >
+        address = #{address},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone},
+      </if>
+      <if test="investtypetime != null" >
+        investTypeTime = #{investtypetime},
+      </if>
+      <if test="investsum != null" >
+        investSum = #{investsum},
+      </if>
+      <if test="factinvestsum != null" >
+        factInvestSum = #{factinvestsum},
+      </if>
+      <if test="investscale != null" >
+        investScale = #{investscale},
+      </if>
+      <if test="unitUid != null" >
+        unit_uid = #{unitUid},
+      </if>
+      <if test="updateusername != null" >
+        updateUserName = #{updateusername},
+      </if>
+        updateDateTime = NOW(),
+      <if test="remark != null" >
+        remark = #{remark},
+      </if>
+    </set>
+    where stock_ID = #{stockId}
+  </update>
+  
+  
+</mapper>

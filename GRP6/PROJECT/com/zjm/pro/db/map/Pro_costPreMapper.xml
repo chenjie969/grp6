@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_costPreMapper">
+	
+	<!-- 预收费用表信息 -->
+	<resultMap type="com.zjm.pro.db.model.Pro_costPre" id="CostPreMap">
+		<result property="costPre_ID" column="costPre_ID" />
+		<result property="apply_ID" column="apply_ID" />
+		<result property="applyDetail_ID" column="applyDetail_ID" />
+		<result property="costTypeID" column="costTypeID" />
+		<result property="costTypeName" column="costTypeName" />
+		<result property="costRate" column="costRate" />
+		<result property="costUnit" column="costUnit" />
+		<result property="preCostSum" column="preCostSum" />
+		<result property="preCostDate" column="preCostDate" />
+		<result property="remark" column="remark" />
+		<result property="operationDepartID" column="operationDepartID" />
+		<result property="operationDepartName" column="operationDepartName" />
+		<result property="operationUserID" column="operationUserID" />
+		<result property="operationUserName" column="operationUserName" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="updateUserName" column="updateUserName" />
+		<result property="updateDateTime" column="updateDateTime" />
+		<result property="costPreState" column="costPreState" />
+		<result property="loanPlan_ID" column="loanPlan_ID" />
+		<result property="costMust_ID" column="costMust_ID" />
+		<result property="meetingDetail_ID" column="meetingDetail_ID" />
+		
+		
+	</resultMap>
+	
+	<!-- 查询多个预收费用列表  -->
+	<select id="selectCostPreListByWheresql" parameterType="string" resultMap="CostPreMap">
+		<![CDATA[
+			SELECT
+		 		costPre_ID,
+				apply_ID,
+				applyDetail_ID,
+				meetingDetail_ID,
+				costTypeID,
+				costTypeName,
+				costRate,
+				costUnit,
+				preCostSum,
+				preCostDate,
+				remark,
+				operationDepartID,
+				operationDepartName,
+				operationUserID,
+				operationUserName,
+				unit_uid,
+				updateUserName,
+				updateDateTime,
+				costPreState,
+				loanPlan_ID,
+				costMust_ID
+			FROM pro_costPre
+			WHERE 1=1 ${value}
+		]]>
+	</select>
+	<!-- 查询一条预收费用信息 -->
+	
+	<!-- 添加一条预收费用信息 -->
+	<insert id="insertOneCostPre" parameterType="com.zjm.pro.db.model.Pro_costPre">
+		INSERT INTO pro_costPre(
+			costPre_ID,
+			apply_ID,
+			applyDetail_ID,
+			meetingDetail_ID,
+			costTypeID,
+			costTypeName,
+			costRate,
+			costUnit,
+			preCostSum,
+			preCostDate,
+			remark,
+			operationDepartID,
+			operationDepartName,
+			operationUserID,
+			operationUserName,
+			unit_uid,
+			updateUserName,
+			updateDateTime,
+			costPreState,
+			loanPlan_ID,
+			costMust_ID
+
+		) VALUES(
+			#{costPre_ID},
+			#{apply_ID},
+			#{applyDetail_ID},
+			#{meetingDetail_ID},
+			#{costTypeID},
+			#{costTypeName},
+			#{costRate},
+			#{costUnit},
+			#{preCostSum},
+			#{preCostDate},
+			#{remark},
+			#{operationDepartID},
+			#{operationDepartName},
+			#{operationUserID},
+			#{operationUserName},
+			#{unit_uid},
+			#{updateUserName},
+			NOW(),
+			#{costPreState},
+			#{loanPlan_ID},
+			#{costMust_ID}
+			
+		)
+	</insert>
+	
+	<!-- 删除一条预收费用信息  -->
+	<delete id="deleteOneCostPre" parameterType="com.zjm.pro.db.model.Pro_costPre">
+		DELETE FROM pro_costPre
+		WHERE costPre_ID = #{costPre_ID}
+		LIMIT 1
+	</delete>
+	<!-- 根据查询条件查询一个预收费用信息-->
+	<select id="selectOneCostPreByWhereSql" parameterType="java.lang.String"  resultMap="CostPreMap">
+	<![CDATA[
+		SELECT 
+		        costPre_ID,
+				apply_ID,
+				applyDetail_ID,
+				meetingDetail_ID,
+				costTypeID,
+				costTypeName,
+				costRate,
+				costUnit,
+				preCostSum,
+				preCostDate,
+				remark,
+				operationDepartID,
+				operationDepartName,
+				operationUserID,
+				operationUserName,
+				unit_uid,
+				updateUserName,
+				updateDateTime,
+				costPreState,
+				loanPlan_ID,
+				costMust_ID
+		       
+	    FROM 
+	         pro_costPre 
+		WHERE 1=1 ${value}
+		
+		limit 1 
+		]]> 				 
+	</select>
+	<!-- 更新一个预收费用表信息 -->	
+	<update id="updateOneCostPre" parameterType="com.zjm.pro.db.model.Pro_costPre">
+		UPDATE 
+		     pro_costPre
+		<set >
+				
+			    <if test="apply_ID != null" >apply_ID = #{apply_ID},</if>
+				<if test="applyDetail_ID != null" >applyDetail_ID = #{applyDetail_ID},</if>
+				<if test="costTypeID != null" >costTypeID = #{costTypeID},</if>
+				<if test="costTypeName != null" >costTypeName = #{costTypeName},</if>
+				<if test="costRate != null" >costRate = #{costRate},</if>
+				<if test="costUnit != null" >costUnit = #{costUnit},</if>
+				<if test="preCostSum != null" >preCostSum = #{preCostSum},</if>
+				<if test="preCostDate != null" >preCostDate = #{preCostDate},</if>
+				<if test="remark != null" >remark= #{remark},</if>
+				<if test="costPreState != null" >costPreState= #{costPreState},</if>
+				<if test="operationDepartID != null" >operationDepartID= #{operationDepartID},</if>
+				<if test="operationDepartName != null" >operationDepartName= #{operationDepartName},</if>
+				<if test="operationUserID != null" >operationUserID= #{operationUserID},</if>
+				<if test="operationUserName != null" >operationUserName= #{operationUserName},</if>
+				<if test="unit_uid != null" >unit_uid= #{unit_uid},</if>
+				<if test="updateUserName != null" >updateUserName= #{updateUserName},</if>
+				   updateDateTime = NOW(),
+				<if test="loanPlan_ID!= null" >loanPlan_ID= #{loanPlan_ID},</if>
+				<if test="costMust_ID!= null" >costMust_ID= #{costMust_ID},</if>
+				<if test="meetingDetail_ID!= null" >meetingDetail_ID= #{meetingDetail_ID}</if>
+				
+			</set>
+			 
+		WHERE costPre_ID=#{costPre_ID} 
+	</update>
+	<!-- 分组查询  -->
+	<select id="selectCostPreListByWheresqlGroup" parameterType="string" resultMap="CostPreMap">
+		<![CDATA[
+			SELECT
+				costTypeID,
+				costTypeName,
+				IFNULL(SUM(preCostSum),0) AS preCostSum
+			FROM pro_costPre
+			WHERE 1=1 ${value}
+		]]>
+	</select>
+	
+	<!-- 预收转实收 -->	
+	<update id="costPreToFact" parameterType="com.zjm.pro.db.model.Pro_costPre">
+		UPDATE 
+		     pro_costPre
+		set
+			costPreState=#{costPreState},	
+			updateDateTime = NOW()			 
+		WHERE costPre_ID=#{costPre_ID} 
+	</update>
+	
+</mapper>

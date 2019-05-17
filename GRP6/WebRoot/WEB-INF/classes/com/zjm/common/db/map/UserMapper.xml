@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.common.db.map.UserMapper">
+	<!-- 用户信息 -->
+	<resultMap type="com.zjm.common.db.model.User" id="UserInfoResultMap">
+		<result property="user_uid" column="user_uid" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="unit_uidName" column="unit_uidName" />
+		<result property="user_id" column="user_id" />
+		<result property="userpassword" column="userpassword" />
+		<result property="user_name" column="user_name" />
+		<result property="user_bh" column="user_bh" />
+		<result property="isEable" column="isEable" />
+		<result property="user_type" column="user_type" />
+		<result property="isactive" column="isactive" />
+		<result property="isAdmin" column="isAdmin" />
+		<result property="order_id" column="order_id" />
+		<result property="createdatetime" column="createdatetime" />
+		<result property="create_user" column="create_user" />
+		<result property="updatedatetime" column="updatedatetime" />
+		<result property="update_user" column="update_user" />
+		<result property="depart_uid" column="depart_uid" />
+		<result property="depart_name" column="depart_name" />
+		<result property="is_otherdep" column="is_otherdep" />
+		<result property="post_id" column="post_ID" />
+		<result property="postName" column="postName" />
+		<result property="role_uids" column="role_uids" />
+	</resultMap>
+	
+	
+	<!-- 根据用户名获取用户信息 -->
+	<select id="selectOneUserByLoginName" parameterType="com.zjm.common.db.model.User" resultMap="UserInfoResultMap">
+		SELECT a.user_uid,
+			a.unit_uid,
+			a.unit_uidName,
+			a.user_id,
+			a.userpassword,
+			a.user_name,
+			a.user_bh,
+			a.user_type,
+			a.isEable,
+			a.isactive,
+			a.isAdmin,
+			a.order_id,
+			c.depart_uid,
+			c.depart_name,
+			b.is_otherdep,
+			p.post_ID,
+			p.postName,
+			d.role_uids
+		 FROM sys_users a
+		 LEFT JOIN sys_dep_user b ON a.user_uid=b.user_uid
+		 LEFT JOIN sys_departs c ON c.depart_uid=b.depart_uid
+		 LEFT JOIN sys_post_user pu ON pu.user_uid = a.user_uid
+		 LEFT JOIN sys_post p ON p.post_ID = pu.post_ID
+		 left join (
+			SELECT b.user_uid,group_concat(a.role_uid) as role_uids
+			FROM sys_roles a  
+			left join sys_roles_user b on b.role_uid=a.role_uid 
+			group by b.user_uid
+		) d on d.user_uid=a.user_uid 
+		
+		 WHERE a.user_id=#{user_id}  and a.isEable = 0 and b.is_otherdep is not true LIMIT 1
+	</select>
+	
+	<!-- 更新个人设置 -->	
+	<update id="updateUserSetInfo" parameterType="com.zjm.common.db.model.User">
+		<![CDATA[
+		UPDATE 
+		  sys_users
+		SET
+		  userpassword = #{userpassword},
+		  updatedatetime = NOW(),
+		  update_user = #{update_user}
+		WHERE user_uid = #{user_uid} and unit_uid = #{unit_uid}
+		  ]]>
+	</update>
+	
+	<select id="selectUserByUserUid" parameterType="java.lang.String" resultMap="UserInfoResultMap">
+		select * from sys_users
+		where user_uid = #{user_uid}
+	</select>
+	
+</mapper>  

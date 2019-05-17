@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+
+	<!-- don't handle the static 当在web.xml 中DispatcherServlet使用<url-pattern>/</url-pattern> 映射时，能映射静态资源  -->
+	<mvc:default-servlet-handler />
+	<!--自动注入相关配置，启动自动注入需要下面的配置，1，2步骤  -->
+	<!-- 自动注入1：if you use annotation you must configure following setting -->
+	<mvc:annotation-driven />
+	
+	
+	<!-- 定时任务扫描器 -->
+	<task:executor id="executor" pool-size="5" />      
+    <task:scheduler id="scheduler" pool-size="5" />    
+    <task:annotation-driven executor="executor" scheduler="scheduler" />
+	
+	
+	
+	<!-- 自动注入2：scan the package and the sub package -->
+	<context:component-scan base-package="defaultAction" />
+	<context:component-scan base-package="com.zjm.*.*.web" />
+	<context:component-scan base-package="com.opensymphony.workflow.*" />
+	
+	<!-- 扫描activiti在线编辑器的跳转@RestController 
+	<context:component-scan base-package="com.zjm.activiti.rest.editor,com.zjm.activiti.rest.diagram" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>-->
+	
+	
+	
+		
+	<!-- configure the InternalResourceViewResolver -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		id="internalResourceViewResolver">
+		<!-- 前缀 -->
+		<property name="prefix" value="" />
+		<!-- 后缀 -->
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+	 <!-- ②：启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"></bean>
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+	 <property name="messageConverters">
+	  <list>
+	   <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+	  </list>
+	 </property>
+	</bean>
+	
+	
+
+	
+	<!-- 支持Shiro对Controller的方法级AOP安全控制 begin-->
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor">
+		<property name="proxyTargetClass" value="true" />
+	</bean>
+	<!-- <bean class="com.zjm.exception.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="org.apache.shiro.authz.UnauthorizedException">error404</prop>
+				<prop key="java.lang.RuntimeException">error500</prop>
+				<prop key="java.lang.Exception">error500</prop>
+				<prop key="java.lang.Throwable">error500</prop>
+			</props>
+		</property>
+	</bean> -->
+	<!-- 全局异常配置 start -->     
+     <bean id="exceptionResolver" class="com.zjm.exception.SimpleMappingExceptionResolver">     
+         <!-- <property name="exceptionMappings">     
+             <props>     
+             	 <prop key="org.apache.shiro.authz.UnauthorizedException">error404</prop>
+                 <prop key="java.lang.Exception">error500</prop>     
+                 <prop key="java.lang.Throwable">error500</prop>     
+             </props>     
+         </property>     
+         <property name="statusCodes">     
+             <props>     
+                 <prop key="error500">500</prop>     
+                 <prop key="error404">404</prop>     
+             </props>     
+         </property>     
+         设置日志输出级别，不定义则默认不输出警告等错误日志信息     
+         <property name="warnLogCategory" value="WARN"></property>     
+         默认错误页面，当找不到上面mappings中指定的异常对应视图时，使用本默认配置     
+         <property name="defaultErrorView" value="error500"></property>     
+         默认HTTP状态码     
+         <property name="defaultStatusCode" value="500"></property>   -->   
+     </bean>     
+     <!-- 全局异常配置 end --> 
+	
+	<!-- <mvc:annotation-driven>
+		<mvc:message-converters register-defaults="true">
+			避免IE执行AJAX时,返回JSON出现下载文件
+			<bean
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/html;charset=UTF-8</value>
+						<value>text/json;charset=UTF-8</value>
+						<value>application/json;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	
+	
+	配置文件上传，如果没有使用文件上传可以不用配置，当然如果不配，那么配置文件中也不必引入上传组件包
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		默认编码
+		<property name="defaultEncoding" value="utf-8" />
+		文件大小最大值
+		<property name="maxUploadSize" value="1048576000" />
+		内存中的最大值
+		<property name="maxInMemorySize" value="40960" />
+	</bean> -->
+	
+	
+	<bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- set the max upload size100MB 104857600-->
+        <!-- set the max upload size250MB mashuo add 20170807-->
+        <property name="maxUploadSize">
+            <value>1048576000</value>
+        </property>
+        <property name="maxInMemorySize">
+            <value>4096</value>
+        </property>
+        <property name="defaultEncoding" value="UTF-8"></property>
+    </bean>
+	
+</beans>

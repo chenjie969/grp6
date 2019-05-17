@@ -1,0 +1,11 @@
+<workflows>
+    <workflow name="bankload" type="resource"  location="unit_1/gworkflowtemplate/bankload.xml"/>
+    <workflow name="loan" type="resource"  location="unit_1/gworkflowtemplate/loan.xml"/>
+    <workflow name="delay" type="resource"  location="unit_1/gworkflowtemplate/delay.xml"/>
+    <workflow name="factpay" type="resource"  location="unit_1/gworkflowtemplate/factpay.xml"/>
+    <!-- 完结解保 -->
+    <workflow name="finish" type="resource"  location="unit_1/gworkflowtemplate/finish.xml"/>
+    <workflow name="wdfinish" type="resource"  location="unit_1/gworkflowtemplate/wdfinish.xml"/>
+    <workflow name="returnguarantysum" type="resource"  location="unit_1/gworkflowtemplate/returnguarantysum.xml"/>
+    <workflow name="returnoptsum" type="resource"  location="unit_1/gworkflowtemplate/returnoptsum.xml"/>
+</workflows>

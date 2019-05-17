@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.sys.db.map.Sys_role_userMapper">
+
+	
+	<!-- 插入一个用户与角色关联表信息 -->
+	<insert id="insertOneUserAndRolesInfo"	parameterType="com.zjm.sys.db.model.Sys_role_user">
+		<![CDATA[
+		INSERT INTO sys_roles_user (
+		role_uid,
+		unit_uid,
+		user_uid
+		)
+		VALUES
+		(
+		#{role_uid},
+		#{unit_uid},
+		#{user_uid}
+		) ;
+		]]>
+	</insert>
+	<!-- 删除一个用户与角色关联表信息 -->
+	<delete id="delectUserAndRolesInfo" parameterType="com.zjm.sys.db.model.Sys_roles">
+		<![CDATA[DELETE FROM sys_roles_user WHERE role_uid=#{role_uid}  and unit_uid=#{unit_uid}  ]]>
+	</delete>
+	
+	<!-- 根据用户user_uid删除角色和用户的关系 -->
+	<delete id="delectUserAndRolesInfoByUserUid" parameterType="java.lang.String">
+		<![CDATA[DELETE FROM sys_roles_user WHERE user_uid=#{value}   ]]>
+	</delete>
+</mapper>  

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjm.crm.db.map.Crm_costInfoMapper" >
+  
+	<resultMap id="costInfoResultMap" type="com.zjm.crm.db.model.Crm_costInfo" >
+		<result column="costInfo_ID" property="costInfo_ID"  />
+		<result column="client_ID" property="client_ID"  />
+		<result column="yearMonth" property="yearMonth"  />
+		<result column="intYear" property="intYear"  />
+		<result column="intMonth" property="intMonth"  />
+		<result column="electricCost" property="electricCost"  />
+		<result column="waterCost" property="waterCost"  />
+		<result column="otherCost" property="otherCost"  />
+		<result column="costSum" property="costSum"  />
+		<result column="remark" property="remark"  />
+		<result column="unit_uid" property="unit_uid"  />
+		<result column="unit_uidName" property="unit_uidName"  />
+		<result column="updateUserName" property="updateUserName"  />
+		<result column="updateDateTime" property="updateDateTime"  />
+	</resultMap>
+
+	<!-- 分页查询水电气费缴纳情况列表 -->
+	<select id="selectCostInfoPageTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="costInfoResultMap">
+		SELECT 
+			costInfo_ID,
+			client_ID,
+			yearMonth,
+			intYear,  
+			intMonth, 
+			electricCost,  
+			waterCost,  
+			otherCost,
+			costSum,
+			remark,
+			unit_uid, 
+			unit_uidName, 
+			updateUserName,
+			updateDateTime  
+		FROM crm_costInfo
+		WHERE unit_uid = #{queryCondition.unit_uid}
+		AND client_ID = #{queryCondition.client_ID}
+		ORDER BY updateDateTime DESC
+		LIMIT #{pageNumber},#{pageSize}  
+	</select>
+
+	<!-- 分页查询水电气费缴纳情况列表-查询总记录数 -->
+	<select id="selectCostInfoPageTable_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+	 	SELECT 
+	 		COUNT(1) 
+	 	FROM 
+	 		crm_costInfo 
+	 	WHERE
+	 		unit_uid = #{queryCondition.unit_uid}
+		AND client_ID = #{queryCondition.client_ID}
+	</select>
+	
+	<!-- 查询水电气费缴纳情况列表 -->
+	<select id="selectCostInfoList" parameterType="java.lang.String" resultMap="costInfoResultMap">
+		SELECT 
+			costInfo_ID,
+			client_ID,
+			yearMonth,
+			intYear,  
+			intMonth, 
+			electricCost,  
+			waterCost,  
+			otherCost,
+			costSum,
+			remark,
+			unit_uid, 
+			unit_uidName, 
+			updateUserName,
+			updateDateTime  
+		FROM crm_costInfo
+		WHERE 1=1 ${value}
+	</select>
+
+	<!-- 查询一条水电气费缴纳情况-->  
+	<select id="selectOneCostInfo" parameterType="com.zjm.crm.db.model.Crm_costInfo" resultMap="costInfoResultMap">
+		SELECT 
+			costInfo_ID,
+			client_ID,
+			yearMonth,
+			intYear,  
+			intMonth, 
+			electricCost,  
+			waterCost,  
+			otherCost,
+			costSum,
+			remark,
+			unit_uid, 
+			unit_uidName, 
+			updateUserName,
+			updateDateTime    
+		FROM crm_costInfo
+		WHERE unit_uid = #{unit_uid}
+		AND costInfo_ID = #{costInfo_ID}
+	</select>
+	
+	<!-- 插入一条水电气费缴纳情况 -->
+	<insert id="insertOneCostInfo" parameterType="com.zjm.crm.db.model.Crm_costInfo">
+		INSERT INTO crm_costInfo(
+			costInfo_ID,
+			client_ID,
+			yearMonth,
+			intYear,  
+			intMonth, 
+			electricCost,  
+			waterCost,  
+			otherCost,
+			costSum,
+			remark,
+			unit_uid, 
+			unit_uidName, 
+			updateUserName,
+			updateDateTime    
+		) VALUES(
+			#{costInfo_ID},
+			#{client_ID},
+			#{yearMonth},
+			#{intYear},  
+			#{intMonth}, 
+			#{electricCost},  
+			#{waterCost},  
+			#{otherCost},
+			#{costSum},
+			#{remark},
+			#{unit_uid}, 
+			#{unit_uidName}, 
+			#{updateUserName},
+			NOW()
+		)
+	</insert>
+	
+	<!-- 修改一条水电气费缴纳情况 -->
+	<update id="updateOneCostInfo" parameterType="com.zjm.crm.db.model.Crm_costInfo">
+		UPDATE crm_costInfo
+		SET
+			yearMonth = #{yearMonth},
+			intYear = #{intYear},  
+			intMonth = #{intMonth}, 
+			electricCost = #{electricCost},  
+			waterCost = #{waterCost},  
+			otherCost = #{otherCost},
+			costSum = #{costSum},
+			remark = #{remark}, 
+			updateUserName = #{updateUserName},
+			updateDateTime = NOW()
+		WHERE unit_uid=#{unit_uid}
+		AND costInfo_ID = #{costInfo_ID}
+	</update>
+	
+	<!-- 删除一条水电气费缴纳情况 -->
+	<delete id="deleteOneCostInfo" parameterType="com.zjm.crm.db.model.Crm_costInfo">
+		DELETE FROM 
+			crm_costInfo
+		WHERE
+			unit_uid = #{unit_uid}
+		AND costInfo_ID = #{costInfo_ID}
+	</delete>
+ 
+ 
+	<delete id="deleteCostInfoByWhereSql" parameterType="string">
+		DELETE FROM 
+			crm_costInfo
+		WHERE  1=1  ${value}
+	</delete>
+	
+</mapper>

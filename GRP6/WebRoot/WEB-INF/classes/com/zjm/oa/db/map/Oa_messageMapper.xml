@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.oa.db.map.Oa_messageMapper">
+	
+	<!-- Oa_message表信息 -->
+	<resultMap type="com.zjm.oa.db.model.Oa_message" id="AnnounceResultMap">
+		<id property="messageId" column="message_ID" />
+		<result property="messageTypeId" column="messageTypeID" />
+		<result property="messageTypeName" column="messageTypeName" />
+		<result property="messageTypePID" column="messageTypePID" />
+		<result property="messageTypePName" column="messageTypePName" />
+		<result property="title" column="title" />
+		<result property="isSign" column="isSign" />
+		<result property="receiveUserIdList" column="receiveUserIDList" />
+		<result property="receiveUserNameList" column="receiveUserNameList" />
+		<result property="templetId" column="templetID" />
+		<result property="content" column="content" />
+		<result property="approvalStatus" column="approvalStatus" />
+		<result property="createUserId" column="createUserID" />
+		<result property="createUserName" column="createUserName" />
+		<result property="createDateTime" column="createDateTime" />
+		<result property="unitUid" column="unit_uid" />
+		<result property="unitUidName" column="unit_uidName" />
+		<result property="updateUserName" column="updateUserName" />
+		<result property="updateDateTime" column="updateDateTime" />
+		<result property="returnDesc" column="returnDesc" />
+		<result property="returnDateTime" column="returnDateTime" />
+		<result property="approvalUserId" column="approvalUserId" />
+		<result property="approvalDateTime" column="approvalDateTime" />
+		<result property="approvalUserName" column="approvalUserName" />
+		<result property="noSignUserIdList" column="noSignUserIdList" />
+		<result property="signedUserIdList" column="signedUserIdList" />
+		<result property="noSignUserNameList" column="noSignUserNameList" />
+		<result property="signedUserNameList" column="signedUserNameList" />
+	</resultMap>
+	
+	<!-- 查询信息分页列表  -->
+	<select id="selectAnnouncePageTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="AnnounceResultMap">
+		<![CDATA[
+			SELECT
+				message_ID,
+				messageTypeID,
+				messageTypeName,
+				messageTypePID,
+				messageTypePName,
+				title,
+				isSign,
+				receiveUserIDList,
+				receiveUserNameList,
+				templetID,
+				content,
+				approvalStatus,
+				createUserID,
+				createUserName,
+				createDateTime,
+				unit_uid,
+				unit_uidName,
+				updateUserName,
+				updateDateTime,
+				returnDesc,
+				returnDateTime,
+				approvalUserID,
+				approvalDateTime,
+				approvaluserName,
+				noSignUserIDList,
+				noSignUserNameList,
+				signedUserIDList,
+				signedUserNameList
+			FROM
+				oa_message 
+				
+			WHERE unit_uid=#{queryCondition.unit_uid}  
+			 	  ${wheresql}  
+			ORDER BY ${sortName} ${sortOrder}
+			LIMIT #{pageNumber},#{pageSize}   
+		]]>
+	</select>
+	
+	<!-- 查询信息分页列表-查询总记录数 -->
+	<select id="selectAnnouncePageTable_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		 <![CDATA[
+		 	SELECT 
+		 		COUNT(1) 
+		 	FROM 
+		 		oa_message 
+		 		
+		 	WHERE  1=1  ${wheresql}
+			AND	unit_uid=#{queryCondition.unit_uid}  
+		 ]]> 
+	</select>
+	
+	<!-- 新增一条信息记录 -->
+	<insert id="insertOneAnnounce" parameterType="com.zjm.oa.db.model.Oa_message">
+		<![CDATA[
+			INSERT INTO oa_message (
+				message_ID,
+				messageTypeID,
+				messageTypeName,
+				messageTypePID,
+				messageTypePName,
+				title,
+				isSign,
+				receiveUserIDList,
+				receiveUserNameList,
+				templetID,
+				content,
+				approvalStatus,
+				createUserID,
+				createUserName,
+				createDateTime,
+				unit_uid,
+				unit_uidName,
+				updateUserName,
+				updateDateTime,
+				returnDesc,
+				returnDateTime,
+				approvalUserID,
+				approvalDateTime,
+				approvaluserName,
+				noSignUserIDList,
+				noSignUserNameList,
+				signedUserIDList,
+				signedUserNameList
+			)
+			VALUES (
+				#{messageId},
+				#{messageTypeId},
+				#{messageTypeName},
+				#{messageTypePID},
+				#{messageTypePName},
+				#{title},
+				#{isSign},
+				#{receiveUserIdList},
+				#{receiveUserNameList},
+				#{templetId},
+				#{content},
+				#{approvalStatus},
+				#{createUserId},
+				#{createUserName},
+				#{createDateTime},
+				#{unitUid},
+				#{unitUidName},
+				#{updateUserName},
+				#{updateDateTime},
+				#{returnDesc},
+				#{returnDateTime},
+				#{approvalUserId},
+				#{approvalDateTime},
+				#{approvalUserName},
+				#{noSignUserIdList},
+				#{noSignUserNameList},
+				#{signedUserIdList},
+				#{signedUserNameList}
+			) 
+		]]>
+	</insert>
+	
+	<!-- 修改状态	-->
+	<update id="updateOneAnnounce" parameterType="com.zjm.oa.db.model.Oa_message">
+		<![CDATA[
+			UPDATE 
+				oa_message
+			SET
+				messageTypeID=#{messageTypeId},
+				messageTypeName=#{messageTypeName},
+				messageTypePID=#{messageTypePID},
+				messageTypePName=#{messageTypePName},
+				title=#{title},
+				isSign=#{isSign},
+				receiveUserIDList=#{receiveUserIdList},
+				receiveUserNameList=#{receiveUserNameList},
+				templetID=#{templetId},
+				content=#{content},
+				approvalStatus=#{approvalStatus},
+				createUserID=#{createUserId},
+				createUserName=#{createUserName},
+				createDateTime=#{createDateTime},
+				unit_uid=#{unitUid},
+				unit_uidName=#{unitUidName},
+				updateUserName=#{updateUserName},
+				updateDateTime=NOW()
+			
+				
+			WHERE
+				unit_uid=#{unitUid}
+			AND message_ID=#{messageId}
+		]]>
+	</update>
+	<!-- 修改状态	-->
+	<update id="updateStatus" parameterType="com.zjm.oa.db.model.Oa_message">
+		<![CDATA[
+			UPDATE 
+				oa_message
+			SET
+				approvalStatus = #{approvalStatus},
+				updateUserName = #{updateUserName},
+				updateDateTime = NOW(),
+				noSignUserIDList = #{noSignUserIdList},
+				noSignUserNameList = #{noSignUserNameList},
+				approvalUserID = #{approvalUserId},
+				approvalUserName = #{approvalUserName},
+				approvalDateTime = NOW()
+			WHERE
+				unit_uid=#{unitUid}
+			AND message_ID in 
+		]]>
+		 <foreach collection="auditIds" item="auditId" index="index" open="(" close=")" separator=",">
+             #{auditId}
+         </foreach>
+	</update>
+	<update id="updateStatusToYesCheck" parameterType="com.zjm.oa.db.model.Oa_message">
+		<![CDATA[
+			UPDATE 
+				oa_message
+			SET
+				approvalStatus = #{approvalStatus},
+				updateUserName = #{updateUserName},
+				updateDateTime = NOW(),
+				noSignUserIDList = #{noSignUserIdList},
+				noSignUserNameList = #{noSignUserNameList},
+				approvalUserID = #{approvalUserId},
+				approvalUserName = #{approvalUserName},
+				approvalDateTime = NOW()
+			WHERE
+				unit_uid=#{unitUid}
+			AND message_ID = #{messageId} 
+		]]>
+	</update>
+	<update id="updateStatusBounced" parameterType="com.zjm.oa.db.model.Oa_message">
+		<![CDATA[
+			UPDATE 
+				oa_message
+			SET
+				returnDesc = #{returnDesc},
+				approvalStatus = #{approvalStatus},
+				updateUserName = #{updateUserName},
+				updateDateTime = NOW(),
+				returnDateTime = NOW(),
+				approvalUserID = #{approvalUserId},
+				approvalUserName = #{approvalUserName},
+				approvalDateTime = NOW()
+			WHERE
+				unit_uid=#{unitUid}
+			AND message_ID=#{messageId}
+		]]>
+	</update>
+	<!-- 修改为"已签收"状态 -->
+	<update id="updateStatusToYesSign" parameterType="com.zjm.oa.db.model.Oa_message">
+		<![CDATA[
+			UPDATE 
+				oa_message
+			SET
+				noSignUserIDList = #{noSignUserIdList},
+				signedUserIDList = #{signedUserIdList},
+				noSignUserNameList = #{noSignUserNameList},
+				signedUserNameList = #{signedUserNameList}
+			WHERE
+				message_ID=#{messageId}
+		]]>
+	</update>
+	<!-- 查看一条信息记录  -->
+	<select id="selectOneAnnounce" parameterType="com.zjm.oa.db.model.Oa_message" resultMap="AnnounceResultMap">
+		<![CDATA[
+			SELECT
+				message_ID,
+				messageTypeId,
+				messageTypeName,
+				messageTypePID,
+				messageTypePName,
+				title,
+				isSign,
+				receiveUserIDList,
+				receiveUserNameList,
+				templetID,
+				content,
+				approvalStatus,
+				createUserID,
+				createUserName,
+				createDateTime,
+				unit_uid,
+				unit_uidName,
+				updateUserName,
+				updateDateTime,
+				returnDesc,
+				returnDateTime,
+				approvalUserID,
+				approvalDateTime,
+				approvaluserName,
+				noSignUserIDList,
+				noSignUserNameList,
+				signedUserIDList,
+				signedUserNameList
+			FROM
+				oa_message
+			WHERE
+				message_ID=#{messageId}
+		]]>
+	</select>
+	
+	<!--  bdan 删除一条信息记录  -->
+	<delete id="deleteOneAnnounce" parameterType="com.zjm.oa.db.model.Oa_message">
+		<![CDATA[
+			DELETE FROM 
+				oa_message
+			WHERE
+				message_ID=#{messageId}
+		]]>
+	</delete>
+	 <!-- 批量删除主体 -->
+	<delete id="batchDeleteAnnounceByIDs" parameterType="com.zjm.oa.db.model.Oa_message">
+		delete from oa_message where unit_uid=#{unitUid} and message_ID in 
+		 <foreach collection="deleteIds" item="deleteId" index="index" open="(" close=")" separator=",">
+             #{deleteId}
+         </foreach>
+	</delete>
+	 <!-- 根据主体ID查询主体名称 -->
+	<select id="selectAnnounceNameByID" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT title FROM oa_message WHERE message_ID=#{messageId}
+	</select>	
+	<!-- 首页查询不同类型的信息List -->
+	<select id="selectMessageList" parameterType="java.lang.String" resultMap="AnnounceResultMap">
+		 <![CDATA[
+		 	SELECT 
+		 		message_ID,
+				messageTypeId,
+				messageTypeName,
+				messageTypePID,
+				messageTypePName,
+				title,
+				isSign,
+				receiveUserIDList,
+				receiveUserNameList,
+				templetID,
+				content,
+				approvalStatus,
+				createUserID,
+				createUserName,
+				createDateTime,
+				unit_uid,
+				unit_uidName,
+				updateUserName,
+				updateDateTime,
+				returnDesc,
+				returnDateTime,
+				approvalUserID,
+				approvalDateTime,
+				approvaluserName,
+				noSignUserIDList,
+				noSignUserNameList,
+				signedUserIDList,
+				signedUserNameList
+				
+		 		FROM oa_message m
+				
+		 	WHERE  1=1  ${value}
+
+		 ]]> 
+	</select>
+	<!-- 查询信息分页列表-查询总记录数 -->
+	<select id="selectTable_Count" parameterType="java.lang.String" resultType="java.lang.Long">
+		 <![CDATA[
+		 	SELECT 
+		 		COUNT(1) 
+		 	FROM 
+		 		oa_message m
+		 		
+		 	WHERE  1=1  ${value}
+		 ]]> 
+	</select>
+	
+	
+	
+<!-- <![CDATA[]]> -->	
+</mapper>

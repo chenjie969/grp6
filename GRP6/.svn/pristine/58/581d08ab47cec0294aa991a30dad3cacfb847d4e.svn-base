@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_meetingJuryMapper">
+	
+	<!-- 评审会评委表信息 -->
+	<resultMap type="com.zjm.pro.db.model.Pro_meetingJury" id="meetingJuryMap">
+		<result property="meetingJury_ID" column="meetingJury_ID" />
+		<result property="userUid" column="userUid" />
+		<result property="userName" column="userName" />
+		<result property="juryStatus" column="juryStatus" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="updateUserName" column="updateUserName" />
+		<result property="updateDateTime" column="updateDateTime" />
+	</resultMap>
+	
+	<!-- 查询评审会评委列表 -->
+	<select id="selectMeetingJuryPageTables" parameterType="com.zjm.common.db.model.PageTable" resultMap="meetingJuryMap">
+		SELECT
+			meetingJury_ID,
+			userUid,
+			userName,
+			juryStatus,
+			unit_uid,
+			updateUserName,
+			updateDateTime
+		FROM
+			pro_meetingJury
+		WHERE unit_uid=#{queryCondition.unit_uid} ${wheresql}
+		ORDER BY ${sortName} ${sortOrder}
+		LIMIT #{pageNumber},#{pageSize}
+	</select>
+	
+	<!-- 查询评审会评委列表_总数 -->
+	<select id="selectMeetingJuryPageTables_count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		SELECT
+			count(meetingJury_ID)
+		FROM
+			pro_meetingJury
+		WHERE unit_uid=#{queryCondition.unit_uid} ${wheresql}
+	</select>
+	
+	<!-- 查询评审会评委列表 -->
+	<select id="selectMeetingJuryListByWhereSql" parameterType="java.lang.String" resultMap="meetingJuryMap">
+		SELECT
+			meetingJury_ID,
+			userUid,
+			userName,
+			juryStatus,
+			unit_uid,
+			updateUserName,
+			updateDateTime
+		FROM
+			pro_meetingJury
+		WHERE 1=1 ${value}
+	</select>
+	
+	<!-- 查询一个评审会评委 -->
+	<select id="selectOneMeetingJury" parameterType="com.zjm.pro.db.model.Pro_meetingJury" resultMap="meetingJuryMap">
+		SELECT
+			meetingJury_ID,
+			userUid,
+			userName,
+			juryStatus,
+			unit_uid,
+			updateUserName,
+			updateDateTime
+		FROM
+			pro_meetingJury
+		WHERE meetingJury_ID=#{meetingJury_ID}
+			OR userUid=#{userUid}	
+		LIMIT 1
+	</select>
+	
+	<!-- 添加一条评审会评委信息 -->
+	<insert id="insertOneMeetingJury" parameterType="com.zjm.pro.db.model.Pro_meetingJury">
+		INSERT INTO pro_meetingJury (
+			meetingJury_ID,
+			userUid,
+			userName,
+			juryStatus,
+			unit_uid,
+			updateUserName,
+			updateDateTime
+		) VALUES (
+			#{meetingJury_ID},
+			#{userUid},
+			#{userName},
+			#{juryStatus},
+			#{unit_uid},
+			#{updateUserName},
+			NOW()
+		)
+	</insert>
+	
+	<!-- 修改一条评审会评委信息 -->
+	<update id="updateOneMeetingJury" parameterType="com.zjm.pro.db.model.Pro_meetingJury">
+		UPDATE 
+			pro_meetingJury
+		SET
+			juryStatus = #{juryStatus},
+			updateUserName = #{updateUserName},
+			updateDateTime = NOW()
+		WHERE
+			meetingJury_ID = #{meetingJury_ID}
+		LIMIT 1
+	</update>
+	
+	<!-- 删除一条评审会评委信息 -->
+	<delete id="deleteOneMeetingJury" parameterType="com.zjm.pro.db.model.Pro_meetingJury">
+		DELETE FROM 
+			pro_meetingJury
+		WHERE
+			meetingJury_ID = #{meetingJury_ID}
+		LIMIT 1
+	</delete>
+	
+</mapper>

@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE workflow PUBLIC "-//OpenSymphony Group//DTD OSWorkflow 2.6//EN" "http://www.opensymphony.com/osworkflow/workflow_2_8.dtd">
+<workflow>
+<meta name="workflowName">退回保费流程</meta>
+<meta name="createDateTime">Wed Jan 30 11:32:41 CST 2012</meta>
+<meta name="lastModiDateTime">Wed Jan 30 11:32:41 CST 2012</meta>
+<meta name="editor">zhongzk</meta>   
+<meta name="softcompany">北京速融科技有限公司,技术支持电话010-80792253 QQ:28582157 e-mail:beijing69@gmail.com</meta>    
+	<!--步骤的状态字典： Quened等待处理,Underway:处理中, Finished:完成,Return:返回处理,FlowStop:异常终止, FlowEnd:流程结束 -->
+	<!-- 流程状态字典: 1活动中,2被挂起,3异常终止,4正常结束,-1未定义-->
+	<!--动作编号规则要求:      
+	   1.动作编号:100:流程初始化步骤的动作,此此编号固定,其它动作不能使用此编号.
+	   2.动作编号后三位为777:提前终止流程的业务构件,此编号后3位固定,其它动作不能使用此编号.
+	   3.动作编号后三位为666:退回上一步的业务构件,此编号后3位固定,其它动作不能使用此编号.
+	   4.所有动作(除初始化动作外)的id编号规则为:步骤编号(3位数字)+（2位步骤内序号，此可选）+动作编号(3位数字).   
+	  -->
+	<initial-actions>
+		<action id="100" name="开始启动流程">			
+			<pre-functions>
+				<function type="class">
+					<arg name="class.name">com.opensymphony.workflow.util.CurCaller</arg>					
+				</function>
+			</pre-functions>
+			<results>
+				<unconditional-result old-status="Finished" status="Underway" step="601" owner="${curCaller}"/>
+			</results>		
+		</action>
+	</initial-actions>
+	<!-- 通用动作  -->
+	<common-actions>
+	  <action id="999555" name="否决项目，终止流程" view="555" finish="true">
+		<pre-functions>
+		  <function type="class">
+			<arg name="class.name">com.opensymphony.workflow.util.CurCaller</arg>					
+		  </function>
+		</pre-functions>
+		<results> 
+		   <unconditional-result old-status="FlowStop" status="Underway" step="-1" /> 
+		 </results> 
+	  </action> 
+   </common-actions> 
+   <steps>
+   <!-- 受理阶段 begin -->
+		<step id="601" name="业务人员：上传退费审批单">
+			<actions>
+				<action id="60101001" name="提交财务审核" view="610">			
+					<results>
+						<unconditional-result old-status="Finished" status="Underway" step="602" owner="子公司财务"/>
+					</results>	
+				</action>
+			</actions>
+		</step>
+		<step id="602" name="财务人员确认">
+			<actions>
+				<action id="60201001" name="流程结束" view="611">			
+					<pre-functions>
+						<function type="class">
+							<arg name="class.name">com.opensymphony.workflow.util.CurCaller</arg>
+						</function>
+					</pre-functions>
+					<results>
+						<unconditional-result old-status="Finished" status="Underway" step="900" owner="${curCaller}"/>
+					</results>	
+					<post-functions>
+						<function type="class">
+							<arg name="class.name">com.opensymphony.workflow.util.Function_UpdateReturnGuarantySum</arg>
+							<arg name="repayType">退回保费</arg>
+						</function>
+					</post-functions>
+				</action>
+				<action id="602001002" name="退回" view="611">			
+					<pre-functions>
+						<function type="class">
+							<arg name="class.name">com.opensymphony.workflow.util.MostRecentOwner</arg>
+							<arg name="stepId">601</arg>
+						</function>
+					</pre-functions>
+					<results>
+						<unconditional-result old-status="Return" status="Underway" step="601" owner="${mostRecentOwner}"/>
+					</results>	
+				</action>
+			</actions>
+		</step>
+	<!-- 放款阶段 end -->		
+	<!-- 流程结束 -->
+		<step id="900" name="结束流程"/>
+   </steps>
+	
+	
+	
+	      
+	<!-- 创建分支定义 -->     
+	<!--  <splits>					
+			动态生成分支，评审会各个评委进行评审
+			<split  id="911" dynamic="TRUE" autochoose="FALSE" obtain-groups-callback="com.opensymphony.workflow.util.DynamicSplitGroup">	
+			     <unconditional-result old-status="Finished" status="Underway" step="301"/>  
+			</split>
+	</splits> -->
+	
+	<!-- 分支合并定义-->   
+	<!-- <joins>      
+			评审通过后的合并
+			<join id="916">   
+	           <conditions type="AND">   
+	             <condition type="class">   
+	               <arg name="class.name">com.opensymphony.workflow.util.ApproveJoinCondition</arg> 
+	             </condition>  
+	           </conditions>  
+	           <unconditional-result old-status="Finished" status="Underway"  owner="风险部部长" step="306">
+	           			<post-functions>
+							<function type="class">
+								<arg name="class.name">com.opensymphony.workflow.util.SendWinEimMessage</arg>
+								<arg name="otherReceptionUsers"></arg>设置其他接收角色
+				 				<arg name="messageTopInfo">委员签批结束。您有一个项目需要处理：</arg>设置消息头部信息
+							</function>
+						</post-functions>
+	           </unconditional-result>
+	         </join>
+	</joins> -->
+</workflow>

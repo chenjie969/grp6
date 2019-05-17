@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zjm.gworkFlow.db.map.FlowProjRelationMapper">
+	
+	<resultMap type="com.zjm.gworkFlow.db.model.OsGworkFlowProjIDFlowID" id="returnOsGworkFlowProjIDFlowID">
+		<result property="projectID" column="projectID" />
+		<result property="enter_ID" column="ENTRY_ID" />
+		<result property="flowTemplateID" column="flowTemplateID" />
+		<result property="flowCreateTime" column="flowCreateTime" />
+		<result property="flowCtreatorID" column="flowCtreatorID" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="flowTemplateName" column="flowTemplateName" />
+	</resultMap>
+	
+	<!-- 项目号和流程实例关系表中插入一个记录 -->
+	<insert id="insertOneprojAndflowID" parameterType="com.zjm.gworkFlow.db.model.OsGworkFlowProjIDFlowID">
+		<![CDATA[	
+			INSERT INTO os_gworkflow_projidflowid (
+			  projectID,
+			  ENTRY_ID,
+			  flowTemplateID,
+			  flowCreateTime,
+			  flowCtreatorID,
+			  flowTemplateName,
+			  unit_uid,
+			  flowType,
+			  departid,
+			  useruid,
+			  createdatetime,
+			  entityName
+			) 
+			VALUES
+			  (
+			    #{projectID},
+			    #{enter_ID},
+			    #{flowTemplateID},
+			    now(),
+			    #{flowCtreatorID},
+			    #{flowTemplateName},
+			    #{unit_uid},
+			    #{flowType},
+			    #{departUid},
+			    #{userUid},
+			    #{createdatetime},
+			    #{entityName}
+			  )	
+		]]>
+	</insert>
+	
+	<!-- 根据 项目id获取流程id与项目信息 -->
+	<select id="selectFlowIDByProjectID" resultMap="returnOsGworkFlowProjIDFlowID"  parameterType="com.zjm.gworkFlow.db.model.OsGworkFlowProjIDFlowID">
+		<![CDATA[
+			SELECT 
+			  * 
+			FROM
+			  os_gworkflow_projidflowid 
+			WHERE projectID = #{projectID}
+			  AND unit_uid = #{unit_uid}
+		]]>
+	</select>
+
+</mapper>

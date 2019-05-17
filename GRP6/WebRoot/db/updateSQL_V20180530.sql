@@ -1,0 +1,1 @@
+ALTER TABLE pro_project ADD COLUMN `isCreditorAll` tinyint(1) DEFAULT '0' COMMENT '是否全额转让项目';

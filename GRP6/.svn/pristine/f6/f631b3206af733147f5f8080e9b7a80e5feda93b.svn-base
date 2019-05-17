@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.gbpm.db.map.Act_re_model_actSortMapper">
+
+	<!-- activiti模型与流程分类关系表信息 -->
+	<resultMap type="com.zjm.gbpm.db.model.Act_re_model_actSort" id="ModelActSortResultMap">
+		<result property="actSortID" column="actSortID" />
+		<result property="modelID" column="modelID" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="name" column="name" />
+		<result property="actSortName" column="actSortName" />
+		<result property="deploymentId" column="deploymentId" />
+		<result property="createTime" column="createTime" />
+	</resultMap>
+	<!-- 插入一个activiti模型与流程分类关系信息 -->
+	<insert id="insertOneModelActSortInfo"	parameterType="com.zjm.gbpm.db.model.Act_re_model_actSort">
+		<![CDATA[
+		INSERT INTO act_re_model_actsort (
+		actSortID,
+		modelID,
+		unit_uid
+		)
+		VALUES
+		(
+		#{actSortID},
+		#{modelID},
+		#{unit_uid}
+		) ;
+		]]>
+	</insert>
+	<!-- 查询一个activiti模型与流程分类关系信息-->
+	<select id="selectOneModelActSortInfo" parameterType="com.zjm.gbpm.db.model.Act_re_model_actSort"  resultMap="ModelActSortResultMap">
+	<![CDATA[
+		SELECT * FROM act_re_model_actsort 
+		WHERE actSortID=#{actSortID}  and unit_uid=#{unit_uid} and modelID=#{modelID}
+		]]> 				 
+	</select>
+	
+	<!-- 删除一个activiti模型与流程分类关系信息 -->
+	<delete id="delectOneModelActSortInfo" parameterType="com.zjm.gbpm.db.model.Act_re_model_actSort">
+		<![CDATA[DELETE FROM act_re_model_actsort WHERE unit_uid=#{unit_uid} and modelID=#{modelID}  ]]>
+	</delete>
+	<!-- 查询activiti模型与流程分类关系List-->
+	<select id="selectModelActSortList" parameterType="java.lang.String"  resultMap="ModelActSortResultMap">
+	<![CDATA[
+		SELECT * FROM act_re_model_actsort WHERE 1=1 ${value} 
+		]]>
+	</select>
+	
+	
+	
+	<!-- 查询所有的模型    分页列表-->
+	<select id="selectProcessDefinitionPageTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="ModelActSortResultMap">
+		<![CDATA[
+		SELECT
+		    b.*,
+			a.NAME_ as name,
+			a.CREATE_TIME_ as createTime,
+			a.DEPLOYMENT_ID_ as deploymentId,
+			c.actSortName
+		 FROM act_re_model a 
+		 left join act_re_model_actsort b on a.ID_=b.modelID
+		 left join act_re_actsort c on c.actSortID=b.actSortID
+		 where 1=1 ${wheresql}   
+		 limit #{pageNumber},#{pageSize}
+	   ]]>
+	</select>
+	<!-- 查询所有的模型  分页列表 总记录数-->
+	<select id="selectProcessDefinitionPageTable_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		<![CDATA[SELECT count(a.ID_) 
+		 FROM act_re_model a 
+		 left join act_re_model_actsort b on a.ID_=b.modelID
+		 left join act_re_actsort c on c.actSortID=b.actSortID
+		where 1=1 ${wheresql} ]]>
+	</select>
+</mapper>  

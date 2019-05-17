@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjm.crm.db.map.Crm_creditInfoMapper" >
+  
+	<resultMap id="CreditInfoMap" type="com.zjm.crm.db.model.Crm_creditInfo" >
+		<result column="creditInfo_ID" property="creditInfo_ID"  />
+		<result column="client_ID" property="client_ID"  />
+		<result column="bankCreditInfo" property="bankCreditInfo"  />
+		<result column="loanBalance" property="loanBalance"  />
+		<result column="creditResult" property="creditResult"  />
+		<result column="lawsuitInfo" property="lawsuitInfo"  />
+		<result column="marketMessage" property="marketMessage"  />
+		<result column="garantySum" property="garantySum"  />
+		<result column="otherDesc" property="otherDesc"  />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="unit_uidName" column="unit_uidName" />
+		<result column="updateUserName" property="updateUserName"  />
+		<result column="updateDateTime" property="updateDateTime"  />
+	</resultMap>
+
+	<!-- 查询一条信用信息 -->  
+	<select id="selectOneCreditInfo" parameterType="com.zjm.crm.db.model.Crm_creditInfo" resultMap="CreditInfoMap">
+		SELECT 
+			creditInfo_ID,
+			client_ID,
+			bankCreditInfo,  
+			loanBalance,  
+			creditResult,  
+			lawsuitInfo, 
+			marketMessage,  
+			garantySum,  
+			otherDesc, 
+			unit_uid, 
+			unit_uidName, 
+			updateUserName,
+			updateDateTime  
+		FROM crm_creditinfo
+		WHERE unit_uid = #{unit_uid}
+		<if test="creditInfo_ID != null">
+			 AND creditInfo_ID = #{creditInfo_ID}
+		</if>
+		<if test="client_ID != null">
+			 AND client_ID = #{client_ID}
+		</if>
+	</select>
+	
+	<!-- 插入一条信用信息 -->
+	<insert id="insertOneCreditInfo" parameterType="com.zjm.crm.db.model.Crm_creditInfo">
+		INSERT INTO crm_creditinfo(
+			creditInfo_ID,
+			client_ID,
+			bankCreditInfo,  
+			loanBalance,  
+			creditResult,  
+			lawsuitInfo, 
+			marketMessage,  
+			garantySum,  
+			otherDesc, 
+			unit_uid, 
+			unit_uidName, 
+			updateUserName,
+			updateDateTime
+		) VALUES(
+			#{creditInfo_ID},
+			#{client_ID},
+			#{bankCreditInfo},
+			#{loanBalance},
+			#{creditResult},
+			#{lawsuitInfo},
+			#{marketMessage},
+			#{garantySum},
+			#{otherDesc},
+			#{unit_uid},
+			#{unit_uidName},
+			#{updateUserName},
+			NOW()
+		)
+	</insert>
+	
+	<!-- 更新一条信用信息，为符合手机开发使用了 set if 标签 -->
+	<update id="updateOneCreditInfo" parameterType="com.zjm.crm.db.model.Crm_creditInfo">
+		UPDATE crm_creditinfo
+		<set>
+			<if test="bankCreditInfo != null">bankCreditInfo = #{bankCreditInfo},</if>
+			<if test="creditResult != null">creditResult = #{creditResult},</if>
+			<if test="lawsuitInfo != null">lawsuitInfo = #{lawsuitInfo},</if>
+			<if test="marketMessage != null">marketMessage = #{marketMessage},</if>
+			<if test="otherDesc != null">otherDesc = #{otherDesc},</if>
+			loanBalance = #{loanBalance},
+			garantySum = #{garantySum},
+			updateUserName = #{updateUserName},
+			updateDateTime = NOW()
+		</set>
+		WHERE unit_uid=#{unit_uid} 
+		<if test="creditInfo_ID != null">
+			 AND creditInfo_ID = #{creditInfo_ID}
+		</if>
+		<if test="client_ID != null">
+			 AND client_ID = #{client_ID}
+		</if>
+	</update>
+	
+	<delete id="deleteCreditInfoByClient_ID" parameterType="string">
+			delete from   crm_creditinfo
+			where client_ID = #{client_ID}
+	</delete>
+ 
+</mapper>

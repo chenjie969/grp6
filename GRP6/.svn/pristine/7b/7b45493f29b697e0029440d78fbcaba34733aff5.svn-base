@@ -1,0 +1,210 @@
+package com.zjm.pro.project.service;
+
+import java.util.List;
+import java.util.Map;
+
+import com.zjm.common.db.model.PageTable;
+import com.zjm.common.db.model.User;
+import com.zjm.pro.db.model.EChart;
+import com.zjm.pro.db.model.Pro_project;
+import com.zjm.pro.db.model.Pro_projectForProVo;
+import com.zjm.pro.db.model.Pro_projectoverdue;
+import com.zjm.pro.db.model.Pro_relationProjectVo;
+import com.zjm.sys.db.model.C_dictype;
+
+public interface ProjectService {
+
+	/**
+	 * 查询所有重点项目的分页列表
+	 */
+	public PageTable<Pro_projectForProVo> selectMultiProjectPageTable(PageTable<Pro_projectForProVo> pageTable);
+	
+	/**
+	 *  查询某关联系下的所有项目
+	 */
+	public PageTable<Pro_relationProjectVo> selectRelationProjectTable(PageTable<Pro_relationProjectVo> pageTable);
+	
+	/**
+	 * 根据输入的条件查询一条project信息
+	 * @param project_ID
+	 * @return
+	 */
+	public Pro_project  selectOneProjectInfoByWheresql(String WhereSql);
+    /**
+     * 新增项目逾期确认
+     * @param userSession
+     * @param pro_project
+     * @return
+     */
+	public Boolean insertOneProjectOver(User userSession, Pro_project pro_project);
+	
+	/**
+	 * @description	 分页列表
+	 * @author wuhn
+	 * @date 2017年8月25日 下午2:42:05
+	 */
+	PageTable<Pro_project> selectProjectPageTables(PageTable<Pro_project>  pageTable);
+	
+	/**
+	 * @description	  总记录数
+	 * @author wuhn
+	 * @date 2017年8月25日 下午2:42:37
+	 */
+	Long selectProjectPageTables_Count(PageTable<Pro_project>  pageTable);
+	
+	/**
+	 * @description	 保后检查分页列表
+	 */
+	public PageTable<Pro_project> selectCheckProjectPageTables(PageTable<Pro_project> pageTable);
+	
+	/**
+	 * @description	  更新项目信息
+	 */
+	public Boolean updateOneProjectInfo(User user, Pro_project pro_project);
+	
+	/**
+	 * 添加一条实际放款信息
+	 */
+	public Boolean insertOneProjectInfo(User user, Pro_project project);
+	
+	/**
+	 * 更新提前到期信息
+	 */
+	public Boolean updateBeforeEndInfo(User user, Pro_project project);
+	/**
+	 * 新增保后项目
+	 * @param userSession
+	 * @param pro_project
+	 * @return
+	 */
+	public Boolean insertOneProjectAfter(User userSession, Pro_project pro_project);
+	/**
+	 * 更新保后项目
+	 * @param userSession
+	 * @param pro_project 
+	 * @return
+	 */
+	public Boolean updateOneProjectAfter(User userSession, Pro_project pro_project);
+	/**
+	 * 放款与解除
+	 */
+	public PageTable<Pro_project> selectDutyRemovePage(PageTable<Pro_project>  pageTable);
+	/**
+	 * 放款与解除--记录数
+	 */
+	public Long selectDutyRemovePage_Count(PageTable<Pro_project>  pageTable);
+	/**
+	 * 担保责任确认
+	 */
+	public Boolean updateDutyRemove(User userSession, Pro_project pro_project);
+	/**
+	 * 删除一个保后项目
+	 * @param userSession
+	 * @param pro_project
+	 * @return
+	 */
+	public Boolean deleteOneProjectAfter(User userSession, Pro_project pro_project);
+	
+	
+	/**
+	 *   查询多个保后项目
+	 * @param WhereSql
+	 * @return
+	 */
+	public List<Pro_project> selectProjectListByWheresql(String WhereSql);
+	
+	
+	/**
+	 *   查询多个保后项目累计罚息
+	 * @param WhereSql
+	 * @return
+	 */
+	public List<Pro_project> selectProjectListForInterestByWheresql(String WhereSql);
+	
+	public EChart guarantySumYearBySum(User userSession);
+	
+	public EChart guarantySumYearByPeriod(User userSession);
+	
+	public EChart guarantySumBySum(User userSession);
+	
+	public EChart guarantySumByPeriod(User userSession);
+	
+	/**
+	 * 核销损失
+	 * @param userSession
+	 * @param pro_project
+	 * @return
+	 */
+	public Boolean projectFinishLoss(User userSession, Pro_project pro_project);
+	
+	/**
+	 * 项目完结
+	 * @param userSession
+	 * @param pro_project
+	 * @return
+	 * @throws Exception 
+	 */
+	public Boolean projectFinishRegister(User userSession, Pro_project pro_project) throws Exception;
+	
+    /**
+     * 完结项目--->续作
+     * @param userSession
+     * @param pro_project
+     * @return
+     */
+	public Boolean projectContinue(User userSession, Pro_project pro_project);
+	/**
+	 * @param user
+	 * @param pro_project
+	 * @return 已确认放款
+	 */
+	public Boolean addConfirmLoan(User user, Pro_project pro_project);
+	
+	/**
+	 * @param user
+	 * @param pro_project
+	 * @return 撤销已确认放款
+	 */
+	public Boolean cancelLoanConfirm(User user, Pro_project pro_project);
+	
+    /**
+     * 
+     * @Title: selectRelationClientProTable   
+     * @Description:查询某关联系下的所有关联企业及项目信息
+     * @param: @param pageTable
+     * @param: @return      
+     * @return: PageTable<Pro_project>      
+     * @throws
+     */
+	public PageTable<Pro_project> selectRelationClientProTable(PageTable<Pro_project> pageTable);
+	
+	/**
+	 * 核保放款  填报项目详情
+	 * @param userSession
+	 * @param pro_project
+	 * @return
+	 */
+	public Boolean insertProjectInfoAfter(User userSession, Pro_project pro_project);
+	
+	/**
+	 * 定期生成逾期罚息信息
+	 */
+	public void insertOverDueInfo();
+
+	public void payInterestSum();
+	
+	/**
+	 * 按已诉讼和未诉讼，五级分类将项目分组
+	 * @param string
+	 * @return
+	 */
+	public List<Map<String, Object>> selectRiskLevelList(String string);
+
+	/**
+	 * 费用统计（财务）
+	 * 代偿本金，代偿利息，追偿本金，追偿利息，保证金，担保费，确认放款金额，未确认放款金额，评审费，还款金额，还款利息
+	 * @return
+	 */
+	public List<Pro_project> projectCostCount(String string);
+	
+}

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjm.pro.db.map.Pro_projectCodeMapper" >
+  <resultMap id="ProjectCodeResultMap" type="com.zjm.pro.db.model.Pro_projectCode" >  
+    <result column="projectCode_ID" property="projectCode_ID"  />
+    <result column="years" property="years"  />
+    <result column="applyCode" property="applyCode"  />
+    <result column="projectCode" property="projectCode"  />
+    <result column="creditCode" property="creditCode"  />
+    <result column="unit_uid" property="unit_uid" />
+  </resultMap>
+  
+  <!-- 插入一个项目编号信息 -->
+	<insert id="insertOneProjectCodeInfo"	parameterType="com.zjm.pro.db.model.Pro_projectCode">
+		<![CDATA[
+		INSERT INTO pro_projectCode (
+			projectCode_ID,
+	   	 	years,
+	   	 	applyCode,
+	   	 	projectCode,
+	   	 	creditCode,
+			unit_uid
+		)
+		VALUES
+		(
+			#{projectCode_ID},
+			#{years},
+			#{applyCode},
+			#{projectCode},
+			#{creditCode},
+			#{unit_uid}
+		) ;
+		]]>
+	</insert>
+  
+  <!-- 查询一个客户编号信息 -->
+  <select id="selectOneProjectCodeInfo" resultMap="ProjectCodeResultMap" parameterType="com.zjm.pro.db.model.Pro_projectCode" >
+   	<![CDATA[
+	   	 select 
+	   	 	projectCode_ID,
+	   	 	years,
+	   	 	applyCode,
+	   	 	projectCode,
+	   	 	creditCode,
+			unit_uid
+	    from pro_projectCode
+	    where unit_uid = #{unit_uid} and years = #{years}
+     ]]>
+  </select>
+  
+  <!-- 更新客户编号信息 -->
+  <update id="updateOneProjectCodeInfo" parameterType="com.zjm.pro.db.model.Pro_projectCode" >
+  	<![CDATA[  	
+  	
+	    update pro_projectCode
+	    set
+	      applyCode = #{applyCode},
+	      projectCode = #{projectCode},
+	      creditCode = #{creditCode}
+	    where unit_uid = #{unit_uid} and years = #{years}
+       ]]>
+  </update>
+	
+	
+</mapper>

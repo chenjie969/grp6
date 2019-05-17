@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_contractDocMapper">
+	<!-- 合同表-->
+	 <resultMap id="ProContractMap" type="com.zjm.pro.db.model.Pro_contractdoc" >
+        <result column="contractDoc_ID" property="contractDoc_ID"/>
+        <result column="applyDetail_ID" property="applyDetail_ID"/>
+        <result column="apply_ID" property="apply_ID"/>
+        <result column="contractCode" property="contractCode"/>
+        <result column="contractTypeID" property="contractTypeID"/>
+        <result column="contractTypeName" property="contractTypeName"/>
+        <result column="contractName" property="contractName"/>
+        <result column="contractBeginDate" property="contractBeginDate"/>
+        <result column="contractEndDate" property="contractEndDate"/>
+        <result column="remark" property="remark"/>
+        <result column="contractPath" property="contractPath"/>
+		<result column="unit_uid" property="unit_uid"/>
+		<result column="unit_uidName" property="unit_uidName"/>
+		<result column="updateDateTime" property="updateDateTime"/>
+		<result column="updateUserName" property="updateUserName"/>
+		<result column="filename" property="filename"/>
+		
+  </resultMap>
+	
+	
+
+	
+	<!-- 分页查询列表    对应的项目 -->
+	<select id="selectContractTable" parameterType="string" resultMap="ProContractMap">
+		<![CDATA[
+		SELECT 
+			contractDoc_ID,
+					 apply_ID,
+					  applyDetail_ID,
+					 contractCode,
+					 contractTypeID,
+					 contractTypeName,
+					 contractName,
+					 contractBeginDate,
+					contractEndDate,
+					 remark,
+					contractPath,
+					 unit_uid,
+					unit_uidName,
+					 updateUserName,
+					 filename,
+					updateDateTime
+		
+		FROM 
+		     pro_contractdoc 
+		WHERE 1=1  ${value} 	
+		
+		]]>
+	</select>
+	
+		<!-- 新增-->
+	<insert id="insertOneContractInfo" parameterType="com.zjm.pro.db.model.Pro_contractdoc">
+		<![CDATA[
+		INSERT INTO pro_contractdoc (
+					contractDoc_ID,
+					 apply_ID,
+					  applyDetail_ID,
+					 contractCode,
+					 contractTypeID,
+					 contractTypeName,
+					 contractName,
+					 contractBeginDate,
+					contractEndDate,
+					remark,
+					contractPath,
+					 unit_uid,
+					unit_uidName,
+					 updateUserName,
+					 filename,			
+					updateDateTime		
+		       )
+		VALUES
+		(
+				#{contractDoc_ID},
+				#{apply_ID},
+				#{applyDetail_ID},
+				#{contractCode},
+				#{contractTypeID},
+				#{contractTypeName},
+				#{contractName},
+				#{contractBeginDate},
+				#{contractEndDate},	
+				#{remark},
+				#{contractPath},
+				#{unit_uid},
+				#{unit_uidName},
+				#{updateUserName},	
+				#{filename},
+				NOW()
+		) 
+		]]>
+	</insert>
+	<!-- 根据主键找到该对象 -->
+	<select id="selectOneContractdocInfo" parameterType="com.zjm.pro.db.model.Pro_contractdoc" resultMap="ProContractMap">
+		SELECT
+			contractDoc_ID,
+			apply_ID,
+			applyDetail_ID,
+			contractCode,
+			contractTypeID,
+			contractTypeName,
+			contractName,
+			contractBeginDate,
+			contractEndDate,
+			remark,
+			contractPath,
+			unit_uid,
+			unit_uidName,
+			updateUserName,
+			filename,
+			updateDateTime
+	
+		FROM
+			pro_contractdoc
+		WHERE 1=1
+		<if test="contractDoc_ID != null">
+			and contractDoc_ID=#{contractDoc_ID}
+		</if>
+		<if test="contractCode != null">
+			and contractCode=#{contractCode}
+		</if>
+	</select>
+	
+<!--修改一条数据  -->
+  <update id="updateOneContractInfo" parameterType="com.zjm.pro.db.model.Pro_contractdoc" >
+    update pro_contractdoc
+  set     
+		contractCode=#{contractCode},
+		contractTypeID=#{contractTypeID},
+		contractTypeName=#{contractTypeName},
+		remark=#{remark},
+		contractBeginDate=#{contractBeginDate},
+		contractEndDate=#{contractEndDate},
+		contractPath=#{contractPath},
+		filename=#{filename},
+		contractName=#{contractTypeName},
+		updateDateTime=NOW()
+    where contractDoc_ID = #{contractDoc_ID}
+  </update>
+  <!--修改一条数据的附件信息  -->
+  <update id="updateOneContractFilesInfo" parameterType="com.zjm.pro.db.model.Pro_contractdoc" >
+    update pro_contractdoc
+  	set     
+		contractPath=#{contractPath},
+		filename=#{filename},
+		updateDateTime=NOW()
+    where contractDoc_ID = #{contractDoc_ID}
+  </update>
+  <!--根据ID修改一条数据的附件信息  -->
+  <update id="updateOneContractByID" parameterType="com.zjm.pro.db.model.Pro_contractdoc" >
+    update pro_contractdoc
+  	set     
+		contractCode=#{contractCode},
+		contractTypeID=#{contractTypeID},
+		contractTypeName=#{contractTypeName},
+		remark=#{remark},
+		contractBeginDate=#{contractBeginDate},
+		contractEndDate=#{contractEndDate},
+		contractName=#{contractName},
+		updateDateTime=NOW()
+    where contractDoc_ID = #{contractDoc_ID}
+  </update>
+  
+	<delete id="contractDel"	parameterType="com.zjm.pro.db.model.Pro_contractdoc">
+		<![CDATA[		
+		delete from pro_contractdoc where contractDoc_ID=#{contractDoc_ID}
+		]]>
+	</delete>
+	
+	<!-- 判断合同编号是否存在 ，如果存在，说明是更新数据，要排除与自身的contractCode比较-->
+	<select id="isExistContractCode" parameterType="com.zjm.pro.db.model.Pro_contractdoc" resultType="java.lang.Integer">
+		<![CDATA[
+			SELECT 
+				COUNT(1) 
+			FROM 
+				pro_contractdoc 
+			WHERE 
+				unit_uid = #{unit_uid} 
+			AND contractCode = #{contractCode}
+		]]>
+			<if test="node_ID != null">
+				AND contractDoc_ID != #{contractDoc_ID}
+			</if>
+	</select>
+	
+</mapper>  

@@ -1,0 +1,124 @@
+package com.zjm.gbpm.index.service.impl;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.zjm.common.db.model.User;
+import com.zjm.gbpm.db.map.IndexMapper;
+import com.zjm.gbpm.db.model.Index;
+import com.zjm.gbpm.index.service.IndexService;
+import com.zjm.sys.db.model.Sys_syspara;
+import com.zjm.sys.syspara.service.SysparaService;
+import com.zjm.sys.util.RolesDataAccreditUtil;
+import com.zjm.util.SystemSession;
+@Service("indexService")
+@Transactional
+public class IndexServiceImpl implements IndexService {
+	@Resource 
+	private IndexMapper indexMapper;
+	@Resource
+	private SysparaService sysparaService;
+	
+	@Override
+	public Index selectStatisticalData(String wheresql1,String wheresql2) {
+		Index index = new Index();
+		Index loadIndex = indexMapper.selectLoadSum(wheresql1);
+		Index returnIndex = indexMapper.selectFactPaySum(wheresql2);
+		Index guarantyIndex = indexMapper.selectGuarantySum();
+		index.setLoadSum(loadIndex.getLoadSum());
+		index.setLoadNum(loadIndex.getLoadNum());
+		index.setReturnSum(returnIndex.getReturnSum());
+		index.setReturnNum(returnIndex.getReturnNum());
+		index.setGuarantySum(guarantyIndex.getGuarantySum());
+		index.setGuarantyNum(guarantyIndex.getGuarantyNum());
+		return index;
+	}
+
+	@Override
+	public Index selectProData(User user) {
+		Index index = new Index();
+		//调用selectProByWheresql该方法时使用的sql 
+		String proDataSql = RolesDataAccreditUtil.appendProSqlByABC(user.getUser_uid(), ""); 
+		if( null == proDataSql){
+			proDataSql = " ";
+		}
+		//调用selectRiskPro该方法时使用的sql (风险项目)
+		String riskProDataSql = RolesDataAccreditUtil.appendProSqlByABC(user.getUser_uid(), "p."); 
+		if( null == riskProDataSql){
+			riskProDataSql = " ";
+		}
+		//调用selectCheckPro该方法时使用的sql(保后检查)
+		String checkProDataSql =  RolesDataAccreditUtil.appendProSqlByABC(user.getUser_uid(), "project.");
+		if( null == checkProDataSql){
+			checkProDataSql = " ";
+		}
+		//调用selectMeetingPro该方法时使用的sql（准备上会）
+		String preMettingSql = RolesDataAccreditUtil.appendMeetingSql(user.getUser_uid());
+		if( null == preMettingSql ){
+			preMettingSql = " ";
+		}
+		
+		//逾期项目笔数
+		String wheresql = " and unit_uid = \'"+user.getUnit_uid()+"\' ";
+//		wheresql = wheresql + " and delayEndDate < now() and IFNULL(replaceFreeSum,0) = 0 and isFree = 0";
+		wheresql = wheresql + " and IFNULL(replaceFreeSum,0)= 0 and ( isOver = 1  or (finishDate is NULL and delayEndDate<=now()) or finishDate > overDate) ";
+//		wheresql = wheresql + " "+ proDataSql; //pro表查询时根据abc角数据权限查询
+		index.setOverPro(indexMapper.selectProByWheresql(wheresql));
+		//代偿项目笔数
+		wheresql = " and unit_uid = \'"+user.getUnit_uid()+"\' ";
+//		wheresql = wheresql + " and replaceFreeSum > 0 ";
+		wheresql = wheresql + "  and replaceFreeSum > 0  AND ( isOver = 1  or (finishDate is NULL and delayEndDate<=now()) or finishDate > overDate)  ";
+		wheresql = wheresql + " "+ proDataSql;//pro表查询时根据abc角数据权限查询
+		index.setReplacePro(indexMapper.selectProByWheresql(wheresql));
+		//风险项目笔数
+		wheresql = " and a.unit_uid = \'"+user.getUnit_uid()+"\' ";
+		wheresql = wheresql +" "+ riskProDataSql;//查询时根据abc角数据权限查询
+		index.setRiskPro(indexMapper.selectRiskPro(wheresql));
+		//即将到期笔数
+		wheresql = " and unit_uid = \'"+user.getUnit_uid()+"\' ";
+		wheresql = wheresql + " and praraID = '01'";
+		Sys_syspara para1 = sysparaService.selectOneSysparaInfo(wheresql);
+		StringBuffer sb1=new StringBuffer();
+		sb1.append(" and unit_uid= '"+SystemSession.getUserSession().getUnit_uid()+"'");
+		sb1.append(" and delayEndDate < DATE_ADD(now(),INTERVAL " + para1.getParaValue() + " DAY)" +  " and delayEndDate > NOW()");
+		sb1.append(" "+ proDataSql);//pro表查询时根据abc角数据权限查询
+		index.setExpirePro(indexMapper.selectProByWheresql(sb1.toString()));
+		//即将上会
+		wheresql = " and pro_meeting.unit_uid = \'"+user.getUnit_uid()+"\' ";
+		wheresql = wheresql+" "+ preMettingSql;
+		index.setMeetingPro(indexMapper.selectMeetingPro(wheresql));
+		
+		//保后检查笔数
+		wheresql = " and unit_uid = \'"+user.getUnit_uid()+"\' ";
+		wheresql = wheresql + " and praraID = '02'";
+		Sys_syspara para = sysparaService.selectOneSysparaInfo(wheresql);
+		StringBuffer sb=new StringBuffer();
+		sb.append(" and project.unit_uid= '"+SystemSession.getUserSession().getUnit_uid()+"'");
+		sb.append(" and planCheckDate < DATE_ADD(now(),INTERVAL " + para.getParaValue() + " DAY) " +  " and planCheckDate > NOW()");
+		sb.append(" "+checkProDataSql);///查询时根据abc角数据权限查询
+		index.setCheckPro(indexMapper.selectCheckPro(sb.toString()));
+		
+		//未到期项目笔数
+		wheresql = " and unit_uid = \'"+user.getUnit_uid()+"\' ";
+		wheresql = wheresql + " and delayEndDate >= now() ";
+		wheresql = wheresql + " "+ proDataSql;//pro表查询时根据abc角数据权限查询
+		index.setNoExpirePro(indexMapper.selectProByWheresql(wheresql));
+		
+		//展期项目笔数
+		wheresql = " and unit_uid = \'"+user.getUnit_uid()+"\' ";
+		wheresql = wheresql + " and isDelay = 1  and delayEndDate >= now() ";
+		wheresql = wheresql + " "+ proDataSql;//pro表查询时根据abc角数据权限查询
+		index.setExtendPro(indexMapper.selectProByWheresql(wheresql));
+		
+		//项目终止笔数
+		wheresql = " and unit_uid = \'"+user.getUnit_uid()+"\' ";
+		wheresql = wheresql + " and isFree = 1";
+		wheresql = wheresql + " "+ proDataSql;//pro表查询时根据abc角数据权限查询
+		index.setEndPro(indexMapper.selectProByWheresql(wheresql));
+		
+		return index;
+	}
+
+}

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><jatools Class="jatools.ReportDocument" Name="jatools report template"><VariableContext/><Page><Children ItemClass="PagePanel"><Item0><Width>1713</Width><Height>137</Height><Children><Item0 Class="Label"><Text>项目进展情况日报表 </Text><Font><Face>宋体</Face><Style>1</Style><Size>36</Size></Font><HorizontalAlignment>1</HorizontalAlignment><X>528</X><Y>14</Y><Width>656</Width><Height>71</Height></Item0><Item1 Class="Text"><Variable>=if(has(begindatesql)) return begindatesql;else return "";</Variable><HorizontalAlignment>1</HorizontalAlignment><X>759</X><Y>87</Y><Width>110</Width><Height>23</Height></Item1><Item2 Class="Text"><Variable>=if(has(enddatesql)) return enddatesql;else return $today;</Variable><X>911</X><Y>88</Y><Width>110</Width><Height>23</Height></Item2><Item3 Class="Label"><Text>至</Text><HorizontalAlignment>1</HorizontalAlignment><X>871</X><Y>86</Y><Width>26</Width><Height>23</Height></Item3><Item4 Class="Label"><Text>统计期间：</Text><X>700</X><Y>86</Y><Width>56</Width><Height>23</Height></Item4></Children><Type>100</Type></Item0><Item1><Y>790</Y><Width>1713</Width><Height>19</Height><Type>103</Type></Item1><Item2><Y>137</Y><Width>1713</Width><Height>653</Height><Children><Item0 Class="Table"><X>27</X><Y>31</Y><Children><Item0 Class="Label"><Text>客户名称</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col></Cell></Item0><Item1 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>2</Col></Cell></Item1><Item2 Class="Label"><Text>项目编号</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>2</Col></Cell></Item2><Item3 Class="Label"><Text>项目名称</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>3</Col></Cell></Item3><Item4 Class="Label"><Text>项目金额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>4</Col></Cell></Item4><Item5 Class="Label"><Text>业务品种</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>5</Col></Cell></Item5><Item6 Class="Label"><Text>A角</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>10</Col></Cell></Item6><Item7 Class="Label"><Text>B角</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>11</Col></Cell></Item7><Item8 Class="RowPanel"><Cell><Row>1</Row><Col>0</Col><RowSpan>2</RowSpan><ColSpan>12</ColSpan></Cell><Children><Item0 Class="RowPanel"><Cell><Row>1</Row><Col>0</Col><ColSpan>12</ColSpan></Cell><Children><Item0 Class="Text"><Variable>=$.loadEndDate</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DateFormat"/><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>9</Col></Cell></Item0><Item1 Class="Text"><Variable>=$.loadBeginDate</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DateFormat"/><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>8</Col></Cell></Item1><Item2 Class="Text"><Variable>=$.greenChannelName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>7</Col></Cell></Item2><Item3 Class="Text"><Variable>=$.bankName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>6</Col></Cell></Item3><Item4 Class="Text"><Variable>=$.bmanName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>11</Col></Cell></Item4><Item5 Class="Text"><Variable>=$.amanName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>10</Col></Cell></Item5><Item6 Class="Text"><Variable>=$.busiTypeName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>5</Col></Cell></Item6><Item7 Class="Text"><Variable>=$.loadSum</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>4</Col></Cell></Item7><Item8 Class="Text"><Variable>=$.projectName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>3</Col></Cell></Item8><Item9 Class="Text"><Variable>=$.busiCode</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>2</Col></Cell></Item9><Item10 Class="Text"><Variable>=$.clientName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>1</Col></Cell></Item10><Item11 Class="Label"><Text>放款项目</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><PrintStyle>united-level:1;auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>0</Col></Cell></Item11></Children><NodePath>Row</NodePath></Item0><Item1 Class="Label"><Text>放款合计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>1</Col><ColSpan>3</ColSpan></Cell></Item1><Item2 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>9</Col></Cell></Item2><Item3 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>8</Col></Cell></Item3><Item4 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>7</Col></Cell></Item4><Item5 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>6</Col></Cell></Item5><Item6 Class="Text"><Variable>=$.loadSum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>4</Col></Cell></Item6><Item7 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>11</Col></Cell></Item7><Item8 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>10</Col></Cell></Item8><Item9 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>5</Col></Cell></Item9><Item10 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>0</Col></Cell></Item10></Children><NodePath>detail_factload</NodePath></Item8><Item9 Class="Label"><Text>合作机构</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>6</Col></Cell></Item9><Item10 Class="Label"><Text>绿色通道</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>7</Col></Cell></Item10><Item11 Class="Label"><Text>起始日期</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>8</Col></Cell></Item11><Item12 Class="Label"><Text>到期日期</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>9</Col></Cell></Item12><Item13 Class="Label"><Text>客户名称</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>1</Col></Cell></Item13><Item14 Class="Label"><Text>项目编号</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>2</Col></Cell></Item14><Item15 Class="Label"><Text>项目名称</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>3</Col></Cell></Item15><Item16 Class="Label"><Text>还款金额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>4</Col></Cell></Item16><Item17 Class="Label"><Text>业务品种</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>5</Col></Cell></Item17><Item18 Class="Label"><Text>合作机构</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>6</Col></Cell></Item18><Item19 Class="Label"><Text>绿色通道</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>7</Col></Cell></Item19><Item20 Class="Label"><Text>起始日期-到期日期</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>8</Col></Cell></Item20><Item21 Class="Label"><Text>还款日期</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>9</Col></Cell></Item21><Item22 Class="Label"><Text>A角</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>10</Col></Cell></Item22><Item23 Class="Label"><Text>B角</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>11</Col></Cell></Item23><Item24 Class="Label"><Text>客户名称</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>6</Row><Col>1</Col></Cell></Item24><Item25 Class="Label"><Text>项目编号</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>6</Row><Col>2</Col></Cell></Item25><Item26 Class="Label"><Text>项目名称</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>6</Row><Col>3</Col></Cell></Item26><Item27 Class="Label"><Text>展期金额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>6</Row><Col>4</Col></Cell></Item27><Item28 Class="Label"><Text>业务品种</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>6</Row><Col>5</Col></Cell></Item28><Item29 Class="Label"><Text>合作机构</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>6</Row><Col>6</Col></Cell></Item29><Item30 Class="Label"><Text>绿色通道</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>6</Row><Col>7</Col></Cell></Item30><Item31 Class="Label"><Text>起始日期-到期日期</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>6</Row><Col>8</Col></Cell></Item31><Item32 Class="Label"><Text>展期开始日期-展期结束日期</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>6</Row><Col>9</Col></Cell></Item32><Item33 Class="Label"><Text>A角</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>6</Row><Col>10</Col></Cell></Item33><Item34 Class="Label"><Text>B角</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>6</Row><Col>11</Col></Cell></Item34><Item35 Class="RowPanel"><Cell><Row>4</Row><Col>0</Col><RowSpan>2</RowSpan><ColSpan>12</ColSpan></Cell><Children><Item0 Class="RowPanel"><Cell><Row>4</Row><Col>0</Col><ColSpan>12</ColSpan></Cell><Children><Item0 Class="Text"><Variable>=$.clientName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>4</Row><Col>1</Col></Cell></Item0><Item1 Class="Text"><Variable>=$.busiCode</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>4</Row><Col>2</Col></Cell></Item1><Item2 Class="Text"><Variable>=$.projectName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>4</Row><Col>3</Col></Cell></Item2><Item3 Class="Text"><Variable>=$.payCapitalSum</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>4</Row><Col>4</Col></Cell></Item3><Item4 Class="Text"><Variable>=$.busiTypeName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>4</Row><Col>5</Col></Cell></Item4><Item5 Class="Text"><Variable>=$.bankName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>4</Row><Col>6</Col></Cell></Item5><Item6 Class="Text"><Variable>=$.greenChannelName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>4</Row><Col>7</Col></Cell></Item6><Item7 Class="Text"><Variable>=$.loadBeginDate+"~"+$.loadEndDate</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>4</Row><Col>8</Col></Cell></Item7><Item8 Class="Text"><Variable>=$.amanName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>4</Row><Col>10</Col></Cell></Item8><Item9 Class="Text"><Variable>=$.bmanName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>4</Row><Col>11</Col></Cell></Item9><Item10 Class="Text"><Variable>=$.payDate</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DateFormat"/><Wordwrap>true</Wordwrap><Cell><Row>4</Row><Col>9</Col></Cell></Item10><Item11 Class="Label"><Text>还款项目</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><PrintStyle>united-level:2;auto-size:height;</PrintStyle><Cell><Row>4</Row><Col>0</Col></Cell></Item11></Children><NodePath>Row</NodePath></Item0><Item1 Class="Label"><Text>还款合计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>5</Row><Col>1</Col><ColSpan>3</ColSpan></Cell></Item1><Item2 Class="Text"><Variable>=$.payCapitalSum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>5</Row><Col>4</Col></Cell></Item2><Item3 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>5</Row><Col>5</Col></Cell></Item3><Item4 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>5</Row><Col>6</Col></Cell></Item4><Item5 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>5</Row><Col>7</Col></Cell></Item5><Item6 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>5</Row><Col>8</Col></Cell></Item6><Item7 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>5</Row><Col>9</Col></Cell></Item7><Item8 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>5</Row><Col>10</Col></Cell></Item8><Item9 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>5</Row><Col>11</Col></Cell></Item9><Item10 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><PrintStyle>united-level:2;auto-size:height;</PrintStyle><Cell><Row>5</Row><Col>0</Col></Cell></Item10></Children><NodePath>detail_free</NodePath></Item35><Item36 Class="Label"><Text>项目</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col></Cell></Item36><Item37 Class="Label"><Text>项目</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>0</Col></Cell></Item37><Item38 Class="Label"><Text>项目</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>6</Row><Col>0</Col></Cell></Item38><Item39 Class="RowPanel"><Cell><Row>7</Row><Col>0</Col><RowSpan>2</RowSpan><ColSpan>12</ColSpan></Cell><Children><Item0 Class="RowPanel"><Cell><Row>7</Row><Col>0</Col><ColSpan>12</ColSpan></Cell><Children><Item0 Class="Text"><Variable>=$.clientName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>7</Row><Col>1</Col></Cell></Item0><Item1 Class="Text"><Variable>=$.busiCode</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>7</Row><Col>2</Col></Cell></Item1><Item2 Class="Text"><Variable>=$.projectName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>7</Row><Col>3</Col></Cell></Item2><Item3 Class="Text"><Variable>=$.deplaySum</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>7</Row><Col>4</Col></Cell></Item3><Item4 Class="Text"><Variable>=$.busiTypeName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>7</Row><Col>5</Col></Cell></Item4><Item5 Class="Text"><Variable>=$.bankName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>7</Row><Col>6</Col></Cell></Item5><Item6 Class="Text"><Variable>=$.greenChannelName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>7</Row><Col>7</Col></Cell></Item6><Item7 Class="Text"><Variable>=$.delayBeginDate+"~"+$.delayEndDate</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>7</Row><Col>9</Col></Cell></Item7><Item8 Class="Text"><Variable>=$.amanName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>7</Row><Col>10</Col></Cell></Item8><Item9 Class="Text"><Variable>=$.bmanName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>7</Row><Col>11</Col></Cell></Item9><Item10 Class="Label"><Text>展期项目</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>united-level:3;auto-size:height;</PrintStyle><Cell><Row>7</Row><Col>0</Col></Cell></Item10><Item11 Class="Text"><Variable>=$.loadBeginDate+"~"+$.loadEndDate</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>7</Row><Col>8</Col></Cell></Item11></Children><NodePath>Row</NodePath></Item0><Item1 Class="Label"><Text>展期合计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>8</Row><Col>1</Col><ColSpan>3</ColSpan></Cell></Item1><Item2 Class="Text"><Variable>=$.deplaySum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>8</Row><Col>4</Col></Cell></Item2><Item3 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>8</Row><Col>5</Col></Cell></Item3><Item4 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>8</Row><Col>6</Col></Cell></Item4><Item5 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>8</Row><Col>7</Col></Cell></Item5><Item6 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>8</Row><Col>8</Col></Cell></Item6><Item7 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>8</Row><Col>9</Col></Cell></Item7><Item8 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>8</Row><Col>10</Col></Cell></Item8><Item9 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>8</Row><Col>11</Col></Cell></Item9><Item10 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>united-level:3;auto-size:height;</PrintStyle><Cell><Row>8</Row><Col>0</Col></Cell></Item10></Children><NodePath>detail_delay</NodePath></Item39></Children><ColumnWidths>106,192,135,201,117,114,117,126,195,177,93,93</ColumnWidths><RowHeights>40,40,20,20,20,20,20,20,20</RowHeights></Item0><Item1 Class="Label"><Text>填报单位：</Text><X>25</X><Y>4</Y><Width>131</Width><Height>23</Height></Item1><Item2 Class="Label"><Text>金额单位：万元</Text><HorizontalAlignment>2</HorizontalAlignment><X>1582</X><Y>3</Y><Width>110</Width><Height>23</Height></Item2></Children><Type>102</Type></Item2></Children><PageFormat><Width>1753</Width><Height>852</Height><Top>23</Top></PageFormat></Page><NodeSource><Children ItemClass="DatasetNodeSource"><Item0><Children ItemClass="RowNodeSource"><Item0/></Children><Reader Class="SqlReader"><Name>detail_factload</Name><Sql>SELECT 
+
+DISTINCT
+
+apply.apply_ID,
+cli.fullAreaName,
+cli.fullAreaCode,
+applydetail.busiNatureName,
+cli.clientName,
+apply.projectName,
+apply.busiCode,
+project.loadSum,
+project.busiTypeName,
+project.loadBeginDate,
+project.loadEndDate,
+applydetail.applydetail_ID,
+applydetail.projectTypeName,
+applydetail.projectSourceName,
+applydetail.bankName,
+applydetail.greenChannelName,
+applydetail.amanName,
+applydetail.bmanName
+  
+ FROM  pro_project project
+
+ LEFT JOIN pro_apply apply ON project.apply_ID = apply.apply_ID
+ 
+ LEFT JOIN pro_applydetail applydetail ON project.applyDetail_ID = applydetail.applyDetail_ID
+ 
+ LEFT JOIN crm_client  cli ON apply.client_ID = cli.client_ID
+ 
+WHERE 1=1 
+${has(begindatesql)?(" and project.loadBeginDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and project.loadBeginDate&lt;='"+enddatesql+"'"):""}
+ order by project.loadEndDate
+</Sql><Description>SELECT 
+
+DISTINCT
+
+apply.apply_ID,
+cli.fullAreaName,
+cli.fullAreaCode,
+applydetail.busiNatureName,
+cli.clientName,
+apply.projectName,
+apply.busiCode,
+project.loadSum,
+project.busiTypeName,
+project.loadBeginDate,
+project.loadEndDate,
+applydetail.applydetail_ID,
+applydetail.projectTypeName,
+applydetail.projectSourceName,
+applydetail.bankName,
+applydetail.greenChannelName,
+applydetail.amanName,
+applydetail.bmanName
+  
+ FROM  pro_project project
+
+ LEFT JOIN pro_apply apply ON project.apply_ID = apply.apply_ID
+ 
+ LEFT JOIN pro_applydetail applydetail ON project.applyDetail_ID = applydetail.applyDetail_ID
+ 
+ LEFT JOIN crm_client  cli ON apply.client_ID = cli.client_ID
+ 
+WHERE 1=1 
+${has(begindatesql)?(" and project.loadBeginDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and project.loadBeginDate&lt;='"+enddatesql+"'"):""}
+ order by project.loadEndDate
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><TagName>detail_factload</TagName></Item0><Item1><Children ItemClass="RowNodeSource"><Item0/></Children><Reader Class="SqlReader"><Name>detail_free</Name><Sql>
+
+SELECT DISTINCT
+
+	cli.fullAreaName,
+                        cli.fullAreaCode,
+                         cli.clientName,
+	apply.projectName,
+                        apply.busiCode,
+	
+	IFNULL(factpay.payCapitalSum,0) AS payCapitalSum,
+	project.busiTypeName,
+	applydetail.bankName,
+
+	
+	project.loadBeginDate,
+	project.loadEndDate,
+                       applydetail.greenChannelName,
+	
+	
+(project.loadSum - (SELECT SUM(payCapitalSum) FROM pro_factpay factpay1 WHERE factpay1.project_ID = factpay.project_ID AND factpay1.payDate &lt;= factpay.payDate)) AS 'remainSUM',
+	
+	
+	factpay.payDate,
+	factpay.remark,
+	applydetail.amanName,
+	applydetail.bmanName
+	
+  FROM pro_factpay factpay
+
+ LEFT JOIN pro_project project  ON factpay.project_ID=project.project_ID
+
+ LEFT JOIN pro_apply apply ON project.apply_ID = apply.apply_ID
+ 
+ LEFT JOIN pro_applydetail applydetail ON project.applyDetail_ID = applydetail.applyDetail_ID
+ 
+ LEFT JOIN crm_client  cli ON apply.client_ID = cli.client_ID
+ 
+where 1=1 
+
+${has(begindatesql)?(" and factpay.payDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and factpay.payDate&lt;='"+enddatesql+"'"):""}
+ order by 	factpay.payDate
+
+</Sql><Description>
+
+SELECT DISTINCT
+
+	cli.fullAreaName,
+                        cli.fullAreaCode,
+                         cli.clientName,
+	apply.projectName,
+                        apply.busiCode,
+	
+	IFNULL(factpay.payCapitalSum,0) AS payCapitalSum,
+	project.busiTypeName,
+	applydetail.bankName,
+
+	
+	project.loadBeginDate,
+	project.loadEndDate,
+                       applydetail.greenChannelName,
+	
+	
+(project.loadSum - (SELECT SUM(payCapitalSum) FROM pro_factpay factpay1 WHERE factpay1.project_ID = factpay.project_ID AND factpay1.payDate &lt;= factpay.payDate)) AS 'remainSUM',
+	
+	
+	factpay.payDate,
+	factpay.remark,
+	applydetail.amanName,
+	applydetail.bmanName
+	
+  FROM pro_factpay factpay
+
+ LEFT JOIN pro_project project  ON factpay.project_ID=project.project_ID
+
+ LEFT JOIN pro_apply apply ON project.apply_ID = apply.apply_ID
+ 
+ LEFT JOIN pro_applydetail applydetail ON project.applyDetail_ID = applydetail.applyDetail_ID
+ 
+ LEFT JOIN crm_client  cli ON apply.client_ID = cli.client_ID
+ 
+where 1=1 
+
+${has(begindatesql)?(" and factpay.payDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and factpay.payDate&lt;='"+enddatesql+"'"):""}
+ order by 	factpay.payDate
+
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><TagName>detail_free</TagName></Item1><Item2><Children ItemClass="RowNodeSource"><Item0/></Children><Reader Class="SqlReader"><Name>detail_delay</Name><Sql>SELECT DISTINCT	
+cli.clientName,
+apply.busiCode,
+apply.projectName,
+IFNULL(delay.delaySum,0) AS deplaySum,
+project.busiTypeName,
+project.bankName,
+applydetail.greenChannelName,
+project.loadBeginDate,
+project.loadEndDate,
+delay.delayBeginDate,
+delay.delayEndDate,
+applydetail.amanName,
+applydetail.bmanName
+ FROM pro_delay delay
+ LEFT JOIN pro_project project  ON delay.project_ID=project.project_ID
+ LEFT JOIN pro_apply apply ON project.apply_ID = apply.apply_ID 
+ LEFT JOIN pro_applydetail applydetail ON project.applyDetail_ID = applydetail.applyDetail_ID
+ LEFT JOIN crm_client  cli ON apply.client_ID = cli.client_ID
+WHERE 1=1 
+${has(begindatesql)?(" and delay.delayBeginDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and delay.delayBeginDate&lt;='"+enddatesql+"'"):" and delay.delayBeginDate&lt;=CURDATE()"}</Sql><Description>SELECT DISTINCT	
+cli.clientName,
+apply.busiCode,
+apply.projectName,
+IFNULL(delay.delaySum,0) AS deplaySum,
+project.busiTypeName,
+project.bankName,
+applydetail.greenChannelName,
+project.loadBeginDate,
+project.loadEndDate,
+delay.delayBeginDate,
+delay.delayEndDate,
+applydetail.amanName,
+applydetail.bmanName
+ FROM pro_delay delay
+ LEFT JOIN pro_project project  ON delay.project_ID=project.project_ID
+ LEFT JOIN pro_apply apply ON project.apply_ID = apply.apply_ID 
+ LEFT JOIN pro_applydetail applydetail ON project.applyDetail_ID = applydetail.applyDetail_ID
+ LEFT JOIN crm_client  cli ON apply.client_ID = cli.client_ID
+WHERE 1=1 
+${has(begindatesql)?(" and delay.delayBeginDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and delay.delayBeginDate&lt;='"+enddatesql+"'"):" and delay.delayBeginDate&lt;=CURDATE()"}</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><TagName>detail_delay</TagName></Item2></Children></NodeSource></jatools>

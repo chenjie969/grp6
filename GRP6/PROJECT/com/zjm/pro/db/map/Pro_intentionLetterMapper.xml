@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_intentionLetterMapper">
+	<!-- 担保意向函表 -->
+	 <resultMap id="intentionLetterMapper" type="com.zjm.pro.db.model.Pro_intentionLetter" >
+	    <id column="intentionLetter_ID" property="intentionLetter_ID"  />
+	    <result column="apply_ID" property="apply_ID"/>
+	    <result column="meetingDetail_ID" property="meetingDetail_ID"/>
+	    <result column="intentionLetterCode" property="intentionLetterCode"/>
+		<result column="bankID" property="bankID"/>
+		<result column="bankName" property="bankName"/>
+		<result column="busiTypeID" property="busiTypeID"/>
+		<result column="busiTypeName" property="busiTypeName"/>
+		<result column="agreeSum" property="agreeSum"/>
+		<result column="periodDay" property="periodDay"/>
+		<result column="periodMonth" property="periodMonth"/>
+		<result column="periodMonthDay" property="periodMonthDay"/>
+		<result column="createDate" property="createDate"/>
+		<result column="batchNumber" property="batchNumber"/>
+		<result column="status" property="status"/>
+		<result column="filePath" property="filePath"/>
+		<result column="fileName" property="fileName"/>
+		<result column="unit_uid" property="unit_uid"/>
+		<result column="unit_uidName" property="unit_uidName"/>
+		<result column="updateUserName" property="updateUserName"/>
+		<result column="updateDateTime" property="updateDateTime"/>	   
+	 </resultMap>
+	
+	<!-- 查询担保意向函列表 -->
+	<select id="selectIntentionLetterListByWheresql" parameterType="java.lang.String"  resultMap="intentionLetterMapper">
+		SELECT 
+		    intentionLetter_ID,
+			apply_ID,
+	 		meetingDetail_ID,
+	 		intentionLetterCode,
+			bankID,
+			bankName,
+			busiTypeID,
+			busiTypeName,
+			agreeSum,
+			periodDay,
+			periodMonth,
+			periodMonthDay,
+			createDate,
+			batchNumber,
+			status,
+			filePath,
+			fileName,
+			unit_uid,
+			unit_uidName,
+			updateUserName,
+			updateDateTime
+	    FROM 
+	         pro_intentionletter 
+		WHERE 1=1 ${value}
+	</select>
+		            
+	<!-- 新增一条担保意向函 -->       
+	<insert id="insertOneIntentionLetter" parameterType="com.zjm.pro.db.model.Pro_intentionLetter">
+	 	INSERT INTO pro_intentionletter (
+	 		intentionLetter_ID,
+			apply_ID,
+	 		meetingDetail_ID,
+	 		intentionLetterCode,
+			bankID,
+			bankName,
+			busiTypeID,
+			busiTypeName,
+			agreeSum,
+			periodDay,
+			periodMonth,
+			periodMonthDay,
+			createDate,
+			batchNumber,
+			status,
+			filePath,
+			fileName,
+			unit_uid,
+			unit_uidName,
+			updateUserName,
+			updateDateTime
+		) values (
+			#{intentionLetter_ID},
+			#{apply_ID},
+	 		#{meetingDetail_ID},
+	 		#{intentionLetterCode},
+			#{bankID},
+			#{bankName},
+			#{busiTypeID},
+			#{busiTypeName},
+			#{agreeSum},
+			#{periodDay},
+			#{periodMonth},
+			#{periodMonthDay},
+			NOW(),
+			#{batchNumber},
+			#{status},
+			#{filePath},
+			#{fileName},
+			#{unit_uid},
+			#{unit_uidName},
+			#{updateUserName},
+			NOW()
+		)
+	</insert>	
+	
+	<!-- 删除一条担保意向函 -->
+	<delete id="deleteOneIntentionLetter" parameterType="java.lang.String">
+		<![CDATA[
+			DELETE FROM 
+				pro_intentionletter
+			WHERE 
+				1=1 ${value}
+		]]>
+	</delete>        
+	
+	<!-- 查询一条担保意向函 -->
+	<select id="selectOneIntentionLetterByWhereSql" parameterType="java.lang.String"  resultMap="intentionLetterMapper">
+		SELECT 
+		    intentionLetter_ID,
+			apply_ID,
+	 		meetingDetail_ID,
+	 		intentionLetterCode,
+			bankID,
+			bankName,
+			busiTypeID,
+			busiTypeName,
+			agreeSum,
+			periodDay,
+			periodMonth,
+			periodMonthDay,
+			createDate,
+			batchNumber,
+			status,
+			filePath,
+			fileName,
+			unit_uid,
+			unit_uidName,
+			updateUserName,
+			updateDateTime
+	    FROM 
+	         pro_intentionletter 
+		WHERE 1=1 ${value}
+	</select>
+	
+	<!--  修改担保意向函状态 -->
+	<update id="updateStatus" parameterType="com.zjm.pro.db.model.Pro_intentionLetter">
+		UPDATE pro_intentionLetter
+		SET
+			<if test="batchNumber!=null">batchNumber=#{batchNumber}</if>
+			status=#{status},
+			updateUserName=#{updateUserName},
+			updateDateTime=NOW()
+		WHERE
+			intentionLetter_ID = #{intentionLetter_ID}
+	</update>
+	
+	<!--  -->
+	<select id="selectBatchNumber" parameterType="java.lang.String" resultType="java.lang.Integer">
+		SELECT MAX(batchNumber)
+		FROM pro_intentionLetter
+		WHERE 1=1 ${value}
+	</select>
+</mapper>  

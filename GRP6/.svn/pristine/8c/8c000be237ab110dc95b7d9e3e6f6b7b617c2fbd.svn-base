@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_applyDetailMapper">
+	<!-- 业务申请产品信息表 -->
+	 <resultMap id="ProApplyDetailMap" type="com.zjm.pro.db.model.Pro_applyDetail" >
+	    		<id column="applyDetail_ID" property="applyDetail_ID"  />
+	    		<result column="apply_ID" property="apply_ID"/>
+				<result column="client_ID" property="client_ID"/>
+				<result column="clientTypeID" property="clientTypeID"/>
+				<result column="clientGUID" property="clientGUID"/>
+				<result column="clientName" property="clientName"/>
+				<result column="projectCode" property="projectCode"/>
+				<result column="busiNatureID" property="busiNatureID"/>
+				<result column="busiNatureName" property="busiNatureName"/>
+				<result column="AreaCodeID" property="AreaCodeID"/>
+				<result column="AreaCodeName" property="AreaCodeName"/>
+				<result column="busiClass" property="busiClass"/>
+				<result column="busiTypeID" property="busiTypeID"/>
+				<result column="busiTypeName" property="busiTypeName"/>
+				<result column="projectTypeID" property="projectTypeID"/>
+				<result column="projectTypeName" property="projectTypeName"/>
+				<result column="greenChannelID" property="greenChannelID"/>
+				<result column="greenChannelName" property="greenChannelName"/>
+				<result column="bankTypeID" property="bankTypeID"/>
+				<result column="bankTypeName" property="bankTypeName"/>
+				<result column="bankID" property="bankID"/>
+				<result column="bankName" property="bankName"/>
+				<result column="subBankName" property="subBankName"/>
+				<result column="applySum" property="applySum"/>
+				<result column="guarantyScale" property="guarantyScale"/>
+				<result column="guarantyScope" property="guarantyScope"/>
+				<result column="guarantyDutySum" property="guarantyDutySum"/>
+				<result column="periodMonth" property="periodMonth"/>
+				<result column="periodDay" property="periodDay"/>
+				<result column="periodMonthDay" property="periodMonthDay"/>
+				<result column="departID" property="departID"/>
+				<result column="departName" property="departName"/>
+				<result column="loadUsed" property="loadUsed"/>
+				<result column="repaymentPlan" property="repaymentPlan"/>
+				<result column="provideGuaranty" property="provideGuaranty"/>
+				<result column="otherDesc" property="otherDesc"/>
+				<result column="unit_uid" property="unit_uid"/>
+				<result column="unit_uidName" property="unit_uidName"/>
+				<result column="amanID" property="amanID"/>
+				<result column="amanName" property="amanName"/>
+				<result column="bmanID" property="bmanID"/>
+				<result column="bmanName" property="bmanName"/>
+				<result column="reviewManID" property="reviewManID"/>
+				<result column="reviewManName" property="reviewManName"/>
+				<result column="legalManID" property="legalManID"/>
+				<result column="legalManName" property="legalManName"/>
+				<result column="beforeAManID" property="beforeAManID"/>
+				<result column="beforeBManID" property="beforeBManID"/>
+				<result column="beforeReviewManID" property="beforeReviewManID"/>
+				<result column="beforeLegalManID" property="beforeLegalManID"/>
+				<result column="changeDate" property="changeDate"/>
+				<result column="changeManID" property="changeManID"/>
+				<result column="isMeeting" property="isMeeting"/>
+				<result column="applyMeetingDate" property="applyMeetingDate"/>
+				<result column="operationDepartID" property="operationDepartID"/>
+				<result column="operationDepartName" property="operationDepartName"/>
+				<result column="applyMeetingUserName" property="applyMeetingUserName"/>
+				<result column="meetingSubmitDate" property="meetingSubmitDate"/>
+				<result column="meetingStatus" property="meetingStatus"/>
+				<result column="meetingTypeID" property="meetingTypeID"/>
+				<result column="meetingTypeName" property="meetingTypeName"/>
+				<result column="meetingDate" property="meetingDate"/>
+				<result column="isResolution" property="isResolution"/>
+				<result column="meetingCode" property="meetingCode"/>
+				<result column="resolutionCode" property="resolutionCode"/>
+				<result column="monitoredAsking" property="monitoredAsking"/>
+				<result column="meetingResult" property="meetingResult"/>
+				<result column="meetingDate" property="meetingDate"/>
+				<result column="isResolution" property="isResolution"/>
+				<result column="meetingCode" property="meetingCode"/>
+				<result column="resolutionCode" property="resolutionCode"/>
+				<result column="monitoredAsking" property="monitoredAsking"/>
+				<result column="meetingResult" property="meetingResult"/>
+				<result column="agreeSum" property="agreeSum"/>
+				<result column="agreeMonth" property="agreeMonth"/>
+				<result column="agreeDay" property="agreeDay"/>
+				<result column="agreeMonthDay" property="agreeMonthDay"/>
+				<result column="guarantyRate" property="guarantyRate"/>
+				<result column="reviewRate" property="reviewRate"/>
+				<result column="serviceRate" property="serviceRate"/>
+				<result column="serviceRate" property="serviceRate"/>
+				<result column="bzScale" property="bzScale"/>
+				<result column="interestRate" property="interestRate"/>
+				<result column="otherRateOne" property="otherRateOne"/>
+				<result column="otherRateOneDesc" property="otherRateOneDesc"/>
+				<result column="otherRateTwo" property="otherRateTwo"/>
+				<result column="otherRateTwoDesc" property="otherRateTwoDesc"/>
+				<result column="dcontractCode" property="dcontractCode"/>
+				<result column="contractBeginDate" property="contractBeginDate"/>
+				<result column="contractEndDate" property="contractEndDate"/>
+				<result column="jcontractCode" property="jcontractCode"/>
+				<result column="bcontractCode" property="bcontractCode"/>
+				<result column="isCreditSubProject" property="isCreditSubProject"/>
+				<result column="isStop" property="isStop"/>
+				<result column="isUnpack" property="isUnpack"/>
+				<result column="stopDate" property="stopDate"/>
+				<result column="stopTypeID" property="stopTypeID"/>
+				<result column="stopTypeName" property="stopTypeName"/>
+				<result column="stopDesc" property="stopDesc"/>
+				<result column="loanMethod" property="loanMethod"/>
+				<result column="payMethod" property="payMethod"/>
+				<result column="InterestMethodID" property="InterestMethodID"/>
+				<result column="InterestMethodName" property="InterestMethodName"/>
+				<result column="projectStageID" property="projectStageID"/>
+				<result column="projectStageName" property="projectStageName"/>
+				<result column="updateUserName" property="updateUserName"/>
+				<result column="updateDateTime" property="updateDateTime"/>
+				<result column="applySumUse" property="applySumUse"/>
+   
+  </resultMap>
+	
+<!-- 插入 一个业务申请产品信息表 -->
+	<insert id="insertOneApplyDetailInfo"	parameterType="com.zjm.pro.db.model.Pro_applyDetail">
+		<![CDATA[
+		INSERT INTO pro_applydetail (
+		        applyDetail_ID,
+		        apply_ID,
+				client_ID,
+				clientTypeID,
+				clientGUID,
+				clientName,
+				projectCode,
+				busiNatureID,
+				busiNatureName,
+				AreaCodeID,
+				AreaCodeName,
+				busiClass,
+				busiTypeID,
+				busiTypeName,
+				projectTypeID,
+				projectTypeName,
+				greenChannelID,
+				greenChannelName,
+				bankTypeID,
+				bankTypeName,
+				bankID,
+				bankName,
+				subBankName,
+				applySum,
+				guarantyScale,
+				guarantyScope,
+				guarantyDutySum,
+				periodMonth,
+				periodDay,
+				periodMonthDay,
+				departID,
+				departName,
+				unit_uid,
+				unit_uidName,
+				amanID,
+				amanName,
+				bmanID,
+				bmanName,
+				reviewManID,
+				reviewManName,
+				legalManID,
+				legalManName,
+				beforeLegalManID,
+				beforeAManID,
+				beforeBManID,
+				beforeReviewManID,
+				changeDate,
+				changeManID,
+				isMeeting,
+				meetingTypeID,
+				meetingTypeName,
+				meetingDate,
+				agreeSum,
+				agreeMonth,
+				agreeDay,
+				agreeMonthDay,
+				dcontractCode,
+				jcontractCode,
+				bcontractCode,
+				contractBeginDate,
+				contractEndDate,
+				isCreditSubProject,
+				isStop,
+				stopDate,
+				stopTypeID,
+				stopTypeName,
+				stopDesc,
+				loanMethod,
+				payMethod,
+				InterestMethodID,
+				InterestMethodName,
+				projectStageID,
+				projectStageName,
+				updateUserName,
+				updateDateTime,
+				applySumUse
+		)
+		VALUES
+		(
+		 		#{applyDetail_ID},
+				#{apply_ID},
+				#{client_ID},
+				#{clientTypeID},
+				#{clientGUID},
+				#{clientName},
+				#{projectCode},
+				#{busiNatureID},
+				#{busiNatureName},
+				#{AreaCodeID},
+				#{AreaCodeName},
+				#{busiClass},
+				#{busiTypeID},
+				#{busiTypeName},
+				#{projectTypeID},
+				#{projectTypeName},
+				#{greenChannelID},
+				#{greenChannelName},
+				#{bankTypeID},
+				#{bankTypeName},
+				#{bankID},
+				#{bankName},
+				#{subBankName},
+				#{applySum},
+				#{guarantyScale},
+				#{guarantyScope},
+				#{guarantyDutySum},
+				#{periodMonth},
+				#{periodDay},
+				#{periodMonthDay},
+				#{departID},
+				#{departName},
+				#{unit_uid},
+				#{unit_uidName},
+				#{amanID},
+				#{amanName},
+				#{bmanID},
+				#{bmanName},
+				#{reviewManID},
+				#{reviewManName},
+				#{legalManID},
+				#{legalManName},
+				#{beforeLegalManID},
+				#{beforeAManID},
+				#{beforeBManID},
+				#{beforeReviewManID},
+				#{changeDate},
+				#{changeManID},
+				#{isMeeting},
+				#{meetingTypeID},
+				#{meetingTypeName},
+				#{meetingDate},
+				#{agreeSum},
+				#{agreeMonth},
+				#{agreeDay},
+				#{agreeMonthDay},
+				#{dcontractCode},
+				#{jcontractCode},
+				#{bcontractCode},
+				#{contractBeginDate},
+				#{contractEndDate},
+				#{isCreditSubProject},
+				#{isStop},
+				#{stopDate},
+				#{stopTypeID},
+				#{stopTypeName},
+				#{stopDesc},
+				#{loanMethod},
+				#{payMethod},
+				#{InterestMethodID},
+				#{InterestMethodName},
+				#{projectStageID},
+				#{projectStageName},
+				#{updateUserName},
+				NOW(),
+				#{applySumUse}
+			
+		) ;
+		]]>
+	</insert>
+	
+	<select id="selectApplyDetailList" parameterType="string" resultMap="ProApplyDetailMap">
+		<![CDATA[
+			SELECT
+		 		  applyDetail_ID,
+		        apply_ID,
+				client_ID,
+				clientTypeID,
+				clientGUID,
+				clientName,
+				projectCode,
+				busiNatureID,
+				busiNatureName,
+				AreaCodeID,
+				AreaCodeName,
+				busiClass,
+				busiTypeID,
+				busiTypeName,
+				projectTypeID,
+				projectTypeName,
+				greenChannelID,
+				greenChannelName,
+				bankTypeID,
+				bankTypeName,
+				bankID,
+				bankName,
+				subBankName,
+				applySum,
+				guarantyScale,
+				guarantyScope,
+				guarantyDutySum,
+				periodMonth,
+				periodDay,
+				periodMonthDay,
+				departID,
+				departName,
+				unit_uid,
+				unit_uidName,
+				amanID,
+				amanName,
+				bmanID,
+				bmanName,
+				reviewManID,
+				reviewManName,
+				legalManID,
+				legalManName,
+				beforeLegalManID,
+				beforeAManID,
+				beforeBManID,
+				beforeReviewManID,
+				changeDate,
+				changeManID,
+				isMeeting,
+				meetingTypeID,
+				meetingTypeName,
+				meetingDate,
+				agreeSum,
+				agreeMonth,
+				agreeDay,
+				agreeMonthDay,
+				dcontractCode,
+				jcontractCode,
+				bcontractCode,
+				contractBeginDate,
+				contractEndDate,
+				isCreditSubProject,
+				isStop,
+				stopDate,
+				stopTypeID,
+				stopTypeName,
+				stopDesc,
+				loanMethod,
+				payMethod,
+				InterestMethodID,
+				InterestMethodName,
+				projectStageID,
+				projectStageName,
+				updateUserName,
+				updateDateTime,
+				applySumUse
+			FROM pro_applydetail
+			WHERE 1=1 ${value}
+		]]>
+	</select>
+	
+		<!--根据wheresql删除申请明细表信息 -->
+	<delete id="deleteApplyDetailByWhereSql"  parameterType="java.lang.String" >
+		<![CDATA[DELETE FROM pro_applydetail WHERE 1=1 ${value} ]]>
+	</delete>
+	
+	<!-- 根据 applyDetail_ID 更新一条申请明细表数据 -->
+	<update id="updateOneApplyDetailInfo" parameterType="com.zjm.pro.db.model.Pro_applyDetail">
+		UPDATE pro_applyDetail
+		SET 
+	        apply_ID=#{apply_ID},
+			client_ID=#{client_ID},
+			clientTypeID=#{clientTypeID},
+			clientGUID=#{clientGUID},
+			clientName=#{clientName},
+			projectCode=#{projectCode},
+			busiNatureID=#{busiNatureID},
+			busiNatureName=#{busiNatureName},
+			AreaCodeID=#{AreaCodeID},
+			AreaCodeName=#{AreaCodeName},
+			busiClass=#{busiClass},
+			busiTypeID=#{busiTypeID},
+			busiTypeName=#{busiTypeName},
+			projectTypeID=#{projectTypeID},
+			projectTypeName=#{projectTypeName},
+			greenChannelID=#{greenChannelID},
+			greenChannelName=#{greenChannelName},
+			bankTypeID=#{bankTypeID},
+			bankTypeName=#{bankTypeName},
+			bankID=#{bankID},
+			bankName=#{bankName},
+			subBankName=#{subBankName},
+			applySum=#{applySum},
+			guarantyScale=#{guarantyScale},
+			guarantyScope=#{guarantyScope},
+			guarantyDutySum=#{guarantyDutySum},
+			periodMonth=#{periodMonth},
+			periodDay=#{periodDay},
+			periodMonthDay=#{periodMonthDay},
+			departID=#{departID},
+			departName=#{departName},
+			unit_uid=#{unit_uid},
+			unit_uidName=#{unit_uidName},
+			amanID=#{amanID},
+			amanName=#{amanName},
+			bmanID=#{bmanID},
+			bmanName=#{bmanName},
+			reviewManID=#{reviewManID},
+			reviewManName=#{reviewManName},
+			beforeAManID=#{beforeAManID},
+			beforeBManID=#{beforeBManID},
+			beforeReviewManID=#{beforeReviewManID},
+			changeDate=#{changeDate},
+			changeManID=#{changeManID},
+			isMeeting=#{isMeeting},
+			meetingTypeID=#{meetingTypeID},
+			meetingTypeName=#{meetingTypeName},
+			meetingDate=#{meetingDate},
+			agreeSum=#{agreeSum},
+			agreeMonth=#{agreeMonth},
+			agreeDay=#{agreeDay},
+			agreeMonthDay=#{agreeMonthDay},
+			<if test="dcontractCode != null and dcontractCode !=''">
+				dcontractCode=#{dcontractCode},
+			</if>
+			<if test="jcontractCode != null and jcontractCode !=''">
+				jcontractCode=#{jcontractCode},
+			</if>
+			<if test="bcontractCode != null and bcontractCode !=''">
+				bcontractCode=#{bcontractCode},
+			</if>
+			guarantyRate= #{guarantyRate},
+			reviewRate=#{reviewRate},
+			bzScale=#{bzScale},
+			contractBeginDate=#{contractBeginDate},
+			contractEndDate=#{contractEndDate},
+			isCreditSubProject=#{isCreditSubProject},
+			isStop=#{isStop},
+			stopDate=#{stopDate},
+			stopTypeID=#{stopTypeID},
+			stopTypeName=#{stopTypeName},
+			stopDesc=#{stopDesc},
+			loanMethod=#{loanMethod},
+			payMethod=#{payMethod},
+			InterestMethodID=#{InterestMethodID},
+			InterestMethodName=#{InterestMethodName},
+			projectStageID=#{projectStageID},
+			projectStageName=#{projectStageName},
+			updateUserName=#{updateUserName},
+			updateDateTime=NOW(),
+			applySumUse=#{applySumUse}
+		WHERE
+			applyDetail_ID=#{applyDetail_ID}
+	</update>
+	
+	<!-- 指定项目AB角  -->
+	<update id="updateApplySetABMan" parameterType="com.zjm.pro.db.model.Pro_applyDetail">
+		<![CDATA[
+			UPDATE pro_applyDetail 
+			SET 
+				amanID = #{amanID},
+				amanName = #{amanName},	
+				bmanID = #{bmanID},
+				bmanName = #{bmanName},
+				beforeAManID = #{beforeAManID},
+				beforeBManID = #{beforeBManID}
+			WHERE 
+				apply_ID  = #{apply_ID}
+		]]>
+	</update>
+	<!-- 指定项目风控复核人  -->
+	<update id="updateApplySetReviewMan" parameterType="com.zjm.pro.db.model.Pro_applyDetail">
+		<![CDATA[
+			UPDATE pro_applyDetail 
+			SET 
+				reviewManID = #{reviewManID},
+				reviewManName = #{reviewManName},
+				beforeReviewManID = #{beforeReviewManID}
+			WHERE 
+				apply_ID  = #{apply_ID}
+		]]>
+	</update>
+	<!-- 指定项目法务评审人  -->
+	<update id="updateApplySetLegalMan" parameterType="com.zjm.pro.db.model.Pro_applyDetail">
+		<![CDATA[
+			UPDATE pro_applyDetail 
+			SET 
+				legalManID = #{legalManID},
+				legalManName = #{legalManName},
+				beforeLegalManID = #{beforeLegalManID}
+			WHERE 
+				apply_ID  = #{apply_ID}
+		]]>
+	</update>
+	<!-- 修改产品评审会决议  -->
+	<update id="updateOneApproveGuarantee" parameterType="com.zjm.pro.db.model.Pro_applyDetail">
+		<![CDATA[
+			UPDATE pro_applyDetail 
+			SET 
+				bankID=#{bankID},
+				bankName=#{bankName},
+				subBankName=#{subBankName},
+				agreeSum = #{agreeSum},
+				agreeMonth = #{agreeMonth},
+				agreeDay = #{agreeDay},
+				agreeMonthDay = #{agreeMonthDay},
+				guarantyScale = #{guarantyScale},
+				guarantyScope = #{guarantyScope},
+				guarantyDutySum = #{guarantyDutySum}
+			WHERE 
+				applyDetail_ID  = #{applyDetail_ID}
+		]]>
+	</update>
+	<!-- 查询一条详细信息 -->
+	<select id="selectOneApplyDetailWhereSql" parameterType="string" resultMap="ProApplyDetailMap">
+		<![CDATA[
+			SELECT
+		 		  applyDetail_ID,
+		        apply_ID,
+				client_ID,
+				clientTypeID,
+				clientGUID,
+				clientName,
+				projectCode,
+				busiNatureID,
+				busiNatureName,
+				AreaCodeID,
+				AreaCodeName,
+				busiClass,
+				busiTypeID,
+				busiTypeName,
+				projectTypeID,
+				projectTypeName,
+				greenChannelID,
+				greenChannelName,
+				bankTypeID,
+				bankTypeName,
+				bankID,
+				bankName,
+				subBankName,
+				applySum,
+				guarantyScale,
+				guarantyScope,
+				guarantyDutySum,
+				periodMonth,
+				periodDay,
+				periodMonthDay,
+				departID,
+				departName,
+				unit_uid,
+				unit_uidName,
+				amanID,
+				amanName,
+				bmanID,
+				bmanName,
+				reviewManID,
+				reviewManName,
+				beforeAManID,
+				beforeBManID,
+				beforeReviewManID,
+				changeDate,
+				changeManID,
+				isMeeting,
+				meetingTypeID,
+				meetingTypeName,
+				meetingDate,
+				agreeSum,
+				agreeMonth,
+				agreeDay,
+				agreeMonthDay,
+				dcontractCode,
+				jcontractCode,
+				bcontractCode,
+				contractBeginDate,
+				contractEndDate,
+				isCreditSubProject,
+				isStop,
+				stopDate,
+				stopTypeID,
+				stopTypeName,
+				stopDesc,
+				loanMethod,
+				payMethod,
+				InterestMethodID,
+				InterestMethodName,
+				projectStageID,
+				projectStageName,
+				updateUserName,
+				updateDateTime,
+				applySumUse
+			FROM pro_applydetail
+			WHERE 1=1 ${value}
+			limit 1
+		]]>
+	</select>
+
+
+</mapper>  

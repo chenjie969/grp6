@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="IBatisWorkflowStore">
+
+        <typeAlias alias="WorkflowEntryData" type="com.opensymphony.workflow.spi.ibatis.WorkflowEntryData"/>
+        <typeAlias alias="WorkflowStepData" type="com.opensymphony.workflow.spi.ibatis.WorkflowStepData"/>
+        <typeAlias alias="PreviousStepData" type="com.opensymphony.workflow.spi.ibatis.PreviousStepData"/>
+        
+        <cacheModel id="queryworkflowentry-cache" type="LRU">
+                <flushInterval minutes="30"/>
+                <property name="size" value="1000" />
+                <flushOnExecute statement="insertCurrentStep"/>
+                <flushOnExecute statement="updateCurrentStep"/>
+                <flushOnExecute statement="deleteCurrentStep"/>
+                <flushOnExecute statement="insertHistoryStep"/>
+        </cacheModel>
+        
+        <cacheModel id="workflowcurrentstep-cache" type="LRU">
+                <flushInterval minutes="30"/>
+                <property name="size" value="1000" />
+                <flushOnExecute statement="insertCurrentStep"/>
+                <flushOnExecute statement="updateCurrentStep"/>
+                <flushOnExecute statement="deleteCurrentStep"/>
+        </cacheModel>
+        
+        <cacheModel id="workflowcurrentprevstep-cache" type="LRU">
+                <flushInterval minutes="30"/>
+                <property name="size" value="1000" />
+                <flushOnExecute statement="insertCurrentPriviousStep"/>
+                <flushOnExecute statement="deleteCurrentPriviousStep"/>
+        </cacheModel>
+        
+        <cacheModel id="workflowhistorystep-cache" type="LRU">
+                <flushInterval minutes="30"/>
+                <property name="size" value="1000" />
+                <flushOnExecute statement="insertHistoryStep"/>
+        </cacheModel>
+        
+        <cacheModel id="workflowhistoryprevstep-cache" type="LRU">
+                <flushInterval minutes="30"/>
+                <property name="size" value="1000" />
+                <flushOnExecute statement="insertHistoryPriviousStep"/>
+        </cacheModel>
+        
+        <cacheModel id="workflowentry-cache" type="LRU">
+                <flushInterval minutes="30"/>
+                <property name="size" value="1000" />
+                <flushOnExecute statement="insertWorkflowEntry"/>
+                <flushOnExecute statement="updateWorkflowEntry"/>
+        </cacheModel>
+        
+        <resultMap id="WorkflowEntryDataResult" class="WorkflowEntryData">
+                <result property="id" column="ID"/>
+                <result property="name" column="NAME"/>
+                <result property="state" column="STATE"/>
+        </resultMap>
+        
+        <resultMap id="WorkflowStepDataResult" class="WorkflowStepData">
+                <result property="id" column="ID"/>
+                <result property="entryId" column="ENTRY_ID"/>
+                <result property="stepId" column="STEP_ID"/>
+                <result property="actionId" column="ACTION_ID"/>
+                <result property="owner" column="OWNER"/>
+                <result property="startDate" column="START_DATE"/>
+                <result property="finishDate" column="FINISH_DATE"/>
+                <result property="dueDate" column="DUE_DATE"/>
+                <result property="status" column="STATUS"/>
+                <result property="caller" column="CALLER"/>
+        </resultMap>
+        
+        <resultMap id="PreviousStepDataResult" class="PreviousStepData">
+                <result property="id" column="ID"/>
+                <result property="previousId" column="PREVIOUS_ID"/>
+        </resultMap>
+        
+        <select id="queryWorkflowEntry" parameterClass="String" resultClass="long" cacheModel="queryworkflowentry-cache">
+                $value$
+        </select> 
+        
+        <select id="selectWorkflowEntry" parameterClass="long" resultMap="WorkflowEntryDataResult" cacheModel="workflowentry-cache">
+                SELECT `ID`, `NAME`, `STATE` FROM `os_wfentry` WHERE `ID`=#value#
+        </select>
+        
+        <select id="selectCurrentStepByEntry" parameterClass="long" resultMap="WorkflowStepDataResult" cacheModel="workflowcurrentstep-cache">
+                SELECT `ID`, `ENTRY_ID`, `STEP_ID`, `ACTION_ID`, `OWNER`, 
+                        `START_DATE`, `FINISH_DATE`, `DUE_DATE`, `STATUS`, `CALLER` 
+                FROM `os_currentstep` 
+                WHERE `ENTRY_ID`=#value#
+        </select>
+        
+        <select id="selectCurrentPriviousStep" parameterClass="long" resultMap="PreviousStepDataResult" cacheModel="workflowcurrentprevstep-cache">
+                SELECT `ID`, `PREVIOUS_ID` FROM `os_currentstep_prev` WHERE `ID`=#value#
+        </select>
+        
+        <select id="selectHistoryStepByEntry" parameterClass="long" resultMap="WorkflowStepDataResult" cacheModel="workflowhistorystep-cache">
+                SELECT `ID`, `ENTRY_ID`, `STEP_ID`, `ACTION_ID`, `OWNER`, 
+                        `START_DATE`, `FINISH_DATE`, `DUE_DATE`, `STATUS`, `CALLER` 
+                FROM `os_historystep` 
+                WHERE `ENTRY_ID`=#value#
+                ORDER BY `ID` DESC
+        </select>
+        
+        <select id="selectHistoryPriviousStep" parameterClass="long" resultMap="PreviousStepDataResult" cacheModel="workflowhistoryprevstep-cache">
+                SELECT `ID`, `PREVIOUS_ID` FROM `os_historystep_prev` WHERE `ID`=#value#
+        </select>
+        
+        <select id="selectStepSequence" resultClass="long">
+                SELECT max(`ID`) AS `ID` FROM `os_stepids`
+        </select>
+        
+        <select id="selectEntrySequence" resultClass="long">
+                SELECT max(`ID`) AS `ID` FROM `os_entryids`
+        </select>
+        
+        <insert id="insertWorkflowEntry" parameterClass="WorkflowEntryData">
+                INSERT INTO `os_wfentry` (`ID`, `NAME`, `STATE`) VALUE (#id#, #name#, #state#)
+        </insert>
+        
+        <insert id="insertHistoryPriviousStep" parameterClass="PreviousStepData">
+                INSERT INTO `os_historystep_prev` (`ID`, `PREVIOUS_ID`) VALUES (#id#, #previousId#)
+        </insert>
+        
+        <insert id="insertCurrentPriviousStep" parameterClass="PreviousStepData">
+                INSERT INTO `os_currentstep_prev` (`ID`, `PREVIOUS_ID`) VALUES (#id#, #previousId#)
+        </insert>
+        
+        <insert id="insertHistoryStep" parameterClass="WorkflowStepData">
+                INSERT INTO `os_historystep` 
+                (`ID` ,`ENTRY_ID`, `STEP_ID`, `ACTION_ID`, `OWNER`, `START_DATE`, `FINISH_DATE`, `STATUS`, `CALLER`) 
+                VALUES 
+                (#id#, #entryId#, #stepId#, #actionId#, #owner#, #startDate#, #finishDate#, #status#, #caller#)
+        </insert>
+        
+        <insert id="insertCurrentStep" parameterClass="WorkflowStepData">
+                INSERT INTO `os_currentstep` 
+                (`ID` ,`ENTRY_ID`, `STEP_ID`, `ACTION_ID`, `OWNER`, `START_DATE`, `DUE_DATE`, `FINISH_DATE`, `STATUS`, `CALLER`) 
+                VALUES 
+                (#id#, #entryId#, #stepId#, null, #owner#, #startDate#, #dueDate#, null, #status#, null)
+        </insert>
+        
+        <insert id="insertStepSequence">
+                INSERT INTO `os_stepids` (`ID`) values (null)
+        </insert>
+        
+        <insert id="insertEntrySequence">
+                INSERT INTO `os_entryids` (`ID`) values (null)
+        </insert>
+        
+        <update id="updateWorkflowEntry" parameterClass="WorkflowEntryData">
+                UPDATE `os_wfentry` SET `STATE`=#state# WHERE `ID`=#id#
+        </update>
+
+        <update id="updateCurrentStep" parameterClass="WorkflowStepData">
+                UPDATE `os_currentstep` 
+                SET `STATUS`=#status#, `ACTION_ID`=#actionId#, `FINISH_DATE`=#finishDate#, `CALLER`=#caller# 
+                WHERE `ID`=#id#
+        </update>
+
+        <delete id="deleteCurrentStep" parameterClass="long">
+                DELETE FROM `os_currentstep` WHERE `ID`=#value#
+        </delete>
+        
+        <delete id="deleteCurrentPriviousStep" parameterClass="long">
+                DELETE FROM `os_currentstep_prev` WHERE `ID`=#value#
+        </delete>
+        
+</sqlMap>

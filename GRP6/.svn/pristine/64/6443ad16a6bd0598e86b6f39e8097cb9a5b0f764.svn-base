@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_riskScheme_riskMeetingRecMapper">
+<!-- 会议记录与化解方案关联表 -->
+	<resultMap id="riskScheme_riskMeetingRecMap" type="com.zjm.pro.db.model.Pro_riskScheme_riskMeetingRec" >
+		<result column="riskScheme_ID" property="riskScheme_ID"/>
+		<result column="riskMeetingRec_ID"  property="riskMeetingRec_ID"/>
+  	</resultMap>
+
+	<insert id="insertOneRiskScheme_riskMeetingRec" parameterType="com.zjm.pro.db.model.Pro_riskScheme_riskMeetingRec">
+		INSERT INTO pro_riskScheme_riskMeetingRec (
+		    riskScheme_ID,
+			riskMeetingRec_ID
+		)
+		VALUES (
+	 		#{riskScheme_ID},
+			#{riskMeetingRec_ID}
+		) ;
+	</insert>
+</mapper>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjm.pro.db.map.Pro_optGuarantyMapper" >
+  <resultMap id="BaseResultMap" type="com.zjm.pro.db.model.Pro_optGuarantyToApply" >
+    <id column="optguaranty_to_apply_id" property="optGuarantyToApplyID"  />
+    <result column="apply_id" property="applyID"  />
+    <result column="optguaranty_id" property="optGuarantyID"  />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    optguaranty_to_apply_id, apply_id, optguaranty_id
+  </sql>
+  
+  <sql id="rongyu_Column">
+  	busiCode,projectName,clientName,otherOwner,otherCreditCode,otherLegalPerson,otherLegalPhone,otherLegalAddress,
+  	otherPersonNum,otherPersonPhone,otherPersonAddress,otherPostCode,otherFax
+  </sql>
+  
+  <!-- 添加一条 担保措施信息 -->
+  <insert id="insertOneOptGuarantyToApplyInfo" parameterType="com.zjm.pro.db.model.Pro_optGuarantyToApply" >
+     insert into pro_optguaranty_to_apply (
+	      optguaranty_to_apply_id, apply_id, optguaranty_id
+      )
+    values (#{optGuarantyToApplyID}, #{applyID}, #{optGuarantyID}
+      )
+  </insert>
+  
+  <!-- 删除保证措施信息 -->
+  <delete id="deleteOneOptGuarantyInfo" parameterType="java.lang.String" >
+    delete from pro_optguaranty_to_apply
+    where optguaranty_to_apply_id = #{optGuarantyToApplyID}
+  </delete>
+  
+  <!-- 修改保证措施信息 -->
+  <update id="updateOneOptGuarantyToApplyInfo" parameterType="com.zjm.pro.db.model.Pro_optGuarantyToApply" >
+       update pro_optguaranty_to_apply
+    <set >
+      <if test="applyID != null" >
+        apply_id = #{applyID},
+      </if>
+      <if test="optGuarantyID != null" >
+        optguaranty_id = #{optGuarantyID},
+      </if>
+    </set>
+    where optguaranty_to_apply_id = #{optGuarantyToApplyID}
+  </update>
+  
+  <!-- 计算分页列表 总记录数 -->
+  <select id="selectOptGuarantyPageTables_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Integer">
+  	select 
+  	count(po.optGuaranty_ID)
+  	from pro_optguaranty_to_apply po
+	LEFT JOIN pro_apply  pa on pa.apply_ID = po.apply_ID
+  	where 1=1 ${wheresql}
+  </select>
+  
+  <select id="selectGuarantySumByWheresql" parameterType="string" resultType="java.lang.Double">
+  	select sum(guaranteeSum) from pro_optguaranty where 1=1 ${wheresql}
+  </select>
+  
+</mapper>

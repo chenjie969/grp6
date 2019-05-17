@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_calculationFactPayMapper">
+	<!-- 业务利息计算表pro_delay -->
+	  <resultMap id="CalculationFactPayMap" type="com.zjm.pro.db.model.Pro_calculationFactPay" >
+		<id column="calculation_ID" property="calculation_ID"  />
+		<result column="apply_ID" property="apply_ID"/>
+		<result column="project_ID" property="project_ID"/>
+		<result column="interest" property="interest"/>
+		<result column="fxinterest" property="fxinterest"/>
+		<result column="flinterest" property="flinterest"/>
+		<result column="surplusInterest" property="surplusInterest"/>
+		<result column="surplusFxinterest" property="surplusFxinterest"/>
+		<result column="surplusFlinterest" property="surplusFlinterest"/>
+		<result column="surplusSum" property="surplusSum"/>
+		<result column="interestDate" property="interestDate"/>
+  </resultMap> 
+	<!-- 新增业务利息计算表pro_delay-->
+	 <insert id="insertOneCalculationFactPayInfo"	parameterType="com.zjm.pro.db.model.Pro_calculationFactPay">
+		INSERT INTO pro_calculationFactPay (
+					calculation_ID,
+					apply_ID,
+					project_ID,
+					interest,
+					fxinterest,
+					flinterest,
+					surplusInterest,
+					surplusFxinterest,
+					surplusFlinterest,
+					surplusSum,
+					interestDate
+		       )
+		VALUES
+		(
+				#{calculation_ID}, 
+				#{apply_ID}, 
+				#{project_ID},
+				#{interest}, 
+				#{fxinterest}, 
+				#{flinterest}, 
+				#{surplusInterest}, 
+				#{surplusFxinterest}, 
+				#{surplusFlinterest}, 
+				#{surplusSum}, 
+				#{interestDate}
+		) ;
+
+	</insert> 
+	
+		<!--根据wheresql删除利息计算表信息 -->
+    <delete id="deleteCalculationFactPayByWhereSql"  parameterType="java.lang.String" >
+		DELETE FROM pro_calculationFactPay WHERE 1=1 ${value} 
+	</delete> 
+	
+	<!-- 根据ID查询利息计算列表 -->
+ <select id="selectOneCalculationFactPayInfoByID" resultMap="CalculationFactPayMap" parameterType="java.lang.String">
+		SELECT
+				   	calculation_ID,
+					apply_ID,
+					project_ID,
+					interest,
+					fxinterest,
+					flinterest,
+					surplusInterest,
+					surplusFxinterest,
+					surplusFlinterest,
+					surplusSum,
+					interestDate
+	     FROM
+	   		pro_calculationFactPay	
+		WHERE 1=1 ${value} 
+	</select>
+	
+	<!-- 修改一条业务利息计算 -->	
+ <update id="updateCalculationFactPay" parameterType="com.zjm.pro.db.model.Pro_calculationFactPay">
+		UPDATE 
+		     pro_calculationFactPay
+		<set >
+			<if test="calculation_ID != null" >calculation_ID= #{calculation_ID},</if>
+			<if test="apply_ID != null" >apply_ID= #{apply_ID},</if>
+			<if test="project_ID != null" >project_ID= #{project_ID},</if>
+			<if test="interest != null" >interest= #{interest},</if>
+			<if test="fxinterest != null" >fxinterest= #{fxinterest},</if>
+			<if test="flinterest != null" >flinterest= #{flinterest},</if>
+			<if test="surplusInterest != null" >surplusInterest= #{surplusInterest},</if>
+			<if test="surplusFxinterest != null" >surplusFxinterest= #{surplusFxinterest},</if>
+			<if test="surplusFlinterest != null" >surplusFlinterest= #{surplusFlinterest},</if>
+			<if test="surplusSum != null" >surplusSum= #{surplusSum},</if>
+			<if test="interestDate != null" >interestDate= #{interestDate},</if>
+			</set>
+			 
+		WHERE calculation_ID=#{calculation_ID} 
+	</update> 
+	<!-- 根据查询条件查询一个利息计算表信息-->
+ <select id="selectOneCalculationFactPayByWhereSql" parameterType="java.lang.String"  resultMap="CalculationFactPayMap">
+		SELECT 
+	        		calculation_ID,
+					apply_ID,
+					project_ID,
+					interest,
+					fxinterest,
+					flinterest,
+					surplusInterest,
+					surplusFxinterest,
+					surplusFlinterest,
+					surplusSum,
+					interestDate
+	    FROM 
+	         pro_calculationFactPay 
+		WHERE 1=1 ${value}			 
+	</select> 
+	
+	<!-- 根据查询条件查询多个利息计算表信息-->
+	 <select id="selectCalculationFactPayListByWhereSql" parameterType="java.lang.String"  resultMap="CalculationFactPayMap">
+		SELECT 
+		     		calculation_ID,
+					apply_ID,
+					project_ID,
+					interest,
+					fxinterest,
+					flinterest,
+					surplusInterest,
+					surplusFxinterest,
+					surplusFlinterest,
+					surplusSum,
+					interestDate
+	    FROM 
+	         pro_calculationFactPay 
+		WHERE 1=1 ${value}
+		ORDER BY  interestDate asc				 
+	</select> 
+	
+</mapper>  

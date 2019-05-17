@@ -1,0 +1,68 @@
+package com.zjm.pro.assetSealUp.web;
+import javax.annotation.Resource;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import com.zjm.common.db.model.AjaxRes;
+import com.zjm.pro.assetSealUp.service.AssetSealUpService;
+import com.zjm.pro.db.model.Pro_assetSealUp;
+import com.zjm.pro.db.model.Pro_project;
+import com.zjm.pro.project.service.ProjectService;
+import com.zjm.util.CustomDispatchServlet;
+import com.zjm.util.SystemSession;
+
+
+@Controller
+@RequestMapping(value = "/project/assetSealUp")
+public class AssetSealUpAction {
+	@Resource
+	private AssetSealUpService assetSeaulUpService;	
+	@Resource
+	private ProjectService projectService;
+
+    /**
+     * 资产查封信息页面
+     * @param project_ID
+     * @return
+     */
+	@RequestMapping(value="/openAssetSealUpPage")
+	public ModelAndView openAssetSealUpPage(String project_ID){
+		ModelAndView mv = CustomDispatchServlet.getModeAndView();
+		Pro_project  project= new Pro_project();
+		project = projectService.selectOneProjectInfoByWheresql(" and project_ID = \'"+project_ID+"\'");
+		Pro_assetSealUp proSeaulUp = assetSeaulUpService.selectOneSealUpInfo(" and project_ID = \'"+project_ID+"\'");
+		if (proSeaulUp == null) {
+			proSeaulUp = new Pro_assetSealUp();
+			proSeaulUp.setProject_ID(project_ID);
+		}
+		mv.getModelMap().put("proSeaulUp", proSeaulUp);
+		mv.getModelMap().put("project",project);
+		mv.setViewName("/project/apply/pro_assetSealUp");
+		return mv;		
+	}
+
+	/**
+	 * 新增资产查封信息表
+	 * @param 
+	 * @return
+	 */
+	@RequestMapping(value="/insertOrUpdateOneSealUpInfo", method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes insertOrUpdateOneSealUpInfo(@RequestBody Pro_assetSealUp proSeaulUp){
+		AjaxRes ar=new AjaxRes();
+		try{
+			if (proSeaulUp != null && proSeaulUp.getAssetSealUp_ID() != null && !"".equals(proSeaulUp.getAssetSealUp_ID())) {
+				ar.setSucceed ( assetSeaulUpService.updateOneSealUpInfo(SystemSession.getUserSession(), proSeaulUp));
+			} else {
+				ar.setSucceed ( assetSeaulUpService.insertOneSeaulUp(SystemSession.getUserSession(), proSeaulUp));
+			}
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		return ar;
+	}
+}

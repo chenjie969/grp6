@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.crm.db.map.Crm_badClientMapper">
+	
+	<!-- 黑名单表信息 -->
+	<resultMap type="com.zjm.crm.db.model.Crm_badClient" id="BadClientResultMap">
+		<result property="badClient_ID" column="badClient_ID" />
+		<result property="client_ID" column="client_ID" />
+		<result property="operationDepartFullCode" column="operationDepartFullCode" />
+		<result property="operationDepartName" column="operationDepartName" />
+		<result property="operatorID" column="operatorID" />
+		<result property="operatorName" column="operatorName" />
+		<result property="operatorDate" column="operatorDate" />
+		<result property="operationDescription" column="description" />
+		<result property="cancelDepartFullCode" column="cancelDepartFullCode" />
+		<result property="cancelDepartName" column="cancelDepartName" />
+		<result property="cancelOperatorID" column="cancelOperatorID" />
+		<result property="cancelOperatorName" column="cancelOperatorName" />
+		<result property="cancelDate" column="cancelDate" />
+		<result property="cancelDescription" column="cancelDescription" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="unit_uidName" column="unit_uidName" />
+		<result property="updateUserName" column="updateUserName" />
+		<result property="updateDateTime" column="updateDateTime" />
+		<association property="client" resultMap="com.zjm.crm.db.map.Crm_clientMapper.ClientResultMap" />
+	</resultMap>
+	
+	<!-- 分页查询黑名单列表 -->
+	<select id="selectBadClientPageTables" parameterType="com.zjm.common.db.model.PageTable" resultMap="BadClientResultMap">
+		<![CDATA[
+		select b.badClient_ID,b.client_ID,b.operationDepartFullCode,b.operationDepartName,b.operatorID,b.operatorName,b.operatorDate,b.description,b.cancelDepartFullCode,b.cancelDepartName,b.cancelOperatorID,b.cancelOperatorName,b.cancelDate,b.cancelDescription,b.updateUserName,b.updateDateTime,b.unit_uidName,
+			/*c.client_ID,*/ c.clientGUID,c.clientBH,c.clientName,c.clientTypeID,c.clientTypeName,
+			c.fullAreaCode,c.fullAreaName,c.fullTradeCode,c.fullTradeName,c.enterpriseTypeID,c.enterpriseTypeName,c.certificateCode,c.fullRegisteCode,c.fullRegisteName,c.registeAddress,c.workAddress,c.zipCode,c.legalPerson,c.legalCertificate,c.legalPersonNum,c.controlPerson,c.controlCertificate,c.controlPersonNum,c.registerSum,c.currencyID,c.currencyName,c.natureID,c.natureName,c.createDate,c.busiTerm,c.industryCommerceOrg,c.loanCode,c.busiScope,c.leadBusi,c.nationalTaxOrg,c.landTaxOrg,c.businessLicence,c.organizationCode,c.taxCode,c.employeeSum,c.factSum,c.capitalSum,c.lastYear,c.lastYearSale,c.lastYearSaleProfit,c.lastYearProfit,c.selfArea,c.rentalArea,c.selfWorkShop,c.rentalWorkShop,c.isHighTechnology,c.highTechnologyCode,c.highTechnologyDate,c.contactOne,c.positionOneName,c.phoneOne,c.contactTwo,c.positionTwoName,c.phoneTwo,c.remark,
+			c.clientSourceID,c.clientSourceName,c.clientSourceDesc,c.personName,c.personNum,c.sex,c.age,c.maritalStatus,c.domicile,c.familyNum,c.workNum,c.incomeSource,c.education,c.workUnit,c.position,c.unitAddress,c.monthIncome,c.unitPost,c.unitPhone,c.houseNature,c.houseArea,c.houseAddress,c.housePost,c.phone,c. houseTel,c.otherAssets,c.isClient,c.isRelation,c.isOptGaranty,c.isBadClient,c.creditLevelID,c.creditLevel,c.unit_uid,c.fullDepartCode,c.createUserID,c.createDateTime,c.isMainVersion,c.updateUserName,c.updateDateTime  
+		from crm_badclient b 
+		left join crm_client c on b.client_ID = c.client_ID
+		where b.cancelDate is null and c.isBadClient=1
+		${wheresql}
+		limit #{pageNumber},#{pageSize}
+		 ]]>
+	</select>
+	
+	<!-- 分页查询黑名单列表_查询总数 -->
+	<select id="selectBadClientPageTables_Count"  parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		<![CDATA[ 
+		SELECT count(1) FROM crm_badclient b
+		left join crm_client c on b.client_ID = c.client_ID
+		where b.cancelDate is null  
+			and c.isBadClient=1 ${wheresql} 
+		]]>
+	</select>
+	
+	<!-- 查询单个黑名单信息 -->
+	<select id="selectOneBadClientInfo" parameterType="com.zjm.crm.db.model.Crm_badClient" resultMap="BadClientResultMap">
+		<![CDATA[ 
+		select 
+			b.badClient_ID,b.operationDepartFullCode,b.operationDepartName,b.operatorID,b.operatorName,b.operatorDate,b.description,b.unit_uidName,
+			c.client_ID,c.clientGUID,	c.clientBH,c.clientName,c.clientTypeID,c.clientTypeName,
+			c.fullAreaCode,c.fullAreaName,c.fullTradeCode,c.fullTradeName,c.enterpriseTypeID,c.enterpriseTypeName,c.certificateCode,c.fullRegisteCode,c.fullRegisteName,c.registeAddress,c.workAddress,c.zipCode,c.legalPerson,c.legalCertificate,c.legalPersonNum,c.controlPerson,c.controlCertificate,c.controlPersonNum,c.registerSum,c.currencyID,c.currencyName,c.natureID,c.natureName,c.createDate,c.busiTerm,c.industryCommerceOrg,c.loanCode,c.busiScope,c.leadBusi,c.nationalTaxOrg,c.landTaxOrg,c.businessLicence,c.organizationCode,c.taxCode,c.employeeSum,c.factSum,c.capitalSum,c.lastYear,c.lastYearSale,c.lastYearSaleProfit,c.lastYearProfit,c.selfArea,c.rentalArea,c.selfWorkShop,c.rentalWorkShop,c.isHighTechnology,c.highTechnologyCode,c.highTechnologyDate,c.contactOne,c.positionOneName,c.phoneOne,c.contactTwo,c.positionTwoName,c.phoneTwo,c.remark,
+			c.clientSourceID,c.clientSourceName,c.clientSourceDesc,c.personName,c.personNum,c.sex,c.age,c.maritalStatus,c.domicile,c.familyNum,c.workNum,c.incomeSource,c.education,c.workUnit,c.position,c.unitAddress,c.monthIncome,c.unitPost,c.unitPhone,c.houseNature,c.houseArea,c.houseAddress,c.housePost,c.phone,c. houseTel,c.otherAssets,c.isClient,c.isRelation,c.isOptGaranty,c.isBadClient,c.creditLevelID,c.creditLevel,c.unit_uid,c.fullDepartCode,c.createUserID,c.createDateTime,c.isMainVersion,c.updateUserName,c.updateDateTime  
+		from crm_badclient b 
+		left join crm_client c on b.client_ID = c.client_ID
+		where b.badClient_ID = #{badClient_ID}  and b.unit_uid=#{unit_uid}
+		 ]]>
+	</select>
+	
+	<!-- 更新一个黑名单信息 -->	
+	<update id="updateOneBadClientInfo" parameterType="com.zjm.crm.db.model.Crm_badClient">
+		<![CDATA[
+		UPDATE 
+		  crm_badclient
+		SET
+		  operationDepartFullCode = #{operationDepartFullCode},
+		  operationDepartName = #{operationDepartName},
+		  operatorID = #{operatorID},
+		  operatorName = #{operatorName},
+		  operatorDate = #{operatorDate},
+		  description = #{operationDescription},
+		  cancelDepartFullCode = #{cancelDepartFullCode},
+		  cancelDepartName = #{cancelDepartName},
+		  cancelOperatorID = #{cancelOperatorID},
+		  cancelOperatorName = #{cancelOperatorName},
+		  cancelDate = #{cancelDate},
+		  cancelDescription = #{cancelDescription},
+		  updateUserName = #{updateUserName},
+		  updateDateTime = NOW()
+		WHERE 
+		  badClient_ID = #{badClient_ID} and unit_uid=#{unit_uid}
+		  ]]>
+	</update>
+	
+	<!-- 新增一个黑名单 -->
+	<insert id="insertOneBadClientInfo" parameterType="com.zjm.crm.db.model.Crm_badClient">
+		<![CDATA[
+		INSERT INTO crm_badclient(
+			badClient_ID,
+			client_ID,
+			operationDepartFullCode,
+			operationDepartName,
+		  	operatorID,
+		  	operatorName,
+		  	operatorDate,
+		  	description,
+		  	updateUserName,
+		  	updateDateTime,
+		  	unit_uid,
+		  	unit_uidName
+		)
+		VALUES
+		(
+			#{badClient_ID},
+			#{client_ID},
+			#{operationDepartFullCode},
+			#{operationDepartName},
+			#{operatorID},
+			#{operatorName},
+			NOW(),
+			#{operationDescription},
+			#{updateUserName},
+			NOW(),
+			#{unit_uid},
+			#{unit_uidName}
+		);
+		]]>
+	</insert>
+		<!-- test黑名单列表 -->
+	<select id="selectBadClientLists"  resultMap="BadClientResultMap">
+		<![CDATA[
+		select b.badClient_ID,b.client_ID,b.operationDepartFullCode,b.operationDepartName,b.operatorID,b.operatorName,b.operatorDate,b.description,b.cancelDepartFullCode,b.cancelDepartName,b.cancelOperatorID,b.cancelOperatorName,b.cancelDate,b.cancelDescription,b.updateUserName,b.updateDateTime,b.unit_uidName,
+			/*c.client_ID,*/ c.clientGUID,c.clientBH,c.clientName,c.clientTypeID,c.clientTypeName,
+			c.fullAreaCode,c.fullAreaName,c.fullTradeCode,c.fullTradeName,c.enterpriseTypeID,c.enterpriseTypeName,c.certificateCode,c.fullRegisteCode,c.fullRegisteName,c.registeAddress,c.workAddress,c.zipCode,c.legalPerson,c.legalCertificate,c.legalPersonNum,c.controlPerson,c.controlCertificate,c.controlPersonNum,c.registerSum,c.currencyID,c.currencyName,c.natureID,c.natureName,c.createDate,c.busiTerm,c.industryCommerceOrg,c.loanCode,c.busiScope,c.leadBusi,c.nationalTaxOrg,c.landTaxOrg,c.businessLicence,c.organizationCode,c.taxCode,c.employeeSum,c.factSum,c.capitalSum,c.lastYear,c.lastYearSale,c.lastYearSaleProfit,c.lastYearProfit,c.selfArea,c.rentalArea,c.selfWorkShop,c.rentalWorkShop,c.isHighTechnology,c.highTechnologyCode,c.highTechnologyDate,c.contactOne,c.positionOneName,c.phoneOne,c.contactTwo,c.positionTwoName,c.phoneTwo,c.remark,
+			c.clientSourceID,c.clientSourceName,c.clientSourceDesc,c.personName,c.sex,c.age,c.maritalStatus,c.domicile,c.familyNum,c.workNum,c.incomeSource,c.education,c.workUnit,c.position,c.unitAddress,c.monthIncome,c.unitPost,c.unitPhone,c.houseNature,c.houseArea,c.houseAddress,c.housePost,c.phone,c. houseTel,c.otherAssets,c.isClient,c.isRelation,c.isOptGaranty,c.isBadClient,c.creditLevelID,c.creditLevel,c.unit_uid,c.fullDepartCode,c.createUserID,c.createDateTime,c.isMainVersion,c.updateUserName,c.updateDateTime  
+		from crm_badclient b 
+		left join crm_client c on b.client_ID = c.client_ID
+		where b.cancelDate is null and c.isBadClient=1
+		 ]]>
+	</select>	
+	<!-- 查询一个黑名单信息 -->
+	<select id="selectOneBadClientInfoByclent_id" parameterType="string" resultMap="BadClientResultMap">
+		<![CDATA[ 
+		select 
+			b.badClient_ID,b.operationDepartFullCode,b.operationDepartName,b.operatorID,b.operatorName,b.operatorDate,b.description,b.unit_uidName,
+			c.client_ID,c.clientGUID,	c.clientBH,c.clientName,c.clientTypeID,c.clientTypeName,
+			c.fullAreaCode,c.fullAreaName,c.fullTradeCode,c.fullTradeName,c.enterpriseTypeID,c.enterpriseTypeName,c.certificateCode,c.fullRegisteCode,c.fullRegisteName,c.registeAddress,c.workAddress,c.zipCode,c.legalPerson,c.legalCertificate,c.legalPersonNum,c.controlPerson,c.controlCertificate,c.controlPersonNum,c.registerSum,c.currencyID,c.currencyName,c.natureID,c.natureName,c.createDate,c.busiTerm,c.industryCommerceOrg,c.loanCode,c.busiScope,c.leadBusi,c.nationalTaxOrg,c.landTaxOrg,c.businessLicence,c.organizationCode,c.taxCode,c.employeeSum,c.factSum,c.capitalSum,c.lastYear,c.lastYearSale,c.lastYearSaleProfit,c.lastYearProfit,c.selfArea,c.rentalArea,c.selfWorkShop,c.rentalWorkShop,c.isHighTechnology,c.highTechnologyCode,c.highTechnologyDate,c.contactOne,c.positionOneName,c.phoneOne,c.contactTwo,c.positionTwoName,c.phoneTwo,c.remark,
+			c.clientSourceID,c.clientSourceName,c.clientSourceDesc,c.personName,c.personNum,c.sex,c.age,c.maritalStatus,c.domicile,c.familyNum,c.workNum,c.incomeSource,c.education,c.workUnit,c.position,c.unitAddress,c.monthIncome,c.unitPost,c.unitPhone,c.houseNature,c.houseArea,c.houseAddress,c.housePost,c.phone,c. houseTel,c.otherAssets,c.isClient,c.isRelation,c.isOptGaranty,c.isBadClient,c.creditLevelID,c.creditLevel,c.unit_uid,c.fullDepartCode,c.createUserID,c.createDateTime,c.isMainVersion,c.updateUserName,c.updateDateTime  
+		from crm_badclient b 
+		left join crm_client c on b.client_ID = c.client_ID
+		where b.client_ID = #{client_ID} 
+		 ]]>
+	</select>
+	
+	<select id="selectBadClientListByWhereSql" parameterType="string" resultMap="BadClientResultMap">
+		select 
+			b.badClient_ID,b.operationDepartFullCode,b.operationDepartName,b.operatorID,b.operatorName,b.operatorDate,b.description,b.unit_uidName,
+			c.client_ID,c.clientGUID,	c.clientBH,c.clientName,c.clientTypeID,c.clientTypeName,
+			c.fullAreaCode,c.fullAreaName,c.fullTradeCode,c.fullTradeName,c.enterpriseTypeID,c.enterpriseTypeName,c.certificateCode,c.fullRegisteCode,c.fullRegisteName,c.registeAddress,c.workAddress,c.zipCode,c.legalPerson,c.legalCertificate,c.legalPersonNum,c.controlPerson,c.controlCertificate,c.controlPersonNum,c.registerSum,c.currencyID,c.currencyName,c.natureID,c.natureName,c.createDate,c.busiTerm,c.industryCommerceOrg,c.loanCode,c.busiScope,c.leadBusi,c.nationalTaxOrg,c.landTaxOrg,c.businessLicence,c.organizationCode,c.taxCode,c.employeeSum,c.factSum,c.capitalSum,c.lastYear,c.lastYearSale,c.lastYearSaleProfit,c.lastYearProfit,c.selfArea,c.rentalArea,c.selfWorkShop,c.rentalWorkShop,c.isHighTechnology,c.highTechnologyCode,c.highTechnologyDate,c.contactOne,c.positionOneName,c.phoneOne,c.contactTwo,c.positionTwoName,c.phoneTwo,c.remark,
+			c.clientSourceID,c.clientSourceName,c.clientSourceDesc,c.personName,c.sex,c.age,c.maritalStatus,c.domicile,c.familyNum,c.workNum,c.incomeSource,c.education,c.workUnit,c.position,c.unitAddress,c.monthIncome,c.unitPost,c.unitPhone,c.houseNature,c.houseArea,c.houseAddress,c.housePost,c.phone,c. houseTel,c.otherAssets,c.isClient,c.isRelation,c.isOptGaranty,c.isBadClient,c.creditLevelID,c.creditLevel,c.unit_uid,c.fullDepartCode,c.createUserID,c.createDateTime,c.isMainVersion,c.updateUserName,c.updateDateTime  
+		from crm_badclient b 
+		left join crm_client c on b.client_ID = c.client_ID
+		where b.badClient_ID = #{badClient_ID}
+	</select>
+	
+	<delete id="deleteBadClientByWhereSql" parameterType="string">
+		delete  from crm_badclient 
+		where 1=1  ${value}
+	</delete>
+	
+</mapper>

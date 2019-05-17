@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><jatools Class="jatools.ReportDocument" Name="jatools report template"><VariableContext/><Page><Children ItemClass="PagePanel"><Item0><Width>972</Width><Height>167</Height><Children><Item0 Class="Label"><Text>担保项目行业分布结构表</Text><Font><Face>宋体</Face><Style>1</Style><Size>36</Size></Font><HorizontalAlignment>1</HorizontalAlignment><X>184</X><Y>10</Y><Width>604</Width><Height>58</Height></Item0><Item1 Class="Label"><Text>统计年月：</Text><HorizontalAlignment>2</HorizontalAlignment><X>344</X><Y>90</Y><Width>68</Width><Height>23</Height></Item1><Item2 Class="Text"><Variable>=if(has(endyearmonthsql)) return endyearmonthsql;else return ($today+"").substring(0,7);</Variable><X>421</X><Y>90</Y><Width>128</Width><Height>23</Height></Item2><Item3 Class="Label"><Text>金额单位：亿元</Text><HorizontalAlignment>2</HorizontalAlignment><X>614</X><Y>122</Y><Width>110</Width><Height>23</Height></Item3></Children><Type>100</Type></Item0><Item1><Y>1041</Y><Width>972</Width><Height>5</Height><Type>103</Type></Item1><Item2><Y>167</Y><Width>972</Width><Height>874</Height><Children ItemClass="Table"><Item0><NodePath>detai</NodePath><X>145</X><Y>20</Y><Children><Item0 Class="Label"><Text>行业</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col></Cell></Item0><Item1 Class="Label"><Text>担保余额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col></Cell></Item1><Item2 Class="Label"><Text>委贷余额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>2</Col></Cell></Item2><Item3 Class="Label"><Text>合计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>3</Col></Cell></Item3><Item4 Class="Label"><Text>合计金额占比</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>4</Col></Cell></Item4><Item5 Class="Label"><Text>合计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>0</Col></Cell></Item5><Item6 Class="RowPanel"><Cell><Row>1</Row><Col>0</Col><ColSpan>5</ColSpan></Cell><Children ItemClass="Text"><Item0><Variable>=$.fullTradeName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>0</Col></Cell></Item0><Item1><Variable>=$.guarantySum/10000
+</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>0.0000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>1</Col></Cell></Item1><Item2><Variable>=$.eloadSum/10000
+</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>0.0000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>2</Col></Cell></Item2><Item3><Variable>=$.totalSum/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>0.0000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>3</Col></Cell></Item3><Item4><Variable>=$.totalSum
+/$.allSum</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>0.0000%</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>4</Col></Cell></Item4></Children><NodePath>Row</NodePath></Item6><Item7 Class="Text"><Variable>=$.guarantySum.sum()
+/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>0.0000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>1</Col></Cell></Item7><Item8 Class="Text"><Variable>=$.eloadSum.sum()/10000
+</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>0.0000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>2</Col></Cell></Item8><Item9 Class="Text"><Variable>=$.totalSum.sum()/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>0.0000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>3</Col></Cell></Item9><Item10 Class="Label"><Text>100%</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>4</Col></Cell></Item10></Children><ColumnWidths>201,120,120,120,120</ColumnWidths><RowHeights>30,30,30</RowHeights></Item0></Children><Type>102</Type></Item2></Children><PageFormat><Width>1012</Width><Height>1122</Height><Bottom>56</Bottom></PageFormat></Page><NodeSource><Children ItemClass="DatasetNodeSource"><Item0><Children ItemClass="RowNodeSource"><Item0/></Children><Reader Class="SqlReader"><Name>detai</Name><Sql>select 
+tab1.fullTradeName as fullTradeName,
+tab1.loadSum as guarantySum,
+IFNULL(tab2.loadSum,0) as eloadSum,
+(tab1.loadSum + IFNULL(tab2.loadSum,0)) as totalSum,
+tab3.allSum as allSum
+ from (
+select 
+c.fullTradeName as fullTradeName,
+sum(pp.loadSum - IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)-IFNULL(tab4.creditorsum,0) ) as loadSum
+FROM pro_project  pp 
+left join pro_apply b on pp.apply_ID = b.apply_ID
+left join crm_client c on b.client_ID = c.client_ID
+ LEFT JOIN (SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum FROM pro_factpay pfp
+    WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY pfp.project_ID
+  )tab1 ON tab1.project_ID =  pp.project_ID
+ LEFT JOIN (SELECT pre.project_ID,SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum FROM pro_replace pre
+    WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY pre.project_ID
+   )tab2 ON tab2.project_ID =  pp.project_ID 
+ LEFT JOIN (SELECT precre.project_ID,SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum FROM pro_creditor precre
+    WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(precre.creditor_date,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY precre.project_ID
+   )tab4 ON tab4.project_ID =  pp.project_ID 
+where c.fullTradeName is not null  
+and pp.busiClass = '01'
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.delayBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+group by c.fullTradeName
+) as tab1 
+left join (
+select 
+c.fullTradeName as fullTradeName,
+sum(pp.loadSum - IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)-IFNULL(tab4.creditorsum,0) ) as loadSum
+FROM pro_project  pp 
+left join pro_apply b on pp.apply_ID = b.apply_ID
+left join crm_client c on b.client_ID = c.client_ID
+ LEFT JOIN (SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum FROM pro_factpay pfp
+    WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY pfp.project_ID
+  )tab1 ON tab1.project_ID =  pp.project_ID
+ LEFT JOIN (SELECT pre.project_ID,SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum FROM pro_replace pre
+    WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY pre.project_ID
+   )tab2 ON tab2.project_ID =  pp.project_ID 
+ LEFT JOIN (SELECT precre.project_ID,SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum FROM pro_creditor precre
+    WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(precre.creditor_date,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY precre.project_ID
+   )tab4 ON tab4.project_ID =  pp.project_ID 
+where c.fullTradeName is not null  
+and pp.busiClass = '02'
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.delayBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+group by c.fullTradeName
+) tab2  on tab1.fullTradeName = tab2.fullTradeName
+join ( select sum(pp.loadSum- IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)-IFNULL(tab4.creditorsum,0)) as allSum from pro_project pp 
+left join pro_apply b on pp.apply_ID = b.apply_ID
+left join crm_client c on b.client_ID = c.client_ID
+LEFT JOIN (SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum FROM pro_factpay pfp
+    WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY pfp.project_ID
+  )tab1 ON tab1.project_ID =  pp.project_ID
+ LEFT JOIN (SELECT pre.project_ID,SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum FROM pro_replace pre
+    WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY pre.project_ID
+   )tab2 ON tab2.project_ID =  pp.project_ID 
+ LEFT JOIN (SELECT precre.project_ID,SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum FROM pro_creditor precre
+    WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(precre.creditor_date,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY precre.project_ID
+   )tab4 ON tab4.project_ID =  pp.project_ID 
+where c.fullTradeName is not null  
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.delayBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+) tab3
+order by totalSum desc
+</Sql><Description>select 
+tab1.fullTradeName as fullTradeName,
+tab1.loadSum as guarantySum,
+IFNULL(tab2.loadSum,0) as eloadSum,
+(tab1.loadSum + IFNULL(tab2.loadSum,0)) as totalSum,
+tab3.allSum as allSum
+ from (
+select 
+c.fullTradeName as fullTradeName,
+sum(pp.loadSum - IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)-IFNULL(tab4.creditorsum,0) ) as loadSum
+FROM pro_project  pp 
+left join pro_apply b on pp.apply_ID = b.apply_ID
+left join crm_client c on b.client_ID = c.client_ID
+ LEFT JOIN (SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum FROM pro_factpay pfp
+    WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY pfp.project_ID
+  )tab1 ON tab1.project_ID =  pp.project_ID
+ LEFT JOIN (SELECT pre.project_ID,SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum FROM pro_replace pre
+    WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY pre.project_ID
+   )tab2 ON tab2.project_ID =  pp.project_ID 
+ LEFT JOIN (SELECT precre.project_ID,SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum FROM pro_creditor precre
+    WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(precre.creditor_date,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY precre.project_ID
+   )tab4 ON tab4.project_ID =  pp.project_ID 
+where c.fullTradeName is not null  
+and pp.busiClass = '01'
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.delayBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+group by c.fullTradeName
+) as tab1 
+left join (
+select 
+c.fullTradeName as fullTradeName,
+sum(pp.loadSum - IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)-IFNULL(tab4.creditorsum,0) ) as loadSum
+FROM pro_project  pp 
+left join pro_apply b on pp.apply_ID = b.apply_ID
+left join crm_client c on b.client_ID = c.client_ID
+ LEFT JOIN (SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum FROM pro_factpay pfp
+    WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY pfp.project_ID
+  )tab1 ON tab1.project_ID =  pp.project_ID
+ LEFT JOIN (SELECT pre.project_ID,SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum FROM pro_replace pre
+    WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY pre.project_ID
+   )tab2 ON tab2.project_ID =  pp.project_ID 
+ LEFT JOIN (SELECT precre.project_ID,SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum FROM pro_creditor precre
+    WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(precre.creditor_date,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY precre.project_ID
+   )tab4 ON tab4.project_ID =  pp.project_ID 
+where c.fullTradeName is not null  
+and pp.busiClass = '02'
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.delayBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+group by c.fullTradeName
+) tab2  on tab1.fullTradeName = tab2.fullTradeName
+join ( select sum(pp.loadSum- IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)-IFNULL(tab4.creditorsum,0)) as allSum from pro_project pp 
+left join pro_apply b on pp.apply_ID = b.apply_ID
+left join crm_client c on b.client_ID = c.client_ID
+LEFT JOIN (SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum FROM pro_factpay pfp
+    WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY pfp.project_ID
+  )tab1 ON tab1.project_ID =  pp.project_ID
+ LEFT JOIN (SELECT pre.project_ID,SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum FROM pro_replace pre
+    WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY pre.project_ID
+   )tab2 ON tab2.project_ID =  pp.project_ID 
+ LEFT JOIN (SELECT precre.project_ID,SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum FROM pro_creditor precre
+    WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(precre.creditor_date,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY precre.project_ID
+   )tab4 ON tab4.project_ID =  pp.project_ID 
+where c.fullTradeName is not null  
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.delayBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+) tab3
+order by totalSum desc
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><TagName>detai</TagName></Item0></Children></NodeSource></jatools>

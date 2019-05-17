@@ -1,0 +1,8 @@
+主要资产情况分析--- mainAsset
+	1、主要资产情况分析--应收账款： mainAsset --- receivable
+	2、主要资产情况分析--其他应收账款： mainAsset --- otherReceivable
+	3、主要资产情况分析--存货： mainAsset --- inventory
+	4、主要资产情况分析--土地、厂房、名下房产： mainAsset --- landHouse
+	5、主要资产情况分析-- 机器设备及车辆等： mainAsset --- machine
+	6、主要资产情况分析-- 变动情况原因分析: mainAsset --financeDesc
+	

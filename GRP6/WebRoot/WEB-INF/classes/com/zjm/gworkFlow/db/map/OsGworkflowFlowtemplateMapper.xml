@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zjm.gworkFlow.db.map.OsGworkflowFlowtemplateMapper">
+
+	<resultMap type="com.zjm.gworkFlow.db.model.OsGworkflowFlowtemplate" id="OsGworkflowFlowtemplateResultMap">
+		<result property="id" column="id" />
+		<result property="flowTemplateID" column="flowTemplateID" />
+		<result property="flowTypeID" column="flowTypeID" />
+		<result property="flowTypeName" column="flowTypeName" />
+		<result property="flowTemplateName" column="flowTemplateName" />
+		<result property="flowTempaleMapName" column="flowTempaleMapName" />
+		<result property="flowXmlFile" column="flowXmlFile" />
+		<result property="funDesrc" column="funDesrc" />
+		<result property="version" column="version" />
+		<result property="releaseDate" column="releaseDate" />
+		<result property="isActive" column="isActive" />
+		<result property="isDel" column="isDel" />
+		<result property="unit_uid" column="unit_uid" />
+	</resultMap>
+	
+	<!-- 查询所有的流程模板   AND flowTypeName = #{flowTypeName}-->
+	<select id="returnAllFlowtemplateList" resultMap="OsGworkflowFlowtemplateResultMap" parameterType="com.zjm.gworkFlow.db.model.OsGworkflowFlowtemplate">
+		SELECT 
+		  * 
+		FROM
+		  os_gworkflow_flowtemplate 
+		WHERE unit_uid=#{unit_uid} and (flowTypeID = #{flowTypeID} OR flowTypeID = '所有业务品种')
+		
+	</select>
+	
+	<!-- 通过流程模板id和担保机构id返回单个对象-->
+	<select id="getOneGworkflowTemplate" resultMap="OsGworkflowFlowtemplateResultMap" parameterType="com.zjm.gworkFlow.db.model.OsGworkflowFlowtemplate">
+		SELECT 
+		  *
+		FROM
+		  os_gworkflow_flowtemplate 
+		WHERE unit_uid=#{unit_uid} and flowTemplateID = #{flowTemplateID}
+		
+	</select>
+
+
+	<!-- 判断是否已有流程实例 并且尚未结束 -->
+	<select id="stateWorkFlowInstance" resultType="java.lang.Integer" parameterType="com.zjm.gworkFlow.db.model.OsGworkflowFlowtemplate">
+		<![CDATA[
+		SELECT 
+		  COUNT(*) 
+		FROM
+		  os_gworkflow_projidflowid A 
+		  LEFT JOIN os_wfentry B 
+		    ON A.ENTRY_ID = B.ID 
+		WHERE (
+			(B.STATE != 4 AND B.STATE != 3) 
+			AND A.unit_uid = #{unit_uid} 
+			AND A.projectID = #{projectID}
+		      )
+		]]>
+	</select>
+	
+	<!-- 查询所有的流程模板   all -->
+	<select id="returnAllFlowtemplateListAll" resultMap="OsGworkflowFlowtemplateResultMap" parameterType="com.zjm.gworkFlow.db.model.OsGworkflowFlowtemplate">
+		SELECT 
+		  * 
+		FROM
+		  os_gworkflow_flowtemplate 
+		WHERE unit_uid=#{unit_uid} 
+		
+	</select>
+	<!--插入一条流程模板记录-->
+	<insert id="insertOneFlowtemplate" parameterType = "com.zjm.gworkFlow.db.model.OsGworkflowFlowtemplate">
+ 		<![CDATA[
+ 			INSERT INTO os_gworkflow_flowtemplate (
+						  flowTemplateID,
+						  flowTypeID,
+						  flowTypeName,
+						  flowTemplateName,
+						  flowTempaleMapName,
+						  flowXmlFile,
+						  funDesrc,
+						  version,
+						  releaseDate,
+						  isActive,
+						  isDel,
+						  unit_uid
+						) 
+						VALUES
+						  (
+						    #{flowTemplateID},
+						    #{flowTypeID},
+						    #{flowTypeName},
+						    #{flowTemplateName},
+						    #{flowTempaleMapName},
+						    #{flowXmlFile},
+						    #{funDesrc},
+						    #{version},
+						    #{releaseDate},
+						    #{isActive},
+						    #{isDel},
+						    #{unit_uid}
+						  ) ;
+ 		]]>
+	</insert>
+	
+	
+	<!-- 判断是否已有流程实例  -->
+	<select id="stateWorkFlowStartInstance" resultType="java.lang.Integer" parameterType="com.zjm.gworkFlow.db.model.OsGworkflowFlowtemplate">
+		<![CDATA[
+		SELECT 
+		  COUNT(*) 
+		FROM
+		  os_gworkflow_projidflowid A 
+		WHERE (
+			 A.unit_uid = #{unit_uid} 
+			AND A.projectID = #{projectID}
+		      )
+		]]>
+	</select>
+	<!-- 查询所有的流程模板 -->
+	<select id="returnAllFlowtemplateListByFlowTypeID" resultMap="OsGworkflowFlowtemplateResultMap" parameterType="com.zjm.gworkFlow.db.model.OsGworkflowFlowtemplate">
+		SELECT 
+		  * 
+		FROM
+		  os_gworkflow_flowtemplate 
+		WHERE unit_uid=#{unit_uid} and (flowTypeID = #{flowTypeID})
+		
+	</select>
+
+</mapper> 

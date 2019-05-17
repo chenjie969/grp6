@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">    
+        
+<mapper namespace="com.zjm.oa.db.map.Hr_staffJobMapper">
+	<resultMap type="com.zjm.oa.db.model.Hr_staffJob" id="JobResultMap">	
+		<result property="jobID" column="JobID" />
+		<result property="staffcase_Id" column="staffCase_ID" />
+		<result property="jobStartDate" column="JobStartDate" />
+		<result property="jobEndDate" column="JobEndDate" />
+		<result property="jobUnits" column="JobUnits" />
+		<result property="jobAddress" column="JobAddress" />
+		<result property="jobposts" column="Jobposts" />
+		<result property="jobNotes" column="JobNotes" />
+	</resultMap>  
+    	<!-- 查询所有的员工  分页列表-->
+	<select id="selectJobListByCase_ID" resultMap="JobResultMap" parameterType="java.lang.String">
+
+		<![CDATA[
+	SELECT	
+			JobID,
+			staffCase_ID,
+			JobStartDate,
+			JobEndDate,
+			JobUnits,
+			JobAddress,
+			Jobposts,
+			JobNotes		
+		FROM 
+			Hr_staffjob
+		 where staffcase_Id = #{staffcase_Id}
+		]]>
+	</select>
+
+<!--根据岗位ID查询  -->
+<select id="selectOneByJobId" resultMap="JobResultMap" parameterType="java.lang.String">
+		<![CDATA[
+	SELECT	
+			JobID,
+			staffCase_ID,
+			JobStartDate,
+			JobEndDate,
+			JobUnits,
+			JobAddress,
+			Jobposts,
+			JobNotes		
+		FROM 
+			Hr_staffjob
+		 where JobID = #{jobID}
+		]]>
+	</select>
+
+<!-- 增加一条数据 -->
+ <insert id="insertOneJobInfo" parameterType="com.zjm.oa.db.model.Hr_staffJob" >
+		<![CDATA[
+		INSERT INTO Hr_staffjob (		
+		staffCase_ID,
+			JobID,
+			JobStartDate,
+			JobEndDate,
+			JobUnits,
+			JobAddress,
+			Jobposts,
+			JobNotes	
+		)
+	VALUES (
+		#{staffcase_Id},
+			#{jobID},	
+			#{jobStartDate},
+			#{jobEndDate},
+			#{jobUnits},
+			#{jobAddress},
+			#{jobposts},
+			#{jobNotes}
+		)
+		]]>
+	</insert>	
+	
+<!--修改一条数据  -->
+  <update id="updateOneJobInfo" parameterType="com.zjm.oa.db.model.Hr_staffJob" >
+
+    update Hr_staffjob
+   		set
+        JobStartDate = #{jobStartDate},
+      
+        JobEndDate = #{jobEndDate},
+    
+        JobUnits = #{jobUnits},
+     
+        jobAddress = #{jobAddress},
+     
+        jobposts = #{jobposts},
+    
+        jobNotes = #{jobNotes}
+       
+    where jobID = #{jobID}
+  </update>
+
+</mapper>

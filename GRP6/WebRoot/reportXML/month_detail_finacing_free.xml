@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><jatools Class="jatools.ReportDocument" Name="jatools report template"><VariableContext/><Page><Children ItemClass="PagePanel"><Item0><Width>1761</Width><Height>173</Height><Children><Item0 Class="Label"><Text>担保业务还款明细月报表</Text><Font><Face>宋体</Face><Style>1</Style><Size>36</Size></Font><X>563</X><Y>18</Y><Width>425</Width><Height>71</Height></Item0><Item1 Class="Label"><Text>填报单位：</Text><X>52</X><Y>143</Y><Width>62</Width><Height>23</Height></Item1><Item2 Class="Text"><X>116</X><Y>143</Y><Width>110</Width><Height>23</Height></Item2><Item3 Class="Label"><Text>统计期间：</Text><X>620</X><Y>106</Y><Width>56</Width><Height>23</Height></Item3><Item4 Class="Text"><Variable>=if(has(begindatesql)) return begindatesql;</Variable><HorizontalAlignment>1</HorizontalAlignment><X>678</X><Y>106</Y><Width>110</Width><Height>23</Height></Item4><Item5 Class="Label"><Text>至</Text><HorizontalAlignment>1</HorizontalAlignment><X>791</X><Y>106</Y><Width>26</Width><Height>23</Height></Item5><Item6 Class="Text"><Variable>=if(has(enddatesql)) return enddatesql;else return $today;</Variable><X>836</X><Y>106</Y><Width>110</Width><Height>23</Height></Item6><Item7 Class="Label"><Text>金额单位：万元</Text><HorizontalAlignment>2</HorizontalAlignment><X>1570</X><Y>147</Y><Width>110</Width><Height>23</Height></Item7></Children><Type>100</Type></Item0><Item1><Y>1013</Y><Width>1761</Width><Height>73</Height><Type>103</Type></Item1><Item2><Y>173</Y><Width>1761</Width><Height>840</Height><Children ItemClass="Table"><Item0><X>49</X><Y>3</Y><Children><Item0 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>7</Col></Cell></Item0><Item1 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>3</Row><Col>0</Col></Cell></Item1><Item2 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>3</Row><Col>9</Col></Cell></Item2><Item3 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>10</Col></Cell></Item3><Item4 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>11</Col></Cell></Item4><Item5 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>12</Col></Cell></Item5><Item6 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>13</Col></Cell></Item6><Item7 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>14</Col></Cell></Item7><Item8 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>15</Col></Cell></Item8><Item9 Class="RowPanel"><Cell><Row>1</Row><Col>0</Col><RowSpan>2</RowSpan><ColSpan>16</ColSpan></Cell><Children><Item0 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>2</Row><Col>9</Col></Cell></Item0><Item1 Class="RowPanel"><Cell><Row>1</Row><Col>0</Col><ColSpan>16</ColSpan></Cell><Children ItemClass="RowPanel"><Item0><Cell><Row>1</Row><Col>0</Col><ColSpan>16</ColSpan></Cell><Children ItemClass="Text"><Item0><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>13</Col></Cell></Item0><Item1><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><PrintStyle>united-level:1;</PrintStyle><Cell><Row>1</Row><Col>1</Col><RowSpan>2</RowSpan></Cell></Item1><Item2><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>0</Col></Cell></Item2><Item3><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>2</Col></Cell></Item3><Item4><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>3</Col></Cell></Item4><Item5><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>4</Col></Cell></Item5><Item6><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>5</Col></Cell></Item6><Item7><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>6</Col></Cell></Item7><Item8><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>7</Col></Cell></Item8><Item9><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>8</Col></Cell></Item9><Item10><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>9</Col></Cell></Item10><Item11><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>10</Col></Cell></Item11><Item12><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>11</Col></Cell></Item12><Item13><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>12</Col></Cell></Item13><Item14><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>14</Col></Cell></Item14><Item15><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>15</Col></Cell></Item15></Children></Item0></Children></Item1><Item2 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>15</Col></Cell></Item2><Item3 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>14</Col></Cell></Item3><Item4 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>2</Row><Col>0</Col></Cell></Item4><Item5 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>10</Col></Cell></Item5><Item6 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>7</Col></Cell></Item6><Item7 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>13</Col></Cell></Item7><Item8 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>12</Col></Cell></Item8><Item9 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>5</Col></Cell></Item9><Item10 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>6</Col></Cell></Item10><Item11 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>11</Col></Cell></Item11><Item12 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>2</Col><ColSpan>2</ColSpan></Cell></Item12><Item13 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>4</Col></Cell></Item13><Item14 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>8</Col></Cell></Item14></Children></Item9><Item10 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>1</Col></Cell></Item10><Item11 Class="Label"><Text>担保集团业务合计</Text><Border><StyleText>border-top:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>2</Col><ColSpan>2</ColSpan></Cell></Item11><Item12 Class="Label"><Text>担保金额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>4</Col></Cell></Item12><Item13 Class="Label"><Text>合作放款机构</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>5</Col></Cell></Item13><Item14 Class="Label"><Text>到期日期</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>11</Col></Cell></Item14><Item15 Class="Label"><Text>实际还款日期</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>12</Col></Cell></Item15><Item16 Class="Label"><Text>说明</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>13</Col></Cell></Item16><Item17 Class="Label"><Text>资金来源</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>7</Col></Cell></Item17><Item18 Class="Label"><Text>起始日期</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>10</Col></Cell></Item18><Item19 Class="Label"><Text>A角</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>14</Col></Cell></Item19><Item20 Class="Label"><Text>B角</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>15</Col></Cell></Item20><Item21 Class="Label"><Text>还款金额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>8</Col></Cell></Item21><Item22 Class="Label"><Text>本笔尚未解保余额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>9</Col></Cell></Item22><Item23 Class="Label"><Text>放款子机构(或个人)</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>6</Col></Cell></Item23><Item24 Class="Label"><Text>承保机构</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col></Cell></Item24><Item25 Class="Label"><Text>序号</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col></Cell></Item25><Item26 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>6</Col></Cell></Item26><Item27 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>5</Col></Cell></Item27><Item28 Class="Label"><Text>项目名称</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>3</Col></Cell></Item28><Item29 Class="Label"><Text>地区</Text><Border><StyleText>border-top:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>2</Col></Cell></Item29><Item30 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>4</Col></Cell></Item30><Item31 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>8</Col></Cell></Item31></Children><ColumnWidths>60,127,112,201,90,96,144,100,87,120,78,75,75,132,56,61</ColumnWidths><RowHeights>40,20,40,40</RowHeights></Item0></Children><Type>102</Type></Item2></Children><PageFormat><Width>1797</Width><Height>1122</Height><Left>18</Left><Top>18</Top><Right>18</Right><Bottom>18</Bottom></PageFormat></Page><NodeSource><Children ItemClass="DatasetNodeSource"><Item0><Children ItemClass="GroupNodeSource"><Item0><Children ItemClass="GroupNodeSource"><Item0><Children ItemClass="RowNodeSource"><Item0/></Children><Group><Field>hostAreaID</Field></Group></Item0></Children><Group><Field>guarantyOrgID</Field></Group></Item0></Children><Reader Class="SqlReader"><Name>tab_detail_free</Name><Sql>-- sql START runing 
+
+SELECT 
+p.guarantyOrgID,
+ (fl.loadSum - (SELECT IFNULL(SUM(freeCapitalSum),0) FROM pro_freedetail fd1 WHERE fd1.projectId = fd.projectId AND fd1.freedetail_id &lt;= fd.freedetail_id)) AS 'remainSUM',
+
+
+p.hostAreaID,
+p.projectName,
+p.fundSource,
+p.aManID,p.bManID,
+ifnull(fl.loadSum,0) as loadSum, 
+fl.fullBankCode,
+ifnull(fd.freeCapitalSum,0) as freeCapitalSum,
+fd.freeDate,
+fl.guarantySum,
+p.oprationCompany,
+p.attribution,
+c.relationMain,
+fl.normalDate,
+fl.reportDate,
+fl.loadEndDate,
+fl.subBankName,
+fd.replaceSum
+FROM pro_freedetail fd
+LEFT JOIN pro_project p ON fd.projectID=p.project_ID
+LEFT JOIN   pro_factLoad fl ON fl.factLoad_ID=fd.factLoad_ID and fl.projectID=fd.projectID
+LEFT JOIN crm_client c ON p.project_ID = c.projectID
+where fl.busiTypeID="01"  and (fl.normalFreeSum &gt;0 or fl.replaceFreeSum&gt;0 ) and fd.freeSum&gt;0
+
+
+${has(begindatesql)?(" and fd.freeDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and fd.freeDate&lt;='"+enddatesql+"'"):" and fd.freeDate&lt;=NOW()"}
+${has(fullBankCodesql)?(" and fl.fullBankCode like '"+fullBankCodesql+"%'"):""}
+${has(fullBusiTypeCodesql)?(" and fl.fullBusiTypeCode like'"+fullBusiTypeCodesql+"%'"):""}
+${has(guaraSumMinsql)?(" and (fl.loadSum&gt;"+guaraSumMinsql):""}
+${has(sumMinEqualsql)?(" or fl.loadSum="+guaraSumMinsql+")"):""}
+${has(guaraSumMaxsql)?(" and fl.loadSum&lt;"+guaraSumMaxsql):""}
+${has(guaraPeriodMonthsMinsql)?(" and ( fl.periodMonth&gt;"+guaraPeriodMonthsMinsql):""}
+${has(monthsMinEqualsql)?(" or fl.periodMonth="+guaraPeriodMonthsMinsql+")"):""}
+${has(guaraPeriodMonthsMaxsql)?(" and fl.periodMonth&lt; "+guaraPeriodMonthsMaxsql):""}
+${has(busiPropIDsql)?(" and p.busiPropID = '"+busiPropIDsql+"'"):""}
+${has(projTypeIDsql)?(" and p.projTypeID = '"+projTypeIDsql+"'"):""}
+${has(fullDepartCodesql)?(" and p.fullDepartCode like'"+fullDepartCodesql+"%'"):""}
+${has(amanIDsql)?(" and p.aManID="+amanIDsql):""}
+${has(bmanIDsql)?(" and p.bManID="+bmanIDsql):""}
+${has(cmanIDsql)?(" and p.cManID="+cmanIDsql):""}
+${has(fullAreaCodesql)?(" and p.hostAreaID like '"+fullAreaCodesql+"%'"):""}
+
+ORDER BY fd.freeDetail_ID 
+-- sql  over ..</Sql><Description>-- sql START runing 
+
+SELECT 
+p.guarantyOrgID,
+ (fl.loadSum - (SELECT IFNULL(SUM(freeCapitalSum),0) FROM pro_freedetail fd1 WHERE fd1.projectId = fd.projectId AND fd1.freedetail_id &lt;= fd.freedetail_id)) AS 'remainSUM',
+
+
+p.hostAreaID,
+p.projectName,
+p.fundSource,
+p.aManID,p.bManID,
+ifnull(fl.loadSum,0) as loadSum, 
+fl.fullBankCode,
+ifnull(fd.freeCapitalSum,0) as freeCapitalSum,
+fd.freeDate,
+fl.guarantySum,
+p.oprationCompany,
+p.attribution,
+c.relationMain,
+fl.normalDate,
+fl.reportDate,
+fl.loadEndDate,
+fl.subBankName,
+fd.replaceSum
+FROM pro_freedetail fd
+LEFT JOIN pro_project p ON fd.projectID=p.project_ID
+LEFT JOIN   pro_factLoad fl ON fl.factLoad_ID=fd.factLoad_ID and fl.projectID=fd.projectID
+LEFT JOIN crm_client c ON p.project_ID = c.projectID
+where fl.busiTypeID="01"  and (fl.normalFreeSum &gt;0 or fl.replaceFreeSum&gt;0 ) and fd.freeSum&gt;0
+
+
+${has(begindatesql)?(" and fd.freeDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and fd.freeDate&lt;='"+enddatesql+"'"):" and fd.freeDate&lt;=NOW()"}
+${has(fullBankCodesql)?(" and fl.fullBankCode like '"+fullBankCodesql+"%'"):""}
+${has(fullBusiTypeCodesql)?(" and fl.fullBusiTypeCode like'"+fullBusiTypeCodesql+"%'"):""}
+${has(guaraSumMinsql)?(" and (fl.loadSum&gt;"+guaraSumMinsql):""}
+${has(sumMinEqualsql)?(" or fl.loadSum="+guaraSumMinsql+")"):""}
+${has(guaraSumMaxsql)?(" and fl.loadSum&lt;"+guaraSumMaxsql):""}
+${has(guaraPeriodMonthsMinsql)?(" and ( fl.periodMonth&gt;"+guaraPeriodMonthsMinsql):""}
+${has(monthsMinEqualsql)?(" or fl.periodMonth="+guaraPeriodMonthsMinsql+")"):""}
+${has(guaraPeriodMonthsMaxsql)?(" and fl.periodMonth&lt; "+guaraPeriodMonthsMaxsql):""}
+${has(busiPropIDsql)?(" and p.busiPropID = '"+busiPropIDsql+"'"):""}
+${has(projTypeIDsql)?(" and p.projTypeID = '"+projTypeIDsql+"'"):""}
+${has(fullDepartCodesql)?(" and p.fullDepartCode like'"+fullDepartCodesql+"%'"):""}
+${has(amanIDsql)?(" and p.aManID="+amanIDsql):""}
+${has(bmanIDsql)?(" and p.bManID="+bmanIDsql):""}
+${has(cmanIDsql)?(" and p.cManID="+cmanIDsql):""}
+${has(fullAreaCodesql)?(" and p.hostAreaID like '"+fullAreaCodesql+"%'"):""}
+
+ORDER BY fd.freeDetail_ID 
+-- sql  over ..</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><TagName>tab_detail_free</TagName></Item0><Item1><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">id</IndexFields><TagName>index_dic_org</TagName></Item0></Children><Reader Class="SqlReader"><Name>dic_org</Name><Sql>SELECT fieldValue as name ,fieldID as id 
+FROM c_dictype
+WHERE dicTypeID=29</Sql><Description>SELECT fieldValue as name ,fieldID as id 
+FROM c_dictype
+WHERE dicTypeID=29</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">id</IndexFields><TagName>dic_org</TagName></Item1><Item2><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">fieldID</IndexFields><TagName>index_dic_area</TagName></Item0></Children><Reader Class="SqlReader"><Name>dic_area</Name><Sql>SELECT fieldValue,fieldID FROM c_dictype
+WHERE dicTypeID='36' </Sql><Description>SELECT fieldValue,fieldID FROM c_dictype
+WHERE dicTypeID='36' </Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">fieldID</IndexFields><TagName>dic_area</TagName></Item2><Item3><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">id</IndexFields><TagName>index_dic_bank</TagName></Item0></Children><Reader Class="SqlReader"><Name>dic_bank</Name><Sql>SELECT bankSortName as name ,bankFullCode as id
+FROM c_banksort</Sql><Description>SELECT bankSortName as name ,bankFullCode as id
+FROM c_banksort</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">id</IndexFields><TagName>dic_bank</TagName></Item3><Item4><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">id</IndexFields><TagName>index_dic_user</TagName></Item0></Children><Reader Class="SqlReader"><Name>dic_user</Name><Sql>SELECT user_name as name ,user_uid as id
+FROM sys_users
+</Sql><Description>SELECT user_name as name ,user_uid as id
+FROM sys_users
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">id</IndexFields><TagName>dic_user</TagName></Item4><Item5><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">guarantyOrgID</IndexFields><TagName>index_column5</TagName></Item0></Children><Reader Class="SqlReader"><Name>column5</Name><Sql>SELECT 
+IFNULL(SUM(tab.loadSum),0) AS loadSum,
+tab.guarantyOrgID
+FROM pro_factload fl
+LEFT JOIN
+(SELECT DISTINCT fl.`loadSum`,fl.`factLoad_ID`,p.`guarantyOrgID`FROM pro_freedetail fd
+LEFT JOIN pro_factload fl ON fl.`factLoad_ID`=fd.factload_ID
+LEFT JOIN pro_project p ON p.`project_ID`=fd.projectID
+WHERE fl.`busiTypeID`="01" AND (fl.normalFreeSum&gt;0 or fl.replaceFreeSum&gt;0) and fd.freeSum&gt;0
+
+${has(begindatesql)?(" and fd.freeDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and fd.freeDate&lt;='"+enddatesql+"'"):" and fd.freeDate&lt;=NOW()"}
+${has(fullBankCodesql)?(" and fl.fullBankCode like '"+fullBankCodesql+"%'"):""}
+${has(fullBusiTypeCodesql)?(" and fl.fullBusiTypeCode like'"+fullBusiTypeCodesql+"%'"):""}
+${has(guaraSumMinsql)?(" and (fl.loadSum&gt;"+guaraSumMinsql):""}
+${has(sumMinEqualsql)?(" or fl.loadSum="+guaraSumMinsql+")"):""}
+${has(guaraSumMaxsql)?(" and fl.loadSum&lt;"+guaraSumMaxsql):""}
+${has(guaraPeriodMonthsMinsql)?(" and ( fl.periodMonth&gt;"+guaraPeriodMonthsMinsql):""}
+${has(monthsMinEqualsql)?(" or fl.periodMonth="+guaraPeriodMonthsMinsql+")"):""}
+${has(guaraPeriodMonthsMaxsql)?(" and fl.periodMonth&lt; "+guaraPeriodMonthsMaxsql):""}
+${has(busiPropIDsql)?(" and p.busiPropID = '"+busiPropIDsql+"'"):""}
+${has(projTypeIDsql)?(" and p.projTypeID = '"+projTypeIDsql+"'"):""}
+${has(fullDepartCodesql)?(" and p.fullDepartCode like'"+fullDepartCodesql+"%'"):""}
+${has(amanIDsql)?(" and p.aManID="+amanIDsql):""}
+${has(bmanIDsql)?(" and p.bManID="+bmanIDsql):""}
+${has(cmanIDsql)?(" and p.cManID="+cmanIDsql):""}
+${has(fullAreaCodesql)?(" and p.fullAreaCode like '"+fullAreaCodesql+"%'"):""}
+
+) tab ON tab.factLoad_ID=fl.`factLoad_ID`
+WHERE tab.factLoad_ID=fl.`factLoad_ID`
+GROUP BY tab.guarantyOrgID</Sql><Description>SELECT 
+IFNULL(SUM(tab.loadSum),0) AS loadSum,
+tab.guarantyOrgID
+FROM pro_factload fl
+LEFT JOIN
+(SELECT DISTINCT fl.`loadSum`,fl.`factLoad_ID`,p.`guarantyOrgID`FROM pro_freedetail fd
+LEFT JOIN pro_factload fl ON fl.`factLoad_ID`=fd.factload_ID
+LEFT JOIN pro_project p ON p.`project_ID`=fd.projectID
+WHERE fl.`busiTypeID`="01" AND (fl.normalFreeSum&gt;0 or fl.replaceFreeSum&gt;0) and fd.freeSum&gt;0
+
+${has(begindatesql)?(" and fd.freeDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and fd.freeDate&lt;='"+enddatesql+"'"):" and fd.freeDate&lt;=NOW()"}
+${has(fullBankCodesql)?(" and fl.fullBankCode like '"+fullBankCodesql+"%'"):""}
+${has(fullBusiTypeCodesql)?(" and fl.fullBusiTypeCode like'"+fullBusiTypeCodesql+"%'"):""}
+${has(guaraSumMinsql)?(" and (fl.loadSum&gt;"+guaraSumMinsql):""}
+${has(sumMinEqualsql)?(" or fl.loadSum="+guaraSumMinsql+")"):""}
+${has(guaraSumMaxsql)?(" and fl.loadSum&lt;"+guaraSumMaxsql):""}
+${has(guaraPeriodMonthsMinsql)?(" and ( fl.periodMonth&gt;"+guaraPeriodMonthsMinsql):""}
+${has(monthsMinEqualsql)?(" or fl.periodMonth="+guaraPeriodMonthsMinsql+")"):""}
+${has(guaraPeriodMonthsMaxsql)?(" and fl.periodMonth&lt; "+guaraPeriodMonthsMaxsql):""}
+${has(busiPropIDsql)?(" and p.busiPropID = '"+busiPropIDsql+"'"):""}
+${has(projTypeIDsql)?(" and p.projTypeID = '"+projTypeIDsql+"'"):""}
+${has(fullDepartCodesql)?(" and p.fullDepartCode like'"+fullDepartCodesql+"%'"):""}
+${has(amanIDsql)?(" and p.aManID="+amanIDsql):""}
+${has(bmanIDsql)?(" and p.bManID="+bmanIDsql):""}
+${has(cmanIDsql)?(" and p.cManID="+cmanIDsql):""}
+${has(fullAreaCodesql)?(" and p.fullAreaCode like '"+fullAreaCodesql+"%'"):""}
+
+) tab ON tab.factLoad_ID=fl.`factLoad_ID`
+WHERE tab.factLoad_ID=fl.`factLoad_ID`
+GROUP BY tab.guarantyOrgID</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">guarantyOrgID</IndexFields><TagName>column5</TagName></Item5><Item6><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">fieldID</IndexFields><TagName>index_dic_relation</TagName></Item0></Children><Reader Class="SqlReader"><Name>dic_relation</Name><Sql>SELECT fieldValue,fieldID FROM c_dictype
+WHERE dicTypeID='37' </Sql><Description>SELECT fieldValue,fieldID FROM c_dictype
+WHERE dicTypeID='37' </Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">fieldID</IndexFields><TagName>dic_relation</TagName></Item6><Item7><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">depart_uid</IndexFields><TagName>index_dic_depart</TagName></Item0></Children><Reader Class="SqlReader"><Name>departName</Name><Sql>SELECT 
+  depart_name,
+  concat(depart_uid,'') as depart_uid,
+	depart_fullcode
+  FROM sys_departs ; 
+
+-- 获取承办公司名称</Sql><Description>SELECT 
+  depart_name,
+  concat(depart_uid,'') as depart_uid,
+	depart_fullcode
+  FROM sys_departs ; 
+
+-- 获取承办公司名称</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">depart_uid</IndexFields><TagName>departName</TagName></Item7></Children></NodeSource></jatools>

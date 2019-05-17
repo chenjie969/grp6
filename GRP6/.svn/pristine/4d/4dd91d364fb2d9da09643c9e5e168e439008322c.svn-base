@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.gworkFlow.db.map.Os_gworkflow_filesMapper">
+	<resultMap type="com.zjm.gworkFlow.db.model.Os_gworkflow_files" id="Os_gworkflow_filesResultMap">
+		<result property="files_ID" column="files_ID" />
+		<result property="fileType" column="fileType" />
+		<result property="sourceFileName" column="sourceFileName" />
+		<result property="pathFile" column="pathFile" />
+		<result property="extend" column="extend" />
+		<result property="uploadManID" column="uploadManID" />
+		<result property="uploadManName" column="uploadManName" />
+		<result property="uploadDateTime" column="uploadDateTime" />
+		<result property="fileSize" column="fileSize" />
+		<result property="updateUserName" column="updateUserName" />
+		<result property="updateDateTime" column="updateDateTime" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="unit_uidName" column="unit_uidName" />
+		<result property="flowID" column="flowID" />
+		<result property="stepID" column="stepID" />
+		<result property="historyID" column="historyID" />
+		<result property="projectID" column="projectID" />
+	</resultMap>
+	<!-- 插入一个流程意见附件-->
+	<insert id="insertOneOsGworkflowFiles"	parameterType="com.zjm.gworkFlow.db.model.Os_gworkflow_files">
+		<![CDATA[
+		INSERT INTO os_gworkflow_files (
+		files_ID,
+		fileType,
+		sourceFileName,
+		pathFile,
+		extend,
+		uploadManID,
+		uploadManName,
+		uploadDateTime,
+		fileSize,
+		updateUserName,
+		updateDateTime,
+		unit_uid,
+		unit_uidName,
+		flowID,
+		stepID,
+		historyID,
+		projectID
+		)
+		VALUES
+		(
+		#{files_ID},
+		#{fileType},
+		#{sourceFileName},
+		#{pathFile},
+		#{extend},
+		#{uploadManID},
+		#{uploadManName},
+		NOW(),
+		#{fileSize},
+		#{updateUserName},
+		NOW(),
+		#{unit_uid},
+		#{unit_uidName},
+		#{flowID},
+		#{stepID},
+		#{historyID},
+		#{projectID}
+		) ;
+		]]>
+	</insert>
+	
+	<!-- 附件List -->
+	<select id="selectAllOsGworkflowFilesPageTables" parameterType="com.zjm.common.db.model.PageTable" resultMap="Os_gworkflow_filesResultMap">
+		<![CDATA[SELECT files_ID,unit_uid,fileType,sourceFileName,pathFile,extend,uploadManID,uploadManName,uploadDateTime,fileSize,flowID,stepID,historyID,projectID FROM os_gworkflow_files where 1=1 ${wheresql}]]>
+	</select>
+	
+	<!-- 客户附件 记录数 -->
+	<select id="selectAllOsGworkflowFilesPageTables_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		<![CDATA[SELECT count(files_ID) FROM os_gworkflow_files where 1=1 ${wheresql} ]]>
+	</select>
+	
+	<!-- 删除一个附件信息 -->
+	<delete id="delectOneOsGworkflowFilesInfo" parameterType="com.zjm.gworkFlow.db.model.Os_gworkflow_files">
+		<![CDATA[DELETE FROM os_gworkflow_files WHERE files_ID=#{files_ID}  and unit_uid=#{unit_uid} and projectID=#{projectID}  ]]>
+	</delete>
+</mapper>  

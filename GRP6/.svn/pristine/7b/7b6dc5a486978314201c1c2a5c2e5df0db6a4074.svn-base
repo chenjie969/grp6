@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><jatools Class="jatools.ReportDocument" Name="jatools report template"><VariableContext/><Page><Children ItemClass="PagePanel"><Item0><Width>1086</Width><Height>173</Height><Children><Item0 Class="Label"><Text>担保/委贷项目按行业分布</Text><Font><Face>宋体</Face><Style>1</Style><Size>36</Size></Font><HorizontalAlignment>1</HorizontalAlignment><X>296</X><Y>9</Y><Width>500</Width><Height>71</Height></Item0><Item1 Class="Label"><Text>填报单位：</Text><X>48</X><Y>147</Y><Width>56</Width><Height>23</Height></Item1><Item2 Class="Label"><Text>单位：亿元</Text><HorizontalAlignment>2</HorizontalAlignment><X>964</X><Y>147</Y><Width>68</Width><Height>23</Height></Item2><Item3 Class="Label"><Text>统计期间：</Text><X>390</X><Y>87</Y><Width>56</Width><Height>23</Height></Item3><Item4 Class="Label"><Text>至</Text><HorizontalAlignment>1</HorizontalAlignment><X>555</X><Y>87</Y><Width>26</Width><Height>23</Height></Item4><Item5 Class="Text"><Variable>=if(has(begindatesql)) return begindatesql;</Variable><HorizontalAlignment>1</HorizontalAlignment><X>445</X><Y>87</Y><Width>110</Width><Height>23</Height></Item5><Item6 Class="Text"><Variable>=if(has(enddatesql)) return enddatesql;else return $today;</Variable><X>597</X><Y>87</Y><Width>110</Width><Height>23</Height></Item6><Item7 Class="Label"><Text>集团风险管理部</Text><X>108</X><Y>147</Y><Width>122</Width><Height>23</Height></Item7></Children><Type>100</Type></Item0><Item1><Y>1024</Y><Width>1086</Width><Height>73</Height><Type>103</Type></Item1><Item2><Y>173</Y><Width>1086</Width><Height>851</Height><Children ItemClass="Table"><Item0><NodePath>tab_trade</NodePath><X>49</X><Y>6</Y><Children><Item0 Class="Label"><Text>行业</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col></Cell></Item0><Item1 Class="Label"><Text>委贷余额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>3</Col></Cell></Item1><Item2 Class="Label"><Text>合计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>4</Col></Cell></Item2><Item3 Class="Label"><Text>合计金额占比</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>5</Col></Cell></Item3><Item4 Class="Label"><Text>担保余额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>2</Col></Cell></Item4><Item5 Class="RowPanel"><Cell><Row>1</Row><Col>0</Col><ColSpan>6</ColSpan></Cell><Children ItemClass="Text"><Item0><Variable>=$.fullTradeName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>1</Col></Cell></Item0><Item1><Variable>=if(has(index_guarantySum.guarantySum{$.fullTradeCode}/10000)) return (index_guarantySum.guarantySum{$.fullTradeCode}/10000);else return 0;</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.0000000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>2</Col></Cell></Item1><Item2><Variable>=index_totalSum.totalSum{$.fullTradeCode}/index_totalSum.totalSum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>0.00%</Pattern></Format><Cell><Row>1</Row><Col>5</Col></Cell></Item2><Item3><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>2</Row><Col>5</Col></Cell></Item3><Item4><Variable>=if(has(index_entrustSum.entrustSum{$.fullTradeCode}/10000)) return (index_entrustSum.entrustSum{$.fullTradeCode}/10000);else return 0;</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.0000000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>3</Col></Cell></Item4><Item5><Variable>=index_totalSum.totalSum{$.fullTradeCode}/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.0000000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>4</Col></Cell></Item5><Item6><Variable>=$.position+1</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>0</Col></Cell></Item6></Children><NodePath>Row</NodePath></Item5><Item6 Class="Text"><Variable>=index_guarantySum.guarantySum.sum()/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.0000000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>2</Col></Cell></Item6><Item7 Class="Text"><Variable>=index_entrustSum.entrustSum.sum()/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.0000000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>3</Col></Cell></Item7><Item8 Class="Text"><Variable>=index_totalSum.totalSum.sum()/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.0000000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>4</Col></Cell></Item8><Item9 Class="Label"><Text>序号</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col></Cell></Item9><Item10 Class="Label"><Text>合计</Text><Border/><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>0</Col><ColSpan>2</ColSpan></Cell></Item10></Children><ColumnWidths>60,230,183,177,192,145</ColumnWidths><RowHeights>40,35,40</RowHeights></Item0></Children><Type>102</Type></Item2></Children><PageFormat><Width>1122</Width><Height>1133</Height><Left>18</Left><Top>18</Top><Right>18</Right><Bottom>18</Bottom></PageFormat></Page><NodeSource><Children ItemClass="DatasetNodeSource"><Item0><Children ItemClass="RowNodeSource"><Item0/></Children><Reader Class="SqlReader"><Name>tab_detail_client</Name><Sql>
+SELECT  
+cc.fullTradeCode,
+cc.fullTradeName,
+IFNULL(IFNULL(g.guarantySum,0)+IFNULL(e.guarantySum,0),0)/10000 AS allSum
+FROM crm_client cc
+LEFT JOIN  pro_apply  pa  ON cc.`clientGUID`=pa.`clientGUID`
+LEFT JOIN  pro_project  pp ON pa.`apply_ID` = pp.`apply_ID`
+LEFT JOIN pro_factpay pfp ON pfp.`project_ID`=pp.`project_ID`
+LEFT JOIN
+	(SELECT SUM((IFNULL(pp.`loadSum`,0)-IFNULL(tab.freeSum,0))) AS guarantySum,cc.fullTradeCode,cc.fullTradeName FROM pro_project pp
+		LEFT JOIN 
+			(SELECT pp.project_ID,SUM(IFNULL(pfp.`payCapitalSum`,0)+IFNULL(pre.`replaceSum`,0)+IFNULL(precre.creditor_sum,0)) AS freeSum FROM pro_project pp
+				LEFT JOIN pro_factpay pfp ON pfp.`project_ID`=pp.`project_ID`
+				LEFT JOIN pro_replace pre ON pre.`project_ID`=pp.`project_ID`
+				LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+				LEFT JOIN crm_client cc ON cc.`clientGUID`=pa.`clientGUID`
+				LEFT JOIN pro_creditor precre ON precre.project_ID =  pp.project_ID
+				WHERE 1=1
+		${has(enddatesql)?(" and pp.freeDate&lt;='"+enddatesql+"'"):" and pp.freeDate&lt;=NOW()"}
+			GROUP BY pp.project_ID) tab ON tab.`project_ID` = pp.`project_ID`
+			LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+			LEFT JOIN crm_client cc ON cc.client_ID = pa.`client_ID`
+			WHERE pp.busiClass= '01'
+			${has(enddatesql)?(" and pp.freeDate&lt;='"+enddatesql+"'"):" and pp.freeDate&lt;=NOW()"}			
+			${has(enddatesql)?(" and pp.delayBeginDate&lt;='"+enddatesql+"'"):" and pp.delayBeginDate&lt;=NOW()"}
+			GROUP BY cc.fullTradeCode ) AS g ON g.fullTradeCode=cc.fullTradeCode
+LEFT JOIN
+	(SELECT  SUM((IFNULL(pp.`loadSum`,0)-IFNULL(tab.freeSum,0)-IFNULL(tab1.badSum,0))) AS guarantySum,cc1.fullTradeCode FROM pro_project pp
+		LEFT JOIN 
+			(SELECT pp.project_ID,SUM(IFNULL(pfp.`payCapitalSum`,0)) AS freeSum FROM pro_project pp
+			LEFT JOIN pro_factpay pfp ON pfp.`project_ID`=pp.`project_ID`
+			WHERE 1=1
+			${has(enddatesql)?(" and pp.freeDate&lt;='"+enddatesql+"'"):" and pp.freeDate&lt;=NOW()"}
+			GROUP BY pp.project_ID) tab ON tab.`project_ID` = pp.`project_ID`
+		LEFT JOIN
+			(SELECT pp2.`project_ID`,pa1.client_ID,pp2.`badSum` AS badSum FROM pro_project pp2
+			LEFT JOIN  pro_apply  pa1 ON pp2.apply_ID=pa1.apply_ID
+			
+			) tab1 ON tab1.`project_ID` = pp.`project_ID`
+		LEFT JOIN crm_client cc1 ON cc1.client_ID = tab1.`client_ID`
+	WHERE pp.busiClass= '02'
+	
+${has(begindatesql)?(" and pp.delayBeginDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and pp.delayBeginDate&lt;='"+enddatesql+"'"):" and pp.delayBeginDate&lt;=NOW()"}
+	GROUP BY cc1.fullTradeCode) AS e ON e.fullTradeCode=cc.fullTradeCode
+WHERE cc.isMainVersion=0
+${has(begindatesql)?(" and pp.delayBeginDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and pp.delayBeginDate&lt;='"+enddatesql+"'"):" and pp.delayBeginDate&lt;=NOW()"}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY cc.fullTradeCode
+ORDER BY allSum DESC
+
+
+
+</Sql><Description>
+SELECT  
+cc.fullTradeCode,
+cc.fullTradeName,
+IFNULL(IFNULL(g.guarantySum,0)+IFNULL(e.guarantySum,0),0)/10000 AS allSum
+FROM crm_client cc
+LEFT JOIN  pro_apply  pa  ON cc.`clientGUID`=pa.`clientGUID`
+LEFT JOIN  pro_project  pp ON pa.`apply_ID` = pp.`apply_ID`
+LEFT JOIN pro_factpay pfp ON pfp.`project_ID`=pp.`project_ID`
+LEFT JOIN
+	(SELECT SUM((IFNULL(pp.`loadSum`,0)-IFNULL(tab.freeSum,0))) AS guarantySum,cc.fullTradeCode,cc.fullTradeName FROM pro_project pp
+		LEFT JOIN 
+			(SELECT pp.project_ID,SUM(IFNULL(pfp.`payCapitalSum`,0)+IFNULL(pre.`replaceSum`,0)+IFNULL(precre.creditor_sum,0)) AS freeSum FROM pro_project pp
+				LEFT JOIN pro_factpay pfp ON pfp.`project_ID`=pp.`project_ID`
+				LEFT JOIN pro_replace pre ON pre.`project_ID`=pp.`project_ID`
+				LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+				LEFT JOIN crm_client cc ON cc.`clientGUID`=pa.`clientGUID`
+				LEFT JOIN pro_creditor precre ON precre.project_ID =  pp.project_ID
+				WHERE 1=1
+		${has(enddatesql)?(" and pp.freeDate&lt;='"+enddatesql+"'"):" and pp.freeDate&lt;=NOW()"}
+			GROUP BY pp.project_ID) tab ON tab.`project_ID` = pp.`project_ID`
+			LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+			LEFT JOIN crm_client cc ON cc.client_ID = pa.`client_ID`
+			WHERE pp.busiClass= '01'
+			${has(enddatesql)?(" and pp.freeDate&lt;='"+enddatesql+"'"):" and pp.freeDate&lt;=NOW()"}			
+			${has(enddatesql)?(" and pp.delayBeginDate&lt;='"+enddatesql+"'"):" and pp.delayBeginDate&lt;=NOW()"}
+			GROUP BY cc.fullTradeCode ) AS g ON g.fullTradeCode=cc.fullTradeCode
+LEFT JOIN
+	(SELECT  SUM((IFNULL(pp.`loadSum`,0)-IFNULL(tab.freeSum,0)-IFNULL(tab1.badSum,0))) AS guarantySum,cc1.fullTradeCode FROM pro_project pp
+		LEFT JOIN 
+			(SELECT pp.project_ID,SUM(IFNULL(pfp.`payCapitalSum`,0)) AS freeSum FROM pro_project pp
+			LEFT JOIN pro_factpay pfp ON pfp.`project_ID`=pp.`project_ID`
+			WHERE 1=1
+			${has(enddatesql)?(" and pp.freeDate&lt;='"+enddatesql+"'"):" and pp.freeDate&lt;=NOW()"}
+			GROUP BY pp.project_ID) tab ON tab.`project_ID` = pp.`project_ID`
+		LEFT JOIN
+			(SELECT pp2.`project_ID`,pa1.client_ID,pp2.`badSum` AS badSum FROM pro_project pp2
+			LEFT JOIN  pro_apply  pa1 ON pp2.apply_ID=pa1.apply_ID
+			
+			) tab1 ON tab1.`project_ID` = pp.`project_ID`
+		LEFT JOIN crm_client cc1 ON cc1.client_ID = tab1.`client_ID`
+	WHERE pp.busiClass= '02'
+	
+${has(begindatesql)?(" and pp.delayBeginDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and pp.delayBeginDate&lt;='"+enddatesql+"'"):" and pp.delayBeginDate&lt;=NOW()"}
+	GROUP BY cc1.fullTradeCode) AS e ON e.fullTradeCode=cc.fullTradeCode
+WHERE cc.isMainVersion=0
+${has(begindatesql)?(" and pp.delayBeginDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and pp.delayBeginDate&lt;='"+enddatesql+"'"):" and pp.delayBeginDate&lt;=NOW()"}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY cc.fullTradeCode
+ORDER BY allSum DESC
+
+
+
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><TagName>tab_detail_client</TagName></Item0><Item1><Children ItemClass="CrossIndexNodeSource"><Item0><IndexFields Len="1">fullTradeCode</IndexFields><IndexFields2 Len="1">guarantySum</IndexFields2><TagName>index_column2</TagName></Item0></Children><Reader Class="SqlReader"><Name>column2</Name><Sql>SELECT 
+SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)-IFNULL(tab5.creditorsum,0))) AS guarantySum,
+cc.fullTradeCode,
+cc.fullTradeName
+ FROM 
+pro_project pp
+LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+LEFT JOIN crm_client cc ON cc.client_ID = pa.client_ID
+LEFT JOIN (
+   SELECT 
+       
+        pfp.project_ID,
+        SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum 
+        
+    FROM
+    pro_factpay pfp
+    WHERE 1=1 
+    
+    ${has(begindatesql)?(" and pfp.payDate&gt;='"+begindatesql+"'"):""}
+    ${has(enddatesql)?(" and pfp.payDate&lt;='"+enddatesql+"'"):""}
+    GROUP BY pfp.project_ID
+    
+  
+ )tab1 ON tab1.project_ID =  pp.project_ID
+ 
+ 
+ LEFT JOIN (
+   SELECT 
+       
+        pre.project_ID,
+        
+       SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum 
+        
+    FROM
+    pro_replace pre
+    WHERE 1=1 
+
+${has(begindatesql)?(" and pre.replaceDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and pre.replaceDate&lt;='"+enddatesql+"'"):""}
+    GROUP BY pre.project_ID
+    
+  
+ )tab2 ON tab2.project_ID =  pp.project_ID
+LEFT JOIN (
+	SELECT 
+		precre.project_ID,        
+		SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum          
+	FROM
+		pro_creditor precre
+	WHERE 1=1   
+${has(begindatesql)?(" and precre.creditor_date&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and precre.creditor_date&lt;='"+enddatesql+"'"):""}
+	GROUP BY precre.project_ID 
+)tab5 ON tab5.project_ID =  pp.project_ID
+WHERE pp.busiClass= '01'
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+${has(begindatesql)?(" and pp.delayBeginDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and pp.delayBeginDate&lt;='"+enddatesql+"'"):""}
+GROUP BY cc.fullTradeCode
+
+</Sql><Description>SELECT 
+SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)-IFNULL(tab5.creditorsum,0))) AS guarantySum,
+cc.fullTradeCode,
+cc.fullTradeName
+ FROM 
+pro_project pp
+LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+LEFT JOIN crm_client cc ON cc.client_ID = pa.client_ID
+LEFT JOIN (
+   SELECT 
+       
+        pfp.project_ID,
+        SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum 
+        
+    FROM
+    pro_factpay pfp
+    WHERE 1=1 
+    
+    ${has(begindatesql)?(" and pfp.payDate&gt;='"+begindatesql+"'"):""}
+    ${has(enddatesql)?(" and pfp.payDate&lt;='"+enddatesql+"'"):""}
+    GROUP BY pfp.project_ID
+    
+  
+ )tab1 ON tab1.project_ID =  pp.project_ID
+ 
+ 
+ LEFT JOIN (
+   SELECT 
+       
+        pre.project_ID,
+        
+       SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum 
+        
+    FROM
+    pro_replace pre
+    WHERE 1=1 
+
+${has(begindatesql)?(" and pre.replaceDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and pre.replaceDate&lt;='"+enddatesql+"'"):""}
+    GROUP BY pre.project_ID
+    
+  
+ )tab2 ON tab2.project_ID =  pp.project_ID
+LEFT JOIN (
+	SELECT 
+		precre.project_ID,        
+		SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum          
+	FROM
+		pro_creditor precre
+	WHERE 1=1   
+${has(begindatesql)?(" and precre.creditor_date&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and precre.creditor_date&lt;='"+enddatesql+"'"):""}
+	GROUP BY precre.project_ID 
+)tab5 ON tab5.project_ID =  pp.project_ID
+WHERE pp.busiClass= '01'
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+${has(begindatesql)?(" and pp.delayBeginDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and pp.delayBeginDate&lt;='"+enddatesql+"'"):""}
+GROUP BY cc.fullTradeCode
+
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">fullTradeCode</IndexFields><IndexFields2 Len="1">guarantySum</IndexFields2><TagName>column2</TagName></Item1><Item2><Children ItemClass="CrossIndexNodeSource"><Item0><IndexFields Len="1">fullTradeCode</IndexFields><IndexFields2 Len="1">guarantySum</IndexFields2><TagName>index_column3</TagName></Item0></Children><Reader Class="SqlReader"><Name>column3</Name><Sql>SELECT 
+SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)-IFNULL(tab5.creditorsum,0))) AS guarantySum,
+cc.fullTradeCode,
+cc.fullTradeName
+ FROM 
+pro_project pp
+LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+LEFT JOIN crm_client cc ON cc.client_ID = pa.client_ID
+LEFT JOIN (
+   SELECT 
+       
+        pfp.project_ID,
+        SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum 
+        
+    FROM
+    pro_factpay pfp
+    WHERE 1=1 
+    
+    ${has(begindatesql)?(" and pfp.payDate&gt;='"+begindatesql+"'"):""}
+    ${has(enddatesql)?(" and pfp.payDate&lt;='"+enddatesql+"'"):""}
+    GROUP BY pfp.project_ID
+    
+  
+ )tab1 ON tab1.project_ID =  pp.project_ID
+ 
+ 
+ LEFT JOIN (
+   SELECT 
+       
+        pre.project_ID,
+        
+       SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum 
+        
+    FROM
+    pro_replace pre
+    WHERE 1=1 
+
+${has(begindatesql)?(" and pre.replaceDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and pre.replaceDate&lt;='"+enddatesql+"'"):""}
+    GROUP BY pre.project_ID
+    
+  
+ )tab2 ON tab2.project_ID =  pp.project_ID
+
+LEFT JOIN (
+	SELECT 
+		precre.project_ID,        
+		SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum          
+	FROM
+		pro_creditor precre
+	WHERE 1=1   
+
+${has(begindatesql)?(" and precre.creditor_date&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and precre.creditor_date&lt;='"+enddatesql+"'"):""}
+	GROUP BY precre.project_ID 
+)tab5 ON tab5.project_ID =  pp.project_ID
+
+WHERE pp.busiClass= '02'
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+${has(begindatesql)?(" and pp.delayBeginDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and pp.delayBeginDate&lt;='"+enddatesql+"'"):""}
+GROUP BY cc.fullTradeCode
+
+</Sql><Description>SELECT 
+SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)-IFNULL(tab5.creditorsum,0))) AS guarantySum,
+cc.fullTradeCode,
+cc.fullTradeName
+ FROM 
+pro_project pp
+LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+LEFT JOIN crm_client cc ON cc.client_ID = pa.client_ID
+LEFT JOIN (
+   SELECT 
+       
+        pfp.project_ID,
+        SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum 
+        
+    FROM
+    pro_factpay pfp
+    WHERE 1=1 
+    
+    ${has(begindatesql)?(" and pfp.payDate&gt;='"+begindatesql+"'"):""}
+    ${has(enddatesql)?(" and pfp.payDate&lt;='"+enddatesql+"'"):""}
+    GROUP BY pfp.project_ID
+    
+  
+ )tab1 ON tab1.project_ID =  pp.project_ID
+ 
+ 
+ LEFT JOIN (
+   SELECT 
+       
+        pre.project_ID,
+        
+       SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum 
+        
+    FROM
+    pro_replace pre
+    WHERE 1=1 
+
+${has(begindatesql)?(" and pre.replaceDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and pre.replaceDate&lt;='"+enddatesql+"'"):""}
+    GROUP BY pre.project_ID
+    
+  
+ )tab2 ON tab2.project_ID =  pp.project_ID
+
+LEFT JOIN (
+	SELECT 
+		precre.project_ID,        
+		SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum          
+	FROM
+		pro_creditor precre
+	WHERE 1=1   
+
+${has(begindatesql)?(" and precre.creditor_date&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and precre.creditor_date&lt;='"+enddatesql+"'"):""}
+	GROUP BY precre.project_ID 
+)tab5 ON tab5.project_ID =  pp.project_ID
+
+WHERE pp.busiClass= '02'
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+${has(begindatesql)?(" and pp.delayBeginDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and pp.delayBeginDate&lt;='"+enddatesql+"'"):""}
+GROUP BY cc.fullTradeCode
+
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">fullTradeCode</IndexFields><IndexFields2 Len="1">guarantySum</IndexFields2><TagName>column3</TagName></Item2><Item3><Children ItemClass="RowNodeSource"><Item0/></Children><Reader Class="SqlReader"><Name>tab_trade</Name><Sql>SELECT  
+	DISTINCT  cc.`fullTradeName`,
+	cc.`fullTradeCode`
+FROM  pro_project pp  
+LEFT JOIN  pro_apply  pa ON pa.apply_id=pp.apply_id
+LEFT JOIN  crm_client cc ON pa.client_ID=cc.client_ID
+WHERE 	pp.busiClass IS NOT NULL and cc.`fullTradeCode`  IS NOT NULL
+${has(begindatesql)?(" and pp.delayBeginDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and pp.delayBeginDate&lt;='"+enddatesql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}</Sql><Description>SELECT  
+	DISTINCT  cc.`fullTradeName`,
+	cc.`fullTradeCode`
+FROM  pro_project pp  
+LEFT JOIN  pro_apply  pa ON pa.apply_id=pp.apply_id
+LEFT JOIN  crm_client cc ON pa.client_ID=cc.client_ID
+WHERE 	pp.busiClass IS NOT NULL and cc.`fullTradeCode`  IS NOT NULL
+${has(begindatesql)?(" and pp.delayBeginDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and pp.delayBeginDate&lt;='"+enddatesql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><TagName>tab_trade</TagName></Item3><Item4><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">fullTradeCode</IndexFields><TagName>index_guarantySum</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab_guarantySum</Name><Sql>SELECT
+	SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)-IFNULL(tab5.creditorsum,0))) AS guarantySum,
+	cc.fullTradeName,
+	cc.fullTradeCode
+FROM pro_project pp
+LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+LEFT JOIN  crm_client cc ON cc.client_ID=pa.client_ID
+LEFT JOIN (
+	SELECT 
+	
+		pfp.project_ID,
+		SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM
+		pro_factpay pfp
+	WHERE 	1=1 
+		${has(begindatesql)?(" and pfp.payDate&gt;='"+begindatesql+"'"):""}
+		${has(enddatesql)?(" and pfp.payDate&lt;='"+enddatesql+"'"):""}
+	GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+LEFT JOIN (
+	SELECT 
+	
+		pre.project_ID,        
+		SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum         
+	FROM
+		pro_replace pre
+	WHERE 	1=1   
+		${has(begindatesql)?(" and pre.replaceDate&gt;='"+begindatesql+"'"):""}
+		${has(enddatesql)?(" and pre.replaceDate&lt;='"+enddatesql+"'"):""}
+	GROUP BY pre.project_ID 
+)tab2 ON tab2.project_ID =  pp.project_ID 
+LEFT JOIN (
+	SELECT 
+		precre.project_ID,        
+		SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum          
+	FROM
+		pro_creditor precre
+	WHERE 1=1   
+	${has(begindatesql)?(" and precre.creditor_date&gt;='"+begindatesql+"'"):""}
+	${has(enddatesql)?(" and precre.creditor_date&lt;='"+enddatesql+"'"):""}
+	GROUP BY precre.project_ID 
+)tab5 ON tab5.project_ID =  pp.project_ID
+
+
+WHERE	pp.busiClass= '01'  
+	${has(begindatesql)?(" and pp.delayBeginDate&gt;='"+begindatesql+"'"):""}
+	${has(enddatesql)?(" and pp.delayBeginDate&lt;='"+enddatesql+"'"):""}
+	${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY cc.fullTradeCode</Sql><Description>SELECT
+	SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)-IFNULL(tab5.creditorsum,0))) AS guarantySum,
+	cc.fullTradeName,
+	cc.fullTradeCode
+FROM pro_project pp
+LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+LEFT JOIN  crm_client cc ON cc.client_ID=pa.client_ID
+LEFT JOIN (
+	SELECT 
+	
+		pfp.project_ID,
+		SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM
+		pro_factpay pfp
+	WHERE 	1=1 
+		${has(begindatesql)?(" and pfp.payDate&gt;='"+begindatesql+"'"):""}
+		${has(enddatesql)?(" and pfp.payDate&lt;='"+enddatesql+"'"):""}
+	GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+LEFT JOIN (
+	SELECT 
+	
+		pre.project_ID,        
+		SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum         
+	FROM
+		pro_replace pre
+	WHERE 	1=1   
+		${has(begindatesql)?(" and pre.replaceDate&gt;='"+begindatesql+"'"):""}
+		${has(enddatesql)?(" and pre.replaceDate&lt;='"+enddatesql+"'"):""}
+	GROUP BY pre.project_ID 
+)tab2 ON tab2.project_ID =  pp.project_ID 
+LEFT JOIN (
+	SELECT 
+		precre.project_ID,        
+		SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum          
+	FROM
+		pro_creditor precre
+	WHERE 1=1   
+	${has(begindatesql)?(" and precre.creditor_date&gt;='"+begindatesql+"'"):""}
+	${has(enddatesql)?(" and precre.creditor_date&lt;='"+enddatesql+"'"):""}
+	GROUP BY precre.project_ID 
+)tab5 ON tab5.project_ID =  pp.project_ID
+
+
+WHERE	pp.busiClass= '01'  
+	${has(begindatesql)?(" and pp.delayBeginDate&gt;='"+begindatesql+"'"):""}
+	${has(enddatesql)?(" and pp.delayBeginDate&lt;='"+enddatesql+"'"):""}
+	${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY cc.fullTradeCode</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">fullTradeCode</IndexFields><TagName>tab_guarantySum</TagName></Item4><Item5><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">fullTradeCode</IndexFields><TagName>index_entrustSum</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab_entrustSum</Name><Sql>SELECT
+	SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0))) AS entrustSum,
+	cc.fullTradeName,
+	cc.fullTradeCode
+FROM pro_project pp
+LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+LEFT JOIN  crm_client cc ON cc.client_ID=pa.client_ID
+LEFT JOIN (
+	SELECT 
+	
+		pfp.project_ID,
+		SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM
+		pro_factpay pfp
+	WHERE 	1=1 
+		${has(begindatesql)?(" and pfp.payDate&gt;='"+begindatesql+"'"):""}
+		${has(enddatesql)?(" and pfp.payDate&lt;='"+enddatesql+"'"):""}
+	GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+
+WHERE	pp.busiClass= '02'  
+	${has(begindatesql)?(" and pp.delayBeginDate&gt;='"+begindatesql+"'"):""}
+	${has(enddatesql)?(" and pp.delayBeginDate&lt;='"+enddatesql+"'"):""}
+	${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY cc.fullTradeCode</Sql><Description>SELECT
+	SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0))) AS entrustSum,
+	cc.fullTradeName,
+	cc.fullTradeCode
+FROM pro_project pp
+LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+LEFT JOIN  crm_client cc ON cc.client_ID=pa.client_ID
+LEFT JOIN (
+	SELECT 
+	
+		pfp.project_ID,
+		SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM
+		pro_factpay pfp
+	WHERE 	1=1 
+		${has(begindatesql)?(" and pfp.payDate&gt;='"+begindatesql+"'"):""}
+		${has(enddatesql)?(" and pfp.payDate&lt;='"+enddatesql+"'"):""}
+	GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+
+WHERE	pp.busiClass= '02'  
+	${has(begindatesql)?(" and pp.delayBeginDate&gt;='"+begindatesql+"'"):""}
+	${has(enddatesql)?(" and pp.delayBeginDate&lt;='"+enddatesql+"'"):""}
+	${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY cc.fullTradeCode</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">fullTradeCode</IndexFields><TagName>tab_entrustSum</TagName></Item5><Item6><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">fullTradeCode</IndexFields><TagName>index_totalSum</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab_totalSum</Name><Sql>SELECT
+	SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)-IFNULL(tab5.creditorsum,0))) AS totalSum,
+	cc.fullTradeName,
+	cc.fullTradeCode
+FROM pro_project pp
+LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+LEFT JOIN  crm_client cc ON cc.client_ID=pa.client_ID
+LEFT JOIN (
+	SELECT 
+		pfp.project_ID,
+		SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM
+		pro_factpay pfp
+	WHERE 	1=1 
+		${has(begindatesql)?(" and pfp.payDate&gt;='"+begindatesql+"'"):""}
+		${has(enddatesql)?(" and pfp.payDate&lt;='"+enddatesql+"'"):""}
+	GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+LEFT JOIN (
+	SELECT 
+		pre.project_ID,        
+		SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum         
+	FROM
+		pro_replace pre
+	WHERE 	1=1   
+		${has(begindatesql)?(" and pre.replaceDate&gt;='"+begindatesql+"'"):""}
+		${has(enddatesql)?(" and pre.replaceDate&lt;='"+enddatesql+"'"):""}
+	GROUP BY pre.project_ID 
+)tab2 ON tab2.project_ID =  pp.project_ID 
+LEFT JOIN (
+	SELECT 
+		precre.project_ID,        
+		SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum          
+	FROM
+		pro_creditor precre
+	WHERE 1=1   
+	${has(begindatesql)?(" and precre.creditor_date&gt;='"+begindatesql+"'"):""}
+	${has(enddatesql)?(" and precre.creditor_date&lt;='"+enddatesql+"'"):""}
+	GROUP BY precre.project_ID 
+)tab5 ON tab5.project_ID =  pp.project_ID
+
+
+WHERE	pp.busiClass IS NOT NULL
+	${has(begindatesql)?(" and pp.delayBeginDate&gt;='"+begindatesql+"'"):""}
+	${has(enddatesql)?(" and pp.delayBeginDate&lt;='"+enddatesql+"'"):""}	
+	${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY cc.fullTradeCode</Sql><Description>SELECT
+	SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)-IFNULL(tab5.creditorsum,0))) AS totalSum,
+	cc.fullTradeName,
+	cc.fullTradeCode
+FROM pro_project pp
+LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+LEFT JOIN  crm_client cc ON cc.client_ID=pa.client_ID
+LEFT JOIN (
+	SELECT 
+		pfp.project_ID,
+		SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM
+		pro_factpay pfp
+	WHERE 	1=1 
+		${has(begindatesql)?(" and pfp.payDate&gt;='"+begindatesql+"'"):""}
+		${has(enddatesql)?(" and pfp.payDate&lt;='"+enddatesql+"'"):""}
+	GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+LEFT JOIN (
+	SELECT 
+		pre.project_ID,        
+		SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum         
+	FROM
+		pro_replace pre
+	WHERE 	1=1   
+		${has(begindatesql)?(" and pre.replaceDate&gt;='"+begindatesql+"'"):""}
+		${has(enddatesql)?(" and pre.replaceDate&lt;='"+enddatesql+"'"):""}
+	GROUP BY pre.project_ID 
+)tab2 ON tab2.project_ID =  pp.project_ID 
+LEFT JOIN (
+	SELECT 
+		precre.project_ID,        
+		SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum          
+	FROM
+		pro_creditor precre
+	WHERE 1=1   
+	${has(begindatesql)?(" and precre.creditor_date&gt;='"+begindatesql+"'"):""}
+	${has(enddatesql)?(" and precre.creditor_date&lt;='"+enddatesql+"'"):""}
+	GROUP BY precre.project_ID 
+)tab5 ON tab5.project_ID =  pp.project_ID
+
+
+WHERE	pp.busiClass IS NOT NULL
+	${has(begindatesql)?(" and pp.delayBeginDate&gt;='"+begindatesql+"'"):""}
+	${has(enddatesql)?(" and pp.delayBeginDate&lt;='"+enddatesql+"'"):""}	
+	${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY cc.fullTradeCode</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">fullTradeCode</IndexFields><TagName>tab_totalSum</TagName></Item6></Children></NodeSource></jatools>

@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.gbpm.db.map.Gbpm_finishTaskMapper">
+	<resultMap type="com.zjm.gbpm.db.model.Gbpm_finishTask" id="finishTaskResultMap">
+		<result column="finishTask_ID" property="finishTask_ID"  />
+		<result column="productInstanceID" property="productInstanceID"  />
+		<result column="runNodeID" property="runNodeID"  />
+		<result column="nodeNames" property="nodeNames"  />
+		<result column="taskMangerID" property="taskMangerID"  />
+		<!-- <result column="taskTypeID" property="taskTypeID"  /> -->
+		<result column="taskCode" property="taskCode"  />
+		<result column="taskName" property="taskName"  />
+		<result column="taskUrl" property="taskUrl"  />
+		<result column="viewTaskUrl" property="viewTaskUrl"  />
+		<result column="taskSort" property="taskSort"  />
+		<result column="operationType" property="operationType"  />
+		<result column="isBeforeTask" property="isBeforeTask"  />
+		<result column="beforeTaskID" property="beforeTaskID"  />
+		<result column="beforeTaskName" property="beforeTaskName"  />
+		<result column="isAfterTask" property="isAfterTask"  />
+		<result column="afterTaskIDList" property="afterTaskIDList"  />
+		<result column="warnMethodIDList" property="warnMethodIDList"  />
+		<result column="warnMethodNameList" property="warnMethodNameList"  />
+		<result column="isStartProcess" property="isStartProcess"  />
+		<result column="operaterTypeID" property="operaterTypeID"  />
+		<result column="operaterTypeName" property="operaterTypeName"  />
+		<result column="operatorID" property="operatorID"  />
+		<result column="" property="operatorName"  />
+		<result column="assignUserID" property="assignUserID"  />
+		<result column="assignUserName" property="assignUserName"  />
+		<result column="assignDateTime" property="assignDateTime"  />
+		<result column="handleUserID" property="handleUserID"  />
+		<result column="handleUserName" property="handleUserName"  />
+		<result column="handleDateTime" property="handleDateTime"  />
+		<result column="entrustUserID" property="entrustUserID"  />
+		<result column="entrustUserName" property="entrustUserName"  />
+		<result column="processID" property="processID"  />
+		<result column="processName" property="processName"  />
+		<result column="taskStatus" property="taskStatus"  />
+		<result column="taskName" property="taskName"  />
+		<result column="taskName" property="taskName"  />
+		<result column="unit_uid" property="unit_uid"  />
+		<result column="unit_uidName" property="unit_uidName"  />
+		<result column="updateUserName" property="updateUserName"  />
+		<result column="updateDateTime" property="updateDateTime"  />
+		
+		<result column="entityID" property="entityID"  />
+		<result column="entityName" property="entityName"  />
+		<result column="productName" property="productName"  />
+		<result column="createUserName" property="createUserName"  />
+		
+	</resultMap>
+	
+	<!-- 查询一条运行中任务--> 
+	<select id="selectOneFinishTaskByWhereSql" parameterType="java.lang.String" resultMap="finishTaskResultMap">
+		SELECT 
+			finishTask_ID,
+		 	productInstanceID,
+		 	runNodeID,
+		 	nodeNames,
+		 	taskMangerID,
+		 	taskCode,
+		 	taskName,
+			taskUrl,
+   			viewTaskUrl,
+		 	taskSort,
+		 	operationType,
+			isBeforeTask,
+			beforeTaskID,
+			beforeTaskName,
+			isAfterTask,
+			afterTaskIDList,
+			warnMethodIDList,
+			warnMethodNameList,
+			isStartProcess,
+			operaterTypeID,
+			operaterTypeName,
+			operatorID,
+			operatorName,
+			assignUserID,
+			assignUserName,
+			assignDateTime,
+			handleUserID,
+			handleUserName,
+			handleDateTime,
+			entrustUserID,
+			entrustUserName,
+			processID,
+			processName,
+			taskStatus,
+			unit_uid,
+			unit_uidName,
+			updateUserName,
+			updateDateTime 
+			
+		FROM gbpm_finishTask
+		WHERE  1=1
+		   ${value}
+		limit 1
+		
+	</select>
+	
+	<!-- 根据wheresql获取节点任务事项-->  
+	<select id="selectFinishNodeTaskTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="finishTaskResultMap">
+	<![CDATA[
+		SELECT 
+			finishTask_ID,
+		 	productInstanceID,
+		 	runNodeID,
+		 	nodeNames,
+		 	taskMangerID,
+		 	taskmanager.taskCode,
+		 	taskmanager.taskName,
+			taskmanager.taskUrl,
+   			taskmanager.viewTaskUrl,
+		 	taskSort,
+		 	operationType,
+			isBeforeTask,
+			beforeTaskID,
+			beforeTaskName,
+			isAfterTask,
+			afterTaskIDList,
+			warnMethodIDList,
+			warnMethodNameList,
+			isStartProcess,
+			operaterTypeID,
+			operaterTypeName,
+			operatorID,
+			operatorName,
+			assignUserID,
+			assignUserName,
+			assignDateTime,
+			handleUserID,
+			handleUserName,
+			handleDateTime,
+			entrustUserID,
+			entrustUserName,
+			processID,
+			processName,
+			taskStatus,
+			taskmanager.unit_uid,
+			taskmanager.unit_uidName,
+			finishTask.updateUserName,
+			taskmanager.updateDateTime,
+			entityID,
+			entityName,
+			productName,
+			createUserName
+			
+		FROM gbpm_finishTask finishTask
+		LEFT JOIN gbpm_dic_taskmanager taskmanager ON taskmanager.taskManager_ID = finishTask.taskMangerID 
+		LEFT JOIN gbpm_productinstance productInstance ON productInstance.productInstance_ID = finishTask.productInstanceID
+		
+		WHERE  1=1 ${wheresql} 
+		order by ${sortName}  ${sortOrder}
+		limit #{pageNumber},#{pageSize}	
+		
+		]]>
+	</select>
+	
+	
+	<!-- 按环节分组获取任务事项-->  
+	<select id="selectFinishTaskGroupTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="finishTaskResultMap">
+	<![CDATA[
+	SELECT 
+			count(finishTask.finishTask_ID) as number,
+		 	max(finishTask.productInstanceID) as productInstanceID,
+		 	runNodeID,
+		 	max(finishTask.nodeNames) as nodeNames,
+		 	max(finishTask.handleDateTime) as handleDateTime,
+		 	max(finishTask.assignDateTime) as assignDateTime,
+		 	max(productInstance.entityID) as entityID,
+		 	max(productInstance.entityName) as entityName,
+		 	max(productInstance.productName) as productName,
+		 	max(productInstance.createUserName) as createUserName
+
+		FROM gbpm_finishTask  finishTask 
+		LEFT JOIN gbpm_productinstance productInstance ON productInstance.productInstance_ID = finishTask.productInstanceID
+		
+		WHERE  1=1 ${wheresql}
+		group by finishTask.runNodeID
+		order by ${sortName}  ${sortOrder}
+		limit #{pageNumber},#{pageSize}	
+		
+		]]>
+	</select>
+	
+	<!-- 按环节分组获取任务事项  总记录数-->
+	<select id="selectFinishTaskGroupTable_count" parameterType="com.zjm.common.db.model.PageTable"  resultType="java.lang.Long">
+		<![CDATA[
+		SELECT 
+			count(DISTINCT finishTask.runNodeID)
+			
+		FROM gbpm_finishTask  finishTask 
+		LEFT JOIN gbpm_productinstance productInstance ON productInstance.productInstance_ID = finishTask.productInstanceID
+		
+		WHERE  1=1 ${wheresql}
+		]]>		 
+	</select>
+	
+	<!-- 插入一条运行中任务 -->
+	<insert id="insertOneFinishTaskInfo" parameterType="com.zjm.gbpm.db.model.Gbpm_finishTask">
+		INSERT INTO gbpm_finishTask(
+			finishTask_ID,
+		 	productInstanceID,
+		 	runNodeID,
+		 	nodeNames,
+		 	taskMangerID,
+		 	taskCode,
+		 	taskName,
+			taskUrl,
+   			viewTaskUrl,
+		 	taskSort,
+		 	operationType,
+			isBeforeTask,
+			beforeTaskID,
+			beforeTaskName,
+			isAfterTask,
+			afterTaskIDList,
+			warnMethodIDList,
+			warnMethodNameList,
+			isStartProcess,
+			operaterTypeID,
+			operaterTypeName,
+			operatorID,
+			operatorName,
+			assignUserID,
+			assignUserName,
+			assignDateTime,
+			handleUserID,
+			handleUserName,
+			handleDateTime,
+			entrustUserID,
+			entrustUserName,
+			processID,
+			processName,
+			taskStatus,
+			unit_uid,
+			unit_uidName,
+			updateUserName,
+			updateDateTime 
+		) VALUES(
+			#{finishTask_ID},
+		 	#{productInstanceID},
+		 	#{runNodeID},
+		 	#{nodeNames},
+		 	#{taskMangerID},
+		 	#{taskCode},
+		 	#{taskName},
+			#{taskUrl},
+			#{viewTaskUrl},
+		 	#{taskSort},
+		 	#{operationType},
+			#{isBeforeTask},
+			#{beforeTaskID},
+			#{beforeTaskName},
+			#{isAfterTask},
+			#{afterTaskIDList},
+			#{warnMethodIDList},
+			#{warnMethodNameList},
+			#{isStartProcess},
+			#{operaterTypeID},
+			#{operaterTypeName},
+			#{operatorID},
+			#{operatorName},
+			#{assignUserID},
+			#{assignUserName},
+			NOW(),
+			#{handleUserID},
+			#{handleUserName},
+			#{handleDateTime},
+			#{entrustUserID},
+			#{entrustUserName},
+			#{processID},
+			#{processName},
+			#{taskStatus},
+			#{unit_uid},
+			#{unit_uidName},
+			#{updateUserName},
+			NOW()
+		)
+	</insert>
+	
+	<!-- 查询节点id获取节点任务事项列表  总记录数-->
+	<select id="selectfinishNodeTaskTable_count" parameterType="com.zjm.common.db.model.PageTable"  resultType="java.lang.Long">
+		<![CDATA[
+		SELECT count(finishTask_ID) FROM gbpm_finishTask finishTask
+		LEFT JOIN gbpm_dic_taskmanager taskmanager ON taskmanager.taskManager_ID = finishTask.taskMangerID 
+		LEFT JOIN gbpm_productinstance productInstance ON productInstance.productInstance_ID = finishTask.productInstanceID
+		WHERE 1=1 ${wheresql} 		
+		]]>		 
+	</select>
+	
+	<!--修改已完成任务任务-->
+	<update id="updateOneFinishTaskInfo" parameterType="com.zjm.gbpm.db.model.Gbpm_finishTask">
+	 <![CDATA[
+		UPDATE gbpm_finishTask
+		SET
+		 	productInstanceID= #{productInstanceID},
+		 	runNodeID= #{runNodeID},
+		 	nodeNames= #{nodeNames},
+		 	taskMangerID= #{taskMangerID},
+		 	taskCode= #{taskCode},
+		 	taskName= #{taskName},
+			taskUrl= #{taskUrl},
+   			viewTaskUrl= #{viewTaskUrl},
+		 	taskSort= #{taskSort},
+		 	operationType= #{operationType},
+			isBeforeTask= #{isBeforeTask},
+			beforeTaskID= #{beforeTaskID},
+			beforeTaskName= #{beforeTaskName},
+			isAfterTask= #{isAfterTask},
+			afterTaskIDList= #{afterTaskIDList},
+			warnMethodIDList= #{warnMethodIDList},
+			warnMethodNameList= #{warnMethodNameList},
+			isStartProcess= #{isStartProcess},
+			operaterTypeID= #{operaterTypeID},
+			operaterTypeName= #{operaterTypeName},
+			operatorID= #{operatorID},
+			operatorName= #{operatorName},
+			assignUserID= #{assignUserID},
+			assignUserName= #{assignUserName},
+			handleUserID= #{handleUserID},
+			handleUserName= #{handleUserName},
+			handleDateTime= #{handleDateTime},
+			entrustUserID= #{entrustUserID},
+			entrustUserName= #{entrustUserName},
+			processID= #{processID},
+			processName= #{processName},
+			taskStatus= #{taskStatus},
+			unit_uid= #{unit_uid},
+			unit_uidName= #{unit_uidName},
+			updateUserName= #{updateUserName},
+			updateDateTime= NOW() 
+		
+		WHERE finishTask_ID = #{finishTask_ID}
+		]]>		
+	</update>
+
+	<!-- 查询运行中任务事项List-->  
+	<select id="selectFinishTaskListByWhereSql" parameterType="java.lang.String" resultMap="finishTaskResultMap">
+		SELECT 
+			finishTask_ID,
+		 	productInstanceID,
+		 	runNodeID,
+		 	nodeNames,
+		 	taskMangerID,
+		 	taskCode,
+		 	taskName,
+			taskUrl,
+   			viewTaskUrl,
+		 	taskSort,
+		 	operationType,
+			isBeforeTask,
+			beforeTaskID,
+			beforeTaskName,
+			isAfterTask,
+			afterTaskIDList,
+			warnMethodIDList,
+			warnMethodNameList,
+			isStartProcess,
+			operaterTypeID,
+			operaterTypeName,
+			operatorID,
+			operatorName,
+			assignUserID,
+			assignUserName,
+			assignDateTime,
+			handleUserID,
+			handleUserName,
+			handleDateTime,
+			entrustUserID,
+			entrustUserName,
+			processID,
+			processName,
+			taskStatus,
+			unit_uid,
+			unit_uidName,
+			updateUserName,
+			updateDateTime 
+			
+		FROM gbpm_finishTask
+		WHERE  1=1
+		   ${value}
+		
+	</select>
+	<delete id="deleteFinishTaskByWheresql" parameterType="java.lang.String">
+		<![CDATA[
+			delete from gbpm_finishTask
+			where 1=1 ${value}
+		]]>
+	</delete>
+	
+</mapper>

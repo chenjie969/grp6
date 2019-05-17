@@ -1,0 +1,18 @@
+列表编号              列表名称	                               可选列字段																 可选列名称
+  001                企业客户	 	fullAreaName,fullTradeName,createDate,contactOne,phoneOne,employeeSum,   	所属区域,所属行业,成立日期,联系人,联系方式,员工人数,
+  					 unit_uidName,fullDepartName,createUserName,createDateTime						机构名称,创建部门,创建人,创建日期
+  					 
+  002               个人客户（经营性）	clientName,personNum,sex,position,domicile,phone,unit_uidName,			企业名称,身份证号码,性别,职位,户口所在地,联系方式,
+  							fullDepartName,createUserName,createDateTime							机构名称,创建部门,创建人,创建时间
+  	
+  003               个人客户（消费性）	personNum,sex,position,domicile,phone,unit_uidName,						企业名称,身份证号码,性别,职位,户口所在地,联系方式,
+  							fullDepartName,createUserName,createDateTime							机构名称,创建部门,创建人,创建时间
+
+  004                企业咨询登记          	busiTypeName,applySum,periodMonthDay,cooperationName,clientSourceName,	业务品种,申请金额（万元）,申请期限,合作机构,客户来源,
+  						contact,phone,receiveDate,receiveDeapartName,receiveUserName				联系人,手机,接待日期,接待部门,接待人  
+  						
+  005                个人咨询登记          	certificateCode，busiTypeName,applySum,periodMonthDay,cooperationName,	身份证号码,业务品种,申请金额（万元）,申请期限,合作机构,
+  						clientSourceName,phone,receiveDate,receiveDeapartName,receiveUserName		客户来源,手机,接待日期,接待部门,接待人    				
+  006                申请登记			busiTypeName,applySum,periodMonthDay,bankName,departName,               业务品种名称,申请金额,申请期限.月天,
+    							createManName,createDate											合作机构名称,部门名称,创建人名称,登记日期 
+                              		

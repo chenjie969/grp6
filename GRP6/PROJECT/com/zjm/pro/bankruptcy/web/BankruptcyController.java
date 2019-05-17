@@ -1,0 +1,113 @@
+package com.zjm.pro.bankruptcy.web;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.zjm.common.db.model.AjaxRes;
+import com.zjm.common.db.model.PageTable;
+import com.zjm.pro.bankruptcy.service.BankruptcyService;
+import com.zjm.pro.db.model.Pro_bankruptcy;
+import com.zjm.sys.db.model.C_dictype;
+import com.zjm.sys.dicType.service.DicTypeService;
+import com.zjm.util.CustomDispatchServlet;
+import com.zjm.util.SystemSession;
+
+@Controller
+@RequestMapping(value = "/project/bankruptcy")
+public class BankruptcyController {
+	
+	@Resource
+	private BankruptcyService bankruptcyService;
+	@Resource
+	private DicTypeService dicTypeService;
+	
+	/**
+	 * 打开破产登记页面
+	 * @return
+	 */
+	@RequestMapping(value="/openBankruptcyPage")
+	public ModelAndView openBankruptcyPage(String bankruptcyId){
+		ModelAndView mv = CustomDispatchServlet.getModeAndView();
+		if (bankruptcyId != null && !"".equals(bankruptcyId)) {
+			Pro_bankruptcy bankruptcy = bankruptcyService.findByPrimary(bankruptcyId);
+			mv.getModelMap().put("bankruptcy", bankruptcy);
+		}
+		//执行依据种类
+		List<C_dictype> executionBasisTypeList = dicTypeService.selectAllDicTypeList(" and dicTypePID='d8d61af21d0b4e86946f050db5b8950e'");
+		mv.getModelMap().put("executionBasisTypeList",executionBasisTypeList);
+		//单位名称
+		List<C_dictype> guarantyOrgList = dicTypeService.selectAllDicTypeList(" and dicTypePID='78ae83f6524d458dbbd522324c80723d'");
+		mv.getModelMap().put("guarantyOrgList",guarantyOrgList);
+//		mv.setViewName("/project/lawBankruptcy/bankruptcy");
+		//破产程序类型
+		List<C_dictype> bankruptcyTypeList = dicTypeService.selectAllDicTypeList(" and dicTypePID='a28e752c652a40b99a9008aa721c01a7'");
+		mv.getModelMap().put("bankruptcyTypeList",bankruptcyTypeList);
+		mv.setViewName("/project/lawBankruptcy/bankruptcy");
+		
+		
+		return mv;
+	}
+	
+	/**
+	 * 新增或修改破产记录
+	 * @param bankruptcy
+	 * @return
+	 */
+	@RequestMapping(value="/insertOrUpdateBankruptcy", method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes insertOrUpdateBankruptcy(@RequestBody Pro_bankruptcy bankruptcy){
+		AjaxRes ar=new AjaxRes();
+		if (bankruptcy.getBankruptcyId() != null && !"".equals(bankruptcy.getBankruptcyId())) {
+			ar.setSucceed(bankruptcyService.update(SystemSession.getUserSession(), bankruptcy));
+		} else {
+			ar.setSucceed(bankruptcyService.save(SystemSession.getUserSession(), bankruptcy));
+		}
+		return ar;
+	}
+	
+	/**
+	 * 查询破产记录列表
+	 * 
+	 * @param pageTable
+	 * @return
+	 */
+	@RequestMapping(value = "/selectBankruptcyPageTables")
+	@ResponseBody
+	public AjaxRes selectBankruptcyPageTables(@RequestBody PageTable<Pro_bankruptcy> pageTable){
+		AjaxRes ar =new AjaxRes();
+		String queryCondition = queryCondition(pageTable);
+		pageTable.setWheresql(queryCondition);
+		pageTable = bankruptcyService.selectBankruptcyPageTables(pageTable);
+		ar.setSucceed(pageTable);
+		return ar;
+	}
+	
+	
+	private String queryCondition(PageTable<Pro_bankruptcy> pageTable){
+		StringBuffer sb=new StringBuffer();
+		if (pageTable.getWheresql() != null) {
+			sb.append(pageTable.getWheresql());
+		}
+		
+		if (pageTable.getSearchText() != null && !"".equals(pageTable.getSearchText())) {
+			sb.append(" and ( ");
+			sb.append(" plaintiff like \'%"+pageTable.getSearchText()+"%\'");
+			sb.append(" or defendant like \'%"+pageTable.getSearchText()+"%\'");
+			sb.append(" or project_name_list like \'%"+pageTable.getSearchText()+"%\'");
+			sb.append(" or `group` like \'%"+pageTable.getSearchText()+"%\'");
+			sb.append(" ) ");
+		}
+		
+		
+		return sb.toString();
+	}
+
+}

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.gbpm.db.map.Act_re_actSortMapper">
+
+	<!-- 流程分类表信息 -->
+	<resultMap type="com.zjm.gbpm.db.model.Act_re_actSort" id="ActSortResultMap">
+		<result property="actSortID" column="actSortID" />
+		<result property="pactSortID" column="pactSortID" />
+		<result property="actSortFullCode" column="actSortFullCode" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="actSortName" column="actSortName" />
+		<result property="order_id" column="order_id" />
+		<result property="remark" column="remark" />
+		<result property="isOpen" column="isOpen" />
+		<result property="createdatetime" column="createdatetime" />
+		<result property="create_user" column="create_user" />
+		<result property="updatedatetime" column="updatedatetime" />
+		<result property="update_user" column="update_user" />
+	</resultMap>
+	
+	
+	<!-- 查询  流程分类列表 -->
+	<select id="selectActSortPageTables" resultMap="ActSortResultMap" parameterType="com.zjm.common.db.model.PageTable">
+		<![CDATA[
+		SELECT e.actSortID,e.pactSortID,e.actSortFullCode,e.unit_uid,e.actSortName,e.order_id,e.remark,e.createdatetime,e.create_user,e.updatedatetime,e.update_user FROM act_re_actsort e
+		WHERE 1=1 ${wheresql} limit #{pageNumber},#{pageSize}	
+		]]>
+	</select>
+	
+	<!-- 查询 流程分类列表 总记录数-->
+	<select id="selectActSortPageTables_Count" parameterType="com.zjm.common.db.model.PageTable"  resultType="java.lang.Long">
+		<![CDATA[
+		SELECT count(actSortID) FROM act_re_actsort e
+		WHERE 1=1 ${wheresql} 		
+		]]>		 
+	</select>
+	
+	
+	<!-- 插入一个流程分类信息 -->
+	<insert id="insertOneActSortInfo"	parameterType="com.zjm.gbpm.db.model.Act_re_actSort">
+		<![CDATA[
+		INSERT INTO act_re_actsort (
+		actSortID,
+		pactSortID,
+		actSortFullCode,
+		unit_uid,
+		actSortName,
+		order_id,
+		remark,
+		isOpen,
+		createdatetime,
+		create_user,
+		updatedatetime,
+		update_user
+		)
+		VALUES
+		(
+		#{actSortID},
+		#{pactSortID},
+		#{actSortFullCode},
+		#{unit_uid},
+		#{actSortName},
+		#{order_id},
+		#{remark},
+		#{isOpen},
+		NOW(),
+		#{create_user},
+		NOW(),
+		#{update_user}
+		) ;
+		]]>
+	</insert>
+	<!-- 查询一个流程分类信息-->
+	<select id="selectOneActSortInfo" parameterType="com.zjm.gbpm.db.model.Act_re_actSort"  resultMap="ActSortResultMap">
+	<![CDATA[
+		SELECT actSortID,pactSortID,actSortFullCode,unit_uid,actSortName,remark,isOpen FROM act_re_actsort 
+		WHERE actSortID=#{actSortID}  and unit_uid=#{unit_uid}
+		]]> 				 
+	</select>
+	<!-- 判断流程分类名称是否重复-->
+	<select id="selectActSortNameIsExist" parameterType="java.lang.String"  resultType="java.lang.Integer">
+	<![CDATA[
+		SELECT count(actSortID) FROM act_re_actsort 
+		WHERE 1=1 ${value} 		
+		]]>		 
+	</select>
+	<!-- 更新一个流程分类信息 -->	
+	<update id="updateOneActSortInfo" parameterType="com.zjm.gbpm.db.model.Act_re_actSort">
+		<![CDATA[
+		UPDATE 
+		  act_re_actsort
+		SET
+		  actSortName = #{actSortName},
+		  remark = #{remark},
+		  isOpen = #{isOpen},
+		  updatedatetime = NOW(),
+		  update_user = #{update_user}
+		WHERE actSortID=#{actSortID}  and unit_uid=#{unit_uid} 
+		  ]]>
+	</update>
+	
+	<!-- 删除一个流程分类信息 -->
+	<delete id="delectOneActSortInfo" parameterType="com.zjm.gbpm.db.model.Act_re_actSort">
+		<![CDATA[DELETE FROM act_re_actsort WHERE actSortID=#{actSortID}  and unit_uid=#{unit_uid}  ]]>
+	</delete>
+	<!-- 查询流程分类List-->
+	<select id="selectActSortList" parameterType="java.lang.String"  resultMap="ActSortResultMap">
+	<![CDATA[
+		SELECT actSortID,pactSortID,actSortFullCode,unit_uid,actSortName,isOpen FROM act_re_actsort 
+		WHERE 1=1 ${value} 	ORDER BY order_id
+		]]>
+	</select>
+</mapper>  

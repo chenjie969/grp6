@@ -1,0 +1,82 @@
+alter table pro_projectlawsuit CHANGE project_ID assetSealUp_ID varchar(32);
+
+alter table `pro_assetsealup` add `projectIDList` varchar(255) DEFAULT NULL COMMENT '关联项目id';
+alter table `pro_assetsealup` add `projectNameList` varchar(255) NOT NULL COMMENT '关联项目名称';
+alter table `pro_assetsealup` add `group` varchar(125) NOT NULL COMMENT '涉及公司名称';
+alter table `pro_assetsealup` add `assetSealUpType` varchar(125) NOT NULL COMMENT '查封类型 01 作为申请人 02作为被执行人';
+alter table `pro_projectlawsuit` add `assetSealUpName` varchar(125) NOT NULL COMMENT '关联查封信息案号';
+
+-- 破产记录表
+CREATE TABLE `pro_bankruptcy` (
+  `bankruptcy_id` varchar(32) NOT NULL COMMENT '破产记录id',
+  `project_id` varchar(32) NOT NULL COMMENT '项目id',
+  `if_working_group` tinyint(1) DEFAULT '0' COMMENT '是否工作组 1是  0否',
+  `execution_basis_type` varchar(11) DEFAULT NULL COMMENT '执行依据种类   裁决书 公证书 判决书',
+  `execution_basis_num` varchar(30) DEFAULT NULL COMMENT '执行依据编号',
+  `group` varchar(125) DEFAULT NULL COMMENT '涉及集团及所属公司',
+  `plaintiff` varchar(100) DEFAULT NULL COMMENT '原告（申请人）',
+  `defendant` varchar(100) DEFAULT NULL COMMENT '被告（被执行人）',
+  `lawsuit_sum` decimal(18,6) DEFAULT NULL COMMENT '涉诉金额',
+  `lawsuit_date` date DEFAULT NULL COMMENT '起诉时间',
+  `province` varchar(11) DEFAULT NULL COMMENT '管辖法院所属区域 0省内  1省外',
+  `law_court` varchar(200) DEFAULT NULL COMMENT '管辖法院名称',
+  `record_num` varchar(50) DEFAULT NULL COMMENT '案号',
+  `undertake_judge` varchar(32) DEFAULT NULL COMMENT '承办法官',
+  `first_seal` text COMMENT '财产查控情况(首封)',
+  `waiting` text COMMENT '财产查控情况(轮候)',
+  `remark` text COMMENT '备注',
+  `fund_deduction` varchar(255) DEFAULT NULL COMMENT '资金扣划情况',
+  `bankruptcy_type` varchar(10) DEFAULT NULL COMMENT '破产程序类型',
+  `is_claims_declarate`  tinyint(1) DEFAULT NULL COMMENT '是否申报债权', 
+  `obligor_type` varchar(10) DEFAULT NULL COMMENT '破产登记类型 01作为破产债权人 02作为破产连带债务人',
+  `project_id_list` varchar(255) DEFAULT NULL COMMENT '关联项目id',
+  `project_name_list` varchar(255) NOT NULL COMMENT '关联项目名称',
+  `law_suit_id` varchar(32) DEFAULT NULL COMMENT '关联诉讼id',
+  `law_suit_name` varchar(32) DEFAULT NULL COMMENT '关联诉讼名称（案号）',
+  `asset_seal_id` varchar(32) DEFAULT NULL COMMENT '关联查封id',
+  `asset_seal_name` varchar(32) DEFAULT NULL COMMENT '关联查封名称（案号）',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+   PRIMARY KEY (`bankruptcy_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='破产记录表';
+
+-- 案件执行记录表
+CREATE TABLE `pro_executecase` (
+  `executecase_id` varchar(32) NOT NULL COMMENT '案件执行id',
+  `if_working_group` tinyint(1) DEFAULT '0' COMMENT '是否工作组 1是  0否',
+  `execution_basis_type` varchar(11) DEFAULT NULL COMMENT '执行依据种类   裁决书 公证书 判决书',
+  `execution_basis_num` varchar(30) DEFAULT NULL COMMENT '执行依据编号',
+  `group` varchar(125) DEFAULT NULL COMMENT '涉及集团及所属公司',
+  `plaintiff` varchar(100) DEFAULT NULL COMMENT '原告（申请人）',
+  `defendant` varchar(100) DEFAULT NULL COMMENT '被告（被执行人）',
+  `project_id_list` varchar(255) DEFAULT NULL COMMENT '关联项目id',
+  `project_name_list` varchar(255) NOT NULL COMMENT '关联项目名称',
+  `lawsuit_sum` decimal(18,6) DEFAULT NULL COMMENT '涉诉金额',
+  `lawsuit_date` date DEFAULT NULL COMMENT '起诉时间',
+  `province` varchar(11) DEFAULT NULL COMMENT '管辖法院所属区域 0省内  1省外',
+  `law_court` varchar(200) DEFAULT NULL COMMENT '管辖法院名称',
+  `record_num` varchar(50) DEFAULT NULL COMMENT '案号',
+  `undertake_judge` varchar(32) DEFAULT NULL COMMENT '承办法官',
+  `first_seal` text COMMENT '财产查控情况(首封)',
+  `waiting` text COMMENT '财产查控情况(轮候)',
+  `remark` text COMMENT '备注',
+  `fund_deduction` varchar(255) DEFAULT NULL COMMENT '资金扣划情况',
+  `judge_result` varchar(255) DEFAULT NULL COMMENT '判决结果',
+  `executecase_type` varchar(10) DEFAULT NULL COMMENT '执行案件类型 01作为申请执行人 02作为被执行人',
+  `law_suit_id` varchar(32) DEFAULT NULL COMMENT '关联诉讼id',
+  `law_suit_name` varchar(32) DEFAULT NULL COMMENT '关联诉讼名称（案号）',
+  `asset_seal_id` varchar(32) DEFAULT NULL COMMENT '关联查封id',
+  `asset_seal_name` varchar(32) DEFAULT NULL COMMENT '关联查封名称（案号）',
+   PRIMARY KEY (`executecase_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='案件执行记录表';
+
+INSERT INTO `c_dictype` (`dicTypeID`, `unit_uid`, `dicTypePID`, `dicTypeName`, `order_id`, `isEable`, `isDefault`, `unificationID`, `remark`, `createdatetime`, `create_user`, `updatedatetime`, `update_user`) VALUES ('069ac36a24c649c7b4307762d69cbed6', 'cbeb758e3d824626a31aabb2a9587b0a', 'a28e752c652a40b99a9008aa721c01a7', '和解', '1', '0', '0', NULL, '', '2018-07-24 16:08:05', '管理员', '2018-07-24 16:08:05', '管理员');
+INSERT INTO `c_dictype` (`dicTypeID`, `unit_uid`, `dicTypePID`, `dicTypeName`, `order_id`, `isEable`, `isDefault`, `unificationID`, `remark`, `createdatetime`, `create_user`, `updatedatetime`, `update_user`) VALUES ('5d5b04b5476d40f3836074a8c76976d3', 'cbeb758e3d824626a31aabb2a9587b0a', 'a28e752c652a40b99a9008aa721c01a7', '重整', '2', '0', '0', NULL, '', '2018-07-24 16:08:10', '管理员', '2018-07-24 16:08:10', '管理员');
+INSERT INTO `c_dictype` (`dicTypeID`, `unit_uid`, `dicTypePID`, `dicTypeName`, `order_id`, `isEable`, `isDefault`, `unificationID`, `remark`, `createdatetime`, `create_user`, `updatedatetime`, `update_user`) VALUES ('91bca5341ff2458fa61b24da011f92c0', 'cbeb758e3d824626a31aabb2a9587b0a', 'a28e752c652a40b99a9008aa721c01a7', '清算', '0', '0', '0', NULL, '', '2018-07-24 16:07:54', '管理员', '2018-07-24 16:07:54', '管理员');
+INSERT INTO `c_dictype` (`dicTypeID`, `unit_uid`, `dicTypePID`, `dicTypeName`, `order_id`, `isEable`, `isDefault`, `unificationID`, `remark`, `createdatetime`, `create_user`, `updatedatetime`, `update_user`) VALUES ('a28e752c652a40b99a9008aa721c01a7', 'cbeb758e3d824626a31aabb2a9587b0a', '109db432755c4f7ba0610be16df3bea7', '破产程序类型', '73', '0', '0', NULL, '', '2018-07-24 16:07:45', '管理员', '2018-07-24 16:07:45', '管理员');
+
+--  法务相关菜单
+INSERT INTO `sys_modules` (`mod_uid`, `unit_uid`, `pmod_id`, `mod_name`, `url`, `title`, `iframe`, `icon`, `iconopen`, `isopen`, `isReload`, `order_id`, `mod_type`, `createdatetime`, `create_user`, `updatedatetime`, `update_user`) VALUES ('3bf8341130dc41bdb21e4bcb07dd084d', 'cbeb758e3d824626a31aabb2a9587b0a', '5afe4feb86e1488b9794c64f5afbe192', '法务跟踪', '#', '', '', '', '', NULL, '0', '5', '1', '2018-07-19 10:10:10', '1', '2018-07-19 17:43:42', '1');
+INSERT INTO `sys_modules` (`mod_uid`, `unit_uid`, `pmod_id`, `mod_name`, `url`, `title`, `iframe`, `icon`, `iconopen`, `isopen`, `isReload`, `order_id`, `mod_type`, `createdatetime`, `create_user`, `updatedatetime`, `update_user`) VALUES ('4ea95a24c70148d28ae72a7b22408353', 'cbeb758e3d824626a31aabb2a9587b0a', '3bf8341130dc41bdb21e4bcb07dd084d', '诉讼登记', '/project/lawsuit/projectLawTracking.jsp', '', '', '', '', NULL, '0', '0', '1', '2018-07-19 17:41:45', '1', '2018-07-23 14:04:38', '1');
+INSERT INTO `sys_modules` (`mod_uid`, `unit_uid`, `pmod_id`, `mod_name`, `url`, `title`, `iframe`, `icon`, `iconopen`, `isopen`, `isReload`, `order_id`, `mod_type`, `createdatetime`, `create_user`, `updatedatetime`, `update_user`) VALUES ('af9113d26ef4496cba98921adcd16619', 'cbeb758e3d824626a31aabb2a9587b0a', '3bf8341130dc41bdb21e4bcb07dd084d', '项目破产', '/project/lawBankruptcy/bankruptcyTable.jsp', '', '', '', '', NULL, '0', '3', '1', '2018-07-19 17:43:02', '1', '2018-07-23 15:14:09', '1');
+INSERT INTO `sys_modules` (`mod_uid`, `unit_uid`, `pmod_id`, `mod_name`, `url`, `title`, `iframe`, `icon`, `iconopen`, `isopen`, `isReload`, `order_id`, `mod_type`, `createdatetime`, `create_user`, `updatedatetime`, `update_user`) VALUES ('d17bed0016e94e7b9114a9f7ea075c55', 'cbeb758e3d824626a31aabb2a9587b0a', '3bf8341130dc41bdb21e4bcb07dd084d', '资产查封', '/project/lawAssetSealUp/assetSealUpTable.jsp', '', '', '', '', NULL, '0', '1', '1', '2018-07-19 17:42:35', '1', '2018-07-23 12:00:14', '1');
+INSERT INTO `sys_modules` (`mod_uid`, `unit_uid`, `pmod_id`, `mod_name`, `url`, `title`, `iframe`, `icon`, `iconopen`, `isopen`, `isReload`, `order_id`, `mod_type`, `createdatetime`, `create_user`, `updatedatetime`, `update_user`) VALUES ('e44a9b91fcd3474097d7dd4580163c68', 'cbeb758e3d824626a31aabb2a9587b0a', '3bf8341130dc41bdb21e4bcb07dd084d', '案件执行', '/project/lawExecutecase/executecaseTable.jsp', '', '', '', '', NULL, '0', '2', '1', '2018-07-19 17:42:48', '1', '2018-07-23 18:25:49', '1');

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.crm.db.map.Crm_client_relationMainMapper">
+	<!-- 关联企业表信息 -->
+	<resultMap type="com.zjm.crm.db.model.Crm_client_relationMain" id="client_relationMain_map">
+		<result property="relationMain_ID" column="relationMain_ID" />
+		<result property="client_ID" column="client_ID" />
+		<result property="clientName" column="clientName"/>
+		<result property="relationDesc" column="relationDesc" />
+		<result property="updateUserName" column="updateUserName" />
+		<result property="updateDateTime" column="updateDateTime" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="unit_uidName" column="unit_uidName" />
+	</resultMap>
+	
+	<!-- 根据主体ID查询旗下所有的关联企业 -->
+	<select id="selectClientByRelationMain_ID" parameterType="string" resultMap="client_relationMain_map">
+		<![CDATA[
+		SELECT
+			relationMain_ID,
+			client_ID,
+			clientName,
+			relationDesc,
+			updateUserName,
+			updateDateTime,
+			unit_uid
+		FROM crm_client_relationMain
+		WHERE  
+			   relationMain_ID=#{value}]]>
+	</select>
+	
+	<!-- 删除主体时同步删除crm_client_relationmain中的数据 -->
+	<delete id="deleteRelationByID" parameterType="com.zjm.crm.db.model.Crm_relationMain">
+		DELETE FROM crm_client_relationmain WHERE unit_uid=#{unit_uid} AND relationMain_ID IN
+		 <foreach collection="relationMainIDs" item="relationMainID" index="index" open="(" close=")" separator=",">
+             #{relationMainID}
+         </foreach>
+	</delete>
+	
+	<!-- 插入一个关联关系 -->
+	<insert id="insertOneClient_relationMain" parameterType="com.zjm.crm.db.model.Crm_client_relationMain">
+		INSERT INTO crm_client_relationmain(
+			client_ID, 
+			relationMain_ID, 
+			clientName, 
+			relationDesc, 
+			updateUserName, 
+			updateDateTime,
+			unit_uid,
+			unit_uidName
+		) 
+		VALUES (
+			#{client_ID},
+			#{relationMain_ID},
+			#{clientName},
+			#{relationDesc},
+			#{updateUserName},
+			NOW(),
+			#{unit_uid},
+			#{unit_uidName}
+		)
+	</insert>
+	
+	<delete id="deleteRelationByClient_ID" >
+		delete from crm_client_relationmain
+		where client_ID =#{client_ID}
+	</delete>
+	
+	<select id="selectByClientName" parameterType="string" resultMap="client_relationMain_map">
+		<![CDATA[
+		SELECT
+			relationMain_ID,
+			client_ID,
+			clientName,
+			relationDesc,
+			updateUserName,
+			updateDateTime,
+			unit_uid
+		FROM crm_client_relationMain
+		WHERE  
+			   clientName like '%${clientName}%'  ]]>
+	</select>
+	
+</mapper>  

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.crm.db.map.Crm_materialModelMapper">
+	
+	<!-- 客户资料模板表-->
+	<resultMap type="com.zjm.crm.db.model.Crm_materialModel" id="MaterialModelMap">
+		<id property="materialModel_ID" column="materialModel_ID" />
+		<result property="materialModelName" column="materialModelName" />
+		<result property="busiTypeIDList" column="busiTypeIDList" />
+		<result property="busiTypeNameList" column="busiTypeNameList" />
+		<result property="clientTypeID" column="clientTypeID" />
+		<result property="clientTypeName" column="clientTypeName" />
+		<result property="versionNumber" column="versionNumber" />
+		<result property="status" column="status" />
+		<result property="remark" column="remark" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="unit_uidName" column="unit_uidName" />
+		<result property="updateUserName" column="updateUserName" />
+		<result property="updateDateTime" column="updateDateTime" />
+	</resultMap>
+
+		
+	<!-- 查看一条客户资料模板记录  -->
+	<select id="selectOneMaterialModel" parameterType="java.lang.String"  resultMap="MaterialModelMap">
+	<![CDATA[
+		SELECT 
+	        materialModel_ID,
+			materialModelName,
+			busiTypeIDList,
+			busiTypeNameList,
+			clientTypeID,
+			clientTypeName,
+			versionNumber,
+			status,
+			remark,
+			unit_uid,
+			unit_uidName,
+			updateUserName,
+			updateDateTime
+		       
+	    FROM 
+	         crm_materialModel 
+		WHERE 1=1 ${value}
+		order   by versionNumber desc
+		limit 1 
+		]]> 				 
+	</select>
+	<!-- 新增 一条 客户资料模板记录-->
+	<insert id="insertOneMaterialModel"	parameterType="com.zjm.crm.db.model.Crm_materialModel">
+		<![CDATA[
+		INSERT INTO crm_materialModel (
+		        materialModel_ID,
+				materialModelName,
+				busiTypeIDList,
+				busiTypeNameList,
+				clientTypeID,
+				clientTypeName,
+				versionNumber,
+				status,
+				remark,
+				unit_uid,
+				unit_uidName,
+				updateUserName,
+				updateDateTime
+		)
+		VALUES
+		(
+			#{materialModel_ID},
+			#{materialModelName},
+			#{busiTypeIDList},
+			#{busiTypeNameList},
+			#{clientTypeID},
+			#{clientTypeName},
+			#{versionNumber},
+			#{status},
+			#{remark},
+			#{unit_uid},
+			#{unit_uidName},
+			#{updateUserName},
+			NOW()
+		
+		) ;
+		]]>
+	</insert>
+	
+	<!-- 判断客户资料清单名称是否存在 ，如果有materialModel_ID，说明是更新数据，要排除与自身的productName比较-->
+	<select id="isExistMaterialModelName" parameterType="com.zjm.crm.db.model.Crm_materialModel" resultType="java.lang.Integer">
+		<![CDATA[
+			SELECT 
+				COUNT(1) 
+			FROM 
+				crm_materialModel 
+			WHERE 
+				unit_uid = #{unit_uid} 
+			AND materialModelName = #{materialModelName}
+			AND versionNumber = #{versionNumber}
+		]]>
+			<if test="materialModel_ID != null">
+				AND materialModel_ID != #{materialModel_ID}
+			</if>
+	</select>
+		
+	<!-- 查询  客户资料清单列表 -->
+	<select id="selectMaterialModelPageTable" resultMap="MaterialModelMap" parameterType="com.zjm.common.db.model.PageTable">
+		<![CDATA[
+		SELECT
+				materialModel_ID,
+				materialModelName,
+				busiTypeIDList,
+				busiTypeNameList,
+				clientTypeID,
+				clientTypeName,
+				versionNumber,
+				status,
+				remark,
+				unit_uid,
+				unit_uidName,
+				updateUserName,
+				updateDateTime     
+		   FROM
+		   crm_materialModel		   
+		WHERE 1=1 ${wheresql} 
+		ORDER BY ${sortName} ${sortOrder}
+		limit #{pageNumber},#{pageSize}	
+		]]>
+	</select>
+	
+	<!-- 查询 客户资料清单列表 总记录数-->
+	<select id="selectMaterialModelPageTable_Count" parameterType="com.zjm.common.db.model.PageTable"  resultType="java.lang.Long">
+		<![CDATA[
+		SELECT count(materialModel_ID) FROM crm_materialModel
+		WHERE 1=1 ${wheresql} 		
+		]]>		 
+	</select>
+	<!-- 更新一个客户资料清单列表 信息  -->	
+	<update id="updateOneMaterialModel" parameterType="com.zjm.crm.db.model.Crm_materialModel">
+		UPDATE 
+		     crm_materialModel
+		<set >
+				 <if test="materialModelName != null" >materialModelName = #{materialModelName},</if>
+				 <if test="busiTypeIDList != null" >busiTypeIDList = #{busiTypeIDList},</if>
+				 <if test="busiTypeNameList != null" >busiTypeNameList = #{busiTypeNameList},</if>
+				 <if test="clientTypeID != null" >clientTypeID = #{clientTypeID},</if>
+				 <if test="clientTypeName != null" >clientTypeName = #{clientTypeName},</if>
+				 <if test="versionNumber != null" >versionNumber = #{versionNumber},</if>
+				 <if test="status != null" >status = #{status},</if>
+				 <if test="remark != null" >remark = #{remark},</if>
+				 <if test="unit_uid != null" >unit_uid = #{unit_uid},</if>
+				 <if test="unit_uidName != null" >unit_uidName = #{unit_uidName},</if>
+				 <if test="updateUserName != null" >updateUserName = #{updateUserName},</if>
+				 updateDateTime = NOW()
+			</set>
+		WHERE materialModel_ID=#{materialModel_ID} 
+	</update>
+	
+	
+	
+	
+</mapper>

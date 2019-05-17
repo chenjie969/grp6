@@ -1,0 +1,193 @@
+@CHARSET "UTF-8";
+body{
+	margin: 0px;
+	padding: 0px !important;
+	overflow: scroll;
+}
+/* 条件统计列表 */
+.countIf{
+    width: 100%;
+     margin: 0;
+    padding: 0;
+}
+.countIf-item{
+    height: 35px;
+    line-height: 35px;
+    list-style: none outside none;
+    margin-left: 1%;
+    margin-top: 2px;
+    width: 98%;
+}
+.countIf-item-t{
+    display: block;
+    float: left;
+    text-align: right;
+    width: 30%;
+}
+.countIf-item-c{
+	display: block;
+    float: left;
+    text-align: center;
+    width: 50%;
+}
+.date_input_s {
+    background: url("icondate.png") no-repeat scroll 102px 6px rgba(0, 0, 0, 0);
+    border: 1px solid rgb(216, 216, 216);
+    border-radius: 3px;
+    height: 28px;
+    line-height: 28px;
+    margin: 2px 0;
+    padding: 0 10px;
+    width: 189px;
+}
+.date_input {
+    background: url("icondate.png") no-repeat scroll 180px 6px rgba(0, 0, 0, 0);
+    border: 1px solid rgb(216, 216, 216);
+    border-radius: 3px;
+    height: 28px;
+    line-height: 28px;
+    margin: 2px 0;
+    padding: 0 10px;
+    width: 210px;
+}
+.w50{
+	width: 50%;
+}
+.tr{
+	text-align: right;
+}
+.tl{
+	text-align: left;
+}
+.btn_ok_s {
+    background: none repeat scroll 0 0 rgb(254, 109, 0);
+    border: 1px solid rgb(235, 106, 5);
+    border-radius: 2px;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    height: 34px;
+    line-height: 34px;
+    padding: 0 20px;
+    text-align: center;
+}
+.btn-style-close {
+    background: none repeat scroll 0 0 rgb(245, 245, 245);
+    border: 1px solid rgb(229, 229, 229);
+    border-radius: 2px;
+    color: rgb(102, 102, 102);
+    cursor: pointer;
+    text-align: center;
+    height: 34px;
+    line-height: 34px;
+    padding: 0 20px;
+}
+.bod1 {
+    border-color: #e6e6e6 !important;
+    border-style: solid solid dashed !important;
+    border-width: 0 0 1px !important;
+}
+.select_text_style {
+    background: none repeat scroll 0 0 rgb(255, 255, 255);
+    border: 1px solid rgb(216, 216, 216);
+    border-radius: 3px;
+    height: 28px;
+    line-height: 28px;
+    margin-top: 5px;
+    width: 210px;
+}
+
+
+.report_tools{
+	height: 35px !important;
+    left: 0 !important;
+    padding: 3px !important;
+    width: 100% !important;
+    position: relative !important;
+}
+
+.tools{
+	 background-color: #F6F6F6;
+   /*  display: block;
+    height: 30px; */
+    display: table;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    border: 1px solid #ccc;
+    position: fixed;
+    top:0;
+}
+
+.tools-item{
+	cursor: pointer;
+	display: block;
+    float: left;
+    line-height: 28px;
+    list-style: none outside none;
+    padding: 0 7px;
+    text-align: center;
+     height: 28px;
+}
+.tools-item:HOVER{
+	background-color: #f0f0f0;/* #cccc99; */
+}
+.tools-icon{
+	float: left;
+    margin-top: 3px;
+    width: 40px;
+}
+.tools-text{
+	color: #e25353;
+    float: left;
+    font-family: "Microsoft Yahei";
+    font-size: 16px;
+    font-weight: bold;
+    width: 85px;
+}
+.tools-item-text{
+	background-color: #F6F6F6;
+	cursor: pointer;
+	display: block;
+    float: left;
+    line-height: 28px;
+    list-style: none outside none;
+    padding: 0 10px;
+    text-align: center;
+     height: 28px;
+}
+.tools-item-text:HOVER{
+	background-color: #e25353;
+}
+.tools-text:HOVER{
+	color: #fff;
+}
+#_container_div{
+	overflow: unset !important;
+}
+.selectScale{
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    height: 20px;
+     margin-top: 5px;
+}
+.selectScale option {
+	 font-size: 16px;
+    height: 20px;
+    margin: 3px 0;
+    width: 100%;
+}
+.tools-pageCount{
+	
+}
+/* 报表内容显示样式 */
+.active-page{
+	height: 100%;
+    position: static !important;
+    width: 100%;
+}
+
+/* 强制隐藏元素 */
+.hideNode{
+	display:none !important;
+}

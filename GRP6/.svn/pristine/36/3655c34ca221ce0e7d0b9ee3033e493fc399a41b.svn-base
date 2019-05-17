@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.crm.db.map.Crm_selfHouseMapper">
+	<!--自有住房表 -->
+	<resultMap type="com.zjm.crm.db.model.Crm_selfHouse" id="SelfHouseResultMap">
+		<result property="selfHosuse_ID" column="selfHosuse_ID" />
+		<result property="client_ID" column="client_ID" />
+		<result property="address" column="address" />
+		<result property="area" column="area" />
+		<result property="ownership" column="ownership" />
+		<result property="thirdName" column="thirdName" />
+		<result property="personNum" column="personNum" />
+		<result property="relation" column="relation" />
+		<result property="remark" column="remark" />
+		<result property="updateUserName" column="updateUserName" />
+		<result property="updateDateTime" column="updateDateTime" />
+	</resultMap>
+
+	<!-- 新增一个配偶信息 -->
+	<insert id="insertOneSelfHouseInfo" parameterType="com.zjm.crm.db.model.Crm_selfHouse">
+		<![CDATA[
+		INSERT INTO crm_selfHouse(
+			selfHosuse_ID,
+			client_ID,
+			address,
+			area,
+			ownership,
+			thirdName,
+			personNum,
+			relation,
+			remark,
+			updateUserName,
+			updateDateTime,
+			unit_uid
+		)
+		VALUES
+		(
+			#{selfHosuse_ID},
+			#{client_ID},
+			#{address},
+			#{area},
+			#{ownership},
+			#{thirdName},
+			#{personNum},
+			#{relation},
+			#{remark},
+			#{updateUserName},
+			NOW(),
+			#{unit_uid}
+		) ;
+		]]>
+	</insert>
+
+	<delete id="deleteOneSelfHouseInfo" parameterType="com.zjm.crm.db.model.Crm_selfHouse">
+		<![CDATA[
+			delete from crm_selfHouse
+			where client_ID=#{client_ID}
+		]]>
+	</delete>
+	
+	<!-- 查询一个配偶信息 -->
+	<select id="selectOneSelfHouseInfo" parameterType="com.zjm.crm.db.model.Crm_selfHouse" resultMap="SelfHouseResultMap">
+		<![CDATA[
+		 	select
+		 			selfHosuse_ID,
+		 			client_ID,
+					address,
+					area,
+					ownership,
+					thirdName,
+					personNum,
+					relation,
+					remark,
+					updateUserName,
+					updateDateTime
+		 	from crm_selfHouse
+		 	where client_ID=#{client_ID}
+		]]>
+	</select>
+	
+	<!-- 更新配偶信息 -->
+	<update id="updateOneSelfHouseInfo" parameterType="com.zjm.crm.db.model.Crm_selfHouse">
+		<![CDATA[
+			UPDATE 
+			  crm_selfHouse
+			SET
+			  address = #{address},
+			  area = #{area},
+			  ownership = #{ownership},
+			  thirdName = #{thirdName},
+			  personNum = #{personNum},
+			  relation = #{relation},
+			  remark = #{remark},
+			  updateUserName = #{updateUserName},
+			  updateDateTime = NOW()
+			WHERE client_ID = #{client_ID}
+		]]>
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	<select id="selectSelfHouseListByClient_ID" parameterType="string" resultMap="SelfHouseResultMap">
+		 	select
+		 			selfHosuse_ID,
+		 			client_ID,
+					address,
+					area,
+					ownership,
+					thirdName,
+					personNum,
+					relation,
+					remark,
+					updateUserName,
+					updateDateTime
+		 	from crm_selfHouse
+		 	where client_ID=#{client_ID}
+	</select>
+	
+	
+	<delete id="deleteSelfHouseByClient_ID" parameterType="string">
+		delete from crm_selfHouse
+		where client_ID=#{client_ID}
+	
+	</delete>
+	
+	
+	
+	
+</mapper>  

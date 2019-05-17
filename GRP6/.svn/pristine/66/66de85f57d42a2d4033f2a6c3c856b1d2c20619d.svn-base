@@ -1,0 +1,242 @@
+(function($,z){
+	$.zjm_meetingResolution = {
+		meetingDetailAdd:meetingDetailAdd,//添加评审会明细内容
+		meetingDetailEdit:meetingDetailEdit,//修改评审会明细内容
+		meetingDetailDel:meetingDetailDel,//删除评审会明细内容
+		initTree:initTree,
+		updateMeetingResolution_Meeting:updateMeetingResolution_Meeting,//修改会议内容
+		updateMeetingResolution:updateMeetingResolution,//修改决议内容
+		initMeetingResolution:initMeetingResolution
+	};
+	
+	/*$(".btn_closese").unbind("click");*/
+	//初始化页面数据
+	function initMeetingResolution(){
+		var meetingResolution_ID = $("#meetingResolution_ID").val();	
+		$("#meetingResolution_page").load("/pro/meetResolution/meetingResolution/returnMeetingResolutionPage",{"meetingResolution_ID":meetingResolution_ID},function(response,status,xhr){
+			$("#meetingResolutionEdit").modal({keyboard:true});
+		});
+	}
+	/**添加评审会明细*/
+	function meetingDetailAdd(){
+		var meetingResolution_ID = $("#meetingResolution_ID").val();
+		var apply_ID = $("#apply_ID").val();
+		$("#meetingResolution_page").load("/pro/meetResolution/meetingResolution/showMeetingDetailAdd",{"meetingResolution_ID":meetingResolution_ID,"apply_ID":apply_ID},function(response,status,xhr){
+			$("#meetDetailAdd").modal({keyboard:true});
+			initTree();
+			/*注册编辑验证引擎*/
+			zjm.validata({formId:"meetDetailAdd_form"});
+			//tool.undisabled(".btn_submit");
+			$(".btn_submit").click(function(){
+				tool.disabled(".btn_submit");
+				if($("#meetDetailAdd_form").validationEngine("validate")){
+					var queryContainer_form = $("#meetDetailAdd_form");
+					$.ajax({type:'POST',url:'/pro/meetResolution/meetingResolution/insertOneMeetingDetail',data:JSON.stringify(queryContainer_form.serializeJson()),contentType:'application/json; charset=UTF-8',dataType:'json',
+						success:function(data) {
+				        	if(data.obj){
+				        		$("#meetDetailAdd").modal("hide");
+				        		window.location.reload();
+							}else{
+								alert("保存失败！");
+								tool.undisabled(".btn_submit");
+							}
+						}
+					});
+				}else{
+					tool.undisabled(".btn_submit");
+				}
+				$("#meetDetailAdd").on("hidden.bs.modal", function (e) {
+					 $(".btn_submit").unbind("click");
+				});
+			});
+		});
+	}
+	
+	function initTree(){
+		/*获取合作机构下拉选择树*/
+		$.ajax({type:'POST',url:'/sys/dic/selectBankSortDicTree',data:JSON.stringify({}),contentType:'application/json; charset=UTF-8',dataType:'json',
+			success:function(data) {		
+				$("#selectBank").selectTreeWidgets({
+					width : "87%",//设置控件宽度
+					multiple : false,//是否多选
+					data : data.obj//数据源
+				});
+	        }
+		});
+		//获取业务品种下拉树;
+		$.ajax({type:'POST',url:'/sys/dic/selectBusiSortDicTree',data:JSON.stringify({}),contentType:'application/json; charset=UTF-8',dataType:'json',
+			success:function(data){		
+				$("#busiSortDicTree").selectTreeWidgets({
+					width : "87%",//设置控件宽度
+					multiple : false,//是否多选
+					data : data.obj//数据源
+				});
+			}
+		});
+	}
+	//修改评审会明细内容
+	function meetingDetailEdit(meetingDetail_ID){
+		$("#meetingResolution_page").load("/pro/meetResolution/meetingResolution/showMeetingDetailEdit",{"meetingDetail_ID":meetingDetail_ID},function(response,status,xhr){
+			$("#meetDetailEdit").modal({keyboard:true});
+			initTree();
+			/*注册编辑验证引擎*/
+			zjm.validata({formId:"meetDetailEdit_form"});
+			tool.undisabled(".btn_submit");
+			$(".btn_submit").click(function(){
+				tool.disabled(".btn_submit");
+				if($("#meetDetailEdit_form").validationEngine("validate")){
+					var queryContainer_form = $("#meetDetailEdit_form");
+					$.ajax({type:'POST',url:'/pro/meetResolution/meetingResolution/updateOneMeetingDetail',data:JSON.stringify(queryContainer_form.serializeJson()),contentType:'application/json; charset=UTF-8',dataType:'json',
+						success:function(data) {
+				        	if(data.obj){
+				        		$("#meetDetailEdit").modal("hide");
+				        		window.location.reload();
+							}else{
+								alert("保存失败！");
+								tool.undisabled(".btn_submit");
+							}
+						}
+					});
+				}else{
+					tool.undisabled(".btn_submit");
+				}
+				$("#meetDetailEdit").on("hidden.bs.modal", function (e) {
+					 $(".btn_submit").unbind("click");
+				});
+			});
+		});
+	}
+	/**删除*/
+	function meetingDetailDel(meetingDetail_ID){
+		$("#meetingDetailDel").modal({keyboard:true});
+		tool.undisabled(".btn_submit");
+		$(".btn_submit").click(function(){
+			$.ajax({type:'POST',url:'/pro/meetResolution/meetingResolution/deleteOnemeetingDetail',data:JSON.stringify({"meetingDetail_ID":meetingDetail_ID}),contentType:'application/json; charset=UTF-8',dataType:'json',success:function(data) {
+		        	if(data.obj==1){
+						$("#meetingDetailDel").modal("hide");
+						window.location.reload();
+					}else{
+						alert("删除失败！");
+					}
+		        }
+			});
+		});
+	}
+	//修改评审基本信息
+	function updateMeetingResolution_Meeting(){
+		var meetingResolution_ID = $("#meetingResolution_ID").val();	
+		$("#meetingResolution_page").load("/pro/meetResolution/meetingResolution/returnMeetingResolutionPage",{"meetingResolution_ID":meetingResolution_ID,"flag":"1"},function(response,status,xhr){
+			$("#reviewInfoEdit").modal({keyboard:true});
+			zjm.init();
+			/**注册编辑验证引擎*/
+			$.ajax({type:'POST',
+				url:'/pro/meetResolution/meetingResolution/selectMeetingJuryList',
+				data:JSON.stringify({}),
+				contentType:'application/json; charset=UTF-8',
+				dataType:'json',
+				success:function(data) {
+				$("#userid").selectTreeWidgets({
+					width : "90%",//设置控件宽度
+					multiple : true,//是否多选
+					data : data.obj//数据源
+					});
+		        }
+		    });
+			zjm.validata({formId:"updateResolutionMeeting_form"});
+			tool.undisabled(".btn_submit");
+			$(".btn_submit").click(function(){
+				tool.disabled(".btn_submit");
+				var queryContainer_form = $("#updateResolutionMeeting_form");
+				if(queryContainer_form.validationEngine("validate")){
+					$.ajax({type:'POST',url:'/pro/meetResolution/meetingResolution/updateMeetingResolution',data:JSON.stringify(queryContainer_form.serializeJson()),contentType:'application/json; charset=UTF-8',dataType:'json',success:function(data) {
+					        	if(data.obj==1){
+									$("#reviewInfoEdit").modal("hide");
+									window.location.reload();
+								}else{
+									alert("保存失败！");
+									tool.undisabled(".btn_submit");
+								}
+					        }
+						});
+				}else{
+					tool.undisabled(".btn_submit");
+				}
+			});
+			$("#reviewInfoEdit").on("hidden.bs.modal", function (e) {//解除事件绑定
+				 $(".btn_submit").unbind("click");
+			});
+		});
+	};
+	
+	//修改决议内容
+	function updateMeetingResolution(){
+		var meetingResolution_ID = $("#meetingResolution_ID").val();	
+		$("#meetingResolution_page").load("/pro/meetResolution/meetingResolution/returnMeetingResolutionPage",{"meetingResolution_ID":meetingResolution_ID,"flag":"2"},function(response,status,xhr){
+			$("#meetingResolutionEdit").modal({keyboard:true});
+			zjm.init();
+			/*注册编辑验证引擎*/
+			zjm.validata({formId:"updateMeetingResolution_form"});
+			tool.undisabled(".btn_submit");
+			$(".btn_submit").click(function(){
+				tool.disabled(".btn_submit");
+				var queryContainer_form = $("#updateMeetingResolution_form");
+				if(queryContainer_form.validationEngine("validate")){
+						$.ajax({type:'POST',url:'/pro/meetResolution/meetingResolution/updateMeetingResolution',data:JSON.stringify(queryContainer_form.serializeJson()),contentType:'application/json; charset=UTF-8',dataType:'json',success:function(data) {
+					        	if(data.obj==1){
+					        			
+									$("#meetingResolutionEdit").modal("hide");
+									window.location.reload();
+									
+								}else{
+									alert("保存失败！");
+									tool.undisabled(".btn_submit");
+								}
+					        }
+						});
+					}else{
+						tool.undisabled(".btn_submit");
+					}
+			});
+			$("#meetingResolutionEdit").on("hidden.bs.modal", function (e) {//解除事件绑定
+				 $(".btn_submit").unbind("click");
+			});
+		});
+	}
+	/*
+	function closeMeetingResolutionPage(apply_ID){
+		window.parent.closeMenu('录入评审会决议'+apply_ID);
+	}*/
+})(jQuery, this);
+
+$(function () {
+	//添加批准担保基本信息
+	$("#btn_addMeetingDetail").click(function(){
+		$.zjm_meetingResolution.meetingDetailAdd();
+	});
+	//修改批准担保基本信息
+	$(".btn_editMeetingDetail").click(function(e){
+		$.zjm_meetingResolution.meetingDetailEdit(e.target.id);
+	});
+	//删除批准担保基本信息
+	$(".btn_delMeetingDetail").click(function(e){
+		$.zjm_meetingResolution.meetingDetailDel(e.target.id);
+	});
+	//修改决议基本信息
+	$("#btn_updateMeetingResolution_Meeting").click(function(){
+		$.zjm_meetingResolution.updateMeetingResolution_Meeting();
+	});
+	
+	//修改决议内容 
+	$("#btn_updateMeetingResolution").click(function(){
+		$.zjm_meetingResolution.updateMeetingResolution();
+	});
+	/*//关闭页面
+	$("#btn_close").click(function(){
+		var  apply_ID = $("#apply_ID").val();
+		$.zjm_meetingResolution.closeMeetingResolutionPage(apply_ID);
+	});
+	*/
+	
+	
+	
+});

@@ -1,0 +1,92 @@
+package com.zjm.pro.projectLawsuit.service.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Resource;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.zjm.common.db.model.PageTable;
+import com.zjm.common.db.model.User;
+import com.zjm.common.log.service.LogService;
+import com.zjm.pro.db.map.Pro_projectLawsuitMapper;
+import com.zjm.pro.db.model.Pro_projectLawsuit;
+import com.zjm.pro.projectLawsuit.service.ProjectLawsuitService;
+import com.zjm.util.Tool;
+
+@Service("projectLawsuitService")
+@Transactional
+public class ProjectLawsuitServiceImpl implements ProjectLawsuitService{
+	@Resource
+	private Pro_projectLawsuitMapper pro_LawSuitMapper;
+	@Resource
+	private LogService logService;
+
+	/**
+	 * 
+	 * 新增项目诉讼登记
+	 */
+	@Override
+	public Boolean insertOneProjectLawsuit(User userSession, Pro_projectLawsuit projectLawsuit) {
+		/*projectLawsuit.setProjectLawsuit_ID(Tool.createUUID32());
+		projectLawsuit.setUnit_uid(userSession.getUnit_uid());
+		projectLawsuit.setUpdateUserName(userSession.getUser_name());*/
+	  if
+	    ( pro_LawSuitMapper.insertOneProjectLawsuit(projectLawsuit) > 0){
+		logService.insertOneOperatorLogInfo(userSession,"新增项目诉讼情况", "新增", "新增项目诉讼情况"+projectLawsuit.getProjectLawsuit_ID());
+		return true;
+	}
+	  return false;
+		}
+    /**
+     * 
+     *修改项目诉讼登记 
+     */
+	@Override
+	public Boolean updateOneProjectLawsuitInfo(User userSession, Pro_projectLawsuit projectLawsuit) {
+		projectLawsuit.setUnit_uid(userSession.getUser_id());
+		projectLawsuit.setUpdateUserName(userSession.getUser_name());
+		if (pro_LawSuitMapper.updateOneProjectLawsuitInfo(projectLawsuit) > 0){
+			logService.insertOneOperatorLogInfo(userSession,"修改项目诉讼情况", "修改", "修改项目诉讼情况" +	projectLawsuit.getProjectLawsuit_ID());
+			return true;
+			
+		}
+		return false;
+	}
+    /**
+     * 
+     *查询项目诉讼登记 
+     */
+	@Override
+	public Pro_projectLawsuit selectOneProjectLawsuitInfo(String wheresql) {
+		Pro_projectLawsuit projectLawsuit =pro_LawSuitMapper.selectOneProjectLawsuitInfo(wheresql);
+		return projectLawsuit;
+	}
+	
+	 /**
+     *查询项目诉讼登记列表 
+     */
+	@Override
+	public PageTable<Pro_projectLawsuit> selectProjectLawPageTables(PageTable<Pro_projectLawsuit> pageTable) {
+		List<Pro_projectLawsuit> projectLawSuitList = new ArrayList<>();
+		Long total = 0L;
+		try {
+			projectLawSuitList = pro_LawSuitMapper.selectProjectLawsuitTable(pageTable);
+			projectLawSuitList = pro_LawSuitMapper.selectProjectLawsuitTable(pageTable);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		total = pro_LawSuitMapper.selectProjectLawsuitTable_count(pageTable);
+		pageTable.setRows(projectLawSuitList);
+		pageTable.setTotal(total);
+		return pageTable;
+	}
+	@Override
+	public String concatProjectID() {
+		String projectIDs = pro_LawSuitMapper.concatProjectID();
+		return projectIDs;
+	}
+	
+
+}

@@ -1,0 +1,141 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+			
+			<%@ include file="/common_timestamp.jsp" %>
+		<%@ include file="/common_head.jsp" %>
+		
+		
+		<div class="page-content">
+			<div class="row">
+				<div class="col-xs-12">
+		
+				<div id="divTwo">	<!-- divTwo 开始-->
+				
+					<c:if test="${opt.relieveFlag ne '01' && opt.relieveFlag ne '02'}">
+						<div class="page-header">
+							<h5>查看股权详情</h5>
+						</div>
+					</c:if>	
+						
+						<c:if test="${opt.relieveFlag eq '01' || opt.relieveFlag eq '02'}">
+							<div class="page-header">
+								<h5>查看已<c:if test="${opt.relieveFlag eq '01'}">解除</c:if><c:if test="${opt.relieveFlag eq '02'}">处置</c:if>保证措施</h5>
+							</div>
+	                        <div class="form-group col-sm-12">
+	                             <h5 class="header smaller lighter blue">
+	                             	保证措施信息
+	                             </h5>	                              
+							 </div>
+						</c:if>	
+						
+						<form class="form-horizontal" role="form" id="form_baseTwo">
+						
+							 	  <input type="hidden"  id="ownerName" name="ownerName" value="${opt.clientName }">
+                                  <input type="hidden"  id="clientID" name="clientID" value="${opt.clientID }">
+                                  <input type="hidden"  id="apply_ID" name="apply_ID" value="${opt.apply_ID }"> 
+                                  <input type="hidden"  id="guarantyTypeID" name="guarantyTypeID" value="${opt.guarantyTypeID }">
+                                  <input type="hidden"  id="guarantyTypeName" name="guarantyTypeName" value="${opt.guarantyTypeName }">
+                                  <input type="hidden"  id="optTypeID" name="optTypeID" value="${opt.optTypeID }">
+                                  <input type="hidden"  id="optTypeName" name="optTypeName" value="${opt.optTypeName }">
+                                  <input type="hidden"  id="optGuaranty_ID" name="optGuaranty_ID" value="${opt.optGuaranty_ID }">
+                          
+                          
+                          
+                          <div class="col-sm-offset-1 col-sm-10">
+  							 <c:if test="${opt.clientTypeID eq '01' }">      
+								<h5 class="col-sm-6" style="line-height:26px;">权属人：<span class="grey">${opt.clientName }</span></h5>
+								<h5 class="col-sm-6" style="line-height:26px;">统一社会信用代码：<span class="grey">${opt.otherCreditCode }</span></h5>
+							 </c:if> 
+							 <c:if test="${opt.clientTypeID ne '01' }">   	
+								<h5 class="col-sm-6" style="line-height:26px;">权属人：<span class="grey">${opt.personName }</span></h5>
+								<h5 class="col-sm-6" style="line-height:26px;">身份证号码：<span class="grey">${opt.otherPersonNum }</span></h5>
+							 </c:if>
+							 <h5 class="col-sm-12" style="line-height:26px;">是否其他公司股权：<span class="grey">
+									<c:if test="${opt.isCompanyStock == 1 }">是
+										<span style="display: none;" id="clientIDText">${client.client_ID }</span>
+									</c:if>
+									<c:if test="${opt.isCompanyStock == 0 }">否
+										<span style="display: none;" id="clientIDText">${opt.clientID }</span>
+									</c:if>
+							</span></h5>	
+					  	</div>       
+							 
+							 
+								
+									
+									
+                         <h5 class="col-sm-12"><b>股权所在公司信息：</b></h5>
+                          <div class="col-sm-offset-1 col-sm-10">
+                          	<h5 class="col-sm-6" style="line-height:26px;">股权所在企业全称：<span class="grey">${client.clientName }</span></h5>
+                          	<h5 class="col-sm-6" style="line-height:26px;">统一社会信用代码：<span class="grey">${client.certificateCode}</span></h5>
+                          	<h5 class="col-sm-6" style="line-height:26px;">法定代表人：<span class="grey">${client.legalPerson}</span></h5>
+                          	<h5 class="col-sm-6" style="line-height:26px;">法人联系方式：<span class="grey">${client.phoneOne}</span></h5>
+                          	<h5 class="col-sm-12" style="line-height:26px;">住所：<span class="grey">${client.workAddress}</span></h5>
+                          	<h5 class="col-sm-6" style="line-height:26px;">邮编：<span class="grey">${client.zipCode}</span></h5>
+                          	<h5 class="col-sm-6" style="line-height:26px;">传真：<span class="grey">${client.fax}</span></h5>
+                          </div>
+                          
+                          
+                          
+                         <h5 class="col-sm-12"><b>股权所在企业股东信息：</b></h5>
+                          <div class="col-sm-12 space-30"></div>
+                          <div class="col-sm-offset-1 col-sm-10">
+                          	 <div class="table-responsive form-group col-sm-12" id="stockMessageList"> <%-- 股权所在企业股东信息 列表位置 --%>
+								<table id="stockMessage-table" style="font-size: 13px !important;"></table>
+							  </div>
+                          </div>
+                         
+                         
+                         <h5 class="col-sm-12"><b>股权出质信息：</b></h5>
+                        
+                         <div class="col-sm-offset-1 col-sm-10">
+								<h5 class="col-sm-6" style="line-height:26px;">评估价值：<span class="grey">
+									<fmt:formatNumber value="${opt.assessValue }" pattern="###,###.######"/>万元</span></h5>
+								<h5 class="col-sm-6" style="line-height:26px;">质押率：<span class="grey">
+									<fmt:formatNumber value="${opt.coverageRatio }" pattern="###.##"/>%</span></h5>
+								<h5 class="col-sm-6" style="line-height:26px;">质押价值：<span class="grey">
+									<fmt:formatNumber value="${opt.optValue }" pattern="###,###.######"/>万元</span></h5>
+								<h5 class="col-sm-12" style="line-height:26px;">备注：<span class="grey">${opt.disposeRemark }</span></h5>
+								<h5 class="col-sm-12" style="line-height:26px;">是否需要登记：<span class="grey">
+									<c:if test="${opt.isRegister == 1 }">是</c:if>
+									<c:if test="${opt.isRegister == 0 }">否</c:if>
+								</span></h5>
+								<h5 class="col-sm-12" style="line-height:26px;">保证措施附件：<span class="grey">
+								     <%@ include file="/project/opt/optManager/opt_btn_View.jsp" %>
+								</span></h5>
+                		  </div>
+							
+							
+							
+                        </form>
+					</div>
+					
+					<c:if test="${opt.relieveFlag eq '01'}"><%-- 已解除措施加载 --%>
+						<c:if test="${opt.isFree eq 1 }">
+							<%@ include file="/project/opt/optDispose/common_RelieveDetail.jsp" %>
+						</c:if>	
+				   </c:if>
+					<c:if test="${opt.relieveFlag eq '02'}"><%-- 已处置措施加载 --%>
+						<c:if test="${opt.isDispose eq 1 }">
+							<%@ include file="/project/opt/optDispose/common_DisposeDetail.jsp" %>
+						</c:if>
+					</c:if>
+					
+				</div>
+			</div>
+		</div>
+
+
+	<%@ include file="/project/opt/optManager/common_optView.jsp" %>
+	
+	<script src="<%=path %>/crm/client/stockMessage/stockMessage.js?v=<%=vardate%>"></script><%--股权信息 js --%>	
+<script src="<%=path%>/project/opt/optManager/ZYequityPledgeView.js?v=<%=vardate%>"></script>
+
+
+	<%@ include file="/project/opt/imgUpload/optUploadView.jsp" %>
+					<%@ include file="/project/opt/imgUpload/optUpload_realizeView.jsp" %>
+		
+		
+		
+		
+		

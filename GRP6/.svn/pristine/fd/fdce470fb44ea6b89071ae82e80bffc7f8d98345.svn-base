@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_meetingMapper">
+	<!-- 评审会信息表 -->
+	 <resultMap id="ProMeetingMap" type="com.zjm.pro.db.model.Pro_meeting" >
+	    <id column="meeting_ID" property="meeting_ID"  />
+		<result column="meetingCode" property="meetingCode"/>
+		<result column="meetingTypeID" property="meetingTypeID"/>
+		<result column="meetingTypeName" property="meetingTypeName"/>
+		<result column="meetingDateTime" property="meetingDateTime"/>
+		<result column="meetingRoomID" property="meetingRoomID"/>
+		<result column="meetingRoomName" property="meetingRoomName"/>
+		<result column="userIDList" property="userIDList"/>
+		<result column="userNameList" property="userNameList"/>
+		<result column="otherUserNameList" property="otherUserNameList"/>
+		<result column="meetingStatus" property="meetingStatus"/>
+		<result column="unit_uid" property="unit_uid"/>
+		<result column="updateUserName" property="updateUserName"/>
+		<result column="updateDateTime" property="updateDateTime"/>
+		<result column="applyNum" property="applyNum"/>
+		<collection property="meetingApplyList" ofType="com.zjm.pro.db.model.Pro_meetingApply">
+			<result column="entityID" property="entityID"/>
+			<result column="voteJuryIDList" property="userIDList"/>
+			<result column="voteJuryNameList" property="userNameList"/>
+			<result column="meetingSort" property="meetingSort"/>
+			<association property="proApply" javaType="com.zjm.pro.db.model.Pro_apply" >
+				<result column="apply_ID" property="apply_ID"/>
+				<result column="busiCode" property="busiCode"/>
+				<result column="projectName" property="projectName"/>
+				<result column="operationDepartName" property="operationDepartName"/>
+				<result column="applyMeetingUserName" property="applyMeetingUserName"/>
+				<result column="amanName" property="amanName"/>
+				<result column="bmanName" property="bmanName"/>
+				<result column="reviewManName" property="reviewManName"/>
+			</association>
+		</collection>
+  </resultMap>
+	<!-- 查询所有的会议室-->
+	 <select id="selectAllMeetingRooms" parameterType="com.zjm.common.db.model.PageTable"  resultMap="ProMeetingMap">
+	<![CDATA[
+		SELECT 
+				meetingRoomID= #{applyDetail_ID},
+		       meetingRoomName
+	    FROM 
+	         pro_meeting 
+		WHERE 1=1 
+		]]> 				 
+	</select> 
+	<!-- 通过会议室ID查询评审会ID-->
+	 <select id="selectMeetingIdById" parameterType="java.lang.String" resultMap="ProMeetingMap">
+		<![CDATA[
+			SELECT 
+					meeting_ID
+		    FROM 
+		         pro_meeting 
+			WHERE 1=1 and meetingRoomID=#{meetingRoomID}
+		]]> 				 
+	</select>
+	<!-- 分页查询我的评审列表 -->
+	<select id="selectMyProMeetingPageTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="ProMeetingMap">
+		SELECT 
+			meeting_ID,
+			meetingCode,
+			meetingTypeID,
+			meetingTypeName,
+			meetingDateTime,
+			meetingRoomID,
+			meetingRoomName,
+			userIDList,
+			userNameList,
+			otherUserNameList,
+			meetingStatus,
+			unit_uid,
+			updateUserName,
+			updateDateTime
+		FROM pro_meeting 
+		WHERE 1 = 1 
+			  ${wheresql}
+		LIMIT #{pageNumber},#{pageSize}  
+	</select>
+	<!-- 上会审批 -->
+	<select id="selectMeetingInfoByMeetingStatus" parameterType="com.zjm.common.db.model.PageTable" resultMap="ProMeetingMap">
+		SELECT 
+			meeting_ID,
+			meetingCode,
+			meetingTypeID,
+			meetingTypeName,
+			meetingDateTime,
+			meetingRoomID,
+			meetingRoomName,
+			userIDList,
+			userNameList,
+			otherUserNameList,
+			meetingStatus,
+			unit_uid,
+			updateUserName,
+			updateDateTime
+		FROM pro_meeting 
+		WHERE 
+			  ${wheresql}
+		  
+	</select>
+	<!-- 分页查询我的评审数量 -->
+	<select id="selectMyProMeetingPageTable_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="long">
+	 	SELECT 
+	 		COUNT(1) 
+	 	FROM 
+	 		pro_meeting 
+	 	WHERE 1=1 
+	 		 ${wheresql}
+	</select>
+	<insert id="insertOneMeetingApply"	parameterType="com.zjm.pro.db.model.Pro_meeting">
+		<![CDATA[
+		INSERT INTO pro_meeting (
+		    meeting_ID,
+			meetingCode,
+			meetingTypeID,
+			meetingTypeName,
+			meetingDateTime,
+			meetingRoomID,
+			meetingRoomName,
+			userIDList,
+			userNameList,
+			otherUserNameList,
+			meetingStatus,
+			updateUserName,
+			unit_uid,
+			updateDateTime
+		)
+		VALUES
+		(
+		 		#{meeting_ID},
+		 		#{meetingCode},
+		 		#{meetingTypeName},
+		 		#{meetingTypeID},
+		 		#{meetingDateTime},
+		 		#{meetingRoomID},
+		 		#{meetingRoomName},
+		 		#{userIDList},
+		 		#{userNameList},
+		 		#{otherUserNameList},
+		 		#{meetingStatus},
+		 		#{updateUserName},
+		 		#{updateDateTime},
+		 		#{unit_uid},
+				NOW()
+		) ;
+		]]>
+	</insert>
+	<select id="listByDuration" parameterType="com.zjm.common.db.model.PageTable" resultMap="ProMeetingMap">
+
+        select meeting_ID,meetingCode,
+			meetingDateTime,meetingRoomID,
+			meetingRoomName,meetingPlace,
+			userID,userName,userIDList,
+			userNameList,otherUserNameList,
+			meetingStatus,updateUserName,unit_uid,
+			updateDateTime
+ from pro_meeting where 1 = 1 ${wheresql}
+
+    </select>
+    <!-- 删除评审会 -->
+    <delete id="deleteOneEvaluItems" parameterType="com.zjm.common.db.model.PageTable">
+		<![CDATA[
+		DELETE FROM pro_meeting WHERE 1=1 and meeting_ID=#{meeting_ID};
+		
+		]]>
+	</delete>
+	
+	<!-- 删除评审会 -->
+    <delete id="delMeetingBymeeting_ID" parameterType="java.lang.String">
+		<![CDATA[
+		DELETE FROM pro_meeting WHERE meeting_ID=#{meeting_ID};
+		
+		]]>
+	</delete>
+	<!-- 删除评审会 -->
+    <delete id="delMeetingByMeetingRoomID" parameterType="java.lang.String">
+		<![CDATA[
+		DELETE FROM pro_meeting WHERE meetingRoomID=#{meetingRoomID};
+		
+		]]>
+	</delete>
+	 <!-- 查看一条评审会记录 -->
+	<select id="showOneEvaluItemsViewPage" parameterType="java.lang.String"  resultMap="ProMeetingMap">
+		<![CDATA[
+			select meeting_ID,meetingCode,
+			meetingTypeID,meetingTypeName,
+			meetingDateTime,
+			meetingRoomID,meetingRoomName,userIDList,
+			userNameList,otherUserNameList,
+			meetingStatus,updateUserName,unit_uid,
+			updateDateTime
+	    	from pro_meeting where 1 = 1 and meeting_ID=#{meeting_ID}		
+		]]>		 
+	</select>
+	<!-- 判断评审编号是否存在 ，如果有node_ID，说明是更新数据，要排除与自身的nodeNames比较-->
+	<select id="isExistMeetingCode" parameterType="com.zjm.pro.db.model.Pro_meeting" resultType="java.lang.Integer">
+		<![CDATA[
+			SELECT 
+				COUNT(1) 
+			FROM 
+				pro_meeting 
+			WHERE 
+				1 = 1 
+			AND meetingCode = #{meetingCode}
+		]]>
+			<if test="meeting_ID != null">
+				AND meeting_ID != #{meeting_ID}
+			</if>
+	</select>
+	<!-- 修改上会审批 -->
+	<update id="updateMeetingStatusById" parameterType="java.lang.String">
+		<![CDATA[
+		UPDATE pro_meeting 
+		SET meetingStatus = '02'
+		
+		WHERE  meeting_ID = #{meeting_ID} limit 1
+		
+		]]>
+	</update>
+	<!-- 拒绝上会审批 -->
+	<update id="updateRejectReasonAndMeetingStatusById" parameterType="com.zjm.pro.db.model.Pro_meeting">
+		<![CDATA[
+		UPDATE pro_meeting 
+		SET meetingStatus = '03',
+			refuseReason=#{refuseReason},
+			refuseDateTime=NOW()
+		WHERE  meeting_ID = #{meeting_ID} limit 1
+		
+		]]>
+	</update>
+	
+	<!-- 撤销上会审批 -->
+	<update id="updateRevokeMeetingStatusById" parameterType="com.zjm.pro.db.model.Pro_meeting">
+		<![CDATA[
+		UPDATE pro_meeting 
+		SET meetingStatus = '04',
+			refuseDateTime=NOW()
+		WHERE  meeting_ID = #{meeting_ID} limit 1
+		
+		]]>
+	</update>
+	
+	 <!-- 根据查询条件查询单个Meeting-->
+	<select id="selectOneMeetingByWhereSql" parameterType="java.lang.String"  resultMap="ProMeetingMap">
+	<![CDATA[
+		SELECT 
+		     meeting_ID,meetingCode,
+			meetingTypeID,meetingTypeName,
+			meetingDateTime,
+			meetingRoomID,meetingRoomName,userIDList,
+			userNameList,otherUserNameList,
+			meetingStatus,updateUserName,unit_uid,
+			updateDateTime
+	    FROM 
+	         pro_meeting 
+		WHERE 1=1 ${value}
+		]]> 				 
+	</select>
+	
+	<!-- 更新一个Meeting表信息 -->	
+	<update id="updateOneMeeting" parameterType="com.zjm.pro.db.model.Pro_meeting">
+		UPDATE 
+		     pro_meeting
+		<set >
+			 <if test="meetingCode != null" >meetingCode= #{meetingCode},</if>
+			 <if test="meetingTypeID != null" >meetingTypeID= #{meetingTypeID},</if>
+			 <if test="meetingTypeName != null" >meetingTypeName= #{meetingTypeName},</if>
+			 <if test="meetingDateTime != null" >meetingDateTime= #{meetingDateTime},</if>
+			 <if test="meetingRoomID != null" >meetingRoomID= #{meetingRoomID},</if>
+			 <if test="meetingRoomName != null" >meetingRoomName= #{meetingRoomName},</if>
+			 <if test="userIDList != null" >userIDList= #{userIDList},</if>
+			 <if test="userNameList != null" >userNameList= #{userNameList},</if>
+			 <if test="otherUserNameList != null" >otherUserNameList= #{otherUserNameList},</if>
+			 <if test="meetingStatus != null" >meetingStatus= #{meetingStatus},</if>
+			 <if test="unit_uid != null" >unit_uid= #{unit_uid},</if>
+			 <if test="updateUserName != null" >updateUserName= #{updateUserName},</if>
+			 updateDateTime = NOW()		
+		</set>
+		WHERE meeting_ID=#{meeting_ID} 
+	</update>
+	
+	<!-- 新增一条评审会信息  -->
+	<insert id="insertOneMeeting" parameterType="com.zjm.pro.db.model.Pro_meeting">
+		INSERT INTO pro_meeting (
+		    meeting_ID,
+			meetingCode,
+			meetingTypeID,
+			meetingTypeName,
+			meetingDateTime,
+			meetingRoomID,
+			meetingRoomName,
+			userIDList,
+			userNameList,
+			otherUserNameList,
+			meetingStatus,
+			unit_uid,
+			updateUserName,
+			updateDateTime
+		)
+		VALUES
+		(
+	 		#{meeting_ID},
+			#{meetingCode},
+			#{meetingTypeID},
+			#{meetingTypeName},
+			#{meetingDateTime},
+			#{meetingRoomID},
+			#{meetingRoomName},
+			#{userIDList},
+			#{userNameList},
+			#{otherUserNameList},
+			#{meetingStatus},
+			#{unit_uid},
+			#{updateUserName},
+			NOW()
+		) ;
+	</insert>
+	
+	<!-- 分页查询已安排的评审会列表 -->
+	<select id="selectProMeetingPageTables" parameterType="com.zjm.common.db.model.PageTable" resultMap="ProMeetingMap">
+		SELECT
+			pm.meeting_ID,
+			applyNum,
+			meetingCode,
+			meetingTypeID,
+			meetingTypeName,
+			meetingDateTime,
+			meetingRoomID,
+			meetingRoomName,
+			userIDList,
+			userNameList,
+			otherUserNameList,
+			meetingStatus,
+			unit_uid,
+			updateUserName,
+			updateDateTime
+		FROM 	pro_meeting pm
+		LEFT JOIN (
+			SELECT 
+				meeting_ID, 
+				COUNT(*) applyNum
+			FROM pro_meetingApply 
+			GROUP BY meeting_ID
+		) pma ON pma.meeting_ID = pm.meeting_ID
+		<!-- 添加a角数据权限中间表  start -->
+		LEFT JOIN (
+			SELECT pa.amanID as amanID ,pma.meeting_ID as meetingID  
+			from pro_meetingapply as pma
+			LEFT JOIN  pro_apply as pa  on pa.apply_ID = pma.entityID) a_role_data
+		ON a_role_data.meetingID = pm.meeting_ID
+		<!-- 添加a角数据权限中间表  end -->	
+		WHERE	1=1 ${wheresql}
+		ORDER BY ${sortName} ${sortOrder}
+		LIMIT #{pageNumber},#{pageSize}  		
+	</select>
+	
+	<!-- 查询已安排的评审会列表总数 -->
+	<select id="selectProMeetingPageTables_count" parameterType="com.zjm.common.db.model.PageTable" resultType="long">
+		SELECT
+			COUNT(1)
+		FROM pro_meeting pm
+		<!-- 添加a角数据权限中间表  start -->
+		LEFT JOIN (
+			SELECT pa.amanID as amanID ,pma.meeting_ID as meetingID  
+			from pro_meetingapply as pma
+			LEFT JOIN  pro_apply as pa  on pa.apply_ID = pma.entityID) a_role_data
+		ON a_role_data.meetingID = pm.meeting_ID
+		<!-- 添加a角数据权限中间表  end -->	 
+		WHERE 1=1 ${wheresql}
+	</select>
+	
+	<!-- 查询一个评审会 -->
+	<select id="selectOneProjectMeeting" parameterType="java.lang.String" resultMap="ProMeetingMap">
+		SELECT
+			pm.meeting_ID,
+			pm.meetingCode,
+			pm.meetingTypeID,
+			pm.meetingTypeName,
+			pm.meetingDateTime,
+			pm.meetingRoomID,
+			pm.meetingRoomName,
+			pm.userIDList,
+			pm.userNameList,
+			pm.otherUserNameList,
+			pm.meetingStatus,
+			pm.unit_uid,
+			pm.updateUserName,
+			pm.updateDateTime,
+			pma.entityID,
+			pma.userIDList voteJuryIDList,
+			pma.userNameList voteJuryNameList,
+			pma.meetingSort,
+			pa.apply_ID,
+			pa.busiCode,
+			pa.projectName,
+			pa.operationDepartName,
+			pa.applyMeetingUserName,
+			pa.amanName,
+			pa.bmanName,
+			pa.reviewManName
+		FROM 	pro_meeting pm
+		LEFT JOIN pro_meetingApply pma ON pma.meeting_ID = pm.meeting_ID
+		LEFT JOIN pro_apply pa ON pma.entityID = pa.apply_ID
+		WHERE	1=1 ${value}
+	</select>
+	
+	<!-- 修改评审会状态  -->
+	<update id="updateMeetingStatus" parameterType="com.zjm.pro.db.model.Pro_meeting">
+		UPDATE	
+			pro_meeting
+		SET	
+			meetingStatus = #{meetingStatus}
+		WHERE 
+			meeting_ID=#{meeting_ID}
+	</update>
+	
+</mapper>  

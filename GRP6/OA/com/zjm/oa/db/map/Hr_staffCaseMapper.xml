@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.oa.db.map.Hr_staffCaseMapper">
+	<resultMap type="com.zjm.oa.db.model.Hr_staffCase" id="StaffCaseResultMap">
+		<result property="staffAccountLocation" column="staffAccountLocation" />
+		<result property="staffNational" column="staffNational" />
+		<result property="borndate" column="borndate" />
+		<result property="sex" column="sex" />
+		<result property="staffEducation" column="staffEducation" />
+		<result property="staffcase_Id" column="staffcase_Id" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="user_uid" column="user_uid" />
+		<result property="staffDocuments" column="staffDocuments" />
+		<result property="staffPhotos" column="staffPhotos" />
+		<result property="staffMarriage" column="staffMarriage" />
+		<result property="staffPolitical" column="taffPolitical" />
+		<result property="staffBirthplace" column="staffBirthplace" />
+		<result property="staffAccountLocation" column="staffAccountLocation" />		
+		<result property="staffTitle" column="staffTitle" />
+		<result property="staffGraduateInstitutions" column="staffGraduateInstitutions" />
+		<result property="staffProfessional" column="staffProfessional" />
+		<result property="startWorkDate" column="startWorkDate" />
+		<result property="joinWorkDate" column="joinWorkDate" />
+		<result property="staffType" column="staffType" />
+		<result property="staffDuty" column="StaffDuty" />
+		<result property="staffHomeTEL" column="StaffHomeTEL" />
+		<result property="staffHomeZIP" column="StaffHomeZIP" />
+		<result property="staffHomeADR" column="staffHomeADR" />
+		<result property="staffStartContractDate" column="StaffStartContractDate" />
+		<result property="staffEndContractDate" column="StaffEndContractDate" />
+		<result property="staffRegularizedDate" column="StaffRegularizedDate" />
+		<result property="staffYearHoliday" column="staffYearHoliday" />
+		<result property="staffNotes" column="StaffNotes" />
+		<result property="staffCensus" column="StaffCensus" />
+		<result property="staffPeriod" column="StaffPeriod" />
+		<result property="mobilphone" column=" mobilphone" />
+		<result property="subphone" column="subphone" />
+		<result property="remark" column="remark"/>
+		<result property="leavedate" column="leavedate" />
+		<result property="leavereason" column="leavereason" />
+		<result property="email" column="email" />
+		<result property="user_name" column="user_name" />
+		<result property="user_bh" column="user_bh" />
+		<result property="depart_name" column="depart_name" />
+	</resultMap>
+
+	<select id="selectContractBirthdayList" resultMap="StaffCaseResultMap"
+		parameterType="com.zjm.common.db.model.PageTable">
+		SELECT 
+		    u.user_name,
+		    d.depart_name,
+		    sc.borndate,  
+		    sc.StaffStartContractDate,
+		    sc.StaffEndContractDate
+	  FROM hr_staffcase sc
+			LEFT JOIN sys_users u ON sc.user_uid = u.user_uid
+			LEFT JOIN sys_dep_user du ON du.`user_uid`=u.`user_uid`
+			LEFT JOIN sys_departs d ON d.`depart_uid` = du.`depart_uid`
+		where 1=1
+		${wheresql} limit #{pageNumber},#{pageSize}
+	</select>
+
+	<select id="selectContractBirthdayCount" resultType="java.lang.Long"
+		parameterType="com.zjm.common.db.model.PageTable">
+		SELECT count(sc.user_uid) FROM hr_staffcase sc
+		LEFT JOIN sys_users u ON sc.user_uid = u.user_uid
+		LEFT JOIN sys_dep_user du ON du.`user_uid`=u.`user_uid`
+		LEFT JOIN sys_departs d ON d.`depart_uid` = du.`depart_uid`
+		where 1=1
+		${wheresql}
+	</select>
+
+    	<!-- 查询所有的员工  分页列表-->
+	<select id="selectStaffCaseTables" resultMap="StaffCaseResultMap" parameterType="com.zjm.common.db.model.PageTable">
+
+		<![CDATA[		
+		SELECT		
+		    hr.staffcase_Id,	
+			hr.sex,
+			hr.borndate,
+			hr.staffAccountLocation,
+			hr.staffNational,
+			hr.staffEducation,
+			hr.staffBirthplace,
+			hr.leavedate,
+			hr.leavereason,
+			hr.joinWorkDate,
+			hr.mobilphone,
+			hr.unit_uid,
+			u.user_name,
+			u.user_uid			
+		FROM 
+			sys_users u
+		LEFT JOIN  hr_staffCase hr     ON hr.user_uid = u.user_uid  and hr.unit_uid=u.unit_uid
+		LEFT JOIN sys_dep_user du ON du.user_uid = u.user_uid and du.unit_uid=u.unit_uid
+		LEFT JOIN sys_departs d ON d.depart_uid = du.depart_uid and du.unit_uid=d.unit_uid
+		where 1=1 ${wheresql} 	
+		 limit #{pageNumber},#{pageSize}
+		]]>
+	</select>
+	
+	
+	
+	
+	
+	
+	<!-- 查询所有的用户 分页列表 总记录数 -->
+	<select id="selectStaffCaseTables_Count" parameterType="com.zjm.common.db.model.PageTable"
+		resultType="java.lang.Long">
+	<![CDATA[
+		SELECT count(u.user_uid) 
+		FROM sys_users u
+		LEFT JOIN sys_dep_user du ON du.user_uid = u.user_uid 
+		LEFT JOIN sys_departs d ON d.depart_uid = du.depart_uid
+		 where 1=1 ${wheresql} ]]>
+	</select>
+	<!-- 查询一条职员的基本信息 -->
+	<select id="selectOneStaffCaseInfo" parameterType="com.zjm.oa.db.model.Hr_staffCase"
+		resultMap="StaffCaseResultMap">
+	<![CDATA[
+		SELECT
+			user.unit_uid,
+			user.user_uid,
+			user.user_name,
+			user.user_bh,
+			hr.staffDocuments,
+			hr.staffcase_Id,
+			hr.staffPhotos,
+			hr.staffMarriage,
+			hr.staffPolitical,
+			hr.staffBirthplace,
+			hr.staffNational,
+			hr.staffAccountLocation,
+			hr.staffEducation,
+			hr.staffTitle,
+			hr.staffGraduateInstitutions,
+			hr.staffProfessional,
+			hr.startWorkDate,
+			hr.joinWorkDate,
+			hr.staffType,
+			hr.staffDuty,
+			hr.staffHomeTEL,
+			hr.staffHomeZIP,
+			hr.staffHomeADR,
+			hr.staffStartContractDate,
+			hr.staffEndContractDate,
+			hr.staffRegularizedDate,
+			hr.staffYearHoliday,
+			hr.staffNotes,
+			hr.staffCensus,
+			hr.staffPeriod,
+			hr.mobilphone,
+			hr.subphone,
+			hr.remark,
+			hr.borndate,
+			hr.email,
+			hr.sex
+		FROM
+			sys_users user
+		LEFT JOIN hr_staffCase hr
+		ON hr.user_uid = user.user_uid
+		WHERE 1=1 and user.user_uid =#{user_uid}
+		and user.user_name  =#{user_name}
+		
+		]]>
+	</select>
+	
+	<!-- 查询一条职员的基本信息(职工表作为主表查询) -->
+	<select id="selectOneStaffCaseInfo1" parameterType="com.zjm.oa.db.model.Hr_staffCase"
+		resultMap="StaffCaseResultMap">
+	<![CDATA[
+		SELECT
+			user.unit_uid,
+			user.user_uid,
+			user.user_name ,
+			user.user_bh ,
+			hr.staffDocuments,
+			hr.staffcase_Id,
+			hr.staffPhotos,
+			hr.staffMarriage,
+			hr.staffPolitical,
+			hr.staffBirthplace,
+			hr.staffNational,
+			hr.staffAccountLocation,
+			hr.staffEducation,
+			hr.staffTitle,
+			hr.staffGraduateInstitutions,
+			hr.staffProfessional,
+			hr.startWorkDate,
+			hr.joinWorkDate,
+			hr.staffType,
+			hr.staffDuty,
+			hr.staffHomeTEL,
+			hr.staffHomeZIP,
+			hr.staffHomeADR,
+			hr.staffStartContractDate,
+			hr.staffEndContractDate,
+			hr.staffRegularizedDate,
+			hr.staffYearHoliday,
+			hr.staffNotes,
+			hr.staffCensus,
+			hr.staffPeriod,
+			hr.mobilphone,
+			hr.subphone,
+			hr.remark,
+			hr.borndate,
+			hr.email,
+			hr.sex
+		FROM
+			hr_staffCase hr
+		LEFT JOIN  sys_users user
+		ON hr.user_uid = user.user_uid
+		WHERE 1=1 and user.user_uid =#{user_uid}
+		and user.user_name  =#{user_name}
+		
+		]]>
+	</select>
+	
+	
+	
+	<!-- 判断名称是否纯在 -->
+	<select id="selectStaffCaseNameIsExist" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+	<![CDATA[
+		SELECT count(staffcase_Id) FROM hr_staffCase 
+		WHERE 1=1 ${value} 		
+		]]>
+	</select>
+
+	<!-- 更新信息 -->
+	<update id="updateOneStaffCaseInfo" parameterType="com.zjm.oa.db.model.Hr_staffCase">
+		
+		UPDATE 
+		  hr_staffcase		
+		
+			set
+
+        staffDocuments = #{staffDocuments},
+        staffMarriage = #{staffMarriage},
+        staffBirthplace = #{staffBirthplace},
+        staffPolitical = #{staffPolitical},
+        staffNational = #{staffNational},
+        mobilphone = #{mobilphone},      
+        sex = #{sex},      
+        email = #{email},      
+        staffAccountLocation = #{staffAccountLocation},
+        staffEducation = #{staffEducation},
+        staffTitle = #{staffTitle},
+        staffGraduateInstitutions = #{staffGraduateInstitutions},
+        staffProfessional = #{staffProfessional},
+        startWorkDate = #{startWorkDate},
+        joinWorkDate = #{joinWorkDate},
+        staffType = #{staffType},     
+        staffDuty = #{staffDuty},
+        staffHomeTEL = #{staffHomeTEL},
+        staffHomeZIP = #{staffHomeZIP},
+        staffHomeADR = #{staffHomeADR},
+        staffStartContractDate = #{staffStartContractDate},
+        staffEndContractDate = #{staffEndContractDate},
+        staffRegularizedDate = #{staffRegularizedDate},
+        staffYearHoliday = #{staffYearHoliday},
+        staffNotes = #{staffNotes},
+        staffCensus = #{staffCensus},
+        staffPeriod = #{staffPeriod},
+        subphone = #{subphone},
+        remark = #{remark},
+        borndate = #{borndate},
+        leavedate=#{leavedate},
+          leavereason=#{leavereason}
+		WHERE staffcase_Id=#{staffcase_Id}
+
+	</update>
+
+<!-- 更新信息离职员工 -->
+	<update id="updateOneDismissonInfo" parameterType="com.zjm.oa.db.model.Hr_staffCase">
+		
+		UPDATE 
+		  hr_staffcase			
+			set
+        leavedate=#{leavedate},
+          leavereason=#{leavereason}
+		WHERE staffcase_Id=#{staffcase_Id}
+
+	</update>
+
+
+	<!-- 插入 -->
+	<insert id="insertOneStaffCaseInfo" parameterType="com.zjm.oa.db.model.Hr_staffCase">
+		<![CDATA[
+			 insert into hr_staffcase(
+					staffAccountLocation,
+					staffNational,
+					borndate,
+					sex,
+					staffPhotos,
+					staffEducation,
+					staffCase_ID,
+					unit_uid,
+					user_uid,
+					staffDocuments,
+					staffMarriage,
+					staffPolitical,
+					staffBirthplace,
+					staffTitle,
+					staffGraduateInstitutions,
+					staffProfessional,
+					startWorkDate,
+					staffHomeADR,
+					joinWorkDate,
+					staffType,
+					staffDuty,
+					staffHomeTEL,
+					staffHomeZIP,
+					staffStartContractDate,
+					staffEndContractDate,
+					staffRegularizedDate,
+					staffYearHoliday,
+					staffNotes,
+					staffCensus,
+					staffPeriod,
+					mobilphone,
+					subphone,
+					remark,
+					leavedate,
+					leavereason,
+					email
+					
+					
+			) 
+			values (
+					#{staffAccountLocation},
+					#{staffNational},
+					#{borndate},
+					#{sex},
+					#{staffPhotos},
+					#{staffEducation},
+					#{staffcase_Id}, 
+				    #{unit_uid},
+				    #{user_uid},
+				     #{staffDocuments},
+				    #{staffMarriage},
+				    #{staffPolitical},			      
+				    #{staffBirthplace},
+				    #{staffTitle}, 
+				    #{staffGraduateInstitutions},
+				    #{staffProfessional},
+				    #{startWorkDate},
+				    #{staffHomeADR},
+				     #{joinWorkDate},
+				    #{staffType}, 
+				    #{staffDuty},
+				    #{staffHomeTEL},
+				    #{staffHomeZIP},
+				   #{staffStartContractDate}, 
+				   #{staffEndContractDate},
+				   #{staffRegularizedDate},
+				   #{staffYearHoliday},
+				   #{staffNotes}, 
+				   #{staffCensus}, 
+				   #{staffPeriod},
+				   #{mobilphone}, 
+				   #{subphone}, 
+				   #{remark},
+				   #{leavedate},
+				   #{leavereason},
+				   #{email}
+				    
+				    
+			)
+		
+		]]>
+	</insert>
+	
+	
+	
+	
+	<!-- 删除一个员工 -->
+	<delete id="deleteOneStaffCaseInfo" parameterType="com.zjm.oa.db.model.Hr_staffCase">
+		<![CDATA[DELETE FROM Hr_staffcase WHERE staffcase_Id=#{staffcase_Id}  ]]>
+	</delete>
+	
+
+
+</mapper>

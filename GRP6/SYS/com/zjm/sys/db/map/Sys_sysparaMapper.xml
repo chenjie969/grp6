@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.sys.db.map.Sys_sysparaMapper">
+
+	<resultMap type="com.zjm.sys.db.model.Sys_syspara" id="sysparaResultMap">
+		<result property="syspara_ID" column="syspara_ID" />
+		<result property="praraID" column="praraID" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="paraName" column="paraName" />
+		<result property="paraValue" column="paraValue" />
+		<result property="dataType" column="dataType" />
+		<result property="updatedatetime" column="updatedatetime" />
+		<result property="update_user" column="update_user" />
+		<result property="isedit" column="isedit" />
+		<result property="remarks" column="remarks" />
+	</resultMap>
+
+	<!-- 查询系统参数分页列表 -->
+	<select id="selectSysparaPageTables" parameterType="com.zjm.common.db.model.PageTable"
+		resultMap="sysparaResultMap">
+		<![CDATA[
+		SELECT
+		  syspara_ID,
+		  praraID,
+		  unit_uid,
+		  paraName,
+		  paraValue,
+		  dataType,
+		  updatedatetime,
+		  update_user,
+		  isedit,
+		  remarks
+		
+	FROM c_syspara 
+	
+	where 1=1 ${wheresql}   limit #{pageNumber},#{pageSize}]]>
+	</select>
+
+	<!-- 查询系统参数 分页列表 总记录数 -->
+	<select id="selectSysparaPageTables_Count" parameterType="com.zjm.common.db.model.PageTable"
+		resultType="java.lang.Long">
+		<![CDATA[SELECT count(syspara_ID) FROM c_syspara where 1=1 ${wheresql} ]]>
+	</select>
+	
+	<!-- 查询一个系统参数消息 -->
+	<select id="selectOneSysparaInfo" parameterType="java.lang.String"
+		resultMap="sysparaResultMap">
+		<![CDATA[
+		SELECT
+		  syspara_ID,
+		  praraID,
+		  unit_uid,
+		  paraName,
+		  paraValue,
+		  dataType,
+		  updatedatetime,
+		  update_user,
+		  isedit,
+		  remarks
+		
+	FROM c_syspara 
+	
+	where 1=1 ${value}]]>
+	</select>
+	
+	<!-- 更新一个系统参数信息信息 -->
+	<update id="updateOneSysparaInfo" parameterType="com.zjm.sys.db.model.Sys_syspara">
+		<![CDATA[
+		UPDATE 
+		  c_syspara
+		SET
+		  paraName = #{paraName},
+		  paraValue = #{paraValue},
+		  dataType = #{dataType},
+		  updatedatetime = NOW(),
+		  update_user = #{update_user},
+		  remarks = #{remarks}
+		WHERE syspara_ID = #{syspara_ID}
+		  ]]>
+	</update>
+</mapper>  

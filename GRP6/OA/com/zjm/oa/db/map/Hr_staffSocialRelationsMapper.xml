@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.oa.db.map.Hr_staffSocialRelationsMapper">
+	<resultMap type="com.zjm.oa.db.model.Hr_staffSocialRelations" id="relationResultMap">	
+	
+		<result property="socialID" column="SocialID" />
+		<result property="staffcase_Id" column="staffcase_Id" />
+		<result property="socialName" column="SocialName" />
+		<result property="socialSex" column="SocialSex" />
+		<result property="socialAge" column="SocialAge" />
+		<result property="socialAddress" column="SocialAddress" />
+		<result property="socialUnits" column="socialUnits" />
+		<result property="socialDuty" column="SocialDuty" />
+		<result property="socialNotes" column="SocialNotes" />	
+		<result property="socialType" column="SocialType" />	
+	</resultMap>  
+    	<!-- 查询所有的员工  分页列表-->
+	<select id="selectrelationListByCase_ID" resultMap="relationResultMap" parameterType="java.lang.String">      
+		<![CDATA[
+		SELECT	
+			SocialID,
+			staffCase_ID,
+			SocialName,
+			SocialSex,
+			SocialAge,
+			SocialType,
+			SocialAddress,
+			socialUnits,
+			SocialDuty,
+			SocialNotes		
+		FROM 
+			hr_staffsocialrelations 
+		 where staffcase_Id = #{staffcase_Id}
+		]]>
+	</select>
+
+<!--根据岗位ID查询  -->
+<select id="selectBySocialId" resultMap="relationResultMap" parameterType="java.lang.String">
+		<![CDATA[
+		SELECT	
+			SocialID,
+			staffCase_ID,
+			SocialName,
+			SocialSex,
+			SocialAge,
+			SocialType,
+			SocialAddress,
+			socialUnits,
+			SocialDuty,
+			SocialNotes				
+		FROM 
+			hr_staffsocialrelations 
+		 where socialID = #{socialID}
+		]]>
+	</select>
+
+<!-- 增加一条数据 -->
+ <insert id="insertSocialrelation" parameterType="com.zjm.oa.db.model.Hr_staffSocialRelations" >
+		<![CDATA[
+		INSERT INTO hr_staffsocialrelations (
+			SocialID,
+			staffCase_ID,
+			SocialName,
+			SocialSex,
+			SocialAge,
+			SocialType,
+			SocialAddress,
+			socialUnits,
+			SocialDuty,
+			SocialNotes		
+		)
+		VALUES (	
+			#{socialID},	
+		#{staffcase_Id},
+			#{socialName},
+			#{socialSex},
+			#{socialAge},
+			#{socialType},
+			#{socialAddress},
+			#{socialUnits},
+			#{socialDuty},			
+			#{socialNotes}
+		)
+		]]>
+	</insert>		
+<!--修改一条数据  -->
+  <update id="updateSocial" parameterType="com.zjm.oa.db.model.Hr_staffSocialRelations" >
+    update hr_staffsocialrelations
+  set
+  		SocialSex=#{socialSex},
+  		socialAge=#{socialAge},
+  		socialType=#{socialType},
+        socialNotes = #{socialNotes},
+        socialDuty = #{socialDuty},
+        socialUnits=#{socialUnits},
+        socialAddress = #{socialAddress},
+        socialName = #{socialName}
+    where socialID = #{socialID}
+  </update>
+
+</mapper>

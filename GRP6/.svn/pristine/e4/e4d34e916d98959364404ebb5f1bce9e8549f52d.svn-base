@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><jatools Class="jatools.ReportDocument" Name="jatools report template"><VariableContext/><Page><Children ItemClass="PagePanel"><Item0><Width>1347</Width><Height>154</Height><Children><Item0 Class="Label"><Text>资金来源为非银机构前30大客户名录</Text><Font><Face>宋体</Face><Style>1</Style><Size>36</Size></Font><HorizontalAlignment>1</HorizontalAlignment><X>230</X><Width>671</Width><Height>71</Height></Item0><Item1 Class="Label"><Text>（不含融投系内委贷）</Text><X>507</X><Y>73</Y><Width>128</Width><Height>29</Height></Item1><Item2 Class="Label"><Text>金额单位：亿元</Text><HorizontalAlignment>2</HorizontalAlignment><X>968</X><Y>127</Y><Width>110</Width><Height>23</Height></Item2><Item3 Class="Label"><Text>集团风险管理部</Text><X>103</X><Y>127</Y><Width>122</Width><Height>23</Height></Item3><Item4 Class="Label"><Text>统计期间：</Text><X>416</X><Y>105</Y><Width>56</Width><Height>23</Height></Item4><Item5 Class="Label"><Text>至</Text><HorizontalAlignment>1</HorizontalAlignment><X>583</X><Y>105</Y><Width>26</Width><Height>23</Height></Item5><Item6 Class="Text"><Variable>=if(has(begindatesql)) return begindatesql;</Variable><HorizontalAlignment>1</HorizontalAlignment><X>473</X><Y>105</Y><Width>110</Width><Height>23</Height></Item6><Item7 Class="Text"><Variable>=if(has(enddatesql)) return enddatesql;else return $today;</Variable><X>610</X><Y>105</Y><Width>110</Width><Height>23</Height></Item7><Item8 Class="Label"><Text>填报单位：</Text><X>39</X><Y>127</Y><Width>56</Width><Height>23</Height></Item8></Children><Type>100</Type></Item0><Item1><Y>813</Y><Width>1347</Width><Height>25</Height><Type>103</Type></Item1><Item2><Name>合计</Name><Y>154</Y><Width>1347</Width><Height>659</Height><Children ItemClass="Table"><Item0><NodePath>tab_month_detail</NodePath><X>40</X><Y>4</Y><Children><Item0 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>4</Col></Cell></Item0><Item1 Class="RowPanel"><Cell><Row>1</Row><Col>0</Col><ColSpan>5</ColSpan></Cell><Children ItemClass="Text"><Item0><Variable>=$.position + 1</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>0</Col></Cell></Item0><Item1><Variable>=$.clientName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>1</Col></Cell></Item1><Item2><Variable>=$.loadSum/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>3</Col></Cell></Item2><Item3><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>4</Col></Cell></Item3><Item4><Variable>=$.fundName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>2</Col></Cell></Item4></Children><NodePath>Row</NodePath></Item1><Item2 Class="Label"><Text>备注</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>0</Row><Col>4</Col></Cell></Item2><Item3 Class="Label"><Text>担保金额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>0</Row><Col>3</Col></Cell></Item3><Item4 Class="Label"><Text>客户名称</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>0</Row><Col>1</Col></Cell></Item4><Item5 Class="Label"><Text>序号</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>0</Row><Col>0</Col></Cell></Item5><Item6 Class="Text"><Variable>=$.loadSum.sum()/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>3</Col></Cell></Item6><Item7 Class="Label"><Text>合计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>0</Col><ColSpan>3</ColSpan></Cell></Item7><Item8 Class="Label"><Text>资金方名称</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>2</Col></Cell></Item8></Children><ColumnWidths>110,156,168,216,364</ColumnWidths><RowHeights>30,30,30</RowHeights></Item0></Children><Type>102</Type></Item2></Children><PageFormat><Width>1383</Width><Height>874</Height><Left>18</Left><Top>18</Top><Right>18</Right><Bottom>18</Bottom></PageFormat></Page><NodeSource><Children ItemClass="DatasetNodeSource"><Item0><Children ItemClass="RowNodeSource"><Item0/></Children><Reader Class="SqlReader"><Name>tab_month_detail</Name><Sql>SELECT 
+cc.clientName,
+pa.fundName,
+SUM(IFNULL(pp.loadSum,0)) AS loadSum
+FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pa.apply_ID = pp.apply_ID
+LEFT JOIN pro_applydetail pad ON pad.apply_ID = pa.apply_ID
+LEFT JOIN crm_client cc ON pa.client_ID = cc.client_ID
+WHERE 1=1 AND
+cc.isMainVersion = 0 AND pa.fundType='非银行' 
+AND pad.busiClass = '01'
+${has(begindatesql)?(" and pp.delayBeginDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and pp.delayEndDate&lt;='"+enddatesql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+
+GROUP BY cc.clientGUID
+order by cc.clientName
+ LIMIT 30
+ </Sql><Description>SELECT 
+cc.clientName,
+pa.fundName,
+SUM(IFNULL(pp.loadSum,0)) AS loadSum
+FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pa.apply_ID = pp.apply_ID
+LEFT JOIN pro_applydetail pad ON pad.apply_ID = pa.apply_ID
+LEFT JOIN crm_client cc ON pa.client_ID = cc.client_ID
+WHERE 1=1 AND
+cc.isMainVersion = 0 AND pa.fundType='非银行' 
+AND pad.busiClass = '01'
+${has(begindatesql)?(" and pp.delayBeginDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and pp.delayEndDate&lt;='"+enddatesql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+
+GROUP BY cc.clientGUID
+order by cc.clientName
+ LIMIT 30
+ </Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><TagName>tab_month_detail</TagName></Item0></Children></NodeSource></jatools>

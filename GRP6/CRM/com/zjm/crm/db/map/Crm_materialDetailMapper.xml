@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.crm.db.map.Crm_materialDetailMapper">
+	
+	<!-- -->
+	<resultMap type="com.zjm.crm.db.model.Crm_materialDetail" id="MaterialDetailMap">
+		<id property="materialDetail_ID" column="materialDetail_ID" />
+		<result property="materialTree_ID" column="materialTree_ID" />
+		<result property="materialModel_ID" column="materialModel_ID" />
+		<result property="materialTreeName" column="materialTreeName" />
+		<result property="materialName" column="materialName" />
+		<result property="materialType" column="materialType" />
+		<result property="order_id" column="order_id" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="unit_uidName" column="unit_uidName" />
+		<result property="updateUserName" column="updateUserName" />
+		<result property="updateDateTime" column="updateDateTime" />
+	</resultMap>
+
+		<!-- 客户资料明细表列表  -->
+	<select id="selectMaterialDetailList" resultMap="MaterialDetailMap">
+		<![CDATA[
+			SELECT
+				materialDetail_ID,
+				materialTree_ID,
+				materialModel_ID,
+				materialTreeName,
+				materialName,
+				materialType,
+				order_id,
+				unit_uid,
+				unit_uidName,
+				updateUserName,
+				updateDateTime
+
+								
+			FROM
+				crm_materialDetail
+			WHERE 1=1 ${value} 
+		]]>
+	</select>
+	<!-- 新增 一条 客户资料记录-->
+	<insert id="insertOneMaterialDetail" parameterType="com.zjm.crm.db.model.Crm_materialDetail">
+		<![CDATA[
+		INSERT INTO crm_materialDetail (
+		      	materialDetail_ID,
+				materialTree_ID,
+				materialModel_ID,
+				materialTreeName,
+				materialName,
+				materialType,
+				order_id,
+				unit_uid,
+				unit_uidName,
+				updateUserName,
+				updateDateTime
+		)
+		VALUES
+		(
+			#{materialDetail_ID},
+			#{materialTree_ID},
+			#{materialModel_ID},
+			#{materialTreeName},
+			#{materialName},
+			#{materialType},
+			#{order_id},
+			#{unit_uid},
+			#{unit_uidName},
+			#{updateUserName},
+			NOW()		
+		) ;
+		]]>
+	</insert>
+	<!-- 查询  客户资料列表 -->
+	<select id="selectMaterialDetailPageTable" resultMap="MaterialDetailMap" parameterType="com.zjm.common.db.model.PageTable">
+		<![CDATA[
+		SELECT
+				materialDetail_ID,
+				materialTree_ID,
+				materialModel_ID,
+				materialTreeName,
+				materialName,
+				materialType,
+				order_id,
+				unit_uid,
+				unit_uidName,
+				updateUserName,
+				updateDateTime
+		   FROM
+		   crm_materialDetail		   
+		WHERE 1=1 ${wheresql} 
+		ORDER BY ${sortName} ${sortOrder}
+		limit #{pageNumber},#{pageSize}	
+		]]>
+	</select>
+	<!-- 查询 客户资料 列表 总记录数-->
+	<select id="selectMaterialDetailPageTable_Count" parameterType="com.zjm.common.db.model.PageTable"  resultType="java.lang.Long">
+		<![CDATA[
+		SELECT count(materialDetail_ID) FROM crm_materialDetail
+		WHERE 1=1 ${wheresql} 		
+		]]>		 
+	</select>
+	<!--  -->
+	<!-- 查看一条客户资料名称记录  -->
+	<select id="selectOneMaterialDetailByWheresql" parameterType="java.lang.String"  resultMap="MaterialDetailMap">
+	<![CDATA[
+		SELECT 
+	        	materialDetail_ID,
+				materialTree_ID,
+				materialModel_ID,
+				materialTreeName,
+				materialName,
+				materialType,
+				order_id,
+				unit_uid,
+				unit_uidName,
+				updateUserName,
+				updateDateTime
+		       
+	    FROM 
+	         crm_materialDetail 
+		WHERE 1=1 ${value}
+		limit 1 
+		]]> 				 
+	</select>
+	
+	<!--根据wheresql删除客户资料名称表信息 -->
+	<delete id="deleteOneMaterialDetailBySql" parameterType="java.lang.String">
+		<![CDATA[DELETE FROM crm_materialDetail WHERE 1=1 ${value} ]]>
+	</delete>
+	<!--  -->
+	<!-- 更新一个客户资料列表 信息  -->	
+	<update id="updateOneMaterialDetail" parameterType="com.zjm.crm.db.model.Crm_materialDetail">
+		UPDATE 
+		     crm_materialDetail
+		<set >
+					<if test="materialTreeName != null" >materialTreeName = #{materialTreeName},</if>
+					<if test="materialName != null" >materialName = #{materialName},</if>
+					<if test="materialType != null" >materialType = #{materialType},</if>
+					<if test="order_id != null" >order_id = #{order_id},</if>
+					<if test="unit_uid != null" >unit_uid = #{unit_uid},</if>
+				    <if test="unit_uidName != null" >unit_uidName = #{unit_uidName},</if>
+					<if test="updateUserName != null" >updateUserName = #{updateUserName},</if>
+				 updateDateTime = NOW()
+			</set>
+		WHERE materialDetail_ID=#{materialDetail_ID} 
+	</update>
+	
+	
+	
+	
+	
+	
+	
+</mapper>

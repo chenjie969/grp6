@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.sys.db.map.Sys_role_functionMapper">
+
+	<!-- 插入一个功能与角色关联表信息 -->
+	<insert id="insertOneFunctionAndRolesInfo"	parameterType="com.zjm.sys.db.model.Sys_role_function">
+		<![CDATA[
+		INSERT INTO sys_roles_function (
+		role_uid,
+		unit_uid,
+		fun_id
+		)
+		VALUES
+		(
+		#{role_uid},
+		#{unit_uid},
+		#{fun_id}
+		) ;
+		]]>
+	</insert>
+	<!-- 删除一个功能与角色关联表信息 -->
+	<delete id="delectFunctionAndRolesInfo" parameterType="com.zjm.sys.db.model.Sys_roles">
+		<![CDATA[DELETE FROM sys_roles_function WHERE role_uid=#{role_uid}  and unit_uid=#{unit_uid}  ]]>
+	</delete>
+</mapper>  

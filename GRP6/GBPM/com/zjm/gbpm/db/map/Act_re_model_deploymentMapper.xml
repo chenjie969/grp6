@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.gbpm.db.map.Act_re_model_deploymentMapper">
+
+	<!-- activiti模型与部署关系表信息 -->
+	<resultMap type="com.zjm.gbpm.db.model.Act_re_model_deployment" id="ModelDeploymentResultMap">
+		<result property="deploymentID" column="deploymentID" />
+		<result property="modelID" column="modelID" />
+		<result property="unit_uid" column="unit_uid" />
+	</resultMap>
+	<!-- 插入一个activiti模型与部署关系信息 -->
+	<insert id="insertOneModelDeploymentInfo"	parameterType="com.zjm.gbpm.db.model.Act_re_model_deployment">
+		<![CDATA[
+		INSERT INTO act_re_model_deployment (
+		deploymentID,
+		modelID,
+		unit_uid
+		)
+		VALUES
+		(
+		#{deploymentID},
+		#{modelID},
+		#{unit_uid}
+		) ;
+		]]>
+	</insert>
+	<!-- 查询一个activiti模型与部署关系信息-->
+	<select id="selectOneModelDeploymentInfo" parameterType="com.zjm.gbpm.db.model.Act_re_model_deployment"  resultMap="ModelDeploymentResultMap">
+	<![CDATA[
+		SELECT * FROM act_re_model_deployment 
+		WHERE deploymentID=#{deploymentID}  and unit_uid=#{unit_uid} and modelID=#{modelID}
+		]]> 				 
+	</select>
+	
+	<!-- 删除一个activiti模型与部署关系信息 -->
+	<delete id="delectOneModelDeploymentInfo" parameterType="com.zjm.gbpm.db.model.Act_re_model_deployment">
+		<![CDATA[DELETE FROM act_re_model_deployment WHERE deploymentID=#{deploymentID}  and unit_uid=#{unit_uid} and modelID=#{modelID}  ]]>
+	</delete>
+	<!-- 查询activiti模型与部署关系List-->
+	<select id="selectModelDeploymentList" parameterType="java.lang.String"  resultMap="ModelDeploymentResultMap">
+	<![CDATA[
+		SELECT * FROM act_re_model_deployment WHERE 1=1 ${value} 
+		]]>
+	</select>
+</mapper>  

@@ -1,0 +1,259 @@
+package com.zjm.crm.relationMain.service.impl;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.zjm.common.db.model.PageTable;
+import com.zjm.common.db.model.User;
+import com.zjm.common.log.service.LogService;
+import com.zjm.crm.client.service.ClientService;
+import com.zjm.crm.db.map.Crm_client_relationMainMapper;
+import com.zjm.crm.db.map.Crm_relationMainMapper;
+import com.zjm.crm.db.model.Client;
+import com.zjm.crm.db.model.Crm_client_relationMain;
+import com.zjm.crm.db.model.Crm_relationMain;
+import com.zjm.crm.relationClient.service.RelationClientService;
+import com.zjm.crm.relationMain.service.RelationMainService;
+
+@Service("relationMainService")
+@Transactional
+public class RelationMainServiceImpl implements RelationMainService {
+
+	@Resource
+	private Crm_relationMainMapper crm_relationMainMapper;
+	@Resource
+	private Crm_client_relationMainMapper crm_client_relationMainMapper;
+	@Resource
+	private LogService logService;
+	@Resource
+	private ClientService clientService;
+	@Resource
+	private RelationClientService relationClientService;
+	
+	/**
+	 * 分页查询关联主体列表
+	 */
+	@Override
+	public PageTable selectRelationMainPageTables(PageTable pageTable) {
+		try {
+			List<Crm_relationMain> mlist = crm_relationMainMapper.selectRelationMainPageTables(pageTable);
+			/*List<Crm_client_relationMain> cmlist = new ArrayList<>();
+			for (Crm_relationMain rm : mlist) {
+				cmlist = crm_client_relationMainMapper.selectClientByRelationMain_ID(rm.getRelationMain_ID());
+				rm.setCmlist(cmlist);
+			}*/
+			pageTable.setRows(mlist);
+			Long total = crm_relationMainMapper.selectRelationMainPageTables_count(pageTable);
+			pageTable.setTotal(total);
+			return pageTable;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * 插入一个关联主体
+	 */
+	@Override
+	public Boolean insertOneRelationMain(User user,Crm_relationMain relationMain) {
+		try {
+			// 插入一个关联主体，返回其自增主键ID，自动保存在传入的对象中
+			Integer s1 = crm_relationMainMapper.insertOneRelationMain(relationMain); 
+			//更新关联主体客户在crm_client表中的relationMainName值
+			Client client = new Client();
+			client.setClient_ID(relationMain.getClientID());
+			client.setRelationMainName(relationMain.getRelationMainName());
+			clientService.updateRelationMainName(client);
+			//各企业相互添加关联关系
+			Boolean insertEachCompanyRelationFlag = relationClientService.insertRelationEachCompany(user, relationMain);
+			Boolean flag = insertOneClient_relationMain(relationMain);
+			if(s1==1 && flag && insertEachCompanyRelationFlag){
+				logService.insertOneOperatorLogInfo(user,"关联主体", "添加", relationMain.getRelationMainName());
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	/**
+	 * 判断主体名是否重复
+	 */
+	@Override
+	public Boolean isExistMainName(Crm_relationMain relationMain) {
+		Integer exist = crm_relationMainMapper.isExistMainName(relationMain);
+		if(exist == 0){	
+			return true;	//查询结果为0，不存在重名，可用，返回true
+		}else{
+			return false;
+		}
+	}
+
+	/**
+	 * 批量删除关联主体
+	 */
+	@Override
+	public Boolean batchDeleteRelationMainByIDs(User user,Crm_relationMain relationMain) {
+		try {
+			//获取所有要删除的主体名称，用于记录操作日志
+			String[] delIDs = relationMain.getRelationMainIDs();
+			List<String> delNames = new ArrayList<>();
+			for (String id : delIDs) {
+				delNames.add(crm_relationMainMapper.selectRelationMainNameByID(id));
+			}
+			
+			//把该关联主体下的所有企业在crm_client表中的relationMainName设置成null
+			Client tempC = new Client();
+			tempC.setRelationMainName(null);
+			for (String relationMainID : delIDs) {
+				Crm_relationMain tempR = new Crm_relationMain();
+				tempR.setRelationMain_ID(relationMainID);
+				tempR.setUnit_uid(user.getUnit_uid());
+				tempR = selectOneRelationMainById(tempR);
+				tempC.setClient_ID(tempR.getClientID());
+				clientService.updateRelationMainName(tempC);
+				List<Crm_client_relationMain> cmlist = tempR.getCmlist();
+				for (Crm_client_relationMain crm_client_relationMain : cmlist) {
+					tempC.setClient_ID(crm_client_relationMain.getClient_ID());
+					clientService.updateRelationMainName(tempC);
+				}
+			}
+			
+			//删除关联主体时，除了删除crm_relationmain的数据，还要删除crm_client_relationmain中的关联关系
+			crm_client_relationMainMapper.deleteRelationByID(relationMain);
+			Integer idNum1 = relationMain.getRelationMainIDs().length;		//页面传来的ID数量
+			Integer idNum2 = crm_relationMainMapper.batchDeleteRelationMainByIDs(relationMain);  	//成功删除的条数
+			
+			if(idNum1 == idNum2){
+				for (String name : delNames) {
+					logService.insertOneOperatorLogInfo(user,"关联主体","删除", name);
+				}
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	/**
+	 * 根据ID查询一个关联主体
+	 */
+	@Override
+	public Crm_relationMain selectOneRelationMainById(Crm_relationMain relationMain) {
+		relationMain = crm_relationMainMapper.selectOneRelationMainById(relationMain);
+		relationMain.setCmlist(crm_client_relationMainMapper.selectClientByRelationMain_ID(relationMain.getRelationMain_ID()));
+		return relationMain;
+	}
+
+	/**
+	 * 更新一个关联主体
+	 */
+	@Override
+	public Boolean updateOneRelationMain(User user,Crm_relationMain newRelationMain) {
+		// 更新crm_client表中的relationMainName
+		Client c = new Client();
+		//先把原来的主体客户在crm_client表中的relationMainName设置成null
+		Crm_relationMain oldRelationMain = selectOneRelationMainById(newRelationMain);
+		c.setRelationMainName(null);
+		c.setClient_ID(oldRelationMain.getClientID());
+		clientService.updateRelationMainName(c);	
+		//再设置新的主体客户在crm_client表中的relationMainName
+		c.setRelationMainName(newRelationMain.getRelationMainName());
+		c.setClient_ID(newRelationMain.getClientID());
+		clientService.updateRelationMainName(c);	
+		// 把原来的关联企业在crm_client表中的relationMainName设置成null
+		List<Crm_client_relationMain> oldCmlist = oldRelationMain.getCmlist();
+		for (Crm_client_relationMain crm_client_relationMain : oldCmlist) {
+			c.setClient_ID(crm_client_relationMain.getClient_ID());
+			c.setRelationMainName(null);
+			clientService.updateRelationMainName(c);
+		}
+		
+		// 更新主体表 crm_relationmain
+		Integer s1 = crm_relationMainMapper.updateOneRelationMain(newRelationMain);
+		//更新各企业关联表crm_relationClient 做法是先删后增
+		relationClientService.deleteEachCompany(oldCmlist);
+		Boolean flagInsertEachClient = relationClientService.insertRelationEachCompany(user, newRelationMain);
+		// 更新中间表 crm_client_relationmain，做法是 先删再新增
+		String[] relationMainIds = {newRelationMain.getRelationMain_ID()};
+		newRelationMain.setRelationMainIDs(relationMainIds);
+		crm_client_relationMainMapper.deleteRelationByID(newRelationMain);
+		Boolean flag = insertOneClient_relationMain(newRelationMain);
+		if(s1==1 && flag && flagInsertEachClient){
+			logService.insertOneOperatorLogInfo(user,"关联主体", "修改", newRelationMain.getRelationMainName());
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	/**
+	 * 功能函数，插入或更新crm_relationmain表时同时插入crm_client_relationmain表 
+	 * 
+	 * --2017/9/12新增:在crm_client中加入relationMainName字段, 保存时将关联主体下的企业都设置上该值 
+	 */
+	private Boolean insertOneClient_relationMain(Crm_relationMain relationMain){
+		// 判断新增主体时是否选择了关联企业
+		boolean flag = false;	// flag表示crm_client_relationMain中插入数据的条数与页面传来的关联企业数量是否相等，若不相等表示有插入错误，返回FALSE
+		try {
+			if(!"".equals(relationMain.getClientIDs())){
+				String[] clientIds = relationMain.getClientIDs().split(",");
+				String[] clientNames = relationMain.getClientNames().split(",");
+				int s2 = 0;
+				Client client = new Client();
+				client.setRelationMainName(relationMain.getRelationMainName());
+				for(int i=0 ; i < clientIds.length; i++){
+					Crm_client_relationMain cm = new Crm_client_relationMain();
+					cm.setClient_ID(clientIds[i]);
+					cm.setClientName(clientNames[i]);
+					cm.setRelationMain_ID(relationMain.getRelationMain_ID());
+					cm.setRelationDesc(relationMain.getRemark());
+					cm.setUpdateUserName(relationMain.getUpdateUserName());
+					cm.setUnit_uid(relationMain.getUnit_uid());
+					cm.setUnit_uidName(relationMain.getUnit_uidName());
+					s2 += crm_client_relationMainMapper.insertOneClient_relationMain(cm);
+					
+					client.setClient_ID(clientIds[i]);
+					clientService.updateRelationMainName(client);
+					
+				}
+				if(s2==clientIds.length)
+					flag = true;
+			}else{
+				flag = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return flag;
+	}
+	
+	/**
+	 * 批量 移出重点项目
+	 */
+	public Boolean removeKeyProject(User user,Crm_relationMain relationMain){
+		try {
+			relationMain.setProjectTypeID("504eb19d1e4440deb70934ee195c559e");
+			relationMain.setProjectTypeName("正常项目");
+			Integer result = crm_relationMainMapper.removeKeyProject(relationMain);
+			if(result==relationMain.getRelationMainIDs().length){
+				String names = Arrays.toString(relationMain.getRelationMainNames());
+				int total = relationMain.getRelationMainIDs().length;
+				logService.insertOneOperatorLogInfo(user, "集团/关联关系", "移出重点项目", "将"+names+"共"+total+"条移出重点项目");
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+}

@@ -1,0 +1,5 @@
+
+ 抵(质)押---抵（质）押物原件管理
+ 
+ 	抵（质）押物原件管理	    /optGuarantyAction/initPledgeManagerPage	
+ 	

@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- pro_bankruptcy表:破产记录表模块 -->
+<mapper namespace="com.zjm.pro.db.map.Pro_bankruptcyMapper">
+    <!--返回Map-->        
+    <resultMap id="BaseResultMap" type="com.zjm.pro.db.model.Pro_bankruptcy">
+        <result column="bankruptcy_id" property="bankruptcyId" jdbcType="VARCHAR" />
+        <result column="project_id" property="projectId" jdbcType="VARCHAR" />
+        <result column="if_working_group" property="ifWorkingGroup" jdbcType="INTEGER" />
+        <result column="execution_basis_type" property="executionBasisType" jdbcType="VARCHAR" />
+        <result column="execution_basis_num" property="executionBasisNum" jdbcType="VARCHAR" />
+        <result column="group" property="group" jdbcType="VARCHAR" />
+        <result column="plaintiff" property="plaintiff" jdbcType="VARCHAR" />
+        <result column="defendant" property="defendant" jdbcType="VARCHAR" />
+        <result column="lawsuit_sum" property="lawsuitSum" jdbcType="DECIMAL" />
+        <result column="lawsuit_date" property="lawsuitDate" jdbcType="TIMESTAMP" />
+        <result column="province" property="province" jdbcType="VARCHAR" />
+        <result column="law_court" property="lawCourt" jdbcType="VARCHAR" />
+        <result column="record_num" property="recordNum" jdbcType="VARCHAR" />
+        <result column="undertake_judge" property="undertakeJudge" jdbcType="VARCHAR" />
+        <result column="first_seal" property="firstSeal" jdbcType="VARCHAR" />
+        <result column="waiting" property="waiting" jdbcType="VARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="fund_deduction" property="fundDeduction" jdbcType="VARCHAR" />
+        <result column="bankruptcy_type" property="bankruptcyType" jdbcType="VARCHAR" />
+        <result column="is_claims_declarate" property="isClaimsDeclarate" jdbcType="INTEGER" />
+        <result column="obligor_type" property="obligorType" jdbcType="VARCHAR" />
+        <result column="project_id_list" property="projectIDList" jdbcType="VARCHAR" />
+        <result column="project_name_list" property="projectNameList" jdbcType="VARCHAR" />
+        <result column="law_suit_id" property="lawSuitId" jdbcType="VARCHAR" />
+        <result column="law_suit_name" property="lawSuitName" jdbcType="VARCHAR" />
+        <result column="asset_seal_id" property="assetSealId" jdbcType="VARCHAR" />
+        <result column="asset_seal_name" property="assetSealName" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        
+    </resultMap>
+    
+    <!--基本的sql查询字段 公共引用...-->
+    <sql id="Base_Column_List">
+        bankruptcy_id,
+        project_id,
+        if_working_group,
+        execution_basis_type,
+        execution_basis_num,
+        `group`,
+        plaintiff,
+        defendant,
+        lawsuit_sum,
+        lawsuit_date,
+        province,
+        law_court,
+        record_num,
+        undertake_judge,
+        first_seal,
+        waiting,
+        remark,
+        fund_deduction,
+        bankruptcy_type,
+        is_claims_declarate,
+        obligor_type,
+        project_id_list,
+        project_name_list,
+        law_suit_id,
+        law_suit_name,
+        asset_seal_id,
+        asset_seal_name,
+        create_time 
+    </sql>
+    
+    <!-- 基本的sql查询条件公共引用 -->
+    <sql id="searchBy">
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test="bankruptcyId != null and bankruptcyId != ''">
+                and bankruptcy_id = #{bankruptcyId,jdbcType=VARCHAR}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and project_id = #{projectId,jdbcType=VARCHAR}
+            </if>
+            <if test="ifWorkingGroup != null">
+                and if_working_group = #{ifWorkingGroup,jdbcType=INTEGER}
+            </if>
+            <if test="executionBasisType != null and executionBasisType != ''">
+                and execution_basis_type = #{executionBasisType,jdbcType=VARCHAR}
+            </if>
+            <if test="executionBasisNum != null and executionBasisNum != ''">
+                and execution_basis_num = #{executionBasisNum,jdbcType=VARCHAR}
+            </if>
+            <if test="group != null and group != ''">
+                and `group` = #{group,jdbcType=VARCHAR}
+            </if>
+            <if test="plaintiff != null and plaintiff != ''">
+                and plaintiff = #{plaintiff,jdbcType=VARCHAR}
+            </if>
+            <if test="defendant != null and defendant != ''">
+                and defendant = #{defendant,jdbcType=VARCHAR}
+            </if>
+            <if test="lawsuitSum != null">
+                and lawsuit_sum = #{lawsuitSum,jdbcType=DECIMAL}
+            </if>
+            <if test="lawsuitDate != null">
+                and lawsuit_date = #{lawsuitDate,jdbcType=TIMESTAMP}
+            </if>
+            <if test="province != null and province != ''">
+                and province = #{province,jdbcType=VARCHAR}
+            </if>
+            <if test="lawCourt != null and lawCourt != ''">
+                and law_court = #{lawCourt,jdbcType=VARCHAR}
+            </if>
+            <if test="recordNum != null and recordNum != ''">
+                and record_num = #{recordNum,jdbcType=VARCHAR}
+            </if>
+            <if test="undertakeJudge != null and undertakeJudge != ''">
+                and undertake_judge = #{undertakeJudge,jdbcType=VARCHAR}
+            </if>
+            <if test="firstSeal != null and firstSeal != ''">
+                and first_seal = #{firstSeal,jdbcType=VARCHAR}
+            </if>
+            <if test="waiting != null and waiting != ''">
+                and waiting = #{waiting,jdbcType=VARCHAR}
+            </if>
+            <if test="remark != null and remark != ''">
+                and remark = #{remark,jdbcType=VARCHAR}
+            </if>
+            <if test="fundDeduction != null and fundDeduction != ''">
+                and fund_deduction = #{fundDeduction,jdbcType=VARCHAR}
+            </if>
+            <if test="bankruptcyType != null and bankruptcyType != ''">
+                and bankruptcy_type = #{bankruptcyType,jdbcType=VARCHAR}
+            </if>
+            <if test="isClaimsDeclarate != null">
+                and is_claims_declarate = #{isClaimsDeclarate,jdbcType=INTEGER}
+            </if>
+            <if test="obligorType != null and obligorType != ''">
+                and obligor_type = #{obligorType,jdbcType=VARCHAR}
+            </if>
+            <if test="projectIDList != null and projectIDList != ''">
+                and project_id_list = #{projectIDList,jdbcType=VARCHAR}
+            </if>
+            <if test="projectNameList != null and projectNameList != ''">
+                and project_name_list = #{projectNameList,jdbcType=VARCHAR}
+            </if>
+            <if test="lawSuitId != null and lawSuitId != ''">
+                and law_suit_id = #{lawSuitId,jdbcType=VARCHAR}
+            </if>
+            <if test="lawSuitName != null and lawSuitName != ''">
+                and law_suit_name = #{lawSuitName,jdbcType=VARCHAR}
+            </if>
+            <if test="assetSealId != null and assetSealId != ''">
+                and asset_seal_id = #{assetSealId,jdbcType=VARCHAR}
+            </if>
+            <if test="assetSealName != null and assetSealName != ''">
+                and asset_seal_name = #{assetSealName,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null and createTime != ''">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+        </trim>
+    </sql>
+    
+    
+    <insert id="save" parameterType="com.zjm.pro.db.model.Pro_bankruptcy">
+        insert into 
+        pro_bankruptcy(
+        	bankruptcy_id,
+        	project_id,
+        	if_working_group,
+        	execution_basis_type,
+        	execution_basis_num,
+        	`group`,
+        	plaintiff,
+        	defendant,
+        	lawsuit_sum,
+        	lawsuit_date,
+        	province,
+        	law_court,
+        	record_num,
+        	undertake_judge,
+        	first_seal,
+        	waiting,
+        	remark,
+        	fund_deduction,
+        	bankruptcy_type,
+        	is_claims_declarate,
+        	obligor_type,
+        	project_id_list,
+        	project_name_list,
+        	law_suit_id,
+	        law_suit_name,
+	        asset_seal_id,
+	        asset_seal_name,
+        	create_time
+        )values(
+        	#{bankruptcyId,jdbcType=VARCHAR},
+        	#{projectId,jdbcType=VARCHAR},
+        	#{ifWorkingGroup,jdbcType=INTEGER},
+        	#{executionBasisType,jdbcType=VARCHAR},
+        	#{executionBasisNum,jdbcType=VARCHAR},
+        	#{group,jdbcType=VARCHAR},
+        	#{plaintiff,jdbcType=VARCHAR},
+        	#{defendant,jdbcType=VARCHAR},
+        	#{lawsuitSum,jdbcType=DECIMAL},
+        	#{lawsuitDate,jdbcType=TIMESTAMP},
+        	#{province,jdbcType=VARCHAR},
+        	#{lawCourt,jdbcType=VARCHAR},
+        	#{recordNum,jdbcType=VARCHAR},
+        	#{undertakeJudge,jdbcType=VARCHAR},
+        	#{firstSeal,jdbcType=VARCHAR},
+        	#{waiting,jdbcType=VARCHAR},
+        	#{remark,jdbcType=VARCHAR},
+        	#{fundDeduction,jdbcType=VARCHAR},
+        	#{bankruptcyType,jdbcType=VARCHAR},
+        	#{isClaimsDeclarate,jdbcType=INTEGER},
+        	#{obligorType,jdbcType=VARCHAR},
+        	#{projectIDList,jdbcType=VARCHAR},
+        	#{projectNameList,jdbcType=VARCHAR},
+        	#{lawSuitId,jdbcType=VARCHAR},
+        	#{lawSuitName,jdbcType=VARCHAR},
+        	#{assetSealId,jdbcType=VARCHAR},
+        	#{assetSealName,jdbcType=VARCHAR},
+        	#{createTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    
+    <update id="update" parameterType="com.zjm.pro.db.model.Pro_bankruptcy">
+        update pro_bankruptcy set 
+            bankruptcy_id = #{bankruptcyId,jdbcType=VARCHAR},
+            project_id = #{projectId,jdbcType=VARCHAR},
+            if_working_group = #{ifWorkingGroup,jdbcType=INTEGER},
+            execution_basis_type = #{executionBasisType,jdbcType=VARCHAR},
+            execution_basis_num = #{executionBasisNum,jdbcType=VARCHAR},
+            `group` = #{group,jdbcType=VARCHAR},
+            plaintiff = #{plaintiff,jdbcType=VARCHAR},
+            defendant = #{defendant,jdbcType=VARCHAR},
+            lawsuit_sum = #{lawsuitSum,jdbcType=DECIMAL},
+            lawsuit_date = #{lawsuitDate,jdbcType=TIMESTAMP},
+            province = #{province,jdbcType=VARCHAR},
+            law_court = #{lawCourt,jdbcType=VARCHAR},
+            record_num = #{recordNum,jdbcType=VARCHAR},
+            undertake_judge = #{undertakeJudge,jdbcType=VARCHAR},
+            first_seal = #{firstSeal,jdbcType=VARCHAR},
+            waiting = #{waiting,jdbcType=VARCHAR},
+            remark = #{remark,jdbcType=VARCHAR},
+            fund_deduction = #{fundDeduction,jdbcType=VARCHAR},
+            bankruptcy_type = #{bankruptcyType,jdbcType=VARCHAR},
+            is_claims_declarate = #{isClaimsDeclarate,jdbcType=INTEGER},
+            obligor_type = #{obligorType,jdbcType=VARCHAR},
+            project_id_list = #{projectIDList,jdbcType=VARCHAR},
+        	project_name_list = #{projectNameList,jdbcType=VARCHAR},
+        	law_suit_id = #{lawSuitId,jdbcType=VARCHAR},
+        	law_suit_name = #{lawSuitName,jdbcType=VARCHAR},
+        	asset_seal_id = #{assetSealId,jdbcType=VARCHAR},
+        	asset_seal_name = #{assetSealName,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP}
+        where bankruptcy_id = #{bankruptcyId ,jdbcType=VARCHAR}
+    </update>
+
+
+    <update id="updateSelective"  parameterType="java.util.HashMap">
+        update pro_bankruptcy
+          <set>
+            <if test="bankruptcyId != null and bankruptcyId != '' ">
+                bankruptcy_id = #{bankruptcyId,jdbcType=VARCHAR},                
+            </if>
+            <if test="projectId != null and projectId != '' ">
+                project_id = #{projectId,jdbcType=VARCHAR},                
+            </if>
+            <if test="ifWorkingGroup != null">        
+                if_working_group = #{ifWorkingGroup,jdbcType=INTEGER},                
+            </if>
+            <if test="executionBasisType != null and executionBasisType != '' ">
+                execution_basis_type = #{executionBasisType,jdbcType=VARCHAR},                
+            </if>
+            <if test="executionBasisNum != null and executionBasisNum != '' ">
+                execution_basis_num = #{executionBasisNum,jdbcType=VARCHAR},                
+            </if>
+            <if test="group != null and group != '' ">
+                `group` = #{group,jdbcType=VARCHAR},                
+            </if>
+            <if test="plaintiff != null and plaintiff != '' ">
+                plaintiff = #{plaintiff,jdbcType=VARCHAR},                
+            </if>
+            <if test="defendant != null and defendant != '' ">
+                defendant = #{defendant,jdbcType=VARCHAR},                
+            </if>
+            <if test="lawsuitSum != null">        
+                lawsuit_sum = #{lawsuitSum,jdbcType=DECIMAL},                
+            </if>
+            <if test="lawsuitDate != null">        
+                lawsuit_date = #{lawsuitDate,jdbcType=TIMESTAMP},                
+            </if>
+            <if test="province != null and province != '' ">
+                province = #{province,jdbcType=VARCHAR},                
+            </if>
+            <if test="lawCourt != null and lawCourt != '' ">
+                law_court = #{lawCourt,jdbcType=VARCHAR},                
+            </if>
+            <if test="recordNum != null and recordNum != '' ">
+                record_num = #{recordNum,jdbcType=VARCHAR},                
+            </if>
+            <if test="undertakeJudge != null and undertakeJudge != '' ">
+                undertake_judge = #{undertakeJudge,jdbcType=VARCHAR},                
+            </if>
+            <if test="firstSeal != null and firstSeal != '' ">
+                first_seal = #{firstSeal,jdbcType=VARCHAR},                
+            </if>
+            <if test="waiting != null and waiting != '' ">
+                waiting = #{waiting,jdbcType=VARCHAR},                
+            </if>
+            <if test="remark != null and remark != '' ">
+                remark = #{remark,jdbcType=VARCHAR},                
+            </if>
+            <if test="fundDeduction != null and fundDeduction != '' ">
+                fund_deduction = #{fundDeduction,jdbcType=VARCHAR},                
+            </if>
+            <if test="bankruptcyType != null and bankruptcyType != '' ">
+                bankruptcy_type = #{bankruptcyType,jdbcType=VARCHAR},                
+            </if>
+            <if test="isClaimsDeclarate != null">        
+                is_claims_declarate = #{isClaimsDeclarate,jdbcType=INTEGER},                
+            </if>
+            <if test="obligorType != null and obligorType != '' ">
+                obligor_type = #{obligorType,jdbcType=VARCHAR},                
+            </if>
+            <if test="projectIDList != null and projectIDList != '' ">
+                project_id_list = #{projectIDList,jdbcType=VARCHAR},     
+            </if>
+            <if test="projectNameList != null and projectNameList != '' ">
+                project_name_list = #{projectNameList,jdbcType=VARCHAR},       
+            </if>
+              <if test="lawSuitId != null and lawSuitId != ''">
+                and law_suit_id = #{lawSuitId,jdbcType=VARCHAR},
+            </if>
+            <if test="lawSuitName != null and lawSuitName != ''">
+                and law_suit_name = #{lawSuitName,jdbcType=VARCHAR},
+            </if>
+            <if test="assetSealId != null and assetSealId != ''">
+                and asset_seal_id = #{assetSealId,jdbcType=VARCHAR},
+            </if>
+            <if test="assetSealName != null and assetSealName != ''">
+                and asset_seal_name = #{assetSealName,jdbcType=VARCHAR},
+            </if>
+             <if test="createTime != null and createTime != '' ">
+                create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+        </set>    
+        where bankruptcy_id = #{bankruptcy_id ,jdbcType=VARCHAR}
+    </update>
+
+
+    <select id="findByPrimary" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List" />
+        from pro_bankruptcy
+        where bankruptcy_id = #{bankruptcy_id,jdbcType=VARCHAR}
+    </select>
+
+	<select id="findSelective" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select
+        <include refid="Base_Column_List" />
+        from pro_bankruptcy
+        <include refid="searchBy"/>
+    </select>
+               
+    <select id="listSelective" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select
+        <include refid="Base_Column_List" />
+        from pro_bankruptcy
+        <include refid="searchBy"/>
+    </select>
+    
+    <select id="selectBankruptcyTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="BaseResultMap">
+		select 
+			<include refid="Base_Column_List" />
+		from 
+			pro_bankruptcy
+		where 
+			1=1 ${wheresql} LIMIT #{pageNumber},#{pageSize}
+	</select>
+	
+	<select id="selectBankruptcyTable_count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		select
+			count(1)
+		from
+			pro_bankruptcy
+		WHERE 
+			1=1 ${wheresql}
+	</select>
+</mapper>

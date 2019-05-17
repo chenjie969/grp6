@@ -1,0 +1,619 @@
+(function($,z){
+	$.zjm_keyproject = {
+			initProjectListTable:initProjectListTable,//初始化项目列表
+			initApprovalRecordTable:initApprovalRecordTable,//初始化审批记录列表
+			addProcess:addProcess, //新增审批
+			startApproval:startApproval, //同意方案
+			initProductTable:initProductTable, //初始化流程列表
+			projectDeal:projectDeal, //方案办理
+			viewRelationProject:viewRelationProject,
+			initWaitTaskProjectTable:initWaitTaskProjectTable,//待办审批
+			tasktransact:tasktransact,//流程办理
+			removeKeyProject:removeKeyProject,	//移出重点项目
+			viewProjectProgress:viewProjectProgress,//项目进展详情查看
+			viewProjectInfo:viewProjectInfo,//查看项目详情
+			opneHightSelectPage:opneHightSelectPage
+	};
+	
+	/**加载项目列表***/
+	function initProjectListTable(data){
+		$('#projectList_table').bootstrapTable('destroy');
+		$('#projectList_table').bootstrapTable({
+		method: 'post',
+		columns: [
+				  [
+				      {field:'checked',checkbox:true,align: 'center',valign:"middle",rowspan:2,colspan:1,formatter: function (value, row, index) {return index+1  ;}},	
+				       {title: '序号',align: 'center',valign:"middle",rowspan:2,colspan:1,formatter: function (value, row, index) {return index+1;}}, 	
+						{field:"",title: '项目类型',align: 'center',valign:"middle",rowspan:2,colspan:1,formatter: function (value, row, index) { return row.projectTypeName;}},
+						{field:"",title: '所属区域',align: 'center',valign:"middle",rowspan:2,colspan:1,formatter: function (value, row, index) { return row.fullAreaName;}},
+						{field:"relationMainName",title: '关联系',align: 'center',valign:"middle",rowspan:2,colspan:1,formatter: function (value, row, index) {
+							return [
+								'<a class="btn_project_viewc" href="javascript:void(0)">'+ row.relationMainName + '</a>' ].join('');
+						},
+						events:{
+							'click .btn_project_viewc': function(e, value, row, index) {
+								$.zjm_keyproject.viewProjectInfo(row.relationMain_ID);
+							}
+						}
+						},
+						{field:"",title: '资产总额（亿元）',align: 'center',valign:"middle",rowspan:2,colspan:1,formatter: function (value, row, index) { return row.capitalSum;}},
+						{field:"",title: '负债总额（亿元）',align: 'center',valign:"middle",rowspan:2,colspan:1,formatter: function (value, row, index) { return row.liabilitySum;}},
+						{field:"",title: '2015年1月末<br>担保余额（亿元）',align: 'center',valign:"middle",rowspan:2,colspan:1,formatter: function (value, row, index) { return row.guarantySum;}},
+						{field:"",title: '2015年1月末<br>担保集团委贷余额（亿元）',align: 'center',valign:"middle",rowspan:2,colspan:1,formatter: function (value, row, index) { return row.guarantyEntrustSum;}},
+						{field:"",title: '2015年1月末<br>融投系委贷余额（亿元）',align: 'center',valign:"middle",rowspan:2,colspan:1,formatter: function (value, row, index) { return row.entrustSum;}},
+						{field:"",title: '在保余额（亿元）',align: 'center',valign:"middle",rowspan:2,colspan:1,formatter: function (value, row, index) { return row.guaReSum_zaibao;}},
+						{field:"",title: '保外债权人融资金额（亿元）',align: 'center',valign:"middle",rowspan:2,colspan:1,formatter: function (value, row, index) { return row.creditorSum;}},
+						{field:"",title: '担保集团委贷余额（亿元）',align: 'center',valign:"middle",rowspan:2,colspan:1,formatter: function (value, row, index) { return row.entReSum_guaGroup;}},
+						{field:"",title: '代偿清收',align: 'center',valign:"middle",rowspan:2,colspan:1,formatter: function (value, row, index) { return "";}},
+						{field:"",title: '保费清收',align: 'center',valign:"middle",rowspan:2,colspan:1,formatter: function (value, row, index) { return "";}},
+						{field:"",title: '委贷余额（亿元）',align: 'center',rowspan:1,colspan:2},
+						{field:"",title: '租赁余额（亿元）',align: 'center',rowspan:1,colspan:2},
+						{field:"",title: '基金回收（亿元    ',align: 'center',rowspan:1,colspan:2},
+						{field:"",title: '股权退出（亿元）',align: 'center',rowspan:1,colspan:2},
+						{field:"",title: '投资收回（亿元）',align: 'center',rowspan:1,colspan:2},
+						{field:"",title: '融投系业务合计（亿元）',align: 'center',rowspan:1,colspan:2},
+						{field:"",title: '代偿余额（亿元）',align: 'center',valign:"middle",rowspan:2,colspan:1,formatter: function (value, row, index) { return row.replaceReSum;}},
+						{field:"",title: '融投系清收清欠金额（亿元）',align: 'center',valign:"middle",rowspan:2,colspan:1,formatter: function (value, row, index) { return row.collectDebtsSum_rt;}},
+						{field:"",title: '融投系合计（亿元）',align: 'center',valign:"middle",rowspan:2,colspan:1,formatter: function (value, row, index) { return row.totalSum_rt;}},
+						{field:"",title: '项目总共化解金额（亿元）',align: 'center',valign:"middle",rowspan:2,colspan:1,formatter: function (value, row, index) { return row.deRiskSum;}},
+						{title: '操作',align: 'center',valign:"middle",rowspan:2,colspan:1,formatter:function(value,row,index){
+								return [
+									'<button class="btn_project_view btn btn-xs btn-warning"title="查看" href="javascript:void(0)"><i class="icon-zoom-in bigger-120"></i></button>'].join('');
+							},
+							events:{
+								'click .btn_project_view': function(e, value, row, index) {
+									console.log(9666)
+									$.zjm_keyproject.viewRelationProject(row);
+								}
+							}
+						}
+					],[
+						{field:"",title: '担保',align: 'center',valign:"middle",formatter: function (value, row, index) { return row.entReSum_gua;}},
+						{field:"",title: '未担保',align: 'center',valign:"middle",formatter: function (value, row, index) { return row.entReSum_noGua;}},
+						{field:"",title: '担保',align: 'center',valign:"middle",formatter: function (value, row, index) { return "";}},
+						{field:"",title: '未担保',align: 'center',valign:"middle",formatter: function (value, row, index) { return "";}},
+						{field:"",title: '担保',align: 'center',valign:"middle",formatter: function (value, row, index) { return "";}},
+						{field:"",title: '未担保',align: 'center',valign:"middle",formatter: function (value, row, index) { return "";}},
+						{field:"",title: '担保',align: 'center',valign:"middle",formatter: function (value, row, index) { return "";}},
+						{field:"",title: '未担保',align: 'center',valign:"middle",formatter: function (value, row, index) { return "";}},
+						{field:"",title: '担保',align: 'center',valign:"middle",formatter: function (value, row, index) { return "";}},
+						{field:"",title: '未担保',align: 'center',valign:"middle",formatter: function (value, row, index) { return "";}},
+						{field:"",title: '担保',align: 'center',valign:"middle",formatter: function (value, row, index) { return row.totalSum_gua_rt;}},
+						{field:"",title: '未担保',align: 'center',valign:"middle",formatter: function (value, row, index) { return row.totalSum_noGua_rt;}},
+					]
+				  ],
+			detailView: false,
+			detailFormatter:function(index, row){
+			    var html = [];
+			        html.push('<p><b>序号：</b> ' + row.applyNum + '</p>');
+			    return html;
+			},
+			toolbar: '#toolbar',    //工具按钮用哪个容器
+			striped: true,      //是否显示行间隔色
+			cache: false,      //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+			pagination: true,     //设置为 true 会在表格底部显示分页条
+			paginationLoop: true,//设置为 true 启用分页条无限循环的功能。
+			sortable: true,      //是否启用排序
+			sortOrder: "asc",     //排序方式
+			sortName: "projectTypeName",     //排序字段
+			pageNumber:1,      //初始化加载第一页，默认第一页
+			pageSize: 30,      //每页的记录行数（*）
+			pageList: [30,50, 100, 200, 500],  //可供选择的每页的行数（*）
+			url: "/project/project/selectMultiProjectPageTable",//这个接口需要处理bootstrap table传递的固定参数
+			queryParamsType:'', //默认值为 'limit' ,在默认情况下 传给服务端的参数为：offset,limit,sort
+			// 设置为 ''  在这种情况下传给服务器的参数为：pageSize,pageNumber
+			queryParams: function(params) {
+				var queryCondition ={}; 
+				 $.extend(queryCondition,data);
+				 $.extend(params, {"queryCondition":queryCondition});
+				return params;
+			},//前端调用服务时，会默认传递上边提到的参数，如果需要添加自定义参数，可以自定义一个函数返回请求参数
+			sidePagination: "server",   //分页方式：client客户端分页，server服务端分页（*）
+			minimumCountColumns: 2,    //最少允许的列数
+			search: true,      //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+			strictSearch: true,//设置为 true启用 全匹配搜索，否则为模糊搜索
+			showColumns: true,     //是否显示所有的列
+			showRefresh: true,     //是否显示刷新按钮
+			minimumCountColumns: 2,    //最少允许的列数
+			clickToSelect: false,    //是否启用点击选中行
+			searchOnEnterKey: true,//设置为 true时，按回车触发搜索方法，否则自动触发搜索方法
+			showToggle: false,//是否显示详细视图和列表视图的切换按钮
+			showPaginationSwitch:true,
+            showExport: true,                     //是否显示导出
+            exportDataType: "basic"              //basic', 'all', 'selected'
+		});
+	}
+	
+	/**初始化列表***/
+	function initProductTable(){
+		$("#product-table").bootstrapTable('destroy');
+		$('#product-table').bootstrapTable({
+			method: 'get',
+			columns: [
+				{field : 'checked',checkbox : true,align : 'center',formatter : function(value, row, index) {return ;}},
+				{field:'index',title:'序号',align:'center',formatter: function (value, row, index) {return index+1;}},
+				{field:'productName',title:'产品流程名称',align:'center',formatter: function (value, row, index) {return row.productName;}},
+				{field:'version',title:'版本号',align:'center',formatter: function (value, row, index) {return row.version;}},
+				{field:'remark',title:'备注',align:'center',formatter: function (value, row, index) {return row.remark;}},
+			],
+			detailView: false,
+			detailFormatter:function(index, row){
+			    var html = [];
+			        html.push('<p><b>产品流程名称:</b> ' + row.productName + '</p>');
+			        html.push('<p><b>版本号:</b> ' + row.version  + '</p>');
+			        html.push('<p><b>备注:</b> ' + row.remark + '</p>');
+			    return html;
+			},
+			toolbar: '#toolbar',    //工具按钮用哪个容器
+			striped: true,      //是否显示行间隔色
+			cache: false,      //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+			pagination: false,     //设置为 true 会在表格底部显示分页条
+			paginationLoop: false,//设置为 true 启用分页条无限循环的功能。
+			sortable: true,      //是否启用排序
+			sortOrder: "asc",     //排序方式
+			pageNumber:1,      //初始化加载第一页，默认第一页
+			pageSize: 30,      //每页的记录行数（*）
+			pageList: [30,50, 100, 200, 500],  //可供选择的每页的行数（*）
+			url: "/gbpm/product/selectProductPageTable",//这个接口需要处理bootstrap table传递的固定参数
+			queryParamsType:'', //默认值为 'limit' ,在默认情况下 传给服务端的参数为：offset,limit,sort
+			// 设置为 ''  在这种情况下传给服务器的参数为：pageSize,pageNumber
+			queryParams: function(params) {
+				var queryCondition={"isUsed":true};
+				$.extend(params,{"queryCondition":queryCondition});
+				$.extend(params,{"wheresql":" AND productTypeName = '风险处置流程'"});
+				return params;
+			},//前端调用服务时，会默认传递上边提到的参数，如果需要添加自定义参数，可以自定义一个函数返回请求参数
+			sidePagination: "server",   //分页方式：client客户端分页，server服务端分页（*）
+			search: false,      //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+			singleSelect : true,// 单选checkbox
+			strictSearch: false,//设置为 true启用 全匹配搜索，否则为模糊搜索
+			showColumns: false,     //是否显示所有的列
+			showRefresh: false,     //是否显示刷新按钮
+			minimumCountColumns: 2,    //最少允许的列数
+			clickToSelect: false,    //是否启用点击选中行
+			searchOnEnterKey: false,//设置为 true时，按回车触发搜索方法，否则自动触发搜索方法
+			showToggle: false,//是否显示详细视图和列表视图的切换按钮
+			showPaginationSwitch:false,
+            showExport: false,                     //是否显示导出
+            exportDataType: "basic"              //basic', 'all', 'selected'
+			         
+			});
+	};
+	
+
+	/**加载审批记录列表***/
+	function initApprovalRecordTable(){
+		$('#approvalRecord_table').bootstrapTable('destroy');
+		$('#approvalRecord_table').bootstrapTable({
+			method: 'post',
+			columns: [ 
+						{field:'checked',checkbox:true,align: 'center',formatter: function (value, row, index) {return index+1  ;}},	
+				        {title: '序号',align: 'center',formatter: function (value, row, index) {return index+1;}}, 	
+						{field:"title",title: '标题',align: 'center',formatter: function (value, row, index) { return row.title;}},
+//						{field:"",title: '类型',align: 'center',formatter: function (value, row, index) { return "化解方案审批（风委会）";}},
+						{field:"createUserName",title: '创建人',align: 'center',formatter: function (value, row, index) { return row.createUserName;}},
+						{field:"createDate",title: '创建日期',align: 'center',formatter: function (value, row, index) { return tool.parseDate(row.createDate);}},
+//						{field:"nodeNames",title: '当前环节',align: 'center',formatter: function (value, row, index) { return row.nodeNames;}},
+						{field:"status",title: '状态',align: 'center',formatter: function (value, row, index) { return row.status;}},
+						{title: '操作',align: 'center',formatter:function(value,row,index){
+						// !!!!!!!!!!!!!!!  
+							/*if('流程未启动' == row.status){
+								return [
+									'<button class="btn_riskScheme_view btn btn-xs btn-warning" title="查看" ><i class="icon-zoom-in bigger-120"></i></button>',
+									'<button disabled="disabled" class="btn_modules_edit btn btn-xs btn-pink" title="办理"><i class="icon-edit bigger-120"></i></button>'
+									].join('');
+							}else */if('审批通过' == row.status){
+								return [	
+									'<button class="btn_riskScheme_view btn btn-xs btn-warning" title="查看" ><i class="icon-zoom-in bigger-120"></i></button>',
+									'<button disabled="disabled" class="btn_modules_edit btn btn-xs btn-pink" title="办理"><i class="icon-edit bigger-120"></i></button>'
+									].join('');
+							}else{
+								return [
+									'<button class="btn_riskScheme_view btn btn-xs btn-warning" title="查看"><i class="icon-zoom-in bigger-120"></i></button>',
+									'<button class="btn_modules_edit btn btn-xs btn-pink" title="办理"><i class="icon-edit bigger-120"></i></button>'
+									].join('');
+							}
+						},
+							events:{
+								'click .btn_modules_edit': function(e, value, row, index) {
+									$.zjm_keyproject.projectDeal(row);
+								},
+								'click .btn_riskScheme_view': function(e, value, row, index) {
+									$.zjm_keyproject.viewProjectProgress(row);
+								}
+								
+							}
+						}
+					],
+			detailView: false,
+			detailFormatter:function(index, row){
+			    var html = [];
+			        html.push('<p><b>序号：</b> ' + row.applyNum + '</p>');
+			    return html;
+			},
+			toolbar: '#toolbar',    //工具按钮用哪个容器
+			striped: true,      //是否显示行间隔色
+			cache: false,      //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+			pagination: true,     //设置为 true 会在表格底部显示分页条
+			paginationLoop: true,//设置为 true 启用分页条无限循环的功能。
+			sortable: true,      //是否启用排序
+			sortOrder: "desc",     //排序方式
+			sortName: "createDate",     //排序字段
+			pageNumber:1,      //初始化加载第一页，默认第一页
+			pageSize: 30,      //每页的记录行数（*）
+			pageList: [30,50, 100, 200, 500],  //可供选择的每页的行数（*）
+			url: "/project/riskScheme/selectRiskSchemePageTables",//这个接口需要处理bootstrap table传递的固定参数
+			queryParamsType:'', //默认值为 'limit' ,在默认情况下 传给服务端的参数为：offset,limit,sort
+			// 设置为 ''  在这种情况下传给服务器的参数为：pageSize,pageNumber
+			queryParams: function(params) {
+//				 var queryCondition ={"apply_clientType":"01","apply_approvalStatu":"01"}; 
+//				 $.extend(params, {"queryCondition":queryCondition});
+				return params;
+			},//前端调用服务时，会默认传递上边提到的参数，如果需要添加自定义参数，可以自定义一个函数返回请求参数
+			sidePagination: "server",   //分页方式：client客户端分页，server服务端分页（*）
+			search: true,      //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+			strictSearch: true,//设置为 true启用 全匹配搜索，否则为模糊搜索
+			showColumns: true,     //是否显示所有的列
+			showRefresh: true,     //是否显示刷新按钮
+			minimumCountColumns: 2,    //最少允许的列数
+			clickToSelect: false,    //是否启用点击选中行
+			searchOnEnterKey: true,//设置为 true时，按回车触发搜索方法，否则自动触发搜索方法
+			showToggle: true,//是否显示详细视图和列表视图的切换按钮
+			showPaginationSwitch:true,
+            showExport: true,                     //是否显示导出
+            exportDataType: "basic"              //basic', 'all', 'selected'
+		});
+	}
+	
+	/**
+	 * 启动方案---启动流程--添加流程实例;
+	 * @returns
+	 */
+	function startApproval(){
+		var selectContent = $('#approvalRecord_table').bootstrapTable('getSelections');  
+		if(typeof(selectContent) == 'undefined' || selectContent.length != 1) { 
+			$("#pleaseSelectOne").modal({keyboard:true});
+			$("#message").html("请选择一条数据，然后再操作！")
+			return false;  
+		}else{
+			var selectContent = $('#approvalRecord_table').bootstrapTable('getSelections')[0];
+			var entityID = selectContent.riskScheme_ID;
+			var projectName = selectContent.title;
+			$.ajax({type:'POST',
+				url:'/gbpm/productInstance/isExistProductInstance',	
+				data:JSON.stringify({"entityID":entityID}),
+				contentType:'application/json; charset=UTF-8',
+				dataType:'json',
+				success:function(data) {
+					if(data.obj){
+						$("#selectProductModal").modal({keyboard:true});
+						$(".sProjectName").html(projectName);
+						$.zjm_keyproject.initProductTable();
+						$("#entityID").val(entityID);
+						tool.undisabled(".btn_nextStep");
+						$(".btn_nextStep").click(function(){
+							var selectContent = $('#product-table').bootstrapTable('getSelections')[0];
+					        if(typeof(selectContent) == 'undefined'){
+					        	$("#pleaseSelectOne").modal({keyboard:true});
+					        	$("#message").html("请选择一条数据，然后再操作！")
+					        	return false;  
+					        }else{
+								tool.disabled(".btn_nextStep");
+			     				$("#selectProductModal").modal("hide");
+			     				//十个参数  1，产品ID 2，节点顺序 3，流程发起人ID 4，流程发起人名称 5，当前办理人ID 6，当前办理人名称 7.业务ID 8，业务类型：申请：01 打包：02 风险方案：03 9.项目名称/标题 显示用  10 实例化流程ID
+			     				$.zjm_nodeTaskModal.initNodeTaskModal(selectContent.product_ID,'0',$("#userID").val(),$("#userName").val(),$("#userID").val(),$("#userName").val(),entityID,'03',projectName,'');
+					        }
+						});
+						$("#selectProductModal").on("hidden.bs.modal", function (e) {//解除事件绑定
+							$(".btn_nextStep").unbind("click");
+						});
+					}else{
+						$("#pleaseSelectOne").modal({keyboard:true});
+						$("#message").html("该审批已启动流程！")
+					}
+					
+		        }
+		    });
+				
+		} 
+	};
+	
+	/**
+	 * 打开高级查询页面
+	 * @returns
+	 */
+	function opneHightSelectPage(){
+		$("#keyProject_page").load("/project/project/openApplySelectPage",'',function(response,status,xhr){
+			$("#keyProjectSelect").modal({keyboard:true});
+			tool.undisabled(".btn_submit");
+			
+			$(".btn_submit").click(function(){//点击查询按钮	
+				if($("#keyProjectSelect_form").validationEngine("validate")){
+					var condition = $("#keyProjectSelect_form").serializeJson();
+					$("#keyProjectSelect").modal("hide");
+					console.log("===="+condition);
+					initProjectListTable(condition);	
+				}
+			});
+			$("#keyProjectSelect").on("hidden.bs.modal", function (e) {//解除事件绑定
+				 $(".btn_submit").unbind("click");
+			});
+		});
+	};
+	
+	
+	/**
+	 * 
+	 * 新增化解方案
+	 * @returns
+	 */
+		function addProcess(){
+			var selectContent = $('#projectList_table').bootstrapTable('getSelections');  
+			if(typeof(selectContent) == 'undefined' || selectContent.length != 1) { 
+	        	$("#pleaseSelectOne").modal({keyboard:true});
+	        	$("#message").html("请选择一条数据，然后再操作！")
+	            return false;
+	        }else{  
+				/** 新增审批*/
+				$("#approvalRecord_page").load("/project/riskScheme/riskSchemeAddPage",{},function(response,status,xhr){
+					$("#addNewApproval").modal({keyboard:true});
+					zjm.init();
+					$.ajax({type:'POST',
+						url:'/sys/dic/selectDepartsUserTree',	
+						data:JSON.stringify({}),
+						contentType:'application/json; charset=UTF-8',
+						dataType:'json',
+						success:function(data) {
+						$("#creatUser_id").selectTreeWidgets({
+							width : "93%",//设置控件宽度
+							multiple : false,//是否多选
+							data : data.obj//数据源
+							});
+				        }
+				    });
+					var relationMain_ID = selectContent[0].relationMain_ID;
+					var relationMainName = selectContent[0].relationMainName;
+					$("#relationMain_ID").val(relationMain_ID);
+					$("#relationMainName").val(relationMainName);
+					$('#reviewType').change(function(){ 
+						var p=$(this).children('option:selected').text();//这就是selected的值 
+						if(p == "工作进度"){
+							$("#workProgress").show();
+							$("#needCoordination").show();
+							$("#nextPlan").hide();
+							$("#lawsuitInfo").hide();
+							$("#lawsuitProgress").hide();
+						}else if(p == "打击逃废债工作进度"){
+							$("#workProgress").show();
+							$("#needCoordination").hide();
+							$("#nextPlan").show();
+							$("#lawsuitInfo").show();
+							$("#lawsuitProgress").show();
+						}else{
+							$("#workProgress").hide();
+							$("#needCoordination").hide();
+							$("#nextPlan").hide();
+							$("#lawsuitInfo").hide();
+							$("#lawsuitProgress").hide();
+						}
+					});
+					
+					/**注册编辑验证引擎*/
+					zjm.validata({formId:"addNewApproval_form"});
+					tool.undisabled(".btn_submit");
+					$(".btn_submit").click(function(){
+						tool.disabled(".btn_submit");
+						if($("#addNewApproval_form").validationEngine("validate")){
+							var queryContainer_form = $("#addNewApproval_form");
+									$.ajax({type:'POST',url:'/project/riskScheme/insertOneRiskSchemeInfo',data:JSON.stringify(queryContainer_form.serializeJson()),contentType:'application/json; charset=UTF-8',dataType:'json',
+										success:function(data) {
+								        	if(data.obj){
+												$("#addNewApproval").modal("hide");
+											}else{
+												alert("保存失败！");
+												tool.undisabled(".btn_submit");
+											}
+										}
+									});
+						}else{
+							tool.undisabled(".btn_submit");
+						}
+					});
+					$("#addNewApproval").on("hidden.bs.modal", function (e) {//解除事件绑定
+						 $(".btn_submit").unbind("click");
+					});
+				});
+	        }
+		}
+		
+		/**
+		 * 查看该关联系下的所有项目
+		 */
+		function viewRelationProject(row){	//&pageFlag=view
+			window.parent.openMenu('viewProjectTable_'+row.relationMain_ID,'','查看关联系项目','/project/riskResponse/keyProject/projectView.jsp','&relationMain_ID='+row.relationMain_ID);
+		}
+
+		/**
+		 * 移出重点项目 
+		 */
+		function removeKeyProject(){
+			var selectContent = $('#projectList_table').bootstrapTable('getSelections');	
+			if(selectContent.length==0){
+				$("#pleaseSelectOne").modal({keyboard:true});
+				return false;
+			}
+			var relationMainIDs = [];
+			var relationMainNames = [];
+			for(var i=0;i<selectContent.length;i++){
+				relationMainIDs[i] = selectContent[i].relationMain_ID;
+				relationMainNames[i] = selectContent[i].relationMainName;
+			}
+			$("#confirmModal").modal({keyboard:true});
+			$("#confirmValue").text("确定要把选中的"+relationMainIDs.length+"条数据移出重点项目列表吗？");
+			tool.undisabled(".btn_submit");
+			$(".btn_submit").click(function(){
+				tool.disabled(".btn_submit");
+				$.ajax({type:'POST',url:'/removeKeyProject',data:JSON.stringify({"relationMainIDs":relationMainIDs,"relationMainNames":relationMainNames}),contentType:'application/json; charset=UTF-8',dataType:'json',success:function(data) {
+			        	if(data.obj==true){
+			        		$.zjm_keyproject.initProjectListTable();
+							$("#confirmModal").modal("hide");
+						}else{
+							alert("移出项目失败！");
+							tool.undisabled(".btn_submit");
+						}
+			        }
+				});
+			});
+		}
+
+		/**方案处理
+		 */
+		function projectDeal(row){
+			window.parent.openMenu('riskrojectDeal'+row.riskScheme_ID,'','流程办理','/project/projectTracking/riskProjectDeal','&riskScheme_ID='+row.riskScheme_ID,1);
+		}
+		
+		/**初始化业务待办列表***/
+		function initWaitTaskProjectTable(){
+			$("#waitProjectTask-table").bootstrapTable('destroy');
+			$('#waitProjectTask-table').bootstrapTable({
+				method: 'get',
+				columns: [
+					{title: '序号',align: 'center',formatter: function (value, row, index) {return index+1;}}, 
+//					{field:"productName",title: '流程名称',align: 'center',formatter: function (value, row, index) { return row.productName;}}, 
+					{field:"entityName",title: '项目名称',align: 'center',formatter: function (value, row, index) { return row.entityName;}},
+//					{field:"nodeNames",title: '当前环节',align: 'center',formatter: function (value, row, index) { return row.nodeNames;}},
+//							return ['<a class="btn_node_edit" href="javascript:void(0)">'+row.nodeNames+'</a>'].join('');
+//						},
+//						events:{
+//							'click .btn_node_edit': function(e, value, row, index) {
+//								$.zjm_keyproject.tasktransact(row);
+//							},
+//						}
+//					},
+					{field:"number",title: '任务事项',align: 'center',formatter: function (value, row, index) {
+						return ['<a class="btn_task_edit" href="javascript:void(0)">'+row.number+'个'+'</a>'].join('');
+					},
+					events:{
+						'click .btn_task_edit': function(e, value, row, index) {
+							$.zjm_keyproject.tasktransact(row);
+						},
+					}
+				},
+					{field:"createUserName",title: '发起人',align: 'center',formatter: function (value, row, index) { return row.createUserName;}},
+					],
+					detailView: false,
+//				detailFormatter:function(index, row){
+//				    var html = [];
+//				        html.push('<p><b>序号:</b> ' + (index+1) + '</p>');
+//				        html.push('<p><b>流程名称:</b> ' + row.userGroupName + '</p>');
+//				        html.push('<p><b>项目组人员:</b> ' + row.user_names + '</p>');
+//				    return html;
+//				},
+//				toolbar: '#toolbar',    //工具按钮用哪个容器
+					striped: true,      //是否显示行间隔色
+					cache: false,      //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+					pagination: false,     //设置为 true 会在表格底部显示分页条
+					paginationLoop: false,//设置为 true 启用分页条无限循环的功能。
+					sortable: true ,     //是否启用排序
+					sortName:"assignDateTime",
+					sortOrder: "desc",     //排序方式
+					pageNumber:1,      //初始化加载第一页，默认第一页
+					pageSize: 6,      //每页的记录行数（*）
+//				pageList: [10, 30, 50, 100],  //可供选择的每页的行数（*）
+					url: "/gbpm/runTask/selectWaitTaskPageTable",//这个接口需要处理bootstrap table传递的固定参数
+					queryParamsType:'', //默认值为 'limit' ,在默认情况下 传给服务端的参数为：offset,limit,sort
+					// 设置为 ''  在这种情况下传给服务器的参数为：pageSize,pageNumber
+					queryParams: function(params) {
+						$.extend(params, {"pageSize":6});
+						$.extend(params,{"wheresql":" AND product.productTypeName = '风险处置流程'"});
+						return params;
+					},//前端调用服务时，会默认传递上边提到的参数，如果需要添加自定义参数，可以自定义一个函数返回请求参数
+					sidePagination: "server",   //分页方式：client客户端分页，server服务端分页（*）
+					search: false,      //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+					strictSearch: false,//设置为 true启用 全匹配搜索，否则为模糊搜索
+					showColumns: false,     //是否显示所有的列
+					showRefresh: false,     //是否显示刷新按钮
+					minimumCountColumns: 2,    //最少允许的列数
+					clickToSelect: false,    //是否启用点击选中行
+					searchOnEnterKey: false,//设置为 true时，按回车触发搜索方法，否则自动触发搜索方法
+					showToggle: false,//是否显示详细视图和列表视图的切换按钮
+					showPaginationSwitch:false,
+					showExport: false,                     //是否显示导出
+					exportDataType: "basic"              //basic', 'all', 'selected'
+						
+			});
+		};
+		
+		/**办理*/
+		function tasktransact(row){
+			window.parent.openMenu('riskrojectDeal'+row.entityID,'','流程办理','/project/projectTracking/riskProjectDeal','&riskScheme_ID='+row.entityID,1);
+		}
+		/**查看详情***/
+		function viewProjectProgress(row){
+			$("#page_relationProject").load("/project/riskScheme/selectOneRiskSchemeInfo",{"riskScheme_ID":row.riskScheme_ID},function(response,status,xhr){
+				$("#riskSchemeWorkInfo").modal({keyboard:true});
+			});
+			
+		}
+		
+		//查看项目详情
+	    function viewProjectInfo(relationMain_ID){
+			window.parent.openMenu('viewProjectInfo'+relationMain_ID,'','项目详情','/project/riskScheme/projectInfo','&relationMain_ID='+relationMain_ID+'&unit_uid=cbeb758e3d824626a31aabb2a9587b0a');
+	    }
+	
+})(jQuery, this);
+
+$(function () {
+	$.zjm_keyproject.initProjectListTable();
+	$.zjm_keyproject.initWaitTaskProjectTable();
+	$(".form-control-ztb").attr("placeholder",'输入关联系,回车搜索');
+	/**
+	 *加载项目列表
+	 */
+	$("#projectList").click(function(){
+		$.zjm_keyproject.initProjectListTable();
+		$(".form-control-ztb").attr("placeholder",'输入关联系,回车搜索');
+	});
+	/**
+	 *加载审批记录表 
+	 */
+	$("#approvalRecord").click(function(){
+		$.zjm_keyproject.initApprovalRecordTable();
+		$(".form-control-ztb").attr("placeholder",'输入标题,回车搜索');
+	});
+	/**
+	 * 新增审批
+	 */
+	$("#btn_addApproval").click(function(){
+		$.zjm_keyproject.addProcess();
+	});
+	/**
+	 * 查看项目
+	 */
+	$("#addMainForm").click(function(){
+		$.zjm_keyproject.projectView();
+	});
+
+	/**
+	 * 移出重点项目
+	 */
+	$("#btn_removeKeyProject").click(function(){
+		$.zjm_keyproject.removeKeyProject();
+	});
+
+	/**
+	 * 启动方案
+	 */
+	$("#btn_startApproval").click(function(){
+		$.zjm_keyproject.startApproval();
+	});
+	
+	/**
+	 * 高级查询
+	 */
+	$("#btn_hightSelect").click(function(){
+		$.zjm_keyproject.opneHightSelectPage();
+	});
+
+});
+

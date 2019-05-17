@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.oa.db.map.Hr_laborContractMapper">
+   	<resultMap type="com.zjm.oa.db.model.Hr_laborContract" id="contractResultMap">
+   		<result property="laborContractID" column="laborContractID" />
+   		<result property="staffcase_Id" column="staffCase_ID" />
+   		<result property="laborContractStartDate" column="laborContractStartDate" />
+   		<result property="laborContractEndDate" column="laborContractEndDate" />
+   		<result property="laborContractPeriod" column="laborContractPeriod" />
+   		<result property="laborContractType" column="laborContractType" />
+   		<result property="laborContractDate" column="laborContractDate"/>
+   		<result property="laborContractNotes" column="laborContractNotes" />
+   	</resultMap>
+   	<!-- 查询合同表 -->
+   	<select id="selectContractTable" resultMap="contractResultMap" parameterType="com.zjm.common.db.model.PageTable">
+   	<![CDATA[ 
+   	SELECT 
+   		laborContractID,
+		staffCase_ID,
+		laborContractStartDate,
+		laborContractEndDate,
+		laborContractPeriod,
+		laborContractType,
+		laborContractDate,
+		laborContractNotes
+   	 FROM hr_laborcontract
+   	 WHERE 
+		staffCase_ID = #{queryCondition.staffcase_Id}
+   	
+   	]]>
+   	</select>
+   	<!-- 查询一条合同 -->
+   	<select id="selectOneContract" resultMap="contractResultMap" parameterType="java.lang.String">
+   	<![CDATA[ 
+   	SELECT 
+   	    laborContractID,
+		staffCase_ID,
+		laborContractStartDate,
+		laborContractEndDate,
+		laborContractPeriod,
+		laborContractType,
+		laborContractDate,
+		laborContractNotes
+   	 FROM hr_laborcontract
+   	 WHERE 
+		laborContractID = #{value}
+   	
+   	]]>
+   	</select>
+   	
+   	<!-- 插入一条新合同 -->
+	<insert id="insertOneLaborContract" parameterType="com.zjm.oa.db.model.Hr_laborContract">
+	<![CDATA[
+		INSERT INTO hr_laborcontract (
+			laborContractID,
+			staffCase_ID,
+			laborContractStartDate,
+			laborContractEndDate,
+			laborContractPeriod,
+			laborContractType,
+			laborContractDate,
+			laborContractNotes)
+		VALUES (
+			#{laborContractID},
+			#{staffcase_Id},
+			#{laborContractStartDate},
+			#{laborContractEndDate},
+			#{laborContractPeriod},
+			#{laborContractType},
+			#{laborContractDate},
+			#{laborContractNotes}
+		)
+		]]>
+	</insert>
+	<!-- 修改一条合同 -->
+	<update id="updateOneContract" parameterType="com.zjm.oa.db.model.Hr_laborContract">
+	<![CDATA[
+		UPDATE 
+			hr_laborcontract
+		SET
+			laborContractStartDate = #{laborContractStartDate},
+			laborContractEndDate = #{laborContractEndDate}, 
+			laborContractPeriod=#{laborContractPeriod},
+			laborContractType = #{laborContractType},
+            laborContractDate= #{laborContractDate},
+			laborContractNotes=#{laborContractNotes}
+		WHERE laborContractID = #{laborContractID}
+	
+	]]>
+	</update>
+	
+  </mapper>

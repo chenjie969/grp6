@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjm.sys.db.map.C_bankSortMapper" >
+  <resultMap id="BaseResultMap" type="com.zjm.sys.db.model.C_bankSort" >
+    <id column="bankSortID" property="banksortid"  />
+    <id column="unit_uid" property="unitUid"  />
+    <result column="pbankSortID" property="pbanksortid"  />
+    <result column="bankSortName" property="banksortname"  />
+    <result column="bankFullCode" property="bankfullcode"  />
+    <result column="creditSum" property="creditSum"  />
+    <result column="usedSum" property="usedSum"  />
+    <result column="creditBeginDate" property="creditBeginDate"  />
+    <result column="creditEndDate" property="creditEndDate"  />
+    <result column="zrScale" property="zrScale"  />
+    <result column="bzScale" property="bzScale"  />
+  	<result column="mustBzSum" property="mustBzSum"  />
+  	<result column="factBzSum" property="factBzSum"  />
+    <result column="depositMethodID" property="depositMethodID"  />
+    <result column="creditRemark" property="creditRemark"  />
+    <result column="url" property="url"  />
+    <result column="order_id" property="orderId"  />
+    <result column="isEable" property="iseable"  />
+    <result column="isEdit" property="isedit"  />
+    <result column="isDefault" property="isDefault" />
+    <result column="unificationID" property="unificationid"  />
+    <result column="createdatetime" property="createdatetime" />
+    <result column="create_user" property="createUser"  />
+    <result column="upatedatetime" property="upatedatetime" />
+    <result column="update_user" property="updateUser"  />
+    <result column="busiAddress" property="busiAddress"  />
+    <result column="remark" property="remark"  />
+  </resultMap>
+  <!-- 银行字典 字段 -->
+  <sql id="Base_Column_List" >
+    bankSortID, unit_uid, pbankSortID, bankSortName, bankFullCode, url, order_id, createdatetime, 
+    create_user, upatedatetime, update_user, isEable, isEdit, isDefault, unificationID
+  </sql>
+  <!-- 合作机构管理添加的字段 -->
+  <sql id="cooperation">
+  	creditSum,usedSum,creditBeginDate,creditEndDate,zrScale,bzScale,mustBzSum,factBzSum,depositMethodID,creditRemark,busiAddress,remark
+  </sql>
+  
+  <!--  查询所有银行字典 -->
+  <select id="selectAllbankSortList" resultMap="BaseResultMap" parameterType="java.lang.String">
+	  <![CDATA[
+		  	select
+			  	bankSortID, unit_uid, pbankSortID, bankSortName, bankFullCode, url, order_id, createdatetime, 
+			    create_user, upatedatetime, update_user, isEable, isEdit, isDefault, unificationID,
+			    creditSum,usedSum,creditBeginDate,creditEndDate,zrScale,bzScale,mustBzSum,factBzSum,depositMethodID,creditRemark,busiAddress,remark
+		    from
+		    c_banksort
+		     where 1=1 ${value}  ORDER BY order_id
+	   ]]>
+  </select>
+  
+  <!-- 添加一个银行字典信息 -->
+   <insert id="insertOnebankSortInfo" parameterType="com.zjm.sys.db.model.C_bankSort">
+   	<![CDATA[
+	    insert into c_banksort 
+	     (
+		     bankSortID, 
+		     unit_uid, 
+		     pbankSortID, 
+		     bankSortName, 
+		     bankFullCode, 
+		     creditSum,
+		     usedSum,
+		     creditBeginDate,
+		     creditEndDate,
+		     zrScale,
+		     bzScale,
+		     mustBzSum,
+		     factBzSum,
+		     depositMethodID,
+		     creditRemark,
+		     url, 
+		     order_id, 
+		     createdatetime, 
+		     create_user, 
+		     upatedatetime, 
+		     update_user, 
+		     isEable, 
+		     isEdit, 
+		     isDefault, 
+		     unificationID,
+		     busiAddress,
+		     remark
+	      )
+	    values 
+	    (
+		   	  #{banksortid}, 
+		   	  #{unitUid}, 
+		   	  #{pbanksortid}, 
+		      #{banksortname}, 
+		      #{bankfullcode}, 
+		      #{creditSum},
+		      #{usedSum},
+		      #{creditBeginDate},
+		      #{creditEndDate},
+		      #{zrScale},
+		      #{bzScale},
+		      #{mustBzSum},
+		      #{factBzSum},
+		      #{depositMethodID},
+		      #{creditRemark},
+		      #{url}, 
+		      #{orderId}, 
+		      NOW(), 
+		      #{createUser}, 
+		      NOW(),
+		      #{updateUser}, 
+		      #{iseable}, 
+		      #{isedit}, 
+		      #{isDefault}, 
+		      #{unificationid},
+		      #{busiAddress},
+		      #{remark}
+	      )
+      ]]>
+  </insert>
+  
+  <!-- 查询一个银行字典信息 -->
+  <select id="selectOnebankSortInfo" resultMap="BaseResultMap" parameterType="com.zjm.sys.db.model.C_bankSort" >
+   	<![CDATA[
+	   	 select 
+	   		bankSortID, 
+	   		unit_uid, 
+	   		pbankSortID, 
+	   		bankSortName, 
+	   		bankFullCode, 
+	   		creditSum,
+	   		usedSum,
+	   		creditBeginDate,
+	   		creditEndDate,
+	   		zrScale,
+	   		bzScale,
+	   		mustBzSum,
+	   		factBzSum,
+	   		depositMethodID,
+	   		creditRemark,
+	   		url, 
+	   		order_id, 
+	   		createdatetime, 
+			create_user, 
+			upatedatetime, 
+			update_user, 
+			isEable, 
+			isEdit, 
+			isDefault, 
+			unificationID,
+			busiAddress,
+			remark
+	    from c_banksort
+	    where bankSortID = #{banksortid}	
+     ]]>
+  </select>
+  
+  <!-- 更新一个银行字典信息 -->
+  <update id="updateOnebankSortInfo" parameterType="com.zjm.sys.db.model.C_bankSort" >
+  	<![CDATA[
+	    update c_banksort
+	    set pbankSortID = #{pbanksortid},
+	      bankSortName = #{banksortname},
+	      bankFullCode = #{bankfullcode},
+	      creditSum =#{creditSum},
+	      usedSum=#{usedSum},
+	      creditBeginDate=#{creditBeginDate},
+	      creditEndDate=#{creditEndDate},
+	      zrScale=#{zrScale},
+	      bzScale=#{bzScale},
+	   	  mustBzSum=#{mustBzSum},
+	   	  factBzSum=#{factBzSum},
+	      depositMethodID=#{depositMethodID},
+	      creditRemark=#{creditRemark},
+	      url = #{url},
+	      order_id = #{orderId},
+	      create_user = #{createUser},
+	      upatedatetime = NOW(),
+	      update_user = #{updateUser},
+	      isEable = #{iseable},
+	      isEdit = #{isedit},
+	      isDefault = #{isDefault},
+	      unificationID = #{unificationid},
+	      busiAddress=#{busiAddress},
+	      remark=#{remark}
+	    where bankSortID = #{banksortid}	
+       ]]>
+  </update>
+  
+  
+  <!-- 删除一个银行字典信息 -->
+  <delete id="deleteOnebankSortInfo" parameterType="com.zjm.sys.db.model.C_bankSort" >
+ 	 <![CDATA[
+	    delete from c_banksort
+	    where bankSortID = #{banksortid}	
+      ]]>
+  </delete>
+ 	
+  <!-- 查询银行字典列表    分页列表 -->	
+  <select id="selectbankSortPageTables" resultMap="BaseResultMap" parameterType="com.zjm.common.db.model.PageTable">
+  	 <![CDATA[
+  	 	select 
+  	 		bankSortID, unit_uid, pbankSortID, bankSortName, bankFullCode, url, order_id, createdatetime, 
+			create_user, upatedatetime, update_user, isEable, isEdit, isDefault, unificationID,
+			creditSum,usedSum,creditBeginDate,creditEndDate,zrScale,bzScale,mustBzSum,factBzSum,depositMethodID,creditRemark,busiAddress,remark
+		 from
+		 c_banksort
+		 where 1=1 ${wheresql}   
+		 limit #{pageNumber},#{pageSize}
+  	 ]]>
+  </select>
+  
+  <!--  查询银行字典列表    总记录数 -->
+  <select id="selectbankSortPageTables_Count" parameterType="com.zjm.sys.db.model.C_bankSort" resultType="java.lang.Long">
+  		 <![CDATA[
+  		 	select 
+  		 	count(bankSortID)
+  		 	from 
+  		 	c_banksort
+  		 	where 1=1  ${wheresql}
+  		  ]]>
+  </select>
+  
+  
+ 	<!-- 公共排序方法 -->	
+	<update id="updateSortOrder" parameterType="java.lang.String">
+		<![CDATA[${value}]]>
+	</update>
+	
+  	<!-- 判断是否存在-->
+	<select id="selectbankSortIsExist" parameterType="java.lang.String" resultType="java.lang.Integer">
+		<![CDATA[
+			SELECT 
+			count(bankSortID) 
+			FROM 
+			c_banksort 
+			where 1=1 ${value} 
+		]]>
+	</select>
+	
+	<!--  查询同级节点下共有多少 银行字典 合作机构 -->
+	<select id="selectbankSortOrderId" parameterType="com.zjm.sys.db.model.C_bankSort" resultType="java.lang.Integer">
+		<![CDATA[
+			SELECT 
+			count(bankSortID) 
+			FROM c_banksort 
+			where pbankSortID=#{pbanksortid}	
+		]]>
+	</select>
+	
+	<!-- 由父类id查询子类银行字典 -->
+	<select id="selectbankSortListByPbankSortid" parameterType="com.zjm.sys.db.model.C_bankSort" resultMap="BaseResultMap">
+		<![CDATA[
+			select
+				bankSortID, unit_uid, pbankSortID, bankSortName, bankFullCode, url, order_id, createdatetime, 
+				create_user, upatedatetime, update_user, isEable, isEdit, isDefault, unificationID,
+				creditSum,usedSum,creditBeginDate,creditEndDate,zrScale,bzScale,mustBzSum,factBzSum,depositMethodID,creditRemark,busiAddress,remark
+			FROM c_banksort 
+			where pbankSortID=#{pbanksortid}  
+		]]>
+	</select>
+	
+</mapper>

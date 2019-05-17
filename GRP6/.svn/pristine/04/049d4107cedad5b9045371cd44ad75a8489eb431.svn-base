@@ -1,0 +1,70 @@
+alter table pro_projectlawsuit CHANGE project_ID assetSealUp_ID varchar(32);
+
+alter table `pro_assetsealup` add `projectIDList` varchar(255) DEFAULT NULL COMMENT '关联项目id';
+alter table `pro_assetsealup` add `projectNameList` varchar(255) NOT NULL COMMENT '关联项目名称';
+alter table `pro_assetsealup` add `group` varchar(125) NOT NULL COMMENT '涉及公司名称';
+alter table `pro_assetsealup` add `assetSealUpType` varchar(125) NOT NULL COMMENT '查封类型 01 作为申请人 02作为被执行人';
+alter table `pro_projectlawsuit` add `assetSealUpName` varchar(125) NOT NULL COMMENT '关联查封信息案号';
+
+-- 破产记录表
+CREATE TABLE `pro_bankruptcy` (
+  `bankruptcy_id` varchar(32) NOT NULL COMMENT '破产记录id',
+  `project_id` varchar(32) NOT NULL COMMENT '项目id',
+  `if_working_group` tinyint(1) DEFAULT '0' COMMENT '是否工作组 1是  0否',
+  `execution_basis_type` varchar(11) DEFAULT NULL COMMENT '执行依据种类   裁决书 公证书 判决书',
+  `execution_basis_num` varchar(30) DEFAULT NULL COMMENT '执行依据编号',
+  `group` varchar(125) DEFAULT NULL COMMENT '涉及集团及所属公司',
+  `plaintiff` varchar(100) DEFAULT NULL COMMENT '原告（申请人）',
+  `defendant` varchar(100) DEFAULT NULL COMMENT '被告（被执行人）',
+  `lawsuit_sum` decimal(18,6) DEFAULT NULL COMMENT '涉诉金额',
+  `lawsuit_date` date DEFAULT NULL COMMENT '起诉时间',
+  `province` varchar(11) DEFAULT NULL COMMENT '管辖法院所属区域 0省内  1省外',
+  `law_court` varchar(200) DEFAULT NULL COMMENT '管辖法院名称',
+  `record_num` varchar(50) DEFAULT NULL COMMENT '案号',
+  `undertake_judge` varchar(32) DEFAULT NULL COMMENT '承办法官',
+  `first_seal` text COMMENT '财产查控情况(首封)',
+  `waiting` text COMMENT '财产查控情况(轮候)',
+  `remark` text COMMENT '备注',
+  `fund_deduction` varchar(255) DEFAULT NULL COMMENT '资金扣划情况',
+  `bankruptcy_type` varchar(10) DEFAULT NULL COMMENT '破产程序类型',
+  `is_claims_declarate`  tinyint(1) DEFAULT NULL COMMENT '是否申报债权', 
+  `obligor_type` varchar(10) DEFAULT NULL COMMENT '破产登记类型 01作为破产债权人 02作为破产连带债务人',
+  `project_id_list` varchar(255) DEFAULT NULL COMMENT '关联项目id',
+  `project_name_list` varchar(255) NOT NULL COMMENT '关联项目名称',
+  `law_suit_id` varchar(32) DEFAULT NULL COMMENT '关联诉讼id',
+  `law_suit_name` varchar(32) DEFAULT NULL COMMENT '关联诉讼名称（案号）',
+  `asset_seal_id` varchar(32) DEFAULT NULL COMMENT '关联查封id',
+  `asset_seal_name` varchar(32) DEFAULT NULL COMMENT '关联查封名称（案号）',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+   PRIMARY KEY (`bankruptcy_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='破产记录表';
+
+-- 案件执行记录表
+CREATE TABLE `pro_executecase` (
+  `executecase_id` varchar(32) NOT NULL COMMENT '案件执行id',
+  `ifWorking_group` tinyint(1) DEFAULT '0' COMMENT '是否工作组 1是  0否',
+  `execution_basis_type` varchar(11) DEFAULT NULL COMMENT '执行依据种类   裁决书 公证书 判决书',
+  `execution_basis_num` varchar(30) DEFAULT NULL COMMENT '执行依据编号',
+  `group` varchar(125) DEFAULT NULL COMMENT '涉及集团及所属公司',
+  `plaintiff` varchar(100) DEFAULT NULL COMMENT '原告（申请人）',
+  `defendant` varchar(100) DEFAULT NULL COMMENT '被告（被执行人）',
+  `project_id_list` varchar(255) DEFAULT NULL COMMENT '关联项目id',
+  `project_name_list` varchar(255) NOT NULL COMMENT '关联项目名称',
+  `lawsuit_sum` decimal(18,6) DEFAULT NULL COMMENT '涉诉金额',
+  `lawsuit_date` date DEFAULT NULL COMMENT '起诉时间',
+  `province` varchar(11) DEFAULT NULL COMMENT '管辖法院所属区域 0省内  1省外',
+  `law_court` varchar(200) DEFAULT NULL COMMENT '管辖法院名称',
+  `record_num` varchar(50) DEFAULT NULL COMMENT '案号',
+  `undertake_judge` varchar(32) DEFAULT NULL COMMENT '承办法官',
+  `first_seal` text COMMENT '财产查控情况(首封)',
+  `waiting` text COMMENT '财产查控情况(轮候)',
+  `remark` text COMMENT '备注',
+  `fund_deduction` varchar(255) DEFAULT NULL COMMENT '资金扣划情况',
+  `judge_result` varchar(255) DEFAULT NULL COMMENT '判决结果',
+  `executecase_type` varchar(10) DEFAULT NULL COMMENT '执行案件类型 01作为申请执行人 02作为被执行人',
+  `law_suit_id` varchar(32) DEFAULT NULL COMMENT '关联诉讼id',
+  `law_suit_name` varchar(32) DEFAULT NULL COMMENT '关联诉讼名称（案号）',
+  `asset_seal_id` varchar(32) DEFAULT NULL COMMENT '关联查封id',
+  `asset_seal_name` varchar(32) DEFAULT NULL COMMENT '关联查封名称（案号）',
+   PRIMARY KEY (`executecase_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='案件执行记录表';

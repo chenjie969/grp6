@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.crm.db.map.Crm_reportZcfzMapper">
+
+	<!-- 资产负债表信息 -->
+	<resultMap type="com.zjm.crm.db.model.Crm_reportZcfz" id="reportZcfzResultMap">
+		            <result property="reportZcfz_ID" column="reportZcfz_ID" />
+					<result property="client_ID" column="client_ID" />
+					<result property="reportTypeUuid" column="reportTypeUuid" />
+					<result property="reportTypeName" column="reportTypeName" />
+					<result property="yearMonth" column="yearMonth" />
+					<result property="currencyFunds" column="currencyFunds" />
+					<result property="shorttermInvest" column="shorttermInvest" />
+					<result property="notesReceivable" column="notesReceivable" />
+					<result property="dividendsReceivable" column="dividendsReceivable" />
+					<result property="interestReceivable" column="interestReceivable" />
+					<result property="accountsReceivable" column="accountsReceivable" />
+					<result property="otherReceivables" column="otherReceivables" />
+					<result property="prepaidAccount" column="prepaidAccount" />
+					<result property="subsidiesReceivable" column="subsidiesReceivable" />
+					<result property="stock" column="stock" />
+					<result property="deferredExpenses" column="deferredExpenses" />
+					<result property="oneYearInvest" column="oneYearInvest" />
+					<result property="otherCurrentAssets" column="otherCurrentAssets" />
+					<result property="currentAssetsSum" column="currentAssetsSum" />
+					<result property="longtermEquity" column="longtermEquity" />
+					<result property="longtermInvest" column="longtermInvest" />
+					<result property="longtermInvestSum" column="longtermInvestSum" />
+					<result property="fixedAssetsOldValue" column="fixedAssetsOldValue" />
+					<result property="fixedAssetsDepreciation" column="fixedAssetsDepreciation" />
+					<result property="fixedAssetsValue" column="fixedAssetsValue" />
+					<result property="fixedAssetsDevalue" column="fixedAssetsDevalue" />
+					<result property="fixedAssetsAmount" column="fixedAssetsAmount" />
+					<result property="engineeringMaterials" column="engineeringMaterials" />
+					<result property="constructionEngineering" column="constructionEngineering" />
+					<result property="fixedAssetsClean" column="fixedAssetsClean" />
+					<result property="fixedAssetsSum" column="fixedAssetsSum" />
+					<result property="intangibleAssets" column="intangibleAssets" />
+					<result property="prepaidExpenses" column="prepaidExpenses" />
+					<result property="intangibleAssetsSum" column="intangibleAssetsSum" />
+					<result property="deferredTaxDebit" column="deferredTaxDebit" />
+					<result property="assetsSum" column="assetsSum" />
+					<result property="shortTermBorrowings" column="shortTermBorrowings" />
+					<result property="notesPayable" column="notesPayable" />
+					<result property="accountPayable" column="accountPayable" />
+					<result property="receivableAdvance" column="receivableAdvance" />
+					<result property="employeeSalary" column="employeeSalary" />
+					<result property="dividendPayable" column="dividendPayable" />
+					<result property="taxPayable" column="taxPayable" />
+					<result property="otherPayment" column="otherPayment" />
+					<result property="otherPayables" column="otherPayables" />
+					<result property="accruedExpenses" column="accruedExpenses" />
+					<result property="totalLiabilities" column="totalLiabilities" />
+					<result property="oneYearLiabilities" column="oneYearLiabilities" />
+					<result property="otherCurrentLiabilities" column="otherCurrentLiabilities" />
+					<result property="currentLiabilitiesSum" column="currentLiabilitiesSum" />
+					<result property="longtermLoans" column="longtermLoans" />
+					<result property="bondsPayable" column="bondsPayable" />
+					<result property="longtermPayables" column="longtermPayables" />
+					<result property="otherLiabilitiesSum" column="otherLiabilitiesSum" />
+					<result property="longtermLiabilitiesSum" column="longtermLiabilitiesSum" />
+					<result property="deferredTax" column="deferredTax" />
+					<result property="liabilitiesSum" column="liabilitiesSum" />
+					<result property="paidCapital" column="paidCapital" />
+					<result property="capitalReserve" column="capitalReserve" />
+					<result property="surplusReserve" column="surplusReserve" />
+					<result property="statutoryReserve" column="statutoryReserve" />
+					<result property="undistributedProfit" column="undistributedProfit" />
+					<result property="owerRigtSum" column="owerRigtSum" />
+					<result property="piabilitiesOwerRigtSum" column="piabilitiesOwerRigtSum" />
+					<result property="unit_uid" column="unit_uid" />
+					<result property="unit_uidName" column="unit_uidName" />
+					<result property="updateUserName" column="updateUserName" />
+					<result property="updateDateTime" column="updateDateTime" />
+					<result property="otherLongtermAssets" column="otherLongtermAssets" />
+	</resultMap>	
+	<!-- 查询  资产负债表列表 -->
+	<select id="selectReportZcfzPageTables" resultMap="reportZcfzResultMap" parameterType="com.zjm.common.db.model.PageTable">
+		<![CDATA[
+		SELECT
+					reportZcfz_ID,
+					client_ID,
+					reportTypeUuid,
+					reportTypeName,
+					yearMonth,
+					currencyFunds,
+					shorttermInvest,
+					notesReceivable,
+					dividendsReceivable,
+					interestReceivable,
+					accountsReceivable,
+					otherReceivables,
+					prepaidAccount,
+					subsidiesReceivable,
+					stock,
+					deferredExpenses,
+					oneYearInvest,
+					otherCurrentAssets,
+					currentAssetsSum,
+					longtermEquity,
+					longtermInvest,
+					longtermInvestSum,
+					fixedAssetsOldValue,
+					fixedAssetsDepreciation,
+					fixedAssetsValue,
+					fixedAssetsDevalue,
+					fixedAssetsAmount,
+					engineeringMaterials,
+					constructionEngineering,
+					fixedAssetsClean,
+					fixedAssetsSum,
+					intangibleAssets,
+					prepaidExpenses,
+					intangibleAssetsSum,
+					deferredTaxDebit,
+					assetsSum,
+					shortTermBorrowings,
+					notesPayable,
+					accountPayable,
+					receivableAdvance,
+					employeeSalary,
+					dividendPayable,
+					taxPayable,
+					otherPayment,
+					otherPayables,
+					accruedExpenses,
+					totalLiabilities,
+					oneYearLiabilities,
+					otherCurrentLiabilities,
+					currentLiabilitiesSum,
+					longtermLoans,
+					bondsPayable,
+					longtermPayables,
+					otherLiabilitiesSum,
+					longtermLiabilitiesSum,
+					deferredTax,
+					liabilitiesSum,
+					paidCapital,
+					capitalReserve,
+					surplusReserve,
+					statutoryReserve,
+					undistributedProfit,
+					owerRigtSum,
+					piabilitiesOwerRigtSum,
+					unit_uid,
+					unit_uidName,
+					updateUserName,
+					updateDateTime,
+					otherLongtermAssets
+				
+		   FROM
+		   crm_reportZcfz		   
+		WHERE 1=1 ${wheresql} limit #{pageNumber},#{pageSize}	
+		]]>
+	</select>
+	
+	<!-- 查询 资产负债表列表 总记录数-->
+	<select id="selectReportZcfzPageTables_Count" parameterType="com.zjm.common.db.model.PageTable"  resultType="java.lang.Long">
+		<![CDATA[
+		SELECT count(reportZcfz_ID) FROM crm_reportZcfz
+		WHERE 1=1 ${wheresql} 		
+		]]>		 
+	</select>
+	
+	
+	<!-- 插入一个资产负债表信息 -->
+	<insert id="insertOneReportZcfzInfo"	parameterType="com.zjm.crm.db.model.Crm_reportZcfz">
+		<![CDATA[
+		INSERT INTO crm_reportZcfz (
+		            reportZcfz_ID,
+		            client_ID,
+					reportTypeUuid,
+					reportTypeName,
+					yearMonth,
+					currencyFunds,
+					shorttermInvest,
+					notesReceivable,
+					dividendsReceivable,
+					interestReceivable,
+					accountsReceivable,
+					otherReceivables,
+					prepaidAccount,
+					subsidiesReceivable,
+					stock,
+					deferredExpenses,
+					oneYearInvest,
+					otherCurrentAssets,
+					currentAssetsSum,
+					longtermEquity,
+					longtermInvest,
+					longtermInvestSum,
+					fixedAssetsOldValue,
+					fixedAssetsDepreciation,
+					fixedAssetsValue,
+					fixedAssetsDevalue,
+					fixedAssetsAmount,
+					engineeringMaterials,
+					constructionEngineering,
+					fixedAssetsClean,
+					fixedAssetsSum,
+					intangibleAssets,
+					prepaidExpenses,
+					intangibleAssetsSum,
+					deferredTaxDebit,
+					assetsSum,
+					shortTermBorrowings,
+					notesPayable,
+					accountPayable,
+					receivableAdvance,
+					employeeSalary,
+					dividendPayable,
+					taxPayable,
+					otherPayment,
+					otherPayables,
+					accruedExpenses,
+					totalLiabilities,
+					oneYearLiabilities,
+					otherCurrentLiabilities,
+					currentLiabilitiesSum,
+					longtermLoans,
+					bondsPayable,
+					longtermPayables,
+					otherLiabilitiesSum,
+					longtermLiabilitiesSum,
+					deferredTax,
+					liabilitiesSum,
+					paidCapital,
+					capitalReserve,
+					surplusReserve,
+					statutoryReserve,
+					undistributedProfit,
+					owerRigtSum,
+					piabilitiesOwerRigtSum,
+					unit_uid,
+					unit_uidName,
+					updateUserName,
+					updateDateTime,
+					otherLongtermAssets
+				
+		)
+		VALUES
+		(
+			#{reportZcfz_ID},
+            #{client_ID},
+			#{reportTypeUuid},
+			#{reportTypeName},
+			#{yearMonth},
+			#{currencyFunds},
+			#{shorttermInvest},
+			#{notesReceivable},
+			#{dividendsReceivable},
+			#{interestReceivable},
+			#{accountsReceivable},
+			#{otherReceivables},
+			#{prepaidAccount},
+			#{subsidiesReceivable},
+			#{stock},
+			#{deferredExpenses},
+			#{oneYearInvest},
+			#{otherCurrentAssets},
+			#{currentAssetsSum},
+			#{longtermEquity},
+			#{longtermInvest},
+			#{longtermInvestSum},
+			#{fixedAssetsOldValue},
+			#{fixedAssetsDepreciation},
+			#{fixedAssetsValue},
+			#{fixedAssetsDevalue},
+			#{fixedAssetsAmount},
+			#{engineeringMaterials},
+			#{constructionEngineering},
+			#{fixedAssetsClean},
+			#{fixedAssetsSum},
+			#{intangibleAssets},
+			#{prepaidExpenses},
+			#{intangibleAssetsSum},
+			#{deferredTaxDebit},
+			#{assetsSum},
+			#{shortTermBorrowings},
+			#{notesPayable},
+			#{accountPayable},
+			#{receivableAdvance},
+			#{employeeSalary},
+			#{dividendPayable},
+			#{taxPayable},
+			#{otherPayment},
+			#{otherPayables},
+			#{accruedExpenses},
+			#{totalLiabilities},
+			#{oneYearLiabilities},
+			#{otherCurrentLiabilities},
+			#{currentLiabilitiesSum},
+			#{longtermLoans},
+			#{bondsPayable},
+			#{longtermPayables},
+			#{otherLiabilitiesSum},
+			#{longtermLiabilitiesSum},
+			#{deferredTax},
+			#{liabilitiesSum},
+			#{paidCapital},
+			#{capitalReserve},
+			#{surplusReserve},
+			#{statutoryReserve},
+			#{undistributedProfit},
+			#{owerRigtSum},
+			#{piabilitiesOwerRigtSum},
+			#{unit_uid},
+			#{unit_uidName},
+			#{updateUserName},
+			NOW(),		
+			#{otherLongtermAssets}
+		) ;
+		]]>
+	</insert>
+	<!-- 根据查询条件查询一个资产负债表信息-->
+	<select id="selectOneReportZcfzWhereSql" parameterType="java.lang.String"  resultMap="reportZcfzResultMap">
+	<![CDATA[
+		SELECT 
+		            reportZcfz_ID,
+		            client_ID,
+					reportTypeUuid,
+					reportTypeName,
+					yearMonth,
+					currencyFunds,
+					shorttermInvest,
+					notesReceivable,
+					dividendsReceivable,
+					interestReceivable,
+					accountsReceivable,
+					otherReceivables,
+					prepaidAccount,
+					subsidiesReceivable,
+					stock,
+					deferredExpenses,
+					oneYearInvest,
+					otherCurrentAssets,
+					currentAssetsSum,
+					longtermEquity,
+					longtermInvest,
+					longtermInvestSum,
+					fixedAssetsOldValue,
+					fixedAssetsDepreciation,
+					fixedAssetsValue,
+					fixedAssetsDevalue,
+					fixedAssetsAmount,
+					engineeringMaterials,
+					constructionEngineering,
+					fixedAssetsClean,
+					fixedAssetsSum,
+					intangibleAssets,
+					prepaidExpenses,
+					intangibleAssetsSum,
+					deferredTaxDebit,
+					assetsSum,
+					shortTermBorrowings,
+					notesPayable,
+					accountPayable,
+					receivableAdvance,
+					employeeSalary,
+					dividendPayable,
+					taxPayable,
+					otherPayment,
+					otherPayables,
+					accruedExpenses,
+					totalLiabilities,
+					oneYearLiabilities,
+					otherCurrentLiabilities,
+					currentLiabilitiesSum,
+					longtermLoans,
+					bondsPayable,
+					longtermPayables,
+					otherLiabilitiesSum,
+					longtermLiabilitiesSum,
+					deferredTax,
+					liabilitiesSum,
+					paidCapital,
+					capitalReserve,
+					surplusReserve,
+					statutoryReserve,
+					undistributedProfit,
+					owerRigtSum,
+					piabilitiesOwerRigtSum,
+					unit_uid,
+					unit_uidName,
+					updateUserName,
+					updateDateTime,
+					otherLongtermAssets
+	    FROM 
+	         crm_reportZcfz 
+		WHERE 1=1 ${value}
+		]]> 				 
+	</select>
+	
+	
+	<select id="selectReportZcfzByList" parameterType="java.lang.String"  resultMap="reportZcfzResultMap">
+	<![CDATA[
+		SELECT 
+		            reportZcfz_ID,
+		            client_ID,
+					reportTypeUuid,
+					reportTypeName,
+					yearMonth,
+					currencyFunds,
+					shorttermInvest,
+					notesReceivable,
+					dividendsReceivable,
+					interestReceivable,
+					accountsReceivable,
+					otherReceivables,
+					prepaidAccount,
+					subsidiesReceivable,
+					stock,
+					deferredExpenses,
+					oneYearInvest,
+					otherCurrentAssets,
+					currentAssetsSum,
+					longtermEquity,
+					longtermInvest,
+					longtermInvestSum,
+					fixedAssetsOldValue,
+					fixedAssetsDepreciation,
+					fixedAssetsValue,
+					fixedAssetsDevalue,
+					fixedAssetsAmount,
+					engineeringMaterials,
+					constructionEngineering,
+					fixedAssetsClean,
+					fixedAssetsSum,
+					intangibleAssets,
+					prepaidExpenses,
+					intangibleAssetsSum,
+					deferredTaxDebit,
+					assetsSum,
+					shortTermBorrowings,
+					notesPayable,
+					accountPayable,
+					receivableAdvance,
+					employeeSalary,
+					dividendPayable,
+					taxPayable,
+					otherPayment,
+					otherPayables,
+					accruedExpenses,
+					totalLiabilities,
+					oneYearLiabilities,
+					otherCurrentLiabilities,
+					currentLiabilitiesSum,
+					longtermLoans,
+					bondsPayable,
+					longtermPayables,
+					otherLiabilitiesSum,
+					longtermLiabilitiesSum,
+					deferredTax,
+					liabilitiesSum,
+					paidCapital,
+					capitalReserve,
+					surplusReserve,
+					statutoryReserve,
+					undistributedProfit,
+					owerRigtSum,
+					piabilitiesOwerRigtSum,
+					unit_uid,
+					unit_uidName,
+					updateUserName,
+					updateDateTime,
+					otherLongtermAssets
+	    FROM 
+	         crm_reportZcfz 
+		WHERE 1=1 ${value}
+		]]> 				 
+	</select>
+	
+	
+	<!-- 更新一个资产负债表信息 -->	
+	<update id="updateOneReportZcfzInfo" parameterType="com.zjm.crm.db.model.Crm_reportZcfz">
+		<![CDATA[
+		UPDATE 
+		     crm_reportZcfz
+		SET
+		            client_ID= #{client_ID},
+					reportTypeUuid= #{reportTypeUuid},
+					reportTypeName= #{reportTypeName},
+					yearMonth= #{yearMonth},
+					currencyFunds= #{currencyFunds},
+					shorttermInvest= #{shorttermInvest},
+					notesReceivable= #{notesReceivable},
+					dividendsReceivable= #{dividendsReceivable},
+					interestReceivable= #{interestReceivable},
+					accountsReceivable= #{accountsReceivable},
+					otherReceivables= #{otherReceivables},
+					prepaidAccount= #{prepaidAccount},
+					subsidiesReceivable= #{subsidiesReceivable},
+					stock= #{stock},
+					deferredExpenses= #{deferredExpenses},
+					oneYearInvest= #{oneYearInvest},
+					otherCurrentAssets= #{otherCurrentAssets},
+					currentAssetsSum= #{currentAssetsSum},
+					longtermEquity= #{longtermEquity},
+					longtermInvest= #{longtermInvest},
+					longtermInvestSum= #{longtermInvestSum},
+					fixedAssetsOldValue= #{fixedAssetsOldValue},
+					fixedAssetsDepreciation= #{fixedAssetsDepreciation},
+					fixedAssetsValue= #{fixedAssetsValue},
+					fixedAssetsDevalue= #{fixedAssetsDevalue},
+					fixedAssetsAmount= #{fixedAssetsAmount},
+					engineeringMaterials= #{engineeringMaterials},
+					constructionEngineering= #{constructionEngineering},
+					fixedAssetsClean= #{fixedAssetsClean},
+					fixedAssetsSum= #{fixedAssetsSum},
+					intangibleAssets= #{intangibleAssets},
+					prepaidExpenses= #{prepaidExpenses},
+					intangibleAssetsSum= #{intangibleAssetsSum},
+					deferredTaxDebit= #{deferredTaxDebit},
+					assetsSum= #{assetsSum},
+					shortTermBorrowings= #{shortTermBorrowings},
+					notesPayable= #{notesPayable},
+					accountPayable= #{accountPayable},
+					receivableAdvance= #{receivableAdvance},
+					employeeSalary= #{employeeSalary},
+					dividendPayable= #{dividendPayable},
+					taxPayable= #{taxPayable},
+					otherPayment= #{otherPayment},
+					otherPayables= #{otherPayables},
+					accruedExpenses= #{accruedExpenses},
+					totalLiabilities= #{totalLiabilities},
+					oneYearLiabilities= #{oneYearLiabilities},
+					otherCurrentLiabilities= #{otherCurrentLiabilities},
+					currentLiabilitiesSum= #{currentLiabilitiesSum},
+					longtermLoans= #{longtermLoans},
+					bondsPayable= #{bondsPayable},
+					longtermPayables= #{longtermPayables},
+					otherLiabilitiesSum= #{otherLiabilitiesSum},
+					longtermLiabilitiesSum= #{longtermLiabilitiesSum},
+					deferredTax= #{deferredTax},
+					liabilitiesSum= #{liabilitiesSum},
+					paidCapital= #{paidCapital},
+					capitalReserve= #{capitalReserve},
+					surplusReserve= #{surplusReserve},
+					statutoryReserve= #{statutoryReserve},
+					undistributedProfit= #{undistributedProfit},
+					owerRigtSum= #{owerRigtSum},
+					piabilitiesOwerRigtSum= #{piabilitiesOwerRigtSum},
+					updateUserName= #{updateUserName},
+					updateDateTime= NOW(),
+					otherLongtermAssets= #{otherLongtermAssets}
+		WHERE reportZcfz_ID=#{reportZcfz_ID}  and unit_uid=#{unit_uid} 
+		  ]]>
+	</update>
+	
+	<!--根据wheresql删除一个资产负债表信息 -->
+	<delete id="delectReportZcfzByWhereSql" parameterType="java.lang.String">
+		<![CDATA[DELETE FROM crm_reportZcfz WHERE 1=1 ${value} ]]>
+	</delete>
+	
+</mapper>  

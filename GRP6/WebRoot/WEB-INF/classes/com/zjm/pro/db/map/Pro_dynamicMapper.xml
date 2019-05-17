@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_dynamicMapper">
+	<!-- 项目动态表 -->
+	 <resultMap id="ProDynamicMap" type="com.zjm.pro.db.model.Pro_dynamic" >
+	    <id column="dynamic_ID" property="dynamic_ID"  />
+		<result column="apply_ID" property="apply_ID"/>
+		<result column="dynamicContent" property="dynamicContent"/>
+		<result column="createDateTime" property="createDateTime"/>
+		<result column="createUserID" property="createUserID"/>				 
+		<result column="createUserName" property="createUserName"/>
+		<result column="readerUserIDList" property="readerUserIDList"/>
+		<result column="readerUserNameList" property="readerUserNameList"/>
+		<result column="unit_uid" property="unit_uid"/>		
+		<result column="updateUserName" property="updateUserName"/>		
+		<result column="updateDateTime" property="updateDateTime"/>		
+		<result column="projectName" property="projectName"/>		
+		<result column="messageNumber" property="messageNumber"/>		
+  </resultMap>	
+  
+  	<!-- 查询  列表 -->
+	<select id="selectProDynamicTables" resultMap="ProDynamicMap" parameterType="com.zjm.common.db.model.PageTable">
+		<![CDATA[		
+		select 
+			dynamic_ID,
+			apply_ID,
+			dynamicContent,
+			createDateTime,
+			createUserID,
+			createUserName,
+			readerUserIDList,
+			readerUserNameList,
+			unit_uid,
+			updateUserName,
+			updateDateTime
+	    from pro_dynamic
+		WHERE 1=1 ${wheresql} limit #{pageNumber},#{pageSize}	
+		]]>
+	</select>
+	
+	<!-- 查询 列表 总记录数-->
+	<select id="selectProDynamicTables_Count" parameterType="com.zjm.common.db.model.PageTable"  resultType="java.lang.Long">
+		<![CDATA[
+		SELECT count(dynamic_ID) FROM pro_dynamic 
+		WHERE 1=1 ${wheresql} 		
+		]]>		 
+	</select>
+  
+	<!-- 获取项目动态列表-->	
+		<select id="selectProDynamicList" resultMap="ProDynamicMap" parameterType="java.lang.String">
+		select 
+			dynamic_ID,
+			apply_ID,
+			dynamicContent,
+			createDateTime,
+			createUserID,
+			createUserName,
+			readerUserIDList,
+			readerUserNameList,
+			unit_uid,
+			updateUserName,
+			updateDateTime
+	    from pro_dynamic
+	    WHERE 1=1  	  ${value}
+	    
+	</select>
+	
+	<!-- 首页获取项目动态列表-->	
+	<select id="selectIndexProDynamicList" resultMap="ProDynamicMap" parameterType="java.lang.String">
+		select 
+			COUNT(DISTINCT dynamic_ID) as messageNumber,
+			a.apply_ID,
+			a.projectName
+			
+	    from pro_dynamic d
+	    left join pro_apply a on a.apply_ID = d.apply_ID
+	    WHERE 1=1  	  ${value}
+	</select>
+	
+	<!-- 查询总条数 -->
+		<select id="selectProDynamicCount" parameterType="java.lang.String"  resultType="int">
+		<![CDATA[
+		SELECT count(dynamic_ID) FROM pro_dynamic 
+		WHERE 1=1 ${value} 		
+		]]>		 
+	</select>
+	
+	<!-- 插入一条信息 -->	  
+  <insert id="insertOneProDynamic" parameterType="com.zjm.pro.db.model.Pro_dynamic" >
+    insert into pro_dynamic 
+    (		dynamic_ID,
+			apply_ID,
+			dynamicContent,
+			createDateTime,
+			createUserID,
+			createUserName,
+			readerUserIDList,
+			readerUserNameList,
+			unit_uid,
+			updateUserName,
+			updateDateTime
+      )
+    values (#{dynamic_ID}, #{apply_ID}, #{dynamicContent}, 
+      	NOW(), #{createUserID}, #{createUserName}, 
+      #{readerUserIDList}, #{readerUserNameList}, #{unit_uid},
+      #{updateUserName},NOW()
+      )
+  </insert>
+  <!-- 更新信息 -->
+	<update id="updateProDynamicList" parameterType="java.lang.String">		
+		UPDATE 
+		  pro_dynamic d
+        
+	 ${value}
+
+	</update>
+  <!-- 删除计划表 -->
+	<delete id="deleteProDynamicByDynamicID" parameterType="java.lang.String">
+		<![CDATA[DELETE FROM pro_dynamic WHERE dynamic_ID=#{dynamic_ID}   ]]>
+	</delete>
+		<!-- 查询一项目动态信息通过项目动态ID -->
+	<select id="selectOneProDynamic" parameterType="java.lang.String"
+		resultMap="ProDynamicMap">
+	<![CDATA[
+		select dynamic_ID,
+			apply_ID,
+			dynamicContent,
+			createDateTime,
+			createUserID,
+			createUserName,
+			readerUserIDList,
+			readerUserNameList,
+			unit_uid,
+			updateUserName,
+			updateDateTime
+ 	 from pro_dynamic 
+		
+		WHERE 1=1 and dynamic_ID=#{dynamic_ID}
+		
+		
+		]]>
+	</select>
+</mapper>  

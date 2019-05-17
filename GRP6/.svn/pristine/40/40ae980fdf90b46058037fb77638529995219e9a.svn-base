@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.oa.db.map.Oa_meetingMapper">
+    <resultMap id="baseResultMap" type="com.zjm.oa.db.model.Oa_meeting">
+        <result property="meeting_ID" column="meeting_ID"/>
+        <result property="meetingName" column="meetingName"/>
+        <result property="meetingRoomID" column="meetingRoomID"/>
+        <result property="meetingRoomName" column="meetingRoomName"/>
+        <result property="isCyclicity" column="isCyclicity"/>
+        <result property="meetingBeginDateTime" column="meetingBeginDateTime" javaType="java.util.Date"
+                jdbcType="TIMESTAMP"/>
+        <result property="meetingEndDateTime" column="meetingEndDateTime" javaType="java.util.Date"
+                jdbcType="TIMESTAMP"/>
+        <result property="meetingBeginDate" column="meetingBeginDate"/>
+        <result property="meetingEndDate" column="meetingEndDate"/>
+        <result property="meetingBeginTime" column="meetingBeginTime"/>
+        <result property="meetingEndTime" column="meetingEndTime"/>
+        <result property="duplicateManName" column="duplicateManName"/>
+        <result property="membersIDList" column="membersIDList"/>
+        <result property="membersNameList" column="membersNameList"/>
+        <result property="compereID" column="compereID"/>
+        <result property="compereName" column="compereName"/>
+        <result property="outMembers" column="outMembers"/>
+        <result property="subject" column="subject"/>
+        <result property="remark" column="remark"/>
+        <result property="createUserID" column="createUserID"/>
+        <result property="createUserName" column="createUserName"/>
+
+        <result property="createDateTime" column="createDateTime"/>
+        <result property="status" column="status"/>
+        <result property="returnDesc" column="returnDesc"/>
+        <result property="unit_uid" column="unit_uid"/>
+        <result property="unit_uidName" column="unit_uidName"/>
+        <result property="updateUserName" column="updateUserName"/>
+        <result property="updateDateTime" column="updateDateTime"/>
+    </resultMap>
+    <select id="list" resultMap="baseResultMap" parameterType="com.zjm.common.db.model.PageTable">
+        SELECT *
+        FROM oa_meeting
+        LIMIT #{pageNumber}, #{pageSize}
+    </select>
+    <insert id="insert" parameterType="com.zjm.oa.db.map.Oa_meetingMapper">
+        INSERT INTO oa_meeting
+        (meeting_ID, meetingName, meetingRoomID, meetingRoomName, isCyclicity, meetingBeginDateTime, meetingEndDateTime, meetingBeginDate, meetingEndDate, meetingBeginTime, meetingEndTime, duplicateManName, membersIDList, membersNameList,
+         compereID, compereName, outMembers, subject, remark, createUserID, createUserName, createDateTime, status, returnDesc, unit_uid, unit_uidName, updateUserName, updateDateTime
+        ) VALUES (
+            #{meeting_ID},
+            #{meetingName},
+            #{meetingRoomID},
+            #{meetingRoomName},
+            #{isCyclicity},
+            #{meetingBeginDateTime},
+            #{meetingEndDateTime},
+            #{meetingBeginDate},
+            #{meetingEndDate},
+            #{meetingBeginTime},
+            #{meetingEndTime},
+            #{duplicateManName},
+            #{membersIDList},
+            #{membersNameList},
+            #{compereID},
+            #{compereName},
+            #{outMembers},
+            #{subject},
+            #{remark},
+            #{createUserID},
+            #{createUserName},
+            #{createDateTime},
+            #{status},
+            #{returnDesc},
+            #{unit_uid},
+            #{unit_uidName},
+            #{updateUserName},
+            #{updateDateTime}
+        )
+    </insert>
+    <select id="getByPrimaryKey" parameterType="java.lang.String" resultMap="baseResultMap">
+
+        SELECT
+            meeting_ID,
+            meetingName,
+            meetingRoomID,
+            meetingRoomName,
+            isCyclicity,
+            meetingBeginDateTime,
+            meetingEndDateTime,
+            meetingBeginDate,
+            meetingEndDate,
+            meetingBeginTime,
+            meetingEndTime,
+            duplicateManName,
+            membersIDList,
+            membersNameList,
+            compereID,
+            compereName,
+            outMembers,
+            subject,
+            remark,
+            createUserID,
+            createUserName,
+            createDateTime,
+            status,
+            returnDesc,
+            unit_uid,
+            unit_uidName,
+            updateUserName,
+            updateDateTime
+        FROM oa_meeting
+        WHERE meeting_ID = #{meeting_ID}
+
+    </select>
+    <update id="updateByID" parameterType="com.zjm.oa.db.model.Oa_meeting">
+        UPDATE oa_meeting
+        SET status = #{status}, returnDesc = #{returnDesc}
+        WHERE meeting_ID = #{meeting_ID}
+    </update>
+    <delete id="delete" parameterType="java.lang.String">
+        DELETE FROM oa_meeting
+        WHERE meeting_ID = #{meeting_ID}
+    </delete>
+    <!-- 根据会议室ID删除会议信息 -->
+	<delete id="delOaMeetingByMeetingRoomID" parameterType="java.lang.String">
+        DELETE FROM oa_meeting
+        WHERE meetingRoomID = #{meetingRoomID}
+    </delete>
+    <select id="listByDuration" parameterType="com.zjm.common.db.model.PageTable" resultMap="baseResultMap">
+
+        SELECT
+            meeting_ID,
+            meetingName,
+            meetingRoomID,
+            meetingRoomName,
+            isCyclicity,
+            meetingBeginDateTime,
+            meetingEndDateTime,
+            meetingBeginDate,
+            meetingEndDate,
+            meetingBeginTime,
+            meetingEndTime,
+            duplicateManName,
+            membersIDList,
+            membersNameList,
+            compereID,
+            compereName,
+            outMembers,
+            subject,
+            remark,
+            createUserID,
+            createUserName,
+            createDateTime,
+            status,
+            returnDesc,
+            unit_uid,
+            unit_uidName,
+            updateUserName,
+            updateDateTime
+        FROM oa_meeting
+        WHERE ${wheresql}
+
+    </select>
+
+    <select id="listByApprovalStatus" parameterType="com.zjm.common.db.model.PageTable" resultMap="baseResultMap">
+        SELECT
+            meeting_ID,
+            meetingName,
+            meetingRoomID,
+            meetingRoomName,
+            isCyclicity,
+            meetingBeginDateTime,
+            meetingEndDateTime,
+            meetingBeginDate,
+            meetingEndDate,
+            meetingBeginTime,
+            meetingEndTime,
+            duplicateManName,
+            membersIDList,
+            membersNameList,
+            compereID,
+            compereName,
+            outMembers,
+            subject,
+            remark,
+            createUserID,
+            createUserName,
+            createDateTime,
+            status,
+            returnDesc,
+            unit_uid,
+            unit_uidName,
+            updateUserName,
+            updateDateTime
+        FROM oa_meeting
+        WHERE ${wheresql}
+
+
+    </select>
+</mapper>

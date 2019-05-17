@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zjm.gworkFlow.db.map.FlowtemplateMapper">
+
+	<resultMap type="com.zjm.gworkFlow.db.model.Os_step" id="Os_stepeResultMap">
+		<result property="id" column="ID" />
+		<result property="stepId" column="STEP_ID" />
+		<result property="entryId" column="ENTRY_ID" />
+		<result property="flowName_chn" column="flowTemplateName" />
+		<result property="stepName_chn" column="stepName" />
+		<result property="owner_chn" column="OWNER" />
+		<result property="startDate" column="START_DATE" />
+		<result property="finishDate" column="FINISH_DATE" />
+		<result property="dueDate" column="DUE_DATE" />
+		<result property="status_chn" column="statusName" />
+		<result property="caller_chn" column="CALLER" />
+
+		<result property="projectCode" column="ProjDocCode" />
+		<result property="projectID" column="ProjectID" />
+		<result property="clientName_chn" column="ClientName" />
+		<result property="flowCreator_chn" column="UserName" />
+		<result property="usergid" column="usergid" />
+		<result property="applysum" column="applysum" />
+	</resultMap>
+	
+	
+
+</mapper> 

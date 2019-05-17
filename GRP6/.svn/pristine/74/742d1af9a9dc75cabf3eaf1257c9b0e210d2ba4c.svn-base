@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><jatools Class="jatools.ReportDocument" Name="jatools report template"><VariableContext/><Page><Children ItemClass="PagePanel"><Item0><Width>1161</Width><Height>137</Height><Children><Item0 Class="Label"><Text>金额单位：亿元</Text><HorizontalAlignment>2</HorizontalAlignment><X>1015</X><Y>110</Y><Width>110</Width><Height>23</Height></Item0><Item1 Class="Text"><Variable>=if(has(enddatesql)) return enddatesql;else return $today;</Variable><X>603</X><Y>95</Y><Width>82</Width><Height>23</Height></Item1><Item2 Class="Label"><Text>截止日期：</Text><HorizontalAlignment>2</HorizontalAlignment><X>527</X><Y>95</Y><Width>76</Width><Height>23</Height></Item2><Item3 Class="Label"><Text>担保项目分布（按银行机构）</Text><Font><Face>宋体</Face><Style>1</Style><Size>36</Size></Font><HorizontalAlignment>1</HorizontalAlignment><X>269</X><Y>17</Y><Width>748</Width><Height>58</Height></Item3></Children><Type>100</Type></Item0><Item1><Y>1024</Y><Width>1161</Width><Height>58</Height><Type>103</Type></Item1><Item2><Y>137</Y><Width>1161</Width><Height>887</Height><Children ItemClass="Table"><Item0><NodePath>tab_bank</NodePath><X>11</X><Y>2</Y><Children><Item0 Class="Label"><Text>序号</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col></Cell></Item0><Item1 Class="Label"><Text>名称</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col></Cell></Item1><Item2 Class="Label"><Text>授信额度</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>2</Col></Cell></Item2><Item3 Class="Label"><Text>合作余额</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>3</Col></Cell></Item3><Item4 Class="Label"><Text>其中逾期余额</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>4</Col></Cell></Item4><Item5 Class="Label"><Text>已代偿余额</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>5</Col></Cell></Item5><Item6 Class="Label"><Text>合计</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>0</Col><ColSpan>2</ColSpan></Cell></Item6><Item7 Class="Text"><Variable>=$.creditSum.sum()</Variable><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>2</Row><Col>2</Col></Cell></Item7><Item8 Class="RowPanel"><Cell><Row>1</Row><Col>0</Col><ColSpan>6</ColSpan></Cell><Children ItemClass="Text"><Item0><Variable>=$.position + 1</Variable><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>0</Col></Cell></Item0><Item1><Variable>=$.bankName</Variable><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>1</Col></Cell></Item1><Item2><Variable>=$.creditSum</Variable><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>1</Row><Col>2</Col></Cell></Item2><Item3><Variable>=index_financing.remainedGuaSum{$.bankName}/10000</Variable><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>1</Row><Col>3</Col></Cell></Item3><Item4><Variable>=if(has(index_oversum.remainedoversum{$.bankName})) return index_oversum.remainedoversum{$.bankName}/10000; else return 0;</Variable><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>1</Row><Col>4</Col></Cell></Item4><Item5><Variable>=if(has(index_replacesum.remainedreplacesum{$.bankName})) return index_replacesum.remainedreplacesum{$.bankName}/10000; else return 0;</Variable><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>1</Row><Col>5</Col></Cell></Item5></Children><NodePath>Row</NodePath></Item8><Item9 Class="Text"><Variable>=index_oversum.remainedoversum.sum()/10000</Variable><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>2</Row><Col>4</Col></Cell></Item9><Item10 Class="Text"><Variable>=index_replacesum.remainedreplacesum.sum()/10000</Variable><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>2</Row><Col>5</Col></Cell></Item10><Item11 Class="Text"><Variable>=index_financing.remainedGuaSum.sum()/10000</Variable><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>2</Row><Col>3</Col></Cell></Item11></Children><ColumnWidths>60,232,174,222,222,222</ColumnWidths><RowHeights>36,30,30</RowHeights></Item0></Children><Type>102</Type></Item2></Children><PageFormat><Width>1186</Width><Height>1122</Height><Left>11</Left><Right>14</Right></PageFormat></Page><NodeSource><Children ItemClass="DatasetNodeSource"><Item0><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">bankName</IndexFields><TagName>index_replacesum</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab_replaceSum</Name><Sql>SELECT pp.`bankName` bankName,SUM(IFNULL(pre.`replaceSum`,0) - IFNULL(tab.returnSum,0)) remainedreplacesum FROM pro_replace pre 
+LEFT JOIN (SELECT prd.projectID,SUM(IFNULL(prd.`returnSum`,0)) returnSum FROM pro_returndetail prd WHERE 1=1 ${has(enddatesql)?(" AND prd.returndate &lt;='"+enddatesql+"'"):""} GROUP BY prd.projectID) tab ON tab.`projectID`=pre.`project_ID`
+LEFT JOIN pro_project pp ON pp.`project_ID` = pre.`project_ID`
+WHERE 1=1	${has(enddatesql)?(" AND pre.replacedate&lt;='"+enddatesql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY pp.`bankName`</Sql><Description>SELECT pp.`bankName` bankName,SUM(IFNULL(pre.`replaceSum`,0) - IFNULL(tab.returnSum,0)) remainedreplacesum FROM pro_replace pre 
+LEFT JOIN (SELECT prd.projectID,SUM(IFNULL(prd.`returnSum`,0)) returnSum FROM pro_returndetail prd WHERE 1=1 ${has(enddatesql)?(" AND prd.returndate &lt;='"+enddatesql+"'"):""} GROUP BY prd.projectID) tab ON tab.`projectID`=pre.`project_ID`
+LEFT JOIN pro_project pp ON pp.`project_ID` = pre.`project_ID`
+WHERE 1=1	${has(enddatesql)?(" AND pre.replacedate&lt;='"+enddatesql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY pp.`bankName`</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">bankName</IndexFields><TagName>tab_replaceSum</TagName></Item0><Item1><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">bankname</IndexFields><TagName>index_financing</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab_financing_guarantySum</Name><Sql>SELECT SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)-IFNULL(tab5.creditorsum,0))) AS remainedGuaSum,pp.bankname
+FROM pro_project pp
+LEFT JOIN ( SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM pro_factpay pfp WHERE  1=1 ${has(enddatesql)?(" and pfp.payDate&lt;='"+enddatesql+"'"):""} GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+LEFT JOIN (SELECT pre.project_ID,SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum 
+	FROM pro_replace pre WHERE 1=1 ${has(enddatesql)?(" and pre.replaceDate&lt;='"+enddatesql+"'"):""} GROUP BY pre.project_ID 
+)tab2 ON tab2.project_ID =  pp.project_ID 
+LEFT JOIN (
+	SELECT 
+		precre.project_ID,        
+		SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum          
+	FROM
+		pro_creditor precre
+	WHERE 1=1   
+	${has(enddatesql)?(" and  precre.creditor_date&lt;='"+enddatesql+"'"):""}
+	GROUP BY precre.project_ID 
+)tab5 ON tab5.project_ID =  pp.project_ID
+
+
+LEFT JOIN pro_apply pa ON pa.`apply_ID` = pp.`apply_ID`
+WHERE	pp.busiClass= '01' AND pa.`fundType` = '银行'
+	${has(enddatesql)?(" and pp.delayBeginDate&lt;='"+enddatesql+"'"):""}
+	${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY pp.bankname</Sql><Description>SELECT SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)-IFNULL(tab5.creditorsum,0))) AS remainedGuaSum,pp.bankname
+FROM pro_project pp
+LEFT JOIN ( SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM pro_factpay pfp WHERE  1=1 ${has(enddatesql)?(" and pfp.payDate&lt;='"+enddatesql+"'"):""} GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+LEFT JOIN (SELECT pre.project_ID,SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum 
+	FROM pro_replace pre WHERE 1=1 ${has(enddatesql)?(" and pre.replaceDate&lt;='"+enddatesql+"'"):""} GROUP BY pre.project_ID 
+)tab2 ON tab2.project_ID =  pp.project_ID 
+LEFT JOIN (
+	SELECT 
+		precre.project_ID,        
+		SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum          
+	FROM
+		pro_creditor precre
+	WHERE 1=1   
+	${has(enddatesql)?(" and  precre.creditor_date&lt;='"+enddatesql+"'"):""}
+	GROUP BY precre.project_ID 
+)tab5 ON tab5.project_ID =  pp.project_ID
+
+
+LEFT JOIN pro_apply pa ON pa.`apply_ID` = pp.`apply_ID`
+WHERE	pp.busiClass= '01' AND pa.`fundType` = '银行'
+	${has(enddatesql)?(" and pp.delayBeginDate&lt;='"+enddatesql+"'"):""}
+	${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY pp.bankname</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">bankname</IndexFields><TagName>tab_financing_guarantySum</TagName></Item1><Item2><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">bankName</IndexFields><TagName>index_oversum</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab_oversum</Name><Sql>SELECT pp.bankName,SUM((IFNULL(pp.`overSum`,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)-IFNULL(tab5.creditorsum,0))) AS remainedoversum
+FROM pro_project pp
+LEFT JOIN (SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM pro_factpay pfp
+	LEFT JOIN pro_project p1 ON p1.`project_ID`=pfp.`project_ID` WHERE pfp.payDate &lt; p1.`overDate` ${has(enddatesql)?(" and pfp.payDate&lt;='"+enddatesql+"'"):""} GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+LEFT JOIN ( SELECT pre.project_ID,SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum         
+	FROM pro_replace pre LEFT JOIN pro_project p2 ON p2.`project_ID`=pre.`project_ID` WHERE pre.`replaceDate`&lt; p2.`overDate` ${has(enddatesql)?(" and pre.replaceDate&lt;='"+enddatesql+"'"):""} GROUP BY pre.project_ID 
+)tab2 ON tab2.project_ID =  pp.project_ID
+
+LEFT JOIN (
+	SELECT 
+		precre.project_ID,        
+		SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum          
+	FROM
+		pro_creditor precre
+	WHERE 1=1   
+	${has(enddatesql)?(" and  precre.creditor_date&lt;='"+enddatesql+"'"):""}
+	GROUP BY precre.project_ID 
+)tab5 ON tab5.project_ID =  pp.project_ID
+
+LEFT JOIN pro_apply pa ON pa.`apply_ID` = pp.`apply_ID`
+WHERE pp.busiClass= '01' AND pa.`fundType` = '银行' 
+${has(enddatesql)?(" and pp.overdate&lt;='"+enddatesql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY pp.bankName</Sql><Description>SELECT pp.bankName,SUM((IFNULL(pp.`overSum`,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)-IFNULL(tab5.creditorsum,0))) AS remainedoversum
+FROM pro_project pp
+LEFT JOIN (SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM pro_factpay pfp
+	LEFT JOIN pro_project p1 ON p1.`project_ID`=pfp.`project_ID` WHERE pfp.payDate &lt; p1.`overDate` ${has(enddatesql)?(" and pfp.payDate&lt;='"+enddatesql+"'"):""} GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+LEFT JOIN ( SELECT pre.project_ID,SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum         
+	FROM pro_replace pre LEFT JOIN pro_project p2 ON p2.`project_ID`=pre.`project_ID` WHERE pre.`replaceDate`&lt; p2.`overDate` ${has(enddatesql)?(" and pre.replaceDate&lt;='"+enddatesql+"'"):""} GROUP BY pre.project_ID 
+)tab2 ON tab2.project_ID =  pp.project_ID
+
+LEFT JOIN (
+	SELECT 
+		precre.project_ID,        
+		SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum          
+	FROM
+		pro_creditor precre
+	WHERE 1=1   
+	${has(enddatesql)?(" and  precre.creditor_date&lt;='"+enddatesql+"'"):""}
+	GROUP BY precre.project_ID 
+)tab5 ON tab5.project_ID =  pp.project_ID
+
+LEFT JOIN pro_apply pa ON pa.`apply_ID` = pp.`apply_ID`
+WHERE pp.busiClass= '01' AND pa.`fundType` = '银行' 
+${has(enddatesql)?(" and pp.overdate&lt;='"+enddatesql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY pp.bankName</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">bankName</IndexFields><TagName>tab_oversum</TagName></Item2><Item3><Children ItemClass="RowNodeSource"><Item0/></Children><Reader Class="SqlReader"><Name>tab_bank</Name><Sql>SELECT DISTINCT pp.bankName,IFNULL(bank.creditSum,0) creditSum
+FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pp.apply_ID=pa.apply_ID
+LEFT JOIN c_banksort bank ON bank.bankSortID=pp.bankID
+WHERE pp.busiClass='01'  AND pp.bankID &lt;&gt;'' AND pa.fundType = "银行"
+${has(endyearmonthsql)?(" and DATE_FORMAT(pp.delayBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+ORDER BY pp.bankName ASC</Sql><Description>SELECT DISTINCT pp.bankName,IFNULL(bank.creditSum,0) creditSum
+FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pp.apply_ID=pa.apply_ID
+LEFT JOIN c_banksort bank ON bank.bankSortID=pp.bankID
+WHERE pp.busiClass='01'  AND pp.bankID &lt;&gt;'' AND pa.fundType = "银行"
+${has(endyearmonthsql)?(" and DATE_FORMAT(pp.delayBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+ORDER BY pp.bankName ASC</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><TagName>tab_bank</TagName></Item3></Children></NodeSource></jatools>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.crm.db.map.Crm_clientShareMapper">
+	<!-- 共享客户表信息 -->
+	<resultMap type="com.zjm.crm.db.model.Crm_clientShare" id="ClientShareResultMap">
+		<result property="clientShare_ID" column="clientShare_ID" />
+		<result property="client_ID" column="client_ID" />
+		<result property="userIDs" column="userIDs" />
+		<result property="userNames" column="userNames" />
+		<result property="shareUserID" column="shareUserID" />
+		<result property="shareDateTime" column="shareDateTime" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="updateUserName" column="updateUserName" />
+		<result property="updateDateTime" column="updateDateTime" />
+	</resultMap>
+
+	<!-- 新增一个共享客户信息 -->
+	<insert id="insertOneClientShareInfo" parameterType="com.zjm.crm.db.model.Crm_clientShare">
+		<![CDATA[
+		INSERT INTO crm_clientShare(
+			clientShare_ID,
+			client_ID,
+			userIDs,
+			userNames,
+			shareUserID,
+			shareDateTime,
+			updateUserName,
+			updateDateTime,
+			unit_uid
+		)
+		VALUES
+		(
+			#{clientShare_ID},
+			#{client_ID},
+			#{userIDs},
+			#{userNames},
+			#{shareUserID},
+			NOW(),
+			#{updateUserName},
+			NOW(),
+			#{unit_uid}
+		) ;
+		]]>
+	</insert>
+	
+	<!-- 修改一个共享客户信息 -->
+	<update id="updateOneClientShareInfo" parameterType="com.zjm.crm.db.model.Crm_clientShare">
+		<![CDATA[
+		update crm_clientShare
+			set
+				userIDs       	  =#{userIDs},     
+				userNames         =#{userNames},   
+				updateUserName    =#{updateUserName}, 
+				updateDateTime    =NOW()
+			where  clientShare_ID =#{clientShare_ID}
+		
+		]]>
+	</update>
+
+	<!-- 查询一个关联企业信息 -->
+	<select id="selectOneClientShareInfo" parameterType="com.zjm.crm.db.model.Crm_clientShare"
+		resultMap="ClientShareResultMap">
+		<![CDATA[
+		SELECT
+			clientShare_ID,
+			userIDs,
+			userNames
+		
+		FROM crm_clientShare
+		where unit_uid=#{unit_uid}  AND client_ID=#{client_ID}]]>
+	</select>
+	
+	<delete id="deleteClientShareByClient_ID" parameterType="java.lang.String">
+		DELETE FROM 
+			crm_clientShare
+		WHERE  client_ID = #{client_ID}
+	</delete>
+</mapper>  

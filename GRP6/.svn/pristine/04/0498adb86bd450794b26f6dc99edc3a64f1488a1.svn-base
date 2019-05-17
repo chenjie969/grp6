@@ -1,0 +1,37 @@
+package com.zjm.pro.db.map;
+
+import com.zjm.pro.db.model.Pro_projectLawsuit;
+
+public interface Pro_projectLawsuitMapper {	
+	/**
+	 * 新增一个项目诉讼
+	 * @param projectLawsuit
+	 * @return
+	 */
+	
+	public Integer  insertOneProjectLawsuit(Pro_projectLawsuit projectLawsuit);
+	/**
+	 * 更改项目诉讼
+	 * @param proLawSuit
+	 * @return
+	 */
+	public Integer  updateOneProjectLawsuitInfo(Pro_projectLawsuit projectLawsuit);
+
+	/**
+	 * 查询一条项目诉讼
+	 * @param proLawSuit
+	 * @return
+	 */
+	public Pro_projectLawsuit selectOneProjectLawsuitInfo(String whereSql);
+	
+	/**
+	 * 根据项目id删除诉讼
+	 * @param project_ID
+	 * @return
+	 */
+	public Integer deleteLawsuitMapperByProject_ID(String project_ID);
+	
+
+
+	
+}

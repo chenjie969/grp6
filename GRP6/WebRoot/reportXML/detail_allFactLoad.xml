@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><jatools Class="jatools.ReportDocument" Name="jatools report template"><VariableContext/><Page><Children ItemClass="PagePanel"><Item0><Width>1677</Width><Height>137</Height><Children><Item0 Class="Label"><Text>放款明细月报表</Text><Font><Face>宋体</Face><Style>1</Style><Size>36</Size></Font><HorizontalAlignment>1</HorizontalAlignment><X>372</X><Y>14</Y><Width>656</Width><Height>71</Height></Item0><Item1 Class="Text"><Variable>=if(has(begindatesql)) return begindatesql;else return "";</Variable><HorizontalAlignment>1</HorizontalAlignment><X>596</X><Y>87</Y><Width>110</Width><Height>23</Height></Item1><Item2 Class="Text"><Variable>=if(has(enddatesql)) return enddatesql;else return $today;</Variable><X>748</X><Y>88</Y><Width>110</Width><Height>23</Height></Item2><Item3 Class="Label"><Text>至</Text><HorizontalAlignment>1</HorizontalAlignment><X>708</X><Y>86</Y><Width>26</Width><Height>23</Height></Item3><Item4 Class="Label"><Text>统计期间：</Text><X>537</X><Y>86</Y><Width>56</Width><Height>23</Height></Item4></Children><Type>100</Type></Item0><Item1><Y>790</Y><Width>1677</Width><Height>19</Height><Type>103</Type></Item1><Item2><Y>137</Y><Width>1677</Width><Height>653</Height><Children><Item0 Class="Table"><NodePath>detail_factload</NodePath><X>82</X><Y>33</Y><Children><Item0 Class="Label"><Text>序号</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>0</Col></Cell></Item0><Item1 Class="Label"><Text>所属区域</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>1</Col></Cell></Item1><Item2 Class="Label"><Text>业务性质</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>2</Col></Cell></Item2><Item3 Class="Label"><Text>客户名称</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>3</Col></Cell></Item3><Item4 Class="Label"><Text>项目编号</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>4</Col></Cell></Item4><Item5 Class="Label"><Text>项目名称</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>5</Col></Cell></Item5><Item6 Class="Label"><Text>放款金额</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>6</Col></Cell></Item6><Item7 Class="Label"><Text>业务品种</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>7</Col></Cell></Item7><Item8 Class="Label"><Text>项目类型</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>8</Col></Cell></Item8><Item9 Class="Label"><Text>项目来源</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>9</Col></Cell></Item9><Item10 Class="Label"><Text>合作机构</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>10</Col></Cell></Item10><Item11 Class="Label"><Text>绿色通道</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>11</Col></Cell></Item11><Item12 Class="Label"><Text>A角</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>12</Col></Cell></Item12><Item13 Class="Label"><Text>B角</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>13</Col></Cell></Item13><Item14 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>0</Col></Cell></Item14><Item15 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>7</Col></Cell></Item15><Item16 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>8</Col></Cell></Item16><Item17 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>9</Col></Cell></Item17><Item18 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>10</Col></Cell></Item18><Item19 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>11</Col></Cell></Item19><Item20 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>12</Col></Cell></Item20><Item21 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>13</Col></Cell></Item21><Item22 Class="RowPanel"><Cell><Row>1</Row><Col>0</Col><RowSpan>2</RowSpan><ColSpan>14</ColSpan></Cell><Children><Item0 Class="RowPanel"><Cell><Row>1</Row><Col>0</Col><ColSpan>14</ColSpan></Cell><Children ItemClass="Text"><Item0><Variable>=$.clientName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>3</Col></Cell></Item0><Item1><Variable>=$.busiNatureName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>2</Col></Cell></Item1><Item2><Variable>=index_dic_area.name{$fullAreaCode}</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>united-level:2;auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>1</Col></Cell></Item2><Item3><Variable>=$.position + 1</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>0</Col></Cell></Item3><Item4><Variable>=$.projectName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>4</Col></Cell></Item4><Item5><Variable>=$.projectName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>5</Col></Cell></Item5><Item6><Variable>=$.loadSum</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>6</Col></Cell></Item6><Item7><Variable>=$.busiTypeName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>7</Col></Cell></Item7><Item8><Variable>=$.projectTypeName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>8</Col></Cell></Item8><Item9><Variable>=$.projectSourceName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>9</Col></Cell></Item9><Item10><Variable>=$.bankName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>10</Col></Cell></Item10><Item11><Variable>=$.greenChannelName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>11</Col></Cell></Item11><Item12><Variable>=$.amanName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>12</Col></Cell></Item12><Item13><Variable>=$.bmanName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>13</Col></Cell></Item13></Children><NodePath>Row</NodePath></Item0><Item1 Class="Text"><Variable>=$.loadSum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>6</Col></Cell></Item1><Item2 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>7</Col></Cell></Item2><Item3 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>8</Col></Cell></Item3><Item4 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>9</Col></Cell></Item4><Item5 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>10</Col></Cell></Item5><Item6 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>11</Col></Cell></Item6><Item7 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>12</Col></Cell></Item7><Item8 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>13</Col></Cell></Item8><Item9 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>0</Col></Cell></Item9><Item10 Class="Text"><Variable>=index_dic_area.name{$fullAreaCode}+"小计"</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>united-level:1;auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>1</Col><ColSpan>5</ColSpan></Cell></Item10></Children><NodePath>fullAreaCode</NodePath></Item22><Item23 Class="Text"><Variable>=$.loadSum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>6</Col></Cell></Item23><Item24 Class="Label"><Text>总计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>1</Col><ColSpan>5</ColSpan></Cell></Item24></Children><ColumnWidths>108,120,135,105,135,108,117,114,117,126,87,105,93,93</ColumnWidths><RowHeights>40,40,20,20</RowHeights></Item0><Item1 Class="Label"><Text>填报单位：</Text><X>80</X><Y>4</Y><Width>131</Width><Height>23</Height></Item1><Item2 Class="Label"><Text>金额单位：万元</Text><HorizontalAlignment>2</HorizontalAlignment><X>1535</X><Y>6</Y><Width>110</Width><Height>23</Height></Item2></Children><Type>102</Type></Item2></Children><PageFormat><Width>1717</Width><Height>852</Height><Top>23</Top></PageFormat></Page><NodeSource><Children ItemClass="DatasetNodeSource"><Item0><Children ItemClass="GroupNodeSource"><Item0><Children ItemClass="RowNodeSource"><Item0/></Children><Group><Order>1</Order><Field>fullAreaCode</Field></Group></Item0></Children><Reader Class="SqlReader"><Name>detail_factload</Name><Sql>SELECT 
+
+DISTINCT
+
+apply.apply_ID,
+cli.fullAreaName,
+fullAreaCode,
+applydetail.busiNatureName,
+cli.clientName,
+apply.projectName,
+project.loadSum,
+project.busiTypeName,
+project.loadBeginDate,
+applydetail.applydetail_ID,
+applydetail.projectTypeName,
+apply.projectSourceName,
+applydetail.bankName,
+applydetail.greenChannelName,
+applydetail.amanName,
+applydetail.bmanName
+  
+ FROM  pro_project project
+
+ LEFT JOIN pro_apply apply ON project.apply_ID = apply.apply_ID
+ 
+ LEFT JOIN pro_applydetail applydetail ON project.applyDetail_ID = applydetail.applyDetail_ID
+ 
+ LEFT JOIN crm_client  cli ON apply.client_ID = cli.client_ID
+ 
+where 1=1 
+${has(begindatesql)?(" and project.loadBeginDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and project.loadBeginDate&lt;='"+enddatesql+"'"):""}
+ 
+</Sql><Description>SELECT 
+
+DISTINCT
+
+apply.apply_ID,
+cli.fullAreaName,
+fullAreaCode,
+applydetail.busiNatureName,
+cli.clientName,
+apply.projectName,
+project.loadSum,
+project.busiTypeName,
+project.loadBeginDate,
+applydetail.applydetail_ID,
+applydetail.projectTypeName,
+apply.projectSourceName,
+applydetail.bankName,
+applydetail.greenChannelName,
+applydetail.amanName,
+applydetail.bmanName
+  
+ FROM  pro_project project
+
+ LEFT JOIN pro_apply apply ON project.apply_ID = apply.apply_ID
+ 
+ LEFT JOIN pro_applydetail applydetail ON project.applyDetail_ID = applydetail.applyDetail_ID
+ 
+ LEFT JOIN crm_client  cli ON apply.client_ID = cli.client_ID
+ 
+where 1=1 
+${has(begindatesql)?(" and project.loadBeginDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and project.loadBeginDate&lt;='"+enddatesql+"'"):""}
+ 
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><TagName>detail_factload</TagName></Item0><Item1><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">id</IndexFields><TagName>index_dic_area</TagName></Item0></Children><Reader Class="SqlReader"><Name>dic_area</Name><Sql> SELECT 
+    multiLevelSortID as id,
+    multiLevelSortName as name
+    FROM  c_multilevelsort   multilevelsort
+    WHERE multilevelsort.pmultiLevelSortID = '66547f3187194ed884e81dcd83027c36'
+ </Sql><Description> SELECT 
+    multiLevelSortID as id,
+    multiLevelSortName as name
+    FROM  c_multilevelsort   multilevelsort
+    WHERE multilevelsort.pmultiLevelSortID = '66547f3187194ed884e81dcd83027c36'
+ </Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">id</IndexFields><TagName>dic_area</TagName></Item1></Children></NodeSource></jatools>

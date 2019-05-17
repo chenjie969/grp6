@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.gbpm.db.map.IndexMapper">
+
+	<!-- 流程分类表信息 -->
+	<resultMap type="com.zjm.gbpm.db.model.Index" id="IndexResultMap">
+		<result property="loadSum" column="loadSum" />
+		<result property="loadNum" column="loadNum" />
+		<result property="returnSum" column="returnSum" />
+		<result property="returnNum" column="returnNum" />
+		<result property="guarantySum" column="guarantySum" />
+		<result property="guarantyNum" column="guarantyNum" />
+	</resultMap>
+	
+	<!-- 查询新增金额-->
+	<select id="selectLoadSum" parameterType="java.lang.String"  resultMap="IndexResultMap">
+	<![CDATA[
+		select IFNULL(SUM(loadSum),0) as loadSum, count(project_ID) as loadNum FROM pro_project
+		WHERE 1=1 ${value}
+		]]>
+	</select>
+	
+	<!-- 查询解除金额-->
+	<select id="selectFactPaySum" parameterType="java.lang.String"  resultMap="IndexResultMap">
+	<![CDATA[
+		SELECT IFNULL(SUM(payCapitalSum),0) as returnSum, count(factPay_ID) as returnNum FROM pro_factPay
+		WHERE 1=1 ${value}
+		]]>
+	</select>
+	
+	<!-- 查询在保金额-->
+	<select id="selectGuarantySum" parameterType="java.lang.String" resultMap="IndexResultMap">
+	<!-- <![CDATA[
+		SELECT IFNULL(SUM(guarantySum),0) AS guarantySum, count(project_ID) as guarantyNum FROM pro_project
+		WHERE guarantySum > 0 ${value}
+		]]> -->
+		 <![CDATA[
+		SELECT SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0))) AS guarantySum ,COUNT(pp.project_ID) as guarantyNum
+		FROM pro_project pp
+		LEFT JOIN (SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+			FROM pro_factpay pfp WHERE 1=1   and pfp.payDate < curdate()  GROUP BY pfp.project_ID
+		)tab1 ON tab1.project_ID =  pp.project_ID
+		LEFT JOIN ( SELECT pre.project_ID,SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum         
+			FROM pro_replace pre WHERE 1=1   and pre.replaceDate < curdate()  GROUP BY pre.project_ID 
+		)tab2 ON tab2.project_ID =  pp.project_ID
+		WHERE  pp.finishDate is null 
+		 and pp.delayBeginDate <curdate()
+		 ]]> 
+	</select>
+	
+	<!-- 查询风险项目笔数-->
+	<select id="selectRiskPro" parameterType="java.lang.String"  resultType="java.lang.Integer">
+	<![CDATA[
+		SELECT COUNT(project_ID) FROM pro_project p
+		LEFT JOIN pro_apply a on a.apply_ID = p.apply_ID
+		LEFT JOIN crm_client c on c.client_ID = a.client_ID
+		WHERE c.riskLevelName != '正常' ${value}
+		]]>
+	</select>
+	
+	<!-- 查询上会项目笔数-->
+	<select id="selectMeetingPro" parameterType="java.lang.String"  resultType="java.lang.Integer">
+	<![CDATA[
+		SELECT count(meeting_ID) FROM pro_meeting WHERE 1 = 1  and meetingDateTime > now() and meetingStatus='02'  ${value}  
+		]]>
+	</select>
+	
+	<!-- 查询保后检查项目笔数-->
+	<select id="selectCheckPro" parameterType="java.lang.String"  resultType="java.lang.Integer">
+	<![CDATA[
+		select count(project.project_ID) 
+		from pro_project project
+		 LEFT JOIN pro_checkplan checkplan ON project.apply_ID = checkplan.apply_ID
+		WHERE 1=1  ${value}
+		]]>
+	</select>
+	
+	<!-- 根据wheresql查询项目笔数-->
+	<select id="selectProByWheresql" parameterType="java.lang.String"  resultType="java.lang.Integer">
+	<![CDATA[
+		SELECT 
+			COUNT(project_ID)	
+ 		FROM pro_project 
+ 		WHERE  1=1 ${value}
+		]]>
+	</select>
+	
+</mapper>  

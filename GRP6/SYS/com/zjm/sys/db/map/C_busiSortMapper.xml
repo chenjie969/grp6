@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjm.sys.db.map.C_busiSortMapper" >
+  <resultMap id="BaseResultMap" type="com.zjm.sys.db.model.C_busiSort" >
+    <id column="busiSortID" property="busisortid"  />
+    <id column="unit_uid" property="unitUid"  />
+    <result column="pbusiSortID" property="pbusisortid"  />
+    <result column="busiSortName" property="busisortname"  />
+    <result column="busiSortFullCode" property="busisortfullcode"  />
+    <result column="busiClass" property="busiClass"  />
+    <result column="url" property="url"  />
+    <result column="order_id" property="orderId"  />
+    <result column="createdatetime" property="createdatetime"  />
+    <result column="create_user" property="createUser"  />
+    <result column="upatedatetime" property="upatedatetime"  />
+    <result column="update_user" property="updateUser"  />
+    <result column="isEable" property="iseable"  />
+    <result column="isEdit" property="isedit"  />
+    <result column="isDefault" property="isDefault"  />
+    <result column="unificationID" property="unificationid"  />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    busiSortID, unit_uid, pbusiSortID, busiSortName, busiSortFullCode, busiClass, url, order_id, 
+    createdatetime, create_user, upatedatetime, update_user,  isEable, isEdit, 
+    isDefault, unificationID
+  </sql>
+  
+  <!-- 查询全部业务品种信息 -->
+  <select id="selectAllBusiSortList" resultMap="BaseResultMap" parameterType="string">
+  	<![CDATA[
+	  	select 
+	  	 busiSortID, unit_uid, pbusiSortID, busiSortName, busiSortFullCode, busiClass, url, order_id, 
+	    createdatetime, create_user, upatedatetime, update_user,  isEable, isEdit, 
+	    isDefault, unificationID
+	  	from c_busisort
+	  	where 1=1
+	  	${value}
+	  	order by order_id
+	  ]]>	
+  </select> 
+  
+  <!-- 添加一个业务品种信息 -->
+   <insert id="insertOneBusiSortInfo" parameterType="com.zjm.sys.db.model.C_busiSort" >
+   <![CDATA[
+	  	insert into c_busisort (
+		  	busiSortID, 
+		  	unit_uid, 
+		  	pbusiSortID, 
+		    busiSortName, 
+		    busiSortFullCode, 
+		    busiClass, 
+		    url, 
+		    order_id, 
+		    createdatetime,
+		    create_user, 
+		    upatedatetime, 
+		    update_user, 
+		    isEable,
+		    isEdit, 
+		    isDefault, 
+		    unificationID
+	     )
+	    values 
+	    (
+		    #{busisortid}, 
+		    #{unitUid}, 
+		    #{pbusisortid}, 
+		    #{busisortname}, 
+		    #{busisortfullcode}, 
+		    #{busiClass}, 
+		    #{url}, 
+		    #{orderId}, 
+		    NOW(), 
+		    #{createUser}, 
+		    NOW(), 
+		    #{updateUser},  
+		    #{iseable}, 
+		    #{isedit}, 
+		    #{isDefault}, 
+		    #{unificationid}
+	    )
+     ]]> 
+  </insert>
+  
+  <!-- 查询一个业务品种信息 -->
+  <select id="selectOneBusiSortInfo" resultMap="BaseResultMap" parameterType="com.zjm.sys.db.model.C_busiSort">
+  	<![CDATA[
+	  	select
+	  	 busiSortID, unit_uid, pbusiSortID, busiSortName, busiSortFullCode, busiClass, url, order_id, 
+		    createdatetime, create_user, upatedatetime, update_user,  isEable, isEdit, 
+		    isDefault, unificationID
+	  	from c_busisort
+	  	 where busiSortID = #{busisortid} 
+  	]]> 
+  </select >
+  
+  <!-- 更新一个业务品种信息 -->
+  <update id="updateOneBusiSortInfo" parameterType="com.zjm.sys.db.model.C_busiSort">
+  	<![CDATA[
+  	   update c_busisort
+  	  	  set pbusiSortID = #{pbusisortid},
+	      busiSortName = #{busisortname},
+	      busiSortFullCode = #{busisortfullcode},
+	      busiClass = #{busiClass},
+	      url = #{url},
+	      order_id = #{orderId},
+	      create_user = #{createUser},
+	      upatedatetime= NOW(),
+	      update_user = #{updateUser},
+	      isEable = #{iseable},
+	      isEdit = #{isedit},
+	      isDefault = #{isDefault},
+	      unificationID = #{unificationid}
+  	  where busiSortID = #{busisortid} 
+  	]]>
+  </update>
+  
+  <!-- 删除一个业务品种信息 -->
+  <delete id="deleteOneBusiSortInfo" parameterType="com.zjm.sys.db.model.C_busiSort">
+ 	 <![CDATA[
+	  	delete 
+	  	from  C_busiSort 
+	  	where busiSortID = #{busisortid}	
+  	 ]]>
+  </delete>
+  
+  <!-- 查询业务品种 分页列表  -->
+  <select id="selectBusiSortPageTables" parameterType="com.zjm.common.db.model.PageTable" resultMap="BaseResultMap">
+  	 <![CDATA[
+	  	select 
+		  	 busiSortID, unit_uid, pbusiSortID, busiSortName, busiSortFullCode, busiClass, url, order_id, 
+		    createdatetime, create_user, upatedatetime, update_user, isEable, isEdit, 
+		    isDefault, unificationID
+	  	from 	c_busiSort
+	  	where 1=1 ${wheresql}   limit #{pageNumber},#{pageSize}
+  	 ]]>
+  </select>
+  
+  <!-- 统计业务品种总数 -->
+  <select id="selectBusiSortPageTables_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+  	<![CDATA[
+  		select count(busisortid) from C_busiSort  where 1=1 ${wheresql}
+  	]]>
+  </select>
+  
+  <!-- 由父类id查询子类业务品种 -->
+  <select id="selectBusiSortListByPbusisortid" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	<![CDATA[
+	  	select 
+	  		busiSortID, unit_uid, pbusiSortID, busiSortName, busiSortFullCode, busiClass, url, order_id, 
+			createdatetime, create_user, upatedatetime, update_user,  isEable, isEdit, 
+			isDefault, unificationID
+	  	from c_busiSort
+	  	where pbusiSortID=#{pbusisortid}	
+  	]]>
+  </select>
+  
+  <!-- 公共排序方法 -->	
+	<update id="updateSortOrder" parameterType="java.lang.String">
+		<![CDATA[${value}]]>
+	</update>
+	
+   <!-- 判断是否存在 -->
+ 	<select id="selectBusiSortIsExist" resultType="java.lang.Integer" parameterType="java.lang.String">
+ 		<![CDATA[
+	 		select 
+				count(busiSortName)
+		  	from c_busiSort
+		  	where 1=1  ${value}
+	  	]]>
+ 	</select>
+ 	
+ 	<!--  查询同级节点下有多少个子节点 -->
+ 	<select id="selectBusiSortOrderId" resultType="integer" parameterType="com.zjm.sys.db.model.C_busiSort">
+ 		<![CDATA[
+ 			select count(pbusisortid) from c_busiSort
+ 			where pbusiSortID=#{pbusisortid}  
+ 		]]>
+ 	</select>
+</mapper>

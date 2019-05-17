@@ -1,0 +1,32 @@
+/*设置发送消息及自动转换项目阶段*/
+<post-functions>
+	<function type="class">
+		<arg name="class.name">com.opensymphony.workflow.util.SendWinEimMessage</arg>
+		<arg name="otherReceptionUsers"></arg><!-- 设置其他接收角色 -->
+		<arg name="messageTopInfo">您有一个项目需要处理：</arg><!-- 设置消息头部信息 -->
+		<arg name="projStatues">在保阶段</arg><!-- 设置项目阶段状态 -->
+		<arg name="endType">未结案</arg><!-- 设置项目结案方式 -->
+	</function>
+</post-functions>	
+
+
+
+
+/*设置步骤限办时间*/
+<post-functions>
+	<function type="class">
+		<arg name="class.name">com.opensymphony.workflow.util.SetLimitDate</arg>
+		<arg name="nowlimitDate"></arg><!-- 设置当前步骤的限办时间 -->
+		<arg name="nowlimitDateUnit"></arg><!-- 设置当前步骤的限办时间单位 -->
+		<arg name="nextlimitDate">1</arg><!-- 设置下一步骤的限办时间 -->
+		<arg name="nextlimitDateUnit">天</arg><!-- 设置下一步骤的限办时间单位 -->
+	</function>
+</post-functions>	
+
+/*设置项目推荐记录状态*/
+<post-functions>
+	<function type="class">
+		<arg name="class.name">com.opensymphony.workflow.util.OpApplyrecordAgreeORVeto</arg>
+		<arg name="projstatues">正式受理</arg><!-- 设置项目推荐的状态    参数：正式受理  已否决-->
+	</function>
+</post-functions>

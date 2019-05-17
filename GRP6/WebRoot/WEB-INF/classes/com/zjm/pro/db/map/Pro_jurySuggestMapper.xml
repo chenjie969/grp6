@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_jurySuggestMapper">
+	
+	<!-- 评审会评委意见表 -->
+	<resultMap type="com.zjm.pro.db.model.Pro_jurySuggest" id="jurySuggestMapper">
+		<result property="jurySuggest_ID" column="jurySuggest_ID" />
+		<result property="meeting_ID" column="meeting_ID" />
+		<result property="apply_ID" column="apply_ID" />
+		<result property="suggestResultID" column="suggestResultID" />
+		<result property="suggestResultName" column="suggestResultName" />
+		<result property="suggestContent" column="suggestContent" />
+		<result property="userID" column="userID" />
+		<result property="userName" column="userName" />
+		<result property="checkDateTime" column="checkDateTime" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="unit_uidName" column="unit_uidName" />
+		<result property="updateUserName" column="updateUserName" />
+		<result property="updateDateTime" column="updateDateTime" />
+		<result property="suggestStatus" column="suggestStatus"/>
+	</resultMap>
+	
+	<!-- 查询多条评委意见 -->
+	<select id="selectJurySuggestListByWheresql" parameterType="java.lang.String" resultMap="jurySuggestMapper">
+		SELECT
+			jurySuggest_ID,	
+			meeting_ID,	
+			apply_ID,	
+			suggestResultID,	
+			suggestResultName,	
+			suggestContent,	
+			userID,	
+			userName,	
+			checkDateTime,	
+			unit_uid,	
+			unit_uidName,	
+			updateUserName,	
+			updateDateTime,
+			suggestStatus
+		FROM
+			pro_jurySuggest
+		WHERE 1=1 ${value}
+	</select>
+	
+	<!-- 新增一条评委表决意见 -->
+	<insert id="insertOneJurySuggest" parameterType="com.zjm.pro.db.model.Pro_jurySuggest">
+		INSERT INTO pro_jurySuggest (
+			jurySuggest_ID,
+			meeting_ID,
+			apply_ID,
+			suggestResultID,
+			suggestResultName,
+			suggestContent,
+			userID,
+			userName,
+			unit_uid,
+			unit_uidName,
+			updateUserName,
+			updateDateTime,
+			suggestStatus
+		) VALUES (
+			#{jurySuggest_ID},
+			#{meeting_ID},
+			#{apply_ID},
+			#{suggestResultID},
+			#{suggestResultName},
+			#{suggestContent},
+			#{userID},
+			#{userName},
+			#{unit_uid},
+			#{unit_uidName},
+			#{updateUserName},
+			NOW(),
+			#{suggestStatus}
+		)
+	</insert>
+	
+	<!-- 修改一条评委表决意见 -->
+	<update id="updateOneJurySuggest" parameterType="com.zjm.pro.db.model.Pro_jurySuggest">
+		UPDATE 
+			pro_jurySuggest
+		SET
+			suggestResultID	=	#{suggestResultID},	
+			suggestResultName	=	#{suggestResultName},	
+			suggestContent	=	#{suggestContent},	
+			updateUserName	=	#{updateUserName},	
+			updateDateTime	=	NOW()	
+		WHERE
+			jurySuggest_ID	=	#{jurySuggest_ID}	
+	</update>
+	
+	<!-- 查看一条评委表决意见 -->
+	<select id="selectOneJurySuggestByWheresql" parameterType="java.lang.String" resultMap="jurySuggestMapper">
+		SELECT 
+			jurySuggest_ID,
+			meeting_ID,
+			apply_ID,
+			suggestResultID,
+			suggestResultName,
+			suggestContent,
+			userID,
+			userName,
+			checkDateTime,
+			unit_uid,
+			unit_uidName,
+			updateUserName,
+			updateDateTime
+		FROM pro_jurySuggest 
+		WHERE 1=1 ${value}
+	</select>
+	
+	<!-- 查询当前评委未完成表决的评审会列表 -->
+	<select id="selectNotVoteMeetingList" parameterType="com.zjm.common.db.model.PageTable" resultType="com.zjm.pro.db.model.Pro_meeting">
+		SELECT
+			pm.meeting_ID,
+			applyNum,
+			meetingCode,
+			meetingTypeID,
+			meetingTypeName,
+			meetingDateTime,
+			meetingRoomID,
+			meetingRoomName,
+			userIDList,
+			userNameList,
+			otherUserNameList,
+			meetingStatus,
+			unit_uid,
+			updateUserName,
+			updateDateTime
+		FROM 	pro_meeting pm
+		LEFT JOIN (
+			SELECT 
+				meeting_ID, 
+				COUNT(*) applyNum
+			FROM pro_meetingApply 
+			GROUP BY meeting_ID
+		) pma ON pma.meeting_ID = pm.meeting_ID
+		WHERE pm.meeting_ID IN (
+			SELECT 
+				DISTINCT pm.meeting_ID
+			FROM pro_meeting pm 
+			LEFT JOIN pro_meetingApply pma ON pma.meeting_ID = pm.meeting_ID 
+			WHERE pm.meeting_ID NOT IN ( 
+				SELECT DISTINCT pma.meeting_ID FROM pro_meetingapply pma 
+				LEFT JOIN pro_jurysuggest pjs ON pjs.apply_ID = pma.entityID 
+				WHERE pma.userIDList LIKE CONCAT('%',#{queryCondition.user_uid},'%') 
+				AND pjs.userID = #{queryCondition.user_uid} AND pjs.suggestStatus = "1" ) 
+			AND pma.userIDList LIKE CONCAT('%',#{queryCondition.user_uid},'%') ) ${wheresql}
+		ORDER BY ${sortName} ${sortOrder}
+		LIMIT #{pageNumber},#{pageSize}
+	</select>
+	
+	<!-- 查询当前评委未完成表决的评审会列表_求总数 -->
+	<select id="selectNotVoteMeetingList_count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		SELECT
+			COUNT(*)
+		FROM 	pro_meeting pm
+		WHERE pm.meeting_ID IN (
+			SELECT 
+				DISTINCT pm.meeting_ID
+			FROM pro_meeting pm 
+			LEFT JOIN pro_meetingApply pma ON pma.meeting_ID = pm.meeting_ID 
+			WHERE pm.meeting_ID NOT IN ( 
+				SELECT DISTINCT pma.meeting_ID FROM pro_meetingapply pma 
+				LEFT JOIN pro_jurysuggest pjs ON pjs.apply_ID = pma.entityID 
+				WHERE pma.userIDList LIKE CONCAT('%',#{queryCondition.user_uid},'%') 
+				AND pjs.userID = #{queryCondition.user_uid} AND pjs.suggestStatus = "1" ) 
+			AND pma.userIDList LIKE CONCAT('%',#{queryCondition.user_uid},'%') ) ${wheresql}
+	</select>
+	
+	<!-- 查询当前评委已完成表决的评审会列表 -->
+	<select id="selectHasVotedMeetingList" parameterType="com.zjm.common.db.model.PageTable" resultType="com.zjm.pro.db.model.Pro_meeting">
+		SELECT
+			pm.meeting_ID,
+			applyNum,
+			meetingCode,
+			meetingTypeID,
+			meetingTypeName,
+			meetingDateTime,
+			meetingRoomID,
+			meetingRoomName,
+			userIDList,
+			userNameList,
+			otherUserNameList,
+			meetingStatus,
+			unit_uid,
+			updateUserName,
+			updateDateTime
+		FROM 	pro_meeting pm
+		LEFT JOIN (
+			SELECT 
+				meeting_ID, 
+				COUNT(*) applyNum
+			FROM pro_meetingApply 
+			GROUP BY meeting_ID
+		) pma ON pma.meeting_ID = pm.meeting_ID
+		WHERE pm.meeting_ID IN (
+			SELECT 
+				DISTINCT pma.meeting_ID
+			FROM pro_meetingapply pma
+			LEFT JOIN pro_jurysuggest pjs ON pjs.apply_ID = pma.entityID
+			WHERE pma.userIDList LIKE CONCAT('%',#{queryCondition.user_uid},'%') 
+			AND pjs.userID = #{queryCondition.user_uid}
+			AND pjs.suggestStatus = "1" ) ${wheresql}
+		ORDER BY ${sortName} ${sortOrder}
+		LIMIT #{pageNumber},#{pageSize}
+	</select>
+	
+	<!-- 查询当前评委已完成表决的评审会列表_求总数 -->
+	<select id="selectHasVotedMeetingList_count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		SELECT
+			COUNT(*)
+		FROM 	pro_meeting pm
+		WHERE pm.meeting_ID IN (
+			SELECT 
+				DISTINCT pma.meeting_ID
+			FROM pro_meetingapply pma
+			LEFT JOIN pro_jurysuggest pjs ON pjs.apply_ID = pma.entityID
+			WHERE pma.userIDList LIKE CONCAT('%',#{queryCondition.user_uid},'%') 
+			AND pjs.userID = #{queryCondition.user_uid}
+			AND pjs.suggestStatus = "1" ) ${wheresql}
+	</select>
+	
+	<!-- 评委提交意见 -->
+	<update id="submitJurySuggest" parameterType="java.lang.String">	
+		UPDATE 
+			pro_jurySuggest
+		SET
+			checkDateTime = NOW(),
+			suggestStatus = 1
+		WHERE 1=1 ${value}
+	</update>
+	
+	<!-- 统计评委投票结果 -->
+	<select id="countOfJuryVotes" parameterType="java.lang.String" resultType="com.zjm.pro.db.model.Pro_countOfVotes">
+		SELECT	
+			apply_ID,	
+			suggestResultID,
+			suggestResultName,	
+			COUNT(*) AS votesNum
+		FROM
+			pro_jurySuggest
+		WHERE 1=1 ${value}
+		GROUP BY apply_ID,suggestResultID
+	</select>
+</mapper>

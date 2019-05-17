@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration> 
+<settings>     
+      <setting name="cacheEnabled" value="true"/>
+      <setting name="logImpl" value="LOG4J"/>
+      <!-- 日志里打印SQL语句  <setting name="logImpl" value="LOG4J"/> -->
+	  <!--  控制台显示SQL语句  <setting name="logImpl" value="STDOUT_LOGGING"/>   -->
+	  <setting name="logImpl" value="STDOUT_LOGGING"/>
+</settings>  
+<!-- 自动设置pojo类的别名，即小写的pojo类名 -->
+ <typeAliases>    
+    <package name="com.zjm.*.db.map"/>  
+    <package name="com.opensymphony.workflow.db.map"/>  
+    
+</typeAliases>   
+<!-- <mappers>      
+     <mapper resource="com/zjm/sys/db/map/sys_usersMapper.xml" />
+     <mapper resource="com/zjm/sys/db/map/sys_modulesMapper.xml" />
+</mappers>   -->
+ </configuration> 

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_creditorMapper">
+	<!-- 业务债权信息表pro_delay -->
+	  <resultMap id="CreditorMap" type="com.zjm.pro.db.model.Pro_creditor" >
+		<id column="creditor_id" property="creditorId"  />
+		<result column="apply_id" property="applyId"/>
+		<result column="project_id" property="projectId"/>
+		<result column="fund_source" property="fundSource"/>
+		<result column="fund_type" property="fundType"/>
+		<result column="fund_type_id" property="fundTypeId"/>
+		<result column="fund_name" property="fundName"/>
+		<result column="fund_id" property="fundId"/>
+		<result column="sub_fund_name" property="subFundName"/>
+		<result column="creditor_sum" property="creditorSum"/>
+		<result column="creditor_date" property="creditorDate"/>
+		<result column="create_date" property="createDate"/>
+		<result column="credit_apply_id" property="creditApplyId"/>
+		<result column="credit_project_id" property="creditProjectId"/>
+  </resultMap> 
+	<!-- 新增业务债权信息表pro_delay-->
+	 <insert id="insertOneCreditorInfo"	parameterType="com.zjm.pro.db.model.Pro_creditor">
+		INSERT INTO pro_creditor (
+					creditor_id,
+					apply_id,
+					project_id,
+					fund_source,
+					fund_type,
+					fund_type_id,
+					fund_name,
+					fund_id,
+					sub_fund_name,
+					creditor_date,
+					creditor_sum,
+					create_date,
+					credit_apply_id,
+					credit_project_id
+		       )
+		VALUES
+		(
+				#{creditorId}, 
+				#{applyId}, 
+				#{projectId},
+				#{fundSource}, 
+				#{fundType}, 
+				#{fundTypeId}, 
+				#{fundName},
+				#{fundId},
+				#{subFundName}, 
+				#{creditorDate}, 
+				#{creditorSum},
+				#{createDate},
+				#{creditApplyId},
+				#{creditProjectId}
+		) ;
+
+	</insert> 
+	
+		<!--根据wheresql删除债权表信息 -->
+    <delete id="deleteCreditorByWhereSql"  parameterType="java.lang.String" >
+		DELETE FROM pro_creditor WHERE 1=1 ${value} 
+	</delete> 
+	
+	<!-- 根据ID查询债权列表 -->
+ <select id="selectOneCreditorInfoByID" resultMap="CreditorMap" parameterType="java.lang.String">
+		SELECT
+				   	creditor_id,
+					apply_id,
+					project_id,
+					fund_source,
+					fund_type,
+					fund_type_id,
+					fund_name,
+					fund_id,
+					sub_fund_name,
+					creditor_date,
+					creditor_sum,
+					create_date,
+					credit_apply_id,
+					credit_project_id
+	     FROM
+	   		pro_creditor	
+		WHERE 1=1 ${value} 
+	</select>
+	
+	<!-- 修改一条业务债权信息 -->	
+ <update id="updateCreditor" parameterType="com.zjm.pro.db.model.Pro_creditor">
+		UPDATE 
+		     pro_creditor
+		<set >
+			<if test="creditorId != null" >creditor_id= #{creditorId},</if>
+			<if test="applyId != null" >apply_id= #{applyId},</if>
+			<if test="projectId != null" >project_id= #{projectId},</if>
+			<if test="fundSource != null" >fund_source= #{fundSource},</if>
+			<if test="fundType != null" >fund_type= #{fundType},</if>
+			<if test="fundTypeId != null" >fund_type_id= #{fundTypeId},</if>
+			<if test="fundName != null" >fund_name= #{fundName},</if>
+			<if test="fundId != null" >fund_id= #{fundId},</if>
+			<if test="subFundName != null" >sub_fund_name= #{subFundName},</if>
+			<if test="creditorDate != null" >creditor_date= #{creditorDate},</if>
+			<if test="creditorSum != null" >creditor_sum= #{creditorSum},</if>
+			<if test="createDate != null" >create_date= #{createDate},</if>
+			  updateDateTime = NOW()		
+			</set>
+			 
+		WHERE creditor_id=#{creditorId} 
+	</update> 
+	<!-- 根据查询条件查询一个债权表信息-->
+ <select id="selectOneCreditorByWhereSql" parameterType="java.lang.String"  resultMap="CreditorMap">
+		SELECT 
+	        		creditor_id,
+					apply_id,
+					project_id,
+					fund_source,
+					fund_type,
+					fund_type_id,
+					fund_name,
+					fund_id,
+					sub_fund_name,
+					creditor_date,
+					creditor_sum,
+					create_date,
+					credit_apply_id,
+					credit_project_id
+	    FROM 
+	         pro_creditor 
+		WHERE 1=1 ${value}			 
+	</select> 
+	
+	<!-- 根据查询条件查询多个债权表信息-->
+	 <select id="selectDelayListByWhereSql" parameterType="java.lang.String"  resultMap="CreditorMap">
+		SELECT 
+		     		creditor_id,
+					apply_id,
+					project_id,
+					fund_source,
+					fund_type,
+					fund_type_id,
+					fund_name,
+					fund_id,
+					sub_fund_name,
+					creditor_date,
+					creditor_sum,
+					create_date,
+					credit_apply_id,
+					credit_project_id
+	    FROM 
+	         pro_creditor 
+		WHERE 1=1 ${value}
+		ORDER BY  creditor_date asc				 
+	</select> 
+
+	<select id="selectProjectCreditorPageTables" parameterType="com.zjm.common.db.model.PageTable" resultMap="CreditorMap">
+		SELECT 
+		       	pc.creditor_id,
+				pc.apply_id,
+				pc.project_id,
+				pc.fund_source,
+				pc.fund_type,
+				pc.fund_type_id,
+				pc.fund_name,
+				pc.fund_id,
+				pc.sub_fund_name,
+				pc.creditor_date,
+				pc.creditor_sum,
+				pc.create_date,
+				pa.projectName
+	    FROM 
+	         pro_creditor pc 
+	    left join pro_apply pa  on pa.apply_ID = pc.apply_id
+		WHERE 1=1 ${wheresql} 
+		ORDER BY ${sortName} ${sortOrder}
+		limit #{pageNumber},#{pageSize}
+	</select>
+
+
+	<select id="selectProjectCreditorPageTables_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		select count(pc.creditor_id) 
+		from pro_creditor pc
+		left join pro_apply pa  on pa.apply_ID = pc.apply_id
+		WHERE 1=1 ${wheresql} 
+	</select>
+</mapper>  

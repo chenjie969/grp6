@@ -1,0 +1,594 @@
+package com.zjm.pro.contractdoc.web;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.zjm.common.db.model.AjaxRes;
+import com.zjm.common.db.model.PageTable;
+import com.zjm.common.db.model.UrlParam;
+import com.zjm.common.db.model.User;
+import com.zjm.crm.db.model.UploadParam;
+import com.zjm.crm.filesUpload.service.FilesUploadService;
+import com.zjm.pro.apply.service.ProjectApplyService;
+import com.zjm.pro.applyDetail.service.ApplyDetailService;
+import com.zjm.pro.contractdoc.service.ContractdocService;
+import com.zjm.pro.db.model.Pro_apply;
+import com.zjm.pro.db.model.Pro_applyDetail;
+import com.zjm.pro.db.model.Pro_contractdoc;
+import com.zjm.pro.db.model.Pro_project;
+import com.zjm.pro.db.model.Pro_projectfiles;
+import com.zjm.pro.project.service.ProjectService;
+import com.zjm.pro.projectfiles.service.ProjectfilesService;
+import com.zjm.sys.db.model.C_dictype;
+import com.zjm.sys.dicType.service.DicTypeService;
+import com.zjm.sys.docMould.service.DocMouldService;
+import com.zjm.util.CustomDispatchServlet;
+import com.zjm.util.SystemSession;
+import com.zjm.util.Tool;
+
+@Controller
+@RequestMapping(value = "/pro/contractdoc")
+public class ContractdocAction {
+	@Resource
+	private ContractdocService contractdocService;
+	@Resource
+	private DocMouldService docMouldService;
+	@Resource
+	private ProjectApplyService projectApplyService;
+	@Resource
+	private ApplyDetailService applyDetailService;
+	@Resource
+	private DicTypeService dicTypeService;
+	@Resource
+	private FilesUploadService filesUploadService;
+	@Resource
+	private ProjectfilesService projectfilesService;
+	@Resource
+	private ProjectService projectService;
+	
+	/**
+	 * 新增一条合同记录
+	 * @param contractdoc
+	 * @return
+	 */
+	@RequestMapping(value = "/addOneContractdoc", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public AjaxRes addOneContractdoc(@RequestBody Pro_contractdoc contractdoc) {
+		AjaxRes ar = new AjaxRes();
+		try {
+			User user = SystemSession.getUserSession();
+			//String apply_ID = contractdoc.getApply_ID();
+			//String whereSql = "and apply_ID = '" + apply_ID + "'";
+			//Pro_apply apply = projectApplyService.selectOneApplyByWhereSql(whereSql);
+			//String busiCode = apply.getBusiCode();//业务编号
+			//String contractCode = "zcdb";//合同编号
+			//if(busiCode !=null){
+				//contractCode = "zcdb".concat(busiCode);
+			//}
+			//contractdoc.setContractCode(contractCode);
+			
+			contractdoc.setContractDoc_ID(Tool.createUUID32());
+			//contractdoc.setApplyDetail_ID("2eceb1d4a01b44179109d40eac924490");
+			contractdoc.setUnit_uid(SystemSession.getUserSession().getUnit_uid());
+			contractdoc.setUnit_uidName(SystemSession.getUserSession().getUnit_uidName());
+			contractdoc.setUpdateUserName(user.getUser_name());
+			Boolean cBoolean = contractdocService.insertOneContractInfo(contractdoc, user);
+			ar.setSucceed(cBoolean);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ar;
+	}
+
+	/**
+	 * @param urlParam
+	 * @return 进入合同制作首页面
+	 */
+	@RequestMapping(value = "/selectContract")
+	public ModelAndView selectContract(UrlParam urlParam ,String comming) {
+		ModelAndView mView = CustomDispatchServlet.getModeAndView();
+		try {
+			String apply_ID = urlParam.getEntityID();
+			String whereSql = "and apply_ID = '" + apply_ID + "'";
+			Pro_apply apply = projectApplyService.selectOneApplyByWhereSql(whereSql);
+			Pro_project project = projectService.selectOneProjectInfoByWheresql(" and apply_ID = \'"+apply_ID+"\'");
+			Pro_applyDetail applyDetail = applyDetailService.selectOneApplyDetailByWhereSql(" and apply_ID = \'"+apply_ID+"\'");
+			mView.getModel().put("apply", apply);
+			mView.getModel().put("urlParam", urlParam);
+			mView.getModel().put("comming", comming);
+			mView.getModel().put("project", project);
+			mView.getModel().put("applyDetail", applyDetail);
+			mView.setViewName("/project/contractDoc/contractDoc");
+			//mView.setViewName("/project/HeTong/index");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mView;
+	}
+	
+	/**
+	 * @param urlParam
+	 * @return 进入合同制作首页面    手机APP
+	 */
+	@RequestMapping(value = "/selectContractAPP")
+	@ResponseBody
+	public AjaxRes selectContractAPP(@RequestBody UrlParam urlParam) {
+		AjaxRes ar=new AjaxRes();
+		List<Object> contractList = new ArrayList<>();
+		try {
+			String apply_ID = urlParam.getEntityID();
+			String whereSql = "and apply_ID='" + apply_ID + "' and unit_uid ='"+SystemSession.getUserSession().getUnit_uid()+"' ";
+			Pro_apply apply = projectApplyService.selectOneApplyByWhereSql(whereSql);
+			
+			List<Pro_contractdoc> list = contractdocService.selectContractTable(whereSql);
+			for (Pro_contractdoc contractdoc : list) {
+				String entityID = contractdoc.getContractDoc_ID();
+				String whereSQL = " and entityID='"+entityID+"' ";
+				Pro_projectfiles projectfiles = projectfilesService.selectOneProFilesByEntityID(whereSQL);
+				if(null != projectfiles){
+					contractdoc.setProjectfiles(projectfiles);
+				}
+			}
+			//apply.setContractdocList(list);
+			contractList.add(apply);
+			contractList.add(list);
+			ar.setSucceed(contractList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ar;
+	}
+
+	/**
+	 * 查询合同 列表
+	 */
+
+	@RequestMapping(value = "/selectContractListPageTables", method = RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes selectContractListPageTables(@RequestBody PageTable<Pro_contractdoc> pageTable) {
+		AjaxRes ar = new AjaxRes();
+		try {
+			String apply_ID = pageTable.getQueryCondition().getApply_ID();
+			String whereSql = "and apply_ID='" + apply_ID + "' and unit_uid ='"+SystemSession.getUserSession().getUnit_uid()+"' ";
+			List<Pro_contractdoc> list = contractdocService.selectContractTable(whereSql);
+			for (Pro_contractdoc contractdoc : list) {
+				String entityID = contractdoc.getContractDoc_ID();
+				String whereSQL = " and entityID='"+entityID+"' ";
+				Pro_projectfiles projectfiles = projectfilesService.selectOneProFilesByEntityID(whereSQL);
+				if(null != projectfiles){
+					contractdoc.setProjectfiles(projectfiles);
+				}
+			}
+			pageTable.setRows(list);
+			ar.setSucceed(pageTable);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ar;
+	}
+
+	/*@RequestMapping(value = "/addOneContract")
+	public ModelAndView addOneContract(Pro_contractdoc contractdoc) {
+		ModelAndView mView = CustomDispatchServlet.getModeAndView();
+		try {
+
+			mView.setViewName("/project/contractDoc/contractDocAdd");
+			mView.getModel().put("contractdoc", contractdoc);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return mView;
+	}*/
+
+	@RequestMapping(value = "/seclectOneContractDel")
+	public ModelAndView seclectOneContractDel(Pro_contractdoc contractdoc) {
+		ModelAndView mView = CustomDispatchServlet.getModeAndView();
+		try {
+			mView.setViewName("/project/contractDoc/contractDocDel");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mView;
+	}
+
+	/**
+	 * @param contractdoc
+	 * @return 删除一条合同记录
+	 */
+	@RequestMapping(value = "/delOneContractInfo", method = RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes delOneContractInfo(@RequestBody Pro_contractdoc contractdoc) {
+		AjaxRes ar = new AjaxRes();
+		try {
+			String entityID = contractdoc.getContractDoc_ID();
+			boolean a =  projectfilesService.deleteProFilesInfoByEntityID(SystemSession.getUserSession(), entityID);
+			boolean b = contractdocService.contractDel(contractdoc);
+			ar.setSucceed(b);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ar;
+	}
+
+	/*@RequestMapping(value = "/seclectOneContractedit")
+	public ModelAndView seclectOneContractedit(Pro_contractdoc contractdoc) {
+		ModelAndView mView = CustomDispatchServlet.getModeAndView();
+		try {
+			contractdoc.setApply_ID(contractdoc.getApply_ID());
+			contractdoc.setContractDoc_ID(contractdoc.getContractDoc_ID());
+			contractdoc = contractdocService.selectOneContractdocInfo(contractdoc);
+			int flag;
+			if (contractdoc.getContractPath().equals("")) {
+				flag = 0;
+			} else {
+				flag = 1;
+			}
+			mView.setViewName("/project/contractDoc/contractDocUpdate");
+			mView.getModel().put("contractdoc", contractdoc);
+			mView.getModel().put("flag", flag);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mView;
+	}*/
+
+	/**
+	 * 修改合同记录
+	 * 
+	 * @param
+	 * @return
+	 */
+	/*@RequestMapping(value = "/editOneContractInfo", method = RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes editOneContractInfo(@RequestBody Pro_contractdoc contractdoc) {
+		AjaxRes ar = new AjaxRes();
+		try {
+			boolean b = contractdocService.updateOneContractInfo(contractdoc);
+			ar.setSucceed(b);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ar;
+	}
+
+	@RequestMapping(value = "/delOneContractFiles", method = RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes delOneContractFiles(@RequestBody Pro_contractdoc contractdoc) {
+		AjaxRes ar = new AjaxRes();
+		try {
+			contractdoc = contractdocService.selectOneContractdocInfo(contractdoc);
+			contractdoc.setContractPath("");
+			contractdoc.setFilename("");
+			boolean b = contractdocService.updateOneContractInfo(contractdoc);
+			ar.setSucceed(b);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ar;
+	}*/
+	/*********************************************************************/
+	/****************************以下是新更改的******************************/
+	/********************************************************************/
+	
+	
+	
+	
+	/**
+	 * @param apply_ID
+	 * @return  进入新增合同页面
+	 */
+	@RequestMapping(value = "/showContractdocAddPage")
+	public ModelAndView showContractdocAddPage(String  apply_ID) {
+		ModelAndView mView = CustomDispatchServlet.getModeAndView();
+		try {
+			
+			List<C_dictype>  dicTypeList=dicTypeService.selectAllDicTypeList(" and dicTypePID = 'db8b273584b94af5b4518412c960dd7e'");//合同类型
+			String whereSql = "and apply_ID = '" + apply_ID + "'";
+			Pro_apply apply = projectApplyService.selectOneApplyByWhereSql(whereSql);
+			String busiCode = apply.getBusiCode();//业务编号
+			String contractCode = "zcdb";//合同编号
+			if(busiCode !=null){
+				contractCode = "zcdb".concat(busiCode);
+			}
+			
+			mView.getModelMap().put("contractCode", contractCode);
+			mView.getModelMap().put("apply_ID", apply_ID);
+			mView.getModelMap().put("dicTypeList", dicTypeList);
+			mView.setViewName("/project/contractDoc/contractDocAdd");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mView;
+	}
+	
+	
+	/**
+	 * 文件上传
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/insertOneFilesUpload", method=RequestMethod.POST,produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public AjaxRes insertOneFilesUpload(HttpServletRequest request,HttpSession session,UploadParam uploadParam) throws Exception {
+		try {
+			uploadParam.setRequest(request);//手动传入Plupload对象HttpServletRequest属性
+			//获取root路径 设置上传文件目录 
+			String rootPath=request.getSession().getServletContext().getRealPath("/");
+			//文件上传
+			Boolean result = filesUploadService.saveNewDocMould(SystemSession.getUserSession(),uploadParam,rootPath);
+			
+			AjaxRes ar=new AjaxRes();
+			ar.setSucceed(result);
+			return ar;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	/**
+	 * @description	 删除附件列表
+	 * @author wuhn
+	 * @date 2017年8月1日 下午1:57:00
+	 */
+	@RequestMapping(value="/deleteOneInfoByProFiles_ID")
+	@ResponseBody
+	public AjaxRes   deleteOneInfoByProFiles_ID(HttpServletRequest request,Pro_projectfiles projectfiles ){
+		AjaxRes ar =new AjaxRes();
+		deleteFile(request,projectfiles);
+		Boolean info;
+		try {
+			
+			projectfiles = projectfilesService.selectOneProFilesInfo(SystemSession.getUserSession(), projectfiles.getProjectFiles_ID());
+			//更改合同表
+			String contractDoc_ID = projectfiles.getEntityID();
+			Pro_contractdoc con= new Pro_contractdoc();
+			con.setContractDoc_ID(contractDoc_ID);
+			con.setContractPath(null);
+			con.setFilename(null);
+			contractdocService.updateOneContractFilesInfo(con);
+			//删除附件
+			info = projectfilesService.deleteOneInfoByProFiles_ID(SystemSession.getUserSession(), projectfiles.getProjectFiles_ID());
+			
+			ar.setSucceed(info);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ar;
+	}
+	/**
+	 * @description	删除物理文件
+	 * @author wzk
+	 * @date 2017年10月30日 下午2:36:04
+	 */
+	public void deleteFile(HttpServletRequest request,Pro_projectfiles projectfiles){
+		String rootPath = request.getServletContext().getRealPath("");
+		String filePath=rootPath+projectfiles.getPathFile();
+		File file=new File(filePath);
+		if(!file.isFile()){
+			System.out.println(projectfiles.getPathFile()+"文件不存在.");
+		}else{
+			file.delete();
+		}
+	}
+	/**
+	 * @param contractdoc
+	 * @return 进入修改合同页面
+	 */
+	@RequestMapping(value = "/showContractdocUpdatePage")
+	public ModelAndView showContractdocUpdatePage(Pro_contractdoc contractdoc) {
+		ModelAndView mView = CustomDispatchServlet.getModeAndView();
+		try {
+			try {
+				List<C_dictype>  dicTypeList=dicTypeService.selectAllDicTypeList(" and dicTypePID = 'db8b273584b94af5b4518412c960dd7e'");//合同类型
+				contractdoc = contractdocService.selectOneContractdocInfo(contractdoc);
+				
+				mView.getModelMap().put("contractdoc", contractdoc);
+				mView.getModelMap().put("dicTypeList", dicTypeList);
+				mView.setViewName("/project/contractDoc/contractDocUpdate");
+				return mView;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	/**
+	 * 修改一条合同记录
+	 * @param contractdoc
+	 * @return
+	 */
+	@RequestMapping(value = "/updateOneContractdoc", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public AjaxRes updateOneContractdoc(@RequestBody Pro_contractdoc contractdoc) {
+		AjaxRes ar = new AjaxRes();
+		try {
+			/*String apply_ID = contractdoc.getApply_ID();
+			String whereSql = "and apply_ID = '" + apply_ID + "'";
+			Pro_apply apply = projectApplyService.selectOneApplyByWhereSql(whereSql);
+			String busiCode = apply.getBusiCode();//业务编号
+			String contractCode = "zcdb";//合同编号
+			if(busiCode !=null){
+				contractCode = "zcdb".concat(busiCode);
+			}
+			contractdoc.setContractCode(contractCode);*/
+			
+			Boolean cBoolean = contractdocService.updateOneContractByID(contractdoc, SystemSession.getUserSession());
+			ar.setSucceed(cBoolean);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ar;
+	}
+	/**
+	 * 新增/修改合同时判断合同编号是否存在
+	 */
+	@RequestMapping(value="/isExistContractCode")
+	@ResponseBody
+	public AjaxRes isExistContractCode(@RequestBody Pro_contractdoc contractdoc){
+		AjaxRes ar = new AjaxRes();
+		contractdoc.setUnit_uid(SystemSession.getUserSession().getUnit_uid());
+		ar.setSucceed(contractdocService.isExistContractCode(contractdoc));
+		return ar;
+	}
+	
+	/* ****************************************************************************************** 
+	 * ************************** 文担 WHDB 合同制作事项 xuyz 2017/11/07 start********************************** 
+	 * ****************************************************************************************** */
+	/**
+	 * 显示合同页面
+	 */
+	@RequestMapping(value="/showWHDBContractDocPageTables")
+	public ModelAndView showContractDocPageTables(UrlParam urlParam) {
+		ModelAndView mv = CustomDispatchServlet.getModeAndView();
+		mv.getModelMap().put("urlParam", urlParam);
+		Pro_apply apply = projectApplyService.selectOneApplyByWhereSql(" and apply_ID = '" + urlParam.getEntityID() + "'");
+		mv.getModelMap().put("apply", apply);
+		mv.setViewName("/project/WHDB/contractDoc/contractDoc");
+		return mv;
+	}
+	
+	/**
+	 * 显示新增合同页面
+	 */
+	@RequestMapping(value = "/showWHDBContractDocAddPage")
+	public ModelAndView showWHDBContractDocAddPage(String  apply_ID) {
+		ModelAndView mv = CustomDispatchServlet.getModeAndView();
+		List<C_dictype>  dicTypeList = dicTypeService.selectAllDicTypeList(" and dicTypePID = 'db8b273584b94af5b4518412c960dd7e'");//合同类型
+		mv.getModelMap().put("apply_ID", apply_ID);
+		mv.getModelMap().put("contractDoc_ID", Tool.createUUID32());
+		mv.getModelMap().put("dicTypeList", dicTypeList);
+		mv.setViewName("/project/WHDB/contractDoc/contractDocAdd");
+		return mv;
+	}
+	
+	/**
+	 * 显示合同修改页面
+	 */
+	@RequestMapping(value="/showWHDBContractDocEditPage")
+	public ModelAndView showWHDBContractDocEditPage(Pro_contractdoc contractDoc) {
+		ModelAndView mView = CustomDispatchServlet.getModeAndView();
+		mView.setViewName("/project/WHDB/contractDoc/contractDocEdit");
+		try {
+			List<C_dictype>  dicTypeList=dicTypeService.selectAllDicTypeList(" and dicTypePID = 'db8b273584b94af5b4518412c960dd7e'");//合同类型
+			contractDoc = contractdocService.selectOneContractdocInfo(contractDoc);
+//			List<Pro_projectfiles> fileList = contractdocService.getAttachments(contractDoc.getContractDoc_ID());
+//			if(fileList!=null && fileList.size()>0){
+//				contractDoc.setProjectfiles(fileList.get(0));
+//			}
+			mView.getModelMap().put("contractDoc", contractDoc);
+			mView.getModelMap().put("dicTypeList", dicTypeList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mView;
+	}
+	
+	/**
+	 * 显示合同审批页面
+	 */
+	@RequestMapping(value = "/showWHDBContractApprovalPage")
+	public ModelAndView showWHDBContractApprovalPage(String  apply_ID, String contractIDstr) {
+		ModelAndView mv = CustomDispatchServlet.getModeAndView();
+		Pro_apply apply = projectApplyService.selectOneApplyByWhereSql(" and apply_ID = '" + apply_ID + "'");
+		mv.getModelMap().put("apply", apply);
+		mv.getModelMap().put("contractIDstr", contractIDstr);
+		mv.setViewName("/project/WHDB/contractDoc/contractApproval");
+		return mv;
+	}
+	
+	/**
+	 * 显示历史合同查看页面
+	 */
+	@RequestMapping(value="/showWHDBBeforeContractDoc")
+	public ModelAndView showWHDBBeforeContractDoc(UrlParam urlParam) {
+		ModelAndView mv = CustomDispatchServlet.getModeAndView();
+		mv.getModelMap().put("urlParam", urlParam);
+		Pro_apply apply = projectApplyService.selectOneApplyByWhereSql(" and apply_ID = '" + urlParam.getEntityID() + "'");
+		mv.getModelMap().put("apply", apply);
+		mv.setViewName("/project/WHDB/contractDoc/contractDoc2");
+		return mv;
+	}
+	
+	/**
+	 * 查询提交申请的合同列表
+	 */
+	@RequestMapping(value = "/selectApprovalContractTable", method = RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes selectApprovalContractTable(@RequestBody PageTable<Pro_contractdoc> pageTable) {
+		AjaxRes ar = new AjaxRes();
+		try {
+			String contractIDstr = pageTable.getQueryCondition().getContractIDstr();
+			String whereSql = " and contractDoc_ID IN ('"+contractIDstr.replace(",", "','")+"')";
+			List<Pro_contractdoc> list = contractdocService.selectContractTable(whereSql);
+			for (Pro_contractdoc contractdoc : list) {
+				String entityID = contractdoc.getContractDoc_ID();
+				String whereSQL = " and entityID='"+entityID+"' ";
+				Pro_projectfiles projectfiles = projectfilesService.selectOneProFilesByEntityID(whereSQL);
+				if(null != projectfiles){
+					contractdoc.setProjectfiles(projectfiles);
+				}
+			}
+			pageTable.setRows(list);
+			ar.setSucceed(pageTable);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ar;
+	}
+	
+	/**
+     * 根据合同ID获取关联的附件
+     */
+    @ResponseBody
+    @RequestMapping(value = "/getAttachments")
+    public AjaxRes getAttachments(String entityID) {
+        List<Pro_projectfiles> listFiles = new ArrayList<Pro_projectfiles>();
+        listFiles = contractdocService.getAttachments(entityID);
+        AjaxRes ar = new AjaxRes();
+        ar.setSucceed(listFiles);
+        return ar;
+    }
+	
+    /**
+	 * 新增一条合同记录
+	 * @param contractdoc
+	 * @return
+	 */
+	@RequestMapping(value = "/insertWHDBContractDoc", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public AjaxRes insertWHDBContractDoc(@RequestBody Pro_contractdoc contractdoc) {
+		AjaxRes ar = new AjaxRes();
+		try {
+			User user = SystemSession.getUserSession();
+			contractdoc.setUnit_uid(SystemSession.getUserSession().getUnit_uid());
+			contractdoc.setUnit_uidName(SystemSession.getUserSession().getUnit_uidName());
+			contractdoc.setUpdateUserName(user.getUser_name());
+			List<Pro_projectfiles> fileList = contractdocService.getAttachments(contractdoc.getContractDoc_ID());
+			if(fileList!=null && fileList.size()>0){
+				contractdoc.setFilename(fileList.get(0).getSourceFileName());
+				contractdoc.setContractPath(fileList.get(0).getPathFile());
+			}
+			Boolean cBoolean = contractdocService.insertOneContractInfo(contractdoc, SystemSession.getUserSession());
+			ar.setSucceed(cBoolean);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ar;
+	}
+	/* ************************** 文担 合同事项 xuyz 2017/11/07 end********************************** */
+}

@@ -1,0 +1,520 @@
+package com.zjm.pro.applyDetail.service.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.zjm.common.db.model.PageTable;
+import com.zjm.common.db.model.User;
+import com.zjm.common.log.service.LogService;
+import com.zjm.crm.client.service.ClientService;
+import com.zjm.pro.apply.service.ProjectApplyService;
+import com.zjm.pro.applyDetail.service.ApplyDetailService;
+import com.zjm.pro.db.map.Pro_applyDetailMapper;
+import com.zjm.pro.db.model.Pro_apply;
+import com.zjm.pro.db.model.Pro_applyDetail;
+import com.zjm.pro.db.model.Pro_meetingDetail;
+import com.zjm.pro.db.model.Pro_meetingResolution;
+import com.zjm.pro.db.model.Pro_project;
+import com.zjm.pro.db.model.Pro_projectCode;
+import com.zjm.pro.meetDetail.service.MeetingDetailService;
+import com.zjm.pro.meetResolution.service.MeetingResolutionService;
+import com.zjm.pro.projectCode.service.ProjectCodeService;
+import com.zjm.sys.busisort.service.BusiSortService;
+import com.zjm.sys.db.model.C_busiSort;
+import com.zjm.util.Tool;
+
+@Service("applyDetailService")
+@Transactional
+public class ApplyDetailServiceImpl implements ApplyDetailService {
+
+	@Resource
+	private Pro_applyDetailMapper applyDetailMapper;
+	
+	@Resource
+	private ProjectApplyService  projectApplyService;
+	
+	@Resource
+	private LogService logService;
+	
+	@Resource
+	private ProjectCodeService projectCodeService;
+	
+	@Resource
+	private ClientService clientService;
+	
+	@Resource
+	private BusiSortService busiSortService;
+	@Resource
+	private MeetingResolutionService meetingResolutionService;
+	@Resource
+	private MeetingDetailService meetingDetailService;
+	
+	
+
+	@Override
+	public PageTable selectApplyDetailPageTables(PageTable pageTable) {
+		List<Pro_applyDetail> applyDetailList = applyDetailMapper.selectApplyDetailPageTables(pageTable);
+		Long total = applyDetailMapper.selectApplyDetailPageTables_Count(pageTable);
+		pageTable.setRows(applyDetailList);
+		pageTable.setTotal(total);
+		return pageTable;
+	}
+
+	public Boolean insertProjectApply(User user, Pro_applyDetail applyDetail) {
+		Boolean b = false;
+		try {
+			//新增申请前, 先创建客户副版本, 项目绑定客户副版本
+			String newClientID = Tool.createUUID32();
+			clientService.copyMainClientToNewClient(user, applyDetail.getClient_ID(), newClientID);
+			applyDetail.setClient_ID(newClientID);		
+			Pro_apply  apply =  new Pro_apply();//新建申请信息对象;
+			apply.setApply_ID(Tool.createUUID32());//设置申请id;			
+			
+//			if(null==applyDetail.getRelationName()){//单笔或多笔
+//				apply.setClientName(applyDetail.getClientName());//设置客户名称;
+//				apply.setClient_ID(applyDetail.getClient_ID());//设置客户id;
+//			}else{
+//				apply.setRelationID(applyDetail.getRelationID());//设置主体关联ID	
+//				apply.setRelationName(applyDetail.getRelationName());//设置主体关联名称	
+//			}
+			apply.setApplySumUse(applyDetail.getApplySumUse());//借款通途
+			apply.setClientName(applyDetail.getClientName());//设置客户名称;
+			apply.setClient_ID(newClientID);//设置客户id;
+			apply.setRelationID(applyDetail.getRelationID());//设置主体关联ID	
+			apply.setRelationName(applyDetail.getRelationName());//设置主体关联名称	
+			apply.setClientTypeID(applyDetail.getClientTypeID());//客户类型;
+			apply.setProjectName(applyDetail.getProjectName());//项目名称
+			
+			apply.setClientGUID(applyDetail.getClientGUID());//客户唯一标示
+			
+			apply.setDepartID(applyDetail.getDepartID());//部门ID
+			apply.setDepartName(applyDetail.getDepartName());//部门名称	
+			
+			apply.setCreateManID(applyDetail.getCreateManID());//创建人ID
+			apply.setCreateManName(applyDetail.getCreateManName());//创建人名称	
+			
+			apply.setAmanID(applyDetail.getAmanID());//设置A角ID;
+			apply.setAmanName(applyDetail.getAmanName());//设置A角名称
+			apply.setBmanID(applyDetail.getBmanID());//设置B角ID;
+			apply.setBmanName(applyDetail.getBmanName());//设置B角ID;
+			apply.setBeforeAManID(applyDetail.getAmanID());//设置移交前A角ID
+			apply.setBeforeBManID(applyDetail.getBmanID());//设置移交前B角ID
+			apply.setCreateDate(applyDetail.getCreateDate());//登记时间;
+			apply.setProjectType(applyDetail.getProjectType());
+		    apply.setProjectStageID(applyDetail.getProjectStageID());//业务阶段ID	
+		    apply.setProjectStageName(applyDetail.getProjectStageName());//业务阶段
+		    apply.setProjectSourceID(applyDetail.getProjectSourceID());//项目来源id
+		    apply.setProjectSourceName(applyDetail.getProjectSourceName());//项目来源名称
+		    apply.setSourceDesc(applyDetail.getSourceDesc());//项目来源说明
+		    apply.setBusiNatureID(applyDetail.getBusiNatureID());//业务性质id
+		    apply.setBusiNatureName(applyDetail.getBusiNatureName());//业务性质name
+		    
+			Boolean returnBool = projectApplyService.insertOneApplyInfo(user,apply);//新增业务申请信息	
+			String  meetingResolution_ID = Tool.createUUID32();
+			if(returnBool){//在决议表中添加数据
+				Pro_meetingResolution meetResolution = new Pro_meetingResolution();				
+				meetResolution.setMeetingResolution_ID(meetingResolution_ID);
+				meetResolution.setApply_ID(apply.getApply_ID());
+				meetingResolutionService.insertOneMeetingResolution(user,meetResolution);
+			}
+			//如果明细拼接list 不为空：
+			if(null != applyDetail.getBusiDetails() && applyDetail.getBusiDetails().length() != 0){
+				Boolean returnB = insertApplyDetail(user, applyDetail, apply,meetingResolution_ID);//新增业务明细表信息；
+				if(returnB){
+					
+					b = true;
+				}
+				
+			}
+			
+			
+		}catch (Exception e) {
+			 e.printStackTrace();
+		}
+		return b;
+		
+	}
+    /**
+     * 
+     * @param user :用户信息
+     * @param applyDetail：申请明细表信息
+     * @param apply：业务表新
+     * @param newClientID；新客户id
+     * @param meetingResolution_ID：新决议表主键id
+     * @return
+     */
+	public Boolean insertApplyDetail(User user,Pro_applyDetail applyDetail,Pro_apply apply,String meetingResolution_ID){		
+		Boolean bool = false;
+		Double applyTotalSum =0.0;
+		String busiTypeNameList = "";//业务品种名称集合
+		String bankNameList=""; //		
+		
+		String[] strArr = applyDetail.getBusiDetails().split(";");//获取前台拼接字符串;			
+		List<String[]> stringList = new  ArrayList<>();			
+		for (int i = 0; i < strArr.length; i++) {
+			stringList.add(strArr[i].split(",",-1)) ;//拆分业务明细.存放在list中;	
+		}			
+		for (String[] strings : stringList) {//遍历list,取值后放入相应属性中,存入数据库
+			int	j=0;
+			applyDetail.setClientName(strings[j++]);
+			String mainClientID = strings[j++];//这是主版本客户id，此处用于占位
+			//applyDetail.setClient_ID(applyDetail.getClient_ID());//这是副版本客户id，跟随项目走
+			applyDetail.setProjectTypeName(strings[j++]);					
+			applyDetail.setProjectTypeID(strings[j++]);
+			applyDetail.setBankName(strings[j++]);					
+			applyDetail.setBankID(strings[j++]);	
+			bankNameList +=applyDetail.getBankName()+",";
+			applyDetail.setBusiTypeName(strings[j++]);
+			applyDetail.setBusiTypeID(strings[j++]);
+			
+			/*根据业务品种ID, 查询业务字典, 取出所属的业务大类, 设置到applyDetail中  start*/
+			C_busiSort busiSort = new C_busiSort();
+			busiSort.setBusisortid(applyDetail.getBusiTypeID());
+			busiSort.setUnitUid(user.getUnit_uid());
+			busiSort = busiSortService.selectOneBusiSortInfo(busiSort);
+			applyDetail.setBusiClass(busiSort.getBusiClass());
+			/*根据业务品种ID, 查询业务字典, 取出所属的业务大类, 设置到applyDetail中  end*/
+			
+			busiTypeNameList += applyDetail.getBusiTypeName()+",";
+			/*applyDetail.setGreenChannelName(strings[j++]);
+			applyDetail.setGreenChannelID(strings[j++]);*/		
+			applyDetail.setApplySum(Double.parseDouble(strings[j++]));
+			applyTotalSum +=applyDetail.getApplySum();
+			applyDetail.setPeriodMonth(Integer.parseInt(strings[j++]));				 				
+			String periodMonthDay = "";
+			if(applyDetail.getPeriodMonth()!=null&&applyDetail.getPeriodMonth() != 0){	
+				periodMonthDay +=applyDetail.getPeriodMonth()+"个月";
+			}
+			if(applyDetail.getPeriodDay()!=null&&applyDetail.getPeriodDay() != 0){		
+				periodMonthDay +=applyDetail.getPeriodDay()+"天";					
+			}				
+			applyDetail.setPeriodMonthDay(periodMonthDay);
+			//结息方式
+			applyDetail.setInterestMethodName(strings[j++]);
+			applyDetail.setInterestMethodID(strings[j++]);
+			
+			applyDetail.setApplyDetail_ID(Tool.createUUID32());//业务申请产品信息ID
+			applyDetail.setApply_ID(apply.getApply_ID());//申请业务ID
+			
+			//applyDetail.setAmanID(applyDetail.getCreateManID());//设置A角ID;
+			//applyDetail.setAmanName(applyDetail.getCreateManName());//设置A角名称
+			applyDetail.setBeforeAManID(applyDetail.getAmanID());//设置移交前A角ID
+			applyDetail.setBeforeBManID(applyDetail.getBmanID());//设置移交前B角ID
+			applyDetail.setUpdateUserName(user.getUser_name());//设置更新人名称;
+			applyDetail.setUnit_uid(user.getUnit_uid());//设置担保机构id
+			applyDetail.setUnit_uidName(user.getUnit_uidName());//设置担保机构名称;	
+			
+			//设置编号
+			Pro_projectCode projectCode = new Pro_projectCode();
+			projectCode=projectCodeService.returnOneProjectCode(user, "applyDetail");
+			//格式化客户编号之后再设置
+			String projectBH = projectCode.getYears() + projectCodeFormat(projectCode.getProjectCode());
+			applyDetail.setProjectCode(projectBH);
+			Integer insertResult = applyDetailMapper.insertOneApplyDetailInfo(applyDetail);//业务申请产品信息表				
+			if(1 == insertResult){
+			 meetingDetailService.insertMeetingDetail(user, applyDetail, meetingResolution_ID);
+			  logService.insertOneOperatorLogInfo(user,"申请登记", "新增", "业务申请产品信息表信息ID="+applyDetail.getApplyDetail_ID());					
+		    }						
+		}			
+		apply.setBusiTypeNameList(busiTypeNameList.substring(0,busiTypeNameList.length()-1));//业务品种名称集合
+		apply.setBankNameList(bankNameList.substring(0,bankNameList.length()-1));//合作机构名称集合
+		apply.setApplySum(applyTotalSum);//申请总金额;			
+		Boolean returnResult = projectApplyService.updateOneApplyInfo(user, apply);
+		if(returnResult){
+			bool= true;
+			logService.insertOneOperatorLogInfo(user,"申请登记", "修改", "业务申请信息表ID ="+apply.getApply_ID());	
+		}
+		
+		return bool;
+	}
+	/***
+	 * 新增评审会产品明细表信息
+	 * @param user
+	 * @param applyDetail
+	 * @param meetingResolution_ID
+	 * @return
+	 */
+	//public Boolean insertMeetingDetail(User user,Pro_applyDetail applyDetail,String meetingResolution_ID){}
+	
+	public Pro_applyDetail selectOneApplyDetailByWhereSql(String wheresql) {
+		Pro_applyDetail applyDetail = new Pro_applyDetail();
+		try {
+			applyDetail = applyDetailMapper.selectOneApplyDetailWhereSql(wheresql);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		return applyDetail;
+	}
+
+	public Boolean updateOneApplyDetailInfo(User user, Pro_applyDetail applyDetail) {		
+		try {
+			Double applyTotalSum =0.0;
+			String busiTypeNameList = "";//业务品种名称集合
+			String bankNameList=""; //	合作机构名称集合		
+			Pro_apply apply = projectApplyService.selectOneApplyByWhereSql(" and apply_ID = \'"+applyDetail.getApply_ID()+"\'");	
+			
+			if(null==applyDetail.getRelationName()){//单笔或多笔
+				apply.setClientName(applyDetail.getClientName());//设置客户名称;
+				apply.setClient_ID(applyDetail.getClient_ID());//设置客户id;
+			}else{
+				apply.setClientName(applyDetail.getClientName());//设置主体客户名称;
+				apply.setClient_ID(applyDetail.getClient_ID());//设置主体客户id;
+				apply.setRelationID(applyDetail.getRelationID());//设置主体关联ID	
+				apply.setRelationName(applyDetail.getRelationName());//设置主体关联名称	
+			}
+			apply.setApplySumUse(applyDetail.getApplySumUse());//借款通途
+			apply.setProjectName(applyDetail.getProjectName());//项目名称
+			apply.setClientGUID(applyDetail.getClientGUID());//客户唯一标示
+			apply.setDepartID(applyDetail.getDepartID());//部门ID
+			apply.setDepartName(applyDetail.getDepartName());//部门名称	
+			
+			apply.setAmanID(applyDetail.getAmanID());//设置A角ID;
+			apply.setAmanName(applyDetail.getAmanName());//设置A角名称
+			apply.setBmanID(applyDetail.getAmanID());//设置B角ID;
+			apply.setBmanName(applyDetail.getBmanName());//设置B角名称
+			apply.setBeforeAManID(applyDetail.getAmanID());//设置移交前A角ID
+			apply.setBeforeBManID(applyDetail.getBmanID());
+			apply.setCreateManID(applyDetail.getCreateManID());//创建人ID
+			apply.setCreateManName(applyDetail.getCreateManName());//创建人名称	
+			
+			apply.setCreateDate(applyDetail.getCreateDate());//登记时间;
+			apply.setProjectType(applyDetail.getProjectType());
+			
+		    apply.setProjectStageID(applyDetail.getProjectStageID());//业务阶段ID	
+		    apply.setProjectStageName(applyDetail.getProjectStageName());//业务阶段	
+		    apply.setProjectSourceID(applyDetail.getProjectSourceID());//项目来源id
+		    apply.setProjectSourceName(applyDetail.getProjectSourceName());//项目来源名称
+		    apply.setSourceDesc(applyDetail.getSourceDesc());//项目来源说明
+		    
+		    apply.setBusiNatureID(applyDetail.getBusiNatureID());//业务性质id
+		    apply.setBusiNatureName(applyDetail.getBusiNatureName());//业务性质name
+		    
+			projectApplyService.updateOneApplyInfo(user, apply);//更新apply表信息;	
+			
+			Integer intResult = applyDetailMapper.deleteApplyDetailByWhereSql(" and apply_ID = \'"+apply.getApply_ID()+"\'");
+			
+			List<Pro_meetingDetail> meetingDetailList = meetingDetailService.selectMeetingDetailListByWhereSql(" and apply_ID = \'"+apply.getApply_ID()+"\'");
+			for (Pro_meetingDetail pro_meetingDetail : meetingDetailList) {
+				meetingDetailService.deleteOnemeetingDetail(user, pro_meetingDetail.getMeetingDetail_ID());
+			}
+			Pro_meetingResolution resolution = meetingResolutionService.selectOneResolutionByWhereSql(" and apply_ID = \'"+apply.getApply_ID()+"\'");
+			String meetingResolution_ID = "";
+			if(null != resolution){
+				if(null != resolution.getMeetingResolution_ID()){
+					meetingResolution_ID=resolution.getMeetingResolution_ID();
+				}
+				
+			}else{
+				meetingResolution_ID = Tool.createUUID32();
+			}
+			if(intResult>0){
+				
+				String[] strArr = applyDetail.getBusiDetails().split(";");//获取前台拼接字符串;			
+				List<String[]> stringList = new  ArrayList<>();			
+				for (int i = 0; i < strArr.length; i++) {
+					stringList.add(strArr[i].split(",",-1)) ;//拆分业务明细.存放在list中;	
+				}			
+				for (String[] strings : stringList) {//遍历list,取值后放入相应属性中,存入数据库
+					int	j=0;
+					applyDetail.setApplyDetail_ID(Tool.createUUID32());
+					
+					applyDetail.setClientName(strings[j++]);
+					applyDetail.setClient_ID(strings[j++]);
+					applyDetail.setProjectTypeName(strings[j++]);					
+					applyDetail.setProjectTypeID(strings[j++]);
+					applyDetail.setBankName(strings[j++]);					
+					applyDetail.setBankID(strings[j++]);	
+					bankNameList +=applyDetail.getBankName()+",";
+					applyDetail.setBusiTypeName(strings[j++]);
+					applyDetail.setBusiTypeID(strings[j++]);
+					
+					/*根据业务品种ID, 查询业务字典, 取出所属的业务大类, 设置到applyDetail中  start*/
+					C_busiSort busiSort = new C_busiSort();
+					busiSort.setBusisortid(applyDetail.getBusiTypeID());
+					busiSort.setUnitUid(user.getUnit_uid());
+					busiSort = busiSortService.selectOneBusiSortInfo(busiSort);
+					applyDetail.setBusiClass(busiSort.getBusiClass());
+					/*根据业务品种ID, 查询业务字典, 取出所属的业务大类, 设置到applyDetail中  end*/
+					
+					busiTypeNameList += applyDetail.getBusiTypeName()+",";
+					/*applyDetail.setGreenChannelName(strings[j++]);
+					applyDetail.setGreenChannelID(strings[j++]);	*/
+					applyDetail.setApplySum(Double.parseDouble(strings[j++]));
+					String parseInt = strings[j++];
+					applyTotalSum +=applyDetail.getApplySum();
+					applyDetail.setPeriodMonth(Integer.parseInt(parseInt));				 				
+					String periodMonthDay = "";
+					if(applyDetail.getPeriodMonth()!=null&&applyDetail.getPeriodMonth() != 0){	
+						periodMonthDay +=applyDetail.getPeriodMonth()+"个月";
+						
+					}
+					if(applyDetail.getPeriodDay()!=null&&applyDetail.getPeriodDay() != 0){		
+						periodMonthDay +=applyDetail.getPeriodDay()+"天";					
+					}				
+					applyDetail.setPeriodMonthDay(periodMonthDay);
+					
+					//结息方式
+					applyDetail.setInterestMethodName(strings[j++]);
+					applyDetail.setInterestMethodID(strings[j++]);
+					
+					//applyDetail.setApplyDetail_ID(Tool.createUUID32());//业务申请产品信息ID
+					applyDetail.setApply_ID(apply.getApply_ID());//申请业务ID
+					
+					//applyDetail.setAmanID(applyDetail.getCreateManID());//设置A角ID;
+					//applyDetail.setAmanName(applyDetail.getCreateManName());//设置A角名称
+					applyDetail.setBeforeAManID(applyDetail.getAmanID());//设置移交前A角ID
+					applyDetail.setBeforeBManID(applyDetail.getBmanID());//设置移交前B角ID
+					applyDetail.setUpdateUserName(user.getUser_name());//设置更新人名称;
+					applyDetail.setUnit_uid(user.getUnit_uid());//设置担保机构id
+					applyDetail.setUnit_uidName(user.getUnit_uidName());//设置担保机构名称;									
+					Integer insertResult = applyDetailMapper.insertOneApplyDetailInfo(applyDetail);//业务申请产品信息表				
+					if(1 == insertResult){
+						meetingDetailService.insertMeetingDetail(user, applyDetail, meetingResolution_ID);//新增评审会产品明细表信息
+					  logService.insertOneOperatorLogInfo(user,"申请登记", "新增", "业务申请产品信息表信息id="+applyDetail.getApplyDetail_ID());					
+				  }						
+				}			
+				apply.setBusiTypeNameList(busiTypeNameList.substring(0,busiTypeNameList.length()-1));//业务品种名称集合
+				apply.setBankNameList(bankNameList.substring(0,bankNameList.length()-1));//合作机构名称集合
+				apply.setApplySum(applyTotalSum);//申请总金额;			
+				Boolean returnResult = projectApplyService.updateOneApplyInfo(user, apply);
+				if(!returnResult){
+					return false;
+				}
+				return true;
+			}			
+		}catch (Exception e) {
+			 e.printStackTrace();
+		}
+		return false;
+		
+	}
+	/**
+	 * 根据wheresql删除一个业务申请信息表信息
+	 * @param wheresql :
+	 * @return
+	 */
+	public Boolean deleteApplyDetailByWhereSql(User user, String wheresql) {	
+		try {
+			Integer returnResult  = applyDetailMapper.deleteApplyDetailByWhereSql(wheresql);
+			if(returnResult>0){
+				logService.insertOneOperatorLogInfo(user,"申请登记", "删除", "删除业务申请产品信息表信息");		
+			    return true;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	/**
+	 * 根据wheresql查询申请明细
+	 * @param wheresql:
+	 * @return
+	 */
+	public List<Pro_applyDetail> selectApplyDetailList(String wheresql) {
+		try {
+			List<Pro_applyDetail> applyDetailList = applyDetailMapper.selectApplyDetailList(wheresql);
+			return applyDetailList;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+
+	//编号位数生成
+	private String projectCodeFormat(Integer number) {
+		String projectcodes="" + number;
+		for(int i=0;projectcodes.length()<4;i++){
+			projectcodes="0"+projectcodes;
+		}
+		return projectcodes;
+	}
+	
+	/**
+	 * 更新产品评审会决议
+	 * xuyz
+	 */
+	public Boolean updateOneApproveGuarantee(Pro_applyDetail applyDetail){
+		try{
+			applyDetail.setAgreeMonthDay(concatMonthDay(applyDetail));
+			Integer successNum = applyDetailMapper.updateOneApproveGuarantee(applyDetail);
+			if(successNum==1){
+				return true;
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	/**
+	 * 拼接申请期限字符串
+	 */
+	private String concatMonthDay(Pro_applyDetail applyDetail){
+		Integer month = applyDetail.getAgreeMonth();
+		Integer day = applyDetail.getAgreeDay();
+		StringBuffer agreeMonthDay = new StringBuffer();
+		if( month!=null && !month.equals(0)){
+			agreeMonthDay.append(month+"个月");
+			if(day!=null && day!=0){
+				agreeMonthDay.append(day+"天");
+			}
+		}else if(day!=null && day!=0){
+			agreeMonthDay.append(day+"天");
+		}else{	//申请期限改为非必填项后注释此段代码
+			agreeMonthDay.append("0天");
+		}
+		return agreeMonthDay.toString();
+	}
+
+	public Boolean updateOneApplyDetailByApplyDetail_ID(User userSession, Pro_project pro_project) {
+		Pro_applyDetail	 applyDetail = new Pro_applyDetail();
+		Boolean b = false;
+		Integer returnInt = 0;
+		if(null != pro_project){
+			applyDetail= applyDetailMapper.selectOneApplyDetailWhereSql(" and applyDetail_ID = \'"+pro_project.getApplyDetail_ID()+"\'");
+				 applyDetail.setAmanID(pro_project.getAmanID());//A角
+				 applyDetail.setAmanName(pro_project.getAmanName());
+				 applyDetail.setBmanID(pro_project.getBmanID());
+				 applyDetail.setBmanName(pro_project.getBmanName());//B角
+				 applyDetail.setBusiTypeName(pro_project.getBusiTypeName());//业务品种
+				 applyDetail.setBusiTypeID(pro_project.getBusiTypeID());
+				 applyDetail.setBankName(pro_project.getBankName());//合作机构
+				 applyDetail.setSubBankName(pro_project.getSubBankName());//合作子机构
+				 applyDetail.setBankID(pro_project.getBankID());
+				 applyDetail.setBeforeAManID(pro_project.getAmanID());
+				 applyDetail.setBeforeBManID(pro_project.getBmanID());
+				 applyDetail.setPeriodDay(pro_project.getPeriodDay());
+				 applyDetail.setPeriodMonth(pro_project.getPeriodMonth());
+				 applyDetail.setPeriodMonthDay(pro_project.getPeriodMonthDay());
+				 applyDetail.setDcontractCode(pro_project.getDcontractCode());//委托担保合同号（委托贷款合同号）
+				 applyDetail.setJcontractCode(pro_project.getJcontractCode());//借款合同号
+				 applyDetail.setBcontractCode(pro_project.getBcontractCode());//保证合同号
+				 applyDetail.setBusiClass(pro_project.getBusiClass());
+				 returnInt = applyDetailMapper.updateOneApplyDetailInfo(applyDetail);
+			}
+			if(returnInt>0){
+			    logService.insertOneOperatorLogInfo(userSession,"保后(贷)跟踪", "修改", "修改业务申请明细表信息applyDetail_ID="+pro_project.getApplyDetail_ID());
+				b = true;
+			}
+			return b;
+	}
+
+	@Override
+	public Boolean updateOneApplyDetail(User userSession, Pro_applyDetail applyDetail) {
+		boolean a = false;
+		int i = applyDetailMapper.updateOneApplyDetailInfo(applyDetail);
+		if(i>0){
+			a = true;
+		}
+		return a;
+	}
+}

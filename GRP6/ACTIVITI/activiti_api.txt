@@ -1,0 +1,206 @@
+/**
+			 * 提供对暴露BPM和工作流操作的所有服务的访问
+			 */
+			ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+			
+			
+			
+			/**
+			 * 用于启动和搜索流程实例
+			 */
+			RuntimeService runtimeService = processEngine.getRuntimeService();
+			
+			//activateProcessInstanceById(String processInstanceId);//使用给定的id激活流程实例。如果您有一个流程实例层次结构，那么将一个流程实例挂起，它将不挂起其他流程实例
+			
+			/**
+			 * 提供访问流程定义和部署存储库的服务
+			 */
+			RepositoryService repositoryService = processEngine.getRepositoryService();
+			/**
+			 * 提供任务和表单相关操作的服务
+			 */
+			TaskService taskService = processEngine.getTaskService();
+			/**
+			 * 用于流程引擎上的管理和维护操作。这些操作通常不会在工作流驱动的应用程序中使用，但在操作控制台中使用
+			 */
+			ManagementService managementService = processEngine.getManagementService();
+			/**
+			 * 用于管理用户和组的服务
+			 */
+			IdentityService identityService = processEngine.getIdentityService();
+			/**
+			 * 提供关于正在进行的和过去的流程实例的信息。这与运行时信息不同，因为运行时信息只包含任何给定时刻的实际运行时状态，并且对运行时进程执行性能进行了优化。
+			 * 历史信息为便于查询而优化，并且在持久存储中保持永久不变。
+			 */
+			HistoryService historyService = processEngine.getHistoryService();
+			/**
+			 * 访问表单数据和呈现表单以启动新流程实例和完成任务
+			 */
+			FormService formService = processEngine.getFormService();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+15.5. 流程实例 Process Instances
+15.5.1. 获取一个流程实例 Get a process instance
+	GET runtime/process‐instances/{processInstanceId}
+	String processInstanceId 要获取的流程实例的id
+15.5.2. 删除一个流程实例 Delete a process instance
+	DELETE runtime/process‐instances/{processInstanceId}
+	String processInstanceId 要删除的流程实例的id
+15.5.3. 激活或暂停一个流程实例 Activate or suspend a process instance
+	PUT runtime/process‐instances/{processInstanceId}
+	String processInstanceId 要激活/暂停的流程实例的id
+	请求体（暂停）：{"action":"suspend"}
+	请求体（激活）：{"action":"activate"}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

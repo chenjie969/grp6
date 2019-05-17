@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjm.sys.db.map.Sys_dep_postMapper" >
+  <resultMap id="BaseResultMap" type="com.zjm.sys.db.model.Sys_dep_post" >
+    <result column="post_ID" property="post_ID" />
+    <result column="depart_uid" property="depart_uid"  />
+    <result column="unit_uid" property="unit_uid"  />
+  </resultMap>
+  <!-- 部门与岗位关联表字段 -->
+  <sql id="Base_Column_List" >
+		post_ID,depart_uid,unit_uid
+  </sql>
+ 
+  
+  <!--  查询所有银行字典 -->
+  <select id="selectDepPostList" resultMap="BaseResultMap" parameterType="com.zjm.sys.db.model.Sys_dep_post">
+	  <![CDATA[
+		  	select
+			  	post_ID,depart_uid,unit_uid
+		    from
+		    sys_dep_post
+		     where depart_uid=#{depart_uid} and unit_uid=#{unit_uid}
+	   ]]>
+  </select>
+  
+  <!-- 添加一个银行字典信息 -->
+   <insert id="insertOneDepPostInfo" parameterType="com.zjm.sys.db.model.Sys_dep_post">
+   	<![CDATA[
+	    insert into sys_dep_post 
+	     (
+		    post_ID,depart_uid,unit_uid
+	      )
+	    values 
+	    (
+		   	  #{post_ID}, 
+		   	  #{depart_uid}, 
+		   	  #{unit_uid}
+	      )
+      ]]>
+  </insert>
+  
+  
+  
+  <!-- 删除关联关系 -->
+  <delete id="deleteDepPostInfo" parameterType="string" >
+ 	 <![CDATA[
+	    delete from sys_dep_post
+	    where 1=1  ${value};
+      ]]>
+  </delete>
+	
+</mapper>

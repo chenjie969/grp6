@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><jatools Class="jatools.ReportDocument" Name="jatools report template"><VariableContext/><Page><Children ItemClass="PagePanel"><Item0><Width>1176</Width><Height>170</Height><Children><Item0 Class="Label"><Text>融投集团及所属公司执行案件统计表</Text><Font><Face>宋体</Face><Style>1</Style><Size>36</Size></Font><HorizontalAlignment>1</HorizontalAlignment><X>158</X><Y>24</Y><Width>859</Width><Height>100</Height></Item0><Item1 Class="Text"><Variable>=if(has(enddatesql)) return enddatesql;else return $today</Variable><X>78</X><Y>137</Y><Width>110</Width><Height>23</Height></Item1><Item2 Class="Label"><Text>截止日期：</Text><X>20</X><Y>137</Y><Width>56</Width><Height>23</Height></Item2><Item3 Class="Label"><Text>金额单位：亿元</Text><HorizontalAlignment>2</HorizontalAlignment><X>1034</X><Y>137</Y><Width>101</Width><Height>23</Height></Item3></Children><Type>100</Type></Item0><Item1><Y>802</Y><Width>1176</Width><Height>280</Height><Type>103</Type></Item1><Item2><Y>170</Y><Width>1176</Width><Height>632</Height><Children ItemClass="Table"><Item0><NodePath>tab_detail</NodePath><X>90</X><Y>74</Y><Children><Item0 Class="Label"><Text>案件数量</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col><ColSpan>3</ColSpan></Cell></Item0><Item1 Class="Label"><Text>案件标的额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>4</Col><ColSpan>3</ColSpan></Cell></Item1><Item2 Class="Label"><Text>省内法院数量</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>1</Col></Cell></Item2><Item3 Class="Label"><Text>省外法院数量</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>2</Col></Cell></Item3><Item4 Class="Label"><Text>数量合计</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>3</Col></Cell></Item4><Item5 Class="Label"><Text>省内案件标的额</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>4</Col></Cell></Item5><Item6 Class="Label"><Text>省外案件标的额</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>5</Col></Cell></Item6><Item7 Class="Label"><Text>标的额合计</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>6</Col></Cell></Item7><Item8 Class="Label"><Text>案件增量分析</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>7</Col><ColSpan>2</ColSpan></Cell></Item8><Item9 Class="Label"><Text>较上月新增案件数量</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>7</Col></Cell></Item9><Item10 Class="Label"><Text>较上月新增案件标的额</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>8</Col></Cell></Item10><Item11 Class="Label"><Text>备注</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>9</Col><RowSpan>2</RowSpan></Cell></Item11><Item12 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col></Cell></Item12><Item13 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>0</Col></Cell></Item13><Item14 Class="RowPanel"><Cell><Row>2</Row><Col>0</Col><RowSpan>3</RowSpan><ColSpan>10</ColSpan></Cell><Children><Item0 Class="Label"><Text>融投作为被执行人案件</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>0</Col></Cell></Item0><Item1 Class="Text"><Variable>=$.tab3_count</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>1</Col></Cell></Item1><Item2 Class="Text"><Variable>=$.tab4_count</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>2</Col></Cell></Item2><Item3 Class="Text"><Variable>=$.tab3_count + $.tab4_count</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>3</Col></Cell></Item3><Item4 Class="Text"><Variable>=$.tab3_sum/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>4</Col></Cell></Item4><Item5 Class="Text"><Variable>=$.tab4_sum/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>5</Col></Cell></Item5><Item6 Class="Text"><Variable>=($.tab3_sum + $.tab4_sum)/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>6</Col></Cell></Item6><Item7 Class="Text"><Variable>=$.tab3_count + $.tab4_count - $.tab5_count</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>7</Col></Cell></Item7><Item8 Class="Text"><Variable>=($.tab3_sum + $.tab4_sum - $.tab5_sum)/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>8</Col></Cell></Item8><Item9 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>9</Col></Cell></Item9><Item10 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>4</Row><Col>9</Col></Cell></Item10><Item11 Class="Text"><Variable>=($.tab2_sum + $.tab1_sum + $.tab3_sum + $.tab4_sum - $.tab5_sum - $.tab6_sum)/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>4</Row><Col>8</Col></Cell></Item11><Item12 Class="Text"><Variable>=$.tab1_count + $.tab3_count + $.tab2_count + $.tab4_count - $.tab5_count - $.tab6_count</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>4</Row><Col>7</Col></Cell></Item12><Item13 Class="Text"><Variable>=($.tab2_sum + $.tab1_sum + $.tab3_sum + $.tab4_sum)/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>4</Row><Col>6</Col></Cell></Item13><Item14 Class="Text"><Variable>=($.tab2_sum + $.tab4_sum)/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>4</Row><Col>5</Col></Cell></Item14><Item15 Class="Text"><Variable>=($.tab1_sum + $.tab3_sum)/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>4</Row><Col>4</Col></Cell></Item15><Item16 Class="Text"><Variable>=$.tab1_count + $.tab3_count + $.tab2_count + $.tab4_count</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>4</Row><Col>3</Col></Cell></Item16><Item17 Class="Text"><Variable>=$.tab2_count + $.tab4_count</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>4</Row><Col>2</Col></Cell></Item17><Item18 Class="Text"><Variable>=$.tab1_count + $.tab3_count</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>4</Row><Col>1</Col></Cell></Item18><Item19 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>9</Col></Cell></Item19><Item20 Class="Text"><Variable>=($.tab2_sum + $.tab1_sum - $.tab6_sum)/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>8</Col></Cell></Item20><Item21 Class="Text"><Variable>=$.tab1_count + $.tab2_count - $.tab6_count</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>7</Col></Cell></Item21><Item22 Class="Text"><Variable>=($.tab2_sum + $.tab1_sum)/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>6</Col></Cell></Item22><Item23 Class="Text"><Variable>=$.tab2_sum/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>5</Col></Cell></Item23><Item24 Class="Text"><Variable>=$.tab1_sum/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>4</Col></Cell></Item24><Item25 Class="Text"><Variable>=$.tab1_count + $.tab2_count</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>3</Col></Cell></Item25><Item26 Class="Text"><Variable>=$.tab2_count</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>2</Col></Cell></Item26><Item27 Class="Text"><Variable>=$.tab1_count</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>1</Col></Cell></Item27><Item28 Class="Label"><Text>融投为申请执行人案件</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>0</Col></Cell></Item28><Item29 Class="Label"><Text>合 计</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>4</Row><Col>0</Col></Cell></Item29></Children><NodePath>Row</NodePath></Item14></Children><ColumnWidths>155,95,95,95,95,95,95,95,95,80</ColumnWidths><RowHeights>35,35,50,50,50</RowHeights></Item0></Children><Type>102</Type></Item2></Children><PageFormat><Width>1216</Width><Height>1122</Height></PageFormat></Page><NodeSource><Children ItemClass="DatasetNodeSource"><Item0><Children ItemClass="RowNodeSource"><Item0/></Children><Reader Class="SqlReader"><Name>tab_detail</Name><Sql>select * from 
+(select 
+count(*) as tab1_count,
+IFNULL(sum(lawsuit_sum),0) as tab1_sum
+from pro_executecase
+where plaintiff =  '河北融投担保集团有限公司' and province = '省内' 
+${has(enddatesql)?(" and lawsuit_date&lt;='"+enddatesql+"'"):""}
+) tab JOIN
+(select 
+count(*) as tab2_count,
+IFNULL(sum(lawsuit_sum),0) as tab2_sum
+from pro_executecase
+where plaintiff =  '河北融投担保集团有限公司' and province = '省外'
+${has(enddatesql)?(" and lawsuit_date&lt;='"+enddatesql+"'"):""}
+) tab2 JOIN
+(select 
+count(*) as tab3_count,
+IFNULL(sum(lawsuit_sum),0) as tab3_sum
+from pro_executecase
+where defendant =  '河北融投担保集团有限公司' and province = '省内'
+${has(enddatesql)?(" and lawsuit_date&lt;='"+enddatesql+"'"):""}
+) tab3 JOIN
+(select 
+count(*) as tab4_count,
+IFNULL(sum(lawsuit_sum),0) as tab4_sum
+from pro_executecase
+where defendant =  '河北融投担保集团有限公司' and province = '省外'
+${has(enddatesql)?(" and lawsuit_date&lt;='"+enddatesql+"'"):""}
+) tab4 JOIN
+(select 
+count(*) as tab5_count,
+IFNULL(sum(lawsuit_sum),0) as tab5_sum
+from pro_executecase
+where defendant =  '河北融投担保集团有限公司' 
+${has(enddatesql)?(" and PERIOD_DIFF( date_format('"+enddatesql+"' , '%Y%m' ) , date_format( lawsuit_date, '%Y%m' ) ) =1 "):""}
+) tab5 JOIN
+(select 
+count(*) as tab6_count,
+IFNULL(sum(lawsuit_sum),0) as tab6_sum
+from pro_executecase
+where plaintiff =  '河北融投担保集团有限公司' 
+${has(enddatesql)?(" and PERIOD_DIFF( date_format('"+enddatesql+"' , '%Y%m' ) , date_format( lawsuit_date, '%Y%m' ) ) =1 "):""}
+) tab6
+
+
+
+
+
+
+
+
+
+</Sql><Description>select * from 
+(select 
+count(*) as tab1_count,
+IFNULL(sum(lawsuit_sum),0) as tab1_sum
+from pro_executecase
+where plaintiff =  '河北融投担保集团有限公司' and province = '省内' 
+${has(enddatesql)?(" and lawsuit_date&lt;='"+enddatesql+"'"):""}
+) tab JOIN
+(select 
+count(*) as tab2_count,
+IFNULL(sum(lawsuit_sum),0) as tab2_sum
+from pro_executecase
+where plaintiff =  '河北融投担保集团有限公司' and province = '省外'
+${has(enddatesql)?(" and lawsuit_date&lt;='"+enddatesql+"'"):""}
+) tab2 JOIN
+(select 
+count(*) as tab3_count,
+IFNULL(sum(lawsuit_sum),0) as tab3_sum
+from pro_executecase
+where defendant =  '河北融投担保集团有限公司' and province = '省内'
+${has(enddatesql)?(" and lawsuit_date&lt;='"+enddatesql+"'"):""}
+) tab3 JOIN
+(select 
+count(*) as tab4_count,
+IFNULL(sum(lawsuit_sum),0) as tab4_sum
+from pro_executecase
+where defendant =  '河北融投担保集团有限公司' and province = '省外'
+${has(enddatesql)?(" and lawsuit_date&lt;='"+enddatesql+"'"):""}
+) tab4 JOIN
+(select 
+count(*) as tab5_count,
+IFNULL(sum(lawsuit_sum),0) as tab5_sum
+from pro_executecase
+where defendant =  '河北融投担保集团有限公司' 
+${has(enddatesql)?(" and PERIOD_DIFF( date_format('"+enddatesql+"' , '%Y%m' ) , date_format( lawsuit_date, '%Y%m' ) ) =1 "):""}
+) tab5 JOIN
+(select 
+count(*) as tab6_count,
+IFNULL(sum(lawsuit_sum),0) as tab6_sum
+from pro_executecase
+where plaintiff =  '河北融投担保集团有限公司' 
+${has(enddatesql)?(" and PERIOD_DIFF( date_format('"+enddatesql+"' , '%Y%m' ) , date_format( lawsuit_date, '%Y%m' ) ) =1 "):""}
+) tab6
+
+
+
+
+
+
+
+
+
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><TagName>tab_detail</TagName></Item0></Children></NodeSource></jatools>

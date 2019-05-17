@@ -1,0 +1,98 @@
+package com.zjm.pro.executecase.service.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+
+import com.zjm.common.db.model.PageTable;
+import com.zjm.common.db.model.User;
+import com.zjm.common.log.service.LogService;
+import com.zjm.pro.db.map.Pro_executecaseMapper;
+import com.zjm.pro.db.map.Pro_projectLawsuitMapper;
+import com.zjm.pro.db.model.Pro_executecase;
+import com.zjm.pro.db.model.Pro_projectLawsuit;
+import com.zjm.pro.executecase.service.ExecutecaseService;
+import com.zjm.util.Tool;
+
+
+/**
+ * 案件执行记录表ServiceImpl
+ * 
+ * @author chenjianwei
+ * @version 1.0.0
+ * @date 2018-07-23 17:53:04
+ * Copyright 杭州融都科技股份有限公司  All Rights Reserved
+ * 官方网站：www.erongdu.com
+ * 未经授权不得进行修改、复制、出售及商业使用
+ */
+ 
+@Service("executecaseService")
+public class ExecutecaseServiceImpl implements ExecutecaseService {
+	
+    private static final Logger logger = LoggerFactory.getLogger(ExecutecaseServiceImpl.class);
+   
+    @Resource
+    private Pro_executecaseMapper executecaseMapper;
+    @Resource
+   	private Pro_projectLawsuitMapper pro_LawSuitMapper;
+    @Resource
+   	private LogService logService;
+
+	@Override
+	public boolean save(User userSession, Pro_executecase executecase) {
+		executecase.setExecutecaseId(Tool.createUUID32());
+		if (executecase.getLawSuitId() != null && !"".equals(executecase.getLawSuitId())) {
+			Pro_projectLawsuit projectLawsuit = pro_LawSuitMapper.selectOneProjectLawsuitInfo(" and projectLawsuit_ID = \'"+ executecase.getLawSuitId() +"\'");
+			executecase.setAssetSealId(projectLawsuit.getAssetSealUp_ID());
+			executecase.setAssetSealName(projectLawsuit.getAssetSealUpName());
+		}
+		
+		if(executecaseMapper.save(executecase) == 1){
+			logService.insertOneOperatorLogInfo(userSession,"新增案件执行记录", "新增", "新增案件执行记录"+executecase.getExecutecaseId());
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean update(User userSession, Pro_executecase executecase) {
+		if (executecase.getLawSuitId() != null && !"".equals(executecase.getLawSuitId())) {
+			Pro_projectLawsuit projectLawsuit = pro_LawSuitMapper.selectOneProjectLawsuitInfo(" and projectLawsuit_ID = \'"+ executecase.getLawSuitId() +"\'");
+			executecase.setAssetSealId(projectLawsuit.getAssetSealUp_ID());
+			executecase.setAssetSealName(projectLawsuit.getAssetSealUpName());
+		}
+		
+		if(executecaseMapper.update(executecase) == 1){
+			logService.insertOneOperatorLogInfo(userSession,"修改案件执行记录", "修改", "修改案件执行记录"+executecase.getExecutecaseId());
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public PageTable<Pro_executecase> selectExecutecasePageTables(PageTable<Pro_executecase> pageTable) {
+		List<Pro_executecase> executecaseList = new ArrayList<>();
+		Long total = 0L;
+		try {
+			executecaseList = executecaseMapper.selectExecutecaseTable(pageTable);
+			total = executecaseMapper.selectExecutecaseTable_count(pageTable);
+		} catch (Exception e) {
+			logger.info(e.getMessage());
+		}
+		pageTable.setRows(executecaseList);
+		pageTable.setTotal(total);
+		return pageTable;
+	}
+
+	@Override
+	public Pro_executecase findByPrimary(String executecaseId) {
+		return executecaseMapper.findByPrimary(executecaseId);
+	}
+
+	
+}

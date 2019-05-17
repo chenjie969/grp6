@@ -1,0 +1,116 @@
+package com.zjm.pro.bankruptcy.service.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+
+import com.zjm.common.db.model.PageTable;
+import com.zjm.common.db.model.User;
+import com.zjm.common.log.service.LogService;
+import com.zjm.pro.bankruptcy.service.BankruptcyService;
+import com.zjm.pro.db.map.Pro_bankruptcyMapper;
+import com.zjm.pro.db.map.Pro_projectLawsuitMapper;
+import com.zjm.pro.db.model.Pro_bankruptcy;
+import com.zjm.pro.db.model.Pro_projectLawsuit;
+import com.zjm.util.Tool;
+
+
+
+
+/**
+ * 破产记录表ServiceImpl
+ * 
+ * @author chenjianwei
+ * @version 1.0.0
+ * @date 2018-07-20 13:46:23
+ * Copyright 杭州融都科技股份有限公司  All Rights Reserved
+ * 官方网站：www.erongdu.com
+ * 未经授权不得进行修改、复制、出售及商业使用
+ */
+ 
+@Service("bankruptcyService")
+public class BankruptcyServiceImpl implements BankruptcyService {
+	
+    private static final Logger logger = LoggerFactory.getLogger(BankruptcyServiceImpl.class);
+   
+    @Resource
+    private Pro_bankruptcyMapper bankruptcyMapper;
+    @Resource
+	private Pro_projectLawsuitMapper pro_LawSuitMapper;
+
+    @Resource
+	private LogService logService;
+    
+	@Override
+	public boolean save(User userSession, Pro_bankruptcy bankruptcy) {
+		bankruptcy.setBankruptcyId(Tool.createUUID32());
+		bankruptcy.setCreateTime(userSession.getCreatedatetime());
+		
+		conSuitOrAsset(bankruptcy);
+		
+		if(bankruptcyMapper.save(bankruptcy) == 1){
+			logService.insertOneOperatorLogInfo(userSession,"新增破产记录", "新增", "新增破产记录"+bankruptcy.getBankruptcyId());
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public PageTable<Pro_bankruptcy> selectBankruptcyPageTables(PageTable<Pro_bankruptcy> pageTable) {
+		List<Pro_bankruptcy> bankruptcyList = new ArrayList<>();
+		Long total = 0L;
+		try {
+			bankruptcyList = bankruptcyMapper.selectBankruptcyTable(pageTable);
+			total = bankruptcyMapper.selectBankruptcyTable_count(pageTable);
+		} catch (Exception e) {
+			logger.info(e.getMessage());
+		}
+		pageTable.setRows(bankruptcyList);
+		pageTable.setTotal(total);
+		return pageTable;
+	}
+
+	@Override
+	public boolean update(User userSession, Pro_bankruptcy bankruptcy) {
+		conSuitOrAsset(bankruptcy);
+		if(bankruptcyMapper.update(bankruptcy) == 1){
+			logService.insertOneOperatorLogInfo(userSession,"修改破产记录", "修改", "修改破产记录"+bankruptcy.getBankruptcyId());
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public Pro_bankruptcy findByPrimary(String bankruptcyId) {
+		return bankruptcyMapper.findByPrimary(bankruptcyId);
+	}
+	
+	private void conSuitOrAsset(Pro_bankruptcy bankruptcy){
+		String whereSql = " and projectLawsuit_ID = '-1' ";
+		//若关联的诉讼已经关联查封,则案件执行也要关联对应的查封信息
+		if (bankruptcy.getLawSuitId() != null && !"".equals(bankruptcy.getLawSuitId())) {
+			whereSql = " and projectLawsuit_ID = \'"+ bankruptcy.getLawSuitId() +"\'" ;
+		}
+		
+		//若关联的查封已经关联诉讼，则案件执行也要关联对应的诉讼信息
+		if (bankruptcy.getAssetSealId() != null && !"".equals(bankruptcy.getAssetSealId())) {
+			whereSql = " and assetSealUp_ID = \'"+ bankruptcy.getAssetSealId() +"\' ";
+		}
+		
+		Pro_projectLawsuit projectLawsuit = pro_LawSuitMapper.selectOneProjectLawsuitInfo(whereSql);
+		if (projectLawsuit != null ){
+			bankruptcy.setAssetSealId(projectLawsuit.getAssetSealUp_ID());
+			bankruptcy.setAssetSealName(projectLawsuit.getAssetSealUpName());
+			bankruptcy.setLawSuitId(projectLawsuit.getProjectLawsuit_ID());
+			bankruptcy.setLawSuitName(projectLawsuit.getRecordNum());
+		}
+	}
+
+
+	
+}

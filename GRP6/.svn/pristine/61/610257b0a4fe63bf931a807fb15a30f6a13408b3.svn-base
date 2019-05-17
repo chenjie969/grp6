@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_suggestMapper">
+	<!--项目意见表 -->
+	 <resultMap id="SuggestMap" type="com.zjm.pro.db.model.Pro_suggest" >
+	   	<result column="suggest_ID" property="suggest_ID"/>
+		<result column="flowID" property="flowID"/>
+		<result column="stepID" property="stepID"/>
+		<result column="stepName" property="stepName"/>
+		<result column="historyStepID" property="historyStepID"/>
+		<result column="entityType" property="entityType"/>
+		<result column="entityID" property="entityID"/>
+		<result column="productInstanceID" property="productInstanceID"/>
+		<result column="nodeID" property="nodeID"/>
+		<result column="nodeNames" property="nodeNames"/>
+		<result column="taskID" property="taskID"/>
+		<result column="taskName" property="taskName"/>
+		<result column="suggestContent" property="suggestContent"/>
+		<result column="conclusionID" property="conclusionID"/>
+		<result column="conclusionName" property="conclusionName"/>
+		<result column="suggestUserID" property="suggestUserID"/>
+		<result column="suggestUserName" property="suggestUserName"/>
+		<result column="suggestDateTime" property="suggestDateTime"/>
+		<result column="agreetSum" property="agreetSum"/>
+		<result column="periodMonth" property="periodMonth"/>
+		<result column="periodDay" property="periodDay"/>
+		<result column="periodMonthDay" property="periodMonthDay"/>
+		<result column="unit_uid" property="unit_uid"/>
+		<result column="updateUserName" property="updateUserName"/>
+		<result column="updateDateTime" property="updateDateTime"/>
+ 			
+  </resultMap>
+	
+<!-- 新增 项目意见表 -->
+	<insert id="insertOneSuggestInfo"	parameterType="com.zjm.pro.db.model.Pro_suggest">
+		<![CDATA[
+		INSERT INTO pro_suggest (
+		        suggest_ID,
+				flowID,
+				stepID,
+				stepName,
+				historyStepID,
+				entityType,
+				entityID,
+				productInstanceID,
+				nodeID,
+				nodeNames,
+				taskID,
+				taskName,
+				suggestContent,
+				conclusionID,
+				conclusionName,
+				suggestUserID,
+				suggestUserName,
+				suggestDateTime,
+				agreetSum,
+				periodMonth,
+				periodDay,
+				periodMonthDay,
+				unit_uid,
+				updateUserName,
+				updateDateTime
+		)
+		VALUES
+		(
+			#{suggest_ID},
+			#{flowID},
+			#{stepID},
+			#{stepName},
+			#{historyStepID},
+			#{entityType},
+			#{entityID},
+			#{productInstanceID},
+			#{nodeID},
+			#{nodeNames},
+			#{taskID},
+			#{taskName},
+			#{suggestContent},
+			#{conclusionID},
+			#{conclusionName},
+			#{suggestUserID},
+			#{suggestUserName},
+			NOW(),
+			#{agreetSum},
+			#{periodMonth},
+			#{periodDay},
+			#{periodMonthDay},
+			#{unit_uid},
+			#{updateUserName},
+			NOW()
+		
+		) ;
+		]]>
+	</insert>
+	<!-- 根据查询条件查询一个项目意见表信息-->
+	<select id="selectOneSuggestByWhereSql" parameterType="java.lang.String"  resultMap="SuggestMap">
+	<![CDATA[
+		SELECT 
+		        suggest_ID,
+				flowID,
+				stepID,
+				stepName,
+				historyStepID,
+				entityType,
+				entityID,
+				productInstanceID,
+				nodeID,
+				nodeNames,
+				taskID,
+				taskName,
+				suggestContent,
+				conclusionID,
+				conclusionName,
+				suggestUserID,
+				suggestUserName,
+				suggestDateTime,
+				agreetSum,
+				periodMonth,
+				periodDay,
+				periodMonthDay,
+				unit_uid,
+				updateUserName,
+				updateDateTime
+	    FROM 
+	         pro_suggest 
+		WHERE 1=1 ${value}
+		]]> 				 
+	</select>
+	
+	<!-- 根据查询条件查询项目意见表List-->
+	<select id="selectSuggestListByWhereSql" parameterType="java.lang.String"  resultMap="SuggestMap">
+	<![CDATA[
+		SELECT 
+		        suggest_ID,
+				flowID,
+				stepID,
+				stepName,
+				historyStepID,
+				entityType,
+				entityID,
+				productInstanceID,
+				nodeID,
+				nodeNames,
+				taskID,
+				taskName,
+				suggestContent,
+				conclusionID,
+				conclusionName,
+				suggestUserID,
+				suggestUserName,
+				suggestDateTime,
+				agreetSum,
+				periodMonth,
+				periodDay,
+				periodMonthDay,
+				unit_uid,
+				updateUserName,
+				updateDateTime
+		        
+		       
+	    FROM 
+	         pro_suggest 
+		WHERE 1=1 ${value}
+		order by suggestDateTime asc
+		]]> 				 
+	</select>
+	
+	<!-- 更新一个项目意见表信息 -->	
+	<update id="updateOneSuggestInfo" parameterType="com.zjm.pro.db.model.Pro_suggest">
+		<![CDATA[
+		UPDATE 
+		     pro_suggest
+		SET
+			suggest_ID= #{suggest_ID},
+			flowID= #{flowID},
+			stepID= #{stepID},
+			stepName= #{stepName},
+			historyStepID= #{historyStepID},
+			entityType= #{entityType},
+			entityID= #{entityID},
+			productInstanceID= #{productInstanceID},
+			nodeID= #{nodeID},
+			nodeNames= #{nodeNames},
+			taskID= #{taskID},
+			taskName= #{taskName},
+			suggestContent= #{suggestContent},
+			conclusionID= #{conclusionID},
+			conclusionName= #{conclusionName},
+			suggestUserID= #{suggestUserID},
+			suggestUserName= #{suggestUserName},
+			suggestDateTime= NOW(),
+			agreetSum= #{agreetSum},
+			periodMonth= #{periodMonth},
+			periodDay= #{periodDay},
+			periodMonthDay= #{periodMonthDay},
+			unit_uid= #{unit_uid},
+			updateUserName= #{updateUserName},
+			updateDateTime= NOW()	
+			
+		WHERE suggest_ID=#{suggest_ID}  and unit_uid=#{unit_uid} 
+		  ]]>
+	</update>
+	
+	<!--根据wheresql删除项目意见表信息 -->
+	<delete id="deleteOneSuggestByWhereSql"  parameterType="java.lang.String" >
+		<![CDATA[DELETE FROM pro_suggest WHERE 1=1 ${value} ]]>
+	</delete>
+</mapper>  

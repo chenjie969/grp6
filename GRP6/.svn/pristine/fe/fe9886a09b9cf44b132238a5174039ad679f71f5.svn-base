@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_riskAppraiseMapper">
+	
+	<!--  风险管理委员会评议表 -->
+	 <resultMap id="riskAppraiseMap" type="com.zjm.pro.db.model.Pro_riskAppraise" >
+	    <id column="riskAppraise_ID" property="riskAppraise_ID"/>
+		<result column="riskScheme_ID" property="riskScheme_ID"/>
+		<result column="reportUnit"  property="reportUnit"/>
+		<result column="reportUserIDList" property="reportUserIDList"/>
+		<result column="reportUserNameList" property="reportUserNameList"/>
+		<result column="reportDate" property="reportDate"/>
+		<result column="appraiseResult" property="appraiseResult"/>
+		<result column="appraiseDesc" property="appraiseDesc"/>
+		<result column="unit_uid" property="unit_uid"/>
+		<result column="updateUserName" property="updateUserName"/>
+		<result column="updateDateTime" property="updateDateTime"/>
+	  </resultMap>
+	<!-- 新增风险管理委员会评议 -->
+	<insert id="insertOneRiskAppraise"	parameterType="com.zjm.pro.db.model.Pro_riskAppraise">
+		<![CDATA[
+		INSERT INTO pro_riskAppraise (
+		        riskAppraise_ID,		
+		        riskScheme_ID,	
+		        reportUnit,
+		        reportUserIDList,
+		        reportUserNameList,
+				reportDate,				
+				appraiseResult,				
+				appraiseDesc,
+				unit_uid,		
+				updateUserName,			
+				updateDateTime
+		)
+		VALUES
+		(
+				#{riskAppraise_ID},
+				#{riskScheme_ID},
+				#{reportUnit},
+				#{reportUserIDList},				
+				#{reportUserNameList},				
+				#{reportDate},				
+				#{appraiseResult},
+				#{appraiseDesc},
+				#{unit_uid},			
+				#{updateUserName},		
+				NOW()			
+		) ;
+		]]>
+	</insert>		
+	
+	
+	<!-- 查询一个风险管理委员会评议-->
+	<select id="selectOneRiskAppraise" parameterType="java.lang.String"  resultMap="riskAppraiseMap">
+	<![CDATA[
+			select 
+			   riskAppraise_ID,		
+		        riskScheme_ID,	
+		        reportUnit,
+		        reportUserIDList,
+		        reportUserNameList,
+				reportDate,				
+				appraiseResult,				
+				appraiseDesc,
+				unit_uid,		
+				updateUserName,			
+				updateDateTime
+				from pro_riskAppraise
+		WHERE 1=1 ${value}
+		]]> 				 
+	</select>
+
+	<!-- 更新风险管理委员会评议 -->	
+	<update id="updateOneRiskAppraise" parameterType="com.zjm.pro.db.model.Pro_riskAppraise">
+		<![CDATA[
+		UPDATE 
+		  pro_riskAppraise
+		SET
+		riskScheme_ID=#{riskScheme_ID},
+		reportUnit=#{reportUnit},
+		reportUserIDList=#{reportUserIDList},
+		reportUserNameList=#{reportUserNameList},
+		reportDate=#{reportDate},
+		appraiseResult=#{appraiseResult},
+		appraiseDesc=#{appraiseDesc},
+		updatedatetime = NOW(),
+		unit_uid=#{unit_uid},
+		updateUserName = #{updateUserName}
+		
+		WHERE  riskAppraise_ID=#{riskAppraise_ID}  
+		  ]]>
+	</update>
+</mapper>  

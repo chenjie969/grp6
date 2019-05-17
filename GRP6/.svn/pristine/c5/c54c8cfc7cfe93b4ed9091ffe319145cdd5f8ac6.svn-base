@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_arcTransferMapper">
+	<!-- 档案移交清单表 -->
+	<resultMap id="proArcTransferMap" type="com.zjm.pro.db.model.Pro_arcTransfer">
+		<id column="arcTransferList_ID" property="arcTransferList_ID" />
+		<result column="apply_ID" property="apply_ID" />
+		<result column="arcTypeID" property="arcTypeID" />
+		<result column="arcTypeName" property="arcTypeName" />
+		<result column="fileTitle" property="fileTitle" />
+		<result column="pageCount" property="pageCount" />
+		<result column="isOldArc" property="isOldArc" />
+		<result column="remark" property="remark" />
+		<result column="transferUserID" property="transferUserID" />
+		<result column="transferUserName" property="transferUserName" />
+		<result column="transferDepartName" property="transferDepartName" />
+		<result column="transferDepartID" property="transferDepartID" />
+		<result column="transferDate" property="transferDate" />
+		<result column="receiveUserID" property="receiveUserID" />
+		<result column="receiveUserName" property="receiveUserName" />
+		<result column="unit_uid" property="unit_uid" />
+		<result column="updateUserName" property="updateUserName" />
+		<result column="updateDateTime" property="updateDateTime" />
+
+	</resultMap>
+	
+	<!-- 分页查询节点列表 -->
+	<select id="selectTransferRecordsPageTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="proArcTransferMap">
+		SELECT 
+			arcTransferList_ID,
+			apply_ID,
+			arcTypeID,
+			arcTypeName,
+			fileTitle,  
+			pageCount,
+			transferDepartName, 
+			transferDepartID, 
+			isOldArc, 
+			remark,  
+			transferUserID, 
+			transferUserName,
+			transferDate,
+			receiveUserID,
+			receiveUserName,
+			unit_uid,
+			updateUserName,
+			updateDateTime
+		FROM pro_arcTransferList 
+		WHERE 1=1 
+			  ${wheresql}
+		LIMIT #{pageNumber},#{pageSize}  
+	</select>
+	
+	<!-- 分页查询节点列表-查询总记录数 -->
+	<select id="selectTransferRecordsPageTable_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="long">
+	 	SELECT  COUNT(1) 
+	 	FROM    pro_arcTransferList 
+	 	WHERE   1=1  ${wheresql}
+	</select>
+	
+</mapper>  

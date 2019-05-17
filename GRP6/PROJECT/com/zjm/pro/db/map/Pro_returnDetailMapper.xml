@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_returnDetailMapper">
+	<!-- 追偿明细表 -->
+	 <resultMap id="proReturnDetailMap" type="com.zjm.pro.db.model.Pro_returnDetail" >
+	 
+        <result column="returnDetail_ID" property="returnDetail_ID"/>
+        <result column="projectID" property="projectID"/>
+        <result column="apply_ID" property="apply_ID"/>
+        <result column="returnTypeID" property="returnTypeID"/>
+        <result column="returnTypeName" property="returnTypeName"/>
+        <result column="returnDate" property="returnDate"/>
+        <result column="returnFactDate" property="returnFactDate"/>
+        <result column="returnSum" property="returnSum"/>
+        <result column="returnCapitalSum" property="returnCapitalSum"/>
+        <result column="returnInterestSum" property="returnInterestSum"/>
+        <result column="returnOtherSum" property="returnOtherSum"/>
+        <result column="operationManID" property="operationManID"/>
+        <result column="operationManName" property="operationManName"/>
+        <result column="unit_uid" property="unit_uid"/>
+        <result column="updateUserName" property="updateUserName"/>
+        <result column="updateDateTime" property="updateDateTime"/>
+        
+  	</resultMap>
+  	
+  	<!-- 分页查询列表 -->
+	<select id="selectReturnDetailPageTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="proReturnDetailMap">
+		<![CDATA[
+		SELECT 
+			returnDetail_ID,
+			projectID,
+			apply_ID,
+			returnTypeID,
+			returnTypeName,
+			returnDate,
+			returnFactDate,
+			returnSum,
+			returnCapitalSum,
+			returnInterestSum,
+			returnOtherSum,
+			operationManID,
+			operationManName,
+			unit_uid,
+			updateUserName,
+			updateDateTime
+		FROM pro_returnDetail
+		WHERE 1=1
+			  ${wheresql}
+		LIMIT #{pageNumber},#{pageSize} 
+		]]>
+	</select>
+	
+	<!-- 分页查询列表-查询总记录数 -->
+	<select id="selectReturnDetailPageTable_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="long">
+	<![CDATA[
+	 	SELECT 
+	 		COUNT(1) 
+	 	FROM 
+	 		pro_returnDetail
+	 	WHERE 1=1
+	 		${wheresql}
+	 	]]>	
+	</select>
+	
+	<!-- 新增追偿信息表Pro_returnDetail -->
+	<insert id="insertOneReturnDetailInfo"	parameterType="com.zjm.pro.db.model.Pro_returnDetail">
+		<![CDATA[
+		INSERT INTO pro_returnDetail (
+			returnDetail_ID,
+			projectID,
+			apply_ID,
+			returnTypeID,
+			returnTypeName,
+			returnDate,
+			returnFactDate,
+			returnSum,
+			returnCapitalSum,
+			returnInterestSum,
+			returnOtherSum,
+			operationManID,
+			operationManName,
+			unit_uid,
+			updateUserName,
+			updateDateTime
+        )
+		VALUES
+		(
+			#{returnDetail_ID},
+			#{projectID},
+			#{apply_ID},
+			#{returnTypeID},
+			#{returnTypeName},
+			#{returnDate},
+			#{returnFactDate},
+			#{returnSum},
+			#{returnCapitalSum},
+			#{returnInterestSum},
+			#{returnOtherSum},
+			#{operationManID},
+			#{operationManName},
+			#{unit_uid},
+			#{updateUserName},
+			NOW()
+		) ;
+		]]>
+	</insert>
+	<!-- 查询一个追偿信息 -->
+	<select id="selectOneReturnDetailInfo" parameterType="java.lang.String" resultMap="proReturnDetailMap">
+		<![CDATA[
+		SELECT 
+			returnDetail_ID,
+			projectID,
+			apply_ID,
+			returnTypeID,
+			returnTypeName,
+			returnDate,
+			returnFactDate,
+			returnSum,
+			returnCapitalSum,
+			returnInterestSum,
+			returnOtherSum,
+			operationManID,
+			operationManName,
+			unit_uid,
+			updateUserName,
+			updateDateTime
+		FROM pro_returnDetail
+		WHERE 1=1
+			  ${value}
+		]]>
+	</select>
+	
+	<!-- 更新一个追偿明细表信息 -->	
+	<update id="updateOneReturnDetailInfo" parameterType="com.zjm.pro.db.model.Pro_returnDetail">
+		UPDATE 
+		     pro_returnDetail
+		
+		<set >
+			returnDate= #{returnDate},
+			returnFactDate=#{returnFactDate},
+			returnSum= #{returnSum},
+			returnCapitalSum= #{returnCapitalSum},
+			returnInterestSum= #{returnInterestSum},
+			returnOtherSum= #{returnOtherSum},
+			operationManID= #{operationManID},
+			operationManName= #{operationManName},
+			updateUserName= #{updateUserName},
+		  	updateDateTime = NOW()		
+		</set>
+			 
+		WHERE returnDetail_ID=#{returnDetail_ID} 
+	</update>
+	<delete id="deleteReturnDetailByProject_ID" parameterType="string">
+		DELETE FROM 
+			pro_returnDetail
+			where projectID = #{project_ID}
+	</delete>
+</mapper>  

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.gbpm.db.map.Gbpm_taskTypeMapper">
+	<resultMap type="com.zjm.gbpm.db.model.Gbpm_taskType" id="taskTypeResultMap">
+		<result column="taskType_ID" property="taskType_ID"  />
+		<result column="pTaskType_ID" property="pTaskType_ID"  />
+		<result column="taskTypeName" property="taskTypeName"  />
+		<result column="taskTypeSort" property="taskTypeSort"  />
+		<result column="taskTypeFullCode" property="taskTypeFullCode"  />
+		<result column="remark" property="remark"  />
+		<result column="unit_uid" property="unit_uid"  />
+		<result column="unit_uidName" property="unit_uidName"  />
+		<result column="update_user" property="update_user"  />
+		<result column="updatedatetime" property="updatedatetime"  />
+		
+	</resultMap>
+	
+	<!-- 查询一条任务事项类型-->  
+	<select id="selectOneTaskTypeByWheresql" parameterType="java.lang.String" resultMap="taskTypeResultMap">
+		SELECT 
+			taskType_ID,
+			pTaskType_ID,
+			taskTypeName,
+			taskTypeSort,
+			taskTypeFullCode,
+			remark,
+			unit_uid,
+			unit_uidName,
+			updatedatetime,
+		 	update_user
+			
+		FROM gbpm_taskType
+		WHERE  1=1
+		   ${value}
+		limit 1
+		
+	</select>
+	
+	<!-- 查询任务事项类型List-->  
+	<select id="selectTaskTypeList" parameterType="java.lang.String" resultMap="taskTypeResultMap">
+		SELECT 
+			taskType_ID,
+			pTaskType_ID,
+			taskTypeName,
+			taskTypeSort,
+			taskTypeFullCode,
+			remark,
+			unit_uid,
+			unit_uidName,
+			updatedatetime,
+		 	update_user
+			
+		FROM gbpm_taskType
+		WHERE  1=1
+		   ${value}
+		order by taskTypeSort
+		
+	</select>
+	
+	<!-- 插入一条任务事项类型 -->
+	<insert id="insertOneTaskTypeInfo" parameterType="com.zjm.gbpm.db.model.Gbpm_taskType">
+		INSERT INTO gbpm_taskType(
+			taskType_ID,
+			pTaskType_ID,
+			taskTypeName,
+			taskTypeSort,
+			taskTypeFullCode,
+			remark,
+			unit_uid,
+			unit_uidName,
+			updatedatetime,
+		 	update_user
+		) VALUES(
+			#{taskType_ID},
+			#{pTaskType_ID},
+			#{taskTypeName},
+			#{taskTypeSort},
+			#{taskTypeFullCode},
+			#{remark},
+			#{unit_uid},
+			#{unit_uidName},
+			NOW(),
+			#{update_user}
+		)
+	</insert>
+	
+	<!--修改条任务事项类型 -->
+	<update id="updateOneTaskTypeInfo" parameterType="com.zjm.gbpm.db.model.Gbpm_taskType">
+		UPDATE gbpm_taskType
+		SET
+		 	<if test="taskTypeName != null">taskTypeName= #{taskTypeName},</if>
+		 	<if test="taskTypeSort != null">taskTypeSort= #{taskTypeSort},</if>
+		 	<if test="taskTypeFullCode != null">taskTypeFullCode= #{taskTypeFullCode},</if>
+		 	<if test="remark != null">remark= #{remark},</if>
+		 	<if test="unit_uid != null">unit_uid= #{unit_uid},</if>
+		 	<if test="unit_uidName != null">unit_uidName= #{unit_uidName},</if>
+		 	<if test="update_user != null">update_user= #{update_user},</if>
+			updatedatetime = NOW()
+			
+			
+		WHERE taskType_ID = #{taskType_ID}
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="deleteOneTaskTypeInfo" parameterType="java.lang.String">
+		<![CDATA[
+			delete from gbpm_taskType
+			where 1=1 ${value}
+		]]>
+	</delete>
+	
+	<!-- 判断是否存在-->
+	<select id="selectTaskTypeIsExist" parameterType="java.lang.String" resultType="java.lang.Integer">
+		<![CDATA[SELECT count(taskType_ID) FROM gbpm_taskType where 1=1 ${value} ]]>
+	</select>
+	
+	<!--  查询同级节点下共有多少任务事项类型 -->
+	<select id="selectTaskTypeOrderId" parameterType="com.zjm.gbpm.db.model.Gbpm_taskType" resultType="java.lang.Integer">
+		<![CDATA[SELECT count(pTaskType_ID) FROM gbpm_taskType where pTaskType_ID=#{pTaskType_ID}]]>
+	</select>
+	
+</mapper>

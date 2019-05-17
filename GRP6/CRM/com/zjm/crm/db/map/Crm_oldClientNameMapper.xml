@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.crm.db.map.Crm_oldClientNameMapper">
+	<!-- 客户曾用名表信息 -->
+	<resultMap type="com.zjm.crm.db.model.Crm_oldClientName" id="OldClientNameResultMap">
+		<result property="oldClient_ID" column="oldClient_ID" />
+		<result property="client_ID" column="client_ID" />
+		<result property="clientGUID" column="clientGUID" />
+		<result property="oldClientName" column="oldClientName" />
+		<result property="newClientName" column="newClientName" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="unit_uidName" column="unit_uidName" />
+		<result property="updateUserName" column="updateUserName" />
+		<result property="updateDateTime" column="updateDateTime" />
+	</resultMap>
+
+	<!-- 新增一个曾用名信息 -->
+	<insert id="insertOneOldClientNameInfo" parameterType="com.zjm.crm.db.model.Crm_oldClientName">
+		<![CDATA[
+		INSERT INTO crm_oldclientname(
+			oldClient_ID,
+			client_ID,
+			clientGUID,
+			oldClientName,
+			newClientName,
+			updateUserName,
+			updateDateTime,
+			unit_uid,
+			unit_uidName
+			
+		)
+		VALUES
+		(
+			#{oldClient_ID},
+			#{client_ID},
+			#{clientGUID},
+			#{oldClientName},
+			#{newClientName},
+			#{updateUserName},
+			NOW(),
+			#{unit_uid},
+			#{unit_uidName}
+		) ;
+		]]>
+	</insert>
+	
+	<select id="selectOldClientNameList" parameterType="java.lang.String" resultMap="OldClientNameResultMap">
+		select
+			oldClient_ID,
+			client_ID,
+			clientGUID,
+			oldClientName,
+			newClientName,
+			updateUserName,
+			updateDateTime,
+			unit_uid,
+			unit_uidName
+		from crm_oldclientname
+		where 1=1 ${value}
+	</select>
+	
+	<delete id="deleteOldClientMapperByClientId" parameterType="java.lang.String">
+		delete from crm_oldclientname
+		where client_ID = #{client_ID}
+	</delete>
+	
+</mapper>  

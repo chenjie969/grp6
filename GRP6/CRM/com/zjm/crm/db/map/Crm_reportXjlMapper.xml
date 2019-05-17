@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.crm.db.map.Crm_reportXjlMapper">
+
+	<!-- 现金流表信息 -->
+	<resultMap type="com.zjm.crm.db.model.Crm_reportXjl" id="reportXjlResultMap">
+		       <result property="reportXjl_ID" column="reportXjl_ID" />
+				<result property="client_ID" column="client_ID" />
+				<result property="reportTypeUuid" column="reportTypeUuid" />
+				<result property="reportTypeName" column="reportTypeName" />
+				<result property="yearMonth" column="yearMonth" />
+				<result property="servicesGoodsCash" column="servicesGoodsCash" />
+				<result property="receivedTax" column="receivedTax" />
+				<result property="operatingCash" column="operatingCash" />
+				<result property="operatingCashSum" column="operatingCashSum" />
+				<result property="goodsLaborPayCash" column="goodsLaborPayCash" />
+				<result property="employeesToPayCash" column="employeesToPayCash" />
+				<result property="taxPayment" column="taxPayment" />
+				<result property="otherOperatingActivities" column="otherOperatingActivities" />
+				<result property="operatingCashFlow" column="operatingCashFlow" />
+				<result property="activitiesNetCashFlow" column="activitiesNetCashFlow" />
+				<result property="disinvestmentCash" column="disinvestmentCash" />
+				<result property="investmentIncome" column="investmentIncome" />
+				<result property="otherAssetsNetCash" column="otherAssetsNetCash" />
+				<result property="investmentActivitiesCash" column="investmentActivitiesCash" />
+				<result property="inflowsOfCash" column="inflowsOfCash" />
+				<result property="longTermAssetsCash" column="longTermAssetsCash" />
+				<result property="paymentForInvestment" column="paymentForInvestment" />
+				<result property="otherInvestingActivities" column="otherInvestingActivities" />
+				<result property="cashOutflow" column="cashOutflow" />
+				<result property="investmentActivities" column="investmentActivities" />
+				<result property="cashReceivedInvestment" column="cashReceivedInvestment" />
+				<result property="cashReceivedLoan" column="cashReceivedLoan" />
+				<result property="financingActivities" column="financingActivities" />
+				<result property="financingCashFlows" column="financingCashFlows" />
+				<result property="cashPayment" column="cashPayment" />
+				<result property="profitCashPayment" column="profitCashPayment" />
+				<result property="cashPayments" column="cashPayments" />
+				<result property="cashfFlowFinancing" column="cashfFlowFinancing" />
+				<result property="netCashFlow" column="netCashFlow" />
+				<result property="exchangeRateCash" column="exchangeRateCash" />
+				<result property="cashEquivalentsAmount" column="cashEquivalentsAmount" />
+				<result property="netProfit" column="netProfit" />
+				<result property="stockholderLoss" column="stockholderLoss" />
+				<result property="unconfirmed" column="unconfirmed" />
+				<result property="assetsLoss" column="assetsLoss" />
+				<result property="plantAssetsLoss" column="plantAssetsLoss" />
+				<result property="intangibleAssets" column="intangibleAssets" />
+				<result property="longTermPrepaidExpenses" column="longTermPrepaidExpenses" />
+				<result property="otherLongTermAssetsLoss" column="otherLongTermAssetsLoss" />
+				<result property="disposalFixedAssets" column="disposalFixedAssets" />
+				<result property="financialExpenses" column="financialExpenses" />
+				<result property="investmentLoss" column="investmentLoss" />
+				<result property="deferredTax" column="deferredTax" />
+				<result property="decreaseLoss" column="decreaseLoss" />
+				<result property="decreaseOperatingLoss" column="decreaseOperatingLoss" />
+				<result property="increaseOperatingAdd" column="increaseOperatingAdd" />
+				<result property="otherCash" column="otherCash" />
+				<result property="activitiesNetCash" column="activitiesNetCash" />
+				<result property="convertedCapital" column="convertedCapital" />
+				<result property="switchingCompanyBonds" column="switchingCompanyBonds" />
+				<result property="financeLease" column="financeLease" />
+				<result property="other" column="other" />
+				<result property="cashEnd" column="cashEnd" />
+				<result property="cashBegin" column="cashBegin" />
+				<result property="cashEquivalentsEnd" column="cashEquivalentsEnd" />
+				<result property="cashEquivalentsBegin" column="cashEquivalentsBegin" />
+				<result property="cashEquivalentsNetCash" column="cashEquivalentsNetCash" />
+				<result property="unit_uid" column="unit_uid" />
+				<result property="unit_uidName" column="unit_uidName" />
+				<result property="updateUserName" column="updateUserName" />
+				<result property="updateDateTime" column="updateDateTime" />
+				<result property="prepaidExpensesLoss" column="prepaidExpensesLoss" />
+				<result property="accruedExpensesAdd" column="accruedExpensesAdd" />
+				
+				
+				
+	</resultMap>
+	
+	
+	<!-- 查询  现金流表列表 -->
+	<select id="selectReportXjlPageTables" resultMap="reportXjlResultMap" parameterType="com.zjm.common.db.model.PageTable">
+		<![CDATA[
+		SELECT				
+				reportXjl_ID,
+				client_ID,
+				reportTypeUuid,
+				reportTypeName,
+				yearMonth,
+				servicesGoodsCash,
+				receivedTax,
+				operatingCash,
+				operatingCashSum,
+				goodsLaborPayCash,
+				employeesToPayCash,
+				taxPayment,
+				otherOperatingActivities,
+				operatingCashFlow,
+				activitiesNetCashFlow,
+				disinvestmentCash,
+				investmentIncome,
+				otherAssetsNetCash,
+				investmentActivitiesCash,
+				inflowsOfCash,
+				longTermAssetsCash,
+				paymentForInvestment,
+				otherInvestingActivities,
+				cashOutflow,
+				investmentActivities,
+				cashReceivedInvestment,
+				cashReceivedLoan,
+				financingActivities,
+				financingCashFlows,
+				cashPayment,
+				profitCashPayment,
+				cashPayments,
+				cashfFlowFinancing,
+				netCashFlow,
+				exchangeRateCash,
+				cashEquivalentsAmount,
+				netProfit,
+				stockholderLoss,
+				unconfirmed,
+				assetsLoss,
+				plantAssetsLoss,
+				intangibleAssets,
+				longTermPrepaidExpenses,
+				otherLongTermAssetsLoss,
+				disposalFixedAssets,
+				financialExpenses,
+				investmentLoss,
+				deferredTax,
+				decreaseLoss,
+				decreaseOperatingLoss,
+				increaseOperatingAdd,
+				otherCash,
+				activitiesNetCash,
+				prepaidExpensesLoss,
+				accruedExpensesAdd,
+				convertedCapital,
+				switchingCompanyBonds,
+				financeLease,
+				other,
+				cashEnd,
+				cashBegin,
+				cashEquivalentsEnd,
+				cashEquivalentsBegin,
+				cashEquivalentsNetCash,
+				unit_uid,
+				unit_uidName,
+				updateUserName,
+				updateDateTime
+		   FROM
+		   crm_reportXjl		   
+		WHERE 1=1 ${wheresql} limit #{pageNumber},#{pageSize}	
+		]]>
+	</select>
+	
+	<!-- 查询 现金流表列表 总记录数-->
+	<select id="selectReportXjlPageTables_Count" parameterType="com.zjm.common.db.model.PageTable"  resultType="java.lang.Long">
+		<![CDATA[
+		SELECT count(reportXjl_ID) FROM crm_reportXjl WHERE 1=1 ${wheresql} 		
+		]]>		 
+	</select>
+	
+	
+	<!-- 插入一个现金流表信息 -->
+	<insert id="insertOneReportXjlInfo"	parameterType="com.zjm.crm.db.model.Crm_reportXjl">
+		<![CDATA[
+		INSERT INTO crm_reportXjl (
+		        reportXjl_ID,
+		        client_ID,
+				reportTypeUuid,
+				reportTypeName,
+				yearMonth,
+				servicesGoodsCash,
+				receivedTax,
+				operatingCash,
+				operatingCashSum,
+				goodsLaborPayCash,
+				employeesToPayCash,
+				taxPayment,
+				otherOperatingActivities,
+				operatingCashFlow,
+				activitiesNetCashFlow,
+				disinvestmentCash,
+				investmentIncome,
+				otherAssetsNetCash,
+				investmentActivitiesCash,
+				inflowsOfCash,
+				longTermAssetsCash,
+				paymentForInvestment,
+				otherInvestingActivities,
+				cashOutflow,
+				investmentActivities,
+				cashReceivedInvestment,
+				cashReceivedLoan,
+				financingActivities,
+				financingCashFlows,
+				cashPayment,
+				profitCashPayment,
+				cashPayments,
+				cashfFlowFinancing,
+				netCashFlow,
+				exchangeRateCash,
+				cashEquivalentsAmount,
+				netProfit,
+				stockholderLoss,
+				unconfirmed,
+				assetsLoss,
+				plantAssetsLoss,
+				intangibleAssets,
+				longTermPrepaidExpenses,
+				otherLongTermAssetsLoss,
+				disposalFixedAssets,
+				financialExpenses,
+				investmentLoss,
+				deferredTax,
+				decreaseLoss,
+				decreaseOperatingLoss,
+				increaseOperatingAdd,
+				otherCash,
+				activitiesNetCash,
+				prepaidExpensesLoss,
+				accruedExpensesAdd,
+				convertedCapital,
+				switchingCompanyBonds,
+				financeLease,
+				other,
+				cashEnd,
+				cashBegin,
+				cashEquivalentsEnd,
+				cashEquivalentsBegin,
+				cashEquivalentsNetCash,
+				unit_uid,
+				unit_uidName,
+				updateUserName,
+				updateDateTime
+		)
+		VALUES
+		(
+			    #{reportXjl_ID},
+			    #{client_ID},
+				#{reportTypeUuid},
+				#{reportTypeName},
+				#{yearMonth},
+				#{servicesGoodsCash},
+				#{receivedTax},
+				#{operatingCash},
+				#{operatingCashSum},
+				#{goodsLaborPayCash},
+				#{employeesToPayCash},
+				#{taxPayment},
+				#{otherOperatingActivities},
+				#{operatingCashFlow},
+				#{activitiesNetCashFlow},
+				#{disinvestmentCash},
+				#{investmentIncome},
+				#{otherAssetsNetCash},
+				#{investmentActivitiesCash},
+				#{inflowsOfCash},
+				#{longTermAssetsCash},
+				#{paymentForInvestment},
+				#{otherInvestingActivities},
+				#{cashOutflow},
+				#{investmentActivities},
+				#{cashReceivedInvestment},
+				#{cashReceivedLoan},
+				#{financingActivities},
+				#{financingCashFlows},
+				#{cashPayment},
+				#{profitCashPayment},
+				#{cashPayments},
+				#{cashfFlowFinancing},
+				#{netCashFlow},
+				#{exchangeRateCash},
+				#{cashEquivalentsAmount},
+				#{netProfit},
+				#{stockholderLoss},
+				#{unconfirmed},
+				#{assetsLoss},
+				#{plantAssetsLoss},
+				#{intangibleAssets},
+				#{longTermPrepaidExpenses},
+				#{otherLongTermAssetsLoss},
+				#{disposalFixedAssets},
+				#{financialExpenses},
+				#{investmentLoss},
+				#{deferredTax},
+				#{decreaseLoss},
+				#{decreaseOperatingLoss},
+				#{increaseOperatingAdd},
+				#{otherCash},
+				#{activitiesNetCash},
+				#{prepaidExpensesLoss},
+				#{accruedExpensesAdd},
+				#{convertedCapital},
+				#{switchingCompanyBonds},
+				#{financeLease},
+				#{other},
+				#{cashEnd},
+				#{cashBegin},
+				#{cashEquivalentsEnd},
+				#{cashEquivalentsBegin},
+				#{cashEquivalentsNetCash},
+				#{unit_uid},
+				#{unit_uidName},
+				#{updateUserName},
+			    NOW()		
+		) ;
+		]]>
+	</insert>
+	<!-- 根据查询条件查询一个现金流表表信息-->
+	<select id="selectOneReportXjlWhereSql" parameterType="java.lang.String"  resultMap="reportXjlResultMap">
+	<![CDATA[
+		SELECT 
+		        reportXjl_ID,
+		        client_ID,
+				reportTypeUuid,
+				reportTypeName,
+				yearMonth,
+				servicesGoodsCash,
+				receivedTax,
+				operatingCash,
+				operatingCashSum,
+				goodsLaborPayCash,
+				employeesToPayCash,
+				taxPayment,
+				otherOperatingActivities,
+				operatingCashFlow,
+				activitiesNetCashFlow,
+				disinvestmentCash,
+				investmentIncome,
+				otherAssetsNetCash,
+				investmentActivitiesCash,
+				inflowsOfCash,
+				longTermAssetsCash,
+				paymentForInvestment,
+				otherInvestingActivities,
+				cashOutflow,
+				investmentActivities,
+				cashReceivedInvestment,
+				cashReceivedLoan,
+				financingActivities,
+				financingCashFlows,
+				cashPayment,
+				profitCashPayment,
+				cashPayments,
+				cashfFlowFinancing,
+				netCashFlow,
+				exchangeRateCash,
+				cashEquivalentsAmount,
+				netProfit,
+				stockholderLoss,
+				unconfirmed,
+				assetsLoss,
+				plantAssetsLoss,
+				intangibleAssets,
+				longTermPrepaidExpenses,
+				otherLongTermAssetsLoss,
+				disposalFixedAssets,
+				financialExpenses,
+				investmentLoss,
+				deferredTax,
+				decreaseLoss,
+				decreaseOperatingLoss,
+				increaseOperatingAdd,
+				otherCash,
+				activitiesNetCash,
+				prepaidExpensesLoss,
+				accruedExpensesAdd,
+				convertedCapital,
+				switchingCompanyBonds,
+				financeLease,
+				other,
+				cashEnd,
+				cashBegin,
+				cashEquivalentsEnd,
+				cashEquivalentsBegin,
+				cashEquivalentsNetCash,
+				unit_uid,
+				unit_uidName,
+				updateUserName,
+				updateDateTime
+		       
+	    FROM 
+	         crm_reportXjl 
+		WHERE 1=1 ${value}
+		]]> 				 
+	</select>
+	
+	<!-- 更新一个现金流表信息 -->	
+	<update id="updateOneReportXjlInfo" parameterType="com.zjm.crm.db.model.Crm_reportXjl">
+		<![CDATA[
+		UPDATE 
+		     crm_reportXjl
+		SET
+		        client_ID = #{client_ID},
+				reportTypeUuid = #{reportTypeUuid},
+				reportTypeName = #{reportTypeName},
+				yearMonth = #{yearMonth},
+				servicesGoodsCash = #{servicesGoodsCash},
+				receivedTax = #{receivedTax},
+				operatingCash = #{operatingCash},
+				operatingCashSum = #{operatingCashSum},
+				goodsLaborPayCash = #{goodsLaborPayCash},
+				employeesToPayCash = #{employeesToPayCash},
+				taxPayment = #{taxPayment},
+				otherOperatingActivities = #{otherOperatingActivities},
+				operatingCashFlow = #{operatingCashFlow},
+				activitiesNetCashFlow = #{activitiesNetCashFlow},
+				disinvestmentCash = #{disinvestmentCash},
+				investmentIncome = #{investmentIncome},
+				otherAssetsNetCash = #{otherAssetsNetCash},
+				investmentActivitiesCash = #{investmentActivitiesCash},
+				inflowsOfCash = #{inflowsOfCash},
+				longTermAssetsCash = #{longTermAssetsCash},
+				paymentForInvestment = #{paymentForInvestment},
+				otherInvestingActivities = #{otherInvestingActivities},
+				cashOutflow = #{cashOutflow},
+				investmentActivities = #{investmentActivities},
+				cashReceivedInvestment = #{cashReceivedInvestment},
+				cashReceivedLoan = #{cashReceivedLoan},
+				financingActivities = #{financingActivities},
+				financingCashFlows = #{financingCashFlows},
+				cashPayment = #{cashPayment},
+				profitCashPayment = #{profitCashPayment},
+				cashPayments = #{cashPayments},
+				cashfFlowFinancing = #{cashfFlowFinancing},
+				netCashFlow = #{netCashFlow},
+				exchangeRateCash = #{exchangeRateCash},
+				cashEquivalentsAmount = #{cashEquivalentsAmount},
+				netProfit = #{netProfit},
+				stockholderLoss = #{stockholderLoss},
+				unconfirmed = #{unconfirmed},
+				assetsLoss = #{assetsLoss},
+				plantAssetsLoss = #{plantAssetsLoss},
+				intangibleAssets = #{intangibleAssets},
+				longTermPrepaidExpenses = #{longTermPrepaidExpenses},
+				otherLongTermAssetsLoss = #{otherLongTermAssetsLoss},
+				disposalFixedAssets = #{disposalFixedAssets},
+				financialExpenses = #{financialExpenses},
+				investmentLoss = #{investmentLoss},
+				deferredTax = #{deferredTax},
+				decreaseLoss = #{decreaseLoss},
+				decreaseOperatingLoss = #{decreaseOperatingLoss},
+				increaseOperatingAdd = #{increaseOperatingAdd},
+				otherCash = #{otherCash},
+				activitiesNetCash = #{activitiesNetCash},
+				prepaidExpensesLoss = #{prepaidExpensesLoss},
+				accruedExpensesAdd = #{accruedExpensesAdd},
+				convertedCapital = #{convertedCapital},
+				switchingCompanyBonds = #{switchingCompanyBonds},
+				financeLease = #{financeLease},
+				other = #{other},
+				cashEnd = #{cashEnd},
+				cashBegin = #{cashBegin},
+				cashEquivalentsEnd = #{cashEquivalentsEnd},
+				cashEquivalentsBegin = #{cashEquivalentsBegin},
+				cashEquivalentsNetCash = #{cashEquivalentsNetCash},
+				unit_uid = #{unit_uid},
+				unit_uidName = #{unit_uidName},
+				updateUserName = #{updateUserName},
+				updateDateTime = NOW()	
+				
+		WHERE reportXjl_ID=#{reportXjl_ID}  and unit_uid=#{unit_uid} 
+		  ]]>
+	</update>
+	
+	<!--根据wheresql删除一个现金流表表信息 -->
+	<delete id="delectReportXjlByWhereSql" parameterType="java.lang.String">
+		<![CDATA[DELETE FROM crm_reportXjl WHERE 1=1 ${value} ]]>
+	</delete>
+	
+	
+	<select id="selectCrm_ReportXjlList" parameterType="java.lang.String"  resultMap="reportXjlResultMap">
+	<![CDATA[
+		SELECT 
+		        reportXjl_ID,
+		        client_ID,
+				reportTypeUuid,
+				reportTypeName,
+				yearMonth,
+				servicesGoodsCash,
+				receivedTax,
+				operatingCash,
+				operatingCashSum,
+				goodsLaborPayCash,
+				employeesToPayCash,
+				taxPayment,
+				otherOperatingActivities,
+				operatingCashFlow,
+				activitiesNetCashFlow,
+				disinvestmentCash,
+				investmentIncome,
+				otherAssetsNetCash,
+				investmentActivitiesCash,
+				inflowsOfCash,
+				longTermAssetsCash,
+				paymentForInvestment,
+				otherInvestingActivities,
+				cashOutflow,
+				investmentActivities,
+				cashReceivedInvestment,
+				cashReceivedLoan,
+				financingActivities,
+				financingCashFlows,
+				cashPayment,
+				profitCashPayment,
+				cashPayments,
+				cashfFlowFinancing,
+				netCashFlow,
+				exchangeRateCash,
+				cashEquivalentsAmount,
+				netProfit,
+				stockholderLoss,
+				unconfirmed,
+				assetsLoss,
+				plantAssetsLoss,
+				intangibleAssets,
+				longTermPrepaidExpenses,
+				otherLongTermAssetsLoss,
+				disposalFixedAssets,
+				financialExpenses,
+				investmentLoss,
+				deferredTax,
+				decreaseLoss,
+				decreaseOperatingLoss,
+				increaseOperatingAdd,
+				otherCash,
+				activitiesNetCash,
+				prepaidExpensesLoss,
+				accruedExpensesAdd,
+				convertedCapital,
+				switchingCompanyBonds,
+				financeLease,
+				other,
+				cashEnd,
+				cashBegin,
+				cashEquivalentsEnd,
+				cashEquivalentsBegin,
+				cashEquivalentsNetCash,
+				unit_uid,
+				unit_uidName,
+				updateUserName,
+				updateDateTime
+		       
+	    FROM 
+	         crm_reportXjl 
+		WHERE 1=1 ${value}
+		]]> 				 
+	</select>
+	
+	
+</mapper>  

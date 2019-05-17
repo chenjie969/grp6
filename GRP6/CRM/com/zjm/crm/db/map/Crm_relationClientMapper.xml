@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.crm.db.map.Crm_relationClientMapper">
+	<!-- 关联企业表信息 -->
+	<resultMap type="com.zjm.crm.db.model.Crm_relationClient" id="RelationClientResultMap">
+		<result property="relation_id" column="relation_id" />
+		<result property="client_ID" column="client_ID" />
+		<result property="relationClientID" column="relationClientID" />
+		<result property="relationDesc" column="relationDesc" />
+		<result property="updateUserName" column="updateUserName" />
+		<result property="updateDateTime" column="updateDateTime" />
+		<result property="unit_uid" column="unit_uid" />
+	</resultMap>
+
+	<!-- 新增一个客户信息 -->
+	<insert id="insertOneRelationClientInfo" parameterType="com.zjm.crm.db.model.Crm_relationClient">
+		<![CDATA[
+		INSERT INTO crm_relationClient(
+			relation_id,
+			client_ID,
+			relationClientID,
+			relationDesc,
+			updateUserName,
+			updateDateTime,
+			unit_uid
+		)
+		VALUES
+		(
+			#{relation_id},
+			#{client_ID},
+			#{relationClientID},
+			#{relationDesc},
+			#{updateUserName},
+			NOW(),
+			#{unit_uid}
+		) ;
+		]]>
+	</insert>
+
+	<!-- 查询所有的关联企业 分页列表 -->
+	<select id="selectRelationClientPageTables" parameterType="com.zjm.crm.db.model.Crm_relationClient"
+		resultMap="RelationClientResultMap">
+		<![CDATA[
+		SELECT
+			rc.relation_id,
+			rc.client_ID,
+			rc.relationClientID,
+			rc.relationDesc,
+			c.clientName
+		FROM crm_relationClient rc
+		LEFT JOIN crm_client c ON c.client_ID = rc.relationClientID
+		where 1=1  AND rc.client_ID=#{client_ID}]]>
+	</select>
+	
+	<!-- 查询所有的关联企业列表 -->
+	<select id="selectRelationClientList" parameterType="java.lang.String" resultMap="RelationClientResultMap">
+		<![CDATA[
+			SELECT
+				relation_id,
+				client_ID,
+				relationClientID,
+				relationDesc,
+				updateUserName,
+				updateDateTime,
+				unit_uid
+			FROM crm_relationClient
+			where 1=1 ${value}
+		]]>
+	</select>
+
+	<!-- 查询所有的关联企业 分页列表 总记录数 -->
+	<select id="selectClientPageTables_Count" parameterType="com.zjm.crm.db.model.Crm_relationClient"
+		resultType="java.lang.Long">
+		<![CDATA[SELECT count(relation_id) FROM crm_relationClient where 1=1 AND rc.client_ID=#{client_ID} ]]>
+	</select>
+	
+	<!-- 删除一个关联企业 -->
+	<delete id="deleteOneRelationClientInfo" parameterType="java.lang.String">
+		<![CDATA[
+			delete from crm_relationClient
+			where relation_id=#{relation_id}
+		]]>
+	</delete>
+	
+	<!-- 根据relationID查询关联企业信息 -->
+	<select id="selectOneRelationClientInfo" parameterType="com.zjm.crm.db.model.Crm_relationClient" resultMap="RelationClientResultMap">
+		<![CDATA[
+		 	select relation_id,client_ID,relationClientID,relationDesc 
+		 	from crm_relationclient
+		 	where relation_id=#{relation_id}
+		]]>
+	</select>
+	
+	<!-- 更新关联企业信息 -->
+	<update id="updateOneRelationClientInfo" parameterType="com.zjm.crm.db.model.Crm_relationClient">
+		<![CDATA[
+			UPDATE 
+			  crm_relationclient
+			SET
+			  client_ID = #{client_ID},
+			  relationClientID = #{relationClientID},
+			  relationDesc = #{relationDesc},
+			  updateUserName = #{updateUserName},
+			  updateDateTime = NOW()
+			WHERE relation_id = #{relation_id}
+		]]>
+	</update>
+	
+	
+	<delete id="deleteRelationClientByClient_ID"  parameterType="string">
+		delete from crm_relationClient
+		where client_ID=#{client_ID} 
+	</delete>
+	
+	<delete id="deletConnectionClient"  >
+		delete from crm_relationClient 
+		where client_ID = #{client_ID}
+		and relationClientID in
+		 <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}       
+        </foreach>    
+	</delete>
+	
+</mapper>  

@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.sys.db.map.Sys_usersMapper">
+
+	<!-- 用户表信息 -->
+	<resultMap type="com.zjm.sys.db.model.Sys_users" id="UserResultMap">
+		<result property="user_uid" column="user_uid" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="unit_uidName" column="unit_uidName" />
+		<result property="user_id" column="user_id" />
+		<result property="userpassword" column="userpassword" />
+		<result property="user_name" column="user_name" />
+		<result property="user_bh" column="user_bh" />
+		<result property="isEable" column="isEable" />
+		<result property="user_type" column="user_type" />
+		<result property="isactive" column="isactive" />
+		<result property="isAdmin" column="isAdmin" />
+		<result property="order_id" column="order_id" />
+		<result property="createdatetime" column="createdatetime" />
+		<result property="create_user" column="create_user" />
+		<result property="updatedatetime" column="updatedatetime" />
+		<result property="update_user" column="update_user" />
+		
+		<result property="depart_uid" column="depart_uid" />
+		<result property="depart_name" column="depart_name" />
+		<result property="is_otherdep" column="is_otherdep" />
+	</resultMap>
+	
+	<!-- 插入一个用户信息 -->
+	<insert id="insertOneUsersInfo"	parameterType="com.zjm.sys.db.model.Sys_users">
+		<![CDATA[
+		INSERT INTO sys_users (
+		    user_uid,
+			unit_uid,
+			unit_uidName,
+			user_id,
+			userpassword,
+			user_name,
+			user_bh,
+			user_type,
+			isEable,
+			isactive,
+			isAdmin,
+			order_id,
+			createdatetime,
+			create_user
+		)
+		VALUES (
+			#{user_uid},
+			#{unit_uid},
+			#{unit_uidName},
+			#{user_id},
+			#{userpassword},
+			#{user_name},
+			#{user_bh},
+			#{user_type},
+			#{isEable},
+			#{isactive},
+			#{isAdmin},
+			#{order_id},
+			NOW(),
+			#{create_user}
+		)
+		]]>
+	</insert>
+	
+	<!-- 查询所有用户list -->
+	<select id="selectAllUsersList" parameterType="java.lang.String" resultMap="UserResultMap">
+		SELECT 
+			u.user_uid,
+			u.unit_uid,
+			u.unit_uidName,
+			u.user_id,
+			u.userpassword,
+			u.user_name,
+			u.user_bh,
+			u.user_type,
+			u.isEable,
+			u.isactive,
+			u.isAdmin,
+			u.order_id 
+		FROM 
+			sys_users u
+			LEFT JOIN sys_dep_user du ON du.user_uid = u.user_uid 
+		WHERE 1=1  ${value} ORDER BY u.order_id
+	</select>
+	<!-- 查询所有的用户  分页列表-->
+	<select id="selectUsersPageTables" resultMap="UserResultMap" parameterType="com.zjm.common.db.model.PageTable">
+		<![CDATA[
+		SELECT 
+			u.user_uid,
+			u.unit_uid,
+			u.unit_uidName,
+			u.user_id,
+			u.userpassword,
+			u.user_name,
+			u.user_bh,
+			u.user_type,
+			u.isEable,
+			u.isactive,
+			u.isAdmin,
+			u.order_id,
+			d.depart_uid
+		FROM 
+			sys_users u 
+		LEFT JOIN sys_dep_user du ON du.user_uid = u.user_uid 
+		LEFT JOIN sys_departs d ON d.depart_uid = du.depart_uid
+		where 1=1 ${wheresql}  limit #{pageNumber},#{pageSize}
+		]]>
+	</select>
+	
+	<!-- 查询部门下的用户-->
+	<select id="selectUsersListByDepartUid" resultMap="UserResultMap" parameterType="java.lang.String">
+		<![CDATA[
+		SELECT 
+			u.user_uid,
+			u.unit_uid,
+			u.unit_uidName,
+			u.user_id,
+			u.userpassword,
+			u.user_name,
+			u.user_bh,
+			u.user_type,
+			u.isEable,
+			u.isactive,
+			u.isAdmin,
+			u.order_id 
+		FROM 
+			sys_users u 
+		LEFT JOIN sys_dep_user du ON du.user_uid = u.user_uid 
+		LEFT JOIN sys_departs d ON d.depart_uid = du.depart_uid
+		where 1=1 ${value}
+		]]>
+	</select>
+	<!-- 查询所有的用户    分页列表 总记录数 -->
+	<select id="selectUsersPageTables_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		<![CDATA[
+		SELECT count(u.user_uid) 
+		FROM sys_users u
+		LEFT JOIN sys_dep_user du ON du.user_uid = u.user_uid 
+		LEFT JOIN sys_departs d ON d.depart_uid = du.depart_uid
+		 where 1=1 ${wheresql} ]]>
+	</select>
+	
+	<!-- 查询一个用户信息 -->
+	<select id="selectOneUsersInfo" parameterType="com.zjm.sys.db.model.Sys_users" resultMap="UserResultMap">
+		<![CDATA[
+		SELECT 
+			u.user_uid,
+			u.unit_uid,
+			u.unit_uidName,
+			u.user_id,
+			u.userpassword,
+			u.user_name,
+			u.user_bh,
+			u.user_type,
+			u.isEable,
+			u.isactive,
+			u.isAdmin,
+			u.order_id,
+			d.depart_uid,
+			d.depart_name
+		FROM sys_users u 
+		LEFT JOIN sys_dep_user du ON du.user_uid = u.user_uid 
+		LEFT JOIN sys_departs d ON d.depart_uid = du.depart_uid
+		where u.user_uid=#{user_uid} LIMIT 1
+		]]>
+	</select>
+	<!-- 更新一个用户信息 -->	
+	<update id="updateOneUsersInfo" parameterType="com.zjm.sys.db.model.Sys_users">
+		<![CDATA[
+		UPDATE 
+		  sys_users
+		SET
+		  user_id = #{user_id},
+		  user_bh = #{user_bh},
+		  user_name = #{user_name},
+		  user_type = #{user_type},
+		  userpassword = #{userpassword},
+		  isactive = #{isactive},
+		  isEable = #{isEable},
+		  isAdmin = #{isAdmin},
+		  updatedatetime = NOW(),
+		  update_user = #{update_user}
+		WHERE user_uid = #{user_uid}
+		  ]]>
+	</update>
+	
+	<!-- 删除一个用户信息 -->
+	<delete id="deleteOneUsersInfo" parameterType="com.zjm.sys.db.model.Sys_users">
+		<![CDATA[DELETE FROM sys_users WHERE user_uid = #{user_uid} ]]>
+	</delete>
+	
+	<!-- 判断是否存在 -->
+	<select id="selectUsersIdIsExist" parameterType="java.lang.String" resultType="java.lang.Integer">
+		<![CDATA[SELECT count(user_uid) FROM sys_users where 1=1 ${value} ]]>
+	</select>
+	<!-- (某用户的密码是否存在 =》 存在-未修改，不存在-修改了) -->
+	<select id="selectUsersIsUpdatePwd" parameterType="com.zjm.sys.db.model.Sys_users" resultType="java.lang.Integer">
+		<![CDATA[SELECT count(user_uid) FROM sys_users where user_uid=#{user_uid} and userpassword=#{userpassword} ]]>
+	</select>
+	
+	<!--  查询同部门下共有多少用户 -->
+	<select id="selectUsersOrderId" parameterType="com.zjm.sys.db.model.Sys_users" resultType="java.lang.Integer">
+		<![CDATA[
+		SELECT count(u.user_uid) 
+		FROM sys_users u left join sys_dep_user du on du.user_uid=u.user_uid
+		where du.depart_uid=#{depart_uid}
+		]]>
+	</select>
+	
+	
+	
+	<!-- 查询  此机构 此岗位上 的用户列表 -->
+	<select id="selectPostUsersPageTables" resultMap="UserResultMap" parameterType="com.zjm.common.db.model.PageTable">
+		SELECT   post_user.post_ID,
+	             post_user.user_uid,
+	             users.user_name,
+		         users.unit_uid,
+				 users.user_id,
+				 users.user_bh,
+				 users.user_name,
+				 users.user_type,
+				 users.isactive,
+				 users.userpassword,
+				 users.order_id,
+				 users.isAdmin
+	    FROM 
+	     		sys_post_user post_user
+		LEFT JOIN sys_users  users   ON  users.user_uid  = post_user.user_uid
+		LEFT JOIN sys_post post ON post.post_ID = post_user.post_ID
+		WHERE users.isactive = TRUE	${wheresql}  limit #{pageNumber},#{pageSize}	
+	</select>
+	
+	<!-- 查询  此机构 此岗位上 的用户列表 条数-->
+	<select id="selectPostUsersPageTables_Count" parameterType="com.zjm.common.db.model.PageTable"  resultType="java.lang.Long">
+		SELECT    
+			count( post_user.user_uid) 
+	    FROM sys_post_user post_user
+		LEFT JOIN sys_users  users   ON  users.user_uid  = post_user.user_uid
+		LEFT JOIN sys_post post ON post.post_ID = post_user.post_ID
+		WHERE users.isactive = TRUE	${wheresql}  limit #{pageNumber},#{pageSize}
+	</select>
+	
+	<!-- 查询  此机构 此岗位上 的用户列表 条数-->
+	<select id="selectMaxUserBh" resultType="java.lang.String">
+		SELECT 
+			u.user_bh 
+		FROM 
+			sys_users u 
+		ORDER BY u.user_bh DESC LIMIT 1
+	</select>
+	
+	<!-- 根据用户id获取部门 -->
+	<select id = "getDepartByUserId" parameterType = "java.lang.String" resultType = "com.zjm.sys.db.model.Sys_departs" >
+		select * from sys_departs sd
+		where sd.depart_uid = (SELECT sdu.depart_uid from sys_users su 
+		left join sys_dep_user sdu on su.user_uid = sdu.user_uid
+		WHERE su.user_uid = #{userId}
+		)
+	</select>
+	
+	
+</mapper>  

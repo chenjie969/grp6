@@ -1,0 +1,259 @@
+/* ==========================================================================
+   BOX
+   ========================================================================== */
+.box {
+  margin-bottom: 15px;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-flex-wrap: nowrap;
+      -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+}
+.box:not([class*="bg-"]) {
+  background: #fff;
+}
+.box > header,
+.box .box-heading {
+  background-color: inherit;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 10px 15px;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+}
+.box > header > h1,
+.box .box-heading > h1,
+.box > header h2,
+.box .box-heading h2,
+.box > header h3,
+.box .box-heading h3,
+.box > header h4,
+.box .box-heading h4,
+.box > header h5,
+.box .box-heading h5,
+.box > header h6,
+.box .box-heading h6,
+.box > header .box-title,
+.box .box-heading .box-title {
+  margin: 0;
+  -webkit-flex: 1 1 auto;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  color: inherit;
+}
+.box > header[class*="bg-"] a,
+.box .box-heading[class*="bg-"] a {
+  color: #fff;
+}
+.box > header.bg-white a,
+.box .box-heading.bg-white a {
+  color: #333;
+}
+.box > footer {
+  padding: 10px 15px;
+}
+.box-body {
+  padding: 10px 15px;
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
+  -webkit-flex: 1 1 auto !important;
+      -ms-flex: 1 1 auto !important;
+          flex: 1 1 auto !important;
+  -webkit-flex-basis: auto !important;
+      -ms-flex-preferred-size: auto !important;
+          flex-basis: auto !important;
+}
+.box-tools {
+  margin-left: auto;
+}
+.box-tools ul {
+  margin: 0;
+}
+.box-tools a {
+  font-size: 14px;
+  text-decoration: none;
+  color: #888;
+}
+.box-tools a:hover,
+.box-tools a:focus {
+  color: #666;
+}
+header.text-white .box-tools a,
+.box-heading.text-white .box-tools a {
+  color: #fafafa;
+}
+header.text-white .box-tools a:hover,
+.box-heading.text-white .box-tools a:hover,
+header.text-white .box-tools a:focus,
+.box-heading.text-white .box-tools a:focus {
+  color: #fff;
+}
+.box:-webkit-full-screen {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.box:-moz-full-screen {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.box:-ms-fullscreen {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.box:fullscreen {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.box:-webkit-full-screen .box-body {
+  overflow-y: auto;
+}
+.box:-moz-full-screen .box-body {
+  overflow-y: auto;
+}
+.box:-ms-fullscreen .box-body {
+  overflow-y: auto;
+}
+.box:fullscreen .box-body {
+  overflow-y: auto;
+}
+/*  Border
+    ========================================================================= */
+/* Border Base
+    Direction:
+      0 = none
+      a = all
+      t = top
+      r = right
+      b = bottom
+      l = left
+      h = x-axis (horizontal)
+      v = y-axis (vertical)
+*/
+.b-0 {
+  border: none !important;
+}
+.b-a {
+  border: 1px solid #e7e7e7 !important;
+}
+.b-t {
+  border-top: 1px solid #e7e7e7 !important;
+}
+.b-r {
+  border-right: 1px solid #e7e7e7 !important;
+}
+.b-b {
+  border-bottom: 1px solid #e7e7e7 !important;
+}
+.b-l {
+  border-left: 1px solid #e7e7e7 !important;
+}
+.b-h {
+  border-top: 1px solid #e7e7e7 !important;
+  border-bottom: 1px solid #e7e7e7 !important;
+}
+.b-v {
+  border-right: 1px solid #e7e7e7 !important;
+  border-left: 1px solid #e7e7e7 !important;
+}
+/*
+  Border Width
+  selector: .b-w-{modifier}
+  modifier: 1 ... 5 px
+*/
+.b-w-1 {
+  border-width: 1px !important;
+}
+.b-w-2 {
+  border-width: 2px !important;
+}
+.b-w-3 {
+  border-width: 3px !important;
+}
+.b-w-4 {
+  border-width: 4px !important;
+}
+.b-w-5 {
+  border-width: 5px !important;
+}
+/*
+  Border Radius
+  selector: .b-r-{modifier}
+  modifier: 1 ... 5 px
+*/
+.b-r-0 {
+  border-radius: 0 !important;
+}
+.b-r-1 {
+  border-radius: 1px !important;
+}
+.b-r-2 {
+  border-radius: 2px !important;
+}
+.b-r-3 {
+  border-radius: 3px !important;
+}
+.b-r-4 {
+  border-radius: 4px !important;
+}
+.b-r-5 {
+  border-radius: 5px !important;
+}
+/*
+  Border Styles
+  selector: .b-s-{modifier}
+  modifier: solid, dashed, dotted
+*/
+.b-s-solid {
+  border-style: solid !important;
+}
+.b-s-dashed {
+  border-style: dashed !important;
+}
+.b-s-dotted {
+  border-style: dotted !important;
+}
+/*
+  列表搜索框样式
+*/
+
+.form-control-ztb {
+    display: block !important;
+    width: 100% !important;
+    height: 34px !important;
+    padding: 6px 12px !important;
+    font-size: 14px !important;
+    line-height: 1.42857143 !important;
+    color: #555 !important;
+    background-color: #fff !important;
+    background-image: none !important;
+    border: 1px solid #e7e7e7 !important;
+    border-radius: 4px !important;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075) !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075) !important;
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s !important;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s !important;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s !important
+}

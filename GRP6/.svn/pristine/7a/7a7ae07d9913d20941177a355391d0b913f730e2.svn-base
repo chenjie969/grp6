@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.crm.db.map.Crm_landHouseMapper">
+	<!-- 住宅表信息 -->
+	<resultMap type="com.zjm.crm.db.model.Crm_landHouse" id="LandHouseResultMap">
+		<result property="landHouse_ID" column="landHouse_ID" />
+		<result property="client_ID" column="client_ID" />
+		<result property="landHouseName" column="landHouseName" />
+		<result property="landHousePosition" column="landHousePosition" />
+		<result property="landHouseArea" column="landHouseArea" />
+		<result property="buyPrice" column="buyPrice" />
+		<result property="isCertificate" column="isCertificate" />
+		<result property="status" column="status" />
+		<result property="loanBank" column="loanBank" />
+		<result property="guarantySum" column="guarantySum" />
+		<result property="remark" column="remark" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="unit_uidName" column="unit_uidName" />
+		<result property="updateUserName" column="updateUserName" />
+		<result property="updateDateTime" column="updateDateTime" />
+		
+	</resultMap>
+
+	<!-- 新增一个住宅信息 -->
+	<insert id="insertOneLandHouseInfo" parameterType="com.zjm.crm.db.model.Crm_landHouse">
+		<![CDATA[
+		INSERT INTO crm_landHouse(
+			landHouse_ID,
+			client_ID,
+			landHouseName,
+			landHousePosition,
+			landHouseArea,
+			buyPrice,
+			isCertificate,
+			status,
+			loanBank,
+			guarantySum,
+			remark,
+			unit_uid,
+			unit_uidName,
+			updateUserName,
+			updateDateTime
+			
+		)
+		VALUES
+		(
+			#{landHouse_ID},
+			#{client_ID},
+			#{landHouseName},
+			#{landHousePosition},
+			#{landHouseArea},
+			#{buyPrice},
+			#{isCertificate},
+			#{status},
+			#{loanBank},
+			#{guarantySum},
+			#{remark},
+			#{unit_uid},
+			#{unit_uidName},
+			#{updateUserName},
+			NOW()
+			
+		) ;
+		]]>
+	</insert>
+	
+
+	<!-- 查询所有的住宅列表 -->
+	<select id="selectLandHousePageTables" parameterType="com.zjm.crm.db.model.Crm_landHouse"
+		resultMap="LandHouseResultMap">
+		<![CDATA[
+		SELECT
+			landHouse_ID,
+			client_ID,
+			landHouseName,
+			landHousePosition,
+			landHouseArea,
+			buyPrice,
+			isCertificate,
+			status,
+			loanBank,
+			guarantySum,
+			remark,
+			unit_uid,
+			unit_uidName,
+			updateUserName,
+			updateDateTime
+		FROM crm_landHouse
+		where 1=1  AND client_ID=#{client_ID}]]>
+	</select>
+	
+	<!-- 删除一个住宅 -->
+	<delete id="deleteOneLandHouseInfo" parameterType="java.lang.String">
+		<![CDATA[
+			delete from crm_landHouse
+			where landHouse_ID=#{landHouse_ID}
+		]]>
+	</delete>
+	
+	<!-- 根据relationID查询住宅信息 -->
+	<select id="selectOneLandHouseInfo" parameterType="com.zjm.crm.db.model.Crm_landHouse" resultMap="LandHouseResultMap">
+		<![CDATA[
+		 	select 
+				client_ID,
+				landHouseName,
+				landHousePosition,
+				landHouseArea,
+				buyPrice,
+				isCertificate,
+				status,
+				loanBank,
+				guarantySum,
+				remark,
+				unit_uid,
+				unit_uidName,
+				updateUserName,
+				updateDateTime
+		 	from crm_landHouse
+		 	where landHouse_ID = #{landHouse_ID}
+		]]>
+	</select>
+	
+	<!-- 更新住宅信息 -->
+	<update id="updateOneLandHouseInfo" parameterType="com.zjm.crm.db.model.Crm_landHouse">
+		<![CDATA[
+			UPDATE 
+			  crm_landHouse
+			SET
+			  landHouseName = #{landHouseName},
+			  landHousePosition = #{landHousePosition},
+			  landHouseArea = #{landHouseArea},
+			  buyPrice = #{buyPrice},
+			  isCertificate = #{isCertificate},
+			  status = #{status},
+			  loanBank = #{loanBank},
+			  guarantySum = #{guarantySum},
+			  remark = #{remark},
+			  updateUserName = #{updateUserName},
+			  updateDateTime = NOW()
+			WHERE landHouse_ID = #{landHouse_ID}
+		]]>
+	</update>
+	
+	<delete id="deleteLandHouseByClient_ID" parameterType="string">
+		delete from  crm_landHouse
+		where client_ID = #{client_ID}
+	</delete>
+	
+	
+	
+</mapper>  

@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- pro_finish表:完结解保模块 -->
+<mapper namespace="com.zjm.pro.db.map.Pro_finishMapper">
+	<!--返回MAP-->		
+	<resultMap id="ProFinishResult" type="com.zjm.pro.db.model.Pro_finish">
+		<result column="finish_id" property="finishId" />
+		<result column="finish_id_old" property="finishIdOld" />
+		<result column="project_id_old" property="projectIdOld" />
+		<result column="project_id" property="projectId" />
+		<result column="apply_id" property="applyId" />
+		<result column="margin" property="margin" />
+		<result column="remark" property="remark" />
+		<result column="operationmanid" property="operationmanid" />
+		<result column="operationmanname" property="operationmanname" />
+		<result column="unit_uid" property="unitUid" />
+		<result column="updateusername" property="updateusername" />
+		<result column="updatedatetime" property="updatedatetime" />
+		<result column="finishstate" property="finishstate" />
+	</resultMap>
+	
+	<!--基本的sql查询字段 公共引用...-->
+	<sql id="searchSql">
+			finish_id,
+			finish_id_old,
+			project_id_old,
+			project_id,
+			apply_id,
+			margin,
+			remark,
+			operationmanid,
+			operationmanname,
+			unit_uid,
+			updateusername,
+			updatedatetime,
+			finishstate			
+	</sql>
+	
+	<!-- 基本的sql查询条件公共引用 -->
+	<sql id="searchByPo">
+		<trim prefix="where" prefixOverrides="and|or">
+            <if test="finishId !='' and finishId !=null">
+            	and finish_id = #{finishId}
+            </if>
+            <if test="finishIdOld !='' and finishIdOld !=null">
+            	and finish_id_old = #{finishIdOld}
+            </if>
+            <if test="projectIdOld !='' and projectIdOld !=null">
+            	and project_id_old = #{projectIdOld}
+            </if>
+            <if test="projectId !='' and projectId !=null">
+            	and project_id = #{projectId}
+            </if>
+            <if test="applyId !='' and applyId !=null">
+            	and apply_id = #{applyId}
+            </if>
+            <if test="margin !='' and margin !=null">
+            	and margin = #{margin}
+            </if>
+            <if test="remark !='' and remark !=null">
+            	and remark = #{remark}
+            </if>
+            <if test="operationmanid !='' and operationmanid !=null">
+            	and operationmanid = #{operationmanid}
+            </if>
+            <if test="operationmanname !='' and operationmanname !=null">
+            	and operationmanname = #{operationmanname}
+            </if>
+            <if test="unitUid !='' and unitUid !=null">
+            	and unit_uid = #{unitUid}
+            </if>
+            <if test="updateusername !='' and updateusername !=null">
+            	and updateusername = #{updateusername}
+            </if>
+			<if test="updatedatetime !=null">
+            	and updatedatetime = #{updatedatetime}
+            </if>
+            <if test="finishstate !='' and finishstate !=null">
+            	and finishstate = #{finishstate}
+            </if>
+            <if test="finishstates !='' and finishstates !=null">
+            	and finishstate in
+            	<foreach collection="finishstates" item="finishstate" open="(" separator="," close=")">
+            		#{finishstate}
+            	</foreach>
+            </if>
+		</trim>
+	</sql>
+	
+	<!-- 动态更新 -->
+    <sql id="updateByPo">
+       	<trim prefix="set" suffixOverrides=",">
+	    	<if test="finishId != null">		
+	    		finish_id = #{finishId},		
+	    	</if>
+	    	<if test="finishIdOld != null">		
+	    		finish_id_old = #{finishIdOld},		
+	    	</if>
+	    	<if test="projectIdOld != null">		
+	    		project_id_old = #{projectIdOld},		
+	    	</if>
+	    	<if test="projectId != null">		
+	    		project_id = #{projectId},		
+	    	</if>
+	    	<if test="applyId != null">		
+	    		apply_id = #{applyId},		
+	    	</if>
+	    	<if test="margin != null">		
+	    		margin = #{margin},		
+	    	</if>
+	    	<if test="remark != null">		
+	    		remark = #{remark},		
+	    	</if>
+	    	<if test="operationmanid != null">		
+	    		operationmanid = #{operationmanid},		
+	    	</if>
+	    	<if test="operationmanname != null">		
+	    		operationmanname = #{operationmanname},		
+	    	</if>
+	    	<if test="unitUid != null">		
+	    		unit_uid = #{unitUid},		
+	    	</if>
+	    	<if test="updateusername != null">		
+	    		updateusername = #{updateusername},		
+	    	</if>
+	    	<if test="updatedatetime != null">		
+	    		updatedatetime = #{updatedatetime},		
+	    	</if>
+	    	<if test="finishstate != null">		
+	    		finishstate = #{finishstate},		
+	    	</if>
+	    </trim>
+    </sql>
+	
+	<!-- 动态的插入,必须要创建时间 -->
+	<insert id="insert" parameterType="com.zjm.pro.db.model.Pro_finish" useGeneratedKeys="true" keyProperty="id">
+		insert into pro_finish(
+	    <trim suffixOverrides=",">
+	    	<if test="finishId != null">		
+	    		finish_id,		
+	    	</if>
+	    	<if test="finishIdOld != null">		
+	    		finish_id_old,		
+	    	</if>
+	    	<if test="projectIdOld != null">		
+	    		project_id_old,		
+	    	</if>
+	    	<if test="projectId != null">		
+	    		project_id,		
+	    	</if>
+	    	<if test="applyId != null">		
+	    		apply_id,		
+	    	</if>
+	    	<if test="margin != null">		
+	    		margin,		
+	    	</if>
+	    	<if test="remark != null">		
+	    		remark,		
+	    	</if>
+	    	<if test="operationmanid != null">		
+	    		operationmanid,		
+	    	</if>
+	    	<if test="operationmanname != null">		
+	    		operationmanname,		
+	    	</if>
+	    	<if test="unitUid != null">		
+	    		unit_uid,		
+	    	</if>
+	    	<if test="updateusername != null">		
+	    		updateusername,		
+	    	</if>
+	    	<if test="updatedatetime != null">		
+	    		updatedatetime,		
+	    	</if>
+	    	<if test="finishstate != null">		
+	    		finishstate,		
+	    	</if>
+	    </trim>
+        )values(
+        <trim suffixOverrides=",">
+	    	<if test="finishId != null">		
+	    		#{finishId},		
+	    	</if>
+	    	<if test="finishIdOld != null">		
+	    		#{finishIdOld},		
+	    	</if>
+	    	<if test="projectIdOld != null">		
+	    		#{projectIdOld},		
+	    	</if>
+	    	<if test="projectId != null">		
+	    		#{projectId},		
+	    	</if>
+	    	<if test="applyId != null">		
+	    		#{applyId},		
+	    	</if>
+	    	<if test="margin != null">		
+	    		#{margin},		
+	    	</if>
+	    	<if test="remark != null">		
+	    		#{remark},		
+	    	</if>
+	    	<if test="operationmanid != null">		
+	    		#{operationmanid},		
+	    	</if>
+	    	<if test="operationmanname != null">		
+	    		#{operationmanname},		
+	    	</if>
+	    	<if test="unitUid != null">		
+	    		#{unitUid},		
+	    	</if>
+	    	<if test="updateusername != null">		
+	    		#{updateusername},		
+	    	</if>
+	    	<if test="updatedatetime != null">		
+	    		#{updatedatetime},		
+	    	</if>
+	    	<if test="finishstate != null">		
+	    		#{finishstate},		
+	    	</if>
+	    </trim>
+        )
+	 </insert>
+	
+    <!-- 动态更新 -->
+    <update id="update" parameterType="com.zjm.pro.db.model.Pro_finish">
+        update pro_finish
+        <include refid="updateByPo"/>
+        where finish_id = #{finishId}
+    </update>
+
+	<!--根据id查询-->
+	<select id="getItemInfoById" resultMap="ProFinishResult" parameterType="long" >
+		select 
+		<include refid="searchSql"/>
+		from pro_finish
+		where finish_id = #{finishId}	
+	</select>
+	
+	<!--分页列表查询-->
+	<select id="getPageListByMap" resultMap="ProFinishResult" parameterType="java.util.HashMap" >
+		select 
+		<include refid="searchSql"/>
+		from pro_finish
+		<include refid="searchByPo"/>	
+		order by finish_id desc
+	</select>
+	
+	<!--分页列表查询-->
+    <select id="getOne" resultMap="ProFinishResult" parameterType="java.util.HashMap" >
+        select 
+        <include refid="searchSql"/>
+        from pro_finish
+        <include refid="searchByPo"/>   
+        order by finish_id desc
+    </select>
+
+    <!--根据ID删除-->
+    <delete id="deleteById">
+        delete from pro_finish
+        where
+        finish_id  = #{finishId}
+    </delete>
+</mapper>

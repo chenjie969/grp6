@@ -1,0 +1,400 @@
+package com.zjm.pro.db.model;
+
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+
+/**
+ *业务还款信息表pro_factPay
+ */
+public class Pro_factPay implements Serializable{
+	private static final long serialVersionUID = 1L;
+	private String factPay_ID	;//	还款明细ID	varchar(32)
+	private String project_ID	;//	项目ID	varchar(32)
+	private String applyID; //申请id
+	private Date payDate	;//	还款日期	date(根据客户需求自20171213日后此字段名称改为上报日期)
+	private Date factDate	;//	实际还款日期	date
+	
+	private Double paySum	;//	还款金额	decimal(18,6)
+	private Double payCapitalSum;//	其中：还款本金	decimal(18,6)
+	private Double payInterestSum	;//	其中：还款利息	decimal(18,6)
+	private Double payOtherSum	;//	其中：还款其他	decimal(18,6)
+	private String remark	;//	备注	varchar(200)
+	private String operationManID	;//	经办人ID	varchar(32)
+	private String operationManName	;//	经办人名称	varchar(20)
+	private String unit_uid	;//	担保机构编号unit_uid	varchar(32)
+	private String updateUserName	;//	最后修改人姓名	varchar(20)
+	private Date updateDateTime	;//	最后修改时间	datetime
+	
+	private String  payState ; //审批状态
+	private Integer isStopOptGuaranty;//是否注销保证措施
+	
+	private String projectName;//pro_apply冗余字段
+	private String bankName;//pro_project冗余字段
+	private String busiTypeName;//pro_project冗余字段
+	private String projectCode;//pro_project
+	private String	amanName;//A角名称	varchar(20) 冗余字段
+	private String	bmanName;//B角名称	varchar(20) 冗余字段
+	private String	reviewManName;//	风控复核人名称	varchar(20) 冗余字段
+	private Double	loadSum;//	放款金额 冗余字段
+
+	private	String	freeTypeID	;//	担保责任解除类型ID(字典)	Variable characters (32)
+	private	String	freeTypeName	;//	担保责任解除类型名称	Variable characters (20)
+	
+	private List<Pro_projectfiles> projectfilesList ; //附件冗余字段
+	
+	private String fundID; //冗余字段 rd_xujy add 20180202 资金方id 本年还款记录表显示资金方
+	private String fundChinese; //冗余字段 rd_xujy add 20180202 资金方名称  本年还款记录表显示资金方
+	private String productInstance_ID; //冗余字段 rd_xujy add 20180207 记录实体id
+	private Date loadBeginDate;//冗余字段 rd_caodj add 20180320 起始日期
+	private Date loadEndDate;//冗余字段 rd_caodj add 20180320 结束日期
+	private String guarantyOrgName;//冗余字段 rd_caodj add 20180320 承保机构
+	private String hostAreaName;//冗余字段 rd_caodj add 20180320 地区
+	private String fundName;//冗余字段 rd_caodj add 20180320 资金方子机构
+	private String guarantySum;//冗余字段 rd_caodj add 20180320 项目余额
+	private String replaceFreeSum;//冗余字段 rd_caodj add 20180320 代偿金额
+	private Date delayEndDate;//冗余字段 rd_caodj add 20180321 实际结束日期
+	
+	
+	
+	
+	
+	public String getProductInstance_ID() {
+		return productInstance_ID;
+	}
+
+	public void setProductInstance_ID(String productInstance_ID) {
+		this.productInstance_ID = productInstance_ID;
+	}
+
+	public String getFundID() {
+		return fundID;
+	}
+
+	public void setFundID(String fundID) {
+		this.fundID = fundID;
+	}
+
+	public String getFundChinese() {
+		return fundChinese;
+	}
+
+	public void setFundChinese(String fundChinese) {
+		this.fundChinese = fundChinese;
+	}
+
+	
+	public List<Pro_projectfiles> getProjectfilesList() {
+		return projectfilesList;
+	}
+
+	public void setProjectfilesList(List<Pro_projectfiles> projectfilesList) {
+		this.projectfilesList = projectfilesList;
+	}
+
+	public String getFreeTypeID() {
+		return freeTypeID;
+	}
+
+	public void setFreeTypeID(String freeTypeID) {
+		this.freeTypeID = freeTypeID;
+	}
+
+	public String getFreeTypeName() {
+		return freeTypeName;
+	}
+
+	public void setFreeTypeName(String freeTypeName) {
+		this.freeTypeName = freeTypeName;
+	}
+
+	private String type;
+
+	public String getFactPay_ID() {
+		return factPay_ID;
+	}
+
+	public void setFactPay_ID(String factPay_ID) {
+		this.factPay_ID = factPay_ID;
+	}
+
+	public String getProject_ID() {
+		return project_ID;
+	}
+
+	public void setProject_ID(String project_ID) {
+		this.project_ID = project_ID;
+	}
+
+	public String getApplyID() {
+		return applyID;
+	}
+
+	public void setApplyID(String applyID) {
+		this.applyID = applyID;
+	}
+
+	public Date getPayDate() {
+		return payDate;
+	}
+
+	public void setPayDate(Date payDate) {
+		this.payDate = payDate;
+	}
+
+	public Double getPaySum() {
+		return paySum;
+	}
+
+	public void setPaySum(Double paySum) {
+		this.paySum = paySum;
+	}
+
+	public Double getPayCapitalSum() {
+		if(null==payCapitalSum){
+			payCapitalSum=0d;
+		}
+		return payCapitalSum;
+	}
+
+	public void setPayCapitalSum(Double payCapitalSum) {
+		this.payCapitalSum = payCapitalSum;
+	}
+
+	public Double getPayInterestSum() {
+		if(null==payInterestSum){
+			payInterestSum=0d;
+		}
+		return payInterestSum;
+	}
+
+	public void setPayInterestSum(Double payInterestSum) {
+		this.payInterestSum = payInterestSum;
+	}
+
+	public Double getPayOtherSum() {
+		if(null==payOtherSum){
+			payOtherSum=0d;
+		}
+		return payOtherSum;
+		
+	}
+
+	public void setPayOtherSum(Double payOtherSum) {
+		this.payOtherSum = payOtherSum;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public String getOperationManID() {
+		return operationManID;
+	}
+
+	public void setOperationManID(String operationManID) {
+		this.operationManID = operationManID;
+	}
+
+	public String getOperationManName() {
+		return operationManName;
+	}
+
+	public void setOperationManName(String operationManName) {
+		this.operationManName = operationManName;
+	}
+
+	public String getUnit_uid() {
+		return unit_uid;
+	}
+
+	public void setUnit_uid(String unit_uid) {
+		this.unit_uid = unit_uid;
+	}
+
+	public String getUpdateUserName() {
+		return updateUserName;
+	}
+
+	public void setUpdateUserName(String updateUserName) {
+		this.updateUserName = updateUserName;
+	}
+
+	public Date getUpdateDateTime() {
+		return updateDateTime;
+	}
+
+	public void setUpdateDateTime(Date updateDateTime) {
+		this.updateDateTime = updateDateTime;
+	}
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
+	public String getBankName() {
+		return bankName;
+	}
+
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
+	}
+
+	public String getBusiTypeName() {
+		return busiTypeName;
+	}
+
+	public void setBusiTypeName(String busiTypeName) {
+		this.busiTypeName = busiTypeName;
+	}
+
+	public String getProjectCode() {
+		return projectCode;
+	}
+
+	public void setProjectCode(String projectCode) {
+		this.projectCode = projectCode;
+	}
+
+	public String getAmanName() {
+		return amanName;
+	}
+
+	public void setAmanName(String amanName) {
+		this.amanName = amanName;
+	}
+
+	public String getBmanName() {
+		return bmanName;
+	}
+
+	public void setBmanName(String bmanName) {
+		this.bmanName = bmanName;
+	}
+
+	public String getReviewManName() {
+		return reviewManName;
+	}
+
+	public void setReviewManName(String reviewManName) {
+		this.reviewManName = reviewManName;
+	}
+
+	public Double getLoadSum() {
+		return loadSum;
+	}
+
+	public void setLoadSum(Double loadSum) {
+		this.loadSum = loadSum;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+	
+	public String getPayState() {
+		return payState;
+	}
+
+	public void setPayState(String payState) {
+		this.payState = payState;
+	}
+
+	public Integer getIsStopOptGuaranty() {
+		return isStopOptGuaranty;
+	}
+
+	public void setIsStopOptGuaranty(Integer isStopOptGuaranty) {
+		this.isStopOptGuaranty = isStopOptGuaranty;
+	}
+
+	public Date getFactDate() {
+		return factDate;
+	}
+
+	public void setFactDate(Date factDate) {
+		this.factDate = factDate;
+	}
+
+	public Date getLoadBeginDate() {
+		return loadBeginDate;
+	}
+
+	public void setLoadBeginDate(Date loadBeginDate) {
+		this.loadBeginDate = loadBeginDate;
+	}
+
+	public Date getLoadEndDate() {
+		return loadEndDate;
+	}
+
+	public void setLoadEndDate(Date loadEndDate) {
+		this.loadEndDate = loadEndDate;
+	}
+
+	public String getGuarantyOrgName() {
+		return guarantyOrgName;
+	}
+
+	public void setGuarantyOrgName(String guarantyOrgName) {
+		this.guarantyOrgName = guarantyOrgName;
+	}
+
+	public String getHostAreaName() {
+		return hostAreaName;
+	}
+
+	public void setHostAreaName(String hostAreaName) {
+		this.hostAreaName = hostAreaName;
+	}
+
+	public String getFundName() {
+		return fundName;
+	}
+
+	public void setFundName(String fundName) {
+		this.fundName = fundName;
+	}
+
+	public String getGuarantySum() {
+		return guarantySum;
+	}
+
+	public void setGuarantySum(String guarantySum) {
+		this.guarantySum = guarantySum;
+	}
+
+	public String getReplaceFreeSum() {
+		return replaceFreeSum;
+	}
+
+	public void setReplaceFreeSum(String replaceFreeSum) {
+		this.replaceFreeSum = replaceFreeSum;
+	}
+
+	public Date getDelayEndDate() {
+		return delayEndDate;
+	}
+
+	public void setDelayEndDate(Date delayEndDate) {
+		this.delayEndDate = delayEndDate;
+	}
+
+
+
+	
+	
+	
+}

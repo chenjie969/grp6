@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_meetingResolutionMapper">
+	<!-- 评审会决议 -->
+	 <resultMap id="ProMeetResolutionMap" type="com.zjm.pro.db.model.Pro_meetingResolution" >
+	    <id column="meetingResolution_ID" property="meetingResolution_ID"  />
+	    <result column="meeting_ID" property="meeting_ID"/>
+  		<result column="apply_ID" property="apply_ID"/>
+		<result column="meetingCode" property="meetingCode"/>
+		<result column="resolutionType" property="resolutionType"/>
+		<result column="resolutionTypeName" property="resolutionTypeName"/>
+		<result column="meetingDate" property="meetingDate"/>
+		<result column="userIDList" property="userIDList"/>
+		<result column="userNameList" property="userNameList"/>
+		<result column="otherUserNameList" property="otherUserNameList"/>
+		<result column="resolutionCode" property="resolutionCode"/>
+		<result column="shouldJury" property="shouldJury"/>
+		<result column="senseJury" property="senseJury"/>
+		<result column="passJury" property="passJury"/>
+		<result column="signed" property="signed"/>
+		<result column="optDesc" property="optDesc"/>
+		<result column="processControl" property="processControl"/>
+		<result column="loanConditions" property="loanConditions"/>
+		<result column="otherMatters" property="otherMatters"/>
+		<result column="controlTypeID" property="controlTypeID"/>
+		<result column="controlTypeName" property="controlTypeName"/>
+		<result column="monitoredAsking" property="monitoredAsking"/>
+		<result column="resolutionResultID" property="resolutionResultID"/>
+		<result column="resolutionResultName" property="resolutionResultName"/>
+		<result column="unit_uid" property="unit_uid"/>
+		<result column="unit_uidName" property="unit_uidName"/>
+		<result column="updateUserName" property="updateUserName"/>
+		<result column="updateDateTime" property="updateDateTime"/>
+	
+			   
+	 </resultMap>
+		            
+	
+	
+	<!-- 分页查询   根据applyID查所有信息 -->
+	<select id="selectMeetingResolutionByApplyIDPageTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="ProMeetResolutionMap">
+		SELECT 
+			meetingResolution_ID,
+			apply_ID,
+			meeting_ID,
+			meetingCode,
+			resolutionType,
+			resolutionTypeName,
+			meetingDate,
+			userIDList,
+			userNameList,
+			otherUserNameList,
+			resolutionCode,
+			shouldJury,
+			senseJury,
+			passJury,
+			signed,
+			optDesc,
+			processControl,
+			loanConditions,
+			otherMatters,
+			controlTypeID,
+			controlTypeName,
+			monitoredAsking,
+			resolutionResultID,
+			resolutionResultName,
+			unit_uid,
+			unit_uidName,
+			updateUserName,
+			updateDateTime
+
+		FROM pro_meetingResolution 
+		WHERE 1 = 1 
+			  ${wheresql}
+		LIMIT #{pageNumber},#{pageSize}  
+	</select>
+	<!-- 分页查询  根据applyID查所有信息数量 -->
+	<select id="selectMeetingResolutionByApplyIDPageTable_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="long">
+	 	SELECT 
+	 		COUNT(1) 
+	 	FROM 
+	 		pro_meetingResolution 
+	 	WHERE 1=1 
+	 		 ${wheresql}
+	</select>	          
+		               
+	<insert id="insertOneMeetingResolution" parameterType="com.zjm.pro.db.model.Pro_meetingResolution">
+	 insert into pro_meetingResolution (
+	 		meetingResolution_ID,
+			apply_ID,
+			meeting_ID,
+			meetingCode,
+			resolutionType,
+			resolutionTypeName,
+			meetingDate,
+			userIDList,
+			userNameList,
+			otherUserNameList,
+			resolutionCode,
+			shouldJury,
+			senseJury,
+			passJury,
+			signed,
+			optDesc,
+			processControl,
+			loanConditions,
+			otherMatters,
+			controlTypeID,
+			controlTypeName,
+			monitoredAsking,
+			resolutionResultID,
+			resolutionResultName,
+			unit_uid,
+			unit_uidName,
+			updateUserName,
+			updateDateTime
+	) values (
+			#{meetingResolution_ID},
+			#{apply_ID},
+			#{meeting_ID},
+			#{meetingCode},
+			#{resolutionType},
+			#{resolutionTypeName},
+			#{meetingDate},
+			#{userIDList},
+			#{userNameList},
+			#{otherUserNameList},
+			#{resolutionCode},
+			#{shouldJury},
+			#{senseJury},
+			#{passJury},
+			#{signed},
+			#{optDesc},
+			#{processControl},
+			#{loanConditions},
+			#{otherMatters},
+			#{controlTypeID},
+			#{controlTypeName},
+			#{monitoredAsking},
+			#{resolutionResultID},
+			#{resolutionResultName},
+			#{unit_uid},
+			#{unit_uidName},
+			#{updateUserName},
+			NOW()
+	)
+	
+	</insert>	        
+	
+	<!-- 根据输入的条件查询单个决议内容-->
+	<select id="selectOneResolutionByWhereSql" parameterType="java.lang.String"  resultMap="ProMeetResolutionMap">
+	<![CDATA[
+		SELECT 
+		    meetingResolution_ID,
+			apply_ID,
+			meeting_ID,
+			meetingCode,
+			resolutionType,
+			resolutionTypeName,
+			meetingDate,
+			userIDList,
+			userNameList,
+			otherUserNameList,
+			resolutionCode,
+			shouldJury,
+			senseJury,
+			passJury,
+			signed,
+			optDesc,
+			processControl,
+			loanConditions,
+			otherMatters,
+			controlTypeID,
+			controlTypeName,
+			monitoredAsking,
+			resolutionResultID,
+			resolutionResultName,
+			unit_uid,
+			unit_uidName,
+			updateUserName,
+			updateDateTime
+	    FROM 
+	         pro_meetingResolution 
+		WHERE 1=1 ${value}
+		]]> 				 
+	</select>
+	<!-- 更新一个决议内容信息 -->	
+	<update id="updateMeetingResolution" parameterType="com.zjm.pro.db.model.Pro_meetingResolution">
+		UPDATE 
+		     pro_meetingResolution
+		
+		<set >
+		    <if test="apply_ID != null" >apply_ID= #{apply_ID},</if>
+			<if test="meeting_ID != null" >meeting_ID= #{meeting_ID},</if>
+			<if test="meetingCode != null" >meetingCode= #{meetingCode},</if>
+			<if test="resolutionType != null" >resolutionType= #{resolutionType},</if>
+			<if test="resolutionTypeName != null" >resolutionTypeName= #{resolutionTypeName},</if>
+			<if test="meetingDate != null" >meetingDate= #{meetingDate},</if>
+			<if test="userIDList != null" >userIDList= #{userIDList},</if>
+			<if test="userNameList != null" >userNameList= #{userNameList},</if>
+			<if test="otherUserNameList != null" >otherUserNameList= #{otherUserNameList},</if>
+			<if test="resolutionCode != null" >resolutionCode= #{resolutionCode},</if>
+			<if test="shouldJury != null" >shouldJury= #{shouldJury},</if>
+			<if test="senseJury != null" >senseJury= #{senseJury},</if>
+			<if test="passJury != null" >passJury= #{passJury},</if>
+			<if test="optDesc != null" >optDesc= #{optDesc},</if>
+			<if test="signed != null" >signed= #{signed},</if>
+			<if test="processControl != null" >processControl= #{processControl},</if>
+			<if test="loanConditions != null" >loanConditions= #{loanConditions},</if>
+			<if test="otherMatters != null" >otherMatters= #{otherMatters},</if>
+			<if test="controlTypeID != null" >controlTypeID= #{controlTypeID},</if>
+			<if test="controlTypeName != null" >controlTypeName= #{controlTypeName},</if>
+			<if test="monitoredAsking != null" >monitoredAsking= #{monitoredAsking},</if>
+			<if test="resolutionResultID != null" >resolutionResultID= #{resolutionResultID},</if>
+			<if test="resolutionResultName != null" >resolutionResultName= #{resolutionResultName},</if>
+			updateDateTime = NOW()		
+			</set>
+		WHERE meetingResolution_ID=#{meetingResolution_ID}  and unit_uid=#{unit_uid} 
+	</update>
+	<!--删除 -->
+	<delete id="delMeetingResolutionBySql" parameterType="java.lang.String">
+		DELETE FROM 
+			pro_meetingResolution
+		WHERE
+		1=1	${value}
+	</delete>
+	
+</mapper>  

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjm.crm.db.map.Crm_guarantyRecMapper" >
+  
+	<resultMap id="guarantyRecResultMap" type="com.zjm.crm.db.model.Crm_guarantyRec" >
+		<result column="guarantyRec_ID" property="guarantyRec_ID"  />
+		<result column="client_ID" property="client_ID"  />
+		<result column="guarantyUnit" property="guarantyUnit"  />
+		<result column="guarantySum" property="guarantySum"  />
+		<result column="period" property="period"  />
+		<result column="beginDate" property="beginDate"  />
+		<result column="endDate" property="endDate"  />
+		<result column="eachOther" property="eachOther"  />
+		<result column="remark" property="remark"  />
+		<result column="unit_uid" property="unit_uid"  />
+		<result column="unit_uidName" property="unit_uidName"  />
+		<result column="updateUserName" property="updateUserName"  />
+		<result column="updateDateTime" property="updateDateTime"  />
+	</resultMap>
+
+	<!-- 分页查询对外担保列表 -->
+	<select id="selectGuarantyRecPageTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="guarantyRecResultMap">
+		SELECT 
+			guarantyRec_ID,
+			client_ID,
+			guarantyUnit,
+			guarantySum,
+			period,
+			beginDate,
+			endDate,
+			eachOther,
+			remark,
+			unit_uid, 
+			unit_uidName, 
+			updateUserName,
+			updateDateTime  
+		FROM crm_guarantyRec
+		WHERE unit_uid = #{queryCondition.unit_uid}
+		AND client_ID = #{queryCondition.client_ID}
+		ORDER BY updateDateTime DESC
+		LIMIT #{pageNumber},#{pageSize}  
+	</select>
+
+	<!-- 分页查询对外担保列表-查询总记录数 -->
+	<select id="selectGuarantyRecPageTable_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+	 	SELECT 
+	 		COUNT(1) 
+	 	FROM 
+	 		crm_guarantyRec 
+	 	WHERE
+	 		unit_uid = #{queryCondition.unit_uid}
+		AND client_ID = #{queryCondition.client_ID}
+	</select>
+	
+	<!-- 查询对外担保列表 不分页-->
+	<select id="selectGuarantyRecList" parameterType="com.zjm.common.db.model.PageTable" resultMap="guarantyRecResultMap">
+		SELECT 
+			guarantyRec_ID,
+			client_ID,
+			guarantyUnit,
+			guarantySum,
+			period,
+			beginDate,
+			endDate,
+			eachOther,
+			remark,
+			unit_uid, 
+			unit_uidName, 
+			updateUserName,
+			updateDateTime  
+		FROM crm_guarantyRec
+		WHERE unit_uid = #{queryCondition.unit_uid}
+		AND client_ID = #{queryCondition.client_ID}
+		ORDER BY updateDateTime DESC
+	</select>
+	
+	<!-- 查询对外担保列表 不分页-->
+	<select id="selectGuarantyRecListByWheresql" parameterType="java.lang.String" resultMap="guarantyRecResultMap">
+		SELECT 
+			guarantyRec_ID,
+			client_ID,
+			guarantyUnit,
+			guarantySum,
+			period,
+			beginDate,
+			endDate,
+			eachOther,
+			remark,
+			unit_uid, 
+			unit_uidName, 
+			updateUserName,
+			updateDateTime  
+		FROM crm_guarantyRec
+		WHERE 1=1 ${value}
+	</select>
+
+	<!-- 查询一条对外担保-->  
+	<select id="selectOneGuarantyRec" parameterType="com.zjm.crm.db.model.Crm_guarantyRec" resultMap="guarantyRecResultMap">
+		SELECT 
+			guarantyRec_ID,
+			client_ID,
+			guarantyUnit,
+			guarantySum,
+			period,
+			beginDate,
+			endDate,
+			eachOther,
+			remark,
+			unit_uid, 
+			unit_uidName, 
+			updateUserName,
+			updateDateTime   
+		FROM crm_guarantyRec
+		WHERE unit_uid = #{unit_uid}
+		AND guarantyRec_ID = #{guarantyRec_ID}
+	</select>
+	
+	<!-- 插入一条对外担保 -->
+	<insert id="insertOneGuarantyRec" parameterType="com.zjm.crm.db.model.Crm_guarantyRec">
+		INSERT INTO crm_guarantyRec(
+			guarantyRec_ID,
+			client_ID,
+			guarantyUnit,
+			guarantySum,
+			period,
+			beginDate,
+			endDate,
+			eachOther,
+			remark,
+			unit_uid, 
+			unit_uidName, 
+			updateUserName,
+			updateDateTime     
+		) VALUES(
+			#{guarantyRec_ID},
+			#{client_ID},
+			#{guarantyUnit},
+			#{guarantySum},
+			#{period},
+			#{beginDate},
+			#{endDate},
+			#{eachOther},
+			#{remark},
+			#{unit_uid}, 
+			#{unit_uidName}, 
+			#{updateUserName},
+			NOW()
+		)
+	</insert>
+	
+	<!-- 修改一条对外担保 -->
+	<update id="updateOneGuarantyRec" parameterType="com.zjm.crm.db.model.Crm_guarantyRec">
+		UPDATE crm_guarantyRec
+		SET
+			guarantyUnit = #{guarantyUnit},
+			guarantySum = #{guarantySum},
+			period = #{period},
+			beginDate = #{beginDate},
+			endDate = #{endDate},
+			eachOther = #{eachOther},
+			remark = #{remark},
+			updateUserName = #{updateUserName},
+			updateDateTime = NOW()
+		WHERE unit_uid=#{unit_uid}
+		AND guarantyRec_ID = #{guarantyRec_ID}
+	</update>
+	
+	<!-- 删除一条对外担保 -->
+	<delete id="deleteOneGuarantyRec" parameterType="com.zjm.crm.db.model.Crm_guarantyRec">
+		DELETE FROM 
+			crm_guarantyRec
+		WHERE
+			unit_uid = #{unit_uid}
+		AND guarantyRec_ID = #{guarantyRec_ID}
+	</delete>
+ 	
+ 	
+ 	<delete id="deleteGuarantyRecByClient_ID" parameterType="string">
+ 		DELETE FROM 
+			crm_guarantyRec
+		WHERE  client_ID = #{client_ID}
+ 	</delete>
+</mapper>

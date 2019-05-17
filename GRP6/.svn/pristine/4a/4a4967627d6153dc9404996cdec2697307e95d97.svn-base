@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_riskMeetingRecMapper">
+<!-- 会议记录表 -->
+	 <resultMap id="riskMeetedMap" type="com.zjm.pro.db.model.Pro_riskMeetingRec" >
+	    <id column="riskMeetingRec_ID" property="riskMeetingRec_ID"  />
+		<result column=" meetingName" property=" meetingName"/>
+		<result column="meetingTypeID "  property="meetingTypeID "/>
+		<result column="meetingTypeName" property="meetingTypeName"/>
+		<result column="meetingDateTime" property="meetingDateTime"/>
+		<result column="meetingRoom_ID" property="meetingRoom_ID"/>
+		<result column="meetingRoomName" property="meetingRoomName"/>
+		<result column="userIDList" property="userIDList"/>
+		<result column="userNameList" property="userNameList"/>
+		<result column="remark" property="remark"/>
+		<result column="createUserID" property="createUserID"/>
+		<result column="createUserName" property="createUserName"/>
+		<result column="createDate" property="createDate"/>
+		<result column="status" property="status"/>
+		<result column="unit_uid" property="unit_uid"/>
+		<result column="updateUserName" property="updateUserName"/>
+		<result column="updateDateTime" property="updateDateTime"/>
+  </resultMap>
+  
+<!-- 新增一条待上会会议信息  -->
+	<insert id="insertOneArrangeMeeting" parameterType="com.zjm.pro.db.model.Pro_riskMeetingRec">
+		INSERT INTO pro_riskMeetingRec (
+		    riskMeetingRec_ID,
+			meetingName,
+			meetingTypeID,
+			meetingTypeName,
+			meetingDateTime,
+			meetingRoom_ID,
+			meetingRoomName,
+			userIDList,
+			userNameList,
+			remark,
+			createUserID,
+			createUserName,
+			createDate,
+			unit_uid,
+			status,
+			updateUserName,
+			updateDateTime
+		)
+		VALUES
+		(
+	 		#{riskMeetingRec_ID},
+			#{meetingName},
+			#{meetingTypeID},
+			#{meetingTypeName},
+			#{meetingDateTime},
+			#{meetingRoom_ID},
+			#{meetingRoomName},
+			#{userIDList},
+			#{userNameList},
+			#{remark},
+			#{createUserID},
+			#{createUserName},
+			#{createDate},
+			#{unit_uid},
+			#{status},
+			#{updateUserName},
+			NOW()
+		) ;
+	</insert>
+<!-- 分页查询已安排会议列表 -->
+	<select id="selectAwaitedMeetingPageTables" parameterType="com.zjm.common.db.model.PageTable" resultMap="riskMeetedMap">
+		SELECT
+			riskMeetingRec_ID,
+			meetingName,
+			meetingTypeID,
+			meetingTypeName,
+			meetingDateTime,
+			meetingRoom_ID,
+			meetingRoomName,
+			userIDList,
+			userNameList,
+			remark,
+			createUserID,
+			createUserName,
+			createDate,
+			status,
+			unit_uid,
+			updateUserName,
+			updateDateTime
+		FROM pro_riskMeetingRec 
+		WHERE	1=1 ${wheresql}
+		ORDER BY ${sortName} ${sortOrder}
+		LIMIT #{pageNumber},#{pageSize} 		
+	</select>
+
+<!-- 查询已安排的会议列表总数 -->
+	<select id="selectAwaitedMeetedPageTables_count" parameterType="com.zjm.common.db.model.PageTable" resultType="long">
+		SELECT
+			COUNT(1)
+		FROM pro_riskMeetingRec  
+		WHERE 1=1 ${wheresql}
+	</select>
+	
+<!-- 修改审批状态  -->
+	<update id="updateMeetingStatus" parameterType="com.zjm.pro.db.model.Pro_riskMeetingRec">
+		UPDATE	
+			pro_riskMeetingRec
+		SET	
+			status = #{status}
+		WHERE 
+			riskMeetingRec_ID=#{riskMeetingRec_ID}
+	</update>
+<!-- 查询一条会议记录表信息 -->
+	<select id="selectOneAwaitedMeeting" parameterType="java.lang.String" resultMap="riskMeetedMap">
+		SELECT 
+			riskMeetingRec_ID,
+			meetingName,
+			meetingTypeID,
+			meetingTypeName,
+			meetingDateTime,
+			meetingRoom_ID,
+			meetingRoomName,
+			userIDList,
+			userNameList,
+			remark,
+			createUserID,
+			createUserName,
+			createDate,
+			unit_uid,
+			status,
+			updateUserName,
+			updateDateTime
+		FROM pro_riskMeetingRec 
+		WHERE 1=1  ${value}
+	</select>
+
+
+</mapper>

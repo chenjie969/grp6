@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><jatools Class="jatools.ReportDocument" Name="jatools report template"><VariableContext><Item0 Class="Parameter" Name="$param1"><Name>$param1</Name><Type1>java.lang.Double</Type1><DefaultValue>0</DefaultValue></Item0><Item1 Class="jatools.data.Formula" Name="$gs"><Text>tab_risk</Text></Item1><Item2 Class="Parameter" Name="canshu2"><Name>canshu2</Name><Type1>java.lang.String</Type1><DefaultValue>getYear($today) +"年"+getMonth($today) +"月"</DefaultValue></Item2></VariableContext><Page><Children ItemClass="PagePanel"><Item0><Width>1356</Width><Height>96</Height><Children><Item0 Class="Label"><Text>河北融投控股集团在保（在贷、基金、租赁）企业风险分类情况汇总</Text><Font><Face>宋体</Face><Style>1</Style><Size>36</Size></Font><HorizontalAlignment>1</HorizontalAlignment><X>59</X><Y>13</Y><Width>1181</Width><Height>41</Height></Item0><Item1 Class="Text"><Variable>=if(has(begindatesql)) return begindatesql;</Variable><HorizontalAlignment>1</HorizontalAlignment><X>469</X><Y>67</Y><Width>68</Width><Height>23</Height></Item1><Item2 Class="Label"><Text>统计期间：</Text><HorizontalAlignment>1</HorizontalAlignment><X>387</X><Y>67</Y><Width>68</Width><Height>23</Height></Item2><Item3 Class="Label"><Text>至</Text><HorizontalAlignment>1</HorizontalAlignment><X>550</X><Y>67</Y><Width>68</Width><Height>23</Height></Item3><Item4 Class="Text"><Variable>=if(has(enddatesql)) return enddatesql;else return $today;</Variable><HorizontalAlignment>1</HorizontalAlignment><X>592</X><Y>67</Y><Width>68</Width><Height>23</Height></Item4></Children><Type>100</Type></Item0><Item1><Y>478</Y><Width>1356</Width><Height>55</Height><Type>103</Type></Item1><Item2><Y>96</Y><Width>1356</Width><Height>382</Height><Children><Item0 Class="Table"><NodePath>tab_risk</NodePath><X>38</X><Y>62</Y><Children><Item0 Class="Label"><Text>分类</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>0</Col><RowSpan>2</RowSpan></Cell></Item0><Item1 Class="Label"><Text>担保集团承办的业务</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>1</Col><ColSpan>4</ColSpan></Cell></Item1><Item2 Class="Label"><Text>无担保集团担保承办的相关业务</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>5</Col><ColSpan>4</ColSpan></Cell></Item2><Item3 Class="Label"><Text>担保业务余额</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>1</Col></Cell></Item3><Item4 Class="Label"><Text>预估损失</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>2</Col></Cell></Item4><Item5 Class="Label"><Text>委贷业务余额</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>3</Col></Cell></Item5><Item6 Class="Label"><Text>预估损失</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>4</Col></Cell></Item6><Item7 Class="Label"><Text>无担保集团担保的委贷业务余额</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>5</Col></Cell></Item7><Item8 Class="Label"><Text>预估损失</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>6</Col></Cell></Item8><Item9 Class="Label"><Text>无担保集团担保的租赁业务余额</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>7</Col></Cell></Item9><Item10 Class="Label"><Text>预估损失</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>8</Col></Cell></Item10><Item11 Class="Label"><Text>业务余额合计</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>9</Col><RowSpan>2</RowSpan></Cell></Item11><Item12 Class="Label"><Text>预估损失合计</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>10</Col><RowSpan>2</RowSpan></Cell></Item12><Item13 Class="Text"><Variable>=index_column6.guarantySum{tab_risk.name[0]}.sum()*Integer.valueOf(tab_risk.percent[0])/1000
++
+index_column6.guarantySum{tab_risk.name[1]}.sum()*Integer.valueOf(tab_risk.percent[1])/1000
++
+index_column6.guarantySum{tab_risk.name[2]}.sum()*Integer.valueOf(tab_risk.percent[2])/1000
++
+index_column6.guarantySum{tab_risk.name[3]}.sum()*Integer.valueOf(tab_risk.percent[3])/1000
++
+index_column6.guarantySum{tab_risk.name[4]}.sum()*Integer.valueOf(tab_risk.percent[4])/1000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>6</Col></Cell></Item13><Item14 Class="Text"><Variable>=index_column2.guarantySum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>1</Col></Cell></Item14><Item15 Class="Text"><Variable>=index_column4.guarantySum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>3</Col></Cell></Item15><Item16 Class="Text"><Variable>=index_column4.guarantySum{tab_risk.name[0]}.sum()* Integer.valueOf(tab_risk.percent[0])/1000
++
+index_column4.guarantySum{tab_risk.name[1]}.sum()* Integer.valueOf(tab_risk.percent[1])/1000
++
+index_column4.guarantySum{tab_risk.name[2]}.sum()* Integer.valueOf(tab_risk.percent[2])/1000
++
+index_column4.guarantySum{tab_risk.name[3]}.sum()* Integer.valueOf(tab_risk.percent[3])/1000
++
+index_column4.guarantySum{tab_risk.name[4]}.sum()* Integer.valueOf(tab_risk.percent[4])/1000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>4</Col></Cell></Item16><Item17 Class="Text"><Variable>=index_column2.guarantySum.sum()+index_column4.guarantySum.sum()+
+ index_column6.guarantySum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>9</Col></Cell></Item17><Item18 Class="Text"><Variable>=index_column2.guarantySum{tab_risk.name[0]}.sum()/1000*new Integer(tab_risk.percent[0])
++
+index_column2.guarantySum{tab_risk.name[1]}.sum()/1000*new Integer(tab_risk.percent[1])
++
+index_column2.guarantySum{tab_risk.name[2]}.sum()/1000*new Integer(tab_risk.percent[2])
++
+index_column2.guarantySum{tab_risk.name[3]}.sum()/1000*new Integer(tab_risk.percent[3])
++
+index_column2.guarantySum{tab_risk.name[4]}.sum()/1000*new Integer(tab_risk.percent[4])
+
++
+index_column4.guarantySum{tab_risk.name[0]}.sum()* Integer.valueOf(tab_risk.percent[0])/1000
++
+index_column4.guarantySum{tab_risk.name[1]}.sum()* Integer.valueOf(tab_risk.percent[1])/1000
++
+index_column4.guarantySum{tab_risk.name[2]}.sum()* Integer.valueOf(tab_risk.percent[2])/1000
++
+index_column4.guarantySum{tab_risk.name[3]}.sum()* Integer.valueOf(tab_risk.percent[3])/1000
++
+index_column4.guarantySum{tab_risk.name[4]}.sum()* Integer.valueOf(tab_risk.percent[4])/1000
+
++
+index_column6.guarantySum{tab_risk.name[0]}.sum()*Integer.valueOf(tab_risk.percent[0])/1000
++
+index_column6.guarantySum{tab_risk.name[1]}.sum()*Integer.valueOf(tab_risk.percent[1])/1000
++
+index_column6.guarantySum{tab_risk.name[2]}.sum()*Integer.valueOf(tab_risk.percent[2])/1000
++
+index_column6.guarantySum{tab_risk.name[3]}.sum()*Integer.valueOf(tab_risk.percent[3])/1000
++
+index_column6.guarantySum{tab_risk.name[4]}.sum()*Integer.valueOf(tab_risk.percent[4])/1000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>10</Col></Cell></Item18><Item19 Class="Label"><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>7</Col></Cell></Item19><Item20 Class="Text"><Variable>=index_column6.guarantySum.sum()</Variable><Border><StyleText>border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>5</Col></Cell></Item20><Item21 Class="Label"><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>8</Col></Cell></Item21><Item22 Class="Label"><Text>合计</Text><Border/><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>0</Col></Cell></Item22><Item23 Class="RowPanel"><Cell><Row>2</Row><Col>0</Col><ColSpan>11</ColSpan></Cell><Children ItemClass="Text"><Item0><Variable>=$.name</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>0</Col></Cell></Item0><Item1><Variable>=index_column6.guarantySum{$.name}.sum()*Integer.valueOf($.percent)/1000
+</Variable><Border><StyleText>border-top:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>2</Row><Col>6</Col></Cell></Item1><Item2><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>7</Col></Cell></Item2><Item3><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>8</Col></Cell></Item3><Item4><Variable>=index_column2.guarantySum{$.name}.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>1</Col></Cell></Item4><Item5><Name>sunshi</Name><Variable>=index_column2.guarantySum{$.name}.sum()/1000*new Integer($.percent)</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>2</Col></Cell></Item5><Item6><Variable>=index_column4.guarantySum{$.name}.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>3</Col></Cell></Item6><Item7><Variable>=index_column4.guarantySum{$.name}.sum()/1000* Integer.valueOf($.percent)</Variable><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>4</Col></Cell></Item7><Item8><Variable>=index_column2.guarantySum{$.name}.sum()+index_column4.guarantySum{$.name}.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>9</Col></Cell></Item8><Item9><Variable>=index_column2.guarantySum{$.name}.sum()*Integer.valueOf($.percent)/1000+index_column4.guarantySum{$.name}.sum()*Integer.valueOf($.percent)/1000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>10</Col></Cell></Item9><Item10><Variable>=index_column6.guarantySum{$.name}.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.####</Pattern></Format><Cell><Row>2</Row><Col>5</Col></Cell></Item10></Children><NodePath>Row</NodePath></Item23><Item24 Class="Text"><Name>title=" 二狗 道长333"</Name><Variable>=index_column2.guarantySum{tab_risk.name[0]}.sum()/1000*new Integer(tab_risk.percent[0])
++
+index_column2.guarantySum{tab_risk.name[1]}.sum()/1000*new Integer(tab_risk.percent[1])
++
+index_column2.guarantySum{tab_risk.name[2]}.sum()/1000*new Integer(tab_risk.percent[2])
++
+index_column2.guarantySum{tab_risk.name[3]}.sum()/1000*new Integer(tab_risk.percent[3])
++
+index_column2.guarantySum{tab_risk.name[4]}.sum()/1000*new Integer(tab_risk.percent[4])</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.####</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>2</Col></Cell></Item24></Children><ColumnWidths>102,135,121,107,110,84,81,84,84,143,159</ColumnWidths><RowHeights>40,40,20,40</RowHeights></Item0><Item1 Class="Label"><Text>金额单位：万元</Text><HorizontalAlignment>2</HorizontalAlignment><X>1143</X><Y>38</Y><Width>110</Width><Height>23</Height></Item1></Children><Type>102</Type></Item2></Children><PageFormat><Width>1396</Width><Height>603</Height><Bottom>50</Bottom></PageFormat></Page><NodeSource><Children ItemClass="DatasetNodeSource"><Item0><Children ItemClass="RowNodeSource"><Item0/></Children><Reader Class="SqlReader"><Name>tab_risk</Name><Sql>SELECT  dicTypeID as id,dicTypeName as name,
+        remark as percent
+from c_dictype where dicTypePID='50f858be37284937af4e6a8d3c9bee4b'
+
+ORDER BY  order_id</Sql><Description>SELECT  dicTypeID as id,dicTypeName as name,
+        remark as percent
+from c_dictype where dicTypePID='50f858be37284937af4e6a8d3c9bee4b'
+
+ORDER BY  order_id</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><TagName>tab_risk</TagName></Item0><Item1><Children ItemClass="CrossIndexNodeSource"><Item0><IndexFields Len="1">riskLevelName</IndexFields><IndexFields2 Len="1">guarantySum</IndexFields2><TagName>index_column2</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab_column2</Name><Sql>SELECT 
+   SUM((IFNULL(fl.loadSum,0)-IFNULL(tab.freeSum,0)-IFNULL(tab2.replaceSums,0))) AS guarantySum,
+   c.riskLevelName
+   FROM  pro_project fl
+LEFT JOIN 
+(
+SELECT fd.project_ID,SUM(IFNULL(fd.payCapitalSum,0)) AS freeSum FROM pro_factpay fd 
+WHERE  1=1
+   ${has(begindatesql)?(" and fd.payDate&gt;='"+begindatesql+"'"):""}
+   ${has(enddatesql)?(" and fd.payDate&lt;='"+enddatesql+"'"):""}
+GROUP BY fd.project_ID) tab ON tab.project_ID = fl.project_ID
+LEFT JOIN
+(
+	SELECT pr.project_ID,SUM(IFNULL(pr.replaceCapitalSum,0)) as replaceSums from pro_replace pr 
+	where 1=1 
+   ${has(begindatesql)?(" and pr.replaceDate &gt;='"+begindatesql+"'"):""}
+   ${has(enddatesql)?(" and pr.replaceDate &lt;='"+enddatesql+"'"):""}
+GROUP BY pr.project_ID
+) tab2 on tab2.project_ID = fl.project_ID  
+LEFT JOIN pro_apply pa on pa.apply_ID=fl.apply_ID
+LEFT JOIN  pro_applydetail paa on paa.apply_ID=pa.apply_ID
+LEFT JOIN crm_client c on c.client_ID = pa.client_ID
+WHERE
+   fl.busiClass='01'
+ ${has(begindatesql)?(" and fl.reportDate&gt;='"+begindatesql+"'"):""}
+ ${has(enddatesql)?(" and fl.reportDate&lt;='"+enddatesql+"'"):""}
+${has(fullBankCodesql)?(" and fl.fullBankCode like '"+fullBankCodesql+"%'"):""}
+${has(fullBusiTypeCodesql)?(" and fl.fullBusiTypeCode like'"+fullBusiTypeCodesql+"%'"):""}
+${has(guaraSumMinsql)?(" and (fl.loadSum&gt;"+guaraSumMinsql):""}
+${has(sumMinEqualsql)?(" or fl.loadSum="+guaraSumMinsql+")"):""}
+${has(guaraSumMaxsql)?(" and fl.loadSum&lt;"+guaraSumMaxsql):""}
+${has(guaraPeriodMonthsMinsql)?(" and ( fl.preiodMonth&gt;"+guaraPeriodMonthsMinsql):""}
+${has(monthsMinEqualsql)?(" or fl.preiodMonth="+guaraPeriodMonthsMinsql+")"):""}
+${has(guaraPeriodMonthsMaxsql)?(" and fl.preiodMonth&lt; "+guaraPeriodMonthsMaxsql):""}
+
+${has(busiPropIDsql)?(" and p.busiPropID = '"+busiPropIDsql+"'"):""}
+${has(projTypeIDsql)?(" and p.projTypeID = '"+projTypeIDsql+"'"):""}
+${has(fullDepartCodesql)?(" and p.fullDepartCode like'"+fullDepartCodesql+"%'"):""}
+${has(amanIDsql)?(" and p.aManID="+amanIDsql):""}
+${has(bmanIDsql)?(" and p.bManID="+bmanIDsql):""}
+${has(cmanIDsql)?(" and p.cManID="+cmanIDsql):""}
+${has(fullAreaCodesql)?(" and p.fullAreaCode like '"+fullAreaCodesql+"%'"):""}
+GROUP BY   c.riskLevelName </Sql><Description>SELECT 
+   SUM((IFNULL(fl.loadSum,0)-IFNULL(tab.freeSum,0)-IFNULL(tab2.replaceSums,0))) AS guarantySum,
+   c.riskLevelName
+   FROM  pro_project fl
+LEFT JOIN 
+(
+SELECT fd.project_ID,SUM(IFNULL(fd.payCapitalSum,0)) AS freeSum FROM pro_factpay fd 
+WHERE  1=1
+   ${has(begindatesql)?(" and fd.payDate&gt;='"+begindatesql+"'"):""}
+   ${has(enddatesql)?(" and fd.payDate&lt;='"+enddatesql+"'"):""}
+GROUP BY fd.project_ID) tab ON tab.project_ID = fl.project_ID
+LEFT JOIN
+(
+	SELECT pr.project_ID,SUM(IFNULL(pr.replaceCapitalSum,0)) as replaceSums from pro_replace pr 
+	where 1=1 
+   ${has(begindatesql)?(" and pr.replaceDate &gt;='"+begindatesql+"'"):""}
+   ${has(enddatesql)?(" and pr.replaceDate &lt;='"+enddatesql+"'"):""}
+GROUP BY pr.project_ID
+) tab2 on tab2.project_ID = fl.project_ID  
+LEFT JOIN pro_apply pa on pa.apply_ID=fl.apply_ID
+LEFT JOIN  pro_applydetail paa on paa.apply_ID=pa.apply_ID
+LEFT JOIN crm_client c on c.client_ID = pa.client_ID
+WHERE
+   fl.busiClass='01'
+ ${has(begindatesql)?(" and fl.reportDate&gt;='"+begindatesql+"'"):""}
+ ${has(enddatesql)?(" and fl.reportDate&lt;='"+enddatesql+"'"):""}
+${has(fullBankCodesql)?(" and fl.fullBankCode like '"+fullBankCodesql+"%'"):""}
+${has(fullBusiTypeCodesql)?(" and fl.fullBusiTypeCode like'"+fullBusiTypeCodesql+"%'"):""}
+${has(guaraSumMinsql)?(" and (fl.loadSum&gt;"+guaraSumMinsql):""}
+${has(sumMinEqualsql)?(" or fl.loadSum="+guaraSumMinsql+")"):""}
+${has(guaraSumMaxsql)?(" and fl.loadSum&lt;"+guaraSumMaxsql):""}
+${has(guaraPeriodMonthsMinsql)?(" and ( fl.preiodMonth&gt;"+guaraPeriodMonthsMinsql):""}
+${has(monthsMinEqualsql)?(" or fl.preiodMonth="+guaraPeriodMonthsMinsql+")"):""}
+${has(guaraPeriodMonthsMaxsql)?(" and fl.preiodMonth&lt; "+guaraPeriodMonthsMaxsql):""}
+
+${has(busiPropIDsql)?(" and p.busiPropID = '"+busiPropIDsql+"'"):""}
+${has(projTypeIDsql)?(" and p.projTypeID = '"+projTypeIDsql+"'"):""}
+${has(fullDepartCodesql)?(" and p.fullDepartCode like'"+fullDepartCodesql+"%'"):""}
+${has(amanIDsql)?(" and p.aManID="+amanIDsql):""}
+${has(bmanIDsql)?(" and p.bManID="+bmanIDsql):""}
+${has(cmanIDsql)?(" and p.cManID="+cmanIDsql):""}
+${has(fullAreaCodesql)?(" and p.fullAreaCode like '"+fullAreaCodesql+"%'"):""}
+GROUP BY   c.riskLevelName </Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">gzwRiskLevel</IndexFields><IndexFields2 Len="1">guarantySum</IndexFields2><TagName>tab_column2</TagName></Item1><Item2><Children ItemClass="CrossIndexNodeSource"><Item0><IndexFields Len="1">riskLevelName</IndexFields><IndexFields2 Len="1">guarantySum</IndexFields2><TagName>index_column4</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab_column4</Name><Sql>SELECT 
+   SUM(IFNULL((IFNULL(fl.loadSum,0)-IFNULL(tab.freeSum,0)-IFNULL(tab1.badSum,0)),0)) AS guarantySum,
+		c.riskLevelName    
+   FROM  pro_project fl
+LEFT JOIN 
+(SELECT fd.project_ID,SUM(IFNULL(fd.payCapitalSum,0)) AS freeSum FROM pro_factpay fd 
+WHERE  1=1
+ ${has(begindatesql)?(" and fd.payDate&gt;='"+begindatesql+"'"):""}
+ ${has(enddatesql)?(" and fd.payDate&lt;='"+enddatesql+"'"):""}
+GROUP BY fd.project_ID) tab ON tab.project_ID = fl.project_ID
+LEFT JOIN
+(SELECT 
+fl1.project_ID,
+fl1.badSum AS badSum
+FROM 
+pro_project fl1
+WHERE  1=1
+ ${has(enddatesql)?(" and fl1.badDate&lt;='"+enddatesql+"'"):""}
+ ) tab1 ON tab1.project_ID=fl.project_ID
+LEFT JOIN pro_apply pa on pa.apply_ID=fl.apply_ID
+LEFT JOIN  pro_applydetail paa on paa.apply_ID=pa.apply_ID
+LEFT JOIN crm_client c on c.client_ID = pa.client_ID
+WHERE
+   fl.busiClass='02'
+  ${has(begindatesql)?(" and fl.reportDate&gt;='"+begindatesql+"'"):""}
+  ${has(enddatesql)?(" and fl.reportDate&lt;='"+enddatesql+"'"):""}
+	
+		GROUP BY c.riskLevelName
+
+</Sql><Description>SELECT 
+   SUM(IFNULL((IFNULL(fl.loadSum,0)-IFNULL(tab.freeSum,0)-IFNULL(tab1.badSum,0)),0)) AS guarantySum,
+		c.riskLevelName    
+   FROM  pro_project fl
+LEFT JOIN 
+(SELECT fd.project_ID,SUM(IFNULL(fd.payCapitalSum,0)) AS freeSum FROM pro_factpay fd 
+WHERE  1=1
+ ${has(begindatesql)?(" and fd.payDate&gt;='"+begindatesql+"'"):""}
+ ${has(enddatesql)?(" and fd.payDate&lt;='"+enddatesql+"'"):""}
+GROUP BY fd.project_ID) tab ON tab.project_ID = fl.project_ID
+LEFT JOIN
+(SELECT 
+fl1.project_ID,
+fl1.badSum AS badSum
+FROM 
+pro_project fl1
+WHERE  1=1
+ ${has(enddatesql)?(" and fl1.badDate&lt;='"+enddatesql+"'"):""}
+ ) tab1 ON tab1.project_ID=fl.project_ID
+LEFT JOIN pro_apply pa on pa.apply_ID=fl.apply_ID
+LEFT JOIN  pro_applydetail paa on paa.apply_ID=pa.apply_ID
+LEFT JOIN crm_client c on c.client_ID = pa.client_ID
+WHERE
+   fl.busiClass='02'
+  ${has(begindatesql)?(" and fl.reportDate&gt;='"+begindatesql+"'"):""}
+  ${has(enddatesql)?(" and fl.reportDate&lt;='"+enddatesql+"'"):""}
+	
+		GROUP BY c.riskLevelName
+
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">riskLevel</IndexFields><IndexFields2 Len="1">loadSum</IndexFields2><TagName>tab_column4</TagName></Item2><Item3><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">SumAll</IndexFields><TagName>index_column4_1</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab_column4_1</Name><Sql>SELECT 
+SUM(fl.guarantySum*CAST(cd.fieldValue AS SIGNED INTEGER)) AS SumAll
+FROM pro_project p
+LEFT JOIN pro_factload fl
+ON p.project_ID=fl.projectID
+LEFT JOIN c_dictype cd 
+ON p.riskLevel=cd.fieldID
+WHERE dicTypeID = 35 AND  fieldID  !='-1'
+AND  fl.busiTypeID='02'
+${has(begindatesql)?(" and fl.reportDate&gt;='"+begindatesql+"'"):""}
+ ${has(enddatesql)?(" and fl.reportDate&lt;='"+enddatesql+"'"):"AND fl.reportDate&lt;=NOW()"}
+${has(fullBankCodesql)?(" and fl.fullBankCode like '"+fullBankCodesql+"%'"):""}
+${has(fullBusiTypeCodesql)?(" and fl.fullBusiTypeCode like'"+fullBusiTypeCodesql+"%'"):""}
+${has(guaraSumMinsql)?(" and (fl.loadSum&gt;"+guaraSumMinsql):""}
+${has(sumMinEqualsql)?(" or fl.loadSum="+guaraSumMinsql+")"):""}
+${has(guaraSumMaxsql)?(" and fl.loadSum&lt;"+guaraSumMaxsql):""}
+${has(guaraPeriodMonthsMinsql)?(" and ( fl.preiodMonth&gt;"+guaraPeriodMonthsMinsql):""}
+${has(monthsMinEqualsql)?(" or fl.preiodMonth="+guaraPeriodMonthsMinsql+")"):""}
+${has(guaraPeriodMonthsMaxsql)?(" and fl.preiodMonth&lt; "+guaraPeriodMonthsMaxsql):""}
+
+${has(busiPropIDsql)?(" and p.busiPropID = '"+busiPropIDsql+"'"):""}
+${has(projTypeIDsql)?(" and p.projTypeID = '"+projTypeIDsql+"'"):""}
+${has(fullDepartCodesql)?(" and p.fullDepartCode like'"+fullDepartCodesql+"%'"):""}
+${has(amanIDsql)?(" and p.aManID="+amanIDsql):""}
+${has(bmanIDsql)?(" and p.bManID="+bmanIDsql):""}
+${has(cmanIDsql)?(" and p.cManID="+cmanIDsql):""}
+${has(fullAreaCodesql)?(" and p.fullAreaCode like '"+fullAreaCodesql+"%'"):""}</Sql><Description>SELECT 
+SUM(fl.guarantySum*CAST(cd.fieldValue AS SIGNED INTEGER)) AS SumAll
+FROM pro_project p
+LEFT JOIN pro_factload fl
+ON p.project_ID=fl.projectID
+LEFT JOIN c_dictype cd 
+ON p.riskLevel=cd.fieldID
+WHERE dicTypeID = 35 AND  fieldID  !='-1'
+AND  fl.busiTypeID='02'
+${has(begindatesql)?(" and fl.reportDate&gt;='"+begindatesql+"'"):""}
+ ${has(enddatesql)?(" and fl.reportDate&lt;='"+enddatesql+"'"):"AND fl.reportDate&lt;=NOW()"}
+${has(fullBankCodesql)?(" and fl.fullBankCode like '"+fullBankCodesql+"%'"):""}
+${has(fullBusiTypeCodesql)?(" and fl.fullBusiTypeCode like'"+fullBusiTypeCodesql+"%'"):""}
+${has(guaraSumMinsql)?(" and (fl.loadSum&gt;"+guaraSumMinsql):""}
+${has(sumMinEqualsql)?(" or fl.loadSum="+guaraSumMinsql+")"):""}
+${has(guaraSumMaxsql)?(" and fl.loadSum&lt;"+guaraSumMaxsql):""}
+${has(guaraPeriodMonthsMinsql)?(" and ( fl.preiodMonth&gt;"+guaraPeriodMonthsMinsql):""}
+${has(monthsMinEqualsql)?(" or fl.preiodMonth="+guaraPeriodMonthsMinsql+")"):""}
+${has(guaraPeriodMonthsMaxsql)?(" and fl.preiodMonth&lt; "+guaraPeriodMonthsMaxsql):""}
+
+${has(busiPropIDsql)?(" and p.busiPropID = '"+busiPropIDsql+"'"):""}
+${has(projTypeIDsql)?(" and p.projTypeID = '"+projTypeIDsql+"'"):""}
+${has(fullDepartCodesql)?(" and p.fullDepartCode like'"+fullDepartCodesql+"%'"):""}
+${has(amanIDsql)?(" and p.aManID="+amanIDsql):""}
+${has(bmanIDsql)?(" and p.bManID="+bmanIDsql):""}
+${has(cmanIDsql)?(" and p.cManID="+cmanIDsql):""}
+${has(fullAreaCodesql)?(" and p.fullAreaCode like '"+fullAreaCodesql+"%'"):""}</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">SumAll</IndexFields><TagName>tab_column4_1</TagName></Item3><Item4><Children ItemClass="CrossIndexNodeSource"><Item0><IndexFields Len="1">riskLevelName</IndexFields><IndexFields2 Len="1">guarantySum</IndexFields2><TagName>index_column6</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab_column6</Name><Sql>SELECT 
+   SUM(IFNULL((IFNULL(fl.loadSum,0)-IFNULL(tab.freeSum,0)-IFNULL(tab1.badSum,0)),0)) AS guarantySum,
+		c.riskLevelName    
+   FROM  pro_project fl
+LEFT JOIN 
+(SELECT fd.project_ID,SUM(IFNULL(fd.payCapitalSum,0)) AS freeSum FROM pro_factpay fd 
+WHERE  1=1 
+ ${has(begindatesql)?(" and fd.payDate&gt;='"+begindatesql+"'"):""}
+ ${has(enddatesql)?(" and fd.payDate&lt;='"+enddatesql+"'"):""}
+GROUP BY fd.project_ID) tab ON tab.project_ID = fl.project_ID
+LEFT JOIN
+(SELECT 
+fl1.project_ID,
+fl1.badSum AS badSum
+FROM 
+pro_project fl1
+WHERE  1=1
+ ${has(enddatesql)?(" and fl1.badDate&lt;='"+enddatesql+"'"):""}
+ ) tab1 ON tab1.project_ID=fl.project_ID
+LEFT JOIN pro_apply pa on pa.apply_ID=fl.apply_ID
+LEFT JOIN  pro_applydetail paa on paa.apply_ID=pa.apply_ID
+LEFT JOIN crm_client c on c.client_ID = pa.client_ID
+WHERE
+   fl.busiClass='02'  and fl.isGuaranty=false
+  ${has(begindatesql)?(" and fl.reportDate&gt;='"+begindatesql+"'"):""}
+  ${has(enddatesql)?(" and fl.reportDate&lt;='"+enddatesql+"'"):""}
+	
+		GROUP BY c.riskLevelName
+
+</Sql><Description>SELECT 
+   SUM(IFNULL((IFNULL(fl.loadSum,0)-IFNULL(tab.freeSum,0)-IFNULL(tab1.badSum,0)),0)) AS guarantySum,
+		c.riskLevelName    
+   FROM  pro_project fl
+LEFT JOIN 
+(SELECT fd.project_ID,SUM(IFNULL(fd.payCapitalSum,0)) AS freeSum FROM pro_factpay fd 
+WHERE  1=1 
+ ${has(begindatesql)?(" and fd.payDate&gt;='"+begindatesql+"'"):""}
+ ${has(enddatesql)?(" and fd.payDate&lt;='"+enddatesql+"'"):""}
+GROUP BY fd.project_ID) tab ON tab.project_ID = fl.project_ID
+LEFT JOIN
+(SELECT 
+fl1.project_ID,
+fl1.badSum AS badSum
+FROM 
+pro_project fl1
+WHERE  1=1
+ ${has(enddatesql)?(" and fl1.badDate&lt;='"+enddatesql+"'"):""}
+ ) tab1 ON tab1.project_ID=fl.project_ID
+LEFT JOIN pro_apply pa on pa.apply_ID=fl.apply_ID
+LEFT JOIN  pro_applydetail paa on paa.apply_ID=pa.apply_ID
+LEFT JOIN crm_client c on c.client_ID = pa.client_ID
+WHERE
+   fl.busiClass='02'  and fl.isGuaranty=false
+  ${has(begindatesql)?(" and fl.reportDate&gt;='"+begindatesql+"'"):""}
+  ${has(enddatesql)?(" and fl.reportDate&lt;='"+enddatesql+"'"):""}
+	
+		GROUP BY c.riskLevelName
+
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">gzwRiskLevel</IndexFields><IndexFields2 Len="1">guarantySum</IndexFields2><TagName>tab_column6</TagName></Item4><Item5><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">SumAll</IndexFields><TagName>index_column6_1</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab_column6_1</Name><Sql>SELECT 
+SUM(fl.guarantySum*CAST(cd.fieldValue AS SIGNED INTEGER)) AS SumAll
+FROM pro_project p
+LEFT JOIN pro_factload fl
+ON p.project_ID=fl.projectID
+LEFT JOIN c_dictype cd 
+ON p.riskLevel=cd.fieldID
+WHERE dicTypeID = 35 AND  fieldID  !='-1'
+AND  fl.busiTypeID='02'
+${has(begindatesql)?(" and fl.reportDate&gt;='"+begindatesql+"'"):""}
+ ${has(enddatesql)?(" and fl.reportDate&lt;='"+enddatesql+"'"):"AND fl.reportDate&lt;=NOW()"}
+${has(fullBankCodesql)?(" and fl.fullBankCode like '"+fullBankCodesql+"%'"):""}
+${has(fullBusiTypeCodesql)?(" and fl.fullBusiTypeCode like'"+fullBusiTypeCodesql+"%'"):""}
+${has(guaraSumMinsql)?(" and (fl.loadSum&gt;"+guaraSumMinsql):""}
+${has(sumMinEqualsql)?(" or fl.loadSum="+guaraSumMinsql+")"):""}
+${has(guaraSumMaxsql)?(" and fl.loadSum&lt;"+guaraSumMaxsql):""}
+${has(guaraPeriodMonthsMinsql)?(" and ( fl.preiodMonth&gt;"+guaraPeriodMonthsMinsql):""}
+${has(monthsMinEqualsql)?(" or fl.preiodMonth="+guaraPeriodMonthsMinsql+")"):""}
+${has(guaraPeriodMonthsMaxsql)?(" and fl.preiodMonth&lt; "+guaraPeriodMonthsMaxsql):""}
+
+${has(busiPropIDsql)?(" and p.busiPropID = '"+busiPropIDsql+"'"):""}
+${has(projTypeIDsql)?(" and p.projTypeID = '"+projTypeIDsql+"'"):""}
+${has(fullDepartCodesql)?(" and p.fullDepartCode like'"+fullDepartCodesql+"%'"):""}
+${has(amanIDsql)?(" and p.aManID="+amanIDsql):""}
+${has(bmanIDsql)?(" and p.bManID="+bmanIDsql):""}
+${has(cmanIDsql)?(" and p.cManID="+cmanIDsql):""}
+${has(fullAreaCodesql)?(" and p.fullAreaCode like '"+fullAreaCodesql+"%'"):""}</Sql><Description>SELECT 
+SUM(fl.guarantySum*CAST(cd.fieldValue AS SIGNED INTEGER)) AS SumAll
+FROM pro_project p
+LEFT JOIN pro_factload fl
+ON p.project_ID=fl.projectID
+LEFT JOIN c_dictype cd 
+ON p.riskLevel=cd.fieldID
+WHERE dicTypeID = 35 AND  fieldID  !='-1'
+AND  fl.busiTypeID='02'
+${has(begindatesql)?(" and fl.reportDate&gt;='"+begindatesql+"'"):""}
+ ${has(enddatesql)?(" and fl.reportDate&lt;='"+enddatesql+"'"):"AND fl.reportDate&lt;=NOW()"}
+${has(fullBankCodesql)?(" and fl.fullBankCode like '"+fullBankCodesql+"%'"):""}
+${has(fullBusiTypeCodesql)?(" and fl.fullBusiTypeCode like'"+fullBusiTypeCodesql+"%'"):""}
+${has(guaraSumMinsql)?(" and (fl.loadSum&gt;"+guaraSumMinsql):""}
+${has(sumMinEqualsql)?(" or fl.loadSum="+guaraSumMinsql+")"):""}
+${has(guaraSumMaxsql)?(" and fl.loadSum&lt;"+guaraSumMaxsql):""}
+${has(guaraPeriodMonthsMinsql)?(" and ( fl.preiodMonth&gt;"+guaraPeriodMonthsMinsql):""}
+${has(monthsMinEqualsql)?(" or fl.preiodMonth="+guaraPeriodMonthsMinsql+")"):""}
+${has(guaraPeriodMonthsMaxsql)?(" and fl.preiodMonth&lt; "+guaraPeriodMonthsMaxsql):""}
+
+${has(busiPropIDsql)?(" and p.busiPropID = '"+busiPropIDsql+"'"):""}
+${has(projTypeIDsql)?(" and p.projTypeID = '"+projTypeIDsql+"'"):""}
+${has(fullDepartCodesql)?(" and p.fullDepartCode like'"+fullDepartCodesql+"%'"):""}
+${has(amanIDsql)?(" and p.aManID="+amanIDsql):""}
+${has(bmanIDsql)?(" and p.bManID="+bmanIDsql):""}
+${has(cmanIDsql)?(" and p.cManID="+cmanIDsql):""}
+${has(fullAreaCodesql)?(" and p.fullAreaCode like '"+fullAreaCodesql+"%'"):""}</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">SumAll</IndexFields><TagName>tab_column6_1</TagName></Item5></Children></NodeSource></jatools>

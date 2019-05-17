@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.sys.db.map.C_dictypeMapper">
+
+	<!-- 字典表信息 -->
+	<resultMap type="com.zjm.sys.db.model.C_dictype" id="DicResultMap">
+		<result property="unit_uid" column="unit_uid" />
+		<result property="dicTypeID" column="dicTypeID" />
+		<result property="dicTypePID" column="dicTypePID" />
+		<result property="dicTypeName" column="dicTypeName" />
+		<result property="remark" column="remark" />
+		<result property="order_id" column="order_id" />
+		<result property="createdatetime" column="createdatetime" />
+		<result property="create_user" column="create_user" />
+		<result property="updatedatetime" column="updatedatetime" />
+		<result property="update_user" column="update_user" />
+		<result property="isDefault" column="isDefault" />
+		<result property="isEable" column="isEable" />
+		<result property="unificationID" column="unificationID" />
+	</resultMap>
+	<!-- 查询所有的字典 -->
+	<select id="selectAllDicTypeList" resultMap="DicResultMap" parameterType="java.lang.String">
+		<![CDATA[
+		SELECT 
+			unit_uid,
+			dicTypeID,
+			dicTypePID,
+			dicTypeName,
+			remark,
+			order_id,
+			createdatetime,
+			create_user,
+			updatedatetime,
+			update_user,
+			isDefault,
+			isEable,
+			unificationID
+		FROM c_dictype 
+		where 1=1 ${value}  
+		ORDER BY order_id]]>
+	</select>
+	<!-- 查询所有的字典    分页列表 总记录数-->
+	<select id="selectDicTypePageTables_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		<![CDATA[
+		SELECT count(dicTypeID) 
+		FROM c_dictype 
+		where 1=1 ${wheresql} ]]>
+	</select>
+	<!-- 查询所有的字典 带分页-->
+	<select id="selectDicTypePageTables" resultMap="DicResultMap" parameterType="java.lang.String">
+		<![CDATA[
+		SELECT 
+			unit_uid,
+			dicTypeID,
+			dicTypePID,
+			dicTypeName,
+			isDefault,
+			isEable,
+			remark,
+			order_id,
+			createdatetime,
+			create_user,
+			updatedatetime,
+			update_user,
+			unificationID
+		FROM c_dictype 
+		where 1=1 ${wheresql}   
+		limit #{pageNumber},#{pageSize}]]>
+	</select>
+	<!-- 插入一个字典信息 -->
+	<insert id="insertOneDicTypeInfo"	parameterType="com.zjm.sys.db.model.C_dictype">
+		<![CDATA[
+		INSERT INTO c_dictype (
+			unit_uid,
+			dicTypeID,
+			dicTypePID,
+			dicTypeName,
+			remark,			
+			order_id,
+			createdatetime,
+			create_user,
+			updatedatetime,
+			update_user,
+			unificationID,
+			isEable
+		)
+		VALUES
+		(
+			#{unit_uid},
+			#{dicTypeID},
+			#{dicTypePID},
+			#{dicTypeName},
+			#{remark},
+			#{order_id},
+			NOW(),
+			#{create_user},
+			NOW(),
+			#{update_user},
+			#{unificationID},
+			#{isEable}
+		) ;
+		]]>
+	</insert>
+	<!--  查询同级节点下共有多少字典 -->
+	<select id="selectDicTypeOrderId" parameterType="com.zjm.sys.db.model.C_dictype" resultType="java.lang.Integer">
+		<![CDATA[SELECT count(dicTypePID) FROM c_dictype where dicTypePID=#{dicTypePID}]]>
+	</select>
+	<!-- 查询一个字典信息 -->
+	<select id="selectOneDicTypeInfo" parameterType="com.zjm.sys.db.model.C_dictype" resultMap="DicResultMap">
+		<![CDATA[
+		SELECT 
+			unit_uid,
+			dicTypeID,
+			dicTypePID,
+			dicTypeName,
+			isDefault,
+			isEable,
+			remark,
+			order_id,
+			createdatetime,
+			create_user,
+			updatedatetime,
+			update_user,
+			unificationID 
+		FROM c_dictype 
+		where dicTypeID=#{dicTypeID}
+		]]>
+	</select>
+	<!-- 更新一个字典信息 -->	
+	<update id="updateOneDicTypeInfo" parameterType="com.zjm.sys.db.model.C_dictype">
+		<![CDATA[
+		UPDATE 
+		  	c_dictype
+		SET
+		 	unit_uid = #{unit_uid},
+			dicTypePID = #{dicTypePID},
+			dicTypeName = #{dicTypeName},
+			remark = #{remark},
+			order_id = #{order_id} ,
+			updatedatetime = NOW(),
+			update_user = #{update_user},
+			isEable = #{isEable},
+			unificationID = #{unificationID} 
+		WHERE  dicTypeID = #{dicTypeID}
+		  ]]>
+	</update>
+	<!-- 删除一个字典信息 -->
+	<delete id="deleteOneDicTypeInfo" parameterType="com.zjm.sys.db.model.C_dictype">
+		<![CDATA[DELETE FROM c_dictype WHERE dicTypeID = #{dicTypeID} ]]>
+	</delete>
+	<!-- 判断字典名称是否存在（全部单级字典） -->
+	<select id="isExistDictypeNameForALL" parameterType="com.zjm.sys.db.model.C_dictype" resultType="java.lang.Integer">
+		<![CDATA[
+			SELECT 
+				COUNT(1) 
+			FROM 
+				c_dictype 
+			WHERE 
+				unit_uid=#{unit_uid} 
+			AND dicTypeName=#{dicTypeName}
+		]]>
+			<if test="dicTypeID != null">
+				AND dicTypeID != #{dicTypeID}
+			</if>
+	</select>
+	<!-- 判断字典名称是否存在（同级目录字典） -->
+	<select id="isExistDictypeNameForParent" parameterType="com.zjm.sys.db.model.C_dictype" resultType="java.lang.Integer">
+		<![CDATA[
+			SELECT 
+				COUNT(1) 
+			FROM 
+				c_dictype 
+			WHERE 
+				unit_uid=#{unit_uid} 
+			AND dicTypeName=#{dicTypeName}
+			AND dicTypePID=#{dicTypePID}
+		]]>
+			<if test="dicTypeID != null">
+				AND dicTypeID != #{dicTypeID}
+			</if>
+	</select>
+	<!-- 公共排序方法 -->	
+	<update id="updateSortOrder" parameterType="java.lang.String">
+		<![CDATA[${value}]]>
+	</update>	
+</mapper>

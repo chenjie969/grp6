@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_arcMoveRecMapper">
+	<!--档案记录信息表 -->
+	 <resultMap id="ArcMoveRecMap" type="com.zjm.pro.db.model.Pro_arcMoveRec" >
+		<result column="arcMoveRec_ID" property="arcMoveRec_ID"/>
+		<result column="apply_ID" property="apply_ID"/>
+		<result column="moveDate" property="moveDate"/>
+		<result column="moveUserName" property="moveUserName"/>
+		<result column="acceptDate" property="acceptDate"/>
+		<result column="acceptUserName" property="acceptUserName"/>
+		<result column="status" property="status"/>
+		<result column="unit_uid" property="unit_uid"/>
+		<result column="updateUserName" property="updateUserName"/>
+		<result column="updateDateTime" property="updateDateTime"/>
+ 			
+  </resultMap>
+	
+<!-- 新增 档案记录信息表 -->
+	<insert id="insertOneArcMoveRecInfo"	parameterType="com.zjm.pro.db.model.Pro_arcMoveRec">
+		<![CDATA[
+		INSERT INTO pro_arcMoveRec (
+	        arcMoveRec_ID,
+			apply_ID,
+			moveDate,
+			moveUserName,
+			acceptDate,
+			acceptUserName,
+			status,
+			unit_uid,
+			updateUserName,
+			updateDateTime
+		)
+		VALUES
+		(
+			#{arcMoveRec_ID},
+			#{apply_ID},
+			#{moveDate},
+			#{moveUserName},
+			#{acceptDate},
+			#{acceptUserName},
+			#{status},
+			#{unit_uid},
+			#{updateUserName},
+			NOW()
+		
+		) ;
+		]]>
+	</insert>
+	<!-- 根据查询条件查询一个档案记录信息表-->
+	<select id="selectOneArcMoveRecByWhereSql" parameterType="java.lang.String"  resultMap="ArcMoveRecMap">
+	<![CDATA[
+		SELECT 
+		        arcMoveRec_ID,
+				apply_ID,
+				moveDate,
+				moveUserName,
+				acceptDate,
+				acceptUserName,
+				status,
+				unit_uid,
+				updateUserName,
+				updateDateTime
+
+	    FROM 
+	         pro_arcMoveRec
+		WHERE 1=1 ${value}
+		limit 1 
+		]]> 				 
+	</select>
+	
+	<!-- 根据查询条件查询档案记录信息表List-->
+	<select id="selectArcMoveRecListByWhereSql" parameterType="java.lang.String"  resultMap="ArcMoveRecMap">
+	<![CDATA[
+		SELECT 
+		        arcMoveRec_ID,
+				apply_ID,
+				moveDate,
+				moveUserName,
+				acceptDate,
+				acceptUserName,
+				status,
+				unit_uid,
+				updateUserName,
+				updateDateTime
+	    FROM 
+	         pro_arcMoveRec 
+		WHERE 1=1 ${value}
+		]]> 				 
+	</select>
+	
+	
+	
+	<!--根据wheresql删除档案记录信息 -->
+	<delete id="deleteOneArcMoveRecByWhereSql"  parameterType="java.lang.String" >
+		<![CDATA[DELETE FROM pro_arcMoveRec WHERE 1=1 ${value} ]]>
+	</delete>
+	
+	<!-- 查询 档案记录信息  列表 -->
+	<select id="selectArcMoveRecPageTables" resultMap="ArcMoveRecMap" parameterType="com.zjm.common.db.model.PageTable">
+		<![CDATA[
+		SELECT
+				arcMoveRec_ID,
+				apply_ID,
+				moveDate,
+				moveUserName,
+				acceptDate,
+				acceptUserName,
+				status,
+				unit_uid,
+				updateUserName,
+				updateDateTime	
+
+		   FROM
+		   pro_arcMoveRec  
+		WHERE 1=1 ${wheresql} 
+		ORDER BY ${sortName} ${sortOrder}
+		limit #{pageNumber},#{pageSize}
+		]]>
+	</select>
+		<!-- 查询  档案记录信息   列表 总记录数-->
+	<select id="selectArcMoveRecPageTables_Count" parameterType="com.zjm.common.db.model.PageTable"  resultType="java.lang.Long">
+		<![CDATA[
+		SELECT count(arcMoveRec_ID) FROM pro_arcMoveRec
+		WHERE 1=1 ${wheresql} 		
+		]]>		 
+	</select>
+	<!-- 更新一个 档案记录信息  -->	
+	<update id="updateOneArcMoveRecInfo" parameterType="com.zjm.pro.db.model.Pro_arcMoveRec">
+		UPDATE 
+		     pro_arcMoveRec
+		<set >
+	      <if test="moveDate != null" >moveDate= #{moveDate},</if>
+	      <if test="moveUserName != null" >moveUserName= #{moveUserName},</if>
+	      <if test="acceptDate != null" >acceptDate= #{acceptDate},</if>
+	      <if test="acceptUserName != null" >acceptUserName= #{acceptUserName},</if>
+	      <if test="status != null" >status= #{status},</if>
+	      <if test="updateUserName != null" >updateUserName= #{updateUserName},</if>
+               updateDateTime = NOW()
+		 </set>
+			 
+		WHERE arcMoveRec_ID=#{arcMoveRec_ID} 
+	</update>
+</mapper>  

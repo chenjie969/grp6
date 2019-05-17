@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zjm.gworkFlow.db.map.OsGworkflowComponentsMapper">
+
+	<!-- 根据动作编号取得动作的actionURL -->
+	<resultMap type="com.zjm.gworkFlow.db.model.OsGworkflowComponents" id="OsactionURLResultMap">
+		<result property="editAction" column="editAction" />
+	</resultMap>
+	
+	<resultMap type="com.zjm.gworkFlow.db.model.OsGworkflowComponents" id="OsComponentsResultMap">
+		<result property="id" column="ID" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="componentName" column="componentName" />
+		<result property="componentID" column="componentID" />
+		<result property="editAction" column="editAction" />
+		<result property="viewAction" column="viewAction" />
+		<result property="roleDescr" column="roleDescr" />
+		<result property="funDescr" column="funDescr" />
+		<result property="releaseDate" column="releaseDate" />
+		<result property="author" column="author" />
+		<result property="user_name" column="user_name" />
+	</resultMap>
+	
+	<!-- 根据构件编号从业务构件中取得构件的actionURL -->
+	<select id="getActionURL" resultMap="OsactionURLResultMap" parameterType="com.zjm.gworkFlow.db.model.OsGworkflowComponents">
+		<![CDATA[
+		    SELECT 
+			  editAction 
+			FROM
+			  os_gworkflow_components
+			WHERE componentID = ${componentID}
+		]]>
+	</select>
+	
+	<!-- 返回步骤对应业务构件 -->
+	<select id="returnComponent" resultMap="OsComponentsResultMap" parameterType="com.zjm.gworkFlow.db.model.OsGworkflowComponents">
+		<![CDATA[
+		    SELECT 
+			  *
+			FROM
+			  os_gworkflow_components
+			WHERE componentID = ${componentID}
+		]]>
+	</select>
+
+</mapper> 

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.sys.db.map.Sys_docMouldMapper">
+	<resultMap type="com.zjm.sys.db.model.Sys_docMould" id="Sys_docMouldResultMap">
+		<result property="docMouldID" column="docMouldID" />
+		<result property="mouldTypeID" column="mouldTypeID" />
+		<result property="mouldTypeName" column="mouldTypeName" />
+		<result property="mouldName" column="mouldName" />
+		<result property="oldMouldName" column="oldMouldName" />
+		<result property="mouldPath" column="mouldPath" />
+		<result property="fileSize" column="fileSize" />
+		<result property="extend" column="extend" />
+		<result property="uploadManID" column="uploadManID" />
+		<result property="uploadManName" column="uploadManName" />
+		<result property="uploadDateTime" column="uploadDateTime" />
+		<result property="updateUserName" column="updateUserName" />
+		<result property="updateDateTime" column="updateDateTime" />
+		<result property="unit_uid" column="unit_uid" />
+	</resultMap>
+	
+	<!-- 插入一个合同模板 -->
+	<insert id="insertOneDocMould"	parameterType="com.zjm.sys.db.model.Sys_docMould">
+		<![CDATA[
+		INSERT INTO sys_docMould (
+			docMouldID,
+			mouldTypeID,
+			mouldTypeName,
+			mouldName,
+			oldMouldName,
+			mouldPath,
+			fileSize,
+			extend,
+			uploadManID,
+			uploadManName,
+			uploadDateTime,
+			updateUserName,
+			updateDateTime,
+			unit_uid
+		)
+		VALUES
+		(
+			#{docMouldID},
+			#{mouldTypeID},
+			#{mouldTypeName},
+			#{mouldName},
+			#{oldMouldName},
+			#{mouldPath},
+			#{fileSize},
+			#{extend},
+			#{uploadManID},
+			#{uploadManName},
+			NOW(),
+			#{updateUserName},
+			NOW(),
+			#{unit_uid}
+		) ;
+		]]>
+	</insert>
+	
+	
+	
+	<!-- 合同模板List -->
+	<select id="selectAllDocMouldPageTables" parameterType="com.zjm.common.db.model.PageTable" resultMap="Sys_docMouldResultMap">
+		<![CDATA[SELECT docMouldID,
+			mouldTypeID,
+			mouldTypeName,
+			mouldName,
+			oldMouldName,
+			mouldPath,
+			fileSize,
+			extend,
+			uploadManID,
+			uploadManName,
+			uploadDateTime,
+			updateUserName,
+			updateDateTime,
+			unit_uid FROM sys_docMould where 1=1 ${wheresql}   limit #{pageNumber},#{pageSize}]]>
+	</select>
+	
+	<!-- 合同模板 记录数 -->
+	<select id="selectAllDocMouldPageTables_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		<![CDATA[SELECT count(docMouldID) FROM sys_docMould where 1=1 ${wheresql} ]]>
+	</select>
+	
+	<!-- 合同模板List -->
+	<select id="selectDocMouldListByWheresql" parameterType="java.lang.String" resultMap="Sys_docMouldResultMap">
+		<![CDATA[
+			SELECT 
+				docMouldID,
+				mouldTypeID,
+				mouldTypeName,
+				mouldName,
+				oldMouldName,
+				mouldPath,
+				fileSize,
+				extend,
+				uploadManID,
+				uploadManName,
+				uploadDateTime,
+				updateUserName,
+				updateDateTime,
+				unit_uid 
+			FROM 
+				sys_docMould 
+			WHERE 1=1 ${value}
+		]]>
+	</select>
+	
+	<!-- 删除一个合同模板信息 -->
+	<delete id="delectOneDocMouldInfo" parameterType="com.zjm.sys.db.model.Sys_docMould">
+		<![CDATA[DELETE FROM sys_docMould WHERE docMouldID=#{docMouldID}  and unit_uid=#{unit_uid} ]]>
+	</delete>
+		<select id="selectOnefile" parameterType="string" resultMap="Sys_docMouldResultMap">
+		<![CDATA[SELECT docMouldID,
+			mouldTypeID,
+			mouldTypeName,
+			mouldName,
+			oldMouldName,
+			mouldPath,
+			fileSize,
+			extend,
+			uploadManID,
+			uploadManName,
+			uploadDateTime,
+			updateUserName,
+			updateDateTime,
+			unit_uid FROM sys_docMould where oldMouldName=#{oldMouldName}  and mouldPath=#{mouldPath} ]]>
+	</select>
+</mapper>  

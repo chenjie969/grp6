@@ -1,0 +1,168 @@
+package com.zjm.pro.creditor.service.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.zjm.common.db.model.PageTable;
+import com.zjm.common.db.model.User;
+import com.zjm.common.log.service.LogService;
+import com.zjm.pro.creditor.service.CreditorService;
+import com.zjm.pro.db.map.Pro_applyMapper;
+import com.zjm.pro.db.map.Pro_creditorMapper;
+import com.zjm.pro.db.map.Pro_projectMapper;
+import com.zjm.pro.db.model.Pro_apply;
+import com.zjm.pro.db.model.Pro_creditor;
+import com.zjm.pro.db.model.Pro_delay;
+import com.zjm.pro.db.model.Pro_project;
+import com.zjm.util.DateUtil;
+import com.zjm.util.Tool;
+
+@Service("creditorService")
+@Transactional
+public class CreditorServiceImpl implements CreditorService {
+
+	@Resource
+	private Pro_creditorMapper pro_creditorMapper;
+	@Resource
+	private Pro_applyMapper pro_applyMapper;
+	@Resource
+	private Pro_projectMapper pro_projectMapper;
+	@Resource
+	private LogService logService;
+	
+	@Override
+	public boolean insertOneCreditorInfo(User user, Pro_creditor creditor) {
+		creditor.setCreditorId(Tool.createUUID32());
+		return pro_creditorMapper.insertOneCreditorInfo(creditor);
+	}
+
+	/**
+	 * 	全额转让 ：   修改原项目资金方
+	 *	部分转让 : 修改原项目在保余额，新增一条再保项目，再保余额为转让金额，资金方为页面选择资金方
+	 */
+	@Override
+	public Boolean insertOneCreditorInfoByApplyInfo(User userSession, Pro_creditor pro_creditor) {
+		boolean  a = false;
+		Pro_apply apply  = pro_applyMapper.selectOneApplyWhereSql("and apply_ID = \'"+pro_creditor.getApplyId()+"\' ");
+		Pro_project project = pro_projectMapper.selectOneProjectWhereSql("and project_ID = \'"+pro_creditor.getProjectId()+"\' ");
+		int i = 0;
+		if(null!=project){
+			//if(project.getGuarantySum()==pro_creditor.getCreditorSum()){//全额转让
+				/*project.setFundSource(pro_creditor.getFundSource());
+				apply.setFundSource(pro_creditor.getFundSource());
+				apply.setFundType(pro_creditor.getFundType());
+				apply.setFundTypeID(pro_creditor.getFundTypeId());
+				apply.setFundID(pro_creditor.getFundId());
+				apply.setFundName(pro_creditor.getSubFundName());
+				apply.setFundChinese(pro_creditor.getFundName());
+				i = pro_applyMapper.updateOneApplyInfo(apply);*/
+				//if(i>0)
+					//project.setIsCreditorMark(1);
+					//project.setReportDate(pro_creditor.getCreditorDate());
+					//i = pro_projectMapper.updateOneProjectInfo(project);
+			//}else{//部分转让
+				//修改原项目在保余额  -----start-----
+				project.setGuarantySum(project.getGuarantySum()-pro_creditor.getCreditorSum());
+//				pro_applyMapper.updateOneApplyInfo(apply);
+				project.setIsCreditorMark(1);
+				if(project.getGuarantySum()==pro_creditor.getCreditorSum()){//全额转让，将原项目添加标记
+					project.setIsCreditorAll(1);
+				}
+				i = pro_projectMapper.updateOneProjectInfo(project);
+				//修改原项目在保余额  -----end↑--
+				
+				//新增一条保后项目-------start↓--
+				Pro_apply applyNew  = new Pro_apply();
+				BeanUtils.copyProperties(apply, applyNew, Pro_apply.class);
+				applyNew.setApply_ID(Tool.createUUID32());
+				applyNew.setFundSource(pro_creditor.getFundSource());
+				applyNew.setFundType(pro_creditor.getFundType());
+				applyNew.setFundTypeID(pro_creditor.getFundTypeId());
+				applyNew.setFundID(pro_creditor.getFundId());
+				applyNew.setFundName(pro_creditor.getSubFundName());
+				applyNew.setFundChinese(pro_creditor.getFundName());
+				applyNew.setUsableSum(pro_creditor.getCreditorSum());
+				i = pro_applyMapper.insertOneApplyInfo(applyNew);
+				
+				Pro_project projectNew = new Pro_project();
+				BeanUtils.copyProperties(project, projectNew, Pro_project.class);
+				projectNew.setProject_ID(Tool.createUUID32());
+				projectNew.setApply_ID(applyNew.getApply_ID());//设置关联关系
+				projectNew.setFundSource(pro_creditor.getFundSource());
+				projectNew.setGuarantySum(pro_creditor.getCreditorSum());
+				projectNew.setReportDate(pro_creditor.getCreditorDate());
+				projectNew.setBankName(pro_creditor.getFundName());
+				projectNew.setBankID(pro_creditor.getFundId());
+				projectNew.setLoadSum(pro_creditor.getCreditorSum());
+//				projectNew.setIsCreditorMark(1);
+				if(i>0){
+					i = pro_projectMapper.insertOneProjectInfo(projectNew);
+					//模拟一笔放款业务
+					//Pro_factPay factPay = new Pro_factPay();
+				}
+				pro_creditor.setApplyId(apply.getApply_ID());
+				pro_creditor.setProjectId(project.getProject_ID());//关联项目id
+				//设置债权的id
+				pro_creditor.setCreditApplyId(applyNew.getApply_ID());
+				pro_creditor.setCreditProjectId(projectNew.getProject_ID());
+				pro_creditor.setCreditorId(Tool.createUUID32());
+				pro_creditor.setCreateDate(DateUtil.getNow());
+				a = pro_creditorMapper.insertOneCreditorInfo(pro_creditor);
+			//}
+		}
+		return a;
+	}
+
+	@Override
+	public PageTable<Pro_creditor> selectProjectCreditorPageTables(PageTable<Pro_creditor> pageTable) {
+		List<Pro_creditor> creditorList=new ArrayList<>();
+		try {
+			creditorList = pro_creditorMapper.selectProjectCreditorPageTables(pageTable);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Long total=0L;
+		try {
+			total = pro_creditorMapper.selectProjectCreditorPageTables_Count(pageTable);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		pageTable.setRows(creditorList);
+		pageTable.setTotal(total);
+		return pageTable;
+	}
+
+	@Override
+	public Pro_creditor selectOneCreditorByWhereSql(String whereSql) {
+		return	pro_creditorMapper.selectOneCreditorByWhereSql(whereSql);
+	}
+
+	@Override
+	public Boolean deleteCreditorByWhereSql(String whereSql) {
+		boolean b = false;
+		Pro_creditor pro_creditor = pro_creditorMapper.selectOneCreditorByWhereSql(whereSql);
+		if(null!=pro_creditor){
+			Pro_project project = pro_projectMapper.selectOneProjectWhereSql("and project_ID = \'"+pro_creditor.getProjectId()+"\' ");
+			project.setGuarantySum(project.getGuarantySum()+pro_creditor.getCreditorSum());//将转让金额重新加到原项目中
+			int i = pro_projectMapper.updateOneProjectInfo(project);
+			//删除债权转让新增的业务数据
+			i = pro_applyMapper.delectApplyByWhereSql("and apply_ID = \'"+pro_creditor.getCreditApplyId()+"\' ");
+			//删除债权转让新增的项目数据
+			i = pro_projectMapper.deleteOneProjectAfterBySql("and project_ID = \'"+pro_creditor.getCreditProjectId()+"\' ");
+			//删除债权转让记录
+			i = pro_creditorMapper.deleteCreditorByWhereSql(whereSql);
+			
+			if(i>0){
+				b = true;
+			}
+		}
+		return b;
+	}
+
+}

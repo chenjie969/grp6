@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_projectLawsuitMapper">
+	 <resultMap id="ProLawsuitMap" type="com.zjm.pro.db.model.Pro_projectLawsuit" >
+	    <id column="projectLawsuit_ID" property="projectLawsuit_ID"  />
+		<result column="assetSealUp_ID" property="assetSealUp_ID"/>
+		<result column="recordNum" property="recordNum"/>
+		<result column="plaintiff" property="plaintiff"/>
+		<result column="defendant" property="defendant"/>		
+		<result column="lawsuitSum" property="lawsuitSum"/>
+		<result column="lawsuitDate" property="lawsuitDate"/>		
+		<result column="lawCourt" property="lawCourt"/>
+		<result column="caseInfo" property="caseInfo"/>		
+		<result column="propertyInfo" property="propertyInfo"/>
+		<result column="unit_uid" property="unit_uid"/>
+		<result column="caseType" property="caseType"/>
+		<result column="dicTypeID" property="dicTypeID"/>
+		<result column="dicTypeName" property="dicTypeName"/>
+		<result column="effectiveLegalDocuments" property="effectiveLegalDocuments"/>
+		<result column="firstSeal" property="firstSeal"/>
+		<result column="waiting" property="waiting"/>		
+		<result column="undertakeJudge" property="undertakeJudge"/>
+		<result column="plaintiffApplyExecute" property="plaintiffApplyExecute"/>
+		<result column="executionBasisNum" property="executionBasisNum"/>
+		<result column="executionBasisType" property="executionBasisType"/>
+		<result column="province" property="province"/>		
+		<result column="ifSentenceIdentical" property="ifSentenceIdentical"/>
+		<result column="ifReview" property="ifReview"/>		
+		<result column="otherPartyType" property="otherPartyType"/>
+		<result column="ifWorkingGroup" property="ifWorkingGroup"/>
+		<result column="remark" property="remark"/>
+		
+		<result column="projectIDList" property="projectIDList"/>
+		<result column="projectNameList" property="projectNameList"/>
+		<result column="fundDeduction" property="fundDeduction"/>
+		<result column="lawsuitType" property="lawsuitType"/>
+		<result column="affiliateGroup" property="affiliateGroup"/>
+		<result column="assetSealUpName" property="assetSealUpName"/>
+		
+		<result column="createUserName" property="createUserName"/>
+		<result column="createDateTime" property="createDateTime"/>		
+		<result column="updateUserName" property="updateUserName"/>
+		<result column="updateDateTime" property="updateDateTime"/>
+  </resultMap>	
+<!-- 新增一个项目诉讼 -->
+	<insert id="insertOneProjectLawsuit" parameterType="com.zjm.pro.db.model.Pro_projectLawsuit">
+		<![CDATA[
+		INSERT INTO Pro_projectLawsuit (
+		        projectLawsuit_ID,		
+		        assetSealUp_ID,	
+		        recordNum,
+		        plaintiff,
+		        defendant,
+				lawsuitSum,				
+				lawsuitDate,		
+				lawCourt,
+				caseInfo,
+				propertyInfo,
+				unit_uid,
+				caseType,
+				dicTypeID,
+				dicTypeName,
+		        effectiveLegalDocuments,
+				firstSeal,				
+				waiting,		
+				undertakeJudge,
+				plaintiffApplyExecute,
+				executionBasisNum,
+				executionBasisType,
+				province,
+				ifSentenceIdentical,
+				ifReview,
+		        otherPartyType,
+				ifWorkingGroup,				
+				remark,	
+				projectIDList,
+				projectNameList,
+				fundDeduction,
+				lawsuitType,
+				affiliateGroup,
+				assetSealUpName,
+				createUserName,
+				createDateTime,
+				updateUserName,			
+				updateDateTime
+		)
+		VALUES
+		(
+				#{projectLawsuit_ID},
+				#{assetSealUp_ID},
+				#{recordNum},
+				#{plaintiff},
+				#{defendant},				
+				#{lawsuitSum},				
+				#{lawsuitDate},				
+				#{lawCourt},
+				#{caseInfo},
+				#{propertyInfo},
+				#{unit_uid},	
+				#{caseType},
+				#{dicTypeID},
+				#{dicTypeName},				
+				#{effectiveLegalDocuments},				
+				#{firstSeal},
+				#{waiting},
+				#{undertakeJudge},
+				#{plaintiffApplyExecute},	
+				#{executionBasisNum},
+				#{executionBasisType},			
+				#{province},				
+				#{ifSentenceIdentical},
+				#{ifReview},
+				#{otherPartyType},
+				#{ifWorkingGroup},
+				#{remark},	
+				#{projectIDList},	
+				#{projectNameList},	
+				#{fundDeduction},	
+				#{lawsuitType},
+				#{affiliateGroup},
+				#{assetSealUpName},
+				#{createUserName},
+				NOW(),
+				#{updateUserName},		
+				NOW()			
+		) ;
+		]]>
+	</insert>		
+	<!-- 查询项目诉讼列表 -->
+	<select id="selectProLawsuitPageTables" resultMap="ProLawsuitMap" parameterType="com.zjm.common.db.model.PageTable">
+		<![CDATA[
+		select 
+			    projectLawsuit_ID,		
+		        assetSealUp_ID,	
+		        recordNum,
+		        plaintiff,
+		        defendant,
+				lawsuitSum,				
+				lawsuitDate,			
+				lawCourt,
+				caseInfo,
+				propertyInfo,
+				unit_uid,
+				caseType,
+				dicTypeID,
+				dicTypeName,
+		        effectiveLegalDocuments,
+				firstSeal,				
+				waiting,		
+				undertakeJudge,
+				plaintiffApplyExecute,
+				executionBasisNum,
+				executionBasisType,
+				province,
+				ifSentenceIdentical,
+				ifReview,
+		        otherPartyType,
+				ifWorkingGroup,				
+				remark,		
+				projectIDList,
+				projectNameList,
+				fundDeduction,	
+				lawsuitType,
+				affiliateGroup,
+				assetSealUpName,	
+				createUserName,
+				createDateTime,
+				updateUserName,			
+				updateDateTime
+				from Pro_projectLawsuit
+		WHERE 1=1 ${wheresql} limit #{pageNumber},#{pageSize}	
+		]]>
+	</select>	
+	
+	<!-- 查询一个-->
+	<select id="selectOneProjectLawsuitInfo" parameterType="java.lang.String"  resultMap="ProLawsuitMap">
+	<![CDATA[
+			select 
+			    projectLawsuit_ID,		
+		        assetSealUp_ID,	
+		        recordNum,
+		        plaintiff,
+		        defendant,
+				lawsuitSum,				
+				lawsuitDate,			
+				lawCourt,
+				caseInfo,
+				propertyInfo,
+				unit_uid,	
+				caseType,
+				dicTypeID,
+				dicTypeName,
+		        effectiveLegalDocuments,
+				firstSeal,				
+				waiting,		
+				undertakeJudge,
+				plaintiffApplyExecute,
+				executionBasisNum,
+				executionBasisType,
+				province,
+				ifSentenceIdentical,
+				ifReview,
+		        otherPartyType,
+				ifWorkingGroup,				
+				remark,	
+				projectIDList,
+				projectNameList,
+				fundDeduction,	
+				lawsuitType,
+				affiliateGroup,	
+				assetSealUpName,
+				createUserName,
+				createDateTime,
+				updateUserName,			
+				updateDateTime
+				from Pro_projectLawsuit
+		WHERE 1=1 ${value}
+		]]> 				 
+	</select>
+
+	<!-- 更新 -->	
+	<update id="updateOneProjectLawsuitInfo" parameterType="com.zjm.pro.db.model.Pro_projectLawsuit">
+		<![CDATA[
+		UPDATE 
+		  Pro_projectLawsuit
+		SET
+			assetSealUp_ID=#{assetSealUp_ID},
+			recordNum=#{recordNum},
+			lawsuitDate=#{lawsuitDate},
+			defendant=#{defendant},
+			caseInfo=#{caseInfo},
+			lawsuitSum=#{lawsuitSum},
+			lawCourt=#{lawCourt},
+			propertyInfo=#{propertyInfo},
+			plaintiff = #{plaintiff},
+			caseType = #{caseType},
+			dicTypeID = #{dicTypeID},
+			dicTypeName = #{dicTypeName},
+		    effectiveLegalDocuments = #{effectiveLegalDocuments},
+			firstSeal = #{firstSeal},				
+			waiting = #{waiting},		
+			undertakeJudge = #{undertakeJudge},
+			plaintiffApplyExecute = #{plaintiffApplyExecute},
+			executionBasisNum = #{executionBasisNum},
+			executionBasisType = #{executionBasisType},
+			province = #{province},
+			ifSentenceIdentical = #{ifSentenceIdentical},
+			ifReview = #{ifReview},
+		    otherPartyType = #{otherPartyType},
+			ifWorkingGroup = #{ifWorkingGroup},				
+			remark = #{remark},		
+			projectIDList = #{projectIDList},
+			projectNameList = #{projectNameList},
+			fundDeduction = #{fundDeduction},
+			lawsuitType = #{lawsuitType},
+			affiliateGroup = #{affiliateGroup},
+			assetSealUpName = #{assetSealUpName},
+			createUserName = #{createUserName},
+			updatedatetime = NOW(),
+			updateUserName = #{updateUserName}
+		WHERE projectLawsuit_ID=#{projectLawsuit_ID}
+		  ]]>
+	</update>
+	
+	<delete id="deleteLawsuitMapperByProject_ID" parameterType="string" >
+		DELETE FROM 
+			Pro_projectLawsuit
+		where project_ID = #{project_ID}
+	</delete>
+	
+	<select id="selectProjectLawsuitTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="ProLawsuitMap">
+		select 
+			projectLawsuit_ID,		
+	        assetSealUp_ID,	
+	        recordNum,
+	        plaintiff,
+	        defendant,
+			lawsuitSum,				
+			lawsuitDate,			
+			lawCourt,
+			caseInfo,
+			propertyInfo,
+			unit_uid,	
+			caseType,
+			dicTypeID,
+			dicTypeName,
+	        effectiveLegalDocuments,
+			firstSeal,				
+			waiting,		
+			undertakeJudge,
+			plaintiffApplyExecute,
+			executionBasisNum,
+			executionBasisType,
+			province,
+			ifSentenceIdentical,
+			ifReview,
+	        otherPartyType,
+			ifWorkingGroup,				
+			remark,	
+			projectIDList,
+			projectNameList,
+			fundDeduction,		
+			lawsuitType,
+			affiliateGroup,
+			assetSealUpName,
+			createUserName,
+			createDateTime,
+			updateUserName,			
+			updateDateTime
+		from 
+			Pro_projectLawsuit
+		where 
+			1=1 ${wheresql} LIMIT #{pageNumber},#{pageSize}
+	</select>
+	
+	<select id="selectProjectLawsuitTable_count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		select
+			count(1)
+		from
+			Pro_projectLawsuit
+		WHERE 
+			1=1 ${wheresql}
+	</select>
+	
+	<!-- 更新 -->	
+	<update id="updateConAsset" parameterType="java.util.HashMap">
+		<![CDATA[
+		UPDATE 
+		  Pro_projectLawsuit
+		SET
+			assetSealUp_ID=#{assetSealUp_ID},
+			assetSealUpName=#{assetSealUpName}
+		WHERE projectLawsuit_ID=#{projectLawsuit_ID}
+		  ]]>
+	</update>
+
+</mapper>  

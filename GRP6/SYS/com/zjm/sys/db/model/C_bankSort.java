@@ -1,0 +1,235 @@
+package com.zjm.sys.db.model;
+
+import java.io.Serializable;
+import java.util.Date;
+/**
+ * 
+ * @description  银行字典表   ---> 调整为合作机构管理内容 2017年5月24日 14:28:48
+ * @author wuhn
+ * @date 2017年4月26日 下午7:48:58
+ */
+public class C_bankSort implements Serializable{
+	private static final long serialVersionUID = 1L;
+	private    String    banksortid;    //担保机构编号unit_uid						
+	private    String    unitUid;    //银行节点编号bankSortID						
+	private    String    pbanksortid;    //银行父节点编号pbankSortID						
+	private    String    banksortname;    //银行节点名称bankSortName						
+	private    String    bankfullcode;    //银行编号全称bankFullCode		
+	
+	// 2017年5月24日 13:55:42  增加如下字段 变更为合作机构的内容
+	private    Double    creditSum;     //授信额度    creditSum
+	private    Double    usedSum;     //已用额度    usedSum
+	private    Date      creditBeginDate;     //授信起始日期    creditBeginDate
+	private    Date      creditEndDate;     //授信到期日期    creditEndDate
+	private    Double     zrScale;      //责任比例（%）    zrScale
+	private    Double     bzScale;     //保证金比例（%）    bzScale
+	private    String    depositMethodID;     //缴存方式UUID    depositMethodID
+	private    String    creditRemark;     //信贷偏好    creditRemark
+	// 2017年5月24日 13:59:48  end  author:wuhn 
+	
+	// begin： 费用管理-保证金管理 添加字段 
+	private	   Double	mustBzSum;		//应缴保证金额
+	private    Double   factBzSum;		//存出保证金额
+	private    String   remark;			//备注
+	// end	author：xuyz
+	
+	private    String    url;    //节点链接url						
+	private    Integer    orderId;    //节点排序顺序order_id						
+	private    Date    createdatetime;    //创建时间createdatetime						
+	private    String    createUser;    //创建人create_user						
+	private    Date    upatedatetime;    //最后更新时间upatedatetime						
+	private    String    updateUser;    //最后更新人update_user						
+	private    String    unificationid;    //统一编码unificationID	-->字段名称修改为: " 对应监管机构银行字典编号 "					
+	private    Integer    iseable;    //是否可禁用isEable						
+	private    Integer    isedit;    //是否可编辑isEdit						
+	private    Integer    isDefault;    //系统自带还是用户自定义isDefault		
+	private    String 	  busiAddress; // 营业地址
+	private    String 	  bankCategory;// 机构种类--冗余字段,用于 额度使用情况页面显示
+	
+	
+	private String busiClass; //业务类型 -- 接收前端参数
+	private String fundType;  //获取银行的类型 ： 01 资金方名称 02资金方子机构
+	
+	public String getBanksortid() {
+		return banksortid;
+	}
+	public void setBanksortid(String banksortid) {
+		this.banksortid = banksortid;
+	}
+	public String getUnitUid() {
+		return unitUid;
+	}
+	public void setUnitUid(String unitUid) {
+		this.unitUid = unitUid;
+	}
+	public String getPbanksortid() {
+		return pbanksortid;
+	}
+	public void setPbanksortid(String pbanksortid) {
+		this.pbanksortid = pbanksortid;
+	}
+	public String getBanksortname() {
+		return banksortname;
+	}
+	public void setBanksortname(String banksortname) {
+		this.banksortname = banksortname;
+	}
+	public String getBankfullcode() {
+		return bankfullcode;
+	}
+	public void setBankfullcode(String bankfullcode) {
+		this.bankfullcode = bankfullcode;
+	}
+	public Double getCreditSum() {
+		return creditSum;
+	}
+	public void setCreditSum(Double creditSum) {
+		this.creditSum = creditSum;
+	}
+	public Double getUsedSum() {
+		return usedSum;
+	}
+	public void setUsedSum(Double usedSum) {
+		this.usedSum = usedSum;
+	}
+	public Date getCreditBeginDate() {
+		return creditBeginDate;
+	}
+	public void setCreditBeginDate(Date creditBeginDate) {
+		this.creditBeginDate = creditBeginDate;
+	}
+	public Date getCreditEndDate() {
+		return creditEndDate;
+	}
+	public void setCreditEndDate(Date creditEndDate) {
+		this.creditEndDate = creditEndDate;
+	}
+	public Double getZrScale() {
+		return zrScale;
+	}
+	public void setZrScale(Double zrScale) {
+		this.zrScale = zrScale;
+	}
+	public Double getBzScale() {
+		return bzScale;
+	}
+	public void setBzScale(Double bzScale) {
+		this.bzScale = bzScale;
+	}
+	public String getDepositMethodID() {
+		return depositMethodID;
+	}
+	public void setDepositMethodID(String depositMethodID) {
+		this.depositMethodID = depositMethodID;
+	}
+	public String getCreditRemark() {
+		return creditRemark;
+	}
+	public void setCreditRemark(String creditRemark) {
+		this.creditRemark = creditRemark;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public Integer getOrderId() {
+		return orderId;
+	}
+	public void setOrderId(Integer orderId) {
+		this.orderId = orderId;
+	}
+	public Date getCreatedatetime() {
+		return createdatetime;
+	}
+	public void setCreatedatetime(Date createdatetime) {
+		this.createdatetime = createdatetime;
+	}
+	public String getCreateUser() {
+		return createUser;
+	}
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
+	}
+	public Date getUpatedatetime() {
+		return upatedatetime;
+	}
+	public void setUpatedatetime(Date upatedatetime) {
+		this.upatedatetime = upatedatetime;
+	}
+	public String getUpdateUser() {
+		return updateUser;
+	}
+	public void setUpdateUser(String updateUser) {
+		this.updateUser = updateUser;
+	}
+	public String getUnificationid() {
+		return unificationid;
+	}
+	public void setUnificationid(String unificationid) {
+		this.unificationid = unificationid;
+	}
+	public Integer getIseable() {
+		return iseable;
+	}
+	public void setIseable(Integer iseable) {
+		this.iseable = iseable;
+	}
+	public Integer getIsedit() {
+		return isedit;
+	}
+	public void setIsedit(Integer isedit) {
+		this.isedit = isedit;
+	}
+	public Integer getIsDefault() {
+		return isDefault;
+	}
+	public void setIsDefault(Integer isDefault) {
+		this.isDefault = isDefault;
+	}
+	public String getBusiAddress() {
+		return busiAddress;
+	}
+	public void setBusiAddress(String busiAddress) {
+		this.busiAddress = busiAddress;
+	}
+	public String getBankCategory() {
+		return bankCategory;
+	}
+	public void setBankCategory(String bankCategory) {
+		this.bankCategory = bankCategory;
+	}
+	public Double getMustBzSum() {
+		return mustBzSum;
+	}
+	public void setMustBzSum(Double mustBzSum) {
+		this.mustBzSum = mustBzSum;
+	}
+	public Double getFactBzSum() {
+		return factBzSum;
+	}
+	public void setFactBzSum(Double factBzSum) {
+		this.factBzSum = factBzSum;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	public String getBusiClass() {
+		return busiClass;
+	}
+	public void setBusiClass(String busiClass) {
+		this.busiClass = busiClass;
+	}
+	public String getFundType() {
+		return fundType;
+	}
+	public void setFundType(String fundType) {
+		this.fundType = fundType;
+	}
+	
+	
+}

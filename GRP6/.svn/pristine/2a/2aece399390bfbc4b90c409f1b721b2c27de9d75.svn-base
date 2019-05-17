@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.sys.db.map.Sys_role_postMapper">
+
+	<!-- 插入一个岗位与角色关联表信息 -->
+	<insert id="insertOnePostAndRolesInfo"	parameterType="com.zjm.sys.db.model.Sys_role_post">
+		<![CDATA[
+		INSERT INTO sys_roles_post (
+		role_uid,
+		unit_uid,
+		post_ID
+		)
+		VALUES
+		(
+		#{role_uid},
+		#{unit_uid},
+		#{post_ID}
+		) ;
+		]]>
+	</insert>
+	<!-- 删除一个岗位与角色关联表信息 -->
+	<delete id="delectPostAndRolesInfo" parameterType="com.zjm.sys.db.model.Sys_roles">
+		<![CDATA[DELETE FROM sys_roles_post WHERE role_uid=#{role_uid}  and unit_uid=#{unit_uid}  ]]>
+	</delete>
+</mapper>  

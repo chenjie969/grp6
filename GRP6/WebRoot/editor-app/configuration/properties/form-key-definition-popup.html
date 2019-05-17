@@ -1,0 +1,28 @@
+<div class="modal" ng-controller="KisBpmFormKeyDefinitionPopupCtrl">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="close()">&times;</button>
+                <h2 translate>PROPERTY.FORMKEY.TITLE</h2>
+            </div>
+            <div class="modal-body">
+                <div class="row row-no-gutter">
+                    <div class="form-group">
+                    	<label for="formkeyField">{{'PROPERTY.FORMKEY.DEFINITION' | translate}}</label>
+                        <div ng-repeat="formkey in formkeydefinition">
+            	          	<!-- <input id="groupField" class="form-control" type="text" ng-model="candidateGroup.value" /> -->
+            	          	<select id="formkeyField" ng-model="formkey.value" ng-options="item.taskManager_ID as item.taskName for item in formItem" class="form-control"></select>
+            	          	<i class="glyphicon glyphicon-minus clickable-property" ng-click="removeFormKeyDefinitionValue($index)"></i>
+            	          	<i ng-if="$index == (formkeydefinition.length - 1)" class="glyphicon glyphicon-plus clickable-property" ng-click="addFormKeyDefinitionValue($index)"></i>
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+            <div class="modal-footer">
+                <button ng-click="close()" class="btn btn-primary" translate>ACTION.CANCEL</button>
+                <button ng-click="save()" class="btn btn-primary" translate>ACTION.SAVE</button>
+            </div>
+        </div>
+    </div>
+</div>

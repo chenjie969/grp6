@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE workflow PUBLIC "-//OpenSymphony Group//DTD OSWorkflow 2.6//EN" "http://www.opensymphony.com/osworkflow/workflow_2_8.dtd">
+<workflow>
+<meta name="workflowName">展期子流程</meta>
+<meta name="createDateTime">2017-11-09</meta>
+<meta name="lastModiDateTime">2017-11-09</meta>
+<meta name="editor">weizh</meta>   
+<meta name="softcompany">中投保信息技术有限公司,技术支持电话010-88550043 QQ:28582157 e-mail:beijing69@gmail.com</meta>    
+	<!--步骤的状态字典： Quened等待处理,Underway:处理中, Finished:完成,Return:返回处理,FlowStop:异常终止, FlowEnd:流程结束 -->
+	<!-- 流程状态字典: 1活动中,2被挂起,3异常终止,4正常结束,-1未定义-->
+	<!--动作编号规则要求:      
+	   1.动作编号:100:流程初始化步骤的动作,此此编号固定,其它动作不能使用此编号.
+	   2.动作编号后三位为777:提前终止流程的业务构件,此编号后3位固定,其它动作不能使用此编号.
+	   3.动作编号后三位为666:退回上一步的业务构件,此编号后3位固定,其它动作不能使用此编号.
+	   4.所有动作(除初始化动作外)的id编号规则为:步骤编号(3位数字)+（2位步骤内序号，此可选）+动作编号(3位数字).   
+	  -->
+	<initial-actions>
+		<action id="100" name="开始启动流程">			
+			<pre-functions>
+				<function type="class">
+					<arg name="class.name">com.opensymphony.workflow.util.CurCaller</arg>					
+				</function>
+			</pre-functions>
+			<results>
+				<unconditional-result old-status="Finished" status="Underway" step="101" owner="${curCaller}"/>
+			</results>		
+		</action>
+	</initial-actions>
+	<!-- 通用动作  -->
+	<common-actions>
+		<action id="999555" name="否决项目，终止流程" view="555" finish="true">
+			<pre-functions>
+				<function type="class">
+					<arg name="class.name">com.opensymphony.workflow.util.CurCaller</arg>					
+				</function>
+			</pre-functions>
+			<results> 
+				<unconditional-result old-status="FlowStop" status="Underway" step="-1" /> 
+			</results> 
+		</action> 
+	</common-actions> 
+   <steps>
+   <!-- 展期 begin -->
+		<step id="101" name="企业续保申请">
+			<actions>
+				<action id="301001" name="提交A角" view="301">
+					<pre-functions>
+						<function type="class">
+							<arg name="class.name">com.opensymphony.workflow.util.Function_FindProjectPerson</arg>
+							<arg name="person">A</arg>
+						</function>
+					</pre-functions>
+					<results>
+						<unconditional-result old-status="Return" status="Underway" step="102" owner="${appointUser}"/>
+					</results>	
+				</action>
+			</actions>
+		</step>
+		<step id="102" name="地市立项尽调">
+			<actions>
+				<action id="302001" name="提交A角" view="302">	
+					<pre-functions>
+						<function type="class">
+							<arg name="class.name">com.opensymphony.workflow.util.Function_FindProjectPerson</arg>
+							<arg name="person">A</arg>
+						</function>
+					</pre-functions>
+					<results>
+						<unconditional-result old-status="Return" status="Underway" step="103" owner="${appointUser}"/>
+					</results>		
+				</action>
+				<action id="302002" name="退回" view="302">			
+					<pre-functions>
+						<function type="class">
+							<arg name="class.name">com.opensymphony.workflow.util.MostRecentOwner</arg>
+							<arg name="stepId">101</arg>
+						</function>
+					</pre-functions>
+					<results>
+						<unconditional-result old-status="Return" status="Underway" step="101" owner="${mostRecentOwner}"/>
+					</results>	
+				</action>
+			</actions>
+		</step>
+		<step id="103" name="档案移交登记">
+			<actions>
+				<action id="303001" name="提交子公司风险部" view="303">			
+					<results>
+						<unconditional-result old-status="Finished" status="Underway" step="104" owner="子公司风险部"/>
+					</results>	
+				</action>
+				<action id="303002" name="退回" view="303">			
+					<pre-functions>
+						<function type="class">
+							<arg name="class.name">com.opensymphony.workflow.util.MostRecentOwner</arg>
+							<arg name="stepId">101</arg>
+						</function>
+					</pre-functions>
+					<results>
+						<unconditional-result old-status="Return" status="Underway" step="101" owner="${mostRecentOwner}"/>
+					</results>	
+				</action>
+			</actions>
+		</step>
+		<step id="104" name="档案接收确认">
+			<actions>
+				<action id="304001" name="提交子公司风险部" view="304">			
+					<results>
+						<unconditional-result old-status="Finished" status="Underway" step="105" owner="子公司风险部"/>
+					</results>	
+				</action>
+				<action id="304002" name="退回" view="304">			
+					<pre-functions>
+						<function type="class">
+							<arg name="class.name">com.opensymphony.workflow.util.MostRecentOwner</arg>
+							<arg name="stepId">101</arg>
+						</function>
+					</pre-functions>
+					<results>
+						<unconditional-result old-status="Return" status="Underway" step="101" owner="${mostRecentOwner}"/>
+					</results>	
+				</action>
+			</actions>
+		</step>
+		<step id="105" name="子公司风险管理部审核">
+			<actions>
+				<action id="305001" name="提交担保集团风险部" view="305">			
+					<results>
+						<unconditional-result old-status="Finished" status="Underway" step="106" owner="担保集团风险部"/>
+					</results>	
+				</action>
+				<action id="305002" name="退回" view="305">			
+					<pre-functions>
+						<function type="class">
+							<arg name="class.name">com.opensymphony.workflow.util.MostRecentOwner</arg>
+							<arg name="stepId">101</arg>
+						</function>
+					</pre-functions>
+					<results>
+						<unconditional-result old-status="Return" status="Underway" step="101" owner="${mostRecentOwner}"/>
+					</results>	
+				</action>
+			</actions>
+		</step>
+		<step id="106" name="集团风险管理部审核">
+			<actions>
+				<action id="306001" name="提交担保集团风险部" view="306">			
+					<results>
+						<unconditional-result old-status="Finished" status="Underway" step="107" owner="担保集团风险部"/>
+					</results>	
+				</action>
+				<action id="306002" name="退回" view="306">			
+					<pre-functions>
+						<function type="class">
+							<arg name="class.name">com.opensymphony.workflow.util.MostRecentOwner</arg>
+							<arg name="stepId">101</arg>
+						</function>
+					</pre-functions>
+					<results>
+						<unconditional-result old-status="Return" status="Underway" step="101" owner="${mostRecentOwner}"/>
+					</results>	
+				</action>
+			</actions>
+		</step>
+		
+		<step id="107" name="集团总办会纪要">
+			<actions>
+				<action id="307001" name="上传纪要，结束流程" view="307">
+					<!-- <pre-functions>
+						<function type="class">
+							<arg name="class.name">com.opensymphony.workflow.util.CurCaller</arg>
+						</function>
+					</pre-functions> -->
+					<results>
+						<unconditional-result old-status="Finished" status="Underway" step="900" owner="担保集团风险部"/>
+					</results>	
+					<post-functions>
+						<function type="class">
+							<arg name="class.name">com.opensymphony.workflow.util.Function_UpdateDelay</arg>
+							<arg name="repayType">展期</arg>
+						</function>
+					</post-functions>
+				</action>
+			</actions>
+		</step>
+	<!-- 放款阶段 end -->		
+	<!-- 流程结束 -->
+		<step id="900" name="结束流程"/>
+   </steps>
+</workflow>

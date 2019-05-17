@@ -1,0 +1,341 @@
+package com.zjm.pro.riskScheme.web;
+
+
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.zjm.common.db.model.AjaxRes;
+import com.zjm.common.db.model.PageTable;
+import com.zjm.pro.db.model.Pro_riskScheme;
+import com.zjm.pro.db.model.Pro_suggest;
+import com.zjm.pro.projectfiles.service.ProjectfilesService;
+import com.zjm.pro.riskScheme.serivce.RiskSchemeService;
+import com.zjm.pro.suggest.service.ProjectSuggestService;
+import com.zjm.util.CustomDispatchServlet;
+import com.zjm.util.SystemSession;
+import com.zjm.util.Tool;
+
+@Controller
+@RequestMapping(value="/project/riskScheme")
+public class RiskSchemeAction {
+	@Resource
+	private RiskSchemeService riskSchemeService;
+	@Resource
+	private ProjectSuggestService projectSuggestService;
+	
+	 @Resource
+	 private ProjectfilesService  projectfilesService; //项目附件保存
+	
+	/**
+	 * 添加化解方案页面
+	 * @param riskMeetingRec
+	 * @return
+	 */
+	@RequestMapping(value="/riskSchemeAddPage")
+	@ResponseBody
+	public ModelAndView riskSchemeAddPage() throws UnsupportedEncodingException{
+		ModelAndView mv = CustomDispatchServlet.getModeAndView();
+		String riskScheme_ID = (Tool.createUUID32());
+		//获取项目进度跟踪List
+//		List<Pro_riskScheme> applyList = riskSchemeService.selectRiskSchemeStageList();
+//		mv.getModel().put("applyList", applyList);
+		mv.getModelMap().put("riskScheme_ID",riskScheme_ID);
+		mv.setViewName("/project/riskResponse/keyProject/approvalAdd");
+		return mv;
+	}
+	
+	/**
+	   * 添加化解方案
+	   * @param riskMeetingRec
+	   * @return
+    */
+	@RequestMapping(value="/insertOneRiskSchemeInfo")
+	@ResponseBody
+	public AjaxRes insertOneRiskSchemeInfo(@RequestBody Pro_riskScheme riskScheme){
+		AjaxRes ar = new AjaxRes();
+		riskScheme.setStatus("流程未启动");
+		//riskScheme.setStatus("审批通过");//暂时不走流程，新增完直接通过  2018-05-03
+		Boolean b =riskSchemeService.insertOneRiskSchemeInfo(SystemSession.getUserSession(), riskScheme);
+		ar.setSucceed(b);
+		return ar;
+	}
+	
+	/**
+	 * 查看化解方案页面
+	 * @param riskMeetingRec
+	 * @return
+	 */
+	@RequestMapping(value="/riskSchemeViewPage")
+	@ResponseBody
+	public ModelAndView riskSchemeViewPage(String entityID) throws UnsupportedEncodingException{
+		ModelAndView mv = CustomDispatchServlet.getModeAndView();
+		String wheresql = " and riskScheme_ID =\'" + entityID +"\'";
+		Pro_riskScheme riskScheme = riskSchemeService.selectOneRiskShemeInfo(wheresql);
+		mv.getModelMap().put("riskScheme",riskScheme);
+		mv.setViewName("/project/riskResponse/keyProject/approvalView");
+		return mv;
+	}
+	/**
+	 * 查看方案记录-项目进展
+	 * @param riskMeetingRec
+	 * @return
+	 */
+	@RequestMapping(value="/selectOneRiskSchemeInfo")
+	@ResponseBody
+	public ModelAndView selectOneRiskSchemeInfo(Pro_riskScheme pro_riskScheme) {
+		ModelAndView mv = CustomDispatchServlet.getModeAndView();
+		String viewName = "";
+		String wheresql = " and riskScheme_ID =\'" + pro_riskScheme.getRiskScheme_ID() +"\'";
+		String wheresql2 = " and entityID =\'" + pro_riskScheme.getRiskScheme_ID() +"\'";
+		
+		Pro_riskScheme riskScheme = riskSchemeService.selectOneRiskShemeInfo(wheresql);
+		List<Pro_suggest> projectSuggestList = projectSuggestService.selectSuggestListByWhereSql(wheresql2);
+		mv.getModelMap().put("riskScheme",riskScheme);
+		mv.getModelMap().put("projectSuggestList",projectSuggestList);
+		viewName = "/project/riskResponse/keyProject/riskSchemeWorkInfo";
+		
+		/*if("方案".equals(riskScheme.getReviewType())){
+			viewName = "/project/riskResponse/keyProject/riskSchemeInfo";
+		}else if("工作进度".equals(riskScheme.getReviewType())){
+			viewName = "/project/riskResponse/keyProject/riskSchemeWorkInfo";
+		}else{//打击逃废债工作进度
+			viewName = "/project/riskResponse/keyProject/riskSchemeWorkInfo2";
+		}*/
+		mv.setViewName(viewName);
+		return mv;
+	}
+	
+	/**
+	 * 修改化解方案页面
+	 * @param riskMeetingRec
+	 * @return
+	 */
+	@RequestMapping(value="/riskSchemeEditPage")
+	@ResponseBody
+	public ModelAndView riskSchemeEditPage(String entityID) throws UnsupportedEncodingException{
+		ModelAndView mv = CustomDispatchServlet.getModeAndView();
+		String wheresql = " and riskScheme_ID =\'" + entityID +"\'";
+		Pro_riskScheme riskScheme = riskSchemeService.selectOneRiskShemeInfo(wheresql);
+		mv.getModelMap().put("riskScheme",riskScheme);
+		mv.setViewName("/project/riskResponse/keyProject/approvalEdit");
+		return mv;
+	}
+	
+	/**
+	 * 修改化解方案
+	 * @param riskMeetingRec
+	 * @return
+	 */
+	@RequestMapping(value="/updateOneRiskSchemeInfo")
+	@ResponseBody
+	public AjaxRes updateOneRiskSchemeInfo(@RequestBody Pro_riskScheme riskScheme){
+		AjaxRes ar = new AjaxRes();
+		Boolean b =riskSchemeService.updateOneRiskSchemeInfo(SystemSession.getUserSession(), riskScheme);
+		ar.setSucceed(b);
+		return ar;
+	}
+	
+	/**
+	 * 修改化解方案
+	 * @param riskMeetingRec
+	 * @return
+	 */
+	@RequestMapping(value="/finishRiskScheme")
+	@ResponseBody
+	public AjaxRes finishRiskScheme(@RequestBody Pro_riskScheme riskScheme){
+		AjaxRes ar = new AjaxRes();
+		Boolean b =riskSchemeService.finishRiskScheme(SystemSession.getUserSession(), riskScheme);
+		ar.setSucceed(b);
+		return ar;
+	}
+	
+	/**
+	 * 查询化解方案列表
+	 * @param pageTable
+	 * @author chenyang
+	 * @return
+	 */
+	@RequestMapping(value="/selectRiskSchemePageTables")
+	@ResponseBody
+	public AjaxRes selectRiskSchemePageTables(@RequestBody PageTable<Pro_riskScheme> pageTable) {
+		pageTable.setWheresql(queryConditionSql(pageTable));
+		pageTable=riskSchemeService.selectRiskSchemePageTables(pageTable);
+		AjaxRes ar=new AjaxRes();
+		ar.setSucceed(pageTable);
+		return ar;
+	}
+	
+	/**
+	 * 化解方案列表查询条件
+	 * @param pageTable
+	 * @return
+	 */
+	private String queryConditionSql(PageTable pageTable){
+		StringBuffer wheresql = new StringBuffer();
+		if(pageTable==null){
+			return "";
+		}
+		wheresql.append(pageTable.getWheresql());
+		if ( null != pageTable.getSearchText()) {
+			wheresql.append(" and title like \'%"+pageTable.getSearchText().trim()+"%\'");
+		}
+		//根据关联系ID(relationMain_ID)
+		if(pageTable.getQueryCondition().getRelationMain_ID() != null && !"".equals(pageTable.getQueryCondition().getRelationMain_ID())){
+			wheresql.append(" and relationMain_ID = \'"+pageTable.getQueryCondition().getRelationMain_ID()+"\'");
+		}
+		//根据审批类型(reviewType)
+		if(pageTable.getQueryCondition().getReviewType() != null && !"".equals(pageTable.getQueryCondition().getReviewType())){
+			wheresql.append(" and reviewType like \'%"+pageTable.getQueryCondition().getReviewType()+"%\'");
+		}
+		return wheresql.toString();
+	}
+	private String queryConditionSql(Pro_suggest pro_suggest){
+		StringBuffer wheresql = new StringBuffer();
+		//搜索框功能
+		if(pro_suggest==null){
+			return "";
+		}
+		//wheresql.append(" and unit_uid = \'"+SystemSession.getUserSession().getUnit_uid()+"\' ");
+		if(pro_suggest.getTaskID() != null && !"".equals(pro_suggest.getTaskID())){
+			//wheresql.append(" and taskID like \'%"+pageTable.getQueryCondition().getProjectName()+"%\'");
+			wheresql.append(" and taskID = \'"+pro_suggest.getTaskID()+"\'");
+		}
+		if(pro_suggest.getEntityID() != null && !"".equals(pro_suggest.getEntityID())){
+			wheresql.append(" and entityID = \'"+pro_suggest.getEntityID()+"\'");
+		}
+		if(pro_suggest.getTaskName() != null && !"".equals(pro_suggest.getTaskName())){
+			wheresql.append(" and taskName = \'"+pro_suggest.getTaskName()+"\'");
+		}
+		if(pro_suggest.getProductInstanceID() != null && !"".equals(pro_suggest.getProductInstanceID())){
+			wheresql.append(" and productInstanceID = \'"+pro_suggest.getProductInstanceID()+"\'");
+		}
+		return wheresql.toString();		
+	}
+	/**
+	 * 风险化解意见
+	 * @param pro_suggest
+	 * @return
+	 * @throws 
+	 */
+	@RequestMapping(value="/projectSuggetEditPage")
+	public ModelAndView projectSuggetEditPage(Pro_suggest pro_suggest) throws UnsupportedEncodingException{
+		ModelAndView mv = CustomDispatchServlet.getModeAndView();
+		List<Pro_suggest> projectSuggestList = new ArrayList<>();
+		Pro_riskScheme riskScheme  = new Pro_riskScheme();
+		if(null != pro_suggest){
+			pro_suggest.setTaskName(java.net.URLDecoder.decode(pro_suggest.getTaskName(),"UTF-8"));
+			String  wheresql = queryConditionSql(pro_suggest);
+			Pro_suggest suggest= projectSuggestService.selectOneSuggestByWhereSql(wheresql);
+			if(null != pro_suggest.getEntityID()){
+				projectSuggestList = projectSuggestService.selectSuggestListByWhereSql(" and entityID = \'"+pro_suggest.getEntityID()+"\'");//获取意见集合;
+				riskScheme = riskSchemeService.selectOneRiskShemeInfo(" and riskScheme_ID = \'"+pro_suggest.getEntityID()+"\'");
+			}
+			if(null != suggest){
+				pro_suggest.setSuggest_ID(suggest.getSuggest_ID());
+				pro_suggest.setSuggestContent(suggest.getSuggestContent());
+			}
+			
+		}
+		mv.getModelMap().put("suggest",pro_suggest);
+		mv.getModelMap().put("riskScheme",riskScheme);
+		mv.getModelMap().put("projectSuggestList",projectSuggestList);//历史项目意见list
+		mv.setViewName("/project/suggest/riskScheme/projectSuggest");
+		return mv;
+	}
+	
+
+	/**
+	 * 查询最新工作进度-更多列表
+	 * @param pageTable
+	 * @author xuyz
+	 */
+	@RequestMapping(value="/selectMoreRiskSchemeTable")
+	@ResponseBody
+	public AjaxRes selectMoreRiskSchemeTable(@RequestBody PageTable<Pro_riskScheme> pageTable) {
+		pageTable.setWheresql(searchTextSql(pageTable));
+		pageTable=riskSchemeService.selectMoreRiskSchemeTable(pageTable);
+		AjaxRes ar=new AjaxRes();
+		ar.setSucceed(pageTable);
+		return ar;
+	}
+	
+	/**
+	 * 查询工作进度提醒详情列表
+	 * @param pageTable
+	 * @author xuyz
+	 */
+	@RequestMapping(value="/selectSchemeNoticeList")
+	@ResponseBody
+	public AjaxRes selectSchemeNoticeList(@RequestBody PageTable<Pro_riskScheme> pageTable) {
+		pageTable.setWheresql(searchTextSql(pageTable));
+		pageTable=riskSchemeService.selectSchemeNoticeList(pageTable);
+		AjaxRes ar=new AjaxRes();
+		ar.setSucceed(pageTable);
+		return ar;
+	}
+
+	/**
+	 * 工作进度搜索框功能
+	 */
+	private String searchTextSql(PageTable pageTable){
+		StringBuffer wheresql = new StringBuffer();
+		if(pageTable==null){
+			return "";
+		}
+		wheresql.append(pageTable.getWheresql());
+		wheresql.append(" AND prs.status='审批通过' AND prs.reviewType LIKE '%工作进度%' AND prs.unit_uid='"+SystemSession.getUserSession().getUnit_uid()+"'");
+		if ( null != pageTable.getSearchText()) {
+			wheresql.append(" and prs.relationMainName like \'%"+pageTable.getSearchText().trim()+"%\'");
+		}
+		return wheresql.toString();
+	}
+	
+	/**
+	 * 风险处置跳转到终止项目页面
+	 * @param riskScheme_ID
+	 * @return
+	 */
+	@RequestMapping(value = "/stopProcessPage")
+	public ModelAndView stopProcessPage(String riskScheme_ID) {
+		ModelAndView mv = CustomDispatchServlet.getModeAndView();
+		Pro_riskScheme riskScheme = new Pro_riskScheme();
+		if (null != riskScheme_ID && !"".equals(riskScheme_ID)) {
+			String whereSql = "and riskScheme_ID = \'" + riskScheme_ID + "\'";
+			// 根据业务id获取申请明细表信息
+			riskScheme = riskSchemeService.selectOneRiskShemeInfo(whereSql);
+		}
+
+		mv.getModel().put("riskScheme", riskScheme);// 审批信息；
+		mv.setViewName("/project/riskResponse/keyProject/stopProcessPage");
+		return mv;
+	}
+	
+	/**
+	 * 
+	 * 否决项目 stopProcess
+	 */
+	@RequestMapping(value = "/stopProcess", method = RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes stopProcess(@RequestBody Pro_riskScheme riskScheme) {
+		Boolean b = true;
+		if (riskScheme != null) {
+			riskScheme.setStatus("未通过");
+			b = riskSchemeService.updateOneRiskSchemeInfo(SystemSession.getUserSession(), riskScheme);
+		}
+		AjaxRes ar = new AjaxRes();
+		ar.setSucceed(b);
+		return ar;
+	}
+	
+
+}

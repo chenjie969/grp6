@@ -1,0 +1,271 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ include file="/common_timestamp.jsp" %>
+<%@ include file="/common_head.jsp" %>
+
+<div class="page-content">   
+      <div class="row">
+		<div class="col-xs-12">
+		
+		 <%-- <h4 class="header smaller lighter blue">
+			项目信息摘要
+		  	</h4>
+			<div class="col-sm-12">
+               <h5 class="col-sm-12">项目名称：<span class="grey">${project.projectName}</span></h5>
+                 <h5 class="col-sm-6">业务品种：<span class="grey">${project.busiTypeName}</span></h5>
+                 <h5 class="col-sm-6">放款机构：<span class="grey">${project.bankName}</span></h5>
+                 <h5 class="col-sm-6">项目金额：
+                 <span class="grey"><fmt:formatNumber value="${project.loadSum}" pattern="###,###.######"> </fmt:formatNumber>&nbsp;万元</span>
+				  </h5>
+                 <h5 class="col-sm-6">在保余额：
+                 <span class="grey"><fmt:formatNumber value="${project.guarantySum}" pattern="###,###.######"> </fmt:formatNumber>&nbsp;万元</span>
+				  </h5>
+                 <h5 class="col-sm-6">开始日期：<span class="grey"><fmt:formatDate pattern="yyyy-MM-dd" value="${project.loadBeginDate}"/></span></h5>
+                 <h5 class="col-sm-6">结束日期：<span class="grey"><fmt:formatDate pattern="yyyy-MM-dd" value="${project.delayEndDate}"/></span></h5>
+				 <h5 class="col-sm-6">期限：<span class="grey">${project.periodMonthDay}</span></h5>
+                 
+			</div> --%>
+		
+		<div class="col-sm-12 space-20"></div>
+		<h4 class="header smaller lighter blue">
+				项目诉讼情况
+	  		</h4>
+		<form class="form-horizontal" role="form" id="asserSealUp_form">
+	          <input type="hidden" id=assetSealUp_ID class="" name="assetSealUp_ID" value="${proSeaulUp.assetSealUp_ID}">
+			
+			 <div class="space-4"></div>
+			 <div class="form-group ">
+				<label class="col-sm-2 control-label no-padding-right"
+					for="form-input"><i class="icon-asterisk orange"></i>是否关联诉讼信息： </label>
+				<div class="col-sm-2">
+					<label class="radio-inline"> <input type="radio"
+						value="1" name="isConSuit"
+						<c:if test="${proSeaulUp.lawSuitID != null}"> checked</c:if>>是
+					</label>
+					<label class="radio-inline"> <input type="radio"
+						value="0" name="isConSuit"
+						<c:if test="${proSeaulUp.lawSuitID == null || proSeaulUp.lawSuitID eq ''}"> checked</c:if>>否
+					</label> 
+				</div>
+			 </div>
+			 
+			 <div class="form-group" id="div-lawSuit" style="display:none">
+				<label class="col-sm-2 control-label no-padding-right"
+					for="form-input"><i class="icon-asterisk orange"></i>诉讼信息：
+				</label>
+				<div class="col-sm-8 col-lg-4">
+					<input type="text" placeholder="请选择诉讼信息"
+						class="col-sm-8 validate[required]"
+						value="${proSeaulUp.lawSuitName}" readonly="readonly"
+						name="lawSuitName" id="lawSuitName"/>
+					<input type="hidden" id="lawSuitID" name="lawSuitID" value="${proSeaulUp.lawSuitID}" />
+					<div class="col-sm-4 ">
+							<button class="btn btn-xs btn-info" type="button"
+								id="btn_chooseSuit" name="button" data-toggle="modal"
+								data-target="#select">选择</button>
+					</div>
+				</div>
+			</div>
+			 
+			
+			 <div class="form-group ">
+				<label class="col-sm-2 control-label no-padding-right"
+					for="form-input"><i class="icon-asterisk orange"></i>查封类型： </label>
+				<div class="col-sm-10">
+					<label class="radio-inline"> <input type="radio"
+						value="01" name="assetSealUpType"
+						<c:if test="${proSeaulUp.assetSealUpType == '01' || proSeaulUp.assetSealUpType == null}"> checked</c:if>>作为申请人
+					</label>
+					<label class="radio-inline"> <input type="radio"
+						value="02" name="assetSealUpType"
+						<c:if test="${proSeaulUp.assetSealUpType == '02'}"> checked</c:if>>作为被执行人
+					</label> 
+				</div>
+			 </div>
+			 <div class="form-group">
+				<label class="col-sm-2 control-label no-padding-right"
+					for="form-input"><i class="icon-asterisk orange"></i>项目名称：
+				</label>
+				<div class="col-sm-8 col-lg-4">
+					<input type="text" placeholder="请选择项目"
+						class="col-sm-8 validate[required]"
+						value="${proSeaulUp.projectNameList}" readonly="readonly"
+						name="projectNameList" />
+					<input type="hidden" name="projectIDList" value="${proSeaulUp.projectIDList}" />
+					<%-- 客户申请记录ID --%>
+					<div class="col-sm-4 ">
+							<button class="btn btn-xs btn-info" type="button"
+								id="btn_chooseProj" name="button" data-toggle="modal"
+								data-target="#select">选择</button>
+					</div>
+				</div>
+			</div>
+			 
+			 <div class="form-group">
+	           	 <label class="col-md-2 control-label no-padding-right" for="form-field-1"> <i class="icon-asterisk orange"></i>涉及公司名称： </label>
+	             <div class="col-md-10">
+	                 <input type="text" class="col-md-2 col-lg-2 validate[required,maxSize[50]]"  id="group" name="group"   value="${proSeaulUp.group}" />
+	                 <span class="col-md-10 col-lg-10" style="line-height:28px;"></span>
+	             </div>
+			</div>
+			
+			 <div class="form-group">
+	           	 <label class="col-md-2 control-label no-padding-right" for="form-field-1"> <i class="icon-asterisk orange"></i>案件序号：</label>
+	             <div class="col-md-10">
+	                 <input type="text" class="col-md-2 col-lg-2 validate[required,maxSize[18]]"  id="serialNum" name="serialNum" value="${proSeaulUp.serialNum}" />
+	                 <span class="col-md-10 col-lg-10" style="line-height:28px;"></span>
+	             </div>
+			</div>
+			
+			<div class="form-group">
+	           	 <label class="col-md-2 control-label no-padding-right" for="form-field-1"> <i class="icon-asterisk orange"></i>执行标的： </label>
+	             <div class="col-md-10">
+	                 <input type="text" class="col-md-10 col-lg-2 validate[required,maxSize[18],custom[number]]"  id="targetSum" name="targetSum"  value="${proSeaulUp.targetSum}" />
+	                 <span class="col-md-2 col-lg-10" style="line-height:28px;">万元</span>
+	             </div>
+			</div>
+	      <div class="form-group">
+	           	 <label class="col-md-2 control-label no-padding-right" for="form-field-1"> <i class="icon-asterisk orange"></i>资产保全方式：</label>
+	             <div class="col-md-10">
+	                 <input type="text" class="col-md-10 col-lg-2 validate[required,maxSize[18]]"  id="propertyType" name="propertyType"   value="${proSeaulUp.propertyType}"  />
+	                 <span class="col-md-2 col-lg-10" style="line-height:28px;"></span>
+	             </div>
+			</div>
+			
+			<div class="form-group ">
+						<label class="col-sm-2 control-label no-padding-right"
+							for="form-input">是否立案： </label>
+						<div class="col-sm-2">
+							<label class="radio-inline"> <input type="radio"
+								value="1" name="isRecord"
+								<c:if test="${proSeaulUp.isRecord != '0'}"> checked</c:if>>是
+							</label> <label class="radio-inline"> <input type="radio"
+								value="0" name="isRecord"
+								<c:if test="${proSeaulUp.isRecord == '0'}"> checked</c:if>>否
+							</label>
+						</div>
+					</div>
+			<div class="form-group">
+	           	 <label class="col-md-2 control-label no-padding-right" for="form-field-1"> <i class="icon-asterisk orange"></i>案号： </label>
+	             <div class="col-md-10">
+	                 <input type="text" class="col-md-2 col-lg-2 validate[required,maxSize[18]]"  id="recordNum" name="recordNum"   value="${proSeaulUp.recordNum}"  />
+	                 <span class="col-md-10 col-lg-10" style="line-height:28px;"></span>
+	             </div>
+			</div>
+			<div class="form-group">
+	           	 <label class="col-md-2 control-label no-padding-right" for="form-field-1"> <i class="icon-asterisk orange"></i>受理法院：</label>
+	             <div class="col-md-10">
+	                 <input type="text" class="col-md-2 col-lg-2 validate[required,maxSize[18]]"  id="lawCourt" name="lawCourt"   value="${proSeaulUp.lawCourt}" />
+	                 <span class="col-md-10 col-lg-10" style="line-height:28px;"></span>
+	             </div>
+			</div>
+			<div class="space-4"></div>
+			<div class="form-group">
+	           	 <label class="col-md-2 control-label no-padding-right" for="form-field-1"> <i class="icon-asterisk orange"></i>生效法律文书：</label>
+	             <div class="col-md-10">
+	                 <input type="text" class="col-md-2 col-lg-2 validate[required,maxSize[18]]"  id="effectiveLegalDocuments" name="effectiveLegalDocuments"   value="${proSeaulUp.effectiveLegalDocuments}" />
+	                 <span class="col-md-10 col-lg-10" style="line-height:28px;"></span>
+	             </div>
+			</div>
+			<div class="space-4"></div>
+			<div class="form-group">
+		   	    <label class="col-md-2 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>立案日期： </label>
+	         	<div class="col-md-5">
+					<div class="input-group col-md-4">
+						<input class="form-control date-picker validate[required,custom[date]]" id="lawsuitDate" name="lawsuitDate" type="text" data-date-format="yyyy-mm-dd"  value="<fmt:formatDate value="${proSeaulUp.lawsuitDate}" type="time" timeStyle="full" pattern="yyyy-MM-dd"/>"/>
+						<span class="input-group-addon">
+							<i class="icon-calendar bigger-110"></i>
+						</span>
+					</div>
+				</div>
+	        </div>
+			<div class="space-4"></div>
+			<div class="form-group">
+	           	 <label class="col-md-2 control-label no-padding-right" for="form-field-1"> <i class="icon-asterisk orange"></i>申请执行人：</label>
+	             <div class="col-md-10">
+	                 <input type="text" class="col-md-2 col-lg-2 validate[required,maxSize[18]]"  id="plaintiff" name="plaintiff"   value="${proSeaulUp.plaintiff}" />
+	                 <span class="col-md-10 col-lg-10" style="line-height:28px;"></span>
+	             </div>
+			</div>
+			<div class="space-4"></div>
+			<div class="form-group">
+	           	 <label class="col-md-2 control-label no-padding-right" for="form-field-1"> <i class="icon-asterisk orange"></i>被执行人：</label>
+	             <div class="col-md-10">
+	                 <input type="text" class="col-md-2 col-lg-2 validate[required,maxSize[18]]"  id="defendant" name="defendant"   value="${proSeaulUp.defendant}" />
+	                 <span class="col-md-10 col-lg-10" style="line-height:28px;"></span>
+	             </div>
+			</div>
+			<div class="form-group">
+	           	 <label class="col-md-2 control-label no-padding-right" for="form-field-1">财产查控情况(首封)：</label>
+	             <div class="col-md-10">
+	                 <textarea class="col-sm-7 limited  validate[maxSize[2000]]" rows="5"  name="firstSeal" id="firstSeal" >${proSeaulUp.firstSeal}</textarea>											
+					<div class="col-sm-7 no-padding-right" style="text-align:right;">
+						<span class="light-grey">限制2000个字符</span>
+					</div>
+	             </div>
+			</div>
+			 <div class="form-group">
+	           	 <label class="col-md-2 control-label no-padding-right" for="form-field-1">财产查控情况(轮候)： </label>
+	             <div class="col-md-10">
+	                 <textarea class="col-sm-7 limited  validate[maxSize[2000]]" rows="5"  name="waiting" id="waiting" >${proSeaulUp.waiting}</textarea>											
+					<div class="col-sm-7 no-padding-right" style="text-align:right;">
+						<span class="light-grey">限制2000个字符</span>
+					</div>
+	             </div>
+			</div>
+			<div class="form-group ">
+						<label class="col-sm-2 control-label no-padding-right"
+							for="form-input">是否工作组： </label>
+						<div class="col-sm-2">
+							<label class="radio-inline"> <input type="radio"
+								value="1" name="ifWorkingGroup"
+								<c:if test="${proSeaulUp.ifWorkingGroup != '0'}"> checked</c:if>>是
+							</label> <label class="radio-inline"> <input type="radio"
+								value="0" name="ifWorkingGroup"
+								<c:if test="${proSeaulUp.ifWorkingGroup == '0'}"> checked</c:if>>否
+							</label>
+						</div>
+					</div>
+			<div class="space-4"></div>
+			<div class="form-group">
+	           	 <label class="col-md-2 control-label no-padding-right" for="form-field-1"> <i class="icon-asterisk orange"></i>首封资产价值：</label>
+	             <div class="col-md-10">
+	                 <input type="text" class="col-md-2 col-lg-2 validate[required,maxSize[18]]"  id="firstSealAssetValue" name="firstSealAssetValue"   value="${proSeaulUp.firstSealAssetValue}" />
+	                 <span class="col-md-2 col-lg-10" style="line-height:28px;">万元</span>
+	             </div>
+			</div>
+			<div class="space-4"></div>
+           <div class="form-group">
+	           	 <label class="col-md-2 control-label no-padding-right" for="form-field-1">执行依据：</label>
+	             <div class="col-md-10">
+	                 <textarea class="col-sm-7 limited  validate[maxSize[2000]]" rows="5"  name="executeBasis" id="executeBasis" >${proSeaulUp.executeBasis}</textarea>											
+					<div class="col-sm-7 no-padding-right" style="text-align:right;">
+						<span class="light-grey">限制2000个字符</span>
+					</div>
+	             </div>
+			</div>
+			 <div class="form-group">
+	           	 <label class="col-md-2 control-label no-padding-right" for="form-field-1">负责法院或其他备注： </label>
+	             <div class="col-md-10">
+	                 <textarea class="col-sm-7 limited  validate[maxSize[2000]]" rows="5"  name="remark" id="remark" >${proSeaulUp.remark}</textarea>											
+					<div class="col-sm-7 no-padding-right" style="text-align:right;">
+						<span class="light-grey">限制2000个字符</span>
+					</div>
+	             </div>
+			</div>
+        </form>
+        <div class="space-20"></div>
+      <div class="clearfix form-actions">
+			<div class="col-md-offset-3 col-md-9">
+		       <button class="btn btn-primary " id="btn_insertAssetSealUp" type="button"  value="0"><i class="icon-ok bigger-110"></i>保存</button>
+		        &nbsp; &nbsp; &nbsp;
+		       <button class="btn btn_colse" id="btn_colseInsertAssetSealUp" type="button" ><i class="icon-remove bigger-110 "></i>关闭</button>
+            </div>
+      </div>     
+     </div>
+    </div>
+</div>
+<%@ include file="/project/opt/optManager/clientList.jsp"%>
+<%@ include file="/project/lawAssetSealUp/lawSuitList.jsp"%>
+<%@ include file="/common_foot.jsp" %>
+<script type="text/javascript" src="<%=path %>/project/lawAssetSealUp/assetSealUp.js?v=<%=vardate%>"></script>

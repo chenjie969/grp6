@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_packageMapper">
+	<!-- 打包表 -->
+	 <resultMap id="ProPackageMap" type="com.zjm.pro.db.model.Pro_package" >
+	    <id column="package_ID" property="package_ID"  />
+		<result column="packageName" property="packageName"/>
+		<result column="packageDesc" property="packageDesc"/>
+		<result column="packageStatus" property="packageStatus"/>
+		<result column="isUnPackage" property="isUnPackage"/>
+		<result column="createManID" property="createManID"/>
+		<result column="createManName" property="createManName"/>
+		<result column="createDateTime" property="createDateTime"/>
+		<result column="unit_uid" property="unit_uid"/>
+		<result column="unit_uidName" property="unit_uidName"/>
+		<result column="isArrangeMeeting" property="isArrangeMeeting"/>
+  </resultMap>
+	
+<!-- 新增打包表  -->
+	<insert id="insertOnePackageInfo"	parameterType="com.zjm.pro.db.model.Pro_package">
+		<![CDATA[
+		INSERT INTO pro_package (
+			package_ID,	
+			packageName,
+	 		packageDesc,
+	 		packageStatus,
+	 		isUnPackage,
+	 		createManID,
+	 		createManName,
+	 		createDateTime,
+	 		unit_uid,
+	 		unit_uidName
+
+		)
+		VALUES
+		(
+			#{package_ID},
+			#{packageName},
+			#{packageDesc},
+			#{packageStatus},
+			#{isUnPackage},
+			#{createManID},
+			#{createManName},
+			NOW(),
+			#{unit_uid},
+			#{unit_uidName}
+			
+		) ;
+		]]>
+	</insert>
+	<!-- 根据查询条件查询一个打包表信息-->
+	<select id="selectOnePackageWhereSql" parameterType="java.lang.String"  resultMap="ProPackageMap">
+	<![CDATA[
+		SELECT 
+	        package_ID,	
+			packageName,
+	 		packageDesc,
+	 		packageStatus,
+	 		isUnPackage,
+	 		createManID,
+	 		createManName,
+	 		createDateTime,
+	 		unit_uid,
+	 		unit_uidName
+		       
+	    FROM 
+	         pro_package 
+		WHERE 1=1 ${value}
+		]]> 				 
+	</select>
+	
+	<!-- 更新一个打包表信息 -->	
+	<update id="updateOnePackageInfo" parameterType="com.zjm.pro.db.model.Pro_package">
+		<![CDATA[
+		UPDATE 
+		     pro_package
+		SET
+		
+			packageName= #{packageName},
+			packageDesc= #{packageDesc},
+			packageStatus= #{packageStatus},
+			isUnPackage= #{isUnPackage},
+			createManID= #{createManID},
+			createManName= #{createManName},
+			createDateTime= #{createDateTime},
+			unit_uid= #{unit_uid},
+			unit_uidName= #{unit_uidName}
+
+		WHERE package_ID=#{package_ID}  and unit_uid=#{unit_uid} 
+		  ]]>
+	</update>
+	
+
+		<!-- 查询 打包  列表 -->
+	<select id="selectPackagePageTables" resultMap="ProPackageMap" parameterType="com.zjm.common.db.model.PageTable">
+		<![CDATA[
+		SELECT
+				package_ID,	
+				packageName,
+		 		packageDesc,
+		 		packageStatus,
+		 		isUnPackage,
+		 		createManID,
+		 		createManName,
+		 		createDateTime,
+		 		unit_uid,
+		 		unit_uidName
+		   FROM
+		   		pro_package		   
+		WHERE 1=1 ${wheresql} limit #{pageNumber},#{pageSize}	
+		]]>
+	</select>
+		<!-- 查询 打包列表 总记录数-->
+	<select id="selectPackagePageTables_Count" parameterType="com.zjm.common.db.model.PageTable"  resultType="java.lang.Long">
+		<![CDATA[
+		SELECT count(package_ID) FROM pro_package
+		WHERE 1=1 ${wheresql} 		
+		]]>		 
+	</select>
+	
+		<!--删除打包表信息 -->
+	<delete id="delOnePackageInfo" parameterType="java.lang.String">
+		<![CDATA[DELETE FROM pro_package WHERE 1=1 and package_ID = #{package_ID} ]]>
+	</delete>
+	
+		<!--根据package_ID更新apply表信息 -->
+	<update id="updateIsPackageInfo" parameterType="java.lang.String">
+		<![CDATA[
+		UPDATE 
+		     pro_apply
+		SET
+			isPackage= 0,
+			package_ID= NULL
+
+		WHERE package_ID=#{package_ID}
+		  ]]>
+	</update>
+	<!-- 修改上会审批 -->
+	<update id="updateIsArrangeMeetingById" parameterType="com.zjm.common.db.model.PageTable">
+		<![CDATA[
+		UPDATE pro_package 
+		SET isArrangeMeeting = true
+		
+		WHERE  ${wheresql}
+		
+		]]>
+	</update>
+	<!-- 修改上会审批 -->
+	<update id="updateIsArrangeMeetingByIds" parameterType="com.zjm.common.db.model.PageTable">
+		<![CDATA[
+		UPDATE pro_package 
+		SET isArrangeMeeting = false
+		
+		WHERE  ${wheresql}
+		
+		]]>
+	</update>
+</mapper>  

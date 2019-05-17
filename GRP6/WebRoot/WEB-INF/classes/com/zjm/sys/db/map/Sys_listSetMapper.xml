@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjm.sys.db.map.Sys_listSetMapper" >
+  <resultMap id="ListSetResultMap" type="com.zjm.sys.db.model.Sys_listSet" >  
+    <result column="listSetID" property="listSetID"  />
+    <result column="listBH" property="listBH"  />
+    <result column="listName" property="listName"  />
+    <result column="choosableColumns" property="choosableColumns"  />
+    <result column="choosableColumnNames" property="choosableColumnNames"  />
+    <result column="selectedColumns" property="selectedColumns"  />
+    <result column="selectedColumnNames" property="selectedColumnNames"  />
+    
+  </resultMap>
+  
+	<!-- 查询一个自定义列表信息 -->
+	<select id="selectOneListSetInfo" resultMap="ListSetResultMap" parameterType="java.lang.String" >
+	 	<![CDATA[
+	  	 select 
+	  		listSetID, 
+	  		listBH, 
+	  		listName, 
+	  		choosableColumns, 
+	  		choosableColumnNames, 
+	  		selectedColumns,
+	  		selectedColumnNames,
+			unit_uid
+	   from sys_listSet
+	   where 1=1 ${value}
+	   ]]>
+	</select>
+	
+	<!-- 新增一个自定义列表信息 -->
+	<insert id="insertOneListSetInfo" parameterType="com.zjm.sys.db.model.Sys_listSet">
+		<![CDATA[
+		INSERT INTO sys_listSet(
+			listSetID,
+			listBH,
+			listName,
+			choosableColumns, 
+	   		choosableColumnNames, 
+	   		selectedColumns,
+	   		selectedColumnNames,
+	   		unit_uid,
+	   		updateUserName,
+	   		updateDateTime
+		
+		)
+		VALUES
+		(
+			#{listSetID},
+			#{listBH},
+			#{listName},
+			#{choosableColumns},
+			#{choosableColumnNames},
+			#{selectedColumns},
+			#{selectedColumnNames},
+			#{unit_uid},
+			#{updateUserName},
+			NOW()
+		) ;
+		]]>
+	</insert>
+	
+	
+	<!-- 更新一个自定义列表信息-->
+	<update id="updateOneListSetInfo" parameterType="com.zjm.sys.db.model.Sys_listSet">
+		<![CDATA[
+			UPDATE 
+			  	sys_listSet
+			SET
+		   		choosableColumns =#{choosableColumns}, 
+		   		choosableColumnNames =#{choosableColumnNames}, 
+		   		selectedColumns =#{selectedColumns},
+		   		selectedColumnNames =#{selectedColumnNames},
+		   		updateUserName =#{updateUserName},
+		   		updateDateTime = NOW()
+			WHERE listBH = #{listBH} and Unit_uid = #{unit_uid}
+			
+		]]>
+	</update>
+</mapper>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><jatools Class="jatools.ReportDocument" Name="jatools report template"><VariableContext/><Page><Children ItemClass="PagePanel"><Item0><Width>1104</Width><Height>171</Height><Children><Item0 Class="Label"><Text>委贷业务退出户数明细</Text><Font><Face>宋体</Face><Style>1</Style><Size>36</Size></Font><HorizontalAlignment>1</HorizontalAlignment><X>260</X><Y>11</Y><Width>584</Width><Height>71</Height></Item0><Item1 Class="Label"><Text>金额单位：万元</Text><HorizontalAlignment>2</HorizontalAlignment><X>949</X><Y>145</Y><Width>110</Width><Height>20</Height></Item1><Item2 Class="Label"><Text>填报单位：</Text><X>40</X><Y>148</Y><Width>62</Width><Height>23</Height></Item2><Item3 Class="Label"><X>106</X><Y>148</Y><Width>110</Width><Height>23</Height></Item3><Item4 Class="Label"><Text>统计期间：</Text><X>433</X><Y>84</Y><Width>56</Width><Height>23</Height></Item4><Item5 Class="Text"><Variable>=if(has(begindatesql)) return begindatesql;</Variable><HorizontalAlignment>2</HorizontalAlignment><X>489</X><Y>84</Y><Width>62</Width><Height>23</Height></Item5><Item6 Class="Label"><Text>至</Text><HorizontalAlignment>1</HorizontalAlignment><X>554</X><Y>84</Y><Width>26</Width><Height>23</Height></Item6><Item7 Class="Text"><Variable>=if(has(enddatesql)) return enddatesql;else return $today;</Variable><X>582</X><Y>84</Y><Width>98</Width><Height>23</Height></Item7></Children><Type>100</Type></Item0><Item1><Y>883</Y><Width>1104</Width><Height>28</Height><Type>103</Type></Item1><Item2><Y>171</Y><Width>1104</Width><Height>712</Height><Children ItemClass="Table"><Item0><NodePath>tab_detail_financing_after</NodePath><X>41</X><Y>5</Y><Children><Item0 Class="Label"><Text>金额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>5</Col></Cell></Item0><Item1 Class="Label"><Text>公司</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>2</Col></Cell></Item1><Item2 Class="Label"><Text>地市</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col></Cell></Item2><Item3 Class="Label"><Text>序号</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col></Cell></Item3><Item4 Class="Text"><Variable>=$.loadSum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>5</Col></Cell></Item4><Item5 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>2</Row><Col>0</Col></Cell></Item5><Item6 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>2</Row><Col>1</Col></Cell></Item6><Item7 Class="Label"><Text>合计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>2</Col><ColSpan>3</ColSpan></Cell></Item7><Item8 Class="Label"><Text>退出户名</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>3</Col></Cell></Item8><Item9 Class="Label"><Text>退出时间</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>4</Col></Cell></Item9><Item10 Class="RowPanel"><Cell><Row>1</Row><Col>0</Col><ColSpan>6</ColSpan></Cell><Children ItemClass="RowPanel"><Item0><Cell><Row>1</Row><Col>0</Col><ColSpan>6</ColSpan></Cell><Children ItemClass="Text"><Item0><Variable>=index_dic_area.name{$.hostAreaID}</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>united-level:1;auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>0</Col></Cell></Item0><Item1><Variable>=index_dic_org.name{$.guarantyOrgID}</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>united-level:2;auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>2</Col></Cell></Item1><Item2><Variable>=$.loadSum</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>5</Col></Cell></Item2><Item3><Variable>=$.position + 1</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>1</Col></Cell></Item3><Item4><Variable>=$.clientName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>3</Col></Cell></Item4><Item5><Variable>=$.outDate</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DateFormat"/><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>4</Col></Cell></Item5></Children><NodePath>Row</NodePath></Item0></Children><NodePath>hostAreaID</NodePath></Item10></Children><ColumnWidths>152,105,234,282,123,123</ColumnWidths><RowHeights>40,20,40</RowHeights></Item0><Item1><NodePath>column1</NodePath><X>36</X><Y>193</Y><Children><Item0 Class="Label"><Text>金额合计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>3</Col></Cell></Item0><Item1 Class="Label"><Text>公司</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col></Cell></Item1><Item2 Class="Text"><Variable>=index_column3.loadSum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>3</Col></Cell></Item2><Item3 Class="Label"><Text>户数合计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>2</Col></Cell></Item3><Item4 Class="RowPanel"><Cell><Row>1</Row><Col>0</Col><ColSpan>4</ColSpan></Cell><Children ItemClass="Text"><Item0><Variable>=index_column3.loadSum{$.id}.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>3</Col></Cell></Item0><Item1><Variable>=index_column2.clientGUID{$.id}.count()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>2</Col></Cell></Item1><Item2><Variable>=index_dic_org.name{$.id}</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>united-level:2;auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>1</Col></Cell></Item2><Item3><Variable>=$.position + 1</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>0</Col></Cell></Item3></Children><NodePath>Row</NodePath></Item4><Item5 Class="Label"><Text>序号</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col></Cell></Item5><Item6 Class="Label"><Text>担保集团合计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>0</Col><ColSpan>2</ColSpan></Cell></Item6><Item7 Class="Text"><Variable>=index_column2.clientGUID.count()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>2</Col></Cell></Item7></Children><ColumnWidths>160,336,282,246</ColumnWidths><RowHeights>40,20,40</RowHeights></Item1></Children><Type>102</Type></Item2></Children><PageFormat><Width>1144</Width><Height>951</Height></PageFormat></Page><NodeSource><Children ItemClass="DatasetNodeSource"><Item0><Children ItemClass="GroupNodeSource"><Item0><Children ItemClass="RowNodeSource"><Item0/></Children><Group><Field>hostAreaID</Field></Group></Item0></Children><Reader Class="SqlReader"><Name>tab_detail_financing_after</Name><Sql>SELECT SUM(IFNULL(pp.loadSum,0)) AS loadSum,
+           cco.outDate,
+           cc.clientName,
+           pa.guarantyOrgID,
+pa.hostAreaID
+
+ FROM
+     crm_clientOut  cco
+ LEFT JOIN crm_client cc ON cco.clientGUID= cc.clientGUID AND cc.isMainVersion=FALSE
+ LEFT JOIN pro_applyDetail pad ON pad.client_ID = cco.client_ID
+ LEFT JOIN pro_project pp ON pad.applyDetail_ID = PP.applyDetail_ID
+ LEFT JOIN pro_apply pa ON pa.client_ID = cco.client_ID
+ WHERE 1=1 AND cco.outStatus = '1' AND pp.busiClass = '02'
+${has(begindatesql)?(" and cco.outDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and cco.outDate&lt;='"+enddatesql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+ GROUP BY cco.clientGUID
+ </Sql><Description>SELECT SUM(IFNULL(pp.loadSum,0)) AS loadSum,
+           cco.outDate,
+           cc.clientName,
+           pa.guarantyOrgID,
+pa.hostAreaID
+
+ FROM
+     crm_clientOut  cco
+ LEFT JOIN crm_client cc ON cco.clientGUID= cc.clientGUID AND cc.isMainVersion=FALSE
+ LEFT JOIN pro_applyDetail pad ON pad.client_ID = cco.client_ID
+ LEFT JOIN pro_project pp ON pad.applyDetail_ID = PP.applyDetail_ID
+ LEFT JOIN pro_apply pa ON pa.client_ID = cco.client_ID
+ WHERE 1=1 AND cco.outStatus = '1' AND pp.busiClass = '02'
+${has(begindatesql)?(" and cco.outDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and cco.outDate&lt;='"+enddatesql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+ GROUP BY cco.clientGUID
+ </Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><TagName>tab_detail_financing_after</TagName></Item0><Item1><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">id</IndexFields><TagName>index_dic_org</TagName></Item0></Children><Reader Class="SqlReader"><Name>dic_org</Name><Sql>SELECT 
+     dic.dicTypeID  AS id,
+     dic.dicTypeName AS name
+     
+    FROM 
+    c_dictype  dic 
+     WHERE  dic.dicTypePID  = '78ae83f6524d458dbbd522324c80723d'</Sql><Description>SELECT 
+     dic.dicTypeID  AS id,
+     dic.dicTypeName AS name
+     
+    FROM 
+    c_dictype  dic 
+     WHERE  dic.dicTypePID  = '78ae83f6524d458dbbd522324c80723d'</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">id</IndexFields><TagName>dic_org</TagName></Item1><Item2><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">id</IndexFields><TagName>index_dic_area</TagName></Item0></Children><Reader Class="SqlReader"><Name>dic_area</Name><Sql>     SELECT 
+     dic.dicTypeID  AS id,
+     dic.dicTypeName AS name
+     
+    FROM 
+    c_dictype  dic 
+     WHERE  dic.dicTypePID  = 'be8ae49cd7b944b6ad20743671f1d964' </Sql><Description>     SELECT 
+     dic.dicTypeID  AS id,
+     dic.dicTypeName AS name
+     
+    FROM 
+    c_dictype  dic 
+     WHERE  dic.dicTypePID  = 'be8ae49cd7b944b6ad20743671f1d964' </Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">id</IndexFields><TagName>dic_area</TagName></Item2><Item3><Children ItemClass="CrossIndexNodeSource"><Item0><IndexFields Len="1">guarantyOrgID</IndexFields><IndexFields2 Len="1">clientGUID</IndexFields2><TagName>index_column2</TagName></Item0></Children><Reader Class="SqlReader"><Name>column2</Name><Sql>SELECT DISTINCT  
+           pa.guarantyOrgID,
+           cc.clientGUID
+
+ FROM
+     crm_clientOut  cco
+ LEFT JOIN crm_client cc ON cco.clientGUID= cc.clientGUID AND cc.isMainVersion=FALSE
+ LEFT JOIN pro_applyDetail pad ON pad.client_ID = cco.client_ID
+ LEFT JOIN pro_project pp ON pad.applyDetail_ID = PP.applyDetail_ID
+ LEFT JOIN pro_apply pa ON pa.client_ID = cco.client_ID
+ WHERE 1=1 AND cco.outStatus = '1' AND pp.busiClass = '02'
+${has(begindatesql)?(" and cco.outDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and cco.outDate&lt;='"+enddatesql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+ GROUP BY cco.clientGUID
+ </Sql><Description>SELECT DISTINCT  
+           pa.guarantyOrgID,
+           cc.clientGUID
+
+ FROM
+     crm_clientOut  cco
+ LEFT JOIN crm_client cc ON cco.clientGUID= cc.clientGUID AND cc.isMainVersion=FALSE
+ LEFT JOIN pro_applyDetail pad ON pad.client_ID = cco.client_ID
+ LEFT JOIN pro_project pp ON pad.applyDetail_ID = PP.applyDetail_ID
+ LEFT JOIN pro_apply pa ON pa.client_ID = cco.client_ID
+ WHERE 1=1 AND cco.outStatus = '1' AND pp.busiClass = '02'
+${has(begindatesql)?(" and cco.outDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and cco.outDate&lt;='"+enddatesql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+ GROUP BY cco.clientGUID
+ </Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">guarantyOrgID</IndexFields><IndexFields2 Len="1">clientGUID</IndexFields2><TagName>column2</TagName></Item3><Item4><Children ItemClass="RowNodeSource"><Item0/></Children><Reader Class="SqlReader"><Name>column1</Name><Sql>SELECT 
+     dic.dicTypeID  AS id,
+     dic.dicTypeName AS name
+     
+    FROM 
+    c_dictype  dic 
+     WHERE  dic.dicTypePID  = '78ae83f6524d458dbbd522324c80723d' 
+ and  dic.dicTypeID   not in ('6a0a5bca93494507bffd025a9bcc4b72',
+'897ff2ea6bf042c9bcf59b36c1e3ee14','9d230c752d384cc78c199c2cdf2c1088','c949c4c3d3524e7298c344f73fdc5f5d')
+</Sql><Description>SELECT 
+     dic.dicTypeID  AS id,
+     dic.dicTypeName AS name
+     
+    FROM 
+    c_dictype  dic 
+     WHERE  dic.dicTypePID  = '78ae83f6524d458dbbd522324c80723d' 
+ and  dic.dicTypeID   not in ('6a0a5bca93494507bffd025a9bcc4b72',
+'897ff2ea6bf042c9bcf59b36c1e3ee14','9d230c752d384cc78c199c2cdf2c1088','c949c4c3d3524e7298c344f73fdc5f5d')
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">id</IndexFields><TagName>column1</TagName></Item4><Item5><Children ItemClass="CrossIndexNodeSource"><Item0><IndexFields Len="1">guarantyOrgID</IndexFields><IndexFields2 Len="1">loadSum</IndexFields2><TagName>index_column3</TagName></Item0></Children><Reader Class="SqlReader"><Name>column3</Name><Sql>SELECT DISTINCT  SUM(pp.loadSum) AS loadSum,
+           pa.guarantyOrgID
+
+ FROM
+     crm_clientOut  cco
+ LEFT JOIN crm_client cc ON cco.clientGUID= cc.clientGUID AND cc.isMainVersion=FALSE
+ LEFT JOIN pro_applyDetail pad ON pad.client_ID = cco.client_ID
+ LEFT JOIN pro_project pp ON pad.applyDetail_ID = PP.applyDetail_ID
+ LEFT JOIN pro_apply pa ON pa.client_ID = cco.client_ID
+ WHERE 1=1 AND cco.outStatus = '1' AND pp.busiClass = '02'
+${has(begindatesql)?(" and cco.outDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and cco.outDate&lt;='"+enddatesql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+ GROUP BY cco.clientGUID
+ </Sql><Description>SELECT DISTINCT  SUM(pp.loadSum) AS loadSum,
+           pa.guarantyOrgID
+
+ FROM
+     crm_clientOut  cco
+ LEFT JOIN crm_client cc ON cco.clientGUID= cc.clientGUID AND cc.isMainVersion=FALSE
+ LEFT JOIN pro_applyDetail pad ON pad.client_ID = cco.client_ID
+ LEFT JOIN pro_project pp ON pad.applyDetail_ID = PP.applyDetail_ID
+ LEFT JOIN pro_apply pa ON pa.client_ID = cco.client_ID
+ WHERE 1=1 AND cco.outStatus = '1' AND pp.busiClass = '02'
+${has(begindatesql)?(" and cco.outDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and cco.outDate&lt;='"+enddatesql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+ GROUP BY cco.clientGUID
+ </Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">guarantyOrgID</IndexFields><IndexFields2 Len="1">loadSum</IndexFields2><TagName>column3</TagName></Item5></Children></NodeSource></jatools>

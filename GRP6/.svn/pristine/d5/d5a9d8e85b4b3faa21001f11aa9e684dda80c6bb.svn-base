@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zjm.gworkFlow.db.map.PendingWorkFlowMapper">
+
+	<resultMap type="com.zjm.gworkFlow.db.model.PendingWorkFlow" id="PendingWorkFlowResultMap">
+		<result property="unit_uid" column="unit_uid" />
+		<result property="flowID" column="flowID" />
+		<result property="projectID" column="projectID" />
+		<result property="flowType" column="flowType" />
+		<result property="entityName" column="entityName" />
+		
+		<result property="businessId" column="businessId" />
+		<result property="businessType" column="businessType" />
+		
+		<result property="createFlowUserName" column="createFlowUserName" />
+		<result property="createFlowUserUid" column="createFlowUserUid" />
+		<result property="waitFlowUserName" column="waitFlowUserName" />
+		<result property="waitFlowUserUid" column="waitFlowUserUid" />
+		<result property="createFlowDepartName" column="createFlowDepartName" />
+		<result property="createFlowDepartUid" column="createFlowDepartUid" />
+		<result property="waitFlowDepartName" column="waitFlowDepartName" />
+		<result property="waitFlowDepartUid" column="waitFlowDepartUid" />
+		
+		<result property="flowTemplateName" column="flowTemplateName" />
+		<result property="stepID" column="stepID" />
+		<result property="stepName" column="stepName" />
+		<result property="flowStatusName" column="flowStatusName" />
+		<result property="user_uid" column="user_uid" />
+		
+		<result property="historyID" column="historyID" />
+		
+		<result property="limitDate" column="limitDate" />
+		<result property="limitDateUnit" column="limitDateUnit" />
+		<result property="start_date" column="start_date" />
+		<result property="finish_date" column="finish_date" />
+		<result property="create_date" column="create_date" />
+		
+	</resultMap>
+	
+	
+	<!-- 流程监控  分页列表 待处理-->
+	<select id="returnMonitoringWorkFlowPageTableWait" resultMap="PendingWorkFlowResultMap" parameterType="com.zjm.common.db.model.PageTable">
+		<![CDATA[
+			SELECT 
+			  Z.ID AS historyID,
+			  Z.ENTRY_ID  AS flowID,
+			  B.projectID,
+			  ins.businessId,
+			  ins.businessType,
+			  B.flowType,
+			  B.entityName,
+			  G.user_name AS createFlowUserName,
+			  B.flowCtreatorID AS createFlowUserUid,
+			  B.flowTemplateName,
+			  Z.stepName AS stepName,
+			  Z.STEP_ID AS stepID,
+			  H.user_name AS waitFlowUserName,
+			  Z.OWNER AS waitFlowUserUid,
+			  E.flowStatusName,
+			  Z.START_DATE AS start_date,
+			  Z.limitDate,
+			  Z.limitDateUnit,
+			  B.flowCreateTime AS create_date
+			  FROM os_gworkflow_projidflowid B
+			  LEFT JOIN os_currentstep Z ON Z.ENTRY_ID=B.ENTRY_ID
+			  LEFT JOIN os_historystep F ON F.ENTRY_ID=B.ENTRY_ID
+			  LEFT JOIN os_wfentry A   ON B.ENTRY_ID = A.ID
+			  LEFT JOIN os_gworkflow_flowstatus E ON A.STATE = E.flowStatus_id
+			  LEFT JOIN os_gworkflow_instance ins ON ins.entryId=b.ENTRY_ID
+			  LEFT JOIN sys_users G ON B.flowCtreatorID=G.user_uid
+			  LEFT JOIN sys_users H ON Z.OWNER=H.user_uid
+			    
+			WHERE  (A.STATE ='0' OR A.STATE ='1') ${wheresql}
+			GROUP BY Z.ID
+		 	limit #{pageNumber},#{pageSize}
+		]]>
+	</select>
+	<!-- 流程监控  分页列表  已终止-->
+	<select id="returnMonitoringWorkFlowPageTableStop" resultMap="PendingWorkFlowResultMap" parameterType="com.zjm.common.db.model.PageTable">
+		<![CDATA[
+			SELECT
+			  B.unit_uid          AS unit_uid,
+			  A.ID          AS flowID,
+			  E.flowStatusName          AS stepName,
+			  B.projectID,
+			  B.flowType,
+			  B.entityName,
+			  G.user_name AS createFlowUserName,
+			  B.flowCtreatorID as createFlowUserUid,
+			  B.flowTemplateName  AS flowTemplateName,
+			  E.flowStatusName,
+			  B.flowCreateTime as create_date
+			FROM os_gworkflow_projidflowid B
+			     LEFT JOIN os_wfentry A
+			       ON B.ENTRY_ID = A.ID
+			   LEFT JOIN os_gworkflow_flowtemplate D
+			     ON D.flowTemplateID = B.flowTemplateID
+			   LEFT JOIN os_gworkflow_flowstatus E
+			    ON A.STATE = E.flowStatus_id
+			   LEFT JOIN os_historystep F ON B.ENTRY_ID=F.ENTRY_ID
+			   LEFT JOIN sys_users G ON B.flowCtreatorID=G.user_uid
+			    WHERE (A.STATE ='4' OR A.STATE ='3') ${wheresql2} 
+						GROUP BY B.ENTRY_ID
+					limit #{pageNumber},#{pageSize}
+		]]>
+	</select>
+	<!-- 流程监控  分页列表 总记录数待处理 -->
+	<select id="returnMonitoringWorkFlowPageTableCountWait" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		<![CDATA[
+			SELECT 
+			 count(*)
+			 FROM (
+			 SELECT B.*
+			 FROM os_gworkflow_projidflowid B
+			  LEFT JOIN os_currentstep Z ON Z.ENTRY_ID=B.ENTRY_ID
+			  LEFT JOIN sys_users I ON I.user_uid=B.flowCtreatorID
+			  LEFT JOIN os_historystep F ON F.ENTRY_ID=B.ENTRY_ID
+			  LEFT JOIN os_wfentry A   ON B.ENTRY_ID = A.ID
+			  LEFT JOIN os_gworkflow_flowstatus E
+			    ON A.STATE = E.flowStatus_id
+			    LEFT JOIN sys_users G ON B.flowCtreatorID=G.user_uid
+			    
+			WHERE  (A.STATE ='0' OR A.STATE ='1')  ${wheresql}
+			GROUP BY Z.ID)  view_data
+		]]>
+	</select>
+	<!-- 流程监控  分页列表 总记录数 已终止 -->
+	<select id="returnMonitoringWorkFlowPageTableCountStop" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		<![CDATA[
+			SELECT
+			count(*)
+			FROM (
+			SELECT B.*
+			FROM os_gworkflow_projidflowid B
+			     LEFT JOIN os_wfentry A
+			       ON B.ENTRY_ID = A.ID
+			   LEFT JOIN os_gworkflow_flowtemplate D
+			     ON D.flowTemplateID = B.flowTemplateID
+			   LEFT JOIN os_gworkflow_flowstatus E
+			    ON A.STATE = E.flowStatus_id
+			   LEFT JOIN os_historystep F ON B.ENTRY_ID=F.ENTRY_ID
+			   LEFT JOIN sys_users G ON B.flowCtreatorID=G.user_uid
+			    WHERE (A.STATE ='4' OR A.STATE ='3') ${wheresql2}
+			GROUP BY B.ENTRY_ID)  table_data
+		]]>
+	</select>
+	
+	<!--待处理业务流程  分页列表 -->
+	<select id="returnPendingWorkFlowPageTable" resultMap="PendingWorkFlowResultMap" parameterType="com.zjm.common.db.model.PageTable">
+		<![CDATA[
+			SELECT 
+			  A.ID AS historyID,
+			  A.ENTRY_ID AS flowID,
+			  B.projectID,
+			  B.flowType,
+			  app.projectName AS entityName,
+			  G.user_name AS createFlowUserName,
+			  B.flowCtreatorID AS createFlowUserUid,
+			  B.flowTemplateName,
+			  A.STEP_ID AS stepID,
+			  A.stepName AS stepName,
+			  H.user_name AS waitFlowUserName,
+			  A.OWNER AS waitFlowUserUid,
+			  A.limitDate,
+			  A.limitDateUnit,
+			  A.START_DATE AS start_date,
+			  B.flowCreateTime AS create_date
+			FROM
+			  os_currentstep A
+			  LEFT JOIN os_gworkflow_projidflowid B ON A.ENTRY_ID=B.ENTRY_ID
+			   LEFT JOIN sys_users G ON B.flowCtreatorID=G.user_uid
+			   LEFT JOIN sys_users H ON A.OWNER=H.user_uid
+			   LEFT JOIN pro_apply app ON app.apply_ID=B.projectID
+			WHERE  1 ${wheresql}
+					limit #{pageNumber},#{pageSize}
+		]]>
+	</select>
+
+	<!-- 待处理业务流程  分页列表 总记录数-->
+	<select id="returnPendingWorkFlowPageTableCount" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		<![CDATA[
+			SELECT 
+			  count(A.ID)
+			FROM
+			  os_currentstep A
+			  LEFT JOIN os_gworkflow_projidflowid B ON A.ENTRY_ID=B.ENTRY_ID
+			  LEFT JOIN sys_users G ON B.flowCtreatorID=G.user_uid
+			  LEFT JOIN sys_users H ON A.OWNER=H.user_uid
+			  LEFT JOIN pro_apply app ON app.apply_ID=B.projectID
+			WHERE  1	${wheresql}
+		]]>
+	</select>
+	
+	
+	
+	
+	<!-- 获取流程步骤信息  -->
+	<select id="returnWorkFlowStepInfo" resultMap="PendingWorkFlowResultMap" parameterType="com.zjm.gworkFlow.db.model.PendingWorkFlow">
+		<![CDATA[
+			SELECT 
+			  A.ID as historyID,
+			  A.ENTRY_ID as flowID,
+			  B.projectID,
+			  B.flowType,
+			  B.entityName,
+			  G.user_name as createFlowUserName,
+			  B.flowCtreatorID as createFlowUserUid,
+			  B.flowTemplateName,
+			  I.businessId,
+			  I.businessType,
+			  A.STEP_ID as stepID,
+			  A.stepName as stepName,
+			  H.user_name as waitFlowUserName,
+			  A.OWNER as waitFlowUserUid,
+			  A.limitDate,
+			  A.limitDateUnit,
+			  A.START_DATE as start_date,
+			  B.flowCreateTime as create_date
+			FROM
+			  os_currentstep A
+			  LEFT JOIN os_gworkflow_projidflowid B ON A.ENTRY_ID=B.ENTRY_ID
+			  LEFT JOIN os_gworkflow_instance I on I.ENTRYID=A.ENTRY_ID
+			   LEFT JOIN sys_users G ON B.flowCtreatorID=G.user_uid
+			   LEFT JOIN sys_users H ON A.OWNER=H.user_uid
+			WHERE B.unit_uid = #{unit_uid}
+			  AND A.ENTRY_ID = #{flowID}
+			  AND A.STEP_ID = #{stepID}
+	   ]]>
+	</select>
+	
+	
+</mapper> 

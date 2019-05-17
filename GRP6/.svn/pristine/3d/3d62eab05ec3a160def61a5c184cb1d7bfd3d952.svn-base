@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjm.sys.db.map.Sys_post_userMapper" >
+	<!-- 岗位用户关联 -->
+  <resultMap id="PostUserResultMap" type="com.zjm.sys.db.model.Sys_post_user" >
+    <id column="post_ID" property="post_ID"  />
+    <id column="user_uid" property="user_uid"  />
+    <id column="unit_uid" property="unit_uid" />
+  </resultMap>
+  
+  <!-- 根据用户 id删除关联数据 -->
+  <delete id="deleteOnePostUserInfo" parameterType="com.zjm.sys.db.model.Sys_post_user">
+		<![CDATA[	
+				DELETE FROM sys_post_user 
+				WHERE user_uid = #{user_uid}
+		]]>
+			<if test="unit_uid !=null">
+				and unit_uid=#{unit_uid} 
+			</if>
+			<if test="post_ID != null">
+				and post_ID=#{post_ID}
+			</if>
+			
+			
+	</delete>
+	<!-- 插入一个关联数据信息 -->
+	<insert id="insertOnePostUserInfo"	parameterType="com.zjm.sys.db.model.Sys_post_user">
+		<![CDATA[
+		INSERT INTO sys_post_user (
+			post_ID,
+			user_uid,
+			unit_uid
+		)
+		VALUES
+		(
+			#{post_ID},
+			#{user_uid},
+			#{unit_uid}
+		)
+		]]>
+	</insert>
+	<select id="getPostUserCountByIds"   resultType="java.lang.Long">
+     select 
+           count(post_ID) 
+         from sys_post_user 
+            where  1=1 
+                 and  post_ID = #{0} 
+                 and  user_uid = #{1}
+                 and  unit_uid = #{2}
+     </select>
+	
+	<!-- 由机构id和岗位id查询用户id 信息 -->
+	<select id="selectPostUserList" resultMap="PostUserResultMap" resultType="string">
+		select 
+			post_ID,
+			user_uid,
+			unit_uid
+		from sys_post_user
+		where 1=1 ${value}
+	</select>
+	
+	
+</mapper>

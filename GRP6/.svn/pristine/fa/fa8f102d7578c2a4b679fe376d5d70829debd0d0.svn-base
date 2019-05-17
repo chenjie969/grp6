@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_meetingCostMapper">
+	
+	<!-- 评审会收费标准表 -->
+	<resultMap type="com.zjm.pro.db.model.Pro_meetingCost" id="meetingCostMap">
+		<result property="meetingCost_ID" column="meetingCost_ID" />
+		<result property="meetingResolution_ID" column="meetingResolution_ID" />
+		<result property="applyID" column="applyID" />
+		<result property="costStandardID" column="costStandardID" />
+		<result property="remark" column="remark" />
+		<result property="updateUserName" column="updateUserName" />
+		<result property="updateDateTime" column="updateDateTime" />
+		<result property="costName" column="costName" />
+		<result property="costTypeName" column="costTypeName" />
+		<result property="costRate" column="costRate" />
+		<result property="costUnit" column="costUnit" />
+		<result property="culate" column="culate" />	
+		<result property="calculateRate" column="calculateRate" />	
+		<!-- <association property="client" resultMap="com.zjm.crm.db.map.Crm_clientMapper.ClientResultMap" /> -->
+	</resultMap>
+	
+	<!-- 根据条件查询评审会收费标准 -->
+	<select id="selectMeetingCostList" parameterType="string" resultMap="meetingCostMap">
+		SELECT
+			procost.meetingCost_ID,
+			procost.meetingResolution_ID,
+			procost.applyID,
+			procost.costStandardID,
+			procost.remark,
+			syscost.costName,
+			syscost.costTypeName,
+			syscost.costRate,
+			syscost.costUnit,
+			syscost.calculateRate,
+			syscost.culate
+		FROM pro_meetingCost procost
+		LEFT JOIN sys_coststandard syscost ON procost.costStandardID = syscost.costStandard_ID
+		WHERE 1=1 ${value}
+	</select>
+	
+	<!-- 根据条件查询一条评审会收费标准 -->
+	<select id="selectOneMeetingCost" parameterType="com.zjm.pro.db.model.Pro_meetingCost" resultMap="meetingCostMap">
+		SELECT
+			procost.meetingCost_ID,
+			procost.meetingResolution_ID,
+			procost.applyID,
+			procost.costStandardID,
+			procost.remark,
+			syscost.costName,
+			syscost.costTypeName,
+			syscost.costRate,
+			syscost.costUnit,
+			syscost.calculateRate,
+			syscost.culate
+		FROM pro_meetingCost procost
+		LEFT JOIN sys_coststandard syscost ON procost.costStandardID = syscost.costStandard_ID
+		WHERE
+			procost.meetingCost_ID = #{meetingCost_ID}
+		LIMIT 1
+	</select>
+	
+	<!-- 新增一条评审会收费标准 -->
+	<insert id="insertOneMeetingCost" parameterType="com.zjm.pro.db.model.Pro_meetingCost">
+		INSERT INTO pro_meetingcost(
+			meetingCost_ID,
+			meetingResolution_ID,
+			applyID,
+			costStandardID,
+			remark,
+			updateUserName,
+			updateDateTime
+		) VALUES(
+			#{meetingCost_ID},
+			#{meetingResolution_ID},
+			#{applyID},
+			#{costStandardID},
+			#{remark},
+			#{updateUserName},
+			NOW()
+		)
+	</insert>
+	
+	<!-- 修改一条评审会收费标准的备注信息 -->
+	<update id="updateOneMeetingCostRemark" parameterType="com.zjm.pro.db.model.Pro_meetingCost">
+		UPDATE pro_meetingcost
+		SET
+			remark = #{remark},
+			updateUserName = #{updateUserName},
+			updateDateTime = NOW()
+		WHERE
+			meetingCost_ID = #{meetingCost_ID}
+		LIMIT 1
+	</update>
+	
+	<!-- 删除一条评审会收费标准 -->
+	<delete id="deleteOneMeetingCost" parameterType="string">
+		DELETE FROM pro_meetingcost
+		WHERE meetingCost_ID = #{value}
+		LIMIT 1
+	</delete>
+	
+</mapper>

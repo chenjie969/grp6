@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.sys.db.map.Sys_modulesMapper">
+
+	<!-- 人员表信息 -->
+	<resultMap type="com.zjm.sys.db.model.Sys_modules" id="ModelResultMap">
+		<result property="mod_uid" column="mod_uid" />
+		<result property="pmod_id" column="pmod_id" />
+		<result property="mod_name" column="mod_name" />
+		<result property="url" column="url" />
+		<result property="title" column="title" />
+		<result property="iframe" column="iframe" />
+		<result property="icon" column="icon" />
+		<result property="iconopen" column="iconopen" />
+		<result property="isopen" column="isopen" />
+		<result property="order_id" column="order_id" />
+		<result property="createdatetime" column="createdatetime" />
+		<result property="create_user" column="create_user" />
+		<result property="updatedatetime" column="updatedatetime" />
+		<result property="update_user" column="update_user" />
+		<result property="mod_type" column="mod_type" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="isReload" column="isReload" />
+	</resultMap>
+	<!-- 查询所有的菜单 -->
+	<select id="selectAllModulesList" resultMap="ModelResultMap" parameterType="java.lang.String">
+		<![CDATA[SELECT mod_uid,pmod_id,mod_name,url,title,iframe,icon,iconopen,isopen,mod_type,isReload FROM sys_modules where 1=1 ${value}  ORDER BY order_id]]>
+	</select>
+	<!-- 插入一个菜单信息 -->
+	<insert id="insertOneModulesInfo"	parameterType="com.zjm.sys.db.model.Sys_modules">
+		<![CDATA[
+		INSERT INTO sys_modules (
+		mod_uid,
+		unit_uid,
+		pmod_id,
+		mod_name,
+		url,
+		title,
+		iframe,
+		icon,
+		iconopen,
+		isopen,
+		order_id,
+		createdatetime,
+		create_user,
+		updatedatetime,
+		update_user,
+		mod_type,
+		isReload
+		)
+		VALUES
+		(
+		#{mod_uid},
+		#{unit_uid},
+		#{pmod_id},
+		#{mod_name},
+		#{url},
+		#{title},
+		#{iframe},
+		#{icon},
+		#{iconopen},
+		#{isopen},
+		#{order_id},
+		NOW(),
+		#{create_user},
+		NOW(),
+		#{update_user},
+		#{mod_type},
+		#{isReload}
+		) ;
+		]]>
+	</insert>
+	<!-- 查询一个菜单信息 -->
+	<select id="selectOneModulesInfo" parameterType="com.zjm.sys.db.model.Sys_modules" resultMap="ModelResultMap">
+		<![CDATA[SELECT mod_uid,pmod_id,mod_name,url,title,iframe,icon,iconopen,isopen,order_id,createdatetime,create_user,updatedatetime,update_user,mod_type,isReload FROM sys_modules where mod_uid=#{mod_uid}]]>
+	</select>
+	<!-- 更新一个菜单信息 -->	
+	<update id="updateOneModulesInfo" parameterType="com.zjm.sys.db.model.Sys_modules">
+		<![CDATA[
+		UPDATE 
+		  sys_modules
+		SET
+		  mod_name = #{mod_name},
+		  url = #{url},
+		  title = #{title},
+		  iframe = #{iframe},
+		  icon = #{icon},
+		  iconopen = #{iconopen},
+		  isopen = #{isopen},
+		  order_id = #{order_id},
+		  updatedatetime = NOW(),
+		  update_user = #{update_user},
+		  isReload=#{isReload}
+		WHERE mod_uid = #{mod_uid}
+		  ]]>
+	</update>
+	<!-- 删除一个菜单信息 -->
+	<delete id="deleteOneModulesInfo" parameterType="com.zjm.sys.db.model.Sys_modules">
+		<![CDATA[DELETE FROM sys_modules WHERE mod_uid = #{mod_uid} ]]>
+	</delete>
+	
+	
+	<!-- 查询所有的菜单    分页列表-->
+	<select id="selectModulesPageTables" parameterType="com.zjm.common.db.model.PageTable" resultMap="ModelResultMap">
+		<![CDATA[SELECT mod_uid,pmod_id,mod_name,url,title,iframe,icon,iconopen,isopen,mod_type,isReload FROM sys_modules where 1=1 ${wheresql}   limit #{pageNumber},#{pageSize}]]>
+	</select>
+	<!-- 查询所有的菜单    分页列表 总记录数-->
+	<select id="selectModulesPageTables_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		<![CDATA[SELECT count(mod_uid) FROM sys_modules where 1=1 ${wheresql} ]]>
+	</select>
+	
+	<!-- 公共排序方法 -->	
+	<update id="updateSortOrder" parameterType="java.lang.String">
+		<![CDATA[${value}]]>
+	</update>
+	<!-- 判断是否存在-->
+	<select id="selectModulesIsExist" parameterType="java.lang.String" resultType="java.lang.Integer">
+		<![CDATA[SELECT count(mod_uid) FROM sys_modules where 1=1 ${value} ]]>
+	</select>
+	
+	<!--  查询同级节点下共有多少菜单 -->
+	<select id="selectModulesOrderId" parameterType="com.zjm.sys.db.model.Sys_modules" resultType="java.lang.Integer">
+		<![CDATA[SELECT count(pmod_id) FROM sys_modules where pmod_id=#{pmod_id}]]>
+	</select>
+	
+	<!-- 删除该菜单的角色授权信息 -->
+	<delete id="deleteOneModulesInfoRelevanceRoles" parameterType="com.zjm.sys.db.model.Sys_modules">
+		<![CDATA[DELETE FROM sys_roles_module WHERE mod_uid = #{mod_uid} ]]>
+	</delete>
+</mapper>  

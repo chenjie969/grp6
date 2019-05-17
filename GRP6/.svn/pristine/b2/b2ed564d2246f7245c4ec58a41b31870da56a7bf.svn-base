@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjm.sys.db.map.Sys_clientCodeMapper" >
+  <resultMap id="ClientCodeResultMap" type="com.zjm.sys.db.model.Sys_clientCode" >  
+    <result column="clientCodeID" property="clientCodeID"  />
+    <result column="ruleType" property="ruleType"  />
+    <result column="ruleName" property="ruleName"  />
+    <result column="commonWord" property="commonWord"  />
+    <result column="commonCode" property="commonCode"  />
+    <result column="companyWord" property="companyWord"  />
+    <result column="companyCode" property="companyCode"  />
+    <result column="operateWord" property="operateWord" />
+    <result column="operateCode" property="operateCode"  />
+    <result column="consumeWord" property="consumeWord" />
+    <result column="consumeCode" property="consumeCode"  />
+    <result column="updateUserName" property="updateUserName"  />
+    <result column="updateDateTime" property="updateDateTime"  />
+    <result column="unit_uid" property="unit_uid" />
+  </resultMap>
+  
+  <!-- 查询一个客户编号信息 -->
+  <select id="selectOneClientCodeInfo" resultMap="ClientCodeResultMap" parameterType="com.zjm.sys.db.model.Sys_clientCode" >
+   	<![CDATA[
+	   	 select 
+	   		clientCodeID, 
+	   		ruleType, 
+	   		ruleName, 
+	   		commonWord, 
+	   		commonCode, 
+	   		companyWord, 
+	   		companyCode, 
+	   		operateWord, 
+			operateCode, 
+			consumeWord, 
+			consumeCode, 
+			updateUserName, 
+			updateDateTime, 
+			unit_uid
+	    from sys_clientCode
+	    where unit_uid=#{unit_uid}
+     ]]>
+  </select>
+  
+  <!-- 更新客户编号信息 -->
+  <update id="updateOneClientCodeInfo" parameterType="com.zjm.sys.db.model.Sys_clientCode" >
+  	<![CDATA[  	
+  	
+	    update sys_clientCode
+	    set
+	      ruleType = #{ruleType},
+	      ruleName = #{ruleName},
+	      commonWord = #{commonWord},
+	      commonCode = #{commonCode},
+	      companyWord = #{companyWord},
+	      companyCode =#{companyCode},
+	      operateWord = #{operateWord},
+	      operateCode = #{operateCode},
+	      consumeWord = #{consumeWord},
+	      consumeCode = #{consumeCode},
+	      updateUserName = #{updateUserName},
+	      updateDateTime = Now()
+	    where unit_uid = #{unit_uid}
+       ]]>
+  </update>
+	
+	
+</mapper>

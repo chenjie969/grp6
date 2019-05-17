@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjm.sys.db.map.Sys_dep_userMapper" >
+	<!-- 用户部门关联 -->
+  <resultMap id="DepUserResultMap" type="com.zjm.sys.db.model.Sys_dep_user" >
+    <id column="user_uid" property="user_uid"  />
+    <id column="depart_uid" property="depart_uid"  />
+    <id column="unit_uid" property="unit_uid" />
+    <result column="is_otherdep" property="is_otherdep"  />
+  </resultMap>
+  
+  <!-- 根据部门删除关联数据 -->
+  <delete id="deleteOneDepUserInfo" parameterType="com.zjm.sys.db.model.Sys_dep_user">
+		<![CDATA[DELETE FROM sys_dep_user WHERE depart_uid = #{depart_uid} ]]>
+	</delete>
+	<!-- 根据用户删除关联数据 -->
+  <delete id="deleteOneDepUserInfoByUserId" parameterType="com.zjm.sys.db.model.Sys_dep_user">
+		<![CDATA[DELETE FROM sys_dep_user WHERE user_uid = #{user_uid} ]]>
+	</delete>
+	<!-- 插入一个关联数据信息 -->
+	<insert id="insertOneDepUserInfo"	parameterType="com.zjm.sys.db.model.Sys_dep_user">
+		<![CDATA[
+		INSERT INTO sys_dep_user (
+			user_uid,
+			depart_uid,
+			unit_uid,
+			is_otherdep
+		)
+		VALUES
+		(
+			#{user_uid},
+			#{depart_uid},
+			#{unit_uid},
+			#{is_otherdep}
+		)
+		]]>
+	</insert>
+	
+	<!-- 根据用户id获取部门信息 -->
+	<select id="selectOneDepUserInfo" parameterType="com.zjm.sys.db.model.Sys_dep_user" resultMap="DepUserResultMap">
+		select 
+			user_uid,
+			depart_uid,
+			unit_uid,
+			is_otherdep
+		from
+		sys_dep_user
+		where user_uid = #{user_uid}
+		LIMIT 1
+	</select>
+	
+		<!-- 根据 部门id 获取用户信息 -->
+	<select id="selectOneDepUserListByDepart" parameterType="com.zjm.sys.db.model.Sys_dep_user" resultMap="DepUserResultMap">
+		select 
+			user_uid,
+			depart_uid,
+			unit_uid,
+			is_otherdep
+		from
+		sys_dep_user
+		where depart_uid = #{depart_uid}
+	</select>
+	<!-- 更新一个用户部门关联信息 -->	
+	<update id="updateOneDepUserInfo" parameterType="com.zjm.sys.db.model.Sys_dep_user">
+	<!-- 	<![CDATA[
+		UPDATE 
+		     sys_dep_user
+		SET
+		   	user_uid= #{user_uid},
+			depart_uid= #{depart_uid},
+			unit_uid= #{unit_uid},
+			is_otherdep= #{is_otherdep}
+		WHERE user_uid=#{user_uid}  and unit_uid=#{unit_uid} 
+		  ]]> -->
+		<![CDATA[
+		UPDATE 
+		     sys_dep_user
+		SET
+		   	user_uid= #{user_uid},
+			depart_uid= #{depart_uid},
+			unit_uid= #{unit_uid},
+			is_otherdep= #{is_otherdep}
+		WHERE user_uid=#{user_uid}  and unit_uid=#{unit_uid} and depart_uid =#{depart_uid_old} 
+		]]>
+	</update>
+	<!-- 根据用户id 查询相同部门的所有用户id -->
+	<select id="selectUserListByCommonDepUser" parameterType="java.lang.String" resultType="java.lang.String">
+		select sys_dep_user.user_uid from sys_dep_user 
+			where 
+			sys_dep_user.depart_uid = 
+			(select d.depart_uid from sys_departs as d
+							LEFT JOIN sys_dep_user as d_u on d.depart_uid = d_u.depart_uid 
+							LEFT JOIN sys_users as u ON u.user_uid = d_u.user_uid 
+							where u.user_uid = #{user_uid})
+	</select>
+	
+	<!-- 根据部门id查询下级所有部门包括自己部门的用户id -->
+	<select id="selectfollowDepUserByDepart" parameterType="java.lang.String" resultType="java.lang.String">
+		select user_uid from sys_dep_user  
+			where sys_dep_user.depart_uid IN ( 
+			select d.depart_uid from sys_departs as d 
+			where d.depart_fullcode LIKE CONCAT('%', #{depart_uid} ,'%') 
+			)
+	</select>
+	
+	
+</mapper>

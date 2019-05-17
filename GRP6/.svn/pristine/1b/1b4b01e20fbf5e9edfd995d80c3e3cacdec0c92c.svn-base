@@ -1,0 +1,1800 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.crm.db.map.Crm_clientMapper">
+	<!-- 客户表信息 -->
+	<resultMap type="com.zjm.crm.db.model.Client" id="ClientResultMap">
+		<result property="client_ID" column="client_ID" />
+		<result property="clientGUID" column="clientGUID" />
+		<result property="clientBH" column="clientBH" />
+		<result property="clientName" column="clientName" />
+		<result property="clientTypeID" column="clientTypeID" />
+		<result property="clientTypeName" column="clientTypeName" />
+		<result property="fullAreaCode" column="fullAreaCode" />
+		<result property="fullAreaName" column="fullAreaName" />
+		<result property="fullTradeCode" column="fullTradeCode" />
+		<result property="fullTradeName" column="fullTradeName" />
+		<result property="enterpriseTypeID" column="enterpriseTypeID" />
+		<result property="enterpriseTypeName" column="enterpriseTypeName" />
+		<result property="certificateCode" column="certificateCode" />
+		<result property="fullRegisteCode" column="fullRegisteCode" />
+		<result property="fullRegisteName" column="fullRegisteName" />
+		<result property="registeAddress" column="registeAddress" />
+		<result property="workAddress" column="workAddress" />
+		<result property="zipCode" column="zipCode" />
+		<result property="legalPerson" column="legalPerson" />
+		<result property="legalCertificate" column="legalCertificate" />
+		<result property="legalPersonNum" column="legalPersonNum" />
+		<result property="controlPerson" column="controlPerson" />
+		<result property="controlPersonPhone" column="controlPersonPhone" />
+		<result property="controlCertificate" column="controlCertificate" />
+		<result property="controlPersonNum" column="controlPersonNum" />
+		<result property="registerSum" column="registerSum" />
+		<result property="currencyID" column="currencyID" />
+		<result property="currencyName" column="currencyName" />
+		<result property="natureID" column="natureID" />
+		<result property="natureName" column="natureName" />
+		<result property="createDate" column="createDate" />
+		<result property="industryCommerceOrg" column="industryCommerceOrg" />
+		<result property="busiTerm" column="busiTerm" />
+		<result property="loanCode" column="loanCode" />
+		<result property="busiScope" column="busiScope" />
+		<result property="leadBusi" column="leadBusi" />
+		<result property="nationalTaxOrg" column="nationalTaxOrg" />
+		<result property="landTaxOrg" column="landTaxOrg" />
+		<result property="businessLicence" column="businessLicence" />
+		<result property="organizationCode" column="organizationCode" />
+		<result property="taxCode" column="taxCode" />
+		<result property="employeeSum" column="employeeSum" />
+		<result property="factSum" column="factSum" />
+		<result property="capitalSum" column="capitalSum" />
+		<result property="lastYear" column="lastYear" />
+		<result property="lastYearSale" column="lastYearSale" />
+		<result property="lastYearSaleProfit" column="lastYearSaleProfit" />
+		<result property="lastYearProfit" column="lastYearProfit" />
+		<result property="selfArea" column="selfArea" />
+		<result property="rentalArea" column="rentalArea" />
+		<result property="selfWorkShop" column="selfWorkShop" />
+		<result property="rentalWorkShop" column="rentalWorkShop" />
+		<result property="isHighTechnology" column="isHighTechnology" />
+		<result property="highTechnologyCode" column="highTechnologyCode" />
+		<result property="highTechnologyDate" column="highTechnologyDate" />
+		<result property="contactOne" column="contactOne" />
+		<result property="positionOneName" column="positionOneName" />
+		<result property="phoneOne" column="phoneOne" />
+		<result property="contactTwo" column="contactTwo" />
+		<result property="positionTwoName" column="positionTwoName" />
+		<result property="phoneTwo" column="phoneTwo" />
+		<result property="remark" column="remark" />
+		<result property="clientSourceID" column="clientSourceID" />
+		<result property="clientSourceName" column="clientSourceName" />
+		<result property="clientSourceDesc" column="clientSourceDesc" />
+		<result property="personName" column="personName" />
+		<result property="personNum" column="personNum" />
+		<result property="sex" column="sex" />
+		<result property="age" column="age" />
+		<result property="maritalStatus" column="maritalStatus" />
+		<result property="domicile" column="domicile" />
+		<result property="familyNum" column="familyNum" />
+		<result property="workNum" column="workNum" />
+		<result property="incomeSource" column="incomeSource" />
+		<result property="education" column="education" />
+		<result property="workUnit" column="workUnit" />
+		<result property="position" column="position" />
+		<result property="unitAddress" column="unitAddress" />
+		<result property="monthIncome" column="monthIncome" />
+		<result property="unitPost" column="unitPost" />
+		<result property="unitPhone" column="unitPhone" />
+		<result property="houseNature" column="houseNature" />
+		<result property="houseArea" column="houseArea" />
+		<result property="houseAddress" column="houseAddress" />
+		<result property="housePost" column="housePost" />
+		<result property="phone" column="phone" />
+		<result property="houseTel" column="houseTel" />
+		<result property="otherAssets" column="otherAssets" />
+		<result property="isClient" column="isClient" />
+		<result property="isRelation" column="isRelation" />
+		<result property="isOptGaranty" column="isOptGaranty" />
+		<result property="isBadClient" column="isBadClient" />
+		<result property="creditLevelID" column="creditLevelID" />
+		<result property="creditLevel" column="creditLevel" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="unit_uidName" column="unit_uidName" />
+		<result property="fullDepartCode" column="fullDepartCode" />
+		<result property="createUserID" column="createUserID" />
+		<result property="createDateTime" column="createDateTime" />
+		<result property="isMainVersion" column="isMainVersion" />
+		<result property="updateUserName" column="updateUserName" />
+		<result property="updateDateTime" column="updateDateTime" />
+		<result property="fax" column="fax" />
+		<result property="riskLevelID" column="riskLevelID" />
+		<result property="riskLevelName" column="riskLevelName" />
+		<result property="riskLevelDesc" column="riskLevelDesc" />
+		<result property="relationMainName" column="relationMainName" />
+		<result property="liabilitySum" column="liabilitySum" />
+		<result property="creditorGuarSum" column="creditorGuarSum" />
+		<result property="timePointEntrustSum" column="timePointEntrustSum" />
+		<result property="oldDivisionID" column="oldDivisionID" />
+		<result property="oldDivisionName" column="oldDivisionName" />
+		<result property="divisionID" column="divisionID" />
+		<result property="divisionName" column="divisionName" />
+		
+		
+	</resultMap>
+
+	
+	<!-- 查询所有的客户 分页列表 -->
+	<select id="selectCompanyClientPageTables" parameterType="com.zjm.common.db.model.PageTable"
+		resultMap="ClientResultMap">
+		<![CDATA[
+		SELECT
+			client_ID, 
+			clientGUID,
+			clientBH,
+			clientName,
+			clientTypeID,
+			clientTypeName,
+		   	fullAreaCode,
+		  	fullAreaName,
+		    fullTradeCode,
+		    fullTradeName,
+		    enterpriseTypeID,
+		    enterpriseTypeName,
+		    certificateCode,
+		    fullRegisteCode,
+		    fullRegisteName,
+		    registeAddress,
+		    workAddress,
+		    zipCode,
+		    legalPerson,
+		    legalCertificate,
+		    legalPersonNum,
+	        controlPerson,
+	        controlPersonPhone,
+		    controlCertificate,
+		    controlPersonNum,
+		    registerSum,
+		    currencyID,
+	  		currencyName,
+	  		natureID,
+	  		natureName,
+	   		createDate,
+	  		busiTerm,
+	   		industryCommerceOrg,
+      		loanCode,
+	   		busiScope,
+	   		leadBusi,
+	  		nationalTaxOrg,
+	   		landTaxOrg,
+	  		businessLicence,
+	   		organizationCode,
+	   		taxCode,
+	   		employeeSum,
+	   		factSum,
+	  		capitalSum,
+	   		lastYear,
+	   		lastYearSale,
+	   		lastYearSaleProfit,
+	   		lastYearProfit,
+	   		selfArea,
+	   		rentalArea,
+	   		selfWorkShop,
+	   		rentalWorkShop,
+	  		isHighTechnology,
+	   		highTechnologyCode,
+	   		highTechnologyDate,
+	 		contactOne,
+	   		positionOneName,
+   			phoneOne,
+	   		contactTwo,
+	  		positionTwoName,
+	   		phoneTwo,
+	  		remark,
+	   		clientSourceID,
+	  		clientSourceName,
+	  		clientSourceDesc,
+	  		personName,
+	  		personNum,
+	   		sex,
+	  		age,
+	   		maritalStatus,
+	   		domicile,
+	   		familyNum,
+	   		workNum,
+	   		incomeSource,
+	   		education,
+	   		workUnit,
+	   		position,
+	  		unitAddress,
+	   		monthIncome,
+	   		unitPost,
+	   		unitPhone,
+	   		houseNature,
+	  		houseArea,
+	   		houseAddress,
+	   		housePost,
+	   		phone,
+	   		houseTel,
+		 	otherAssets,
+	   		isClient,
+	   		isRelation,
+	  		isOptGaranty,
+	   		isBadClient,
+	  		creditLevelID,
+  			creditLevel,
+	   		unit_uid,
+	   		unit_uidName,
+	  		fullDepartCode,
+	   		createUserID,
+	   		createDateTime,
+	  		isMainVersion,
+	  		updateUserName,
+	  		updateDateTime,
+	  		relationMainName,
+	  		fax,
+	  		liabilitySum,
+	  		creditorGuarSum,
+			timePointEntrustSum,
+			oldDivisionID,
+			oldDivisionName,
+			divisionID,
+			divisionName
+		
+	FROM crm_client 
+	
+	where isMainVersion=TRUE AND isBadClient=FALSE ${wheresql}   limit #{pageNumber},#{pageSize}]]>
+	</select>
+
+	<!-- 查询所有的个人客户 分页列表 -->
+	<select id="selectPersonClientPageTables" parameterType="com.zjm.common.db.model.PageTable"
+		resultMap="ClientResultMap">
+		<![CDATA[
+		SELECT
+			client_ID, 
+			clientGUID,
+			clientBH,
+			clientName,
+			certificateCode,
+	  		personName,
+	  		personNum,
+	   		sex,
+	  		age,
+	  		houseAddress,
+	   		domicile,
+	   		position,
+	   		phone,
+	   		fullDepartCode,
+	   		fullDepartName,
+	   		unit_uidName,
+	   		createUserName,
+	   		createDateTime,
+	   		liabilitySum,
+	   		creditorGuarSum,
+			timePointEntrustSum,
+			oldDivisionID,
+			oldDivisionName,
+			divisionID,
+			divisionName
+		
+	FROM crm_client 
+	where isMainVersion=TRUE AND isBadClient=FALSE ${wheresql}  limit #{pageNumber},#{pageSize}]]>
+	</select>
+
+	<!-- 查询客户 分页列表 总记录数 -->
+	<select id="selectClientPageTables_Count" parameterType="com.zjm.common.db.model.PageTable"
+		resultType="java.lang.Long">
+		<![CDATA[SELECT count(clientGUID) FROM crm_client where isMainVersion=TRUE AND isBadClient=FALSE ${wheresql} ]]>
+	</select>
+	
+	<!-- ***************************企业客户信息*********************** -->
+	<sql id="allColumns">
+			client_ID, clientGUID, clientBH, clientName, clientTypeID, clientTypeName, fullAreaCode, 
+		    fullAreaName, fullTradeCode, fullTradeName, enterpriseTypeID, enterpriseTypeName, 
+		    certificateCode, fullRegisteCode, fullRegisteName, registeAddress, workAddress, zipCode, 
+		    legalPerson, legalCertificate, legalPersonNum, controlPerson,controlPersonPhone, controlCertificate, 
+		    controlPersonNum, registerSum, currencyID, currencyName, natureID, natureName, createDate, 
+		    busiTerm, industryCommerceOrg, loanCode, nationalTaxOrg, landTaxOrg, businessLicence, 
+		    organizationCode, taxCode, employeeSum, factSum, capitalSum, lastYear, lastYearSale, 
+		    lastYearSaleProfit, lastYearProfit, selfArea, rentalArea, selfWorkShop, rentalWorkShop, 
+		    isHighTechnology, highTechnologyCode, highTechnologyDate, contactOne, positionOneName, 
+		    phoneOne, contactTwo, positionTwoName, phoneTwo, clientSourceID, clientSourceName, 
+		    clientSourceDesc, personName,personNum, sex, age, maritalStatus, domicile, familyNum, 
+		    workNum, incomeSource, education, workUnit, position, unitAddress, monthIncome, unitPost, 
+		    unitPhone, houseNature, houseArea, houseAddress, housePost, phone, houseTel, isClient, 
+		    isRelation, isOptGaranty, isBadClient, creditLevelID, creditLevel, unit_uid, unit_uidName, fullDepartCode, 
+		    createUserID, createDateTime, isMainVersion, updateUserName, updateDateTime, fullDepartName, 
+		    createUserName,relationMainName,liabilitySum,creditorGuarSum,timePointEntrustSum,oldDivisionID,oldDivisionName,
+			divisionID,divisionName
+	</sql>
+	<!-- 查询企业客户 分页列表 -->
+	<select id="selectCompanysClientPageTables"  parameterType="com.zjm.common.db.model.PageTable" resultMap="ClientResultMap">
+		<![CDATA[
+			SELECT 
+				DISTINCT
+				c.client_ID, c.clientGUID, clientBH, clientName, clientTypeID, clientTypeName, fullAreaCode, 
+		    fullAreaName, fullTradeCode, fullTradeName, enterpriseTypeID, enterpriseTypeName, 
+		    certificateCode, fullRegisteCode, fullRegisteName, registeAddress, workAddress, zipCode, 
+		    legalPerson, legalCertificate, legalPersonNum, controlPerson,controlPersonPhone, controlCertificate, 
+		    controlPersonNum, registerSum, currencyID, currencyName, natureID, natureName, createDate, 
+		    busiTerm, industryCommerceOrg, loanCode, nationalTaxOrg, landTaxOrg, businessLicence, 
+		    organizationCode, taxCode, employeeSum, factSum, capitalSum, lastYear, lastYearSale, 
+		    lastYearSaleProfit, lastYearProfit, selfArea, rentalArea, selfWorkShop, rentalWorkShop, 
+		    isHighTechnology, highTechnologyCode, highTechnologyDate, contactOne, positionOneName, 
+		    phoneOne, contactTwo, positionTwoName, phoneTwo, clientSourceID, clientSourceName, 
+		    clientSourceDesc, personName,personNum, sex, age, maritalStatus, domicile, familyNum, 
+		    workNum, incomeSource, education, workUnit, POSITION, unitAddress, monthIncome, unitPost, 
+		    unitPhone, houseNature, houseArea, houseAddress, housePost, phone, houseTel, isClient, 
+		    isRelation, isOptGaranty, isBadClient, creditLevelID, creditLevel, c.unit_uid, c.unit_uidName, fullDepartCode, 
+		    createUserID, createDateTime, isMainVersion, c.updateUserName, c.updateDateTime, fullDepartName, 
+		    createUserName,relationMainName,liabilitySum,creditorGuarSum,timePointEntrustSum,oldDivisionID,
+			oldDivisionName,divisionID,divisionName
+		    
+			FROM crm_client c
+			LEFT JOIN crm_oldclientname oc ON c.client_ID = oc.client_ID
+			where isMainVersion=TRUE AND isBadClient=FALSE ${wheresql}   limit #{pageNumber},#{pageSize}
+			
+		]]>
+	</select>
+	
+	<!-- 查询所有的企业客户 分页列表 总记录数 -->
+	<select id="selectCompanyClientPageTables_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		<![CDATA[
+			SELECT count(DISTINCT c.clientGUID) 
+			       FROM crm_client c
+	        LEFT JOIN crm_oldclientname oc ON c.client_ID = oc.client_ID
+			where 
+			      isMainVersion=TRUE AND isBadClient=FALSE ${wheresql} 
+		 ]]>
+	</select>
+	
+	<!-- 添加/插入一个企业客户信息 -->
+	<insert id="insertOneCompanyClientInfo" parameterType="com.zjm.crm.db.model.Client">
+		<![CDATA[
+		INSERT INTO crm_client (
+			client_ID,
+			clientGUID,
+			clientBH,
+			clientName,
+			clientTypeID,
+			clientTypeName,
+		   	fullAreaCode,
+		  	fullAreaName,
+		    fullTradeCode,
+		    fullTradeName,
+		    enterpriseTypeID,
+		    enterpriseTypeName,
+		    certificateCode,
+		    fullRegisteCode,
+		    fullRegisteName,
+		    registeAddress,
+		    workAddress,
+		    zipCode,
+		    legalPerson,
+		    legalCertificate,
+		    legalPersonNum,
+	        controlPerson,
+	        controlPersonPhone,
+		    controlCertificate,
+		    controlPersonNum,
+		    registerSum,
+		    currencyID,
+	  		currencyName,
+	  		natureID,
+	  		natureName,
+	   		createDate,
+	  		busiTerm,
+	   		industryCommerceOrg,
+      		loanCode,
+	   		busiScope,
+	   		leadBusi,
+	  		nationalTaxOrg,
+	   		landTaxOrg,
+	  		businessLicence,
+	   		organizationCode,
+	   		taxCode,
+	   		employeeSum,
+	   		factSum,
+	  		capitalSum,
+	   		lastYear,
+	   		lastYearSale,
+	   		lastYearSaleProfit,
+	   		lastYearProfit,
+	   		selfArea,
+	   		rentalArea,
+	   		selfWorkShop,
+	   		rentalWorkShop,
+	  		isHighTechnology,
+	   		highTechnologyCode,
+	   		highTechnologyDate,
+	 		contactOne,
+	   		positionOneName,
+   			phoneOne,
+	   		contactTwo,
+	  		positionTwoName,
+	   		phoneTwo,
+	  		remark,
+	   		clientSourceID,
+	  		clientSourceName,
+	  		clientSourceDesc,
+	  		personName,
+	  		personNum,
+	   		sex,
+	  		age,
+	   		maritalStatus,
+	   		domicile,
+	   		familyNum,
+	   		workNum,
+	   		incomeSource,
+	   		education,
+	   		workUnit,
+	   		position,
+	  		unitAddress,
+	   		monthIncome,
+	   		unitPost,
+	   		unitPhone,
+	   		houseNature,
+	  		houseArea,
+	   		houseAddress,
+	   		housePost,
+	   		phone,
+	   		houseTel,
+		 	otherAssets,
+	   		isClient,
+	   		isRelation,
+	  		isOptGaranty,
+	   		isBadClient,
+	  		creditLevelID,
+  			creditLevel,
+	   		unit_uid,
+	   		unit_uidName,
+	  		fullDepartCode,
+	   		createUserID,
+	   		createDateTime,
+	  		isMainVersion,
+	  		updateUserName,
+	  		updateDateTime,
+	  		fullDepartName,
+	  		createUserName,
+	  		relationMainName,
+	  		fax,
+	  		liabilitySum,
+	  		creditorGuarSum,
+			timePointEntrustSum,
+			oldDivisionID,
+			oldDivisionName,
+			divisionID,
+			divisionName
+		)
+		VALUES
+		(
+			#{client_ID},
+			#{clientGUID},
+			#{clientBH},
+			#{clientName},
+			#{clientTypeID},
+			#{clientTypeName},
+		   	#{fullAreaCode},
+		  	#{fullAreaName},
+		    #{fullTradeCode},
+		    #{fullTradeName},
+		    #{enterpriseTypeID},
+		    #{enterpriseTypeName},
+		    #{certificateCode},
+		    #{fullRegisteCode},
+		    #{fullRegisteName},
+		    #{registeAddress},
+		    #{workAddress},
+		    #{zipCode},
+		    #{legalPerson},
+		    #{legalCertificate},
+		    #{legalPersonNum},
+	        #{controlPerson},
+	        #{controlPersonPhone},
+		    #{controlCertificate},
+		    #{controlPersonNum},
+		    #{registerSum},
+		    #{currencyID},
+	  		#{currencyName},
+	  		#{natureID},
+	  		#{natureName},
+	   		#{createDate},
+	  		#{busiTerm},
+	   		#{industryCommerceOrg},
+      		#{loanCode},
+	   		#{busiScope},
+	   		#{leadBusi},
+	  		#{nationalTaxOrg},
+	   		#{landTaxOrg},
+	  		#{businessLicence},
+	   		#{organizationCode},
+	   		#{taxCode},
+	   		#{employeeSum},
+	   		#{factSum},
+	  		#{capitalSum},
+	   		#{lastYear},
+	   		#{lastYearSale},
+	   		#{lastYearSaleProfit},
+	   		#{lastYearProfit},
+	   		#{selfArea},
+	   		#{rentalArea},
+	   		#{selfWorkShop},
+	   		#{rentalWorkShop},
+	  		#{isHighTechnology},
+	   		#{highTechnologyCode},
+	   		#{highTechnologyDate},
+	 		#{contactOne},
+	   		#{positionOneName},
+   			#{phoneOne},
+	   		#{contactTwo},
+	  		#{positionTwoName},
+	   		#{phoneTwo},
+	  		#{remark},
+	   		#{clientSourceID},
+	  		#{clientSourceName},
+	  		#{clientSourceDesc},
+	  		#{personName},
+	  		#{personNum},
+	   		#{sex},
+	  		#{age},
+	   		#{maritalStatus},
+	   		#{domicile},
+	   		#{familyNum},
+	   		#{workNum},
+	   		#{incomeSource},
+	   		#{education},
+	   		#{workUnit},
+	   		#{position},
+	  		#{unitAddress},
+	   		#{monthIncome},
+	   		#{unitPost},
+	   		#{unitPhone},
+	   		#{houseNature},
+	  		#{houseArea},
+	   		#{houseAddress},
+	   		#{housePost},
+	   		#{phone},
+	   		#{houseTel},
+		 	#{otherAssets},
+	   		#{isClient},
+	   		#{isRelation},
+	  		#{isOptGaranty},
+	   		#{isBadClient},
+	  		#{creditLevelID},
+  			#{creditLevel},
+	   		#{unit_uid},
+	   		#{unit_uidName},
+	  		#{fullDepartCode},
+	   		#{createUserID},
+	   		#{createDateTime},
+	  		#{isMainVersion},
+	  		#{updateUserName},
+	  		#{updateDateTime},
+	  		#{fullDepartName},
+	  		#{createUserName},
+	  		#{relationMainName},
+	  		#{fax},
+	  		#{liabilitySum},
+	  		#{creditorGuarSum},
+			#{timePointEntrustSum},
+			#{oldDivisionID},
+			#{oldDivisionName},
+			#{divisionID},
+			#{divisionName}
+		) 
+		]]>
+	</insert>
+	
+	<!-- 更新全部内容更新  修改一个企业客户信息 -->
+	<update id="updateOneCompanyClientInfos" parameterType="com.zjm.crm.db.model.Client">
+		<![CDATA[
+			update crm_client 
+			set
+				clientBH             =#{clientBH},         
+				clientName          =#{clientName},       
+				clientTypeID         =#{clientTypeID},     
+				clientTypeName      =#{clientTypeName},   
+				fullAreaCode         =#{fullAreaCode},     
+				fullAreaName        =#{fullAreaName},     
+				fullTradeCode        =#{fullTradeCode},    
+				fullTradeName       =#{fullTradeName},    
+				enterpriseTypeID     =#{enterpriseTypeID}, 
+				enterpriseTypeName  =#{enterpriseTypeName}
+				certificateCode       =#{certificateCode},  
+				fullRegisteCode       =#{fullRegisteCode},  
+				fullRegisteName      =#{fullRegisteName},  
+				registeAddress       =#{registeAddress},   
+				workAddress         =#{workAddress},      
+				zipCode             =#{zipCode},          
+				legalPerson          =#{legalPerson},      
+				legalCertificate      =#{legalCertificate}, 
+				legalPersonNum      =#{legalPersonNum},   
+				controlPerson        =#{controlPerson}, 
+				controlPersonPhone   =#{controlPersonPhone},    
+				controlCertificate    =#{controlCertificate}
+				controlPersonNum    =#{controlPersonNum}, 
+				registerSum          =#{registerSum},      
+				currencyID           =#{currencyID},       
+				currencyName       =#{currencyName},     
+				natureID            =#{natureID},         
+				natureName         =#{natureName},       
+				createDate          =#{createDate},       
+				busiTerm            =#{busiTerm},         
+				industryCommerceOrg =#{industryCommerceOrg
+				loanCode            =#{loanCode},         
+				busiScope           =#{busiScope},        
+				leadBusi             =#{leadBusi},         
+				nationalTaxOrg       =#{nationalTaxOrg},   
+				landTaxOrg          =#{landTaxOrg},       
+				businessLicence      =#{businessLicence},  
+				organizationCode     =#{organizationCode}, 
+				taxCode             =#{taxCode},          
+				employeeSum        =#{employeeSum},      
+				factSum             =#{factSum},          
+				capitalSum          =#{capitalSum},       
+				lastYear             =#{lastYear},         
+				lastYearSale          =#{lastYearSale},     
+				lastYearSaleProfit    =#{lastYearSaleProfit}
+				lastYearProfit        =#{lastYearProfit},   
+				selfArea             =#{selfArea},         
+				rentalArea           =#{rentalArea},       
+				selfWorkShop        =#{selfWorkShop},     
+				rentalWorkShop      =#{rentalWorkShop},   
+				isHighTechnology     =#{isHighTechnology}, 
+				highTechnologyCode   =#{highTechnologyCode}
+				highTechnologyDate   =#{highTechnologyDate}
+				contactOne          =#{contactOne},       
+				positionOneName     =#{positionOneName},  
+				phoneOne           =#{phoneOne},         
+				contactTwo          =#{contactTwo},       
+				positionTwoName     =#{positionTwoName},  
+				phoneTwo           =#{phoneTwo},         
+				remark              =#{remark},           
+				clientSourceID        =#{clientSourceID},   
+				clientSourceName     =#{clientSourceName}, 
+				clientSourceDesc      =#{clientSourceDesc}, 
+				personName     =#{personName},  
+				personNum     =#{personNum},  
+				sex                 =#{sex},              
+				age                =#{age},              
+				maritalStatus         =#{maritalStatus},    
+				domicile            =#{domicile},         
+				familyNum          =#{familyNum},        
+				workNum           =#{workNum},          
+				incomeSource        =#{incomeSource},     
+				education           =#{education},        
+				workUnit            =#{workUnit},         
+				position             =#{position},         
+				unitAddress          =#{unitAddress},      
+				monthIncome        =#{monthIncome},      
+				unitPost             =#{unitPost},         
+				unitPhone           =#{unitPhone},        
+				houseNature         =#{houseNature},      
+				houseArea           =#{houseArea},        
+				houseAddress        =#{houseAddress},     
+				housePost           =#{housePost},        
+				phone              =#{phone},            
+				houseTel            =#{houseTel},         
+				otherAssets          =#{otherAssets},      
+				isClient             =#{isClient},         
+				isRelation           =#{isRelation},       
+				isOptGaranty         =#{isOptGaranty},     
+				isBadClient          =#{isBadClient},      
+				creditLevelID         =#{creditLevelID},    
+				creditLevel           =#{creditLevel},      
+				unit_uid             =#{unit_uid},
+				unit_uidName             =#{unit_uidName},
+				fullDepartCode       =#{fullDepartCode},   
+				createUserID         =#{createUserID},     
+				createDateTime      =#{createDateTime},   
+				isMainVersion        =#{isMainVersion},    
+				updateUserName     =#{updateUserName},   
+				updateDateTime      =#{updateDateTime},   
+				fullDepartName      =#{fullDepartName},   
+				createUserName      =#{createUserName},
+				liabilitySum        =#{liabilitySum},
+				creditorGuarSum =#{creditorGuarSum},
+				timePointEntrustSum =#{timePointEntrustSum},
+				oldDivisionID =#{oldDivisionID},
+				oldDivisionName =#{oldDivisionName},
+				divisionID =#{divisionID},
+				divisionName =#{divisionName},
+				gzwRiskLevel =#{gzwRiskLevel}
+				  
+			where client_ID=#{client_ID}
+		]]>
+	</update>
+					
+	<!-- 动态更新修改 客户信息  基本信息，客户来源 -->										
+	<update id="updateOneCompanyClientInfo" parameterType="com.zjm.crm.db.model.Client" >
+	    update crm_client
+	    <set >
+	      <if test="clientBH != null and clientBH !=''" >
+	        clientBH = #{clientBH},
+	      </if>
+	      <if test="clientName != null and clientName !=''" >
+	        clientName = #{clientName},
+	      </if>
+	      <if test="clientTypeID != null and clientTypeID !='' " >
+	        clientTypeID = #{clientTypeID},
+	      </if>
+	      <if test="clientTypeName != null and clientTypeName !='' " >
+	        clientTypeName = #{clientTypeName},
+	      </if>
+	      <if test="fullAreaCode != null and fullAreaCode !='' " >
+	        fullAreaCode = #{fullAreaCode},
+	      </if>
+	      <if test="fullAreaName != null and fullAreaName !='' " >
+	        fullAreaName = #{fullAreaName},
+	      </if>
+	      <if test="fullTradeCode != null and fullTradeCode != '' " >
+	        fullTradeCode = #{fullTradeCode},
+	      </if>
+	      <if test="fullTradeName != null and fullTradeName != '' " >
+	        fullTradeName = #{fullTradeName},
+	      </if>
+	      <if test="enterpriseTypeID != null and enterpriseTypeID != ''"  >
+	        enterpriseTypeID = #{enterpriseTypeID},
+	      </if>
+	      <if test="enterpriseTypeName != null and enterpriseTypeName != ''" >
+	        enterpriseTypeName = #{enterpriseTypeName},
+	      </if>
+	      <if test="certificateCode != null and certificateCode != ''" >
+	        certificateCode = #{certificateCode},
+	      </if>
+	      <if test="fullRegisteCode != null and fullRegisteCode != ''" >
+	        fullRegisteCode = #{fullRegisteCode},
+	      </if>
+	      <if test="fullRegisteName != null and fullRegisteName != ''" >
+	        fullRegisteName = #{fullRegisteName},
+	      </if>
+	      <if test="registeAddress != null and registeAddress != ''" >
+	        registeAddress = #{registeAddress},
+	      </if>
+	      <if test="workAddress != null and workAddress != ''" >
+	        workAddress = #{workAddress},
+	      </if>
+	      <if test="zipCode != null and zipCode != ''" >
+	        zipCode = #{zipCode},
+	      </if>
+	      <if test="legalPerson != null and legalPerson != ''" >
+	        legalPerson = #{legalPerson},
+	      </if>
+	      <if test="legalCertificate != null and legalCertificate != ''" >
+	        legalCertificate = #{legalCertificate},
+	      </if>
+	      <if test="legalPersonNum != null and legalPersonNum != ''" >
+	        legalPersonNum = #{legalPersonNum},
+	      </if>
+	      <if test="controlPerson != null and controlPerson != ''" >
+	        controlPerson = #{controlPerson},
+	      </if>
+	       <if test="controlPersonPhone != null and controlPersonPhone != ''" >
+	        controlPersonPhone = #{controlPersonPhone},
+	      </if>
+	      <if test="controlCertificate != null and controlCertificate != ''" >
+	        controlCertificate = #{controlCertificate},
+	      </if>
+	      <if test="controlPersonNum != null and controlPersonNum != '' " >
+	        controlPersonNum = #{controlPersonNum},
+	      </if>
+	      <if test="registerSum != null" >
+	        registerSum = #{registerSum},
+	      </if>
+	      <if test="currencyID != null and currencyID != '' " >
+	        currencyID = #{currencyID},
+	      </if>
+	      <if test="currencyName != null and currencyName != '' " >
+	        currencyName = #{currencyName},
+	      </if>
+	      <if test="natureID != null and natureID != '' " >
+	        natureID = #{natureID},
+	      </if>
+	      <if test="natureName != null and natureName != '' " >
+	        natureName = #{natureName},
+	      </if>
+	      <if test="createDate != null" >
+	        createDate = #{createDate},
+	      </if>
+	      <if test="busiTerm != null and busiTerm != '' " >
+	        busiTerm = #{busiTerm},
+	      </if>
+	      <if test="industryCommerceOrg != null and industryCommerceOrg != '' " >
+	        industryCommerceOrg = #{industryCommerceOrg},
+	      </if>
+	      <if test="loanCode != null and loanCode != '' " >
+	        loanCode = #{loanCode},
+	      </if>
+	      <if test="nationalTaxOrg != null and nationalTaxOrg != '' " >
+	        nationalTaxOrg = #{nationalTaxOrg},
+	      </if>
+	      <if test="landTaxOrg != null and landTaxOrg != '' " >
+	        landTaxOrg = #{landTaxOrg},
+	      </if>
+	      <if test="businessLicence != null and businessLicence != '' " >
+	        businessLicence = #{businessLicence},
+	      </if>
+	      <if test="organizationCode != null and organizationCode != '' " >
+	        organizationCode = #{organizationCode},
+	      </if>
+	      <if test="taxCode != null and taxCode != '' " >
+	        taxCode = #{taxCode},
+	      </if>
+	      <if test="employeeSum != null" >
+	        employeeSum = #{employeeSum},
+	      </if>
+	      <if test="factSum != null" >
+	        factSum = #{factSum},
+	      </if>
+	      <if test="capitalSum != null" >
+	        capitalSum = #{capitalSum},
+	      </if>
+	      <if test="lastYear != null" >
+	        lastYear = #{lastYear},
+	      </if>
+	      <if test="lastYearSale != null" >
+	        lastYearSale = #{lastYearSale},
+	      </if>
+	      <if test="lastYearSaleProfit != null" >
+	        lastYearSaleProfit = #{lastYearSaleProfit},
+	      </if>
+	      <if test="lastYearProfit != null" >
+	        lastYearProfit = #{lastYearProfit},
+	      </if>
+	      <if test="selfArea != null" >
+	        selfArea = #{selfArea},
+	      </if>
+	      <if test="rentalArea != null" >
+	        rentalArea = #{rentalArea},
+	      </if>
+	      <if test="selfWorkShop != null" >
+	        selfWorkShop = #{selfWorkShop},
+	      </if>
+	      <if test="rentalWorkShop != null" >
+	        rentalWorkShop = #{rentalWorkShop},
+	      </if>
+	      <if test="isHighTechnology != null" >
+	        isHighTechnology = #{isHighTechnology},
+	      </if>
+	      <if test="highTechnologyCode != null and highTechnologyCode != '' " >
+	        highTechnologyCode = #{highTechnologyCode},
+	      </if>
+	      <if test="highTechnologyDate != null" >
+	        highTechnologyDate = #{highTechnologyDate},
+	      </if>
+	      <if test="contactOne != null and contactOne != '' " >
+	        contactOne = #{contactOne},
+	      </if>
+	      <if test="positionOneName != null and positionOneName !=''" >
+	        positionOneName = #{positionOneName},
+	      </if>
+	      <if test="phoneOne != null and phoneOne != ''" >
+	        phoneOne = #{phoneOne},
+	      </if>
+	      <if test="contactTwo != null and contactTwo !='' " >
+	        contactTwo = #{contactTwo},
+	      </if>
+	      <if test="positionTwoName != null and positionTwoName != ''" >
+	        positionTwoName = #{positionTwoName},
+	      </if>
+	      <if test="phoneTwo != null and phoneTwo !='' " >
+	        phoneTwo = #{phoneTwo},
+	      </if>
+	      <if test="clientSourceID != null and clientSourceID != ''" >
+	        clientSourceID = #{clientSourceID},
+	      </if>
+	      <if test="clientSourceName != null and clientSourceName != ''" >
+	        clientSourceName = #{clientSourceName},
+	      </if>
+	      <if test="clientSourceDesc != null and clientSourceDesc != ''" >
+	        clientSourceDesc = #{clientSourceDesc},
+	      </if>
+	      <if test="personName != null and personName != '' " >
+	        personName = #{personName},
+	      </if>
+	      <if test="personNum != null and personNum != '' " >
+	        personNum = #{personNum},
+	      </if>
+	      <if test="sex != null and sex != '' " >
+	        sex = #{sex},
+	      </if>
+	      <if test="age != null" >
+	        age = #{age},
+	      </if>
+	      <if test="maritalStatus != null and maritalStatus !=''" >
+	        maritalStatus = #{maritalStatus},
+	      </if>
+	      <if test="domicile != null and domicile !='' " >
+	        domicile = #{domicile},
+	      </if>
+	      <if test="familyNum != null" >
+	        familyNum = #{familyNum},
+	      </if>
+	      <if test="workNum != null" >
+	        workNum = #{workNum},
+	      </if>
+	      <if test="incomeSource != null and incomeSource != ''" >
+	        incomeSource = #{incomeSource},
+	      </if>
+	      <if test="education != null and education != '' " >
+	        education = #{education},
+	      </if>
+	      <if test="workUnit != null and workUnit != ''" >
+	        workUnit = #{workUnit},
+	      </if>
+	      <if test="position != null and position != ''" >
+	        position = #{position},
+	      </if>
+	      <if test="unitAddress != null and unitAddress  != ''" >
+	        unitAddress = #{unitAddress},
+	      </if>
+	      <if test="monthIncome != null" >
+	        monthIncome = #{monthIncome},
+	      </if>
+	      <if test="unitPost != null and unitPost !='' " >
+	        unitPost = #{unitPost},
+	      </if>
+	      <if test="unitPhone != null and unitPhone != '' " >
+	        unitPhone = #{unitPhone},
+	      </if>
+	      <if test="houseNature != null and houseNature !='' " >
+	        houseNature = #{houseNature},
+	      </if>
+	      <if test="houseArea != null" >
+	        houseArea = #{houseArea},
+	      </if>
+	      <if test="houseAddress != null and houseAddress !=''" >
+	        houseAddress = #{houseAddress},
+	      </if>
+	      <if test="housePost != null  and housePost !=''" >
+	        housePost = #{housePost},
+	      </if>
+	      <if test="phone != null and phone !=''" >
+	        phone = #{phone},
+	      </if>
+	      <if test="houseTel != null  and houseTel !=''" >
+	        houseTel = #{houseTel},
+	      </if>
+	      <if test="isClient != null" >
+	        isClient = #{isClient},
+	      </if>
+	      <if test="isRelation != null" >
+	        isRelation = #{isRelation},
+	      </if>
+	      <if test="isOptGaranty != null" >
+	        isOptGaranty = #{isOptGaranty},
+	      </if>
+	      <if test="isBadClient != null" >
+	        isBadClient = #{isBadClient},
+	      </if>
+	      <if test="creditLevelID != null and creditLevelID !=''" >
+	        creditLevelID = #{creditLevelID},
+	      </if>
+	      <if test="creditLevel != null and creditLevel !=''" >
+	        creditLevel = #{creditLevel},
+	      </if>
+	      <if test="unit_uid != null  and unit_uid !=''" >
+	        unit_uid = #{unit_uid},
+	      </if>
+	      <if test="fullDepartCode != null and fullDepartCode!=''" >
+	        fullDepartCode = #{fullDepartCode},
+	      </if>
+	      <if test="createUserID != null and createUserID !='' " >
+	        createUserID = #{createUserID},
+	      </if>
+	      <if test="createDateTime != null" >
+	        createDateTime = #{createDateTime},
+	      </if>
+	      <if test="isMainVersion != null" >
+	        isMainVersion = #{isMainVersion},
+	      </if>
+	      <if test="updateUserName != null and updateUserName !='' " >
+	        updateUserName = #{updateUserName},
+	      </if>
+	      <if test="updateDateTime != null " >
+	        updateDateTime = #{updateDateTime},
+	      </if>
+	      <if test="fullDepartName != null and fullDepartName !='' "  >
+	        fullDepartName = #{fullDepartName},
+	      </if>
+	      <if test="createUserName != null and createUserName !=''" >
+	        createUserName = #{createUserName},
+	      </if>
+	      <if test="busiScope != null and busiScope !=''" >
+	        busiScope = #{busiScope},
+	      </if>
+	      <if test="leadBusi != null and leadBusi!='' " >
+	        leadBusi = #{leadBusi},
+	      </if>
+	      <if test="remark != null and remark !='' " >
+	        remark = #{remark},
+	      </if>
+	      <if test="otherAssets != null and otherAssets !='' " >
+	        otherAssets = #{otherAssets},
+	      </if>
+	       <if test="fax != null and fax !='' " >
+	        fax = #{fax},
+	      </if>
+	      <if test="liabilitySum != null">
+	      		liabilitySum = #{liabilitySum},
+	      </if>
+	      <if test="creditorGuarSum != null">
+	       	 creditorGuarSum =#{creditorGuarSum},
+	      </if>
+	      <if test="timePointEntrustSum != null">
+	       	 timePointEntrustSum =#{timePointEntrustSum},
+	      </if>
+	      <if test="oldDivisionID != null and oldDivisionID !='' ">
+	       	 oldDivisionID =#{oldDivisionID},
+	      </if>
+	      <if test="oldDivisionName != null and oldDivisionName !='' ">
+	       	 oldDivisionName =#{oldDivisionName},
+	      </if>
+	      <if test="divisionID != null and divisionID !='' ">
+	       	 divisionID =#{divisionID},
+	      </if>
+	      <if test="divisionName != null and divisionName !=''">
+	       	divisionName =#{divisionName},
+	      </if>
+	      <if test="gzwRiskLevel != null and gzwRiskLevel !=''">
+	       	gzwRiskLevel =#{gzwRiskLevel}
+	      </if>
+	    </set>
+	    where client_ID = #{client_ID}
+	  </update>
+	
+	
+	<!-- 删除一个企业 客户信息 -->
+	<delete id="deleteOneCompanyClientInfo" parameterType="com.zjm.crm.db.model.Client">
+		<![CDATA[
+			delete from crm_client
+			where client_ID=#{client_ID}
+		]]>
+	</delete>
+	<!-- 根据客户名称查询客户信息 -->
+	<select id="selectOneClientInfoByClientName" parameterType="string" resultMap="ClientResultMap">
+		<![CDATA[
+		 	select 
+		 		client_ID,	clientGUID,	clientBH,	clientName,	clientTypeID,	clientTypeName,	fullAreaCode,	
+				fullAreaName,	fullTradeCode,	fullTradeName,	enterpriseTypeID,	enterpriseTypeName,	certificateCode,	
+				fullRegisteCode,	fullRegisteName,	registeAddress,	workAddress,	zipCode,	legalPerson,	
+				legalCertificate,	legalPersonNum,	controlPerson, controlPersonPhone, controlCertificate,	controlPersonNum,	registerSum,	
+				currencyID,	currencyName,	natureID,	natureName,	createDate,	busiTerm,	industryCommerceOrg,	
+				loanCode,	busiScope,	leadBusi,	nationalTaxOrg,	landTaxOrg,	businessLicence,	organizationCode,	
+				taxCode,	employeeSum,	factSum,	capitalSum,	lastYear,	lastYearSale,	lastYearSaleProfit,	
+				lastYearProfit,	selfArea,	rentalArea,	selfWorkShop,	rentalWorkShop,	isHighTechnology,	highTechnologyCode,	
+				highTechnologyDate,	contactOne,	positionOneName,	phoneOne,	contactTwo,	positionTwoName,	phoneTwo,	remark,	
+				clientSourceID,	clientSourceName,	clientSourceDesc,	personName,	personNum, sex,	age,	maritalStatus,	domicile,	
+				familyNum,	workNum,	incomeSource,	education,	workUnit,	position,	unitAddress,	monthIncome,	unitPost,	
+				unitPhone,	houseNature,	houseArea,	houseAddress,	housePost,	phone,	houseTel,	otherAssets,	isClient,	
+				isRelation,	isOptGaranty,	isBadClient,	creditLevelID,	creditLevel,	unit_uid,unit_uidName,	fullDepartCode,	createUserID,	
+				createDateTime,	isMainVersion,	updateUserName,	updateDateTime,fullDepartName,createUserName,fax,liabilitySum,creditorGuarSum,
+				timePointEntrustSum,oldDivisionID,oldDivisionName,divisionID,divisionName
+		 	from crm_client
+		 	where clientName=#{clientName}
+		]]>
+	</select>
+	
+	<!-- 查询一个客户的信息， 公用 包含企业客户和个人客户 -->
+	<select id="selectOneClientInfo" parameterType="com.zjm.crm.db.model.Client" resultMap="ClientResultMap">
+		<![CDATA[
+			select 
+				client_ID,	clientGUID,	clientBH,	clientName,	clientTypeID,	clientTypeName,	fullAreaCode,	
+				fullAreaName,	fullTradeCode,	fullTradeName,	enterpriseTypeID,	enterpriseTypeName,	certificateCode,	
+				fullRegisteCode,	fullRegisteName,	registeAddress,	workAddress,	zipCode,	legalPerson,	
+				legalCertificate,	legalPersonNum,	controlPerson, controlPersonPhone,	controlCertificate,	controlPersonNum,	registerSum,	
+				currencyID,	currencyName,	natureID,	natureName,	createDate,	busiTerm,	industryCommerceOrg,	
+				loanCode,	busiScope,	leadBusi,	nationalTaxOrg,	landTaxOrg,	businessLicence,	organizationCode,	
+				taxCode,	employeeSum,	factSum,	capitalSum,	lastYear,	lastYearSale,	lastYearSaleProfit,	
+				lastYearProfit,	selfArea,	rentalArea,	selfWorkShop,	rentalWorkShop,	isHighTechnology,	highTechnologyCode,	
+				highTechnologyDate,	contactOne,	positionOneName,	phoneOne,	contactTwo,	positionTwoName,	phoneTwo,	remark,	
+				clientSourceID,	clientSourceName,	clientSourceDesc,	personName,personNum,	sex,	age,	maritalStatus,	domicile,	
+				familyNum,	workNum,	incomeSource,	education,	workUnit,	position,	unitAddress,	monthIncome,	unitPost,	
+				unitPhone,	houseNature,	houseArea,	houseAddress,	housePost,	phone,	houseTel,	otherAssets,	isClient,	
+				isRelation,	isOptGaranty,	isBadClient,	creditLevelID,	creditLevel,	unit_uid,unit_uidName,	fullDepartCode,	createUserID,	
+				createDateTime,	isMainVersion,	updateUserName,	updateDateTime,fullDepartName,createUserName,fax,liabilitySum,
+				creditorGuarSum,timePointEntrustSum,oldDivisionID,oldDivisionName,divisionID,divisionName
+			from crm_client
+			where client_ID=#{client_ID}
+		]]>
+	</select>
+	
+	<!-- 判断客户名是否存在-->
+	<select id="selectClientNameIsExist" parameterType="java.lang.String" resultType="java.lang.Integer">
+		<![CDATA[SELECT count(client_ID) FROM crm_client where 1=1 ${value} ]]>
+	</select>
+	
+	<!-- 判断申请人姓名是否存在-->
+	<select id="selectPersonNameIsExist" parameterType="java.lang.String" resultType="java.lang.Integer">
+		<![CDATA[SELECT count(client_ID) FROM crm_client where isMainVersion='01' and personName=#{value} ]]>
+	</select>
+	
+	<!--  根据客户ID查询客户名称 -->
+	<select id="selectNameById" parameterType="java.lang.String" resultType="java.lang.String">
+		<![CDATA[SELECT clientName FROM crm_client WHERE client_ID = #{value} ]]>
+	</select>
+	
+	<!-- 关联查询  企业客户List -->
+	<select id="relationQueryClient"  parameterType="com.zjm.common.db.model.PageTable" resultMap="ClientResultMap">
+			SELECT tab.`client_ID`,tab.clientTypeID,tab.`clientBH`,tab.`clientName`,tab.createUserName,tab.createDateTime,tab.relationQueryDesc FROM (
+				SELECT c.`client_ID`,c.clientTypeID,c.`clientBH`,c.`clientName`,c.createUserName,c.createDateTime,'股东' AS relationQueryDesc FROM crm_client c WHERE c.clientGUID IN (
+				SELECT DISTINCT
+					temp1.clientGUID
+				FROM
+					crm_client AS temp1
+				WHERE c.client_ID IN
+					(SELECT s.client_ID FROM crm_stock s WHERE s.unit_uid = #{queryCondition.unit_uid}
+						<if test="queryCondition.queryType =='01'">
+							AND s.stockName LIKE #{queryCondition.queryContent} 
+						</if>
+						<if test="queryCondition.queryType =='02'">
+							AND s.certificateCode LIKE #{queryCondition.queryContent} 
+						</if>
+						<if test="queryCondition.queryType =='03'">
+							AND s.phone LIKE #{queryCondition.queryContent}
+						</if>)
+				)
+				AND c.isMainVersion = 1
+				${wheresql}
+				
+					<if test="queryCondition.queryType !='03'">
+						UNION 
+						SELECT c.`client_ID`,c.clientTypeID,c.`clientBH`,c.`clientName`,c.createUserName,c.createDateTime,'直接客户' AS relationQueryDesc FROM crm_client c WHERE 
+							c.clientGUID IN (
+								select DISTINCT temp2.clientGUID from crm_client temp2  
+								WHERE
+								 temp2.unit_uid = #{queryCondition.unit_uid}
+								<if test="queryCondition.queryType =='01'">
+								AND temp2.clientName LIKE #{queryCondition.queryContent}  
+								</if>
+								<if test="queryCondition.queryType =='02'">
+								AND temp2.certificateCode LIKE #{queryCondition.queryContent} 
+								</if>
+							)
+							AND c.isMainVersion = 1
+							${wheresql}
+						UNION 
+						SELECT c.`client_ID`,c.clientTypeID,c.`clientBH`,c.`clientName`,c.createUserName,c.createDateTime,'法定代表人' AS relationQueryDesc FROM crm_client c WHERE 
+							c.clientGUID IN (
+								select DISTINCT temp3.clientGUID from crm_client temp3  
+								WHERE
+								 temp3.unit_uid = #{queryCondition.unit_uid} 
+								<if test="queryCondition.queryType =='01'">
+								AND temp3.legalPerson LIKE #{queryCondition.queryContent}  
+								</if>
+								<if test="queryCondition.queryType =='02'">
+								AND temp3.legalPersonNum LIKE #{queryCondition.queryContent} 
+								</if>
+							)
+							AND c.isMainVersion = 1
+							${wheresql}
+						UNION 
+						SELECT c.`client_ID`,c.clientTypeID,c.`clientBH`,c.`clientName`,c.createUserName,c.createDateTime,'实际控制人' AS relationQueryDesc FROM crm_client c WHERE 
+						c.clientGUID IN (
+							select DISTINCT temp4.clientGUID from crm_client temp4 
+								where
+								temp4.unit_uid = #{queryCondition.unit_uid}  
+								<if test="queryCondition.queryType =='01'">
+								AND temp4.controlPerson LIKE #{queryCondition.queryContent}  
+								</if>
+								<if test="queryCondition.queryType =='02'">
+								AND temp4.controlPersonNum LIKE #{queryCondition.queryContent} 
+								</if>
+						)
+						AND c.isMainVersion = 1
+						${wheresql}
+					UNION 
+					SELECT c.`client_ID`,c.clientTypeID,c.`clientBH`,c.`clientName`,c.createUserName,c.createDateTime,'关联企业' AS relationQueryDesc FROM crm_client c WHERE c.clientGUID IN (
+						select DISTINCT temp5.clientGUID from crm_client temp5
+						where temp5.client_ID in
+						(SELECT re.relationClientID FROM crm_relationClient re WHERE re.relationClientID IN (SELECT c.client_ID FROM crm_client c WHERE 
+							c.unit_uid = #{queryCondition.unit_uid}  
+							<if test="queryCondition.queryType =='01'">
+							AND c.clientName LIKE #{queryCondition.queryContent}  
+							</if>
+							<if test="queryCondition.queryType =='02'">
+							AND c.certificateCode LIKE #{queryCondition.queryContent} 
+							</if> 
+						))
+					)
+					AND c.isMainVersion = 1
+					${wheresql}
+				</if>
+				UNION 
+				SELECT c.`client_ID`,c.clientTypeID,c.`clientBH`,c.`clientName`,c.createUserName,c.createDateTime,'高级管理人员' AS description FROM crm_client c WHERE c.clientGUID IN 
+				(	
+					select DISTINCT temp6.clientGUID from crm_client temp6
+					where temp6.client_ID  in 
+					(SELECT m.client_ID FROM crm_managerInfo m WHERE m.unit_uid = #{queryCondition.unit_uid} AND m.managerInfo LIKE #{queryCondition.queryContent})
+				)
+				AND c.isMainVersion = 1
+				${wheresql} 
+			) tab WHERE tab.clientTypeID in ('01','02') GROUP BY tab.client_ID ORDER BY tab.createDateTime DESC limit #{pageNumber},#{pageSize}
+	</select>
+	
+	<!-- 关联查询  企业客户总数 -->
+	<select id="relationQueryClientCount"  parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+			SELECT count(tab2.`client_ID`) FROM (
+				SELECT tab.`client_ID`,tab.clientTypeID,tab.`clientBH`,tab.`clientName`,tab.createUserName,tab.createDateTime,tab.relationQueryDesc FROM (
+				SELECT c.`client_ID`,c.clientTypeID,c.`clientBH`,c.`clientName`,c.createUserName,c.createDateTime,'股东' AS relationQueryDesc FROM crm_client c WHERE c.clientGUID IN (
+				SELECT DISTINCT
+					temp1.clientGUID
+				FROM
+					crm_client AS temp1
+				WHERE c.client_ID IN
+					(SELECT s.client_ID FROM crm_stock s WHERE s.unit_uid = #{queryCondition.unit_uid}
+						<if test="queryCondition.queryType =='01'">
+							AND s.stockName LIKE #{queryCondition.queryContent} 
+						</if>
+						<if test="queryCondition.queryType =='02'">
+							AND s.certificateCode LIKE #{queryCondition.queryContent} 
+						</if>
+						<if test="queryCondition.queryType =='03'">
+							AND s.phone LIKE #{queryCondition.queryContent}
+						</if>)
+				)
+				AND c.isMainVersion = 1
+				${wheresql}
+				
+					<if test="queryCondition.queryType !='03'">
+						UNION 
+						SELECT c.`client_ID`,c.clientTypeID,c.`clientBH`,c.`clientName`,c.createUserName,c.createDateTime,'直接客户' AS relationQueryDesc FROM crm_client c WHERE 
+							c.clientGUID IN (
+								select DISTINCT temp2.clientGUID from crm_client temp2  
+								WHERE
+								 temp2.unit_uid = #{queryCondition.unit_uid}
+								<if test="queryCondition.queryType =='01'">
+								AND temp2.clientName LIKE #{queryCondition.queryContent}  
+								</if>
+								<if test="queryCondition.queryType =='02'">
+								AND temp2.certificateCode LIKE #{queryCondition.queryContent} 
+								</if>
+							)
+							AND c.isMainVersion = 1
+							${wheresql}
+						UNION 
+						SELECT c.`client_ID`,c.clientTypeID,c.`clientBH`,c.`clientName`,c.createUserName,c.createDateTime,'法定代表人' AS relationQueryDesc FROM crm_client c WHERE 
+							c.clientGUID IN (
+								select DISTINCT temp3.clientGUID from crm_client temp3  
+								WHERE
+								 temp3.unit_uid = #{queryCondition.unit_uid} 
+								<if test="queryCondition.queryType =='01'">
+								AND temp3.legalPerson LIKE #{queryCondition.queryContent}  
+								</if>
+								<if test="queryCondition.queryType =='02'">
+								AND temp3.legalPersonNum LIKE #{queryCondition.queryContent} 
+								</if>
+							)
+							AND c.isMainVersion = 1
+							${wheresql}
+						UNION 
+						SELECT c.`client_ID`,c.clientTypeID,c.`clientBH`,c.`clientName`,c.createUserName,c.createDateTime,'实际控制人' AS relationQueryDesc FROM crm_client c WHERE 
+						c.clientGUID IN (
+							select DISTINCT temp4.clientGUID from crm_client temp4 
+								where
+								temp4.unit_uid = #{queryCondition.unit_uid}  
+								<if test="queryCondition.queryType =='01'">
+								AND temp4.controlPerson LIKE #{queryCondition.queryContent}  
+								</if>
+								<if test="queryCondition.queryType =='02'">
+								AND temp4.controlPersonNum LIKE #{queryCondition.queryContent} 
+								</if>
+						)
+						AND c.isMainVersion = 1
+						${wheresql}
+					UNION 
+					SELECT c.`client_ID`,c.clientTypeID,c.`clientBH`,c.`clientName`,c.createUserName,c.createDateTime,'关联企业' AS relationQueryDesc FROM crm_client c WHERE c.clientGUID IN (
+						select DISTINCT temp5.clientGUID from crm_client temp5
+						where temp5.client_ID in
+						(SELECT re.relationClientID FROM crm_relationClient re WHERE re.relationClientID IN (SELECT c.client_ID FROM crm_client c WHERE 
+							c.unit_uid = #{queryCondition.unit_uid}  
+							<if test="queryCondition.queryType =='01'">
+							AND c.clientName LIKE #{queryCondition.queryContent}  
+							</if>
+							<if test="queryCondition.queryType =='02'">
+							AND c.certificateCode LIKE #{queryCondition.queryContent} 
+							</if> 
+						))
+					)
+					AND c.isMainVersion = 1
+					${wheresql}
+				</if>
+				UNION 
+				SELECT c.`client_ID`,c.clientTypeID,c.`clientBH`,c.`clientName`,c.createUserName,c.createDateTime,'高级管理人员' AS description FROM crm_client c WHERE c.clientGUID IN 
+				(	
+					select DISTINCT temp6.clientGUID from crm_client temp6
+					where temp6.client_ID  in 
+					(SELECT m.client_ID FROM crm_managerInfo m WHERE m.unit_uid = #{queryCondition.unit_uid} AND m.managerInfo LIKE #{queryCondition.queryContent})
+				)
+				AND c.isMainVersion = 1
+				${wheresql} 
+			) tab WHERE tab.clientTypeID in ('01','02') GROUP BY tab.client_ID
+			) tab2
+	</select>
+	
+	
+	
+	<!-- 关联查询  个人客户List -->
+	<select id="relationQueryPerson"  parameterType="com.zjm.common.db.model.PageTable" resultMap="ClientResultMap">
+		SELECT tab.`client_ID`,tab.clientTypeID,tab.`clientBH`,tab.`personName`,tab.createUserName,tab.createDateTime,tab.relationQueryDesc FROM (
+			SELECT c.`client_ID`,c.clientTypeID,c.`clientBH`,c.`personName`,c.createUserName,c.createDateTime,'直接客户' AS relationQueryDesc FROM crm_client c WHERE 
+				c.clientGUID in (
+					select DISTINCT temp1.clientGUID from crm_client temp1 
+					where
+					temp1.unit_uid = #{queryCondition.unit_uid}
+					<if test="queryCondition.queryType =='01'">
+					AND temp1.personName LIKE #{queryCondition.queryContent}  
+					</if>
+					<if test="queryCondition.queryType =='02'">
+					AND temp1.personNum LIKE #{queryCondition.queryContent} 
+					</if>
+					<if test="queryCondition.queryType =='03'">
+					AND temp1.phone LIKE #{queryCondition.queryContent} 
+					</if>
+				)
+				AND c.isMainVersion = 1
+				${wheresql}
+			UNION 
+			SELECT c.`client_ID`,c.clientTypeID,c.`clientBH`,c.`personName`,c.createUserName,c.createDateTime,'配偶' AS relationQueryDesc FROM crm_client c WHERE c.clientGUID IN 
+				(select DISTINCT temp2.clientGUID from crm_client temp2  
+					where temp2.client_ID in 
+					(SELECT s.client_ID FROM crm_spouseInfo s WHERE 
+					s.unit_uid = #{queryCondition.unit_uid} 
+					<if test="queryCondition.queryType =='01'">
+					AND s.spouseName LIKE #{queryCondition.queryContent}  
+					</if>
+					<if test="queryCondition.queryType =='02'">
+					AND s.personNum LIKE #{queryCondition.queryContent} 
+					</if>
+					<if test="queryCondition.queryType =='03'">
+					AND s.contact LIKE #{queryCondition.queryContent} 
+					</if>)
+				) 
+				AND c.isMainVersion = 1
+				${wheresql}
+			) tab WHERE tab.clientTypeID IN ('02','03') GROUP BY tab.client_ID ORDER BY tab.createDateTime DESC LIMIT #{pageNumber},#{pageSize}
+	</select>
+	<!-- 关联查询  个人客户总数 -->
+	<select id="relationQueryPersonCount"  parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		SELECT count(tab2.`client_ID`) FROM (
+			SELECT tab.`client_ID`,tab.clientTypeID,tab.`clientBH`,tab.`personName`,tab.createUserName,tab.createDateTime,tab.relationQueryDesc FROM (
+			SELECT c.`client_ID`,c.clientTypeID,c.`clientBH`,c.`personName`,c.createUserName,c.createDateTime,'直接客户' AS relationQueryDesc FROM crm_client c WHERE 
+				c.clientGUID in (
+					select DISTINCT temp1.clientGUID from crm_client temp1 
+					where
+					temp1.unit_uid = #{queryCondition.unit_uid}
+					<if test="queryCondition.queryType =='01'">
+					AND temp1.personName LIKE #{queryCondition.queryContent}  
+					</if>
+					<if test="queryCondition.queryType =='02'">
+					AND temp1.personNum LIKE #{queryCondition.queryContent} 
+					</if>
+					<if test="queryCondition.queryType =='03'">
+					AND temp1.phone LIKE #{queryCondition.queryContent} 
+					</if>
+				)
+				AND c.isMainVersion = 1
+				${wheresql}
+			UNION 
+			SELECT c.`client_ID`,c.clientTypeID,c.`clientBH`,c.`personName`,c.createUserName,c.createDateTime,'配偶' AS relationQueryDesc FROM crm_client c WHERE c.clientGUID IN 
+				(select DISTINCT temp2.clientGUID from crm_client temp2  
+					where temp2.client_ID in 
+					(SELECT s.client_ID FROM crm_spouseInfo s WHERE 
+					s.unit_uid = #{queryCondition.unit_uid} 
+					<if test="queryCondition.queryType =='01'">
+					AND s.spouseName LIKE #{queryCondition.queryContent}  
+					</if>
+					<if test="queryCondition.queryType =='02'">
+					AND s.personNum LIKE #{queryCondition.queryContent} 
+					</if>
+					<if test="queryCondition.queryType =='03'">
+					AND s.contact LIKE #{queryCondition.queryContent} 
+					</if>)
+				) 
+				AND c.isMainVersion = 1
+				${wheresql}
+			) tab WHERE tab.clientTypeID IN ('02','03') GROUP BY tab.client_ID
+		)tab2
+	</select>
+	
+	<!-- 根据条件查询单个客户信息  xuyz 商机管理受理申请时用 -->
+	<select id="selectOneClientByWheresql" parameterType="java.lang.String" resultMap="ClientResultMap">
+		select <include refid="allColumns"/> from crm_client where 1=1 ${value}
+	</select>
+	
+	 <!-- 更改风险等级记录 -->
+   <update id="updateRiskLevelByClient_ID" parameterType="com.zjm.crm.db.model.Client">
+   <![CDATA[
+      UPDATE 
+          crm_client
+      SET
+        riskLevelID=#{riskLevelID},
+        riskLevelName=#{riskLevelName},
+        riskLevelDesc=#{riskLevelDesc},
+        updateUserName=#{updateUserName},
+        divisionID=#{divisionID},
+        divisionName=#{divisionName},
+        updateDateTime=#{updateDateTime}
+        WHERE client_ID = #{client_ID}
+   
+   ]]>
+   </update>
+   
+   <!-- 更新企业所属的关联主体名称 -->
+   <update id="updateRelationMainName" parameterType="com.zjm.crm.db.model.Client">
+   		UPDATE
+   			crm_client
+   		SET
+   			relationMainName = #{relationMainName}
+   		WHERE
+   			client_ID = #{client_ID}
+   </update>
+   
+   
+   <!-- 根据wheresql获取客户 List -->
+   <select id="selectClientListByWheresql" parameterType="java.lang.String" resultMap="ClientResultMap">
+   		select 
+ 				client_ID, 
+			clientGUID,
+			clientBH,
+			clientName,
+			clientTypeID,
+			clientTypeName,
+		   	fullAreaCode,
+		  	fullAreaName,
+		    fullTradeCode,
+		    fullTradeName,
+		    enterpriseTypeID,
+		    enterpriseTypeName,
+		    certificateCode,
+		    fullRegisteCode,
+		    fullRegisteName,
+		    registeAddress,
+		    workAddress,
+		    zipCode,
+		    legalPerson,
+		    legalCertificate,
+		    legalPersonNum,
+	        controlPerson,
+	        controlPersonPhone,
+		    controlCertificate,
+		    controlPersonNum,
+		    registerSum,
+		    currencyID,
+	  		currencyName,
+	  		natureID,
+	  		natureName,
+	   		createDate,
+	  		busiTerm,
+	   		industryCommerceOrg,
+      		loanCode,
+	   		busiScope,
+	   		leadBusi,
+	  		nationalTaxOrg,
+	   		landTaxOrg,
+	  		businessLicence,
+	   		organizationCode,
+	   		taxCode,
+	   		employeeSum,
+	   		factSum,
+	  		capitalSum,
+	   		lastYear,
+	   		lastYearSale,
+	   		lastYearSaleProfit,
+	   		lastYearProfit,
+	   		selfArea,
+	   		rentalArea,
+	   		selfWorkShop,
+	   		rentalWorkShop,
+	  		isHighTechnology,
+	   		highTechnologyCode,
+	   		highTechnologyDate,
+	 		contactOne,
+	   		positionOneName,
+   			phoneOne,
+	   		contactTwo,
+	  		positionTwoName,
+	   		phoneTwo,
+	  		remark,
+	   		clientSourceID,
+	  		clientSourceName,
+	  		clientSourceDesc,
+	  		personName,
+	  		personNum,
+	   		sex,
+	  		age,
+	   		maritalStatus,
+	   		domicile,
+	   		familyNum,
+	   		workNum,
+	   		incomeSource,
+	   		education,
+	   		workUnit,
+	   		position,
+	  		unitAddress,
+	   		monthIncome,
+	   		unitPost,
+	   		unitPhone,
+	   		houseNature,
+	  		houseArea,
+	   		houseAddress,
+	   		housePost,
+	   		phone,
+	   		houseTel,
+		 	otherAssets,
+	   		isClient,
+	   		isRelation,
+	  		isOptGaranty,
+	   		isBadClient,
+	  		creditLevelID,
+  			creditLevel,
+	   		unit_uid,
+	   		unit_uidName,
+	  		fullDepartCode,
+	   		createUserID,
+	   		createDateTime,
+	  		isMainVersion,
+	  		updateUserName,
+	  		updateDateTime,
+	  		relationMainName,
+	  		fax,
+	  		liabilitySum,
+	  		creditorGuarSum,
+			timePointEntrustSum,
+			oldDivisionID,
+			oldDivisionName,
+			divisionID,
+			divisionName
+	  	from  crm_client
+	  	where 1=1 ${value}
+   </select>
+   
+   
+   <!-- 根据客户id获取客户主版本信息 -->
+   <select id="selectMainClientByClient_ID" parameterType="string" resultMap="ClientResultMap">
+		 SELECT 
+		 	client_ID, 
+			clientGUID,
+			clientBH,
+			clientName,
+			clientTypeID,
+			clientTypeName,
+		   	fullAreaCode,
+		  	fullAreaName,
+		    fullTradeCode,
+		    fullTradeName,
+		    enterpriseTypeID,
+		    enterpriseTypeName,
+		    certificateCode,
+		    fullRegisteCode,
+		    fullRegisteName,
+		    registeAddress,
+		    workAddress,
+		    zipCode,
+		    legalPerson,
+		    legalCertificate,
+		    legalPersonNum,
+	        controlPerson,
+	        controlPersonPhone,
+		    controlCertificate,
+		    controlPersonNum,
+		    registerSum,
+		    currencyID,
+	  		currencyName,
+	  		natureID,
+	  		natureName,
+	   		createDate,
+	  		busiTerm,
+	   		industryCommerceOrg,
+      		loanCode,
+	   		busiScope,
+	   		leadBusi,
+	  		nationalTaxOrg,
+	   		landTaxOrg,
+	  		businessLicence,
+	   		organizationCode,
+	   		taxCode,
+	   		employeeSum,
+	   		factSum,
+	  		capitalSum,
+	   		lastYear,
+	   		lastYearSale,
+	   		lastYearSaleProfit,
+	   		lastYearProfit,
+	   		selfArea,
+	   		rentalArea,
+	   		selfWorkShop,
+	   		rentalWorkShop,
+	  		isHighTechnology,
+	   		highTechnologyCode,
+	   		highTechnologyDate,
+	 		contactOne,
+	   		positionOneName,
+   			phoneOne,
+	   		contactTwo,
+	  		positionTwoName,
+	   		phoneTwo,
+	  		remark,
+	   		clientSourceID,
+	  		clientSourceName,
+	  		clientSourceDesc,
+	  		personName,
+	  		personNum,
+	   		sex,
+	  		age,
+	   		maritalStatus,
+	   		domicile,
+	   		familyNum,
+	   		workNum,
+	   		incomeSource,
+	   		education,
+	   		workUnit,
+	   		position,
+	  		unitAddress,
+	   		monthIncome,
+	   		unitPost,
+	   		unitPhone,
+	   		houseNature,
+	  		houseArea,
+	   		houseAddress,
+	   		housePost,
+	   		phone,
+	   		houseTel,
+		 	otherAssets,
+	   		isClient,
+	   		isRelation,
+	  		isOptGaranty,
+	   		isBadClient,
+	  		creditLevelID,
+  			creditLevel,
+	   		unit_uid,
+	   		unit_uidName,
+	  		fullDepartCode,
+	   		createUserID,
+	   		createDateTime,
+	  		isMainVersion,
+	  		updateUserName,
+	  		updateDateTime,
+	  		relationMainName,
+	  		fax,
+	  		liabilitySum,
+	  		fullDepartName,
+	  		createUserName,
+	  		creditorGuarSum,
+			timePointEntrustSum,
+			oldDivisionID,
+			oldDivisionName,
+			divisionID,
+			divisionName
+		 from crm_client where client_ID =(
+				SELECT client_ID from crm_client where clientGUID = (
+					SELECT  clientGUID from crm_client where client_ID=#{client_ID}
+		 ) and isMainVersion=true )
+   </select>
+   
+   
+   <!-- 更新全部客户信息 -->
+   <update id="updateAllClientInfo" parameterType="com.zjm.crm.db.model.Client" >
+    update crm_client
+     set clientGUID = #{clientGUID},
+      clientBH = #{clientBH},
+      clientName = #{clientName},
+      clientTypeID = #{clientTypeID},
+      clientTypeName = #{clientTypeName},
+      fullAreaCode = #{fullAreaCode},
+      fullAreaName = #{fullAreaName},
+      fullTradeCode = #{fullTradeCode},
+      fullTradeName = #{fullTradeName},
+      enterpriseTypeID = #{enterpriseTypeID},
+      enterpriseTypeName = #{enterpriseTypeName},
+      certificateCode = #{certificateCode},
+      fullRegisteCode = #{fullRegisteCode},
+      fullRegisteName = #{fullRegisteName},
+      registeAddress = #{registeAddress},
+      workAddress = #{workAddress},
+      zipCode = #{zipCode},
+      fax = #{fax},
+      legalPerson = #{legalPerson},
+      legalCertificate = #{legalCertificate},
+      legalPersonNum = #{legalPersonNum},
+      controlPerson = #{controlPerson},
+      controlPersonPhone = #{controlPersonPhone},
+      controlCertificate = #{controlCertificate},
+      controlPersonNum = #{controlPersonNum},
+      registerSum = #{registerSum},
+      currencyID = #{currencyID},
+      currencyName = #{currencyName},
+      natureID = #{natureID},
+      natureName = #{natureName},
+      createDate = #{createDate},
+      busiTerm = #{busiTerm},
+      industryCommerceOrg = #{industryCommerceOrg},
+      loanCode = #{loanCode},
+      nationalTaxOrg = #{nationalTaxOrg},
+      landTaxOrg = #{landTaxOrg},
+      businessLicence = #{businessLicence},
+      organizationCode = #{organizationCode},
+      taxCode = #{taxCode},
+      employeeSum = #{employeeSum},
+      factSum = #{factSum},
+      capitalSum = #{capitalSum},
+      lastYear = #{lastYear},
+      lastYearSale = #{lastYearSale},
+      lastYearSaleProfit = #{lastYearSaleProfit},
+      lastYearProfit = #{lastYearProfit},
+      selfArea = #{selfArea},
+      rentalArea = #{rentalArea},
+      selfWorkShop = #{selfWorkShop},
+      rentalWorkShop = #{rentalWorkShop},
+      isHighTechnology = #{isHighTechnology},
+      highTechnologyCode = #{highTechnologyCode},
+      highTechnologyDate = #{highTechnologyDate},
+      contactOne = #{contactOne},
+      positionOneName = #{positionOneName},
+      phoneOne = #{phoneOne},
+      contactTwo = #{contactTwo},
+      positionTwoName = #{positionTwoName},
+      phoneTwo = #{phoneTwo},
+      clientSourceID = #{clientSourceID},
+      clientSourceName = #{clientSourceName},
+      clientSourceDesc = #{clientSourceDesc},
+      personName = #{personName},
+      personNum = #{personNum},
+      sex = #{sex},
+      age = #{age},
+      maritalStatus = #{maritalStatus},
+      domicile = #{domicile},
+      familyNum = #{familyNum},
+      workNum = #{workNum},
+      incomeSource = #{incomeSource},
+      education = #{education},
+      workUnit = #{workUnit},
+      position = #{position},
+      unitAddress = #{unitAddress},
+      monthIncome = #{monthIncome},
+      unitPost = #{unitPost},
+      unitPhone = #{unitPhone},
+      houseNature = #{houseNature},
+      houseArea = #{houseArea},
+      houseAddress = #{houseAddress},
+      housePost = #{housePost},
+      phone = #{phone},
+      houseTel = #{houseTel},
+      isClient = #{isClient},
+      isRelation = #{isRelation},
+      isOptGaranty = #{isOptGaranty},
+      isBadClient = #{isBadClient},
+      creditLevelID = #{creditLevelID},
+      creditLevel = #{creditLevel},
+      unit_uid = #{unit_uid},
+      unit_uidName = #{unit_uidName},
+      fullDepartCode = #{fullDepartCode},
+      fullDepartName = #{fullDepartName},
+      createUserID = #{createUserID},
+      createUserName = #{createUserName},
+      createDateTime = #{createDateTime},
+      gzwRiskLevel = #{gzwRiskLevel},
+      riskLevelID = #{riskLevelID},
+      riskLevelName = #{riskLevelName},
+      relationMainName = #{relationMainName},
+      isMainVersion = #{isMainVersion},
+      timePointSum = #{timePointSum},
+      updateUserName = #{updateUserName},
+      updateDateTime = #{updateDateTime},
+      busiScope = #{busiScope},
+      leadBusi = #{leadBusi},
+      remark = #{remark},
+      otherAssets = #{otherAssets},
+      riskLevelDesc = #{riskLevelDesc},
+      liabilitySum = #{liabilitySum},
+      creditorGuarSum = #{creditorGuarSum},
+	  timePointEntrustSum = #{timePointEntrustSum},
+	  oldDivisionID = #{oldDivisionID},
+	  oldDivisionName = #{oldDivisionName},
+	  divisionID = #{divisionID},
+	  divisionName = #{divisionName}
+    where client_ID = #{client_ID}
+  </update>
+   
+   
+   
+</mapper>  

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.crm.db.map.Crm_spouseInfoMapper">
+	<!-- 配偶信息表 -->
+	<resultMap type="com.zjm.crm.db.model.Crm_spouseInfo" id="SpouseInfoResultMap">
+		<result property="spouseInfo_ID" column="spouseInfo_ID" />
+		<result property="spouseName" column="spouseName" />
+		<result property="personNum" column="personNum" />
+		<result property="unitName" column="unitName" />
+		<result property="unitAddress" column="unitAddress" />
+		<result property="unitPost" column="unitPost" />
+		<result property="unitPhone" column="relationClientID" />
+		<result property="monthIncome" column="relationDesc" />
+		<result property="contact" column="relationDesc" />
+		<result property="remark" column="remark" />
+		<result property="updateUserName" column="updateUserName" />
+		<result property="updateDateTime" column="updateDateTime" />
+	</resultMap>
+
+	<!-- 新增一个配偶信息 -->
+	<insert id="insertOneSpouseInfo" parameterType="com.zjm.crm.db.model.Crm_spouseInfo">
+		<![CDATA[
+		INSERT INTO crm_spouseInfo(
+			spouseInfo_ID,
+			client_ID,
+			spouseName,
+			personNum,
+			unitName,
+			unitAddress,
+			unitPost,
+			unitPhone,
+			monthIncome,
+			contact,
+			remark,
+			updateUserName,
+			updateDateTime,
+			unit_uid
+		)
+		VALUES
+		(
+			#{spouseInfo_ID},
+			#{client_ID},
+			#{spouseName},
+			#{personNum},
+			#{unitName},
+			#{unitAddress},
+			#{unitPost},
+			#{unitPhone},
+			#{monthIncome},
+			#{contact},
+			#{remark},
+			#{updateUserName},
+			NOW(),
+			#{unit_uid}
+		) ;
+		]]>
+	</insert>
+	
+	<!-- 删除一个配偶信息 -->
+	<delete id="deleteOneSpouseInfo" parameterType="com.zjm.crm.db.model.Crm_spouseInfo">
+		<![CDATA[
+			delete from crm_spouseInfo
+			where client_ID=#{client_ID}
+		]]>
+	</delete>
+	
+	<!-- 查询一个配偶信息 -->
+	<select id="selectOneSpouseInfo" parameterType="com.zjm.crm.db.model.Crm_spouseInfo" resultMap="SpouseInfoResultMap">
+		<![CDATA[
+		 	select client_ID,spouseName,personNum,unitName,unitAddress,unitPost,unitPhone,monthIncome,contact,remark,updateUserName,updateDateTime
+		 	from crm_spouseInfo
+		 	where client_ID=#{client_ID}
+		]]>
+	</select>
+	
+	<!-- 更新配偶信息 -->
+	<update id="updateOneSpouseInfo" parameterType="com.zjm.crm.db.model.Crm_spouseInfo">
+		<![CDATA[
+			UPDATE 
+			  crm_spouseInfo
+			SET
+			  spouseName = #{spouseName},
+			  personNum = #{personNum},
+			  unitName = #{unitName},
+			  unitAddress = #{unitAddress},
+			  unitPost = #{unitPost},
+			  unitPhone = #{unitPhone},
+			  monthIncome = #{monthIncome},
+			  contact = #{contact},
+			  remark = #{remark},
+			  updateUserName = #{updateUserName},
+			  updateDateTime = NOW()
+			WHERE client_ID = #{client_ID}
+		]]>
+	</update>
+	
+	<delete id="deleteSpouseByClient_ID" parameterType="string">
+		delete 
+		from crm_spouseInfo
+		where client_ID = #{client_ID}
+	</delete>
+</mapper>  

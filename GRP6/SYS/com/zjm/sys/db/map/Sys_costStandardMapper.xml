@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.sys.db.map.Sys_costStandardMapper">
+   	<resultMap type="com.zjm.sys.db.model.Sys_costStandard" id="costStandardResultMap">
+   		<result property="costStandard_ID" column="costStandard_ID" />
+   		<result property="costTypeID" column="costTypeID" />
+   		<result property="costName" column="costName" />
+   		<result property="costTypeName" column="costTypeName" />
+   		<result property="isDelete" column="isDelete" />
+   		<result property="costRate" column="costRate" />
+   		<result property="costUnit" column="costUnit" />
+   		<result property="calculateRate" column="calculateRate" />
+   		<result property="culate" column="culate" />
+   		<result property="unit_uid" column="unit_uid" />
+   		<result property="updateUserName" column="updateUserName" />
+   		<result property="updateDateTime" column="updateDateTime" />
+   	</resultMap>
+   	 <!-- 查询收费标准 -->
+   	<select id="selectCostStandardTable" resultMap="costStandardResultMap" parameterType="com.zjm.common.db.model.PageTable">
+   	<![CDATA[ 
+   	SELECT 
+   		costStandard_ID,
+		costTypeID,
+		costName,
+		isDelete,
+		costTypeName,
+		costRate,
+		costUnit,
+		calculateRate,
+		culate,
+		unit_uid,
+		updateUserName,
+		updateDateTime
+   	 FROM sys_coststandard
+   	 WHERE isDelete = 0 ${wheresql} ORDER BY ${sortName} ${sortOrder} limit #{pageNumber},#{pageSize}
+   	]]>
+   	</select>
+   <!--  查询一条收费类型记录-->	
+   	<select id="selectOneCostStandard" resultMap="costStandardResultMap" parameterType="java.lang.String">
+   	<![CDATA[ 
+   	SELECT 
+   	    costStandard_ID,
+		costTypeID,
+		costName,
+		isDelete,
+		costTypeName,
+		costRate,
+		costUnit,
+		calculateRate,
+		culate,
+		unit_uid,
+		updateUserName,
+		updateDateTime
+   	 FROM sys_coststandard
+   	 WHERE 
+		costStandard_ID = #{value}
+   	
+   	]]>
+   	</select>
+   	
+   <!--插入一条收费标准 -->
+	<insert id="insertOneCostStandard" parameterType="com.zjm.sys.db.model.Sys_costStandard">
+	<![CDATA[
+		INSERT INTO sys_coststandard (
+		 	costStandard_ID,
+			costTypeID,
+			costName,
+			costTypeName,
+			isDelete,
+			costRate,
+			costUnit,
+			calculateRate,
+			culate,
+			unit_uid,
+			updateUserName,
+			updateDateTime)
+		VALUES (
+			#{costStandard_ID},
+			#{costTypeID},
+			#{costName},
+			#{costTypeName},
+			#{isDelete},
+			#{costRate},
+			#{costUnit},
+			#{calculateRate},
+			#{culate},
+			#{unit_uid},
+			#{updateUserName},
+			NOW()
+		)
+		]]>
+	</insert> 
+	<!-- 查询收费标准   分页列表 总记录数-->
+	<select id="selectCostStandardPageTables_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		<![CDATA[
+		SELECT count(costStandard_ID) 
+		FROM sys_coststandard 
+		where isDelete = 0 ${wheresql} ]]>
+	</select>
+	<!-- 删除一个收费标准 类型-->
+	<delete id="deleteOneCostStandard" parameterType="java.lang.String">
+		<![CDATA[UPDATE sys_coststandard SET isDelete = 1 WHERE costStandard_ID = #{costStandard_ID} ]]>
+	</delete>
+  </mapper>

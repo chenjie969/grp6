@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_FinanceMapper">
+	<!-- 项目费用管理列表显示信息 -->
+	<resultMap type="com.zjm.pro.db.model.Pro_FinanceForProVO" id="financeVoMap">
+		<result property="apply_ID" column="apply_ID" />
+		<result property="applyDetail_ID" column="applyDetail_ID" />
+		<result property="projectCode" column="projectCode" />
+		<result property="projectName" column="projectName" />
+		<result property="agreeSum" column="agreeSum" />
+		<result property="agreeMonthDay" column="agreeMonthDay" />
+		<result property="busiTypeID" column="busiTypeID" />
+		<result property="busiTypeName" column="busiTypeName" />
+		
+		<result property="costSum_dbf_ying" column="costSum_dbf_ying" />
+		<result property="costSum_dbf_yu" column="costSum_dbf_yu" />
+		<result property="costSum_dbf_shi" column="costSum_dbf_shi" />
+		
+		<result property="costSum_psf_ying" column="costSum_psf_ying" />
+		<result property="costSum_psf_yu" column="costSum_psf_yu" />
+		<result property="costSum_psf_shi" column="costSum_psf_shi" />
+	</resultMap>
+	
+	<!-- 查询所有项目费用管理列表信息 分页 -->
+	<select id="selectMultiProFinancePageTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="financeVoMap">
+		SELECT 
+			ying.apply_id,
+			ying.applydetail_id,
+			a.projectName,
+			ad.projectCode,
+			ad.busiTypeID,
+			ad.busiTypeName,
+			ad.agreeSum,
+			ad.agreeMonthDay,
+			
+			ying.costSum_dbf costSum_dbf_ying,
+			ying.costSum_psf costSum_psf_ying,
+			ying.costSum_other costSum_other_ying,
+			
+			yu.costSum_dbf costSum_dbf_yu,
+			yu.costSum_psf costSum_psf_yu,
+			yu.costSum_other costSum_other_yu,
+			
+			shi.costSum_dbf costSum_dbf_shi,
+			shi.costSum_psf costSum_psf_shi,
+			shi.costSum_other costSum_other_shi
+		FROM (
+			SELECT apply_id,applyDetail_ID,  
+				sum(case costTypeId when 1 then mustcostSum else 0 end) costSum_dbf, 
+				sum(case costTypeId when 2 then mustcostSum else 0 end) costSum_psf,
+				sum(case costTypeId when 1 then 0 when 2 then 0 else mustcostSum end) costSum_other
+			FROM pro_costmust
+			group by apply_id,applyDetail_ID
+		) ying
+		LEFT JOIN (
+			SELECT apply_id,applyDetail_ID,  
+				sum(case costTypeId when 1 then precostSum else 0 end) costSum_dbf, 
+				sum(case costTypeId when 2 then precostSum else 0 end) costSum_psf,
+				sum(case costTypeId when 1 then 0 when 2 then 0 else precostSum end) costSum_other
+			FROM pro_costpre  
+			group by apply_id,applyDetail_ID
+		) yu on ying.apply_ID=yu.apply_ID
+		LEFT JOIN (
+			SELECT apply_id,applyDetail_ID,  
+				sum(case costTypeId when 1 then factcostSum else 0 end) costSum_dbf, 
+				sum(case costTypeId when 2 then factcostSum else 0 end) costSum_psf,
+				sum(case costTypeId when 1 then 0 when 2 then 0 else factcostSum end) costSum_other
+			FROM pro_costfact 
+			where costFactState = '已确认收入'
+			group by apply_id,applyDetail_ID
+		) shi on ying.apply_ID=shi.apply_ID
+		LEFT JOIN pro_apply a ON ying.apply_ID=a.apply_ID
+		LEFT JOIN pro_applydetail ad ON ying.applyDetail_ID=ad.applyDetail_ID
+		
+		WHERE 1=1 ${wheresql}
+		ORDER BY ${sortName} ${sortOrder}
+		LIMIT #{pageNumber},#{pageSize}
+	</select>
+</mapper>

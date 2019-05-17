@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.gbpm.db.map.Gbpm_taskTypeTaskMapper">
+	<resultMap type="com.zjm.gbpm.db.model.Gbpm_taskTypeTask" id="taskTypeTaskResultMap">
+		<result column="taskManager_ID" property="taskManager_ID"  />
+		<result column="taskType_ID" property="taskType_ID"  />
+		
+	</resultMap>
+	
+	
+	<!-- 插入一条对应关系 -->
+	<insert id="insertTaskTypeTaskInfo" parameterType="com.zjm.gbpm.db.model.Gbpm_taskTypeTask">
+		INSERT INTO gbpm_tasktype_task(
+			taskManager_ID,
+		 	taskType_ID
+		) VALUES(
+			#{taskManager_ID},
+		 	#{taskType_ID}
+		)
+	</insert>
+	
+	<!--修改条对应关系 -->
+	<update id="updateOneTaskManager" parameterType="com.zjm.gbpm.db.model.Gbpm_taskTypeTask">
+	 <![CDATA[
+		UPDATE gbpm_tasktype_task
+		SET
+			taskType_ID= #{taskType_ID}
+			
+		WHERE taskManager_ID = #{taskManager_ID}
+		]]>		
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="deleteOneTaskTypeTask" parameterType="java.lang.String">
+		<![CDATA[
+			delete from gbpm_tasktype_task
+			where 1=1 ${value}
+		]]>
+	</delete>
+	
+</mapper>

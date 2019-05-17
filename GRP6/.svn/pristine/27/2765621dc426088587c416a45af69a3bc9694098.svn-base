@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.sys.db.map.Sys_rolesMapper">
+
+	<!-- 角色表信息 -->
+	<resultMap type="com.zjm.sys.db.model.Sys_roles" id="RolesResultMap">
+		<result property="role_uid" column="role_uid" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="role_name" column="role_name" />
+		<result property="role_descr" column="role_descr" />
+		<result property="order_id" column="order_id" />
+		<result property="projectTypeDataScope" column="projectTypeDataScope" />
+		<result property="createdatetime" column="createdatetime" />
+		<result property="create_user" column="create_user" />
+		<result property="updatedatetime" column="updatedatetime" />
+		<result property="update_user" column="update_user" />
+		<result property="user_uids" column="user_uids" />
+		<result property="user_names" column="user_names" />
+		<result property="userGroup_uuids" column="userGroup_uuids" />
+		<result property="userGroupNames" column="userGroupNames" />
+		<result property="post_IDs" column="post_IDs" />
+		<result property="postNames" column="postNames" />
+		<result property="mod_uids" column="mod_uids" />
+		<result property="fun_ids" column="fun_ids" />
+	</resultMap>
+	
+	
+	<!-- 查询  角色列表 -->
+	<select id="selectRolesPageTables" resultMap="RolesResultMap" parameterType="com.zjm.common.db.model.PageTable">
+		<![CDATA[
+		SELECT e.role_uid,e.unit_uid,e.role_name,e.role_descr,e.order_id,e.projectTypeDataScope,e.createdatetime,e.create_user,e.updatedatetime,e.update_user,
+		f.user_names,f.user_uids,g.postNames,g.post_IDs,h.userGroupNames,h.userGroup_uuids FROM sys_roles e
+		left join (
+			SELECT c.role_uid,c.unit_uid,group_concat(a.user_uid) as user_uids,group_concat(a.user_name) as user_names 
+			FROM sys_users a
+			left join sys_roles_user b on b.user_uid=a.user_uid and a.unit_uid=b.unit_uid
+			left join sys_roles c on c.role_uid=b.role_uid and c.unit_uid=b.unit_uid
+			group by c.role_uid,c.unit_uid
+		) f on f.role_uid=e.role_uid and f.unit_uid=e.unit_uid
+		left join (
+			SELECT c.role_uid,c.unit_uid,group_concat(a.post_ID) as post_IDs,group_concat(a.postName) as postNames 
+			FROM sys_post a
+			left join sys_roles_post b on b.post_ID=a.post_ID and a.unit_uid=b.unit_uid
+			left join sys_roles c on c.role_uid=b.role_uid and c.unit_uid=b.unit_uid
+			group by c.role_uid,c.unit_uid
+		) g on g.role_uid=e.role_uid and g.unit_uid=e.unit_uid
+		left join (
+			SELECT c.role_uid,c.unit_uid,group_concat(a.userGroup_uuid) as userGroup_uuids,group_concat(a.userGroupName) as userGroupNames 
+			FROM sys_usergroup a
+			left join sys_roles_usergroup b on b.userGroup_uuid=a.userGroup_uuid and a.unit_uid=b.unit_uid
+			left join sys_roles c on c.role_uid=b.role_uid and c.unit_uid=b.unit_uid
+			group by c.role_uid,c.unit_uid
+		) h on h.role_uid=e.role_uid and h.unit_uid=e.unit_uid
+		WHERE 1=1 ${wheresql} limit #{pageNumber},#{pageSize}	
+		]]>
+	</select>
+	
+	<!-- 查询 角色列表 总记录数-->
+	<select id="selectRolesPageTables_Count" parameterType="com.zjm.common.db.model.PageTable"  resultType="java.lang.Long">
+		<![CDATA[
+		SELECT count(role_uid) FROM sys_roles e
+		WHERE 1=1 ${wheresql} 		
+		]]>		 
+	</select>
+	
+	
+	<!-- 插入一个角色信息 -->
+	<insert id="insertOneRolesInfo"	parameterType="com.zjm.sys.db.model.Sys_roles">
+		<![CDATA[
+		INSERT INTO sys_roles (
+		role_uid,
+		unit_uid,
+		role_name,
+		role_descr,
+		order_id,
+		projectTypeDataScope,
+		createdatetime,
+		create_user,
+		updatedatetime,
+		update_user
+		)
+		VALUES
+		(
+		#{role_uid},
+		#{unit_uid},
+		#{role_name},
+		#{role_descr},
+		#{order_id},
+		#{projectTypeDataScope},
+		NOW(),
+		#{create_user},
+		NOW(),
+		#{update_user}
+		) ;
+		]]>
+	</insert>
+	<!-- 查询一个角色信息-->
+	<select id="selectOneRolesInfo" parameterType="com.zjm.sys.db.model.Sys_roles"  resultMap="RolesResultMap">
+	<![CDATA[
+		SELECT e.role_uid,e.unit_uid,e.role_name,e.role_descr,e.order_id,e.projectTypeDataScope,e.createdatetime,e.create_user,e.updatedatetime,e.update_user,
+		f.user_names,f.user_uids,g.postNames,g.post_IDs,h.userGroupNames,h.userGroup_uuids,i.mod_uids,j.fun_ids FROM sys_roles e
+		left join (
+			SELECT c.role_uid,c.unit_uid,group_concat(a.user_uid) as user_uids,group_concat(a.user_name) as user_names 
+			FROM sys_users a
+			left join sys_roles_user b on b.user_uid=a.user_uid and a.unit_uid=b.unit_uid
+			left join sys_roles c on c.role_uid=b.role_uid and c.unit_uid=b.unit_uid
+			group by c.role_uid,c.unit_uid
+		) f on f.role_uid=e.role_uid and f.unit_uid=e.unit_uid
+		left join (
+			SELECT c.role_uid,c.unit_uid,group_concat(a.post_ID) as post_IDs,group_concat(a.postName) as postNames 
+			FROM sys_post a
+			left join sys_roles_post b on b.post_ID=a.post_ID and a.unit_uid=b.unit_uid
+			left join sys_roles c on c.role_uid=b.role_uid and c.unit_uid=b.unit_uid
+			group by c.role_uid,c.unit_uid
+		) g on g.role_uid=e.role_uid and g.unit_uid=e.unit_uid
+		left join (
+			SELECT c.role_uid,c.unit_uid,group_concat(a.userGroup_uuid) as userGroup_uuids,group_concat(a.userGroupName) as userGroupNames 
+			FROM sys_usergroup a
+			left join sys_roles_usergroup b on b.userGroup_uuid=a.userGroup_uuid and a.unit_uid=b.unit_uid
+			left join sys_roles c on c.role_uid=b.role_uid and c.unit_uid=b.unit_uid
+			group by c.role_uid,c.unit_uid
+		) h on h.role_uid=e.role_uid and h.unit_uid=e.unit_uid
+		left join (
+			SELECT c.role_uid,c.unit_uid,group_concat(a.mod_uid) as mod_uids
+			FROM sys_modules a
+			left join sys_roles_module b on b.mod_uid=a.mod_uid and a.unit_uid=b.unit_uid
+			left join sys_roles c on c.role_uid=b.role_uid and c.unit_uid=b.unit_uid
+			group by c.role_uid,c.unit_uid
+		) i on i.role_uid=e.role_uid and i.unit_uid=e.unit_uid
+		left join (
+			SELECT c.role_uid,c.unit_uid,group_concat(a.fun_id) as fun_ids
+			FROM sys_functions a
+			left join sys_roles_function b on b.fun_id=a.fun_id 
+			left join sys_roles c on c.role_uid=b.role_uid and c.unit_uid=b.unit_uid
+			group by c.role_uid,c.unit_uid
+		) j on j.role_uid=e.role_uid and j.unit_uid=e.unit_uid
+		WHERE e.role_uid=#{role_uid}  and e.unit_uid=#{unit_uid}
+		]]> 				 
+	</select>
+	<!-- 判断角色名称是否重复-->
+	<select id="selectRolesNameIsExist" parameterType="java.lang.String"  resultType="java.lang.Integer">
+	<![CDATA[
+		SELECT count(role_uid) FROM sys_roles 
+		WHERE 1=1 ${value} 		
+		]]>		 
+	</select>
+	<!-- 更新一个角色信息 -->	
+	<update id="updateOneRolesInfo" parameterType="com.zjm.sys.db.model.Sys_roles">
+		<![CDATA[
+		UPDATE 
+		  sys_roles
+		SET
+		  role_name = #{role_name},
+		  role_descr = #{role_descr},
+		  updatedatetime = NOW(),
+		  update_user = #{update_user}
+		WHERE role_uid=#{role_uid}  and unit_uid=#{unit_uid} 
+		  ]]>
+	</update>
+	
+	<!-- 删除一个角色信息 -->
+	<delete id="delectOneRolesInfo" parameterType="com.zjm.sys.db.model.Sys_roles">
+		<![CDATA[DELETE FROM sys_roles WHERE role_uid=#{role_uid}  and unit_uid=#{unit_uid}  ]]>
+	</delete>
+	
+	<!-- 查询角色List-->
+	<select id="selectRolesList" parameterType="java.lang.String"  resultMap="RolesResultMap">
+	<![CDATA[
+		SELECT role_uid,unit_uid,role_name FROM sys_roles 
+		WHERE 1=1 ${value} 	ORDER BY order_id
+		]]>
+	</select>
+	
+	<!-- 测试sql-->
+	<select id="testSqlOne">
+	<![CDATA[
+		SET GLOBAL group_concat_max_len=5120
+		]]>
+	</select>
+	
+	<!-- 测试sql2-->
+	<select id="testSqlTwo">
+	<![CDATA[
+		SET SESSION group_concat_max_len=5120
+		]]>
+	</select>
+</mapper>  

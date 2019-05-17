@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><jatools Class="jatools.ReportDocument" Name="jatools report template"><VariableContext/><Page><Children ItemClass="PagePanel"><Item0><Width>1062</Width><Height>140</Height><Children><Item0 Class="Label"><Text>融投系前10大客户名录</Text><Font><Face>宋体</Face><Style>1</Style><Size>36</Size></Font><HorizontalAlignment>1</HorizontalAlignment><X>192</X><Y>9</Y><Width>656</Width><Height>71</Height></Item0><Item1 Class="Label"><Text>金额单位：亿元</Text><HorizontalAlignment>2</HorizontalAlignment><X>911</X><Y>114</Y><Width>101</Width><Height>23</Height></Item1><Item2 Class="Label"><Text>截止日期：</Text><X>433</X><Y>80</Y><Width>56</Width><Height>23</Height></Item2><Item3 Class="Text"><Variable>=if(has(enddatesql)) return enddatesql;else return $today;</Variable><X>494</X><Y>81</Y><Width>110</Width><Height>23</Height></Item3></Children><Type>100</Type></Item0><Item1><Y>1021</Y><Width>1062</Width><Height>61</Height><Type>103</Type></Item1><Item2><Y>140</Y><Width>1062</Width><Height>881</Height><Children ItemClass="Table"><Item0><X>128</X><Y>4</Y><Children><Item0 Class="Label"><Text>序号  </Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col></Cell></Item0><Item1 Class="Label"><Text>关联主体</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col></Cell></Item1><Item2 Class="Label"><Text>担保</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>2</Col></Cell></Item2><Item3 Class="Label"><Text>融投系委贷</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>3</Col></Cell></Item3><Item4 Class="Label"><Text>扣减已担保的委贷</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>4</Col></Cell></Item4><Item5 Class="Label"><Text>合计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>0</Col><ColSpan>2</ColSpan></Cell></Item5><Item6 Class="RowPanel"><Cell><Row>1</Row><Col>0</Col><ColSpan>6</ColSpan></Cell><Children ItemClass="RowPanel"><Item0><Cell><Row>1</Row><Col>0</Col><ColSpan>6</ColSpan></Cell><Children ItemClass="Text"><Item0><Variable>=if(has(index_column5_GUID.guarantySum{$.relationMain_ID}/10000)) return (index_column5_GUID.guarantySum{$.relationMain_ID}/10000);else return 0;</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.0000000000</Pattern></Format><Cell><Row>1</Row><Col>3</Col></Cell></Item0><Item1><Variable>=if(has(index_column4_GUID.guarantySum{$.relationMain_ID}/10000)) return (index_column4_GUID.guarantySum{$.relationMain_ID}/10000);else return 0;</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.0000000000</Pattern></Format><Cell><Row>1</Row><Col>2</Col></Cell></Item1><Item2><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.0000000000</Pattern></Format><Cell><Row>1</Row><Col>4</Col></Cell></Item2><Item3><Variable>=$.relationMainName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>1</Col></Cell></Item3><Item4><Variable>=$.position+1</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>0</Col></Cell></Item4><Item5><Variable>=if(!has(index_column4_GUID.guarantySum{$.relationMain_ID})) return (index_column5_GUID.guarantySum{$.relationMain_ID}/10000);else if(!has(index_column5_GUID.guarantySum{$.relationMain_ID}))return index_column4_GUID.guarantySum{$.relationMain_ID}/10000;else return index_column4_GUID.guarantySum{$.relationMain_ID}/10000+index_column5_GUID.guarantySum{$.relationMain_ID}/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000</Pattern></Format><Cell><Row>1</Row><Col>5</Col></Cell></Item5><Item6><Variable>=index_column4_GUID.guarantySum.sum()/10000+index_column5_GUID.guarantySum.sum()/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000</Pattern></Format><Cell><Row>2</Row><Col>5</Col></Cell></Item6></Children><NodePath>Row</NodePath></Item0></Children><NodePath>tab_detail</NodePath></Item6><Item7 Class="Label"><Text>合计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>5</Col></Cell></Item7><Item8 Class="Text"><Variable>=index_column4_GUID.guarantySum.sum()/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000</Pattern></Format><Cell><Row>2</Row><Col>2</Col></Cell></Item8><Item9 Class="Text"><Variable>=index_column5_GUID.guarantySum.sum()/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000</Pattern></Format><Cell><Row>2</Row><Col>3</Col></Cell></Item9><Item10 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>4</Col></Cell></Item10></Children><ColumnWidths>143,93,153,177,167,130</ColumnWidths><RowHeights>39,45,61</RowHeights></Item0></Children><Type>102</Type></Item2></Children><PageFormat><Width>1102</Width><Height>1122</Height></PageFormat></Page><NodeSource><Children ItemClass="DatasetNodeSource"><Item0><Children ItemClass="RowNodeSource"><Item0/></Children><Reader Class="SqlReader"><Name>tab_detail</Name><Sql>select cr.relationMainName,CONCAT(cli.clientName,',') clientName, sum(IFNULL(cli.clientAmount,0)) guarantySum,cr.relationMain_ID from  crm_relationmain cr 
+LEFT JOIN crm_client_relationmain ccr  ON cr.relationMain_ID = ccr.relationMain_ID
+LEFT JOIN
+(
+SELECT cc.*,sum(IFNULL(dd.amount,0)) clientAmount FROM crm_client cc LEFT JOIN pro_apply pa ON pa.client_ID = cc.client_ID  
+left join 
+(
+SELECT (pp.loadSum-  IFNULL(fb.payCapitalSum ,0)-IFNULL(re.replaceCapitalSum,0)-IFNULL(tab5.creditorsum,0)) amount,  pp.project_ID,pp.apply_ID 
+from pro_project pp 
+LEFT JOIN (select SUM(IFNULL(payCapitalSum,0)) payCapitalSum ,project_ID from  pro_factpay where 1=1 ${has(enddatesql)?("and  DATE_FORMAT(payDate,'%Y-%m') &lt;='"+enddatesql+"'"):""}  GROUP BY  project_ID) fb on fb.project_ID=pp.project_ID 
+LEFT JOIN (select SUM(IFNULL(replaceCapitalSum,0)) replaceCapitalSum ,project_ID from pro_replace  where 1=1 ${has(enddatesql)?("and  DATE_FORMAT(replaceDate,'%Y-%m') &lt;='"+enddatesql+"'"):""} GROUP BY  project_ID)  re on re.project_ID=pp.project_ID
+LEFT JOIN (
+	SELECT 
+		precre.project_ID,        
+		SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum          
+	FROM
+		pro_creditor precre
+	WHERE 1=1   
+	${has(enddatesql)?(" and  DATE_FORMAT(precre.creditor_date,'%Y-%m')&lt;='"+enddatesql+"'"):""}
+	GROUP BY precre.project_ID 
+)tab5 ON tab5.project_ID =  pp.project_ID
+ WHERE 1=1  AND ( pp.finishDate is  null  ${has(endyearmonthsql)?(" or DATE_FORMAT(pp.finishDate,'%Y-%m') &gt; '"+endyearmonthsql+"'"):""}  )  ${has(endyearmonthsql)?(" and DATE_FORMAT(pp.reportDate,'%Y-%m') &lt;= '"+endyearmonthsql+"'"):""}
+ ) dd 
+on dd.apply_ID=pa.apply_ID GROUP BY cc.clientGUID) cli  on ccr.client_ID =cli.client_ID group by cr.relationMain_ID
+ORDER BY guarantySum DESC
+LIMIT 10</Sql><Description>select cr.relationMainName,CONCAT(cli.clientName,',') clientName, sum(IFNULL(cli.clientAmount,0)) guarantySum,cr.relationMain_ID from  crm_relationmain cr 
+LEFT JOIN crm_client_relationmain ccr  ON cr.relationMain_ID = ccr.relationMain_ID
+LEFT JOIN
+(
+SELECT cc.*,sum(IFNULL(dd.amount,0)) clientAmount FROM crm_client cc LEFT JOIN pro_apply pa ON pa.client_ID = cc.client_ID  
+left join 
+(
+SELECT (pp.loadSum-  IFNULL(fb.payCapitalSum ,0)-IFNULL(re.replaceCapitalSum,0)-IFNULL(tab5.creditorsum,0)) amount,  pp.project_ID,pp.apply_ID 
+from pro_project pp 
+LEFT JOIN (select SUM(IFNULL(payCapitalSum,0)) payCapitalSum ,project_ID from  pro_factpay where 1=1 ${has(enddatesql)?("and  DATE_FORMAT(payDate,'%Y-%m') &lt;='"+enddatesql+"'"):""}  GROUP BY  project_ID) fb on fb.project_ID=pp.project_ID 
+LEFT JOIN (select SUM(IFNULL(replaceCapitalSum,0)) replaceCapitalSum ,project_ID from pro_replace  where 1=1 ${has(enddatesql)?("and  DATE_FORMAT(replaceDate,'%Y-%m') &lt;='"+enddatesql+"'"):""} GROUP BY  project_ID)  re on re.project_ID=pp.project_ID
+LEFT JOIN (
+	SELECT 
+		precre.project_ID,        
+		SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum          
+	FROM
+		pro_creditor precre
+	WHERE 1=1   
+	${has(enddatesql)?(" and  DATE_FORMAT(precre.creditor_date,'%Y-%m')&lt;='"+enddatesql+"'"):""}
+	GROUP BY precre.project_ID 
+)tab5 ON tab5.project_ID =  pp.project_ID
+ WHERE 1=1  AND ( pp.finishDate is  null  ${has(endyearmonthsql)?(" or DATE_FORMAT(pp.finishDate,'%Y-%m') &gt; '"+endyearmonthsql+"'"):""}  )  ${has(endyearmonthsql)?(" and DATE_FORMAT(pp.reportDate,'%Y-%m') &lt;= '"+endyearmonthsql+"'"):""}
+ ) dd 
+on dd.apply_ID=pa.apply_ID GROUP BY cc.clientGUID) cli  on ccr.client_ID =cli.client_ID group by cr.relationMain_ID
+ORDER BY guarantySum DESC
+LIMIT 10</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><TagName>tab_detail</TagName></Item0><Item1><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">relationMain_ID</IndexFields><TagName>index_column4_GUID</TagName></Item0></Children><Reader Class="SqlReader"><Name>column_4</Name><Sql>select cr.relationMainName,CONCAT(cli.clientName,',') clientName, sum(IFNULL(cli.clientAmount,0)) guarantySum,cr.relationMain_ID from  crm_relationmain cr 
+LEFT JOIN crm_client_relationmain ccr  ON cr.relationMain_ID = ccr.relationMain_ID
+LEFT JOIN
+(
+SELECT cc.*,sum(IFNULL(dd.amount,0)) clientAmount FROM crm_client cc LEFT JOIN pro_apply pa ON pa.client_ID = cc.client_ID  
+left join 
+(
+SELECT (pp.loadSum-  IFNULL(fb.payCapitalSum ,0)-IFNULL(re.replaceCapitalSum,0)-IFNULL(tab5.creditorsum,0)) amount,  pp.project_ID,pp.apply_ID 
+from pro_project pp 
+LEFT JOIN (select SUM(IFNULL(payCapitalSum,0)) payCapitalSum ,project_ID from  pro_factpay where 1=1 ${has(enddatesql)?("and  DATE_FORMAT(payDate,'%Y-%m') &lt;='"+enddatesql+"'"):""}  GROUP BY  project_ID) fb
+on fb.project_ID=pp.project_ID 
+LEFT JOIN (select SUM(IFNULL(replaceCapitalSum,0)) replaceCapitalSum ,project_ID from pro_replace  where 1=1 ${has(enddatesql)?("and  DATE_FORMAT(replaceDate,'%Y-%m') &lt;='"+enddatesql+"'"):""} GROUP BY  project_ID)  re 
+on re.project_ID=pp.project_ID 
+LEFT JOIN (
+	SELECT 
+		precre.project_ID,        
+		SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum          
+	FROM
+		pro_creditor precre
+	WHERE 1=1   
+	${has(enddatesql)?(" and  DATE_FORMAT(precre.creditor_date,'%Y-%m')&lt;='"+enddatesql+"'"):""}
+	GROUP BY precre.project_ID 
+)tab5 ON tab5.project_ID =  pp.project_ID
+ WHERE pp.`busiClass`='01'  AND ( pp.finishDate is  null  ${has(endyearmonthsql)?(" or DATE_FORMAT(pp.finishDate,'%Y-%m') &gt; '"+endyearmonthsql+"'"):""}  )
+${has(endyearmonthsql)?(" and DATE_FORMAT(pp.reportDate,'%Y-%m') &lt;= '"+endyearmonthsql+"'"):""}
+ ) dd 
+on dd.apply_ID=pa.apply_ID GROUP BY cc.clientGUID) cli  on ccr.client_ID =cli.client_ID group by cr.relationMain_ID
+ORDER BY guarantySum DESC
+LIMIT 10</Sql><Description>select cr.relationMainName,CONCAT(cli.clientName,',') clientName, sum(IFNULL(cli.clientAmount,0)) guarantySum,cr.relationMain_ID from  crm_relationmain cr 
+LEFT JOIN crm_client_relationmain ccr  ON cr.relationMain_ID = ccr.relationMain_ID
+LEFT JOIN
+(
+SELECT cc.*,sum(IFNULL(dd.amount,0)) clientAmount FROM crm_client cc LEFT JOIN pro_apply pa ON pa.client_ID = cc.client_ID  
+left join 
+(
+SELECT (pp.loadSum-  IFNULL(fb.payCapitalSum ,0)-IFNULL(re.replaceCapitalSum,0)-IFNULL(tab5.creditorsum,0)) amount,  pp.project_ID,pp.apply_ID 
+from pro_project pp 
+LEFT JOIN (select SUM(IFNULL(payCapitalSum,0)) payCapitalSum ,project_ID from  pro_factpay where 1=1 ${has(enddatesql)?("and  DATE_FORMAT(payDate,'%Y-%m') &lt;='"+enddatesql+"'"):""}  GROUP BY  project_ID) fb
+on fb.project_ID=pp.project_ID 
+LEFT JOIN (select SUM(IFNULL(replaceCapitalSum,0)) replaceCapitalSum ,project_ID from pro_replace  where 1=1 ${has(enddatesql)?("and  DATE_FORMAT(replaceDate,'%Y-%m') &lt;='"+enddatesql+"'"):""} GROUP BY  project_ID)  re 
+on re.project_ID=pp.project_ID 
+LEFT JOIN (
+	SELECT 
+		precre.project_ID,        
+		SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum          
+	FROM
+		pro_creditor precre
+	WHERE 1=1   
+	${has(enddatesql)?(" and  DATE_FORMAT(precre.creditor_date,'%Y-%m')&lt;='"+enddatesql+"'"):""}
+	GROUP BY precre.project_ID 
+)tab5 ON tab5.project_ID =  pp.project_ID
+ WHERE pp.`busiClass`='01'  AND ( pp.finishDate is  null  ${has(endyearmonthsql)?(" or DATE_FORMAT(pp.finishDate,'%Y-%m') &gt; '"+endyearmonthsql+"'"):""}  )
+${has(endyearmonthsql)?(" and DATE_FORMAT(pp.reportDate,'%Y-%m') &lt;= '"+endyearmonthsql+"'"):""}
+ ) dd 
+on dd.apply_ID=pa.apply_ID GROUP BY cc.clientGUID) cli  on ccr.client_ID =cli.client_ID group by cr.relationMain_ID
+ORDER BY guarantySum DESC
+LIMIT 10</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">relationMain_ID</IndexFields><TagName>column_4</TagName></Item1><Item2><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">relationMain_ID</IndexFields><TagName>index_column5_GUID</TagName></Item0></Children><Reader Class="SqlReader"><Name>column5</Name><Sql>select cr.relationMainName,CONCAT(cli.clientName,',') clientName, sum(IFNULL(cli.clientAmount,0)) guarantySum,cr.relationMain_ID from  crm_relationmain cr 
+LEFT JOIN crm_client_relationmain ccr  ON cr.relationMain_ID = ccr.relationMain_ID
+LEFT JOIN
+(
+SELECT cc.*,sum(IFNULL(dd.amount,0)) clientAmount FROM crm_client cc LEFT JOIN pro_apply pa ON pa.client_ID = cc.client_ID  
+left join 
+(
+SELECT (pp.loadSum-  IFNULL(fb.payCapitalSum ,0)-IFNULL(re.replaceCapitalSum,0)-IFNULL(tab5.creditorsum,0)) amount,  pp.project_ID,pp.apply_ID 
+from pro_project pp 
+LEFT JOIN (select SUM(IFNULL(payCapitalSum,0)) payCapitalSum ,project_ID from  pro_factpay where 1=1 ${has(enddatesql)?("and  DATE_FORMAT(payDate,'%Y-%m') &lt;='"+enddatesql+"'"):""}  GROUP BY  project_ID) fb
+on fb.project_ID=pp.project_ID 
+LEFT JOIN (select SUM(IFNULL(replaceCapitalSum,0)) replaceCapitalSum ,project_ID from pro_replace  where 1=1 ${has(enddatesql)?("and  DATE_FORMAT(replaceDate,'%Y-%m') &lt;='"+enddatesql+"'"):""} GROUP BY  project_ID)  re 
+on re.project_ID=pp.project_ID 
+LEFT JOIN (
+	SELECT 
+		precre.project_ID,        
+		SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum          
+	FROM
+		pro_creditor precre
+	WHERE 1=1   
+	${has(enddatesql)?(" and  DATE_FORMAT(precre.creditor_date,'%Y-%m')&lt;='"+enddatesql+"'"):""}
+	GROUP BY precre.project_ID 
+)tab5 ON tab5.project_ID =  pp.project_ID
+ WHERE pp.`busiClass`='02'  AND ( pp.finishDate is  null  ${has(endyearmonthsql)?(" or DATE_FORMAT(pp.finishDate,'%Y-%m') &gt; '"+endyearmonthsql+"'"):""}  )
+${has(endyearmonthsql)?(" and DATE_FORMAT(pp.reportDate,'%Y-%m') &lt;= '"+endyearmonthsql+"'"):""}
+ ) dd 
+on dd.apply_ID=pa.apply_ID GROUP BY cc.clientGUID) cli  on ccr.client_ID =cli.client_ID group by cr.relationMain_ID
+ORDER BY guarantySum DESC
+LIMIT 10</Sql><Description>select cr.relationMainName,CONCAT(cli.clientName,',') clientName, sum(IFNULL(cli.clientAmount,0)) guarantySum,cr.relationMain_ID from  crm_relationmain cr 
+LEFT JOIN crm_client_relationmain ccr  ON cr.relationMain_ID = ccr.relationMain_ID
+LEFT JOIN
+(
+SELECT cc.*,sum(IFNULL(dd.amount,0)) clientAmount FROM crm_client cc LEFT JOIN pro_apply pa ON pa.client_ID = cc.client_ID  
+left join 
+(
+SELECT (pp.loadSum-  IFNULL(fb.payCapitalSum ,0)-IFNULL(re.replaceCapitalSum,0)-IFNULL(tab5.creditorsum,0)) amount,  pp.project_ID,pp.apply_ID 
+from pro_project pp 
+LEFT JOIN (select SUM(IFNULL(payCapitalSum,0)) payCapitalSum ,project_ID from  pro_factpay where 1=1 ${has(enddatesql)?("and  DATE_FORMAT(payDate,'%Y-%m') &lt;='"+enddatesql+"'"):""}  GROUP BY  project_ID) fb
+on fb.project_ID=pp.project_ID 
+LEFT JOIN (select SUM(IFNULL(replaceCapitalSum,0)) replaceCapitalSum ,project_ID from pro_replace  where 1=1 ${has(enddatesql)?("and  DATE_FORMAT(replaceDate,'%Y-%m') &lt;='"+enddatesql+"'"):""} GROUP BY  project_ID)  re 
+on re.project_ID=pp.project_ID 
+LEFT JOIN (
+	SELECT 
+		precre.project_ID,        
+		SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum          
+	FROM
+		pro_creditor precre
+	WHERE 1=1   
+	${has(enddatesql)?(" and  DATE_FORMAT(precre.creditor_date,'%Y-%m')&lt;='"+enddatesql+"'"):""}
+	GROUP BY precre.project_ID 
+)tab5 ON tab5.project_ID =  pp.project_ID
+ WHERE pp.`busiClass`='02'  AND ( pp.finishDate is  null  ${has(endyearmonthsql)?(" or DATE_FORMAT(pp.finishDate,'%Y-%m') &gt; '"+endyearmonthsql+"'"):""}  )
+${has(endyearmonthsql)?(" and DATE_FORMAT(pp.reportDate,'%Y-%m') &lt;= '"+endyearmonthsql+"'"):""}
+ ) dd 
+on dd.apply_ID=pa.apply_ID GROUP BY cc.clientGUID) cli  on ccr.client_ID =cli.client_ID group by cr.relationMain_ID
+ORDER BY guarantySum DESC
+LIMIT 10</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">relationMain_ID</IndexFields><TagName>column5</TagName></Item2></Children></NodeSource></jatools>

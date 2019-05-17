@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjm.crm.db.map.Crm_managerInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.zjm.crm.db.model.Crm_managerInfo" >
+    <id column="managerInfo_ID" property="managerinfoId"  />
+    <result column="client_ID" property="client_ID"  />
+    <result column="unit_uid" property="unitUid"  />
+    <result column="updateUserName"   property="updateusername"/>
+    <result column="updateDateTime" property="updatedatetime" />
+    <result column="developEvolution" property="developevolution"  />
+    <result column="productDesc" property="productdesc"  />
+    <result column="stockStructure" property="stockstructure"  />
+    <result column="legalPersonInfo" property="legalpersoninfo"  />
+    <result column="controlPersonInfo" property="controlpersoninfo"  />
+    <result column="otherStockInfo" property="otherstockinfo"  />
+    <result column="managerInfo" property="managerinfo"  />
+    <result column="employeeInfo" property="employeeinfo"  />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    managerInfo_ID, client_ID, unit_uid, updateUserName, updateDateTime
+    developEvolution, productDesc, stockStructure, legalPersonInfo, controlPersonInfo, 
+    otherStockInfo, managerInfo, employeeInfo
+  </sql>
+  
+   <!-- 删除 股东 主要管理人员情况 -->
+  <delete id="deleteOneManagerInfo" parameterType="java.lang.String" >
+    delete from crm_managerinfo
+    where client_ID = #{client_ID}
+  </delete>
+  
+  <!-- 添加 股东  主要管理人员情况 -->
+  <insert id="insertOneManagerInfo" parameterType="com.zjm.crm.db.model.Crm_managerInfo" >
+    insert into crm_managerinfo (
+    	managerInfo_ID, 
+    	client_ID, 
+    	unit_uid, 
+      	updateUserName, 
+      	updateDateTime, 
+      	developEvolution, 
+      	productDesc, 
+      	stockStructure, 
+      	legalPersonInfo, 
+      	controlPersonInfo, 
+      	otherStockInfo, 
+      	managerInfo, 
+      	employeeInfo
+      	)
+    values (
+    	#{managerinfoId}, 
+    	#{client_ID}, 
+    	#{unitUid}, 
+      	#{updateusername}, 
+      	NOW(), 
+      	#{developevolution}, 
+      	#{productdesc}, 
+      	#{stockstructure}, 
+      	#{legalpersoninfo}, 
+      	#{controlpersoninfo}, 
+      	#{otherstockinfo}, 
+      	#{managerinfo}, 
+      	#{employeeinfo}
+      )
+  </insert>
+  
+   <!-- 查询一条 股东管理人员情况 -->
+  <select id="selectOneManagerInfo" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+	  	managerInfo_ID, client_ID, unit_uid, updateUserName, updateDateTime,
+	    developEvolution, productDesc, stockStructure, legalPersonInfo, controlPersonInfo, 
+	    otherStockInfo, managerInfo, employeeInfo
+    from crm_managerinfo
+    where 1=1 ${value}
+  </select>
+  
+  
+  <!-- 修改股东 主要管理人员情况 -->
+  <update id="updateOneManagerInfo" parameterType="com.zjm.crm.db.model.Crm_managerInfo" >
+    update crm_managerinfo
+    <set >
+      <if test="client_ID != null" >
+        client_ID = #{client_ID},
+      </if>
+      <if test="unitUid != null" >
+        unit_uid = #{unitUid},
+      </if>
+      <if test="updateusername != null" >
+        updateUserName = #{updateusername},
+      </if>
+        updateDateTime =NOW(),
+      <if test="developevolution != null" >
+        developEvolution = #{developevolution},
+      </if>
+      <if test="productdesc != null" >
+        productDesc = #{productdesc},
+      </if>
+      <if test="stockstructure != null" >
+        stockStructure = #{stockstructure},
+      </if>
+      <if test="legalpersoninfo != null" >
+        legalPersonInfo = #{legalpersoninfo},
+      </if>
+      <if test="controlpersoninfo != null" >
+        controlPersonInfo = #{controlpersoninfo},
+      </if>
+      <if test="otherstockinfo != null" >
+        otherStockInfo = #{otherstockinfo},
+      </if>
+      <if test="managerinfo != null" >
+        managerInfo = #{managerinfo},
+      </if>
+      <if test="employeeinfo != null" >
+        employeeInfo = #{employeeinfo},
+      </if>
+    </set>
+    where 1=1
+    <if test="managerinfoId !=null">
+		and   managerInfo_ID = #{managerinfoId}
+    </if>
+     <if test="client_ID !=null">
+		and   client_ID = #{client_ID}
+    </if>
+  </update>
+  
+  
+  
+  <!-- 更新全部信息 备用 -->
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zjm.crm.db.model.Crm_managerInfo" >
+    update crm_managerinfo
+    set client_ID = #{client_ID},
+      unit_uid = #{unitUid},
+      updateUserName = #{updateusername},
+      updateDateTime = NOW(),
+      developEvolution = #{developevolution},
+      productDesc = #{productdesc},
+      stockStructure = #{stockstructure},
+      legalPersonInfo = #{legalpersoninfo},
+      controlPersonInfo = #{controlpersoninfo},
+      otherStockInfo = #{otherstockinfo},
+      managerInfo = #{managerinfo},
+      employeeInfo = #{employeeinfo}
+    where managerInfo_ID = #{managerinfoId}
+  </update>
+ 	
+ 	<delete id="deleteManagerInfoByClient_ID" parameterType="string">
+ 		   DELETE  from crm_managerinfo where  1=1 and  client_ID =#{client_ID}
+ 	</delete>
+ 
+</mapper>

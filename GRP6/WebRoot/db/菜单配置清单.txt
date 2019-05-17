@@ -1,0 +1,19 @@
+菜单名称:
+URL  :     --张可要20171102
+          		
+          		
+ /*===========xuyz 20171102  上会管理    =======================================================*/
+序号	菜单名称						URL地址										是否自动刷新 	
+1	上会申请	/project/meeting/meetingApply/index.jsp								否	
+2	安排上会	/project/meeting/meetingArrange/index.jsp							否	
+3	评委表决	/project/jurySuggest/showJurySuggestIndexPage						否	
+4	评审会决议	/pro/meetResolution/meetingResolution/showMeetingResultIndexPage	否	
+5	评委库管理	/pro/meetingJury/showMeetingJuryPageTables							否
+ /*===========xuyz 20171102  上会管理    =======================================================*/
+ /*===========zky 20171102  客户管理    =======================================================*/
+ 序号	         菜单名称						URL地址										是否自动刷新 	
+1	客户资料清单设置	 /client/clientMaterial/selectClientMaterialPage			         否	
+/*===========zky 20171102  客户管理  =======================================================*/
+ 
+/*===========zky 20171117  完结项目 =======================================================*/
+ 完结项目                                           project/projectFinish/projectFinishPageTables.jsp          否

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_meetingApplyMapper">
+	<!-- 评审会信息表 -->
+	 <resultMap id="ProMeetingApplyMap" type="com.zjm.pro.db.model.Pro_meetingApply" >
+	    <id column="meetingApply_ID" property="meetingApply_ID"  />
+		<result column="meeting_ID" property="meeting_ID"/>
+		<result column="entityType" property="entityType"/>
+		<result column="entityID" property="entityID"/>
+		<result column="userIDList" property="userIDList"/>
+		<result column="userNameList" property="userNameList"/>
+		<result column="meetingSort" property="meetingSort"/>
+		<result column="updateUserName" property="updateUserName"/>
+		<result column="updateDateTime" property="updateDateTime"/>
+  </resultMap>
+	<!-- 插入一条信息 -->
+	<insert id="insertOneMeetingApplyApply"	parameterType="com.zjm.pro.db.model.Pro_meetingApply">
+		<![CDATA[
+		INSERT INTO pro_meetingApply (
+			meetingApply_ID,
+		    meeting_ID,
+			entityType,
+			entityID, 
+			userIDList,
+			userNameList,
+			meetingSort,
+			updateUserName,
+			updateDateTime
+		)
+		VALUES
+		(
+	 		#{meetingApply_ID},
+	 		#{meeting_ID},
+	 		#{entityType},
+	 		#{entityID},
+	 		#{userIDList},
+			#{userNameList},
+			#{meetingSort},
+	 		#{updateUserName},
+			NOW()
+		);  
+		]]>
+	</insert>
+   <!-- 根据查询条件查询单个MeetingApply-->
+	<select id="selectOneMeetingApplyByWhereSql" parameterType="java.lang.String"  resultMap="ProMeetingApplyMap">
+	<![CDATA[
+		SELECT 
+		    meetingApply_ID,
+		    meeting_ID,
+			entityType,
+			entityID, 
+			userIDList,
+			userNameList,
+			meetingSort,
+			updateUserName,
+			updateDateTime  
+	    FROM 
+	         pro_meetingApply 
+		WHERE 1=1 ${value}
+		]]> 				 
+	</select>
+	
+	<!-- 新增一条评审会与申请对应信息  xuyz-->
+	<insert id="insertOneMeetingApply"	parameterType="com.zjm.pro.db.model.Pro_meetingApply">
+		<![CDATA[
+		INSERT INTO pro_meetingApply (
+			meetingApply_ID,
+			meeting_ID,
+			entityType,
+			entityID,
+			userIDList,
+			userNameList,
+			meetingSort,
+			updateUserName,
+			updateDateTime
+		)
+		VALUES
+		(
+	 		#{meetingApply_ID},
+			#{meeting_ID},
+			#{entityType},
+			#{entityID},
+			#{userIDList},
+			#{userNameList},
+			#{meetingSort},
+			#{updateUserName},
+			NOW()
+		);  
+		]]>
+	</insert>
+	
+	<!-- 根据meeting_ID删除评审会与申请对应信息  -->
+	<delete id="deleteMeetingApplyByMeetingID" parameterType="java.lang.String">
+		DELETE FROM
+			pro_meetingApply
+		WHERE
+			meeting_ID = #{value}
+	</delete>
+	
+	 <!-- 查看一条评审会记录 -->
+	<select id="selectOneMeetingApplyById" parameterType="java.lang.String"  resultMap="ProMeetingApplyMap">
+		<![CDATA[
+			select 
+			meetingApply_ID,
+		    meeting_ID,
+			entityType,
+			entityID, 
+			updateUserName,
+			updateDateTime
+	    	from pro_meetingApply where 1 = 1 and meeting_ID=#{meetingID}		
+		]]>		 
+	</select>
+	
+</mapper>  

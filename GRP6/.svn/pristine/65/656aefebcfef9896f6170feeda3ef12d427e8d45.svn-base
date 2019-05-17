@@ -1,0 +1,177 @@
+package com.zjm.crm.relationMain.web;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.zjm.crm.db.model.Crm_client_relationMain;
+import com.zjm.crm.db.model.Crm_relationMain;
+import com.zjm.crm.relationMain.service.RelationMainService;
+import com.zjm.common.db.model.AjaxRes;
+import com.zjm.common.db.model.PageTable;
+import com.zjm.common.db.model.User;
+import com.zjm.util.CustomDispatchServlet;
+import com.zjm.util.SystemSession;
+import com.zjm.util.Tool;
+
+@Controller
+public class RelationMainAction {
+
+	@Resource
+	private RelationMainService relationMainService;
+	
+	/**
+	 * 查询关联主体列表-- 分页
+	 * @param pageTable
+	 * @return
+	 */
+	@RequestMapping(value = "/selectRelationMainPageTables", method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes selectRelationMainPageTables(@RequestBody PageTable pageTable) {
+		pageTable.setWheresql(queryConditionSql(pageTable));
+		pageTable = relationMainService.selectRelationMainPageTables(pageTable);
+		AjaxRes ar=new AjaxRes();
+		ar.setSucceed(pageTable);
+		return ar;
+	}
+	/**
+	 * 分页列表查询条件
+	 * @param pageTable
+	 */
+	private String queryConditionSql(PageTable<Crm_relationMain> pageTable){
+		String wheresql=" and unit_uid = '"+SystemSession.getUserSession().getUnit_uid()+"'";
+		if(pageTable==null){
+			return "";
+		}
+		//搜索框功能
+		//当查询条件中包含中文时，get请求默认会使用ISO-8859-1编码请求参数，在服务端需要对其解码
+		if ( null != pageTable.getSearchText()) {
+			wheresql=wheresql+" and relationMainName like \'%"+pageTable.getSearchText().trim()+"%\'";
+		}
+		
+		//主体名称/关联名称
+		if (pageTable.getQueryCondition().getRelationMainName() != null && !"".equals(pageTable.getQueryCondition().getRelationMainName())) {
+			wheresql += " and relationMainName like \'%"+pageTable.getQueryCondition().getRelationMainName()+"%\'";
+		}
+		
+		//关联企业名称
+		if (pageTable.getQueryCondition().getRelationClient() != null && !"".equals(pageTable.getQueryCondition().getRelationClient())) {
+			String relationCilentName = pageTable.getQueryCondition().getRelationClient();
+			List<Crm_client_relationMain>  relationMainList = relationMainService.selectRelationMain(relationCilentName);
+			wheresql += " and relationMain_ID in ( ";
+			for (Crm_client_relationMain relation : relationMainList) {
+				wheresql += "'"+ relation.getRelationMain_ID() +"',"; 
+			}
+			wheresql += " '1') ";
+		}
+		
+		//点击列名时的排序功能
+		if(pageTable.getSortName()!=null && !pageTable.getSortName().equals("") && pageTable.getSortOrder()!=null && !pageTable.getSortOrder().equals("")){
+				wheresql=wheresql+" order by "+pageTable.getSortName().trim()+"  " +pageTable.getSortOrder()+"";
+		}else{
+			wheresql=wheresql+" ORDER BY updateDateTime desc ";
+		}
+		return wheresql;
+	}
+	/**
+	 * 新增主体
+	 */
+	@RequestMapping(value = "/insertOneRelationMain", method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes insertOneRelationMain(@RequestBody Crm_relationMain relationMain) {
+		AjaxRes ar=new AjaxRes();
+		relationMain.setRelationMain_ID(Tool.createUUID32());
+		User user = SystemSession.getUserSession();
+		relationMain.setUpdateUserName(user.getUser_name());
+		relationMain.setUnit_uid(user.getUnit_uid());
+		relationMain.setUnit_uidName(user.getUnit_uidName());
+		Boolean b=relationMainService.insertOneRelationMain(user,relationMain);
+		ar.setSucceed(b);
+		return ar;
+	}
+	/**
+	 * 校验主体名是否存在
+	 */
+	@RequestMapping(value="/isExistMainName", method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes isExistMainName(@RequestBody Crm_relationMain relationMain){
+		AjaxRes ar = new AjaxRes();
+		relationMain.setUnit_uid(SystemSession.getUserSession().getUnit_uid());
+		ar.setSucceed(relationMainService.isExistMainName(relationMain));
+		return ar;
+	}
+	
+	/**
+	 * 根据ID批量删除主体
+	 */
+	@RequestMapping(value="batchDeleteRelationMainByIDs",method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes batchDeleteRelationMainByIDs(@RequestBody Crm_relationMain relationMain){
+		AjaxRes ar = new AjaxRes();
+		User user = SystemSession.getUserSession();
+		relationMain.setUnit_uid(user.getUnit_uid());
+		ar.setSucceed(relationMainService.batchDeleteRelationMainByIDs(user,relationMain));
+		return ar;
+	}
+	
+	/**
+	 * 根据ID查询单个关联主体的信息
+	 */
+	@RequestMapping(value="selectOneRelationMainById",method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes selectOneRelationMainById(@RequestBody Crm_relationMain relationMain){
+		AjaxRes ar = new AjaxRes();
+		relationMain.setUnit_uid(SystemSession.getUserSession().getUnit_uid());
+		ar.setSucceed(relationMainService.selectOneRelationMainById(relationMain));
+		return ar;
+	}
+	
+	/**
+	 * 更新一个关联主体
+	 */
+	@RequestMapping(value="updateOneRelationMain",method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes updateOneRelationMain(@RequestBody Crm_relationMain relationMain){
+		AjaxRes ar = new AjaxRes();
+		User user = SystemSession.getUserSession();
+		relationMain.setUpdateUserName(user.getUser_name());
+		relationMain.setUnit_uid(user.getUnit_uid());
+		ar.setSucceed(relationMainService.updateOneRelationMain(user,relationMain));
+		return ar;
+	}
+	
+	/**
+	 * 河北融投-风险处置-移出重点项目
+	 */
+	@RequestMapping(value="removeKeyProject",method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes removeKeyProject(@RequestBody Crm_relationMain relationMain){
+		AjaxRes ar = new AjaxRes();
+		User user = SystemSession.getUserSession();
+		relationMain.setUpdateUserName(user.getUser_name());
+		relationMain.setUnit_uid(user.getUnit_uid());
+		ar.setSucceed(relationMainService.removeKeyProject(user,relationMain));
+		return ar;
+	}
+	
+	
+	/**
+	 * 管理企业高级查询页面
+	 * @param pro_project
+	 * @return
+	 */
+	@RequestMapping(value="/relationSelectPage")
+	public ModelAndView relationSelectPage(){
+		 ModelAndView mv = CustomDispatchServlet.getModeAndView();
+		 mv.setViewName("/crm/relationMain/relationSelect");
+		return mv;		
+	}
+	
+}

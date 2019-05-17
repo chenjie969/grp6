@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjm.crm.db.map.Crm_bankAccountMapper" >
+  <resultMap id="BaseResultMap" type="com.zjm.crm.db.model.Crm_bankAccount" >
+    <id column="bankAccount_ID" property="bankaccountId"  />
+    <result column="client_ID" property="client_ID"  />
+    <result column="accountTypeID" property="accounttypeid"  />
+    <result column="accountType" property="accounttype"  />
+    <result column="bankName" property="bankname"  />
+    <result column="accountNumber" property="accountnumber"  />
+    <result column="accountSum" property="accountsum"  />
+    <result column="remark" property="remark"  />
+    <result column="updateUserName" property="updateusername"  />
+    <result column="updateDateTime" property="updatedatetime"  />
+    <result column="unit_uid" property="unit_uid"  />
+  </resultMap>
+  
+  <sql id="allColuns" >
+    bankAccount_ID, client_ID, accountTypeID, accountType, bankName, accountNumber, accountSum, 
+    remark, updateUserName, updateDateTime,unit_uid
+  </sql>
+  
+  
+  <!-- 查询银行开户信息分页列表 -->
+  <select id="selectCompanysCrm_bankAccountPageTables" parameterType="com.zjm.common.db.model.PageTable" resultMap="BaseResultMap">
+  	<![CDATA[
+  		select 
+		    bankAccount_ID, 
+		    client_ID, 
+		    accountTypeID, 
+		    accountType, 
+		    bankName, 
+		    accountNumber, 
+		    accountSum, 
+		    remark, 
+		    updateUserName, 
+		    updateDateTime,
+		    unit_uid
+	    from crm_bankaccount
+	    where  1=1  ${wheresql}   limit #{pageNumber},#{pageSize}
+  	]]>
+  </select>
+  
+  <!-- 查询所有的银行开户信息 分页列表 总记录数 -->
+   <select id="selectCompanyCrm_bankAccountPageTables_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+  	<![CDATA[
+  		select 
+		    count(bankAccount_ID)
+	    from crm_bankaccount
+	    where  1=1  ${wheresql}
+  	]]>
+  </select>
+  	
+  	<!-- 添加/插入一个银行开户信息信息 -->
+   <insert id="insertOneCompanyCrm_bankAccountInfo" parameterType="com.zjm.crm.db.model.Crm_bankAccount" >
+	    	<![CDATA[
+	    insert into 
+	          crm_bankaccount (
+			                bankAccount_ID, 
+			                client_ID, 
+			                accountTypeID, 
+						    accountType, 
+						    bankName, 
+						    accountNumber, 
+						    accountSum, 
+						    remark,
+						    updateUserName, 
+						    updateDateTime,
+						    unit_uid
+						    )
+	           values (
+					      #{bankaccountId},
+					      #{client_ID},
+					      #{accounttypeid}, 
+					      #{accounttype},
+					      #{bankname}, 
+					      #{accountnumber}, 
+					      #{accountsum},
+					      #{remark},
+					      #{updateusername}, 
+					      NOW(),
+					      unit_uid
+	           )
+	 ]]>
+  </insert>
+  
+  <!-- 更新 修改一个银行开户信息信息 -->
+  <update id="updateOneCompanyCrm_bankAccountInfo" parameterType="com.zjm.crm.db.model.Crm_bankAccount" >
+	    update crm_bankaccount
+	    <set >
+	      <if test="client_ID != null" >
+	        client_ID = #{client_ID},
+	      </if>
+	      <if test="accounttypeid != null" >
+	        accountTypeID = #{accounttypeid},
+	      </if>
+	      <if test="accounttype != null" >
+	        accountType = #{accounttype},
+	      </if>
+	      <if test="bankname != null" >
+	        bankName = #{bankname},
+	      </if>
+	      <if test="accountnumber != null" >
+	        accountNumber = #{accountnumber},
+	      </if>
+	      <if test="accountsum != null" >
+	        accountSum = #{accountsum},
+	      </if>
+	      <if test="remark != null" >
+	        remark = #{remark},
+	      </if>
+	      <if test="updateusername != null" >
+	        updateUserName = #{updateusername},
+	      </if>
+	      <if test="updatedatetime != null" >
+	        updateDateTime = #{updatedatetime},
+	      </if>
+	      <if test="unit_uid != null" >
+	        unit_uid = #{unit_uid},
+	      </if>
+	    </set>
+	    where bankAccount_ID = #{bankaccountId}
+  </update>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	    select 
+		    bankAccount_ID, 
+		    client_ID, 
+		    accountTypeID, 
+		    accountType, 
+		    bankName, 
+		    accountNumber, 
+		    accountSum, 
+		    remark, 
+		    updateUserName, 
+		    updateDateTime
+	    from crm_bankaccount
+	    where bankAccount_ID = #{bankaccountId}
+  </select>
+  
+  <!-- 删除 移除一个银行开户信息信息 根据银行开户id删除 -->
+  <delete id="deleteOneCompanyCrm_bankAccountInfo" parameterType="java.lang.String" >
+    delete from crm_bankaccount
+    where bankAccount_ID = #{bankaccountId}
+  </delete>
+	  
+  <!-- 删除 移除一个银行开户信息信息  根据客户id删除全部银行信息 -->
+  <delete id="deleteOneCompanyCrm_bankAccountByClient_ID" parameterType="java.lang.String" >
+    delete from crm_bankaccount
+    where client_ID = #{client_ID}
+  </delete>
+
+ <!-- 根据银行id查询一个银行开户信息  -->
+ <select id="selectOneCompanyCrm_bankAccountInfo" parameterType="com.zjm.crm.db.model.Crm_bankAccount" resultMap="BaseResultMap">
+ 	<![CDATA[
+ 		 select 
+		    bankAccount_ID, 
+		    client_ID, 
+		    accountTypeID, 
+		    accountType, 
+		    bankName, 
+		    accountNumber, 
+		    accountSum, 
+		    remark, 
+		    updateUserName, 
+		    updateDateTime
+	    from crm_bankaccount
+	    where bankAccount_ID = #{bankaccountId}
+ 	]]>
+ </select>
+	
+ <!-- 根据客户id 查询一个银行开户信息  -->
+ <select id="selectCompanyCrm_bankAccountByClient_ID" parameterType="com.zjm.crm.db.model.Crm_bankAccount" resultMap="BaseResultMap">
+ 	<![CDATA[
+ 		 select 
+		    bankAccount_ID, 
+		    client_ID, 
+		    accountTypeID, 
+		    accountType, 
+		    bankName, 
+		    accountNumber, 
+		    accountSum, 
+		    remark, 
+		    updateUserName, 
+		    updateDateTime
+	    from crm_bankaccount
+	    where client_ID = #{client_ID}
+ 	]]>
+ </select>
+ 
+  <!-- 更新全部信息 备用接口 -->
+  <update id="updateByPrimaryKey" parameterType="com.zjm.crm.db.model.Crm_bankAccount" >
+    update crm_bankaccount
+    set   client_ID = #{client_ID},
+	      accountTypeID = #{accounttypeid},
+	      accountType = #{accounttype},
+	      bankName = #{bankname},
+	      accountNumber = #{accountnumber},
+	      accountSum = #{accountsum},
+	      remark = #{remark},
+	      updateUserName = #{updateusername},
+	      updateDateTime = #{updatedatetime}
+    where bankAccount_ID = #{bankaccountId}
+  </update>
+  
+  
+</mapper>

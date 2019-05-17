@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_costDelayMapper">
+	
+	<!-- 缓收费用表信息 -->
+	<resultMap type="com.zjm.pro.db.model.Pro_costDelay" id="costDelayMap">
+		<result property="costDelay_ID" column="costDelay_ID" />
+		<result property="apply_ID" column="apply_ID" />
+		<result property="applyDetail_ID" column="applyDetail_ID" />
+		<result property="costStandard_ID" column="costStandard_ID" />
+		<result property="delayCostSum" column="delayCostSum" />
+		<result property="remark" column="remark" />
+		<result property="operationDepartID" column="operationDepartID" />
+		<result property="operationDepartName" column="operationDepartName" />
+		<result property="operationUserID" column="operationUserID" />
+		<result property="operationUserName" column="operationUserName" />
+		<result property="operationDate" column="operationDate" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="updateUserName" column="updateUserName" />
+		<result property="updateDateTime" column="updateDateTime" />
+		
+		<result property="busiTypeName" column="busiTypeName" />
+		<result property="bankName" column="bankName" />
+		<result property="agreeSum" column="agreeSum" />
+		<association property="costStandard" resultMap="com.zjm.sys.db.map.Sys_costStandardMapper.costStandardResultMap" />
+		
+	</resultMap>
+	
+	<!-- 查询缓收费用列表 -->
+	<select id="selectCostDelayListByWhereSql" parameterType="string" resultMap="costDelayMap">
+		SELECT 
+			costdelay.costdelay_ID,
+			costdelay.apply_ID,
+			costdelay.applyDetail_ID,
+			costdelay.costStandard_ID,
+			costdelay.delayCostSum,
+			costdelay.remark,
+			costdelay.operationDepartID,
+			costdelay.operationDepartName,
+			costdelay.operationUserID,
+			costdelay.operationUserName,
+			costdelay.operationDate,
+			costdelay.unit_uid,
+			costdelay.updateUserName,
+			costdelay.updateDateTime,
+			coststd.costName,
+			coststd.costTypeName,
+			coststd.costRate,
+			coststd.costUnit,
+			coststd.calculateRate,
+			coststd.culate,
+			applyDetail.busiTypeName,
+			applyDetail.bankName,
+			applyDetail.agreeSum
+		FROM pro_costdelay costdelay
+		LEFT JOIN sys_coststandard coststd ON costdelay.costStandard_ID = coststd.costStandard_ID
+		LEFT JOIN pro_applyDetail applyDetail ON costdelay.applyDetail_ID = applyDetail.applyDetail_ID
+		WHERE 1=1 ${value}
+		ORDER BY bankName,busiTypeName,costTypeName
+	</select>
+	
+	<!-- 查询一条缓收费用信息 -->
+	<select id="selectOneCostDelay" parameterType="com.zjm.pro.db.model.Pro_costDelay" resultMap="costDelayMap">
+		SELECT 
+			costdelay.costDelay_ID,
+			costdelay.apply_ID,
+			costdelay.applyDetail_ID,
+			costdelay.costStandard_ID,
+			costdelay.delayCostSum,
+			costdelay.remark,
+			costdelay.operationDepartID,
+			costdelay.operationDepartName,
+			costdelay.operationUserID,
+			costdelay.operationUserName,
+			costdelay.operationDate,
+			costdelay.unit_uid,
+			costdelay.updateUserName,
+			costdelay.updateDateTime,
+			coststd.costName,
+			coststd.costTypeName,
+			coststd.costRate,
+			coststd.costUnit,
+			coststd.calculateRate,
+			coststd.culate,
+			applyDetail.busiTypeName,
+			applyDetail.bankName,
+			applyDetail.agreeSum
+		FROM pro_costdelay costdelay
+		LEFT JOIN sys_coststandard coststd ON costdelay.costStandard_ID = coststd.costStandard_ID
+		LEFT JOIN pro_applyDetail applyDetail ON costdelay.applyDetail_ID = applyDetail.applyDetail_ID
+		WHERE costdelay.costDelay_ID = #{costDelay_ID}
+		LIMIT 1
+	</select>
+	
+	<!-- 添加一条缓收费用信息 -->
+	<insert id="insertOneCostDelay" parameterType="com.zjm.pro.db.model.Pro_costDelay">
+		INSERT INTO pro_costDelay(
+			costDelay_ID,
+			apply_ID,
+			applyDetail_ID,
+			costStandard_ID,
+			delayCostSum,
+			remark,
+			operationDepartID,
+			operationDepartName,
+			operationUserID,
+			operationUserName,
+			operationDate,
+			unit_uid,
+			updateUserName,
+			updateDateTime
+		) VALUES(
+			#{costDelay_ID},
+			#{apply_ID},
+			#{applyDetail_ID},
+			#{costStandard_ID},
+			#{delayCostSum},
+			#{remark},
+			#{operationDepartID},
+			#{operationDepartName},
+			#{operationUserID},
+			#{operationUserName},
+			#{operationDate},
+			#{unit_uid},
+			#{updateUserName},
+			NOW()
+		)
+	</insert>
+	
+	<!-- 删除一条缓收费用信息  -->
+	<delete id="deleteOneCostDelay" parameterType="com.zjm.pro.db.model.Pro_costDelay">
+		DELETE FROM pro_costDelay
+		WHERE costDelay_ID = #{costDelay_ID}
+		LIMIT 1
+	</delete>
+	
+</mapper>

@@ -1,0 +1,1173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_projectMapper">
+	<!-- 保后（贷后）产品放款明细表 -->
+	 <resultMap id="ProProjectMap" type="com.zjm.pro.db.model.Pro_project" >
+        <result column="project_ID" property="project_ID"/>
+		<result column="apply_ID" property="apply_ID"/>
+		<result column="applyDetail_ID" property="applyDetail_ID"/>
+		<result column="projectCode" property="projectCode"/>
+		<result column="projectName" property="projectName"/>
+		<result column="busiClass" property="busiClass"/>
+		<result column="busiTypeID" property="busiTypeID"/>
+		<result column="busiTypeName" property="busiTypeName"/>
+		<result column="bankID" property="bankID"/>
+		<result column="bankName" property="bankName"/>
+		<result column="subBankName" property="subBankName"/>
+		<result column="loadSum" property="loadSum"/>
+		<result column="guarantyScale" property="guarantyScale"/>
+		<result column="guarantyScope" property="guarantyScope"/>
+		<result column="guarantyDutySum" property="guarantyDutySum"/>
+		<result column="guarantyDutyResSum" property="guarantyDutyResSum"/>
+		<result column="guarantySum" property="guarantySum"/>
+		<result column="periodMonth" property="periodMonth"/>
+		<result column="periodDay" property="periodDay"/>
+		<result column="periodMonthDay" property="periodMonthDay"/>
+		<result column="loadBeginDate" property="loadBeginDate"/>
+		<result column="loadEndDate" property="loadEndDate"/>
+		<result column="billBeginDate" property="billBeginDate"/>
+		<result column="billEndDate" property="billEndDate"/>
+		<result column="delayBeginDate" property="delayBeginDate"/>
+		<result column="delayEndDate" property="delayEndDate"/>
+		<result column="loadCode" property="loadCode"/>
+		<result column="isDelay" property="isDelay"/>
+		<result column="delaySum" property="delaySum"/>
+		<result column="isOver" property="isOver"/>
+		<result column="overDate" property="overDate"/>
+		<result column="overFactDate" property="overFactDate"/>
+		<result column="overSum" property="overSum"/>
+		<result column="overDesc" property="overDesc"/>
+		<result column="normalFreeSum" property="normalFreeSum"/>
+		<result column="normalCapitalSum" property="normalCapitalSum"/>
+		<result column="normalInterestSum" property="normalInterestSum"/>
+		<result column="replaceFreeSum" property="replaceFreeSum"/>
+		<result column="replaceCapitalSum" property="replaceCapitalSum"/>
+		<result column="replaceInterestSum" property="replaceInterestSum"/>
+		<result column="replaceOtherSum" property="replaceOtherSum"/>
+		<result column="selfReplaceSum" property="selfReplaceSum"/>
+		<result column="dangerReplaceSum" property="dangerReplaceSum"/>
+		<result column="returnSum" property="returnSum"/>
+		<result column="returnCapitalSum" property="returnCapitalSum"/>
+		<result column="returnInterestSum" property="returnInterestSum"/>
+		<result column="returnOtherSum" property="returnOtherSum"/>
+		<result column="badSum" property="badSum"/>
+		<result column="badDate" property="badDate"/>
+		<result column="badUserID" property="badUserID"/>
+		<result column="badUserName" property="badUserName"/>
+		<result column="isFree" property="isFree"/>
+		<result column="freeTypeID" property="freeTypeID"/>
+		<result column="freeTypeName" property="freeTypeName"/>
+		<result column="freeMethodID" property="freeMethodID"/>
+		<result column="freeMethodName" property="freeMethodName"/>
+		<result column="freeDate" property="freeDate"/>
+		<!-- <result column="ristLevelID" property="ristLevelID"/>
+		<result column="ristLevelName" property="ristLevelName"/> -->
+		<result column="unit_uid" property="unit_uid"/>
+		<result column="unit_uidName" property="unit_uidName"/>
+		<result column="updateUserName" property="updateUserName"/>
+		<result column="updateDateTime" property="updateDateTime"/>
+		<result column="amanID" property="amanID"/>
+		<result column="amanName" property="amanName"/>
+		<result column="bmanID" property="bmanID"/>
+		<result column="bmanName" property="bmanName"/>
+		<result column="reviewManID" property="reviewManID"/>
+		<result column="reviewManName" property="reviewManName"/>
+		<result column="guarantyOrgName" property="guarantyOrgName"/>
+		<result column="guarantyOrgID" property="guarantyOrgID"/>
+		<result column="hostAreaName" property="hostAreaName"/>
+		<result column="hostAreaID" property="hostAreaID"/>
+		<result column="oprationCompanyName" property="oprationCompanyName"/>
+		<result column="oprationCompanyID" property="oprationCompanyID"/>
+		<result column="attributionName" property="attributionName"/>
+		<result column="attributionID" property="attributionID"/>
+		<result column="bankRate" property="bankRate"/>
+		<result column="guarantyRate" property="guarantyRate"/>
+		<result column="reviewRate" property="reviewRate"/>
+		<result column="serviceRate" property="serviceRate"/>
+		<result column="punishRate" property="punishRate"/>
+		<result column="fundSource" property="fundSource"/>
+		<result column="jcontractCode" property="jcontractCode"/><!-- applyDetail表冗余字段 -->
+		<result column="bcontractCode" property="bcontractCode"/><!-- applyDetail表冗余字段 -->
+		<result column="dcontractCode" property="dcontractCode"/><!-- applyDetail表冗余字段 -->
+		<result column="loanPlan_ID" property="loanPlan_ID"/>
+		<result column="finishUserID" property="finishUserID"/>
+		<result column="finishUserName" property="finishUserName"/>
+		<result column="finishTypeID" property="finishTypeID"/>
+		<result column="finishTypeName" property="finishTypeName"/>
+		<result column="projAppraisal" property="projAppraisal"/>
+		<result column="finishDate" property="finishDate"/>
+		<result column="reportDate" property="reportDate"/>
+		<result column="loanPlan_ID" property="loanPlan_ID"/>
+		<result column="meetingDetail_ID" property="meetingDetail_ID"/>
+		<result column="bzScale" property="bzScale"/>
+		<result column="remark" property="remark"/>
+		<result column="fundID" property="fundID"/>
+		<result column="fundChinese" property="fundChinese"/>
+		<result column="productInstance_ID" property="productInstance_ID"/>
+		
+		<result column="beforeAManID" property="beforeAManID"/>
+		<result column="beforeAManName" property="beforeAManName"/>
+		<result column="beforeBManID" property="beforeBManID"/>
+		<result column="beforeBManName" property="beforeBManName"/>
+		<result column="changeDate" property="changeDate"/>
+		<result column="changeManID" property="changeManID"/>
+		<result column="changeManName" property="changeManName"/>
+		<result column="guarantorsName" property="guarantorsName"/>
+		<result column="isNewClient" property="isNewClient"/>
+		<result column="payDate" property="payDate"/>
+		<result column="limitType" property="limitType"/>
+
+		<result column="oldPeriodMonth" property="oldPeriodMonth"/>
+		<result column="oldPeriodDay" property="oldPeriodDay"/>
+		<result column="oldPeriodMonthDay" property="oldPeriodMonthDay"/>
+		<result column="isCreditorMark" property="isCreditorMark"/>
+		<result column="replaceOverDate" property="replaceOverDate"/>
+		<result column="isUrgeLetter" property="isUrgeLetter"/>
+		<result column="isCreditorAll" property="isCreditorAll"/>
+		<result column="isSensitiveCreditor" property="isSensitiveCreditor"/>
+		<result column="sensitiveCreditorNumber" property="sensitiveCreditorNumber"/>
+		
+		<result column="interest" property="interest"/>
+		<result column="interestSum" property="interestSum"/>
+  </resultMap>
+ 
+  	<resultMap type="com.zjm.pro.db.model.Pro_relationProjectVo" id="relationProjectMap">
+  		<result column="relationMain_ID" property="relationMain_ID"/>
+  		<result column="relationMainName" property="relationMainName"/>
+  		<result column="oprationCompanyName" property="oprationCompanyName"/>
+  		<result column="guarantyOrgName" property="guarantyOrgName"/>
+  		<result column="hostAreaName" property="hostAreaName"/>
+  		<result column="attributionName" property="attributionName"/>
+  		<result column="projectCode" property="projectCode"/>
+  		<result column="projectName" property="projectName"/>
+  		<result column="busiTypeName" property="busiTypeName"/>
+  		<result column="bankName" property="bankName"/>
+  		<result column="loadSum" property="loadSum"/>
+  		<result column="guarantySum" property="guarantySum"/>
+  		<result column="periodMonthDay" property="periodMonthDay"/>
+  		<result column="delayBeginDate" property="delayBeginDate"/>
+  		<result column="delayEndDate" property="delayEndDate"/>
+  		<result column="amanName" property="amanName"/>
+  		<result column="bmanName" property="bmanName"/>
+  		<result column="project_ID" property="project_ID"/>
+  		<result column="apply_ID" property="apply_ID"/>
+  		<result column="client_ID" property="client_ID"/>
+  	</resultMap>
+
+	
+	<!-- 查询所有项目的信息-查询总数 -->
+	<select id="selectMultiProjectPageTable_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		 <![CDATA[
+		 	SELECT COUNT(relationMain_ID) FROM crm_relationmain WHERE 1=1 ${wheresql}
+		 ]]> 
+	</select>
+	
+	
+	<!-- 根据查询条件查询一个保后（贷后）产品放款明细表信息-->
+	<select id="selectOneProjectWhereSql" parameterType="java.lang.String"  resultMap="ProProjectMap">
+	<![CDATA[
+		SELECT 
+		        project_ID,     
+		        apply_ID,     
+		        applyDetail_ID,
+		        bzScale,     
+		        projectCode,     
+		        projectName,
+		        busiTypeID,     
+		        busiTypeName,     
+		        bankID,   
+		        bankName,     
+		        subBankName,     
+		        loadSum,     
+		        guarantyScale,     
+		        guarantyScope,    
+		       guarantyDutySum,     
+		       guarantySum,     
+		       periodMonth,    
+		       periodDay,     
+		       periodMonthDay,     
+		       loadBeginDate,     
+		       loadEndDate,     
+		       billBeginDate,     
+		       billEndDate, 
+		       delayBeginDate,
+			   delayEndDate,    
+		       loadCode,     
+		       isBeforeEnd,     
+		       beforeEndDate,     
+		       beforeEndSum,     
+		       beforeEndDesc,     
+		       isOver,     
+		       overDate,     
+		       overFactDate,     
+		       overSum,     
+		       overDesc,     
+		       isDelay,     
+		       delaySum,      
+		       normalFreeSum,     
+		       normalCapitalSum,     
+		       normalInterestSum,     
+		       replaceFreeSum,   
+		       replaceCapitalSum,     
+		       replaceInterestSum,     
+		       replaceOtherSum,    
+		       selfReplaceSum,     
+		       dangerReplaceSum,     
+		       returnSum, 
+               returnCapitalSum,     
+               returnInterestSum,     
+               returnOtherSum,     
+               busiClass,     
+               badSum,     
+               badDate,     
+               badUserID,   
+               badUserName,     
+               isFree,     
+               freeDate,            
+               amanID,     
+               amanName,     
+               bmanID,     
+               bmanName,
+               guarantyDutyResSum, 
+               reviewManID,     
+               reviewManName,     
+               unit_uid,    
+               unit_uidName,     
+               updateUserName,
+               loanPlan_ID,     
+               updateDateTime,     
+               updateDateTime,
+               bankRate,
+               guarantyRate,
+               reviewRate,
+               serviceRate,
+               punishRate,
+               fundSource,
+               finishUserID,
+               finishUserName,
+               finishTypeID,
+               finishTypeName,
+               projAppraisal,
+               finishDate,
+               reportDate,
+               updateUserName,
+               loanPlan_ID,
+               meetingDetail_ID,
+               remark,     
+               updateDateTime,
+               beforeAManID,
+			   beforeAManName,
+			   beforeBManID,
+			   beforeBManName,
+			   changeDate,
+			   changeManID, 
+			   changeManName,
+			   isCreditorMark,
+			   replaceOverDate,
+			   isUrgeLetter,
+			   isCreditorAll,
+			   isSensitiveCreditor,
+  			   sensitiveCreditorNumber,
+  			   interest,
+  			   interestSum
+	    FROM 
+	         pro_project
+		WHERE 1=1 ${value}
+		]]> 				 
+	</select>
+	
+	<!-- 更新一个保后（贷后）产品放款明细表信息 -->	
+	<update id="updateOneProjectInfo" parameterType="com.zjm.pro.db.model.Pro_project">
+		UPDATE 
+		     pro_project
+		
+		<set >
+	      <if test="apply_ID != null" >apply_ID= #{apply_ID},</if>
+		  <if test="applyDetail_ID != null">applyDetail_ID= #{applyDetail_ID},</if>
+		   <if test="projectCode != null" >projectCode= #{projectCode},</if>
+		   <if test="projectName != null" >projectName= #{projectName},</if>
+			<if test="busiTypeID != null" >busiTypeID= #{busiTypeID},</if>
+			<if test="busiTypeName != null" >busiTypeName= #{busiTypeName},</if>
+	        <if test="bankID != null" >bankID= #{bankID},</if>
+			<if test="bankName != null" >bankName= #{bankName},</if>
+			<if test="subBankName != null" >subBankName= #{subBankName},</if>
+			<if test="loadSum != null" >loadSum= #{loadSum},</if>
+			<if test="guarantyScale != null" >guarantyScale= #{guarantyScale},</if>
+			<if test="guarantyScope != null" >guarantyScope= #{guarantyScope},</if>
+			<if test="guarantyDutySum != null" >guarantyDutySum= #{guarantyDutySum},</if>
+			<if test="guarantySum != null" >guarantySum= #{guarantySum},</if>
+			<if test="periodMonth != null" >periodMonth= #{periodMonth},</if>
+			<if test="periodDay != null" >periodDay= #{periodDay},</if>
+			<if test="periodMonthDay != null" >periodMonthDay= #{periodMonthDay},</if>
+			<if test="loadBeginDate != null" >loadBeginDate= #{loadBeginDate},</if>
+			<if test="loadEndDate != null" >loadEndDate= #{loadEndDate},</if>
+			<if test="billBeginDate != null" >billBeginDate= #{billBeginDate},</if>
+			<if test="billEndDate != null" >billEndDate= #{billEndDate},</if>
+			<if test="loadCode != null" >loadCode= #{loadCode},</if>
+			<if test="guarantyDutyResSum != null" >guarantyDutyResSum= #{guarantyDutyResSum},</if>
+			<!-- <if test="checkCycle != null" >checkCycle= #{checkCycle},</if> -->
+			<if test="isBeforeEnd != null" >isBeforeEnd= #{isBeforeEnd},</if>
+			<if test="beforeEndDate != null" >beforeEndDate= #{beforeEndDate},</if>
+			<if test="beforeEndSum != null" >beforeEndSum= #{beforeEndSum},</if>
+			<if test="beforeEndDesc != null" >beforeEndDesc= #{beforeEndDesc},</if>
+			<if test="overDate != null" >isOver= #{isOver},</if>
+			<if test="overDate != null" >overDate= #{overDate},</if>
+			<if test="overFactDate != null" >overFactDate= #{overFactDate},</if>
+			<if test="overSum != null" >overSum= #{overSum},</if>
+			<!-- <if test="overplusSum != null" >overplusSum= #{overplusSum},</if> -->
+			<if test="overDesc != null" >overDesc= #{overDesc},</if>
+		    <if test="isDelay != null" >isDelay= #{isDelay},</if>
+			<if test="delaySum != null" >delaySum= #{delaySum},</if>
+			<!--<if test="delayMonth != null" >delayMonth= #{delayMonth},</if>
+			<if test="delayDay != null" >delayDay= #{delayDay},</if>
+			<if test="delayMonthDay != null" >delayMonthDay= #{delayMonthDay},</if> -->
+			<if test="delayBeginDate != null" >delayBeginDate= #{delayBeginDate},</if>
+			<if test="delayEndDate != null" >delayEndDate= #{delayEndDate},</if>
+		    <!-- <if test="delayRate != null" >delayRate= #{delayRate},</if>
+			<if test="delayServiceRate != null" >delayServiceRate= #{delayServiceRate},</if> -->
+			<if test="normalFreeSum != null" >normalFreeSum= #{normalFreeSum},</if>
+			<if test="normalCapitalSum != null" >normalCapitalSum= #{normalCapitalSum},</if>
+			<if test="normalInterestSum != null" >normalInterestSum= #{normalInterestSum},</if>
+			<if test="replaceFreeSum != null" >replaceFreeSum= #{replaceFreeSum},</if>
+			<if test="replaceCapitalSum != null" >replaceCapitalSum= #{replaceCapitalSum},</if>
+			<if test="replaceInterestSum != null" >replaceInterestSum= #{replaceInterestSum},</if>
+			<if test="replaceOtherSum != null" >replaceOtherSum= #{replaceOtherSum},</if>
+			<if test="selfReplaceSum != null" >selfReplaceSum= #{selfReplaceSum},</if>
+			<if test="dangerReplaceSum != null" >dangerReplaceSum= #{dangerReplaceSum},</if>
+			<if test="returnSum != null" >returnSum= #{returnSum},</if>
+			<if test="returnCapitalSum != null" >returnCapitalSum= #{returnCapitalSum},</if>
+			<if test="returnInterestSum != null" >returnInterestSum= #{returnInterestSum},</if>
+			<if test="returnOtherSum != null" >returnOtherSum= #{returnOtherSum},</if>
+			<if test="busiClass != null" >busiClass= #{busiClass},</if>
+			<if test="badSum != null" >badSum= #{badSum},</if>
+			<if test="badDate != null" >badDate= #{badDate},</if>
+			<if test="badUserID != null" >badUserID= #{badUserID},</if>
+			<if test="badUserName != null" >badUserName= #{badUserName},</if>
+			<if test="isFree != null" >isFree= #{isFree},</if>
+			<if test="freeDate != null" >freeDate= #{freeDate},</if>
+			<!-- <if test="ristLevelID != null" >ristLevelID= #{ristLevelID},</if> -->
+			<!-- <if test="ristLevelName != null" >ristLevelName= #{ristLevelName},</if> -->
+			<if test="amanID != null" >amanID= #{amanID},</if>
+			<if test="amanName != null" >amanName= #{amanName},</if>
+			<if test="bmanID != null" >bmanID= #{bmanID},</if>
+			<if test="bmanName != null" >bmanName= #{bmanName},</if>
+			<if test="reviewManID != null" >reviewManID= #{reviewManID},</if>
+			<if test="reviewManName != null" >reviewManName= #{reviewManName},</if>
+			<if test="unit_uid != null" >unit_uid= #{unit_uid},</if>
+			<if test="unit_uidName != null" >unit_uidName= #{unit_uidName},</if>
+			<if test="updateUserName != null" >updateUserName= #{updateUserName},</if>
+			<if test="loanPlan_ID != null" >loanPlan_ID= #{loanPlan_ID},</if>
+			  <if test="bankRate != null" >bankRate= #{bankRate},</if>
+			  <if test="guarantyRate != null" >guarantyRate= #{guarantyRate},</if>
+			  <if test="reviewRate != null" >reviewRate= #{reviewRate},</if>
+			  <if test="serviceRate != null" >serviceRate= #{serviceRate},</if>
+			  <if test="punishRate != null" >punishRate= #{punishRate},</if>
+			  <if test="fundSource != null" >fundSource= #{fundSource},</if>
+			  <if test="finishUserID != null" >finishUserID= #{finishUserID},</if>
+			  <if test="finishUserName != null" >finishUserName= #{finishUserName},</if>
+			  <if test="finishTypeID != null" >finishTypeID= #{finishTypeID},</if>
+			  <if test="finishTypeName != null" >finishTypeName= #{finishTypeName},</if>
+			  <if test="projAppraisal != null" >projAppraisal= #{projAppraisal},</if>
+			  <if test="finishDate != null" >finishDate= #{finishDate},</if>
+			  <if test="reportDate != null" >reportDate= #{reportDate},</if>
+			<if test="meetingDetail_ID != null" >meetingDetail_ID= #{meetingDetail_ID},</if>
+			<if test="bzScale != null" >bzScale= #{bzScale},</if>
+			<if test="remark != null" >remark= #{remark},</if>
+			<if test="beforeAManID != null" >beforeAManID= #{beforeAManID},</if>
+			<if test="beforeAManName != null" >beforeAManName= #{beforeAManName},</if>
+			<if test="beforeBManID != null" >beforeBManID= #{beforeBManID},</if>
+			<if test="beforeBManName != null" >beforeBManName= #{beforeBManName},</if>
+			<if test="changeDate != null" >changeDate= #{changeDate},</if>
+			<if test="changeManID != null" >changeManID= #{changeManID},</if>
+			<if test="changeManName != null" >changeManName= #{changeManName},</if>
+			<if test="guarantorsName != null and guarantorsName != '' ">guarantorsName = #{guarantorsName},</if>
+			<if test="isCreditorMark != null">isCreditorMark = #{isCreditorMark},</if>
+			<if test="replaceOverDate != null">replaceOverDate = #{replaceOverDate},</if>
+			<if test="isUrgeLetter != null">isUrgeLetter = #{isUrgeLetter},</if>
+			<if test="isCreditorAll != null">isCreditorAll = #{isCreditorAll},</if>
+			<if test="isSensitiveCreditor != null">isSensitiveCreditor = #{isSensitiveCreditor},</if>
+			<if test="sensitiveCreditorNumber != null">sensitiveCreditorNumber = #{sensitiveCreditorNumber},</if>  
+			<if test="interest != null">interest = #{interest},</if>  
+			<if test="interestSum != null">interestSum = #{interestSum},</if>  
+			  updateDateTime = NOW()		
+			</set>
+		WHERE project_ID=#{project_ID} 
+	</update>
+	
+	
+	<select id="selectProjectPageTables" parameterType="com.zjm.common.db.model.PageTable" resultMap="ProProjectMap">
+		SELECT 
+		        pp.project_ID,
+				pp.apply_ID,
+				pp.applyDetail_ID,
+				pp.bzScale,
+				pp.projectCode,
+				pp.projectName,
+				pp.busiTypeID,
+				pp.busiTypeName,
+				pp.bankID,
+				pp.bankName,
+				pp.subBankName,
+				pp.loadSum,
+				pp.guarantyScale,
+				pp.guarantyScope,
+				pp.guarantyDutySum,
+				pp.guarantySum, 
+				pp.periodMonth,
+				pp.periodDay,
+				pp.periodMonthDay,
+				pp.loadBeginDate,
+				pp.loadEndDate,
+				pp.billBeginDate,
+				pp.billEndDate,
+		        pp.delayBeginDate,
+			    pp.delayEndDate,  
+				pp.loadCode,
+				pp.interest,
+  			   	pp.interestSum,
+				<!-- checkCycle, -->
+				pp.isBeforeEnd,
+				pp.beforeEndDate,
+				pp.beforeEndSum,
+				pp.beforeEndDesc,
+				pp.isOver,
+				pp.overDate,
+				pp.overFactDate,
+				pp.overSum,
+				<!-- overplusSum, -->
+				pp.overDesc,
+				pp.isDelay,
+				pp.delaySum,
+				<!-- delayMonth,
+				delayDay,
+				delayMonthDay,
+				delayEndDate,
+				delayRate,
+				delayServiceRate, -->
+				pp.normalFreeSum,
+				pp.normalCapitalSum,
+				pp.normalInterestSum,
+				pp.replaceFreeSum,
+				pp.replaceCapitalSum,
+				pp.replaceInterestSum,
+				pp.replaceOtherSum,
+				pp.selfReplaceSum,
+				pp.dangerReplaceSum,
+				pp.returnSum,
+				pp.returnCapitalSum,
+				pp.returnInterestSum,
+				pp.returnOtherSum,
+				pp.busiClass,
+				pp.badSum,
+				pp.badDate,
+				pp.badUserID,
+				pp.badUserName,
+				pp.isFree,
+				pp.freeDate,
+				<!-- ristLevelID,
+				ristLevelName, -->
+				pp.amanID,
+				pp.amanName,
+				pp.bmanID,
+				pp.bmanName,
+				pp.reviewManID,
+				pp.reviewManName,
+				pp.unit_uid,
+				pp.unit_uidName,
+				pp.updateUserName,
+				pp.updateDateTime,
+				pp.remark,
+				cd.dicTypeName as guarantyOrgName,
+				guarantyOrgID,
+				pa.hostAreaName,
+				pa.hostAreaID,
+				pa.oprationCompanyName,
+				pa.oprationCompanyID,
+				pa.attributionName,
+				pa.attributionID,
+				pp.bankRate,
+                pp.guarantyRate,
+                pp.reviewRate,
+                pp.serviceRate,
+                pp.punishRate,
+                pp.fundSource,
+                pa.fundName,
+                pa.fundChinese,
+                pp.finishUserID,
+                pp.finishUserName,
+                pp.finishTypeID,
+                pp.finishTypeName,
+                pp.projAppraisal,
+                pp.finishDate,
+                pp.reportDate,
+                pa.fundID,
+                pa.fundChinese,
+                pa.productInstance_ID,
+                pp.isNewClient,
+                pad.dcontractCode,
+                pad.jcontractCode,
+                pad.bcontractCode,
+                pp.isCreditorMark,
+                pp.replaceOverDate,
+                pp.isUrgeLetter,
+                pp.isCreditorAll,
+                pp.isSensitiveCreditor,
+                pp.sensitiveCreditorNumber,
+			    (CASE 
+			     WHEN TIMESTAMPDIFF(MONTH,pp.loadBeginDate ,pp.delayEndDate )/12 &lt;0.5 then 1
+			     WHEN TIMESTAMPDIFF(MONTH,pp.loadBeginDate ,pp.delayEndDate )/12 &lt;1 and TIMESTAMPDIFF(MONTH,pp.loadBeginDate ,pp.delayEndDate )/12 &gt;= 0.5  then 2
+			     WHEN TIMESTAMPDIFF(MONTH,pp.loadBeginDate ,pp.delayEndDate )/12 &lt;3 and TIMESTAMPDIFF(MONTH,pp.loadBeginDate ,pp.delayEndDate )/12 &gt;= 1 then 3
+			     WHEN TIMESTAMPDIFF(MONTH,pp.loadBeginDate ,pp.delayEndDate )/12 &lt;5 and TIMESTAMPDIFF(MONTH,pp.loadBeginDate ,pp.delayEndDate )/12 &gt;= 3 then 4
+			     WHEN TIMESTAMPDIFF(MONTH,pp.loadBeginDate ,pp.delayEndDate )/12 &gt;=5  then 5
+			     END) as limitType
+	    FROM 
+	         pro_project pp 
+	    left join pro_apply pa  on pa.apply_ID = PP.apply_ID
+	    left join c_dictype cd  on pa.guarantyOrgID = cd.dicTypeId
+	    left join pro_applyDetail pad on pa.apply_ID = pad.apply_ID
+		WHERE 1=1 ${wheresql} 
+		ORDER BY ${sortName} ${sortOrder}
+		limit #{pageNumber},#{pageSize}
+	</select>
+	
+	<select id="selectProjectPageTables_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		select count(pp.project_ID) 
+		from pro_project pp
+		left join pro_apply pa  on pa.apply_ID = PP.apply_ID
+		left join c_dictype cd  on pa.guarantyOrgID = cd.dicTypeId
+		WHERE 1=1 ${wheresql} 
+	</select>
+	
+	<select id="selectCheckProjectPageTables" parameterType="com.zjm.common.db.model.PageTable" resultMap="ProProjectMap">
+		SELECT 
+		        project.project_ID,
+				project.apply_ID,
+				project.applyDetail_ID,
+				project.bzScale,
+				project.remark,
+				projectCode,
+				project.projectName,
+				busiTypeID,
+				busiTypeName,
+				bankID,
+				bankName,
+				subBankName,
+				loadSum,
+				guarantyScale,
+				guarantyScope,
+				guarantyDutySum,
+				guarantySum,
+				periodMonth,
+				periodDay,
+				periodMonthDay,
+				loadBeginDate,
+				loadEndDate,
+				billBeginDate,
+				billEndDate,
+		       delayBeginDate,
+			   delayEndDate,  
+				loadCode,
+				<!-- checkCycle, -->
+				isBeforeEnd,
+				beforeEndDate,
+				beforeEndSum,
+				beforeEndDesc,
+				isOver,
+				overDate,
+				overFactDate,
+				overSum,
+				<!-- overplusSum, -->
+				overDesc,
+				isDelay,
+				delaySum,
+				<!-- delayMonth,
+				delayDay,
+				delayMonthDay,
+				delayEndDate,
+				delayRate,
+				delayServiceRate, -->
+				normalFreeSum,
+				normalCapitalSum,
+				normalInterestSum,
+				replaceFreeSum,
+				replaceCapitalSum,
+				replaceInterestSum,
+				replaceOtherSum,
+				selfReplaceSum,
+				dangerReplaceSum,
+				returnSum,
+				returnCapitalSum,
+				returnInterestSum,
+				returnOtherSum,
+				busiClass,
+				badSum,
+				badDate,
+				badUserID,
+				badUserName,
+				isFree,
+				freeDate,
+				<!-- ristLevelID,
+				ristLevelName, -->
+				project.amanID,
+				project.amanName,
+				project.bmanID,
+				project.bmanName,
+				project.reviewManID,
+				project.reviewManName,
+				project.unit_uid,
+				project.unit_uidName,
+				project.updateUserName,
+				project.updateDateTime,
+				bankRate,
+                guarantyRate,
+                reviewRate,
+                serviceRate,
+                punishRate,
+                project.fundSource,
+                finishUserID,
+                finishUserName,
+                finishTypeID,
+                finishTypeName,
+                projAppraisal,
+                finishDate,
+                reportDate,
+                pa.productInstance_ID,
+                project.isCreditorMark,
+                project.replaceOverDate,
+                project.isUrgeLetter,
+                project.isCreditorAll,
+                project.isSensitiveCreditor,
+                project.sensitiveCreditorNumber,
+                project.interest,
+  			   	project.interestSum
+	    FROM 
+	         pro_project project
+	    LEFT JOIN pro_checkplan checkplan ON project.apply_ID = checkplan.apply_ID
+	    left join pro_apply pa on pa.apply_ID = project.apply_ID
+		WHERE 1=1 ${wheresql} 
+		limit #{pageNumber},#{pageSize}
+	</select>
+	
+	<select id="selectCheckProjectPageTables_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		select count(project.project_ID) 
+		from pro_project project
+		 LEFT JOIN pro_checkplan checkplan ON project.apply_ID = checkplan.apply_ID
+		WHERE 1=1 ${wheresql} 
+	</select>
+	
+	<!-- 添加一条实际放款信息 -->
+	<insert id="insertOneProjectInfo" parameterType="com.zjm.pro.db.model.Pro_project">
+		INSERT INTO pro_project	(
+			project_ID,
+			apply_ID,
+			applyDetail_ID,
+			projectCode,
+			projectName,
+			busiTypeID,
+			busiTypeName,
+			bankID,
+			bankName,
+			subBankName,
+			loadSum,
+			guarantyScale,
+			guarantyScope,
+			guarantyDutySum,
+			guarantySum,
+			periodMonth,
+			periodDay,
+			periodMonthDay,
+			loadBeginDate,
+			loadEndDate,
+			billBeginDate,
+			billEndDate,
+			delayBeginDate,
+			delayEndDate,
+			loadCode,
+			<!-- checkCycle, -->
+			isBeforeEnd,
+			beforeEndDate,
+			beforeEndSum,
+			beforeEndDesc,
+			isOver,
+			overDate,
+			overFactDate,
+			overSum,
+			<!-- overplusSum, -->
+			overDesc,
+			isDelay,
+			delaySum,
+			<!-- delayMonth,
+			delayDay,
+			delayMonthDay,
+			delayEndDate,
+			delayRate,
+			delayServiceRate, -->
+			normalFreeSum,
+			normalCapitalSum,
+			normalInterestSum,
+			replaceFreeSum,
+			replaceCapitalSum,
+			replaceInterestSum,
+			replaceOtherSum,
+			selfReplaceSum,
+			dangerReplaceSum,
+			returnSum,
+			returnCapitalSum,
+			returnInterestSum,
+			returnOtherSum,
+			busiClass,
+			badSum,
+			badDate,
+			isFree,
+			freeDate,
+			<!-- ristLevelID,
+			ristLevelName, -->
+			amanID,
+			amanName,
+			bmanID,
+			bmanName,
+			reviewManID,
+			reviewManName,
+			unit_uid,
+			unit_uidName,
+			updateUserName,
+			loanPlan_ID,
+			guarantyDutyResSum,
+			updateDateTime,
+			bankRate,
+            guarantyRate,
+            reviewRate,
+            serviceRate,
+            punishRate,
+            fundSource,
+            finishUserID,
+            finishUserName,
+            finishTypeID,
+            finishTypeName,
+            projAppraisal,
+            finishDate,
+            reportDate,
+			meetingDetail_ID,
+			bzScale,
+			remark,
+			beforeAManID,
+			beforeAManName,
+			beforeBManID,
+			beforeBManName, 
+			changeDate,
+			changeManID ,
+			changeManName,
+			guarantorsName,
+			oldPeriodMonth,
+			oldPeriodDay,
+			oldPeriodMonthDay,
+			isCreditorMark,
+			replaceOverDate,
+			isUrgeLetter,
+			isCreditorAll,
+			isSensitiveCreditor,
+            sensitiveCreditorNumber,
+            interest,
+  			interestSum
+		) VALUES(
+			#{project_ID},
+			#{apply_ID},
+			#{applyDetail_ID},
+			#{projectCode},
+			#{projectName},
+			#{busiTypeID},
+			#{busiTypeName},
+			#{bankID},
+			#{bankName},
+			#{subBankName},
+			#{loadSum},
+			#{guarantyScale},
+			#{guarantyScope},
+			#{guarantyDutySum},
+			#{guarantySum},
+			#{periodMonth},
+			#{periodDay},
+			#{periodMonthDay},
+			#{loadBeginDate},
+			#{loadEndDate},
+			#{billBeginDate},
+			#{billEndDate},
+			#{delayBeginDate},
+			#{delayEndDate},
+			#{loadCode},
+			<!-- #{checkCycle}, -->
+			#{isBeforeEnd},
+			#{beforeEndDate},
+			#{beforeEndSum},
+			#{beforeEndDesc},
+			#{isOver},
+			#{overDate},
+			#{overFactDate},
+			#{overSum},
+			<!-- #{overplusSum}, -->
+			#{overDesc},
+			#{isDelay},
+			#{delaySum},
+			<!-- #{delayMonth},
+			#{delayDay},
+			#{delayMonthDay},
+			#{delayEndDate},
+			#{delayRate},
+			#{delayServiceRate}, -->
+			#{normalFreeSum},
+			#{normalCapitalSum},
+			#{normalInterestSum},
+			#{replaceFreeSum},
+			#{replaceCapitalSum},
+			#{replaceInterestSum},
+			#{replaceOtherSum},
+			#{selfReplaceSum},
+			#{dangerReplaceSum},
+			#{returnSum},
+			#{returnCapitalSum},
+			#{returnInterestSum},
+			#{returnOtherSum},
+			#{busiClass},
+			#{badSum},
+			#{badDate},
+			#{isFree},
+			#{freeDate},
+			<!-- #{ristLevelID},
+			#{ristLevelName}, -->
+			#{amanID},
+			#{amanName},
+			#{bmanID},
+			#{bmanName},
+			#{reviewManID},
+			#{reviewManName},
+			#{unit_uid},
+			#{unit_uidName},
+			#{updateUserName},
+			#{loanPlan_ID},
+			#{guarantyDutyResSum},
+			NOW(),
+			#{bankRate},
+            #{guarantyRate},
+            #{reviewRate},
+            #{serviceRate},
+            #{punishRate},
+            #{fundSource},
+            #{finishUserID},
+            #{finishUserName},
+            #{finishTypeID},
+            #{finishTypeName},
+            #{projAppraisal},
+            #{finishDate},
+            #{reportDate},
+			#{meetingDetail_ID},
+			#{bzScale},
+			#{remark},
+			#{beforeAManID},
+			#{beforeAManName},
+			#{beforeBManID},
+			#{beforeBManName},
+			#{changeDate},
+			#{changeManID},
+			#{changeManName},
+			#{guarantorsName},
+			#{oldPeriodMonth},
+			#{oldPeriodDay},
+			#{oldPeriodMonthDay},
+			#{isCreditorMark},
+			#{replaceOverDate},
+			#{isUrgeLetter},
+			#{isCreditorAll},
+			#{isSensitiveCreditor},
+            #{sensitiveCreditorNumber},
+            #{interest},
+  			#{interestSum}
+		)
+	</insert>
+	
+	<update id="updateBeforeEndInfo" parameterType="com.zjm.pro.db.model.Pro_project">
+		UPDATE pro_project
+		SET
+			isBeforeEnd = #{isBeforeEnd},
+			beforeEndDate = #{beforeEndDate},
+			beforeEndSum = #{beforeEndSum},
+			beforeEndDesc = #{beforeEndDesc}
+		WHERE
+			project_ID = #{project_ID}
+	</update>
+		<!--根据wheresql删除保后跟踪表信息 -->
+	<delete id="deleteOneProjectAfterBySql" parameterType="java.lang.String">
+		<![CDATA[DELETE FROM pro_project WHERE 1=1 ${value} ]]>
+	</delete>
+	<!-- 查询多个保后跟踪表信息 -->
+	<select id="selectProjectListByWheresql" parameterType="string" resultMap="ProProjectMap">
+		<![CDATA[
+			SELECT
+				bankRate,
+		 		 project_ID,     
+		        apply_ID,     
+		        applyDetail_ID,     
+		        projectCode,     
+		        projectName,     
+		        busiTypeID,     
+		        busiTypeName,     
+		        bankID,   
+		        bankName,     
+		        subBankName,     
+		        loadSum,     
+		        guarantyScale,     
+		        guarantyScope,    
+		       guarantyDutySum,     
+		       guarantySum,     
+		       periodMonth,    
+		       periodDay,     
+		       periodMonthDay,     
+		       loadBeginDate,     
+		       loadEndDate,     
+		       billBeginDate,     
+		       billEndDate, 
+		       delayBeginDate,
+			   delayEndDate,    
+		       loadCode,     
+		       isBeforeEnd,     
+		       beforeEndDate,     
+		       beforeEndSum,     
+		       beforeEndDesc,     
+		       isOver,     
+		       overDate,     
+		       overFactDate,     
+		       overSum,     
+		       overDesc,     
+		       isDelay,     
+		       delaySum,      
+		       normalFreeSum,     
+		       normalCapitalSum,     
+		       normalInterestSum,     
+		       replaceFreeSum,   
+		       replaceCapitalSum,     
+		       replaceInterestSum,     
+		       replaceOtherSum,    
+		       selfReplaceSum,     
+		       dangerReplaceSum,     
+		       returnSum, 
+               returnCapitalSum,     
+               returnInterestSum,     
+               returnOtherSum,     
+               busiClass,     
+               badSum,     
+               badDate,     
+               badUserID,   
+               badUserName,     
+               isFree,     
+               freeDate,            
+               amanID,     
+               amanName,     
+               bmanID,     
+               bmanName, 
+               reviewManID,     
+               reviewManName,     
+               unit_uid,
+               loanPlan_ID,    
+               unit_uidName,     
+               updateUserName,     
+               updateDateTime,
+               finishUserID,
+               finishUserName,
+               finishTypeID,
+               finishTypeName,
+               projAppraisal,
+               finishDate,
+               reportDate,
+               isCreditorMark,
+               replaceOverDate,
+               isUrgeLetter,
+               isCreditorAll,
+               isSensitiveCreditor,
+               sensitiveCreditorNumber,
+               interest,
+  			   interestSum
+			FROM pro_project
+			WHERE 1=1 ${value}
+		]]>
+	</select>
+	
+	
+	
+	<!-- 还款与代偿列表分页查询 -->
+	<select id="selectDutyRemovePage" parameterType="com.zjm.common.db.model.PageTable" resultMap="ProProjectMap">
+		SELECT pp.project_ID,pp.apply_ID,pp.applyDetail_ID,pp.projectCode,
+				pp.projectName,busiTypeID,busiTypeName,
+				bankID,bankName,subBankName,loadSum,guarantyScale,guarantyScope,
+				guarantyDutySum,guarantySum,periodMonth,periodDay,periodMonthDay,loadBeginDate,
+				loadEndDate,billBeginDate,billEndDate,delayBeginDate,delayEndDate,  
+				loadCode,isBeforeEnd,beforeEndDate,beforeEndSum,
+				beforeEndDesc,isOver,overDate,overFactDate,overSum,overDesc,
+				isDelay,delaySum,normalFreeSum,normalCapitalSum,normalInterestSum,
+				replaceFreeSum,replaceCapitalSum,replaceInterestSum,replaceOtherSum,
+				selfReplaceSum,dangerReplaceSum,returnSum,returnCapitalSum,returnInterestSum,
+				returnOtherSum,busiClass,badSum,badDate,badUserID,badUserName,
+				isFree,freeDate,pp.amanID,pp.amanName,pp.bmanID,pp.bmanName,
+				pp.reviewManID,pp.reviewManName,pp.unit_uid,pp.unit_uidName,
+				pp.updateUserName,pp.updateDateTime,guarantyOrgName,guarantyOrgID,
+				hostAreaName,hostAreaID,oprationCompanyName,oprationCompanyID,
+				attributionName,attributionID,bankRate,guarantyRate,reviewRate,serviceRate,
+				freeMethodID,freeMethodName,guarantyDutyResSum,
+                punishRate,finishUserID,finishUserName,finishTypeID,finishTypeName,projAppraisal,finishDate,
+                reportDate,
+                isCreditorMark,replaceOverDate,isUrgeLetter,isCreditorAll,isSensitiveCreditor,sensitiveCreditorNumber,
+                interest,interestSum
+	    FROM 
+	         pro_project pp 
+	    left join pro_apply pa  on pa.apply_ID = PP.apply_ID
+		WHERE 1=1 ${wheresql} 
+		ORDER BY ${sortName} ${sortOrder}
+		limit #{pageNumber},#{pageSize}
+	</select>
+	<!-- 还款与代偿列表分页查询 的总数-->
+	<select id="selectDutyRemovePage_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		select count(project_ID) 
+		from pro_project pp
+		WHERE 1=1 ${wheresql} 
+	</select>
+	
+	
+	<!-- 担保责任解除修改产品表 -->	
+	<update id="updateDutyRemove" parameterType="com.zjm.pro.db.model.Pro_project">
+		UPDATE 
+		     pro_project
+		
+		<set >
+			<if test="isFree != null" >isFree= #{isFree},</if>
+			<if test="guarantySum != null" >guarantySum= #{guarantySum},</if>
+			<if test="guarantyDutyResSum != null" >guarantyDutyResSum= #{guarantyDutyResSum},</if>
+			<if test="freeMethodID != null" >freeMethodID= #{freeMethodID},</if>
+			<if test="freeMethodName != null" >freeMethodName= #{freeMethodName},</if>
+			<if test="freeTypeID != null" >freeTypeID= #{freeTypeID},</if>
+			<if test="freeTypeName != null" >freeTypeName= #{freeTypeName},</if>
+			<if test="freeDate != null" >freeDate= #{freeDate},</if>
+			<if test="normalFreeSum != null" >normalFreeSum= #{normalFreeSum},</if>
+			<if test="normalCapitalSum != null" >normalCapitalSum= #{normalCapitalSum},</if>
+			<if test="normalInterestSum != null" >normalInterestSum= #{normalInterestSum},</if>
+			<if test="replaceFreeSum != null" >replaceFreeSum= #{replaceFreeSum},</if>
+			<if test="replaceCapitalSum != null" >replaceCapitalSum= #{replaceCapitalSum},</if>
+			<if test="replaceInterestSum != null" >replaceInterestSum= #{replaceInterestSum},</if>
+			<if test="replaceOtherSum != null" >replaceOtherSum= #{replaceOtherSum},</if>
+			<if test="selfReplaceSum != null" >selfReplaceSum= #{selfReplaceSum},</if>
+			<if test="dangerReplaceSum != null" >dangerReplaceSum= #{dangerReplaceSum},</if>
+			<if test="finishUserID != null" >finishUserID= #{finishUserID},</if>
+		    <if test="finishUserName != null" >finishUserName= #{finishUserName},</if>
+		    <if test="finishTypeID != null" >finishTypeID= #{finishTypeID},</if>
+		    <if test="finishTypeName != null" >finishTypeName= #{finishTypeName},</if>
+		    <if test="projAppraisal != null" >projAppraisal= #{projAppraisal},</if>
+		    <if test="finishDate != null" >finishDate= #{finishDate},</if>
+		    <if test="reportDate != null" >reportDate= #{reportDate},</if>
+			  updateDateTime = NOW()		
+			</set>
+			 
+		WHERE project_ID=#{project_ID} 
+	</update>
+	
+	<!-- 动态Sql 返回项目基表-->
+	<select id="selectProjectDataWhereSql" resultType="com.zjm.pro.db.model.Pro_project" parameterType="java.lang.String">
+		<![CDATA[
+	  		${value} 
+		]]>
+	</select>
+	
+	<!-- 动态Sql-->
+	<select id="selectMapBySql" resultType="java.util.HashMap" parameterType="java.lang.String">
+		<![CDATA[
+	  		${value} 
+		]]>
+	</select>
+	
+	<!-- 查询关联系项目列表 -->	
+	<select id="selectRelationProjectTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="relationProjectMap">
+		SELECT 	
+			cr.relationMain_ID,
+			cc.client_ID,
+			cc.clientGUID,
+			pa.apply_ID,
+			pp.project_ID,
+			pa.oprationCompanyName,
+			pa.guarantyOrgName,
+			pa.attributionName,
+			pa.hostAreaName,
+			cr.relationMainName,
+			pp.projectCode,
+			pp.projectName,	
+			pp.busiTypeName,
+			pp.bankName,
+			pp.loadSum,
+			pp.guarantySum,
+			pp.periodMonthDay,
+			pp.delayBeginDate,
+			pp.delayEndDate,
+			pp.amanName,
+			pp.bmanName,
+		FROM crm_relationmain cr
+		LEFT JOIN crm_client_relationmain ccr ON cr.relationmain_id = ccr.relationmain_ID 
+		LEFT JOIN crm_client cc ON cc.client_id=ccr.client_id 
+		LEFT JOIN pro_apply pa ON pa.clientGUID=cc.clientGUID 
+		LEFT JOIN pro_project pp ON pa.apply_ID=pp.apply_ID 
+		WHERE 1=1 ${wheresql}
+		LIMIT #{pageNumber},#{pageSize}
+	</select>
+	
+	<!-- 查询关联系项目列表总数 -->
+	<select id="selectRelationProjectTable_count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		SELECT 
+			COUNT(1) 
+		FROM crm_relationmain cr
+		LEFT JOIN crm_client_relationmain ccr ON cr.relationmain_id = ccr.relationmain_ID 
+		LEFT JOIN crm_client cc ON cc.client_id=ccr.client_id 
+		LEFT JOIN pro_apply pa ON pa.clientGUID=cc.clientGUID 
+		LEFT JOIN pro_project pp ON pa.apply_ID=pp.apply_ID 
+		WHERE 1=1 ${wheresql}
+	</select>
+	
+	<!-- 查询某关联系下的所有关联企业及项目信息-->	
+	<select id="selectRelationClientProTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="ProProjectMap">
+		SELECT 
+ 		    	cc.clientName,
+ 		    	cc.client_ID,
+ 		    	COUNT(pp.project_ID) AS projCount,
+ 		    	SUM(IFNULL(pp.loadSum,0)) AS loadSum,
+     		SUM(IFNULL(pp.guarantySum,0)) AS guarantySum
+        	
+		FROM crm_relationmain cr
+		LEFT JOIN crm_client_relationmain ccr ON cr.relationmain_id = ccr.relationmain_ID 
+		LEFT JOIN crm_client cc ON cc.client_id=ccr.client_id 
+		LEFT JOIN pro_apply pa ON pa.clientGUID=cc.clientGUID 
+		LEFT JOIN pro_project pp ON pa.apply_ID=pp.apply_ID 
+		WHERE 1=1 ${wheresql}
+		GROUP BY cc.clientGUID
+		ORDER BY ${sortName} ${sortOrder}
+		LIMIT #{pageNumber},#{pageSize}
+	</select>
+	
+	<!-- 查询某关联系下的所有关联企业及项目信息列表总数 -->
+	<select id="selectRelationClientProTable_count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		SELECT 
+			 COUNT(DISTINCT cc.clientGUID ) 
+		FROM crm_relationmain cr
+		LEFT JOIN crm_client_relationmain ccr ON cr.relationmain_id = ccr.relationmain_ID 
+		LEFT JOIN crm_client cc ON cc.client_id=ccr.client_id 
+		LEFT JOIN pro_apply pa ON pa.clientGUID=cc.clientGUID 
+		LEFT JOIN pro_project pp ON pa.apply_ID=pp.apply_ID 
+		WHERE 1=1 ${wheresql}
+	</select>
+	
+	<select id = "selectDelay" resultMap="ProProjectMap">
+		select project_id , loadBeginDate ,loadEndDate, delayEndDate from pro_project where project_id in (select DISTINCT project_id from pro_delay )
+	</select>
+	<select id="selectUnDelay" resultMap="ProProjectMap">
+		select project_id , loadBeginDate ,loadEndDate, delayEndDate from pro_project where project_id not in (select DISTINCT project_id from pro_delay )
+	</select>
+	<update id="updatePeriod" parameterType="com.zjm.pro.db.model.Pro_project">
+		update pro_project 
+			set oldPeriodMonth = #{oldPeriodMonth},
+			 	oldPeriodDay = #{oldPeriodDay},oldPeriodMonthDay =#{oldPeriodMonthDay}, periodMonth = #{periodMonth},periodDay = #{periodDay},periodMonthDay =#{periodMonthDay} 
+			where project_id = #{project_ID}
+	</update>
+</mapper>  

@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_loanPlanMapper">
+	<!--计划放款表-->
+	 <resultMap id="loanPlanMap" type="com.zjm.pro.db.model.Pro_loanPlan" >
+	   	<result column="loanPlan_ID" property="loanPlan_ID"/>
+	   	<result column="applyID" property="applyID"/>
+	   	<result column="applyDetailID" property="applyDetailID"/>
+	   	<result column="busiTypeID" property="busiTypeID"/>
+	   	<result column="busiTypeName" property="busiTypeName"/>
+	   	<result column="bankTypeID" property="bankTypeID"/>
+	   	<result column="bankTypeName" property="bankTypeName"/>
+	   	<result column="bankID" property="bankID"/>
+	   	<result column="bankName" property="bankName"/>
+	   	<result column="subBankName" property="subBankName"/>
+	   	<result column="loanDate" property="loanDate"/>
+	   	<result column="loanSum" property="loanSum"/>
+	   	<result column="loanState" property="loanState"/>
+	   	<result column="unit_uid" property="unit_uid"/>
+	   	<result column="unit_uidName" property="unit_uidName"/>
+	   	<result column="updateUserName" property="updateUserName"/>
+	   	<result column="updateDateTime" property="updateDateTime"/>
+	   	<result column="busiClass" property="busiClass"/>
+	   	
+	   	<result column="periodMonth" property="periodMonth"/>
+	   	<result column="periodDay" property="periodDay"/>
+	   	<result column="periodMonthDay" property="periodMonthDay"/>
+	   	<result column="billBeginDate" property="billBeginDate"/>
+	   	<result column="billEndDate" property="billEndDate"/>
+	   	<result column="interestRate" property="interestRate"/>
+	   	<result column="meetingDetail_ID" property="meetingDetail_ID"/>
+	   	<result column="isDelayApply" property="isDelayApply"/>
+	   	<result column="delayApplyDesc" property="delayApplyDesc"/>
+	   	<result column="receiveDesc" property="receiveDesc"/>
+	   	<result column="remark" property="remark"/>
+	   	<result column="approvalState" property="approvalState"/>
+  	</resultMap>
+	
+	<!-- 查询放款计划列表 -->
+	<select id="selectPlanLoanListByWhereSql" parameterType="java.lang.String" resultMap="loanPlanMap">
+		<![CDATA[
+			SELECT 
+				loanPlan_ID,
+				applyID,
+				applyDetailID,
+				busiTypeID,
+				busiTypeName,
+				bankTypeID,
+				bankTypeName,
+				bankID,
+				bankName,
+				subBankName,
+				loanDate,
+				loanSum,
+				
+				periodMonth,
+				periodDay,
+				periodMonthDay,
+				billBeginDate,
+				billEndDate,
+				interestRate,
+				meetingDetail_ID,
+				isDelayApply,	
+				delayApplyDesc,	
+				receiveDesc,
+				remark,
+				approvalState,
+				
+				loanState,
+				unit_uid,
+				unit_uidName,
+				updateUserName,
+				updateDateTime
+			FROM pro_loanPlan
+			WHERE 1=1 ${value}	
+			ORDER BY loanDate ASC
+		]]>
+	</select>
+	
+	<!-- 新增放款计划-->
+	<insert id="insertOnePlanLoan"	parameterType="com.zjm.pro.db.model.Pro_loanPlan">
+		<![CDATA[
+		INSERT INTO pro_loanPlan (
+	        loanPlan_ID,
+			applyID,
+			applyDetailID,
+			meetingDetail_ID,
+			isDelayApply,	
+			delayApplyDesc,	
+			receiveDesc,
+			remark,
+			approvalState,
+			
+			busiTypeID,
+			busiTypeName,
+			bankTypeID,
+			bankTypeName,
+			bankID,
+			bankName,
+			subBankName,
+			loanDate,
+			loanSum,
+			loanState,
+			periodMonth,
+			periodDay,
+			periodMonthDay,
+			billBeginDate,
+			billEndDate,
+			interestRate,
+			unit_uid,
+			unit_uidName,
+			updateUserName,
+			updateDateTime	
+		)
+		VALUES
+		(
+			#{loanPlan_ID},
+			#{applyID},
+			#{applyDetailID},
+			#{meetingDetail_ID},
+			#{isDelayApply},
+			#{delayApplyDesc},
+			#{receiveDesc},
+			#{remark},
+			#{approvalState},
+			
+			#{busiTypeID},
+			#{busiTypeName},
+			#{bankTypeID},
+			#{bankTypeName},
+			#{bankID},
+			#{bankName},
+			#{subBankName},
+			#{loanDate},
+			#{loanSum},
+			#{loanState},
+			#{periodMonth},
+			#{periodDay},
+			#{periodMonthDay},
+			#{billBeginDate},
+			#{billEndDate},
+			#{interestRate},
+			#{unit_uid},
+			#{unit_uidName},
+			#{updateUserName},
+			NOW()
+		) ;
+		]]>
+	</insert>
+
+	<!-- 查询一条放款计划 -->
+	<select id="selectOneLoanPlan" parameterType="java.lang.String" resultMap="loanPlanMap">
+		<![CDATA[
+			SELECT 
+				loanPlan_ID,
+				applyID,
+				applyDetailID,
+				busiTypeID,
+				busiTypeName,
+				bankTypeID,
+				bankTypeName,
+				bankID,
+				bankName,
+				subBankName,
+				loanDate,
+				loanSum,
+				loanState,
+				
+				periodMonth,
+				periodDay,
+				periodMonthDay,
+				billBeginDate,
+				billEndDate,
+				interestRate,
+				meetingDetail_ID,
+				isDelayApply,	
+				delayApplyDesc,	
+				receiveDesc,
+				remark,
+				approvalState,
+				
+				unit_uid,
+				unit_uidName,
+				updateUserName,
+				updateDateTime
+			FROM pro_loanPlan
+			WHERE 1=1 ${value} 
+			LIMIT 1
+		]]>
+	</select>
+	
+	<!-- 修改一条放款计划 -->
+	<update id="updateOnePlanLoan" parameterType="com.zjm.pro.db.model.Pro_loanPlan">
+		<![CDATA[
+			UPDATE pro_loanPlan
+			SET
+				loanSum = #{loanSum},
+				loanDate = #{loanDate},
+				interestRate = #{interestRate},
+				periodMonth = #{periodMonth},
+				periodDay = #{periodDay},
+				periodMonthDay = #{periodMonthDay}, 
+				updateUserName = #{updateUserName},
+				updateDateTime = NOW()
+			WHERE
+				loanPlan_ID=#{loanPlan_ID}
+			LIMIT 1
+		]]>
+	</update>
+	
+	<!-- 删除一条放款登记 -->
+	<delete id="deleteOnePlanLoan" parameterType="java.lang.String">
+		<![CDATA[
+			DELETE FROM pro_loanPlan
+			WHERE 1=1 ${value}
+		]]>
+	</delete>
+	
+	<!-- 根据条件计算放款总金额 -->
+	<select id="totalLoanSumByWhereSql" parameterType="java.lang.String" resultType="java.lang.Double">
+		<![CDATA[
+			SELECT 
+				SUM(loanSum) 
+			FROM pro_loanPlan
+			WHERE 1=1 ${value}
+		]]>
+	</select>
+	
+	<!-- 修改一条放款计划状态 -->
+	<update id="updatePlanLoanState" parameterType="com.zjm.pro.db.model.Pro_loanPlan">
+		<![CDATA[
+			UPDATE pro_loanPlan
+			SET
+				loanState = #{loanState},
+				updateDateTime=NOW()
+			WHERE
+				loanPlan_ID=#{loanPlan_ID}
+			LIMIT 1
+		]]>
+	</update>
+	<!-- 修改已确认放款 -->
+	<update id="updateLoanConfirm" parameterType="com.zjm.pro.db.model.Pro_loanPlan">
+		<![CDATA[
+			UPDATE pro_loanPlan
+			SET
+				billBeginDate = #{billBeginDate},
+				billEndDate = #{billEndDate},
+				loanState = #{loanState},
+				updateDateTime = NOW()
+			WHERE
+				loanPlan_ID=#{loanPlan_ID}
+			LIMIT 1
+		]]>
+	</update>
+</mapper>  

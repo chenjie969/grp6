@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.gbpm.db.map.Gbpm_productNodeMapper">
+
+	<resultMap type="com.zjm.gbpm.db.model.Gbpm_productNode" id="productNodeResultMap">
+	
+	
+		<result column="productNode_ID" property="productNode_ID"  />
+		<result column="productID" property="productID"  />
+		<result column="nodeID" property="nodeID"  />
+		<result column="nodeNames" property="nodeNames"  />
+		<result column="nodeCode" property="nodeCode"  />
+		<result column="limitDay" property="limitDay"  />
+		<result column="isAutoAssign" property="isAutoAssign"  />
+		<result column="nodeSort" property="nodeSort"  />
+		<result column="unit_uid" property="unit_uid"  />
+		<result column="unit_uidName" property="unit_uidName"  />
+		<result column="updatedatetime" property="updatedatetime"  />
+		<result column="updateUserName" property="updateUserName"  />
+	</resultMap>
+	
+	<!-- 分页查询产品节点列表 -->
+	<select id="selectProductNodePageTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="productNodeResultMap">
+		SELECT 
+			productNode_ID,
+			productID,
+			nodeID,
+			nodeNames,
+			nodeCode,
+			limitDay,
+			isAutoAssign,
+			nodeSort,
+			unit_uid, 
+			unit_uidName,  
+			updateUserName, 
+			updatedatetime
+		FROM gbpm_productNode 
+		WHERE unit_uid = #{queryCondition.unit_uid} 
+			  ${wheresql}
+		LIMIT #{pageNumber},#{pageSize}  
+		ORDER BY nodeSort
+	</select>
+	
+	<!-- 分页查询产品节点列表-查询总记录数 -->
+	<select id="selectProductNodePageTable_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="long">
+	 	SELECT 
+	 		COUNT(productNode_ID) 
+	 	FROM 
+	 		gbpm_productNode 
+	 	WHERE
+	 		unit_uid = #{queryCondition.unit_uid}
+	</select>
+	
+	<!-- 查询一条产品节点-->  
+	<select id="selectOneProductNode" parameterType="java.lang.String" resultMap="productNodeResultMap">
+		SELECT 
+			productNode_ID,
+			productID,
+			nodeID,
+			nodeNames,
+			nodeCode,
+			limitDay,
+			isAutoAssign,
+			nodeSort,
+			unit_uid, 
+			unit_uidName,  
+			updateUserName, 
+			updatedatetime 
+		FROM gbpm_productNode
+		WHERE 
+		1=1 ${value}
+	</select>
+	
+	<!-- 插入一条产品节点 -->
+	<insert id="insertOneProductNode" parameterType="com.zjm.gbpm.db.model.Gbpm_productNode">
+		INSERT INTO gbpm_productNode(
+			productNode_ID,
+			productID,
+			nodeID,
+			nodeNames,
+			nodeCode,
+			limitDay,
+			isAutoAssign,
+			nodeSort,
+			unit_uid, 
+			unit_uidName,  
+			updateUserName, 
+			updatedatetime    
+		) VALUES(
+			#{productNode_ID},
+			#{productID},
+			#{nodeID},
+			#{nodeNames},
+			#{nodeCode},
+			#{limitDay},
+			#{isAutoAssign},
+			#{nodeSort},
+			#{unit_uid}, 
+			#{unit_uidName},  
+			#{updateUserName},  
+			NOW()
+		)
+	</insert>
+	
+	<!-- 修改一条产品节点 -->
+	<update id="updateOneProductNode" parameterType="com.zjm.gbpm.db.model.Gbpm_productNode">
+		UPDATE gbpm_productNode
+		SET
+			<if test="nodeID!=null">nodeID = #{nodeID},</if>
+			<if test="nodeNames!=null">nodeNames = #{nodeNames},</if>
+			<if test="nodeCode!=null">nodeCode = #{nodeCode},</if>
+			<if test="limitDay!=null">limitDay = #{limitDay},</if>
+			<if test="isAutoAssign!=null">isAutoAssign = #{isAutoAssign},</if>
+			<if test="nodeSort!=null">nodeSort = #{nodeSort},</if>
+			<if test="updateUserName!=null">updateUserName = #{updateUserName},</if>
+			updateDateTime = NOW() 
+		WHERE productNode_ID = #{productNode_ID}
+	</update>
+	
+	<!-- 删除一条产品节点 -->
+	<delete id="deleteOneProductNode" parameterType="com.zjm.gbpm.db.model.Gbpm_productNode">
+		DELETE FROM 
+			gbpm_productNode
+		WHERE
+			productNode_ID = #{productNode_ID}
+	</delete>
+	
+	<!-- 删除产品节点 -->
+	<delete id="delProductNodeByWheresql" parameterType="java.lang.String">
+		DELETE FROM 
+			gbpm_productNode
+		WHERE
+			1=1 ${value}
+	</delete>
+	
+	<!-- 根据产品流程ID获取流程下的所有节点-->
+	<select id="selectProductNodeListByProductID" parameterType="java.lang.String" resultMap="productNodeResultMap">
+		<![CDATA[
+			SELECT 
+				productNode_ID,
+				productID,
+				nodeID,
+				nodeNames,
+				nodeCode,
+				limitDay,
+				isAutoAssign,
+				nodeSort,
+				unit_uid, 
+				unit_uidName,  
+				updateUserName, 
+				updatedatetime
+			FROM 
+				gbpm_productNode 
+			WHERE 
+				1=1 ${value}
+		]]>
+	</select>
+</mapper>

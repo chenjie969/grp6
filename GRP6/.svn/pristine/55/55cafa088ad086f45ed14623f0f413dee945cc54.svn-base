@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_factPayMapper">
+	<!-- 业务还款信息表pro_factPay -->
+	 <resultMap id="FactPayMap" type="com.zjm.pro.db.model.Pro_factPay" >
+		<result column="factPay_ID" property="factPay_ID"/>
+		<result column="project_ID" property="project_ID"/>
+		<result column="applyID" property="applyID"/>
+		<result column="payDate" property="payDate"/>
+		<result column="factDate" property="factDate"/>
+		<result column="paySum" property="paySum"/>
+		<result column="payCapitalSum" property="payCapitalSum"/>
+		<result column="payInterestSum" property="payInterestSum"/>
+		<result column="payOtherSum" property="payOtherSum"/>
+		<result column="remark" property="remark"/>
+		<result column="operationManID" property="operationManID"/>
+		<result column="operationManName" property="operationManName"/>
+		<result column="unit_uid" property="unit_uid"/>
+		<result column="updateUserName" property="updateUserName"/>
+		<result column="updateDateTime" property="updateDateTime"/>
+		<result column="freeTypeID" property="freeTypeID"/>
+		<result column="freeTypeName" property="freeTypeName"/>
+		<result column="payState" property="payState"/>
+		<result column="isStopOptGuaranty" property="isStopOptGuaranty"/>
+		<result column="projectName" property="projectName"/><!-- 冗余字段 -->
+		<result column="bankName" property="bankName"/><!-- 冗余字段 -->
+		<result column="busiTypeName" property="busiTypeName"/><!-- 冗余字段 -->
+		<result column="projectCode" property="projectCode"/><!-- 冗余字段 -->
+		<result column="amanName" property="amanName"/><!-- 冗余字段 -->
+		<result column="bmanName" property="bmanName"/><!-- 冗余字段 -->
+		<result column="reviewManName" property="reviewManName"/><!-- 冗余字段 -->
+		<result column="loadSum" property="loadSum"/><!-- 冗余字段 -->
+		<result column="fundID" property="fundID"/><!-- 冗余字段 rd_xujy add 20180202 资金方id -->
+		<result column="fundChinese" property="fundChinese"/><!-- 冗余字段 rd_xujy add 20180202 资金方名称-->
+		<result column="productInstance_ID" property="productInstance_ID"/><!-- 冗余字段 rd_xujy add 20180207 实例id-->
+		<result column="loadBeginDate" property="loadBeginDate"/><!-- 冗余字段 rd_caodj add 20180320 起始日期 -->
+		<result column="loadEndDate" property="loadEndDate"/><!-- 冗余字段 rd_caodj add 20180320 结束日期 -->
+		<result column="guarantyOrgName" property="guarantyOrgName"/><!-- 冗余字段 rd_caodj add 20180320 承保机构 -->
+		<result column="hostAreaName" property="hostAreaName"/><!-- 冗余字段 rd_caodj add 20180320 地区 -->
+		<result column="fundName" property="fundName"/><!-- 冗余字段 rd_caodj add 20180320 资金方子机构名称 -->
+		<result column="guarantySum" property="guarantySum"/><!-- 冗余字段 rd_caodj add 20180320 项目余额 -->
+		<result column="replaceFreeSum" property="replaceFreeSum"/><!-- 冗余字段 rd_caodj add 20180320 代偿金额 -->
+		<result column="delayEndDate" property="delayEndDate"/><!-- 冗余字段 rd_caodj add 20180321 结束日期 -->
+		
+		
+		
+		
+  </resultMap>
+	<!-- 新增业务还款信息表pro_factPay -->
+	<insert id="insertOneFactPayInfo"	parameterType="com.zjm.pro.db.model.Pro_factPay">
+		<![CDATA[
+		
+		INSERT INTO pro_factPay (
+					factPay_ID,
+					project_ID,
+					applyID,
+					payDate,
+					factDate,
+					paySum,
+					payCapitalSum,
+					payInterestSum,
+					payOtherSum,
+					remark,
+					payState,
+					isStopOptGuaranty,
+					
+					operationManID,
+					operationManName,
+					unit_uid,
+					updateUserName,
+					freeTypeID,
+					freeTypeName,
+					updateDateTime
+		
+		       )
+		VALUES
+		(
+				#{factPay_ID}, 
+				#{project_ID},  
+				#{applyID},  
+				#{payDate},
+				#{factDate},
+				#{paySum},
+				#{payCapitalSum},
+				#{payInterestSum},
+				#{payOtherSum},
+				#{remark},
+				#{payState},
+				#{isStopOptGuaranty},
+				#{operationManID},
+				#{operationManName},
+				#{unit_uid},
+				#{updateUserName},		       
+				#{freeTypeID},		       
+				#{freeTypeName},		       
+				NOW()
+		) ;
+		]]>
+	</insert>
+	<!-- 查询还款列表-->
+	<select id="selectFactPayTables" resultMap="FactPayMap" parameterType="com.zjm.common.db.model.PageTable">
+	<![CDATA[
+		SELECT
+				    factPay_ID,
+				 	factPay.project_ID,
+				 	factPay.applyID,
+					factPay.payDate,
+					factPay.factDate,
+					factPay.paySum,
+					factPay.payCapitalSum,
+					factPay.payInterestSum,
+					factPay.payOtherSum,
+					factPay.remark,
+					factPay.payState,
+					factPay.isStopOptGuaranty,
+					factPay.operationManID,
+					factPay.operationManName,
+					factPay.unit_uid,
+					factPay.updateUserName,
+					factPay.freeTypeID,
+					factPay.freeTypeName,
+					apply.projectName,
+					project.bankName,
+					project.projectCode,
+					project.amanName,
+					project.bmanName,
+					project.reviewManName,
+					project.loadSum,
+					project.busiTypeName,
+					project.loadBeginDate,
+					project.delayEndDate,
+					project.guarantySum,
+					project.replaceFreeSum,
+					apply.fundID,
+					apply.fundChinese,
+					apply.productInstance_ID,
+					apply.guarantyOrgName,
+					apply.hostAreaName,
+					apply.fundName
+					
+	     FROM
+	   		pro_factPay	factPay	
+	    LEFT JOIN Pro_project project ON factPay.project_ID = project.project_ID	
+	    LEFT JOIN pro_apply apply ON project.apply_ID = apply.apply_ID
+		WHERE 1=1 ${wheresql} 
+		ORDER BY ${sortName} ${sortOrder}
+		limit #{pageNumber},#{pageSize}
+		]]>
+	</select>
+		<!-- 查询还款列表 总记录数-->
+	<select id="selectFactPayTables_Count" parameterType="com.zjm.common.db.model.PageTable"  resultType="java.lang.Long">
+		<![CDATA[
+		SELECT count(factPay_ID) FROM pro_factPay	factPay	
+	    LEFT JOIN Pro_project project ON factPay.project_ID = project.project_ID
+	    LEFT JOIN pro_apply apply ON project.apply_ID = apply.apply_ID	
+		WHERE 1=1 ${wheresql} 		
+		]]>		 
+	</select>
+
+	<!-- 根据查询条件查询一个还款表信息-->
+	<select id="selectOneFactPayByWhereSql" parameterType="java.lang.String"  resultMap="FactPayMap">
+	<![CDATA[
+		SELECT 
+		            factPay_ID,
+					project_ID,
+					applyID,
+					payDate,
+					factDate,
+					paySum,
+					payCapitalSum,
+					payInterestSum,
+					payOtherSum,
+					remark,
+					operationManID,
+					operationManName,
+					unit_uid,
+					updateUserName,
+					updateDateTime
+	    FROM 
+	         pro_factPay 
+		WHERE 1=1 ${value}
+		]]> 				 
+	</select>
+	<!-- 更新一个还款明细表信息 -->	
+	<update id="updateOneFactPay" parameterType="com.zjm.pro.db.model.Pro_factPay">
+		UPDATE 
+		     pro_factPay
+		
+		<set >
+		      <if test="project_ID != null" >project_ID= #{project_ID},</if>
+		      <if test="applyID != null" >applyID= #{applyID},</if>
+		      <if test="payDate != null" >payDate= #{payDate},</if>
+		      <if test="factDate != null" >factDate= #{factDate},</if>
+		      <if test="paySum != null" >paySum= #{paySum},</if>
+		      <if test="payCapitalSum != null" >payCapitalSum= #{payCapitalSum},</if>
+		      <if test="payInterestSum != null" >payInterestSum= #{payInterestSum},</if>
+		      <if test="payOtherSum != null" >payOtherSum= #{payOtherSum},</if>
+		      <if test="remark != null" >remark= #{remark},</if>
+		      <if test="operationManID != null" >operationManID= #{operationManID},</if>
+		      <if test="operationManName != null" >operationManName= #{operationManName},</if>
+			  <if test="unit_uid != null" >unit_uid= #{unit_uid},</if>
+			  <if test="updateUserName != null" >updateUserName= #{updateUserName},</if>
+			  updateDateTime = NOW()		
+		</set>
+			 
+		WHERE factPay_ID=#{factPay_ID} 
+	</update>
+	<!-- 根据查询条件查询多个还款表信息-->
+	<select id="selectFactPayListByWheresql" parameterType="java.lang.String"  resultMap="FactPayMap">
+	<![CDATA[
+		SELECT 
+		            factPay_ID,
+					project_ID,
+					applyID,
+					payDate,
+					factDate,
+					paySum,
+					payCapitalSum,
+					payInterestSum,
+					payOtherSum,
+					remark,
+					operationManID,
+					operationManName,
+					unit_uid,
+					updateUserName,
+					updateDateTime
+	    FROM 
+	         pro_factPay 
+		WHERE 1=1 ${value}
+		ORDER BY  payDate  asc
+		]]> 				 
+	</select>
+		<!--根据wheresql删除还款表信息 -->
+	<delete id="deleteOneFactPay"  parameterType="java.lang.String" >
+		<![CDATA[DELETE FROM pro_factPay WHERE 1=1 ${value} ]]>
+	</delete>
+	<!-- 查询项目对应还款列表-->
+	<select id="selectPayTables" resultMap="FactPayMap" parameterType="com.zjm.common.db.model.PageTable">
+	<![CDATA[
+		SELECT
+				    factPay_ID,
+				 	factPay.project_ID,
+				 	factPay.applyID,
+					factPay.payDate,
+					factPay.factDate,
+					factPay.paySum,
+					factPay.payCapitalSum,
+					factPay.payInterestSum,
+					factPay.payOtherSum,
+					factPay.remark,
+					factPay.operationManID,
+					factPay.operationManName,
+					factPay.unit_uid,
+					factPay.freeTypeID,
+					factPay.freeTypeName,
+					factPay.updateUserName,
+					factPay.updateDateTime
+	     FROM
+	   		pro_factPay	factPay	
+		WHERE 1=1 ${wheresql} 
+		ORDER BY ${sortName} ${sortOrder}
+		limit #{pageNumber},#{pageSize}
+		]]>
+	</select>
+		<!-- 查询项目对应还款列表 总记录数-->
+	<select id="selectPayTables_Count" parameterType="com.zjm.common.db.model.PageTable"  resultType="java.lang.Long">
+		<![CDATA[
+		SELECT count(1) FROM pro_factPay	factPay	
+		WHERE 1=1 ${wheresql} 		
+		]]>		 
+	</select>
+	
+	<!-- 根据ID查看一条还款信息 -->
+	<select id="selectOneFactPayByID" resultMap="FactPayMap" parameterType="java.lang.String">
+	<![CDATA[
+		SELECT
+				    factPay_ID,
+				 	factPay.project_ID,
+				 	factPay.applyID,
+					factPay.payDate,
+					factPay.factDate,
+					factPay.paySum,
+					factPay.payCapitalSum,
+					factPay.payInterestSum,
+					factPay.payOtherSum,
+					factPay.remark,
+					factPay.operationManID,
+					factPay.operationManName,
+					factPay.unit_uid,
+					factPay.freeTypeID,
+					factPay.freeTypeName,
+					factPay.updateUserName,
+					factPay.updateDateTime
+	     FROM
+	   		pro_factPay	factPay	
+		WHERE 1=1 ${value} 
+		]]>
+	</select>
+	
+	<delete id="cancelOneFactPayDel"	parameterType="com.zjm.pro.db.model.Pro_factPay">
+		<![CDATA[
+		
+		delete from pro_factPay where factPay_ID=#{factPay_ID}
+		]]>
+	</delete>
+
+	
+	<delete id="deletefactPayByProject_ID" parameterType="string">
+ 		DELETE FROM 
+			pro_factPay
+		WHERE  project_ID = #{project_ID}
+	</delete>
+
+</mapper>  

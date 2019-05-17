@@ -1,0 +1,46 @@
+例如：查看客户详情，window.parent.openMenu('view_client'+client_ID,'','客户详情','/sys/index.jsp','&client_ID='+client_ID);
+      参数传递格式：'&client_ID='+client_ID           在前页面取值：tool.getUrlParam('client_ID');
+      
+1、查看个人客户详情
+window.parent.openMenu('view_client'+row.client_ID,'','客户详情','/crm/client/personClient/personClientDetail.jsp','&client_ID='+row.client_ID);
+
+2.查看企业客户详情
+window.parent.openMenu('view_companyClient'+row.client_ID,'','客户详情','/crm/client/companyClient/companyClientDetail.jsp','&client_ID='+row.client_ID);
+
+3.查看资产负债报表详情
+window.parent.openMenu('viewReportZcfz'+row.reportZcfz_ID,'','查看资产负债详情','/reportZcfz/selectReportZcfzViewPage','&reportZcfz_ID='+row.reportZcfz_ID+'&type='+'view',1);
+4.修改资产负债报表详情
+window.parent.openMenu('openReportZcfzEditPage'+row.reportZcfz_ID,'',' 修改资产负债详情','/reportZcfz/openReportZcfzEditPage','&reportZcfz_ID='+row.reportZcfz_ID+'&type='+'edit',1);
+5.选择两期资产负债表对比页面;	
+window.parent.openMenu('reportZcfzCompare'+client_ID,'','两期资产负债对比','/reportZcfz/reportZcfzCompare','&reportZcfz_IDArry='+reportZcfz_IDArry,1);
+6.查看损益报表详情
+window.parent.openMenu('viewReportSy'+row.reportSy_ID,'','查看损益表详情','/reportSy/selectReportSyViewPage','&reportSy_ID='+row.reportSy_ID+'&type='+'view',1);
+7.修改损益报表详情
+window.parent.openMenu('openReportSyEditPage'+row.reportSy_ID,'','修改损益表详情','/reportSy/openReportSyEditPage','&reportSy_ID='+row.reportSy_ID+'&type='+'edit',1);	
+8.选择两期损益表对比页面;
+window.parent.openMenu('reportSyCompare'+client_ID,'','两期损益表对比','/reportSy/reportSyCompare','&reportSy_IDArry='+reportSy_IDArry,1);
+9.查看现金流报表详情
+window.parent.openMenu('viewReportSy'+row.reportSy_ID,'','查看损益表详情','/reportSy/selectReportSyViewPage','&reportSy_ID='+row.reportSy_ID+'&type='+'view',1);
+10.修改现金流报表详情
+window.parent.openMenu('openReportSyEditPage'+row.reportSy_ID,'','修改损益表详情','/reportSy/openReportSyEditPage','&reportSy_ID='+row.reportSy_ID+'&type='+'edit',1);	
+11选择两期现金流表对比页面;
+window.parent.openMenu('reportSyCompare'+client_ID,'','两期损益表对比','/reportSy/reportSyCompare','&reportSy_IDArry='+reportSy_IDArry,1);
+12.添加损益报表
+window.parent.openMenu('openReportSyAddPage'+client_ID,'','添加损益报表','/reportSy/openReportSyAddPage','&client_ID='+client_ID,1);	
+13.添加现金流报表
+window.parent.openMenu('openReportXjlAddPage'+client_ID,'','添加现金流报表','/reportXjl/openReportXjlAddPage','&client_ID='+client_ID,1);
+14.添加资产负债报表
+window.parent.openMenu('openReportZcfzAddPage'+client_ID,'','添加资产负债报表','/reportZcfz/openReportZcfzAddPage','&client_ID='+client_ID,1);
+
+15.新增关联主体
+window.parent.openMenu('relationMainAdd','','新增关联主体','/crm/relationMain/relationMainAdd.jsp','&type=add');
+
+16.修改关联主体
+window.parent.openMenu('relationMainEdit'+row.relationMain_ID,'','修改关联主体','/crm/relationMain/relationMainAdd.jsp','&relationMain_ID='+row.relationMain_ID+'&type=edit');>>>>>>> .r5437
+
+
+
+
+
+
+

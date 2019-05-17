@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><jatools Class="jatools.ReportDocument" Name="jatools report template"><VariableContext/><Page><Children ItemClass="PagePanel"><Item0><Width>1032</Width><Height>119</Height><Children><Item0 Class="Label"><Text>担保项目分布(银行机构)</Text><Font><Face>宋体</Face><Style>1</Style><Size>36</Size></Font><HorizontalAlignment>1</HorizontalAlignment><X>285</X><Y>11</Y><Width>473</Width><Height>59</Height></Item0><Item1 Class="Label"><Text>金额单位：万元</Text><HorizontalAlignment>2</HorizontalAlignment><X>892</X><Y>94</Y><Width>98</Width><Height>23</Height></Item1><Item2 Class="Text"><Variable>=if(has(endyearmonthsql)) return endyearmonthsql;else return ($today+"").substring(0,7)</Variable><X>468</X><Y>80</Y><Width>110</Width><Height>23</Height></Item2><Item3 Class="Label"><Text>截止年月：</Text><HorizontalAlignment>2</HorizontalAlignment><X>400</X><Y>80</Y><Width>68</Width><Height>23</Height></Item3></Children><Type>100</Type></Item0><Item1><Y>789</Y><Width>1032</Width><Height>25</Height><Type>103</Type></Item1><Item2><Y>119</Y><Width>1032</Width><Height>670</Height><Children ItemClass="Table"><Item0><NodePath>tab_detail_bank</NodePath><X>36</X><Y>1</Y><Children><Item0 Class="Label"><Text>序号</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col></Cell></Item0><Item1 Class="Label"><Text>名称</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col></Cell></Item1><Item2 Class="Label"><Text>合作金额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>2</Col></Cell></Item2><Item3 Class="Label"><Text>逾期余额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>3</Col></Cell></Item3><Item4 Class="Label"><Text>代偿金额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>4</Col></Cell></Item4><Item5 Class="Label"><Text>代偿余额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>5</Col></Cell></Item5><Item6 Class="Label"><Text>合计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>0</Col><ColSpan>2</ColSpan></Cell></Item6><Item7 Class="RowPanel"><Cell><Row>1</Row><Col>0</Col><ColSpan>6</ColSpan></Cell><Children ItemClass="Text"><Item0><Variable>=if(has(index_column4.loadSum{$.bankName})) return (index_column4.loadSum{$.bankName});else return  0;</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>2</Col></Cell></Item0><Item1><Variable>=$.bankName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>1</Col></Cell></Item1><Item2><Variable>=$.position + 1</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>0</Col></Cell></Item2><Item3><Variable>=if(has(index_column5.overSum{$.bankName})) return (index_column5.overSum{$.bankName});else return  0;</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>3</Col></Cell></Item3><Item4><Variable>=if(has(index_column6.replaceSum{$.bankName})) return (index_column6.replaceSum{$.bankName});else return  0;</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>4</Col></Cell></Item4><Item5><Name>=if(has(index_column7.remainedReplaceSum{$.bankName})) return (index_column7.remainedReplaceSum{$.bankName});else return  0;</Name><Variable>=if(has(index_column7.remainedReplaceSum{$.bankName})) return (index_column7.remainedReplaceSum{$.bankName});else return  0;</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>5</Col></Cell></Item5></Children><NodePath>Row</NodePath></Item7><Item8 Class="Text"><Variable>=index_column4.loadSum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>2</Col></Cell></Item8><Item9 Class="Text"><Variable>=index_column5.overSum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>3</Col></Cell></Item9><Item10 Class="Text"><Variable>=index_column6.replaceSum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>4</Col></Cell></Item10><Item11 Class="Text"><Variable>=index_column7.remainedReplaceSum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>5</Col></Cell></Item11></Children><ColumnWidths>60,200,140,140,140,140</ColumnWidths><RowHeights>30,30,30</RowHeights></Item0></Children><Type>102</Type></Item2></Children><PageFormat><Width>1059</Width><Height>850</Height><Left>18</Left><Top>18</Top><Right>9</Right><Bottom>18</Bottom></PageFormat></Page><NodeSource><Children ItemClass="DatasetNodeSource"><Item0><Children ItemClass="RowNodeSource"><Item0/></Children><Reader Class="SqlReader"><Name>tab_detail_bank</Name><Sql>SELECT DISTINCT pa.fundChinese AS bankName
+FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pp.apply_ID=pa.apply_ID
+WHERE pp.busiClass='01'  AND pa.fundType = "银行" AND pa.fundChinese IS NOT NULL
+${has(endyearmonthsql)?(" and DATE_FORMAT(pp.delayBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+ORDER BY pa.fundChinese ASC
+</Sql><Description>SELECT DISTINCT pa.fundChinese AS bankName
+FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pp.apply_ID=pa.apply_ID
+WHERE pp.busiClass='01'  AND pa.fundType = "银行" AND pa.fundChinese IS NOT NULL
+${has(endyearmonthsql)?(" and DATE_FORMAT(pp.delayBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+ORDER BY pa.fundChinese ASC
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><TagName>tab_detail_bank</TagName></Item0><Item1><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">bankName</IndexFields><TagName>index_column3</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab_column3</Name><Sql>SELECT DISTINCT pa.fundChinese AS bankName, IFNULL(bank.creditSum,0) creditSum
+FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pp.apply_ID=pa.apply_ID
+LEFT JOIN c_banksort bank ON bank.bankSortID = pp.bankID
+WHERE pp.busiClass='01' AND pa.fundType = "银行"
+${has(endyearmonthsql)?(" and DATE_FORMAT(pp.delayBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}</Sql><Description>SELECT DISTINCT pa.fundChinese AS bankName, IFNULL(bank.creditSum,0) creditSum
+FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pp.apply_ID=pa.apply_ID
+LEFT JOIN c_banksort bank ON bank.bankSortID = pp.bankID
+WHERE pp.busiClass='01' AND pa.fundType = "银行"
+${has(endyearmonthsql)?(" and DATE_FORMAT(pp.delayBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">bankName</IndexFields><TagName>tab_column3</TagName></Item1><Item2><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">bankName</IndexFields><TagName>index_column4</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab_column4</Name><Sql>SELECT pa.fundChinese AS bankName, SUM(IFNULL(pp.`loadSum`,0)) loadSum
+FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pp.apply_ID=pa.apply_ID
+WHERE pp.busiClass='01' AND pa.fundType = "银行"
+${has(endyearmonthsql)?(" and DATE_FORMAT(pp.delayBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY pa.fundChinese</Sql><Description>SELECT pa.fundChinese AS bankName, SUM(IFNULL(pp.`loadSum`,0)) loadSum
+FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pp.apply_ID=pa.apply_ID
+WHERE pp.busiClass='01' AND pa.fundType = "银行"
+${has(endyearmonthsql)?(" and DATE_FORMAT(pp.delayBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY pa.fundChinese</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">bankName</IndexFields><TagName>tab_column4</TagName></Item2><Item3><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">bankName</IndexFields><TagName>index_column5</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab_column5</Name><Sql>SELECT pa.fundChinese AS bankName,SUM((IFNULL(pp.`overSum`,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0))) AS overSum
+FROM pro_project pp
+LEFT JOIN pro_apply pa ON pp.apply_ID=pa.apply_ID
+LEFT JOIN (SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM pro_factpay pfp
+	LEFT JOIN pro_project p1 ON p1.`project_ID`=pfp.`project_ID` WHERE pfp.payDate &lt; p1.`overDate` ${has(endyearmonthsql)?(" and DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+LEFT JOIN ( SELECT pre.project_ID,SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum         
+	FROM pro_replace pre LEFT JOIN pro_project p2 ON p2.`project_ID`=pre.`project_ID` WHERE pre.`replaceDate`&lt; p2.`overDate` ${has(endyearmonthsql)?(" and DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY pre.project_ID 
+)tab2 ON tab2.project_ID =  pp.project_ID
+WHERE 	
+-- pp.bankName IS NOT NULL AND pp.bankName &lt;&gt;''  AND pp.busiClass='01' 
+pa.fundChinese is not null and  pa.fundChinese &lt;&gt;'' 	AND pp.busiClass ='01' AND pa.fundType = "银行"
+AND ( (pp.isOver = 1  ${has(endyearmonthsql)?(" and DATE_FORMAT(pp.overDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} )
+ or (pp.finishDate is NULL and ${has(endyearmonthsql)?("  DATE_FORMAT(pp.delayEndDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):"DATE_FORMAT(pp.delayEndDate,'%Y-%m')&lt;=now()"}) or pp.finishDate &gt; pp.overDate)
+-- ${has(endyearmonthsql)?(" and DATE_FORMAT(pp.overdate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	${has(endyearmonthsql)?(" and DATE_FORMAT(pp.reportDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY pa.fundChinese</Sql><Description>SELECT pa.fundChinese AS bankName,SUM((IFNULL(pp.`overSum`,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0))) AS overSum
+FROM pro_project pp
+LEFT JOIN pro_apply pa ON pp.apply_ID=pa.apply_ID
+LEFT JOIN (SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM pro_factpay pfp
+	LEFT JOIN pro_project p1 ON p1.`project_ID`=pfp.`project_ID` WHERE pfp.payDate &lt; p1.`overDate` ${has(endyearmonthsql)?(" and DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+LEFT JOIN ( SELECT pre.project_ID,SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum         
+	FROM pro_replace pre LEFT JOIN pro_project p2 ON p2.`project_ID`=pre.`project_ID` WHERE pre.`replaceDate`&lt; p2.`overDate` ${has(endyearmonthsql)?(" and DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY pre.project_ID 
+)tab2 ON tab2.project_ID =  pp.project_ID
+WHERE 	
+-- pp.bankName IS NOT NULL AND pp.bankName &lt;&gt;''  AND pp.busiClass='01' 
+pa.fundChinese is not null and  pa.fundChinese &lt;&gt;'' 	AND pp.busiClass ='01' AND pa.fundType = "银行"
+AND ( (pp.isOver = 1  ${has(endyearmonthsql)?(" and DATE_FORMAT(pp.overDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} )
+ or (pp.finishDate is NULL and ${has(endyearmonthsql)?("  DATE_FORMAT(pp.delayEndDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):"DATE_FORMAT(pp.delayEndDate,'%Y-%m')&lt;=now()"}) or pp.finishDate &gt; pp.overDate)
+-- ${has(endyearmonthsql)?(" and DATE_FORMAT(pp.overdate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	${has(endyearmonthsql)?(" and DATE_FORMAT(pp.reportDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY pa.fundChinese</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">bankName</IndexFields><TagName>tab_column5</TagName></Item3><Item4><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">bankName</IndexFields><TagName>index_column6</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab_column6</Name><Sql>SELECT pa.fundChinese AS bankName,SUM(IFNULL(pre.replaceSum,0)) AS replaceSum
+FROM pro_replace pre
+LEFT JOIN pro_project pp ON  pp.project_ID = pre.project_ID
+LEFT JOIN pro_apply pa ON pp.apply_ID=pa.apply_ID
+WHERE pp.busiClass='01' AND pa.fundType = "银行"
+${has(endyearmonthsql)?(" and DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY pa.fundChinese
+</Sql><Description>SELECT pa.fundChinese AS bankName,SUM(IFNULL(pre.replaceSum,0)) AS replaceSum
+FROM pro_replace pre
+LEFT JOIN pro_project pp ON  pp.project_ID = pre.project_ID
+LEFT JOIN pro_apply pa ON pp.apply_ID=pa.apply_ID
+WHERE pp.busiClass='01' AND pa.fundType = "银行"
+${has(endyearmonthsql)?(" and DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY pa.fundChinese
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">bankName</IndexFields><TagName>tab_column6</TagName></Item4><Item5><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">bankName</IndexFields><TagName>index_column7</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab_column7</Name><Sql>SELECT pa.fundChinese AS bankName, SUM(IFNULL(tab2.replaceSum,0)-IFNULL(tab.returnSum,0)) remainedReplaceSum
+FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pp.apply_ID=pa.apply_ID
+LEFT JOIN (SELECT prd.`projectID`,SUM(IFNULL(prd.`returnSum`,0)) returnSum FROM pro_returndetail prd WHERE 1=1  ${has(endyearmonthsql)?(" and DATE_FORMAT(prd.`returnDate`,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} 
+  GROUP BY prd.`projectID`)
+	tab ON pp.`project_ID`=tab.`projectID`
+LEFT JOIN (select pre.project_ID ,SUM(IFNULL(pre.replaceSum,0)) replaceSum  from pro_replace pre where 1=1 ${has(endyearmonthsql)?(" and DATE_FORMAT(pre.`replaceDate`,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} 
+GROUP BY project_ID ) as tab2  ON  pp.project_ID = tab2.project_ID
+WHERE pp.busiClass='01' and pa.fundType = '银行'
+GROUP BY pa.fundChinese</Sql><Description>SELECT pa.fundChinese AS bankName, SUM(IFNULL(tab2.replaceSum,0)-IFNULL(tab.returnSum,0)) remainedReplaceSum
+FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pp.apply_ID=pa.apply_ID
+LEFT JOIN (SELECT prd.`projectID`,SUM(IFNULL(prd.`returnSum`,0)) returnSum FROM pro_returndetail prd WHERE 1=1  ${has(endyearmonthsql)?(" and DATE_FORMAT(prd.`returnDate`,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} 
+  GROUP BY prd.`projectID`)
+	tab ON pp.`project_ID`=tab.`projectID`
+LEFT JOIN (select pre.project_ID ,SUM(IFNULL(pre.replaceSum,0)) replaceSum  from pro_replace pre where 1=1 ${has(endyearmonthsql)?(" and DATE_FORMAT(pre.`replaceDate`,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} 
+GROUP BY project_ID ) as tab2  ON  pp.project_ID = tab2.project_ID
+WHERE pp.busiClass='01' and pa.fundType = '银行'
+GROUP BY pa.fundChinese</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">bankName</IndexFields><TagName>tab_column7</TagName></Item5></Children></NodeSource></jatools>

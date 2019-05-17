@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_billMapper">
+	
+	<!-- 票据表信息 -->
+	<resultMap type="com.zjm.pro.db.model.Pro_costBill" id="billResultMap">
+		<id property="costBill_ID" column="costBill_ID" />
+		<result property="apply_ID" column="apply_ID" />
+		<result property="applyDetail_ID" column="applyDetail_ID" />
+		<result property="billTypeID" column="billTypeID" />
+		<result property="billTypeName" column="billTypeName" />
+		<result property="billSum" column="billSum" />
+		<result property="billTitle" column="billTitle" />
+		<!-- <result property="billCode" column="billCode" /> -->
+		<result property="taxCode" column="taxCode" />
+		<result property="openBank" column="openBank" />
+		<result property="accountNum" column="accountNum" />
+		<result property="phone" column="phone" />
+		<result property="address" column="address" />
+		<result property="billDate" column="billDate" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="updateUserName" column="updateUserName" />
+		<result property="updateDateTime" column="updateDateTime" />
+	</resultMap>
+	
+	<!-- 票据管理主列表显示信息 -->
+	<resultMap type="com.zjm.pro.db.model.Pro_billForProVO" id="billVoMap">
+		<result property="apply_ID" column="apply_ID" />
+		<result property="applyDetail_ID" column="applyDetail_ID" />
+		<result property="projectCode" column="projectCode" />
+		<result property="projectName" column="projectName" />
+		<result property="agreeSum" column="agreeSum" />
+		<result property="agreeMonthDay" column="agreeMonthDay" />
+		<result property="busiTypeID" column="busiTypeID" />
+		<result property="busiTypeName" column="busiTypeName" />
+		<result property="shoujuNum" column="shoujuNum" />
+		<result property="fapiaoNum" column="fapiaoNum" />
+	</resultMap>
+	
+	<!-- 查询所有已收费项目的票据信息 分页 -->
+	<select id="selectMultiProsBillPageTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="billVoMap">
+		SELECT 
+			r1.apply_id,
+			r1.applydetail_id,
+			a.projectName,
+			ad.projectCode,
+			ad.busiTypeID,
+			ad.busiTypeName,
+			ad.agreeSum,
+			ad.agreeMonthDay,
+			IFNULL(t1.counts,0) AS shoujuNum,
+			IFNULL(t2.counts,0) AS fapiaoNum	
+		FROM (SELECT DISTINCT f.apply_id,f.applyDetail_ID,f.unit_uid FROM pro_costfact f WHERE unit_uid=#{queryCondition.unit_uid}) r1
+		LEFT JOIN pro_apply a ON r1.apply_ID=a.apply_ID
+		LEFT JOIN pro_applydetail ad ON r1.applyDetail_ID=ad.applyDetail_ID
+		LEFT JOIN (SELECT applyDetail_ID,COUNT(costBill_ID) AS counts FROM pro_costBill WHERE 1=1 AND billtypeid='642b66d854d24368a6ea1761fa587da2' GROUP BY applyDetail_ID) t1 ON t1.applyDetail_ID=r1.applyDetail_ID
+		LEFT JOIN (SELECT applyDetail_ID,COUNT(costBill_ID) AS counts  FROM pro_costBill WHERE 1=1 AND billtypeid!='642b66d854d24368a6ea1761fa587da2' GROUP BY applyDetail_ID) t2 ON t2.applyDetail_ID=r1.applyDetail_ID
+		WHERE 1=1 ${wheresql}
+		ORDER BY ${sortName} ${sortOrder}
+		LIMIT #{pageNumber},#{pageSize}
+	</select>
+	
+	<!-- 查询所有已收费项目的票据信息-查询总数 -->
+	<select id="selectMultiProsBillPageTable_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		 <![CDATA[
+		 	SELECT COUNT(DISTINCT applyDetail_ID) FROM pro_costfact WHERE 1=1 ${wheresql}
+		 ]]> 
+	</select>
+	
+	<!-- 查询单个项目的票据列表  不分页-->
+	<select id="selectSglProBillPageTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="billResultMap">
+		<![CDATA[
+			SELECT
+				costBill_ID,
+				apply_ID,
+				applyDetail_ID,
+				billTypeID,
+				billTypeName,
+				billSum,
+				billTitle,
+			
+				taxCode,
+				openBank,
+				accountNum,
+				phone,
+				address,
+				billDate,
+				unit_uid,
+				updateUserName,
+				updateDateTime	
+			FROM
+				pro_costBill
+			WHERE
+				applyDetail_ID = #{queryCondition.applyDetail_ID}
+				${wheresql}  
+			ORDER BY ${sortName} ${sortOrder}
+		]]>
+	</select>
+	
+	<!-- 新增一条票据记录 -->
+	<insert id="insertOneBill" parameterType="com.zjm.pro.db.model.Pro_costBill">
+		<![CDATA[
+			INSERT INTO pro_costBill (
+				costBill_ID,
+				apply_ID,
+				applyDetail_ID,
+				billTypeID,
+				billTypeName,
+				billSum,
+				billTitle,
+	
+				taxCode,
+				openBank,
+				accountNum,
+				phone,
+				address,
+				billDate,
+				unit_uid,
+				updateUserName,
+				updateDateTime	
+			)
+			VALUES (
+				#{costBill_ID},
+				#{apply_ID},
+				#{applyDetail_ID},
+				#{billTypeID},
+				#{billTypeName},
+				#{billSum},
+				#{billTitle},
+
+				#{taxCode},
+				#{openBank},
+				#{accountNum},
+				#{phone},
+				#{address},
+				#{billDate},
+				#{unit_uid},
+				#{updateUserName},
+				NOW()
+			) 
+		]]>
+	</insert>
+	
+	<!-- 修改一条票据记录 -->
+	<update id="updateOneBill" parameterType="com.zjm.pro.db.model.Pro_costBill">
+		<![CDATA[
+			UPDATE 
+				pro_costBill
+			SET
+				billTypeID = #{billTypeID},
+				billTypeName = #{billTypeName},
+				billSum = #{billSum},
+				billTitle = #{billTitle},
+			
+				taxCode = #{taxCode},
+				openBank = #{openBank},
+				accountNum = #{accountNum},
+				phone = #{phone},
+				address = #{address},
+				billDate = #{billDate},
+				updateUserName = #{updateUserName},
+				updateDateTime = NOW()
+			WHERE
+				costBill_ID = #{costBill_ID}
+			LIMIT 1
+		]]>
+	</update>
+	
+	<!-- 查看一条票据记录  -->
+	<select id="selectOneBill" parameterType="com.zjm.pro.db.model.Pro_costBill" resultMap="billResultMap">
+		<![CDATA[
+			SELECT
+				costBill_ID,
+				apply_ID,
+				applyDetail_ID,
+				billTypeID,
+				billTypeName,
+				billSum,
+				billTitle,
+			
+				taxCode,
+				openBank,
+				accountNum,
+				phone,
+				address,
+				billDate,
+				unit_uid,
+				updateUserName,
+				updateDateTime	
+			FROM
+				pro_costBill
+			WHERE
+				costBill_ID = #{costBill_ID}
+			LIMIT 1
+		]]>
+	</select>
+	
+	<!-- 删除一条登记记录 -->
+	<delete id="deleteOneBill" parameterType="com.zjm.pro.db.model.Pro_costBill">
+		<![CDATA[
+			DELETE FROM 
+				pro_costBill
+			WHERE
+				costBill_ID=#{costBill_ID}
+			LIMIT 1
+		]]>
+	</delete>
+	
+</mapper>

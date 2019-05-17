@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_riskSchemeMapper">
+<!-- 化解方案(方案进度)表 -->
+	 <resultMap id="riskSchemeMap" type="com.zjm.pro.db.model.Pro_riskScheme" >
+   		<id column="riskScheme_ID" property="riskScheme_ID"  />
+		<result column="relationMain_ID" property="relationMain_ID"/>
+		<result column="relationMainName" property="relationMainName"/>
+		<result column="reviewType" property="reviewType"/>
+		<result column="product_ID" property="product_ID"/>
+		<result column="productName"  property="productName"/>
+		<result column="nodeID"  property="nodeID"/>
+		<result column="nodeNames"  property="nodeNames"/>
+		<result column="productInstance_ID" property="productInstance_ID"/>
+		<result column="title" property="title"/>
+		<result column="workProgress" property="workProgress"/>
+		<result column="needCoordination" property="needCoordination"/>
+		<result column="nextPlan" property="nextPlan"/>
+		<result column="lawsuitInfo" property="lawsuitInfo"/>
+		<result column="lawsuitProgress" property="lawsuitProgress"/>
+		<result column="remark" property="remark"/>
+		<result column="createUserID" property="createUserID"/>
+		<result column="createUserName" property="createUserName"/>
+		<result column="createDate" property="createDate"/>
+		<result column="status" property="status"/>
+		<result column="isMeeting" property="isMeeting"/>
+		<result column="stopDate" property="stopDate"/>
+		<result column="stopDesc" property="stopDesc"/>
+		<result column="stopDesc" property="stopDesc"/>
+		<result column="finishDate" property="finishDate"/>
+		<result column="unit_uid" property="unit_uid"/>
+		<result column="updateUserName" property="updateUserName"/>
+		<result column="updateDateTime" property="updateDateTime"/>
+		<result column = "meetingTypeName"  property ="meetingTypeName"/>
+		<result column="meetingTypeID" property="meetingTypeID"/>
+		<result column="relationTypeID" property="relationTypeID"/>
+		<result column="relationTypeName" property="relationTypeName"/>
+		<result column="fullAreaName" property="fullAreaName"/>
+		<result column="riskSchemeNum" property="riskSchemeNum"/>
+  	</resultMap>
+
+	<insert id="insertOneRiskSchemeInfo" parameterType="com.zjm.pro.db.model.Pro_riskScheme">
+		INSERT INTO pro_riskScheme (
+ 			riskScheme_ID,
+ 			relationMain_ID,
+ 			relationMainName,
+ 			reviewType,
+		    product_ID,
+	  	 	productName,
+	  	 	nodeID,
+	  	 	nodeNames,
+		   	productInstance_ID,
+		   	title,
+		   	workProgress,
+		   	needCoordination,
+		   	nextPlan,
+		   	lawsuitInfo,
+		   	lawsuitProgress,
+		   	remark,
+		   	createUserID,
+		   	createUserName,
+		   	createDate,
+		   	status,
+		   	isMeeting,
+		   	stopDate,
+		   	stopDesc,
+		   	unit_uid,
+		   	updateUserName,
+		   	updateDateTime			
+		)
+		VALUES (
+	 		#{riskScheme_ID},
+	 		#{relationMain_ID},
+	 		#{relationMainName},
+	 		#{reviewType},
+	 		#{product_ID},
+	 		#{productName},
+	 		#{nodeID},
+	 		#{nodeNames},
+	 		#{productInstance_ID},
+	 		#{title},
+	 		#{workProgress},
+	 		#{needCoordination},
+	 		#{nextPlan},
+	 		#{lawsuitInfo},
+	 		#{lawsuitProgress},
+	 		#{remark},
+	 		#{createUserID},
+	 		#{createUserName},
+	 		#{createDate},
+	 		#{status},
+	 		#{isMeeting},
+	 		#{stopDate},
+	 		#{stopDesc},
+	 		#{unit_uid},
+	 		#{updateUserName},
+	 		NOW()
+		) ;
+	</insert>
+
+	<!-- 分页查询待化解方案列表 -->
+	<select id="selectRiskSchemePageTables" parameterType="com.zjm.common.db.model.PageTable" resultMap="riskSchemeMap">
+		SELECT
+			riskScheme_ID,
+			relationMain_ID,
+ 			relationMainName,
+ 			reviewType,
+		    product_ID,
+		   productName,
+		   nodeID,
+		   nodeNames,
+		   productInstance_ID,
+		   title,
+		   workProgress,
+		   needCoordination,
+		   nextPlan,
+		   lawsuitInfo,
+		   lawsuitProgress,
+		   remark,
+		   createUserID,
+		   createUserName,
+		   createDate,
+		   status,
+		   isMeeting,
+		   stopDate,
+		   stopDesc,
+		   finishDate,
+		   unit_uid,
+		   updateUserName,
+		   updateDateTime
+		FROM pro_riskScheme
+		WHERE	1=1 ${wheresql}
+		ORDER BY ${sortName} ${sortOrder}
+		LIMIT #{pageNumber},#{pageSize} 		
+	</select>
+
+	<!-- 查询化解方案列表总数 -->
+	<select id="selectRiskSchemePageTables_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="long">
+		SELECT
+			COUNT(1)
+		FROM pro_riskScheme prs
+		WHERE 1=1 ${wheresql}
+	</select>
+	
+	<!-- ························································································································· -->
+	
+	<!-- 分页查询待安排会议列表 -->
+	<select id="selectAwaitingMeetingPageTables" parameterType="com.zjm.common.db.model.PageTable" resultMap="riskSchemeMap">
+		SELECT
+			riskScheme_ID,
+			relationMain_ID,
+ 			relationMainName,
+ 			reviewType,
+		    product_ID,
+		   productName,
+		   nodeID,
+		   nodeNames,
+		   productInstance_ID,
+		   title,
+		   workProgress,
+		   needCoordination,
+		   nextPlan,
+		   lawsuitInfo,
+		   lawsuitProgress,
+		   remark,
+		   createUserID,
+		   createUserName,
+		   createDate,
+		   status,
+		   isMeeting,
+		   stopDate,
+		   stopDesc,
+		   finishDate,
+		   unit_uid,
+		   updateUserName,
+		   updateDateTime
+		FROM pro_riskScheme
+		WHERE	1=1 ${wheresql}
+		ORDER BY createDate DESC
+		LIMIT #{pageNumber},#{pageSize} 		
+	</select>
+
+	<!-- 查询待安排的会议列表总数 -->
+	<select id="selectAwaitingMeetingPageTables_count" parameterType="com.zjm.common.db.model.PageTable" resultType="long">
+		SELECT
+			COUNT(1)
+		FROM pro_riskScheme prs
+		WHERE 1=1 ${wheresql}
+	</select>
+		<!-- 查询一条化解方案(工作进度)信息表 -->
+	<select id="selectOneAwaitingMeeting" parameterType="java.lang.String" resultMap="riskSchemeMap">
+		SELECT 
+		    riskScheme_ID,
+			relationMain_ID,
+ 			relationMainName,
+ 			reviewType,
+		    product_ID,
+		   productName,
+		   nodeID,
+		   nodeNames,
+		   productInstance_ID,
+		   title,
+		   workProgress,
+		   needCoordination,
+		   nextPlan,
+		   lawsuitInfo,
+		   lawsuitProgress,
+		   remark,
+		   createUserID,
+		   createUserName,
+		   createDate,
+		   status,
+		   isMeeting,
+		   stopDate,
+		   stopDesc,
+		   finishDate,
+		   unit_uid,
+		   updateUserName,
+		   updateDateTime
+		FROM pro_riskScheme  
+		WHERE 1=1  ${value}
+	</select>
+	
+	<!-- 修改安排会议状态  -->
+	<update id="updateMeetingStatus" parameterType="com.zjm.pro.db.model.Pro_riskScheme">
+		UPDATE	
+			pro_riskScheme
+		SET	
+			isMeeting = #{isMeeting},
+			updateDateTime = NOW()
+		WHERE riskScheme_ID=#{riskScheme_ID}
+	</update>
+	
+	<!-- 查询化解方案(工作进度)信息List -->
+	<select id="selectRiskSchemeList" parameterType="java.lang.String" resultMap="riskSchemeMap">
+		SELECT prs.`title`,prs.`riskScheme_ID` FROM pro_riskmeetingrec prmr
+			LEFT JOIN pro_riskscheme_riskmeetingrec prr ON prmr.`riskMeetingRec_ID` = prr.`riskMeetingRec_ID`
+			LEFT JOIN pro_riskscheme prs ON prs.`riskScheme_ID` = prr.`riskScheme_ID`
+		WHERE prs.`title` IS NOT NULL  ${value}
+	</select>
+
+
+	<select id="selectRiskSchemeListByRiskScheme_ID" parameterType="java.lang.String" resultMap="riskSchemeMap">
+		SELECT
+			riskScheme_ID,
+			title,
+			createUserID,
+			createUserName,
+			createDate
+		FROM pro_riskScheme
+		WHERE 1=1 ${value}
+	</select>
+	
+	<!-- 查询一条化解方案(工作进度)信息表 -->
+	<select id="selectOneRiskShemeInfo" parameterType="java.lang.String" resultMap="riskSchemeMap">
+		SELECT 
+		    riskScheme_ID,
+		    relationMain_ID,
+ 			relationMainName,
+ 			reviewType,
+		    product_ID,
+		   productName,
+		   nodeID,
+		   nodeNames,
+		   productInstance_ID,
+		   title,
+		   workProgress,
+		   needCoordination,
+		   nextPlan,
+		   lawsuitInfo,
+		   lawsuitProgress,
+		   remark,
+		   createUserID,
+		   createUserName,
+		   createDate,
+		   status,
+		   isMeeting,
+		   stopDate,
+		   finishDate,
+		   stopDesc,
+		   unit_uid,
+		   updateUserName,
+		   updateDateTime
+		FROM pro_riskScheme  
+		WHERE 1=1  ${value}
+	</select>
+	
+	<!-- 首页获取进度跟踪List-->
+	<select id="selectRiskSchemeStageList" resultMap="riskSchemeMap">
+		<![CDATA[
+		SELECT count(riskScheme_ID) as riskSchemeNum,r.nodeID,r.nodeNames FROM pro_riskScheme r
+			LEFT JOIN gbpm_dic_Node d on r.nodeID = d.node_ID
+		 	WHERE r.nodeNames != '流程未启动' and r.status !='审批完成'
+			GROUP BY nodeID,nodeNames ORDER BY nodeNames
+		]]>		 
+	</select>
+	
+	<!-- 修改化解方案  -->
+	<update id="updateOneRiskSchemeInfo" parameterType="com.zjm.pro.db.model.Pro_riskScheme">
+		UPDATE	
+			pro_riskScheme
+		SET	
+			<if test="relationMain_ID != null" >
+	        	relationMain_ID = #{relationMain_ID},
+	      	</if>
+			<if test="relationMainName != null" >
+	        	relationMainName = #{relationMainName},
+	      	</if>
+			<if test="reviewType != null" >
+	        	reviewType = #{reviewType},
+	      	</if>
+			<if test="product_ID != null" >
+	        	product_ID = #{product_ID},
+	      	</if>
+			<if test="productName != null" >
+	        	productName = #{productName},
+	      	</if>
+			<if test="nodeID != null" >
+	        	nodeID = #{nodeID},
+	      	</if>
+			<if test="nodeNames != null" >
+	        	nodeNames = #{nodeNames},
+	      	</if>
+			<if test="productInstance_ID != null" >
+	        	productInstance_ID = #{productInstance_ID},
+	      	</if>
+			<if test="title != null" >
+	        	title = #{title},
+	      	</if>
+			<if test="workProgress != null" >
+	        	workProgress = #{workProgress},
+	      	</if>
+			<if test="needCoordination != null" >
+	        	needCoordination = #{needCoordination},
+	      	</if>
+			<if test="nextPlan != null" >
+	        	nextPlan = #{needCoordination},
+	      	</if>
+			<if test="lawsuitInfo != null" >
+	        	lawsuitInfo = #{lawsuitInfo},
+	      	</if>
+			<if test="lawsuitProgress != null" >
+	        	lawsuitProgress = #{lawsuitProgress},
+	      	</if>
+			<if test="remark != null" >
+	        	remark = #{remark},
+	      	</if>
+			<if test="createUserID != null" >
+	        	createUserID = #{createUserID},
+	      	</if>
+			<if test="createUserName != null" >
+	        	createUserName = #{createUserName},
+	      	</if>
+			<if test="status != null" >
+	        	status = #{status},
+	      	</if>
+			<if test="isMeeting != null" >
+	        	isMeeting = #{isMeeting},
+	      	</if>
+			<if test="stopDate != null" >
+	        	stopDate = #{stopDate},
+	      	</if>
+			<if test="stopDesc != null" >
+	        	stopDesc = #{stopDesc},
+	      	</if>
+			<if test="updateUserName != null" >
+	        	updateUserName = #{updateUserName},
+	      	</if>
+			updateDateTime = NOW()
+		WHERE riskScheme_ID=#{riskScheme_ID}
+	</update>
+	
+	<!-- 审批完成  -->
+	<update id="finishRiskScheme" parameterType="com.zjm.pro.db.model.Pro_riskScheme">
+		UPDATE	
+			pro_riskScheme
+		SET	
+        	status = #{status},
+			finishDate = NOW(),
+			updateDateTime = NOW()
+		WHERE riskScheme_ID=#{riskScheme_ID}
+	</update>
+	
+	<!-- 查询更多工作进度信息 -->
+	<select id="selectMoreRiskSchemeTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="riskSchemeMap">
+		SELECT 
+			prs.riskScheme_ID,
+			prs.relationMain_ID,
+			prs.relationMainName,
+			prs.workProgress,
+			prs.finishDate,
+			cr.projectTypeID,
+			cr.projectTypeName,
+			cc.fullAreaName
+		FROM pro_riskScheme prs 
+		LEFT JOIN crm_relationmain cr ON prs.relationMain_ID = cr.relationMain_ID
+		LEFT JOIN crm_client cc ON cr.clientID = cc.client_ID
+		WHERE 1=1 ${wheresql}
+		ORDER BY ${sortName} ${sortOrder}
+		LIMIT #{pageNumber},#{pageSize} 	
+	</select>
+	
+	<!-- 查询工作进度提醒信息 -->
+	<select id="selectSchemeNoticeList"  parameterType="com.zjm.common.db.model.PageTable" resultMap="riskSchemeMap">
+		SELECT 
+			prs.riskScheme_ID,
+			prs.relationMain_ID,
+			prs.relationMainName,
+			prs.workProgress,
+			cr.projectTypeID,
+			cr.projectTypeName,
+			cc.fullAreaName,
+			MAX(prs.finishDate) finishDate
+		FROM pro_riskScheme prs
+		LEFT JOIN crm_relationmain cr ON prs.relationMain_ID = cr.relationMain_ID
+		LEFT JOIN crm_client cc ON cr.clientID = cc.client_ID
+		WHERE 1=1
+		<if test="queryCondition.finishBeginDate != null" >
+			AND prs.finishDate > #{queryCondition.finishBeginDate}
+		</if>
+		<if test="queryCondition.finishEndDate != null" >
+			AND prs.finishDate &lt;= #{queryCondition.finishEndDate}
+		</if>
+		${wheresql}
+		GROUP BY prs.relationMain_ID
+		ORDER BY ${sortName} ${sortOrder}			
+		LIMIT #{pageNumber},#{pageSize}
+	</select>
+	
+	<!-- 查询工作进度提醒信息_总数 -->
+	<select id="selectSchemeNoticeList_count"  parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		SELECT count(1)
+		FROM pro_riskScheme prs
+		WHERE 1=1
+		<if test="queryCondition.finishBeginDate != null" >
+			AND prs.finishDate > #{queryCondition.finishBeginDate}
+		</if>
+		<if test="queryCondition.finishEndDate != null" >
+			AND prs.finishDate &lt;= #{queryCondition.finishEndDate}
+		</if>
+		${wheresql}
+		GROUP BY prs.relationMain_ID
+	</select>
+	
+	<delete id="deleteByRiskSchemeId" parameterType="string">
+		delete 
+		 from pro_riskScheme
+		 where riskScheme_ID = #{riskScheme_ID}
+	</delete>
+	
+</mapper>

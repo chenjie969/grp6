@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><jatools Class="jatools.ReportDocument" Name="jatools report template"><VariableContext/><Page><Children ItemClass="PagePanel"><Item0><Width>2260</Width><Height>105</Height><Children><Item0 Class="Label"><Text>35户企业明细表</Text><Font><Face>宋体</Face><Style>1</Style><Size>36</Size></Font><HorizontalAlignment>1</HorizontalAlignment><X>541</X><Y>12</Y><Width>287</Width><Height>47</Height></Item0><Item1 Class="Label"><Text>金额单位：亿元</Text><HorizontalAlignment>2</HorizontalAlignment><X>2147</X><Y>82</Y><Width>98</Width><Height>23</Height></Item1><Item2 Class="Label"><Text>截止年月：</Text><HorizontalAlignment>2</HorizontalAlignment><X>606</X><Y>71</Y><Width>77</Width><Height>23</Height></Item2><Item3 Class="Text"><Variable>=if(has(endyearmonthsql)) return endyearmonthsql;else return ($today+"").substring(0,7);</Variable><X>683</X><Y>71</Y><Width>110</Width><Height>23</Height></Item3></Children><Type>100</Type></Item0><Item1><Y>863</Y><Width>2260</Width><Height>22</Height><Type>103</Type></Item1><Item2><Y>105</Y><Width>2260</Width><Height>758</Height><Children ItemClass="Table"><Item0><X>9</X><Y>2</Y><Children><Item0 Class="Label"><Text>序号</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>0</Col><RowSpan>2</RowSpan></Cell></Item0><Item1 Class="Label"><Text>所属区域</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>2</Col><RowSpan>2</RowSpan></Cell></Item1><Item2 Class="Label"><Text>2015年1月末融投系委贷余额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>8</Col><RowSpan>2</RowSpan></Cell></Item2><Item3 Class="Label"><Text>2015年1月末
+担保集团委贷余额</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>7</Col><RowSpan>2</RowSpan></Cell></Item3><Item4 Class="Label"><Text>2015年1月
+末担保余额</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>6</Col><RowSpan>2</RowSpan></Cell></Item4><Item5 Class="Label"><Text>企业名称</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>3</Col><RowSpan>2</RowSpan></Cell></Item5><Item6 Class="Label"><Text>租赁余额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>14</Col><ColSpan>2</ColSpan></Cell></Item6><Item7 Class="RowPanel"><Cell><Row>2</Row><Col>0</Col><RowSpan>2</RowSpan><ColSpan>28</ColSpan></Cell><Children ItemClass="RowPanel"><Item0><Cell><Row>2</Row><Col>0</Col><RowSpan>2</RowSpan><ColSpan>28</ColSpan></Cell><Children><Item0 Class="RowPanel"><Cell><Row>2</Row><Col>0</Col><ColSpan>28</ColSpan></Cell><Children><Item0 Class="Text"><Variable>=$.clientName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>3</Col></Cell></Item0><Item1 Class="Text"><Variable>=$.timePointSum/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>6</Col></Cell></Item1><Item2 Class="Text"><Variable>=$.fullAreaName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>2</Col></Cell></Item2><Item3 Class="Text"><Variable>=$.position + 1</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>0</Col></Cell></Item3><Item4 Class="Text"><Variable>=$.wdAllGuarantySum/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>7</Col></Cell></Item4><Item5 Class="Text"><Variable>=$.timePointEntrustSum/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>8</Col></Cell></Item5><Item6 Class="Text"><Variable>=$.guarantySum/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>9</Col></Cell></Item6><Item7 Class="Text"><Variable>=$.creditorSum/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>10</Col></Cell></Item7><Item8 Class="Text"><Variable>=$.relationMainName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>united-level:1;auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>1</Col></Cell></Item8><Item9 Class="Text"><Variable>=$.capitalSum/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>4</Col></Cell></Item9><Item10 Class="Text"><Variable>=$.liabilitySum/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>5</Col></Cell></Item10><Item11 Class="Text"><Variable>=$.entrustSum/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>20</Col></Cell></Item11><Item12 Class="Text"><Variable>=$.replaceSum/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>22</Col></Cell></Item12><Item13 Class="Text"><Variable>=($.guarantySum+$.entrustSum+$.replaceSum)/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>26</Col></Cell></Item13><Item14 Class="Text"><Variable>=($.timePointSum-$.guarantySum)/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>23</Col></Cell></Item14><Item15 Class="Text"><Variable>=$.payCapitalSum/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>24</Col></Cell></Item15><Item16 Class="Text"><Variable>=$.payInterestSum/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>25</Col></Cell></Item16><Item17 Class="Label"><Text>0</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>14</Col></Cell></Item17><Item18 Class="Label"><Text>0</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>15</Col></Cell></Item18><Item19 Class="Label"><Text>0</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>16</Col></Cell></Item19><Item20 Class="Label"><Text>0</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>17</Col></Cell></Item20><Item21 Class="Label"><Text>0</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>18</Col></Cell></Item21><Item22 Class="Label"><Text>0</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>19</Col></Cell></Item22><Item23 Class="Label"><Text>0</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>14</Col></Cell></Item23><Item24 Class="Label"><Text>0</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>15</Col></Cell></Item24><Item25 Class="Label"><Text>0</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>16</Col></Cell></Item25><Item26 Class="Label"><Text>0</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>17</Col></Cell></Item26><Item27 Class="Label"><Text>0</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>18</Col></Cell></Item27><Item28 Class="Label"><Text>0</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>19</Col></Cell></Item28><Item29 Class="Label"><Text>0</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>21</Col></Cell></Item29><Item30 Class="Text"><Variable>=($.guarantySum+$.entrustSum+$.replaceSum+$.creditorSum)/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>27</Col></Cell></Item30><Item31 Class="Label"><Text>0</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>11</Col></Cell></Item31><Item32 Class="Label"><Text>0</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>12</Col></Cell></Item32><Item33 Class="Text"><Variable>=$.entrustSum/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>13</Col></Cell></Item33></Children><NodePath>Row</NodePath></Item0><Item1 Class="Text"><Variable>=$.timePointSum.sum()/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>6</Col></Cell></Item1><Item2 Class="Text"><Variable>=$.timePointEntrustSum.sum()/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>3</Row><Col>7</Col></Cell></Item2><Item3 Class="Text"><Variable>=$.guarantySum.sum()/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>3</Row><Col>9</Col></Cell></Item3><Item4 Class="Text"><Variable>=$.timePointEntrustSum.sum()/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>3</Row><Col>8</Col></Cell></Item4><Item5 Class="Label"><Text>小计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>0</Col><ColSpan>4</ColSpan></Cell></Item5><Item6 Class="Text"><Variable>=$.creditorSum.sum()/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>3</Row><Col>10</Col></Cell></Item6><Item7 Class="Text"><Variable>=$.capitalSum.sum()/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>4</Col></Cell></Item7><Item8 Class="Text"><Variable>=$.liabilitySum.sum()/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>5</Col></Cell></Item8><Item9 Class="Text"><Variable>=$.entrustSum.sum()/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>3</Row><Col>20</Col></Cell></Item9><Item10 Class="Text"><Variable>=$.guarantySum.sum()/10000+$.entrustSum.sum()/10000+$.replaceSum.sum()/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>3</Row><Col>26</Col></Cell></Item10><Item11 Class="Text"><Variable>=($.timePointSum.sum()-$.guarantySum.sum())/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>3</Row><Col>23</Col></Cell></Item11><Item12 Class="Text"><Variable>=$.payCapitalSum.sum()/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>3</Row><Col>24</Col></Cell></Item12><Item13 Class="Text"><Variable>=$.payInterestSum.sum()/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>3</Row><Col>25</Col></Cell></Item13><Item14 Class="Text"><Variable>=$.replaceSum.sum()/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>3</Row><Col>22</Col></Cell></Item14><Item15 Class="Label"><Text>0</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>21</Col></Cell></Item15><Item16 Class="Text"><Variable>=$.guarantySum.sum()/10000+$.entrustSum.sum()/10000+$.replaceSum.sum()/10000+$.creditorSum.sum()/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>3</Row><Col>27</Col></Cell></Item16><Item17 Class="Label"><Text>0</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>11</Col></Cell></Item17><Item18 Class="Label"><Text>0</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>12</Col></Cell></Item18><Item19 Class="Text"><Variable>=$.entrustSum.sum()/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>3</Row><Col>13</Col></Cell></Item19></Children><NodePath>relationMainName</NodePath></Item0></Children><NodePath>tab_detail</NodePath></Item7><Item8 Class="Label"><Text>负债总额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>5</Col><RowSpan>2</RowSpan></Cell></Item8><Item9 Class="Label"><Text>资产总额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>4</Col><RowSpan>2</RowSpan></Cell></Item9><Item10 Class="Label"><Text>保外债权人融资金额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>10</Col><RowSpan>2</RowSpan></Cell></Item10><Item11 Class="Label"><Text>在保余额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>9</Col><RowSpan>2</RowSpan></Cell></Item11><Item12 Class="Label"><Text>担保集团委贷余额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>11</Col><RowSpan>2</RowSpan></Cell></Item12><Item13 Class="Label"><Text>未担保</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>13</Col></Cell></Item13><Item14 Class="Label"><Text>担保</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>14</Col></Cell></Item14><Item15 Class="Label"><Text>未担保</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>15</Col></Cell></Item15><Item16 Class="Label"><Text>委贷余额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>12</Col><ColSpan>2</ColSpan></Cell></Item16><Item17 Class="Label"><Text>担保</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>12</Col></Cell></Item17><Item18 Class="Label"><Text>股权退出</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>16</Col><ColSpan>2</ColSpan></Cell></Item18><Item19 Class="Label"><Text>担保</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>16</Col></Cell></Item19><Item20 Class="Label"><Text>未担保</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>17</Col></Cell></Item20><Item21 Class="Label"><Text>投资收回</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>18</Col><ColSpan>2</ColSpan></Cell></Item21><Item22 Class="Label"><Text>担保</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>18</Col></Cell></Item22><Item23 Class="Label"><Text>融投系业务合计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>20</Col><ColSpan>2</ColSpan></Cell></Item23><Item24 Class="Label"><Text>代偿余额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>22</Col><RowSpan>2</RowSpan></Cell></Item24><Item25 Class="Label"><Text>融投系清收清欠金额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>25</Col><RowSpan>2</RowSpan></Cell></Item25><Item26 Class="Label"><Text>融投系合计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>26</Col><RowSpan>2</RowSpan></Cell></Item26><Item27 Class="Label"><Text>项目总共化解金额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>27</Col><RowSpan>2</RowSpan></Cell></Item27><Item28 Class="Label"><Text>未担保</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>19</Col></Cell></Item28><Item29 Class="Label"><Text>担保</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>20</Col></Cell></Item29><Item30 Class="Label"><Text>未担保</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>21</Col></Cell></Item30><Item31 Class="Label"><Text>关联系</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>1</Col><RowSpan>2</RowSpan></Cell></Item31><Item32 Class="Label"><Text>担保压
+降金额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>23</Col><RowSpan>2</RowSpan></Cell></Item32><Item33 Class="Label"><Text>融投系委贷本金清收</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>24</Col><RowSpan>2</RowSpan></Cell></Item33></Children><ColumnWidths>60,80,80,200,80,80,80,80,80,80,80,80,70,70,70,70,70,70,70,70,70,70,80,80,80,80,80,80</ColumnWidths><RowHeights>35,30,30,30</RowHeights></Item0></Children><Type>102</Type></Item2></Children><PageFormat><Width>2278</Width><Height>921</Height><Left>9</Left><Top>18</Top><Right>9</Right><Bottom>18</Bottom></PageFormat></Page><NodeSource><Children ItemClass="DatasetNodeSource"><Item0><Children ItemClass="GroupNodeSource"><Item0><Children ItemClass="RowNodeSource"><Item0/></Children><Group><Field>relationMainName</Field></Group></Item0></Children><Reader Class="SqlReader"><Name>tab_detail</Name><Sql>SELECT cc.fullAreaName,
+	cc.`relationMainName`,
+	cc.`clientName`,
+	IFNULL(capitalSum,0) capitalSum,
+	IFNULL(cc.liabilitySum,0) liabilitySum,
+	IFNULL(db15.guarantySum, 0) timePointSum,
+	IFNULL(wd15.`guarantySum`,0) timePointEntrustSum,
+	IFNULL(wdAll15.`guarantySum`,0) wdAllGuarantySum,
+	IFNULL(tt1.guarantySum,0) guarantySum,
+	IFNULL(cc.creditorSum,0) creditorSum,
+	IFNULL(tt2.entrustSum,0) entrustSum,
+	IFNULL(pay.payCapitalSum,0) payCapitalSum,
+	IFNULL(pay.payInterestSum,0) payInterestSum,
+	IFNULL(tt3.replaceSum,0) replaceSum
+FROM crm_client cc 
+LEFT JOIN crm_client_relationmain ccr ON ccr.`client_ID` = cc.client_ID
+LEFT JOIN crm_relationmain cr ON cr.`relationMain_ID` = ccr.`relationMain_ID`
+LEFT JOIN (
+	SELECT
+		pa.`clientGUID`,
+		SUM((IFNULL(pp.loadSum, 0) - IFNULL(tab1.payCapitalSum, 0) - IFNULL(tab2.replaceCapitalSum, 0))) AS guarantySum
+	FROM
+		pro_project pp
+	LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.`apply_ID`
+	LEFT JOIN (
+		SELECT
+			pfp.project_ID,
+			SUM(IFNULL(pfp.payCapitalSum, 0)) AS payCapitalSum
+		FROM
+			pro_factpay pfp
+		WHERE 1 = 1 AND DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='2015-01' GROUP BY
+			pfp.project_ID
+	) tab1 ON tab1.project_ID = pp.project_ID
+	LEFT JOIN (
+		SELECT
+			pre.project_ID,
+			SUM(IFNULL(pre.replaceCapitalSum, 0)) AS replaceCapitalSum
+		FROM
+			pro_replace pre
+		WHERE
+			1 = 1 AND  DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='2015-01' GROUP BY pre.project_ID
+	) tab2 ON tab2.project_ID = pp.project_ID
+	WHERE
+		pp.`busiClass` = '01' 
+		AND DATE_FORMAT(pp.reportDate,'%Y-%m')&lt;= '2015-01'
+		GROUP BY pa.`clientGUID`
+) db15 ON db15.clientGUID = cc.`clientGUID`
+
+LEFT JOIN (
+	SELECT
+		pa.`clientGUID`,
+		SUM((IFNULL(pp.loadSum, 0) - IFNULL(tab1.payCapitalSum, 0) - IFNULL(tab2.replaceCapitalSum, 0))) AS guarantySum
+	FROM
+		pro_project pp
+	LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.`apply_ID`
+	LEFT JOIN (
+		SELECT
+			pfp.project_ID,
+			SUM(IFNULL(pfp.payCapitalSum, 0)) AS payCapitalSum
+		FROM
+			pro_factpay pfp
+		WHERE 1 = 1 AND DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='2015-01' GROUP BY
+			pfp.project_ID
+	) tab1 ON tab1.project_ID = pp.project_ID
+	LEFT JOIN (
+		SELECT
+			pre.project_ID,
+			SUM(IFNULL(pre.replaceCapitalSum, 0)) AS replaceCapitalSum
+		FROM
+			pro_replace pre
+		WHERE
+			1 = 1 AND  DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='2015-01' GROUP BY pre.project_ID
+	) tab2 ON tab2.project_ID = pp.project_ID
+	WHERE
+		pp.`busiClass` = '02' 
+		AND DATE_FORMAT(pp.reportDate,'%Y-%m') &lt;= '2015-01'
+		AND pa.guarantyOrgID in ('1b6f710ce5054d1d8f9d495f7bc1e142','fbe555a29dd94ed08dacf374dcd85ead','d6f953c683ea41abb946a42fc1004642','73c1bb3d20614bdfa91281622c5b9334')
+		GROUP BY pa.`clientGUID`
+) wd15 ON wd15.clientGUID = cc.`clientGUID`
+
+LEFT JOIN (
+	SELECT
+		pa.`clientGUID`,
+		SUM((IFNULL(pp.loadSum, 0) - IFNULL(tab1.payCapitalSum, 0) - IFNULL(tab2.replaceCapitalSum, 0))) AS guarantySum
+	FROM
+		pro_project pp
+	LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.`apply_ID`
+	LEFT JOIN (
+		SELECT
+			pfp.project_ID,
+			SUM(IFNULL(pfp.payCapitalSum, 0)) AS payCapitalSum
+		FROM
+			pro_factpay pfp
+		WHERE 1 = 1 AND DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='2015-01' GROUP BY
+			pfp.project_ID
+	) tab1 ON tab1.project_ID = pp.project_ID
+	LEFT JOIN (
+		SELECT
+			pre.project_ID,
+			SUM(IFNULL(pre.replaceCapitalSum, 0)) AS replaceCapitalSum
+		FROM
+			pro_replace pre
+		WHERE
+			1 = 1 AND  DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='2015-01' GROUP BY pre.project_ID
+	) tab2 ON tab2.project_ID = pp.project_ID
+	WHERE
+		pp.`busiClass` = '02' 
+		AND DATE_FORMAT(pp.reportDate,'%Y-%m') &lt;= '2015-01'
+		GROUP BY pa.`clientGUID`
+) wdAll15 ON wdAll15.clientGUID = cc.`clientGUID`
+
+LEFT JOIN (SELECT pa.`clientGUID`,SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0))) AS guarantySum FROM pro_project pp
+           LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.`apply_ID`
+           LEFT JOIN (SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum FROM pro_factpay pfp 
+                      WHERE 1=1 ${has(endyearmonthsql)?("  and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+LEFT JOIN ( SELECT pre.project_ID,SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum FROM pro_replace pre 
+                      WHERE 1=1 ${has(endyearmonthsql)?("  and  DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY pre.project_ID 
+)tab2 ON tab2.project_ID =  pp.project_ID
+WHERE  pp.`busiClass` = '01' ${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.`delayBeginDate`,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""} GROUP BY pa.`clientGUID`
+) tt1 ON tt1.clientGUID = cc.`clientGUID`
+LEFT JOIN (SELECT pa.`clientGUID`,SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0))) AS entrustSum FROM pro_project pp
+           LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.`apply_ID`
+           LEFT JOIN (SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum FROM pro_factpay pfp 
+                      WHERE 1=1 GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+WHERE  pp.`busiClass` = '02' ${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.`delayBeginDate`,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""} GROUP BY pa.`clientGUID`
+) tt2 ON tt2.clientGUID = cc.`clientGUID`
+LEFT JOIN (SELECT pa.`clientGUID`,SUM(pfp.`payCapitalSum`) payCapitalSum,SUM(pfp.`payInterestSum`) payInterestSum FROM pro_factpay pfp
+           LEFT JOIN pro_project pp ON pp.`project_ID` = pfp.`project_ID`
+           LEFT JOIN pro_apply pa ON pfp.`applyID` = pa.`apply_ID`
+           WHERE pp.`busiClass` = '02' ${has(endyearmonthsql)?("  and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} 
+           ${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.`delayBeginDate`,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+           ${has(wheresql)?(" and wheresql='"+wheresql+"'"):""} GROUP BY pa.`clientGUID`
+) pay ON pay.clientGUID = cc.`clientGUID`
+
+LEFT JOIN (SELECT pa.`clientGUID`,SUM(IFNULL(tab1.replaceSum,0)-IFNULL(tab2.returnSum,0)) AS replaceSum 
+FROM pro_project pp
+LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.`apply_ID`
+LEFT JOIN (SELECT pre.project_ID,SUM(IFNULL(pre.replaceSum,0)) AS replaceSum FROM pro_replace pre 
+	WHERE 1=1 ${has(endyearmonthsql)?("  and  DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY pre.project_ID)tab1 ON tab1.project_ID =  pp.project_ID
+LEFT JOIN (SELECT prd.projectID,SUM(IFNULL(prd.returnSum,0)) AS returnSum FROM pro_returnDetail prd 
+	WHERE 1=1 ${has(endyearmonthsql)?("  and  DATE_FORMAT(prd.returnDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY prd.projectID) tab2 ON tab2.projectID =  pp.project_ID
+WHERE  pp.`busiClass` = '01'  GROUP BY pa.`clientGUID`
+)tt3 ON tt3.clientGUID = cc.`clientGUID`
+WHERE cr.projectTypeID = '44950f5de8614f1588841a9556ba52a2' </Sql><Description>SELECT cc.fullAreaName,
+	cc.`relationMainName`,
+	cc.`clientName`,
+	IFNULL(capitalSum,0) capitalSum,
+	IFNULL(cc.liabilitySum,0) liabilitySum,
+	IFNULL(db15.guarantySum, 0) timePointSum,
+	IFNULL(wd15.`guarantySum`,0) timePointEntrustSum,
+	IFNULL(wdAll15.`guarantySum`,0) wdAllGuarantySum,
+	IFNULL(tt1.guarantySum,0) guarantySum,
+	IFNULL(cc.creditorSum,0) creditorSum,
+	IFNULL(tt2.entrustSum,0) entrustSum,
+	IFNULL(pay.payCapitalSum,0) payCapitalSum,
+	IFNULL(pay.payInterestSum,0) payInterestSum,
+	IFNULL(tt3.replaceSum,0) replaceSum
+FROM crm_client cc 
+LEFT JOIN crm_client_relationmain ccr ON ccr.`client_ID` = cc.client_ID
+LEFT JOIN crm_relationmain cr ON cr.`relationMain_ID` = ccr.`relationMain_ID`
+LEFT JOIN (
+	SELECT
+		pa.`clientGUID`,
+		SUM((IFNULL(pp.loadSum, 0) - IFNULL(tab1.payCapitalSum, 0) - IFNULL(tab2.replaceCapitalSum, 0))) AS guarantySum
+	FROM
+		pro_project pp
+	LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.`apply_ID`
+	LEFT JOIN (
+		SELECT
+			pfp.project_ID,
+			SUM(IFNULL(pfp.payCapitalSum, 0)) AS payCapitalSum
+		FROM
+			pro_factpay pfp
+		WHERE 1 = 1 AND DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='2015-01' GROUP BY
+			pfp.project_ID
+	) tab1 ON tab1.project_ID = pp.project_ID
+	LEFT JOIN (
+		SELECT
+			pre.project_ID,
+			SUM(IFNULL(pre.replaceCapitalSum, 0)) AS replaceCapitalSum
+		FROM
+			pro_replace pre
+		WHERE
+			1 = 1 AND  DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='2015-01' GROUP BY pre.project_ID
+	) tab2 ON tab2.project_ID = pp.project_ID
+	WHERE
+		pp.`busiClass` = '01' 
+		AND DATE_FORMAT(pp.reportDate,'%Y-%m')&lt;= '2015-01'
+		GROUP BY pa.`clientGUID`
+) db15 ON db15.clientGUID = cc.`clientGUID`
+
+LEFT JOIN (
+	SELECT
+		pa.`clientGUID`,
+		SUM((IFNULL(pp.loadSum, 0) - IFNULL(tab1.payCapitalSum, 0) - IFNULL(tab2.replaceCapitalSum, 0))) AS guarantySum
+	FROM
+		pro_project pp
+	LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.`apply_ID`
+	LEFT JOIN (
+		SELECT
+			pfp.project_ID,
+			SUM(IFNULL(pfp.payCapitalSum, 0)) AS payCapitalSum
+		FROM
+			pro_factpay pfp
+		WHERE 1 = 1 AND DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='2015-01' GROUP BY
+			pfp.project_ID
+	) tab1 ON tab1.project_ID = pp.project_ID
+	LEFT JOIN (
+		SELECT
+			pre.project_ID,
+			SUM(IFNULL(pre.replaceCapitalSum, 0)) AS replaceCapitalSum
+		FROM
+			pro_replace pre
+		WHERE
+			1 = 1 AND  DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='2015-01' GROUP BY pre.project_ID
+	) tab2 ON tab2.project_ID = pp.project_ID
+	WHERE
+		pp.`busiClass` = '02' 
+		AND DATE_FORMAT(pp.reportDate,'%Y-%m') &lt;= '2015-01'
+		AND pa.guarantyOrgID in ('1b6f710ce5054d1d8f9d495f7bc1e142','fbe555a29dd94ed08dacf374dcd85ead','d6f953c683ea41abb946a42fc1004642','73c1bb3d20614bdfa91281622c5b9334')
+		GROUP BY pa.`clientGUID`
+) wd15 ON wd15.clientGUID = cc.`clientGUID`
+
+LEFT JOIN (
+	SELECT
+		pa.`clientGUID`,
+		SUM((IFNULL(pp.loadSum, 0) - IFNULL(tab1.payCapitalSum, 0) - IFNULL(tab2.replaceCapitalSum, 0))) AS guarantySum
+	FROM
+		pro_project pp
+	LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.`apply_ID`
+	LEFT JOIN (
+		SELECT
+			pfp.project_ID,
+			SUM(IFNULL(pfp.payCapitalSum, 0)) AS payCapitalSum
+		FROM
+			pro_factpay pfp
+		WHERE 1 = 1 AND DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='2015-01' GROUP BY
+			pfp.project_ID
+	) tab1 ON tab1.project_ID = pp.project_ID
+	LEFT JOIN (
+		SELECT
+			pre.project_ID,
+			SUM(IFNULL(pre.replaceCapitalSum, 0)) AS replaceCapitalSum
+		FROM
+			pro_replace pre
+		WHERE
+			1 = 1 AND  DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='2015-01' GROUP BY pre.project_ID
+	) tab2 ON tab2.project_ID = pp.project_ID
+	WHERE
+		pp.`busiClass` = '02' 
+		AND DATE_FORMAT(pp.reportDate,'%Y-%m') &lt;= '2015-01'
+		GROUP BY pa.`clientGUID`
+) wdAll15 ON wdAll15.clientGUID = cc.`clientGUID`
+
+LEFT JOIN (SELECT pa.`clientGUID`,SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0))) AS guarantySum FROM pro_project pp
+           LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.`apply_ID`
+           LEFT JOIN (SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum FROM pro_factpay pfp 
+                      WHERE 1=1 ${has(endyearmonthsql)?("  and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+LEFT JOIN ( SELECT pre.project_ID,SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum FROM pro_replace pre 
+                      WHERE 1=1 ${has(endyearmonthsql)?("  and  DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY pre.project_ID 
+)tab2 ON tab2.project_ID =  pp.project_ID
+WHERE  pp.`busiClass` = '01' ${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.`delayBeginDate`,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""} GROUP BY pa.`clientGUID`
+) tt1 ON tt1.clientGUID = cc.`clientGUID`
+LEFT JOIN (SELECT pa.`clientGUID`,SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0))) AS entrustSum FROM pro_project pp
+           LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.`apply_ID`
+           LEFT JOIN (SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum FROM pro_factpay pfp 
+                      WHERE 1=1 GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+WHERE  pp.`busiClass` = '02' ${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.`delayBeginDate`,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""} GROUP BY pa.`clientGUID`
+) tt2 ON tt2.clientGUID = cc.`clientGUID`
+LEFT JOIN (SELECT pa.`clientGUID`,SUM(pfp.`payCapitalSum`) payCapitalSum,SUM(pfp.`payInterestSum`) payInterestSum FROM pro_factpay pfp
+           LEFT JOIN pro_project pp ON pp.`project_ID` = pfp.`project_ID`
+           LEFT JOIN pro_apply pa ON pfp.`applyID` = pa.`apply_ID`
+           WHERE pp.`busiClass` = '02' ${has(endyearmonthsql)?("  and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} 
+           ${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.`delayBeginDate`,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+           ${has(wheresql)?(" and wheresql='"+wheresql+"'"):""} GROUP BY pa.`clientGUID`
+) pay ON pay.clientGUID = cc.`clientGUID`
+
+LEFT JOIN (SELECT pa.`clientGUID`,SUM(IFNULL(tab1.replaceSum,0)-IFNULL(tab2.returnSum,0)) AS replaceSum 
+FROM pro_project pp
+LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.`apply_ID`
+LEFT JOIN (SELECT pre.project_ID,SUM(IFNULL(pre.replaceSum,0)) AS replaceSum FROM pro_replace pre 
+	WHERE 1=1 ${has(endyearmonthsql)?("  and  DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY pre.project_ID)tab1 ON tab1.project_ID =  pp.project_ID
+LEFT JOIN (SELECT prd.projectID,SUM(IFNULL(prd.returnSum,0)) AS returnSum FROM pro_returnDetail prd 
+	WHERE 1=1 ${has(endyearmonthsql)?("  and  DATE_FORMAT(prd.returnDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY prd.projectID) tab2 ON tab2.projectID =  pp.project_ID
+WHERE  pp.`busiClass` = '01'  GROUP BY pa.`clientGUID`
+)tt3 ON tt3.clientGUID = cc.`clientGUID`
+WHERE cr.projectTypeID = '44950f5de8614f1588841a9556ba52a2' </Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">relationMainName</IndexFields><TagName>tab_detail</TagName></Item0><Item1><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">relationMainName</IndexFields><TagName>index_relationMainName</TagName></Item0></Children><Reader Class="SqlReader"><Name>dic_relationMainName</Name><Sql>SELECT cr.relationMainName FROM crm_relationmain cr WHERE cr.projectTypeID = '44950f5de8614f1588841a9556ba52a2' </Sql><Description>SELECT cr.relationMainName FROM crm_relationmain cr WHERE cr.projectTypeID = '44950f5de8614f1588841a9556ba52a2' </Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">relationMainName</IndexFields><TagName>dic_relationMainName</TagName></Item1></Children></NodeSource><Properties/></jatools>

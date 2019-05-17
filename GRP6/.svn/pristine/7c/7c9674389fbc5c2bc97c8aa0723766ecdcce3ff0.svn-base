@@ -1,0 +1,71 @@
+package com.zjm.crm.db.map;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import com.zjm.crm.db.model.Client;
+import com.zjm.crm.db.model.Crm_relationMain;
+import com.zjm.pro.db.model.Pro_projectForProVo;
+import com.zjm.common.db.model.PageTable;
+import com.zjm.common.db.model.User;
+
+@Repository
+public interface Crm_relationMainMapper {
+	/**
+	 * 查询重点项目关联主体列表
+	 */
+	public List<Pro_projectForProVo> selectKeyProjectRelationMain(PageTable pageTable);
+	/**
+	 * 查询重点项目关联主体列表--查询总记录数
+	 */
+	public Long selectKeyProjectRelationMain_count(PageTable pageTable);
+	/**
+	 * 查询关联主体列表
+	 */
+	public List<Crm_relationMain> selectRelationMainPageTables(PageTable pageTable);
+	/**
+	 * 查询关联主体总数 
+	 */
+	public Long selectRelationMainPageTables_count(PageTable pageTable);
+	/**
+	 * 新增一个主体
+	 */
+	public Integer insertOneRelationMain(Crm_relationMain relationMain);
+	/**
+	 * 判断新增主体名是否已存在
+	 */
+	public Integer isExistMainName(Crm_relationMain relationMain);
+	/**
+	 * 批量删除
+	 */
+	public Integer batchDeleteRelationMainByIDs(Crm_relationMain relationMain);
+	/**
+	 * 根据ID查询单个关联主体的信息
+	 */
+	public Crm_relationMain selectOneRelationMainById(Crm_relationMain relationMain);
+	/**
+	 * 修改一个关联主体
+	 */
+	public Integer updateOneRelationMain(Crm_relationMain relationMain);
+	/**
+	 * 根据主体ID查询主体名称
+	 */
+	public String selectRelationMainNameByID(String relationMain_ID);
+	/**
+	 * 批量 移出重点项目
+	 */
+	public Integer removeKeyProject(Crm_relationMain relationMain);
+	
+	/**
+	 * 根据用户id删除客户关联信息
+	 */
+	public Integer deleteByClient_ID(String client_ID);
+	
+	/**
+	 * 查询关系名对应的所有客户公司
+	 * @param relaMain_ID
+	 * @return
+	 */
+	public List<Client> selectClientById(String relaMain_ID);
+}

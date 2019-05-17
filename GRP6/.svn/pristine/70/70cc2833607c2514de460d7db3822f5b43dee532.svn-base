@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.crm.db.map.Crm_applyMapper">
+	
+	<!-- 咨询申请表信息 -->
+	<resultMap type="com.zjm.crm.db.model.Crm_apply" id="ApplyResultMap">
+		<id property="capply_ID" column="capply_ID" />
+		<result property="applyNum" column="applyNum" />
+		<result property="clientType" column="clientType" />
+		<result property="clientName" column="clientName" />
+		<result property="certificateCode" column="certificateCode" />
+		<result property="busiTypeID" column="busiTypeID" />
+		<result property="busiTypeName" column="busiTypeName" />
+		<result property="applySum" column="applySum" />
+		<result property="periodMonth" column="periodMonth" />
+		<result property="periodDay" column="periodDay" />
+		<result property="periodMonthDay" column="periodMonthDay" />
+		<result property="cooperationID" column="cooperationID" />
+		<result property="cooperationName" column="cooperationName" />
+		<result property="clientSourceID" column="clientSourceID" />
+		<result property="clientSourceName" column="clientSourceName" />
+		<result property="clientSourceDesc" column="clientSourceDesc" />
+		<result property="contact" column="contact" />
+		<result property="phone" column="phone" />
+		<result property="telephone" column="telephone" />
+		<result property="loadUsed" column="loadUsed" />
+		<result property="repaymentPlan" column="repaymentPlan" />
+		<result property="provideGuaranty" column="provideGuaranty" />
+		<result property="receiveDeapartID" column="receiveDeapartID" />
+		<result property="receiveDeapartName" column="receiveDeapartName" />
+		<result property="receiveUserID" column="receiveUserID" />
+		<result property="receiveUserName" column="receiveUserName" />
+		<result property="receiveDate" column="receiveDate" />
+		<result property="approvalStatu" column="approvalStatu" />
+		<result property="noAgreeDesc" column="noAgreeDesc" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="unit_uidName" column="unit_uidName" />
+		<result property="updateUserName" column="updateUserName" />
+		<result property="updateDateTime" column="updateDateTime" />
+	</resultMap>
+	
+	<!-- 查询申请分页列表  -->
+	<select id="selectApplyPageTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="ApplyResultMap">
+		<![CDATA[
+			SELECT
+				capply_ID,
+				applyNum,
+				clientType,
+				clientName,
+				certificateCode,
+				busiTypeID,
+				busiTypeName,
+				applySum,
+				periodMonth,
+				periodDay,
+				periodMonthDay,
+				cooperationID,
+				cooperationName,
+				clientSourceID,
+				clientSourceName,
+				clientSourceDesc,
+				contact,
+				phone,
+				telephone,
+				loadUsed,
+				repaymentPlan,
+				provideGuaranty,
+				receiveDeapartID,
+				receiveDeapartName,
+				receiveUserID,
+				receiveUserName,
+				receiveDate,
+				approvalStatu,
+				noAgreeDesc,
+				unit_uid,
+				unit_uidName,
+				updateUserName,
+				updateDateTime
+			FROM
+				crm_apply
+			WHERE
+				unit_uid=#{queryCondition.unit_uid}
+			AND	clientType=#{queryCondition.apply_clientType}
+			AND approvalStatu=#{queryCondition.apply_approvalStatu} 
+				${wheresql}  
+			LIMIT #{pageNumber},#{pageSize}  
+		]]>
+	</select>
+	<!-- 查询客户记录添加start -->
+		<!-- 查询记录分页列表  -->
+	<select id="selectRegisterPageTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="ApplyResultMap">
+		<![CDATA[
+			SELECT
+				capply_ID,
+				applyNum,
+				clientType,
+				clientName,
+				certificateCode,
+				busiTypeID,
+				busiTypeName,
+				applySum,
+				periodMonth,
+				periodDay,
+				periodMonthDay,
+				cooperationID,
+				cooperationName,
+				clientSourceID,
+				clientSourceName,
+				clientSourceDesc,
+				contact,
+				phone,
+				telephone,
+				loadUsed,
+				repaymentPlan,
+				provideGuaranty,
+				receiveDeapartID,
+				receiveDeapartName,
+				receiveUserID,
+				receiveUserName,
+				receiveDate,
+				approvalStatu,
+				noAgreeDesc,
+				unit_uid,
+				unit_uidName,
+				updateUserName,
+				updateDateTime
+			FROM
+				crm_apply
+			WHERE
+				unit_uid=#{queryCondition.unit_uid}
+			AND	clientType=#{queryCondition.apply_clientType}
+				${wheresql}  
+			LIMIT #{pageNumber},#{pageSize}  
+		]]>
+	</select>
+		<!-- 查询记录分页列表-查询总记录数 -->
+	<select id="selectRegisterPageTable_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		 <![CDATA[
+		 	SELECT 
+		 		COUNT(1) 
+		 	FROM 
+		 		crm_apply 
+		 	WHERE
+				clientType=#{queryCondition.apply_clientType}
+				${wheresql}
+		 ]]> 
+	</select>
+		<!-- 查询客户记录添加end -->
+	<!-- 查询申请分页列表-查询总记录数 -->
+	<select id="selectApplyPageTable_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		 <![CDATA[
+		 	SELECT 
+		 		COUNT(1) 
+		 	FROM 
+		 		crm_apply 
+		 	WHERE
+				clientType=#{queryCondition.apply_clientType}
+			AND approvalStatu=#{queryCondition.apply_approvalStatu} 
+				${wheresql}
+		 ]]> 
+	</select>
+	
+	<!-- 新增一条申请记录 -->
+	<insert id="insertOneApply" parameterType="com.zjm.crm.db.model.Crm_apply">
+		<![CDATA[
+			INSERT INTO crm_apply (
+				capply_ID,
+				applyNum,
+				clientType,
+				clientName,
+				certificateCode,
+				busiTypeID,
+				busiTypeName,
+				applySum,
+				periodMonth,
+				periodDay,
+				periodMonthDay,
+				cooperationID,
+				cooperationName,
+				clientSourceID,
+				clientSourceName,
+				clientSourceDesc,
+				contact,
+				phone,
+				telephone,
+				loadUsed,
+				repaymentPlan,
+				provideGuaranty,
+				receiveDeapartID,
+				receiveDeapartName,
+				receiveUserID,
+				receiveUserName,
+				receiveDate,
+				approvalStatu,
+				unit_uid,
+				unit_uidName,
+				updateUserName,
+				updateDateTime
+			)
+			VALUES (
+				#{capply_ID},
+				#{applyNum},
+				#{clientType},
+				#{clientName},
+				#{certificateCode},
+				#{busiTypeID},
+				#{busiTypeName},
+				#{applySum},
+				#{periodMonth},
+				#{periodDay},
+				#{periodMonthDay},
+				#{cooperationID},
+				#{cooperationName},
+				#{clientSourceID},
+				#{clientSourceName},
+				#{clientSourceDesc},
+				#{contact},
+				#{phone},
+				#{telephone},
+				#{loadUsed},
+				#{repaymentPlan},
+				#{provideGuaranty},
+				#{receiveDeapartID},
+				#{receiveDeapartName},
+				#{receiveUserID},
+				#{receiveUserName},
+				#{receiveDate},
+				"01",
+				#{unit_uid},
+				#{unit_uidName},
+				#{updateUserName},
+				NOW()
+			) 
+		]]>
+	</insert>
+	
+	<!-- 插入前查询接待日期年份最大编号 -->
+	<select id="selectMaxApplyNum" parameterType="com.zjm.crm.db.model.Crm_apply" resultType="string">
+		SELECT 
+			MAX(applyNum) 
+		FROM 
+			crm_apply
+		WHERE
+			applyNum like CONCAT(#{receiveYear},'%')
+		AND unit_uid=#{unit_uid}
+	</select>
+	
+	<!-- 修改一条申请记录 -->
+	<update id="updateOneApply" parameterType="com.zjm.crm.db.model.Crm_apply">
+		<![CDATA[
+			UPDATE 
+				crm_apply
+			SET
+				clientName = #{clientName},
+				certificateCode = #{certificateCode},
+				busiTypeID = #{busiTypeID},
+				busiTypeName = #{busiTypeName},
+				applySum = #{applySum},
+				periodMonth = #{periodMonth},
+				periodDay = #{periodDay},
+				periodMonthDay = #{periodMonthDay},
+				cooperationID = #{cooperationID},
+				cooperationName = #{cooperationName},
+				clientSourceID = #{clientSourceID},
+				clientSourceName = #{clientSourceName},
+				clientSourceDesc = #{clientSourceDesc},
+				contact = #{contact},
+				phone = #{phone},
+				telephone = #{telephone},
+				loadUsed = #{loadUsed},
+				repaymentPlan = #{repaymentPlan},
+				provideGuaranty = #{provideGuaranty},
+				receiveDeapartID = #{receiveDeapartID},
+				receiveDeapartName = #{receiveDeapartName},
+				receiveUserID = #{receiveUserID},
+				receiveUserName = #{receiveUserName},
+				receiveDate = #{receiveDate},
+				updateUserName = #{updateUserName},
+				updateDateTime = NOW(),
+				noAgreeDesc = #{noAgreeDesc}
+			WHERE
+				unit_uid=#{unit_uid}
+			AND clientType=#{clientType}
+			AND capply_ID = #{capply_ID}			
+		]]>
+	</update>
+	
+	<!-- 查看一条申请记录  -->
+	<select id="selectOneApply" parameterType="com.zjm.crm.db.model.Crm_apply" resultMap="ApplyResultMap">
+		<![CDATA[
+			SELECT
+				capply_ID,
+				applyNum,
+				clientType,
+				clientName,
+				certificateCode,
+				busiTypeID,
+				busiTypeName,
+				applySum,
+				periodMonth,
+				periodDay,
+				periodMonthDay,
+				cooperationID,
+				cooperationName,
+				clientSourceID,
+				clientSourceName,
+				clientSourceDesc,
+				contact,
+				phone,
+				telephone,
+				loadUsed,
+				repaymentPlan,
+				provideGuaranty,
+				receiveDeapartID,
+				receiveDeapartName,
+				receiveUserID,
+				receiveUserName,
+				receiveDate,
+				approvalStatu,
+				noAgreeDesc,
+				unit_uid,
+				unit_uidName,
+				updateUserName,
+				updateDateTime
+			FROM
+				crm_apply
+			WHERE
+				unit_uid=#{unit_uid}
+			AND capply_ID=#{capply_ID}
+		]]>
+	</select>
+	
+	<!-- 删除一条登记记录 -->
+	<delete id="deleteOneApply" parameterType="com.zjm.crm.db.model.Crm_apply">
+		<![CDATA[
+			DELETE FROM 
+				crm_apply
+			WHERE
+				unit_uid=#{unit_uid}
+			AND capply_ID=#{capply_ID}
+		]]>
+	</delete>
+	
+	<!-- 同意受理，设置审批状态approvalStatu = 02 -->
+	<update id="agreeToAccept" parameterType="com.zjm.crm.db.model.Crm_apply">
+		<![CDATA[
+			UPDATE 
+				crm_apply
+			SET
+				approvalStatu="02",
+				updateUserName = #{updateUserName},
+				updateDateTime = NOW()
+				
+			WHERE
+				unit_uid=#{unit_uid}
+			AND capply_ID=#{capply_ID}
+		]]>
+	</update>
+	
+	<!-- 不同意受理，设置审批状态approvalStatu = 03 -->
+	<update id="disagreeToAccept" parameterType="com.zjm.crm.db.model.Crm_apply">
+		<![CDATA[
+			UPDATE 
+				crm_apply
+			SET
+				approvalStatu="03", 
+				noAgreeDesc = #{noAgreeDesc},
+				updateUserName = #{updateUserName},
+				updateDateTime = NOW()
+			WHERE
+				unit_uid=#{unit_uid}
+			AND capply_ID=#{capply_ID}
+		]]>
+	</update>
+	
+	<!-- 判断客户名称是否重复 -->
+	<select id="isExistClientName" parameterType="com.zjm.crm.db.model.Crm_apply" resultType="java.lang.Integer">
+		SELECT
+			COUNT(1)
+		FROM
+			crm_apply
+		WHERE
+			unit_uid = #{unit_uid}
+		AND	clientType = #{clientType}
+		AND	clientName = #{clientName}
+		<if test="capply_ID != null">
+			AND capply_ID != #{capply_ID}
+		</if>
+	</select>
+	
+<!-- <![CDATA[]]> -->	
+</mapper>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjm.sys.db.map.Sys_unitsMapper" >
+	<!-- 机构表信息 -->
+  <resultMap id="UnitResultMap" type="com.zjm.sys.db.model.Sys_units" >
+    <result column="unit_uid" property="unit_uid" />
+    <result column="punit_uid" property="punit_uid"/>
+    <result column="unit_uidName" property="unit_uidName"/>
+    <result column="unit_uidFullCode" property="unit_uidFullCode"/>
+    <result column="order_id" property="order_id"/>
+    <result column="createdatetime" property="createdatetime"/>
+    <result column="create_user" property="create_user" />
+    <result column="upatedatetime" property="upatedatetime"/>
+    <result column="update_user" property="update_user"/>
+    <result column="isEable" property="isEable"/>
+    <result column="isDefault" property="isDefault"/>
+    <result column="unificationID" property="unificationID"/>
+  </resultMap>
+  <!-- 查询所有的担保机构 -->
+	<select id="selectAllUnitsList" resultMap="UnitResultMap" parameterType="java.lang.String">
+		<![CDATA[
+		SELECT
+			unit_uid,
+			punit_uid,
+			unit_uidName,
+			unit_uidFullCode,
+			order_id,
+			createdatetime,
+			create_user,
+			upatedatetime,
+			update_user,
+			isEable,
+			isDefault,
+			unificationID
+		FROM sys_units where 1=1 ${value} 
+		ORDER BY order_id
+		]]>
+	</select>
+    <!-- 插入一个担保机构信息 -->
+	<insert id="insertOneUnitsInfo"	parameterType="com.zjm.sys.db.model.Sys_units">
+		<![CDATA[
+		INSERT INTO sys_units (
+		unit_uid,
+		punit_uid,
+		unit_uidName,
+		unit_uidFullCode,
+		order_id,
+		createdatetime,
+		create_user,
+		isEable,
+		isDefault,
+		unificationID
+		)
+		VALUES
+		(
+		#{unit_uid},
+		#{punit_uid},
+		#{unit_uidName},
+		#{unit_uidFullCode},
+		#{order_id},
+		NOW(),
+		#{create_user},
+		#{isEable},
+		#{isDefault},
+		#{unificationID}
+		)
+		]]>
+	</insert>
+  <!--  查询同级节点下共有多少机构 -->
+	<select id="selectUnitsOrderId" parameterType="com.zjm.sys.db.model.Sys_units" resultType="java.lang.Integer">
+		<![CDATA[SELECT count(punit_uid) FROM sys_units where punit_uid=#{punit_uid}]]>
+	</select>
+	<!-- 查询所有的机构    分页列表-->
+	<select id="selectUnitsPageTables" parameterType="com.zjm.common.db.model.PageTable" resultMap="UnitResultMap">
+		<![CDATA[
+		SELECT
+			unit_uid,
+			punit_uid,
+			unit_uidName,
+			unit_uidFullCode,
+			order_id,
+			createdatetime,
+			create_user,
+			upatedatetime,
+			update_user,
+			isEable,
+			isDefault,
+			unificationID
+		 FROM sys_units 
+		 where 1=1 ${wheresql}   
+		 limit #{pageNumber},#{pageSize}
+	   ]]>
+	</select>
+	<!-- 查询所有的机构   分页列表 总记录数-->
+	<select id="selectUnitsPageTables_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		<![CDATA[SELECT count(unit_uid) FROM sys_units where 1=1 ${wheresql} ]]>
+	</select>
+	<!-- 查询一个机构-->
+	<select id="selectOneUnitsInfo" parameterType="com.zjm.sys.db.model.Sys_units" resultMap="UnitResultMap">
+		<![CDATA[
+		SELECT 
+			unit_uid,
+			punit_uid,
+			unit_uidName,
+			unit_uidFullCode,
+			order_id,
+			createdatetime,
+			create_user,
+			upatedatetime,
+			update_user,
+			isEable,
+			isDefault,
+			unificationID
+		FROM sys_units 
+		where unit_uid=#{unit_uid} 
+		]]>
+	</select>
+	
+	<!-- 查询一个父机构-->
+	<select id="selectPUnitsInfo" parameterType="com.zjm.sys.db.model.Sys_units" resultMap="UnitResultMap">
+		<![CDATA[
+		SELECT 
+			unit_uid,
+			punit_uid,
+			unit_uidName,
+			unit_uidFullCode,
+			order_id,
+			createdatetime,
+			create_user,
+			upatedatetime,
+			update_user,
+			isEable,
+			isDefault,
+			unificationID
+		FROM sys_units 
+		where unit_uid=#{punit_uid} 
+		]]>
+	</select>
+	
+	<!-- 更新一个机构信息 -->	
+	<update id="updateOneUnitsInfo" parameterType="com.zjm.sys.db.model.Sys_units">
+		<![CDATA[
+		UPDATE 
+		  sys_units
+		SET
+		  unit_uidName = #{unit_uidName},
+		  unit_uidFullCode = #{unit_uidFullCode},
+		  isEable = #{isEable},
+		  isDefault = #{isDefault},
+		  unificationID = #{unificationID},
+		  upatedatetime = NOW(),
+		  update_user = #{update_user}
+		WHERE unit_uid = #{unit_uid}
+		  ]]>
+	</update>
+	<!-- 删除一个机构信息 -->
+	<delete id="deleteOneUnitsInfo" parameterType="com.zjm.sys.db.model.Sys_units">
+		<![CDATA[DELETE FROM sys_units WHERE unit_uid = #{unit_uid} ]]>
+	</delete>
+	<!-- 判断机构名是否存在-->
+	<select id="selectUnitsIsExist" parameterType="java.lang.String" resultType="java.lang.Integer">
+		<![CDATA[SELECT count(unit_uid) FROM sys_units where 1=1 ${value} ]]>
+	</select>
+</mapper>

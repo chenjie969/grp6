@@ -1,0 +1,40 @@
+package com.opensymphony.test;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.opensymphony.workflow.Workflow;
+
+public class Test {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// 测试运行流程，创建流程实例
+//		ApplicationContext cxt = new ClassPathXmlApplicationContext(
+//				"classpath:/spring/applicationContext.xml");
+//	    Workflow wf = (Workflow) cxt.getBean("workflow");
+//	    long id=0;
+//	    try {
+//	       //id = wf.initialize("bankload", 100, null);//返回流程实例的id
+//	  
+//	    
+//	   //测试执行一个动作
+//	    Map map=new HashMap();
+////	    wf.doAction(id, 10101601, map); 
+//		Map<String,Long> rolemap=new HashMap();
+//	    //wf.doAction(id, 10101601, map,rolemap); 
+//	    
+//	    System.out.println("success!!!");
+//	    
+//	    } catch (Exception e) {
+//		       System.out.println("error:" + e);
+//	        }//end catch
+	    
+	}
+
+}

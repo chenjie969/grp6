@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjm.sys.db.map.C_multiLevelSortMapper" >
+  <resultMap id="BaseResultMap" type="com.zjm.sys.db.model.C_multiLevelSort" >
+    <id column="multiLevelSortID" property="multilevelsortid"  />
+    <id column="unit_uid" property="unitUid"  />
+    <result column="pmultiLevelSortID" property="pmultilevelsortid"  />
+    <result column="multiLevelSortName" property="multilevelsortname"  />
+    <result column="multiLevelSortFullCode" property="multilevelsortfullcode"  />
+    <result column="url" property="url"  />
+    <result column="order_id" property="orderId"  />
+    <result column="createdatetime" property="createdatetime"  />
+    <result column="create_user" property="createUser"  />
+    <result column="upatedatetime" property="upatedatetime"  />
+    <result column="update_user" property="updateUser"  />
+    <result column="isEable" property="iseable"  />
+    <result column="isEdit" property="isedit"  />
+    <result column="isDefault" property="isDefault"  />
+    <result column="unificationID" property="unificationid"  />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    multiLevelSortID, unit_uid, pmultiLevelSortID, multiLevelSortName, multiLevelSortFullCode, 
+    url, order_id, createdatetime, create_user, upatedatetime, update_user, isEable, 
+    isEdit, isDefault, unificationID
+  </sql>
+  
+  <!-- 查询所有多级字典 -->
+  <select id="selectAllmultiLevelSortList" parameterType="com.zjm.sys.db.model.C_multiLevelSort" resultMap="BaseResultMap">
+  	<![CDATA[
+  		select 
+  			multiLevelSortID, unit_uid, pmultiLevelSortID, multiLevelSortName, multiLevelSortFullCode, 
+ 	  		url, order_id, createdatetime, create_user, upatedatetime, update_user, isEable, 
+    		isEdit, isDefault, unificationID
+    	from 
+    	c_multilevelsort
+    	 where 1=1 ${value}  ORDER BY order_id
+  	]]>
+  </select>
+  
+  <!-- 插入 添加一个多级字典信息 -->
+  <insert id="insertOnemultiLevelSortInfo" parameterType="com.zjm.sys.db.model.C_multiLevelSort">
+  	<![CDATA[
+	    insert into c_multilevelsort (
+	    	multiLevelSortID, 
+	    	unit_uid, 
+	    	pmultiLevelSortID, 
+	      	multiLevelSortName, 
+	      	multiLevelSortFullCode, 
+	        url, 
+	        order_id, 
+	        createdatetime, 
+	        create_user, 
+	        upatedatetime, 
+	        update_user, 
+	        isEable, 
+	        isEdit, 
+	        isDefault, 
+	        unificationID
+	      )
+	    values (
+	    	#{multilevelsortid}, 
+	    	#{unitUid}, 
+	    	#{pmultilevelsortid}, 
+	        #{multilevelsortname}, 
+	        #{multilevelsortfullcode}, 
+	        #{url}, 
+	        #{orderId}, 
+	        NOW(), 
+  	        #{createUser}, 
+ 	        NOW(), 
+	        #{updateUser}, 
+	        #{iseable}, 
+	        #{isedit}, 
+	        #{isDefault}, 
+	        #{unificationid}
+	      )
+	  ]]>    
+  </insert>
+  
+  	<!-- 查询一个多级字典信息 -->
+  <select id="selectOnemultiLevelSortInfo" resultMap="BaseResultMap" parameterType="com.zjm.sys.db.model.C_multiLevelSort" >
+  	<![CDATA[
+	   	 select 
+	  		multiLevelSortID, unit_uid, pmultiLevelSortID, multiLevelSortName, multiLevelSortFullCode, 
+	 	  	url, order_id, createdatetime, create_user, upatedatetime, update_user, isEable, 
+	    	isEdit, isDefault, unificationID
+		from c_multilevelsort
+		where multiLevelSortID = #{multilevelsortid}
+	]]>  
+  </select>
+  	
+  		<!-- 查询一个多级字典信息 -->
+  <select id="selectOnemultiLevelSortInfoByWheresql" parameterType="java.lang.String" resultMap="BaseResultMap" >
+	   	 select 
+	  		multiLevelSortID, unit_uid, pmultiLevelSortID, multiLevelSortName, multiLevelSortFullCode, 
+	 	  	url, order_id, createdatetime, create_user, upatedatetime, update_user, isEable, 
+	    	isEdit, isDefault, unificationID
+		from c_multilevelsort
+		where 1=1 ${value}
+  </select>
+  	
+  	
+  	
+  	<!-- 更新一个多级字典信息 -->
+  <update id="updateOnemultiLevelSortInfo" parameterType="com.zjm.sys.db.model.C_multiLevelSort" >
+    <![CDATA[
+	    update c_multilevelsort
+	    set 
+	   	  pmultiLevelSortID = #{pmultilevelsortid},
+	      multiLevelSortName = #{multilevelsortname},
+	      multiLevelSortFullCode = #{multilevelsortfullcode},
+	      url = #{url},
+	      order_id = #{orderId},
+	      create_user = #{createUser},
+	      upatedatetime = NOW(),
+	      update_user = #{updateUser},
+	      isEable = #{iseable},
+	      isEdit = #{isedit},
+	      isDefault = #{isDefault},
+	      unificationID = #{unificationid}
+	    where multiLevelSortID = #{multilevelsortid}
+     ]]>
+  </update>
+  
+  	<!-- 删除一个多级字典信息 -->
+   <delete id="deleteOnemultiLevelSortInfo" parameterType="com.zjm.sys.db.model.C_multiLevelSort" >
+  	 <![CDATA[
+	    delete from c_multilevelsort
+	    where multiLevelSortID = #{multilevelsortid}
+	 ]]>     
+  </delete>
+  	
+  	<!-- 查询多级字典列表    分页列表 -->
+    <select id="selectmultiLevelSortPageTables" resultMap="BaseResultMap" parameterType="com.zjm.common.db.model.PageTable">
+	  	<![CDATA[
+	  		 select 
+		  		multiLevelSortID, unit_uid, pmultiLevelSortID, multiLevelSortName, multiLevelSortFullCode, 
+		 	  	url, order_id, createdatetime, create_user, upatedatetime, update_user, isEable, 
+		    	isEdit, isDefault, unificationID
+			from c_multilevelsort
+	  		where 1=1 ${wheresql}   limit #{pageNumber},#{pageSize}
+	  	]]>
+  	</select>
+   
+   <!-- 查询多级字典列表    总记录数  -->
+    <select id="selectmultiLevelSortPageTables_Count" resultType="java.lang.Long" parameterType="com.zjm.common.db.model.PageTable" >
+	  	<![CDATA[
+	  		select
+	  		count(multiLevelSortID)
+	  		from c_multilevelsort
+	  		where 1=1 ${wheresql} 
+	  	]]>
+  	</select>
+  	
+  	 <!-- 公共排序方法 -->	
+	<update id="updateSortOrder" parameterType="java.lang.String">
+		<![CDATA[${value}]]>
+	</update>
+	
+	
+	<!-- 判断是否存在-->
+	<select id="selectmultiLevelSortIsExist" parameterType="java.lang.String" resultType="java.lang.Integer">
+		<![CDATA[
+			SELECT 
+			count(multiLevelSortID) 
+			FROM 
+			c_multilevelsort 
+			where 1=1 ${value} 
+		]]>
+	</select>
+	
+	<!--  查询同级节点下共有多少菜单 -->
+	<select id="selectmultiLevelSortOrderId" parameterType="com.zjm.sys.db.model.C_multiLevelSort" resultType="integer">
+		<![CDATA[
+			SELECT 
+			count(multiLevelSortID) 
+			FROM c_multilevelsort 
+			where pmultilevelsortid=#{pmultilevelsortid}
+		]]>
+	</select>
+	
+  	<!-- 由父类id查询子类多级字典  -->
+  	 <select id="selectmultiLevelSortListByPmultiLevelSortid" resultMap="BaseResultMap" parameterType="com.zjm.sys.db.model.C_multiLevelSort">
+	  	<![CDATA[
+	  		select 
+	  			multiLevelSortID, unit_uid, pmultiLevelSortID, multiLevelSortName, multiLevelSortFullCode, 
+		 	  	url, order_id, createdatetime, create_user, upatedatetime, update_user, isEable, 
+		    	isEdit, isDefault, unificationID
+		    FROM c_multilevelsort 
+		    where pmultiLevelSortID=#{pmultilevelsortid}
+	  	]]>
+  	</select>
+  	
+  
+  
+</mapper>

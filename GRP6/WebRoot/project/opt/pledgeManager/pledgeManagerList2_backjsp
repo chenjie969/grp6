@@ -1,0 +1,54 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ include file="/common_timestamp.jsp" %>
+<%@ include file="/common_head.jsp" %>
+	<style>
+		.table th, .table td {
+		vertical-align: middle!important;
+		}
+	</style>
+	<div class="page-content">
+		<div class="row"  style="display:block" id="personClientPage">
+			<div class="col-xs-12">
+				<div class="tabbable">
+						<ul class="nav nav-tabs" id="myTab">
+                       <li class="active">
+                           <a data-toggle="tab" href="#ok" id="relieveList">
+                               	已解除
+                           </a>
+                       </li>
+
+                       <li>
+                           <a data-toggle="tab" href="#no" id="disposeList">
+                            	已处置
+                           </a>
+                       </li>
+                  	</ul>
+				</div>
+				<!-- PAGE CONTENT BEGINS -->
+                <div class="row">
+                     <div class="col-sm-12">
+						<div class="page-header">
+							<button type="button" id="btn_addOptGuaranty" class="btn btn-sm btn-info" data-toggle="modal" data-target="#edit">添加</button>
+						</div>
+                     </div>
+                     <div class="col-sm-12">
+						<div class="table-responsive">
+							<table id="pledgeManager_table" style="font-size:13px !important;"></table>  
+                        </div>
+                     </div>
+				</div>
+				<!-- PAGE CONTENT ENDS -->
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+	</div><!-- /.page-content -->
+	
+<div id="optGuaranty_page"></div>
+<div id="clientList_page"></div>
+	
+<%@ include file="/common_foot.jsp" %>
+<%@ include file="/common_message.jsp" %>
+<%@ include file="/project/opt/optManager/failDel.jsp" %>
+
+<script src="<%=path %>/project/opt/pledgeManager/pledgeManager.js?v=<%=vardate%>"></script>
+
+	

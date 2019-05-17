@@ -1,0 +1,92 @@
+@CHARSET "UTF-8";
+
+.report {
+	width: 100%;
+}
+
+.report-content {
+	width: 99%;
+	margin: 0 auto;
+}
+
+  /*    --------------    */
+  
+.report-sidebar {
+    float: left;
+    width: 20%;/* 240px; *//* 168px; */
+}
+
+.report-sidebar-box {
+    background: none repeat scroll 0 0 rgb(255, 255, 255);
+    border: 1px solid rgb(224, 224, 224);
+    border-radius: 3px;
+    margin-bottom: 13px;
+}
+.report-account-nav-list {
+    margin: 0 auto;
+    /* width: 234px; *//* 162px; */
+    text-align: left;
+}
+
+.report-account-nav-list-item {
+    float: left;
+    width: 100%;
+}
+.report-account-nav-item {
+    background: url("bajr4l69.bmp") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    /* background-color: #f6f6f6; */
+    color: rgb(102, 102, 102);
+    cursor: pointer;
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    margin-top: 2px;
+    text-decoration: none;
+     text-align: center;
+}
+
+.report-account-nav-item i {
+    display: inline;
+    float: left;
+    height: 16px;
+    margin-left: 16px;
+    margin-right: 8px;
+    margin-top: 13px;
+    width: 16px;
+}
+.report-nav-main {
+    background: url("images/zhanghuzhuye.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+.report-account-nav-item span {
+    float: left;
+    font-size: 14px;
+     width: 100%;
+}
+
+.report-account-nav-list-item li {
+    border-bottom: 1px solid rgb(240, 240, 240);
+    float: left;
+    height: 42px;
+    line-height: 42px;
+    text-indent: 40px;
+    width: 100%;
+}
+
+.report-account-nav-list-item li a {
+    color: rgb(102, 102, 102);
+    display: block;
+    text-decoration: none;
+}
+/* ---  */
+.report-display{
+    width: 79.5%;/* 82.5%; */
+    float: right;
+}
+.report-display-c{
+	border: 0 none;
+    height: 1132px;/* 800px; */
+    width: 99%;
+    overflow-y: hidden;
+}
+

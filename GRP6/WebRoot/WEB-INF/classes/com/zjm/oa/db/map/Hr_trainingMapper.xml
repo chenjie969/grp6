@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+       "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   <mapper namespace="com.zjm.oa.db.map.Hr_trainingMapper">
+    <resultMap type="com.zjm.oa.db.model.Hr_training" id="trainingResultMap">
+     	 <result property="trainingID" column="trainingID"/>
+     	 <result property="staffcase_Id" column="staffcase_ID"/>
+      	 <result property="trainingYear" column="trainingYear"/>
+      	 <result property="trainingName" column="trainingName"/>
+         <result property="trainingPeriod" column="trainingPeriod"/>
+         <result property="trainingFees" column="trainingFees"/>
+         <result property="trainingNotes" column="trainingNotes"/>
+    </resultMap>
+    <!-- 增加一条记录表 -->
+    <insert id="insertOneTraining" parameterType="com.zjm.oa.db.model.Hr_training">
+    <![CDATA[
+       INSERT INTO Hr_training(
+			trainingID,
+			staffcase_Id,
+			trainingYear,
+			trainingName,
+			trainingPeriod,
+			trainingFees,
+			trainingNotes)
+       VALUES(
+          #{trainingID},
+          #{staffcase_Id},
+          #{trainingYear},
+          #{trainingName},
+          #{trainingPeriod},
+          #{trainingFees},
+          #{trainingNotes}
+
+          )
+      ]]>
+    </insert>
+    
+    <!--  更改一条记录表-->
+    <update id="updateOneTraining" parameterType="com.zjm.oa.db.model.Hr_training">
+      <![CDATA[
+      UPDATE Hr_training
+         SET
+        trainingYear=#{trainingYear},
+      	trainingName=#{trainingName},
+      	trainingPeriod=#{trainingPeriod},
+      	trainingFees=#{trainingFees},
+      	trainingNotes=#{trainingNotes}
+      	  WHERE trainingID=#{trainingID}
+      ]]>
+    </update>
+    <!-- 查询一条培训记录 -->
+    <select id="selectOneTraining" resultMap="trainingResultMap" parameterType="java.lang.String">
+    <![CDATA[
+      SELECT 
+           trainingID,
+		   staffcase_Id,
+		   trainingYear,
+		   trainingName,
+		   trainingPeriod,
+		   trainingFees,
+	       trainingNotes 
+	   FROM Hr_training
+	   WHERE trainingID=#{trainingID}
+      ]]>
+    </select>
+     <!-- 查询培训记录表 -->
+   <select id="selectTrainingTable" resultMap="trainingResultMap" parameterType="com.zjm.common.db.model.PageTable">
+   <![CDATA[
+ 	SELECT 
+		trainingID,
+		trainingYear,
+		trainingName,
+		trainingPeriod,
+		trainingFees,
+		trainingNotes
+   	 FROM hr_training
+   	 WHERE 
+		staffCase_Id = #{queryCondition.staffcase_Id}
+   ]]>
+   </select>
+   
+   </mapper>
+   

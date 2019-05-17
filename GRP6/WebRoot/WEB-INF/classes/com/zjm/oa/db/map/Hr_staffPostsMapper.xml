@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.oa.db.map.Hr_staffPostsMapper">
+	<resultMap type="com.zjm.oa.db.model.Hr_staffPosts" id="postsResultMap">	
+		<result property="postsID" column="postsID" />
+		<result property="staffcase_Id" column="staffcase_Id" />
+		<result property="agoPostsDep" column="agoPostsDep" />
+		<result property="nowPostsDep" column="nowPostsDep" />
+		<result property="agoPosts" column="agoPosts" />
+		<result property="nowPosts" column="nowPosts" />
+		<result property="agoSalary" column="agoSalary" />
+		<result property="nowSalary" column="nowSalary" />
+		<result property="changePostsDate" column="changePostsDate" />
+		<result property="postsReason" column="postsReason" />
+	</resultMap>  
+    	<!-- 查询所有的员工  分页列表-->
+	<select id="selectTransferListByCase_ID" resultMap="postsResultMap" parameterType="java.lang.String">
+
+		<![CDATA[
+		SELECT	
+		postsID,	
+		staffcase_Id,	
+			postsReason,
+			agoPostsDep,
+			agoPosts,
+			agoSalary,
+			changePostsDate			
+		FROM 
+			Hr_staffPosts 
+		 where staffcase_Id = #{staffcase_Id}
+		]]>
+	</select>
+
+<!--根据岗位ID查询  -->
+<select id="selectOneByPostId" resultMap="postsResultMap" parameterType="java.lang.String">
+		<![CDATA[
+		SELECT	
+			postsID,
+			staffcase_Id,		
+			postsReason,
+			agoPostsDep,
+			nowPostsDep,
+			agoPosts,
+			nowPosts,
+			agoSalary,
+			nowSalary,
+			changePostsDate			
+		FROM 
+			Hr_staffPosts 
+		 where postsID = #{postsID}
+		]]>
+	</select>
+
+<!-- 增加一条数据 -->
+ <insert id="insertOnePostsInfo" parameterType="com.zjm.oa.db.model.Hr_staffPosts" >
+		<![CDATA[
+		INSERT INTO hr_staffPosts (
+		
+		staffCase_ID,
+		    postsID,		 
+			agoPostsDep,
+			nowPostsDep,
+			agoPosts,
+			nowPosts,
+			agoSalary,
+			nowSalary,
+			changePostsDate,
+			postsReason
+		)
+		VALUES (
+		#{staffcase_Id},
+			#{postsID},	
+			#{agoPostsDep},
+			#{nowPostsDep},
+			#{agoPosts},
+			#{nowPosts},
+			#{agoSalary},
+			#{nowSalary},
+			NOW(),			
+			#{postsReason}
+		)
+		]]>
+	</insert>	
+	
+<!--修改一条数据  -->
+  <update id="updateOnePostsInfo" parameterType="com.zjm.oa.db.model.Hr_staffPosts" >
+    update hr_staffPosts
+    set
+        postsReason = #{postsReason},
+   
+        agoPostsDep = #{agoPostsDep},
+    
+        nowPostsDep = #{nowPostsDep},
+      
+        agoPosts = #{agoPosts},
+     
+        nowPosts = #{nowPosts},
+      
+        agoSalary = #{agoSalary},
+   
+        nowSalary = #{nowSalary},
+    
+        postsID = #{postsID},
+  
+        changePostsDate = NOW()
+   
+    where postsID = #{postsID}
+  </update>
+
+</mapper>

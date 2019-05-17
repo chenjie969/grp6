@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><jatools Class="jatools.ReportDocument" Name="jatools report template"><VariableContext/><Page><Children ItemClass="PagePanel"><Item0><Width>1518</Width><Height>131</Height><Children><Item0 Class="Text"><Variable>=if(has(enddatesql)) return enddatesql;else return $today;</Variable><HorizontalAlignment>1</HorizontalAlignment><X>604</X><Y>104</Y><Width>70</Width><Height>23</Height></Item0><Item1 Class="Label"><Text>统计日期：</Text><X>522</X><Y>104</Y><Width>73</Width><Height>23</Height></Item1><Item2 Class="Label"><Text>金额单位：万元</Text><X>1118</X><Y>107</Y><Width>110</Width><Height>23</Height></Item2><Item3 Class="Label"><Text>河北融投控股集团各公司开展业务情况</Text><Font><Face>宋体</Face><Style>1</Style><Size>36</Size></Font><HorizontalAlignment>1</HorizontalAlignment><X>263</X><Y>13</Y><Width>740</Width><Height>71</Height></Item3></Children><Type>100</Type></Item0><Item1><Y>802</Y><Width>1518</Width><Height>280</Height><Type>103</Type></Item1><Item2><Y>131</Y><Width>1518</Width><Height>671</Height><Children ItemClass="Table"><Item0><NodePath>tab_guarantee</NodePath><X>58</X><Children><Item0 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Cell><Row>1</Row><Col>4</Col></Cell></Item0><Item1 Class="Label"><Text>公司名称</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col></Cell></Item1><Item2 Class="Label"><Text>业务品种</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col></Cell></Item2><Item3 Class="Label"><Text>在保（在贷、租金本金、基金）余额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>2</Col></Cell></Item3><Item4 Class="Label"><Text>担保（委贷、基金）逾期余额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>3</Col></Cell></Item4><Item5 Class="Label"><Text>到期未收回租金余额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>4</Col></Cell></Item5><Item6 Class="Label"><Text>自成立至今代偿余额</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>5</Col></Cell></Item6><Item7 Class="Label"><Text>自成立至今追偿金额</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>6</Col></Cell></Item7><Item8 Class="Label"><Text>融投集团</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>0</Col></Cell></Item8><Item9 Class="Label"><Text>委贷</Text><Border><StyleText>border-top:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>1</Col></Cell></Item9><Item10 Class="Label"><Border><StyleText>border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Cell><Row>3</Row><Col>2</Col></Cell></Item10><Item11 Class="Label"><Border/><Cell><Row>3</Row><Col>3</Col></Cell></Item11><Item12 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Cell><Row>3</Row><Col>4</Col></Cell></Item12><Item13 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>3</Row><Col>5</Col></Cell></Item13><Item14 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>3</Row><Col>6</Col></Cell></Item14><Item15 Class="Label"><Border/><Cell><Row>4</Row><Col>2</Col></Cell></Item15><Item16 Class="Label"><Border/><Cell><Row>4</Row><Col>3</Col></Cell></Item16><Item17 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Cell><Row>4</Row><Col>4</Col></Cell></Item17><Item18 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>4</Row><Col>5</Col></Cell></Item18><Item19 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>4</Row><Col>6</Col></Cell></Item19><Item20 Class="Label"><Border/><Cell><Row>5</Row><Col>2</Col></Cell></Item20><Item21 Class="Label"><Border/><Cell><Row>5</Row><Col>3</Col></Cell></Item21><Item22 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Cell><Row>5</Row><Col>4</Col></Cell></Item22><Item23 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>5</Row><Col>5</Col></Cell></Item23><Item24 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>5</Row><Col>6</Col></Cell></Item24><Item25 Class="Label"><Border/><Cell><Row>6</Row><Col>2</Col></Cell></Item25><Item26 Class="Label"><Border/><Cell><Row>6</Row><Col>3</Col></Cell></Item26><Item27 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Cell><Row>6</Row><Col>4</Col></Cell></Item27><Item28 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>6</Row><Col>5</Col></Cell></Item28><Item29 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>6</Row><Col>6</Col></Cell></Item29><Item30 Class="Label"><Border/><Cell><Row>7</Row><Col>2</Col></Cell></Item30><Item31 Class="Label"><Border/><Cell><Row>7</Row><Col>3</Col></Cell></Item31><Item32 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Cell><Row>7</Row><Col>4</Col></Cell></Item32><Item33 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>7</Row><Col>5</Col></Cell></Item33><Item34 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>7</Row><Col>6</Col></Cell></Item34><Item35 Class="Label"><Border/><Cell><Row>8</Row><Col>2</Col></Cell></Item35><Item36 Class="Label"><Border/><Cell><Row>8</Row><Col>3</Col></Cell></Item36><Item37 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Cell><Row>8</Row><Col>4</Col></Cell></Item37><Item38 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>8</Row><Col>5</Col></Cell></Item38><Item39 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>8</Row><Col>6</Col></Cell></Item39><Item40 Class="Label"><Border/><Cell><Row>9</Row><Col>2</Col></Cell></Item40><Item41 Class="Label"><Border/><Cell><Row>9</Row><Col>3</Col></Cell></Item41><Item42 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Cell><Row>9</Row><Col>4</Col></Cell></Item42><Item43 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>9</Row><Col>5</Col></Cell></Item43><Item44 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>9</Row><Col>6</Col></Cell></Item44><Item45 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Cell><Row>10</Row><Col>2</Col></Cell></Item45><Item46 Class="Label"><Border/><Cell><Row>10</Row><Col>3</Col></Cell></Item46><Item47 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Cell><Row>10</Row><Col>4</Col></Cell></Item47><Item48 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>10</Row><Col>5</Col></Cell></Item48><Item49 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>10</Row><Col>6</Col></Cell></Item49><Item50 Class="Label"><Text>担保</Text><Border><StyleText>border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>1</Col></Cell></Item50><Item51 Class="Label"><Text>委贷</Text><Border><StyleText>border-top:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>4</Row><Col>1</Col></Cell></Item51><Item52 Class="Label"><Text>委贷</Text><Border><StyleText>border-top:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>6</Row><Col>1</Col></Cell></Item52><Item53 Class="Label"><Text>借款</Text><Border><StyleText>border-top:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>7</Row><Col>1</Col></Cell></Item53><Item54 Class="Label"><Text>租赁</Text><Border><StyleText>border-top:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>8</Row><Col>1</Col></Cell></Item54><Item55 Class="Label"><Text>股权投资</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>10</Row><Col>1</Col></Cell></Item55><Item56 Class="Label"><Text>创业投资</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>0</Col><RowSpan>2</RowSpan></Cell></Item56><Item57 Class="Label"><Text>盈和投资</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>5</Row><Col>0</Col></Cell></Item57><Item58 Class="Label"><Text>租赁公司</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>6</Row><Col>0</Col><RowSpan>3</RowSpan></Cell></Item58><Item59 Class="Label"><Text>置业公司</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>9</Row><Col>0</Col><RowSpan>2</RowSpan></Cell></Item59><Item60 Class="Label"><Text>委贷</Text><Border><StyleText>border-top:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>5</Row><Col>1</Col></Cell></Item60><Item61 Class="Label"><Text>委贷</Text><Border><StyleText>border-top:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>9</Row><Col>1</Col></Cell></Item61><Item62 Class="Label"><Text>资产公司</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>11</Row><Col>0</Col><RowSpan>2</RowSpan></Cell></Item62><Item63 Class="Label"><Text>中聚融投控股</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>13</Row><Col>0</Col></Cell></Item63><Item64 Class="Label"><Text>股权形式投资莆金矿业</Text><Border><StyleText>border-top:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>11</Row><Col>1</Col></Cell></Item64><Item65 Class="Label"><Text>购买莆金矿业基金</Text><Border><StyleText>border-top:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>12</Row><Col>1</Col></Cell></Item65><Item66 Class="Label"><Text>委贷</Text><Border><StyleText>border-top:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>13</Row><Col>1</Col></Cell></Item66><Item67 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Cell><Row>11</Row><Col>2</Col></Cell></Item67><Item68 Class="Label"><Border/><Cell><Row>11</Row><Col>3</Col></Cell></Item68><Item69 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Cell><Row>11</Row><Col>4</Col></Cell></Item69><Item70 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>11</Row><Col>5</Col></Cell></Item70><Item71 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>11</Row><Col>6</Col></Cell></Item71><Item72 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Cell><Row>12</Row><Col>2</Col></Cell></Item72><Item73 Class="Label"><Border/><Cell><Row>12</Row><Col>3</Col></Cell></Item73><Item74 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Cell><Row>12</Row><Col>4</Col></Cell></Item74><Item75 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>12</Row><Col>5</Col></Cell></Item75><Item76 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>12</Row><Col>6</Col></Cell></Item76><Item77 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Cell><Row>13</Row><Col>2</Col></Cell></Item77><Item78 Class="Label"><Border/><Cell><Row>13</Row><Col>3</Col></Cell></Item78><Item79 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Cell><Row>13</Row><Col>4</Col></Cell></Item79><Item80 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>13</Row><Col>5</Col></Cell></Item80><Item81 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>13</Row><Col>6</Col></Cell></Item81><Item82 Class="Label"><Text>融投集团委贷业务合计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>14</Row><Col>0</Col><ColSpan>2</ColSpan></Cell></Item82><Item83 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Cell><Row>14</Row><Col>2</Col></Cell></Item83><Item84 Class="Label"><Border/><Cell><Row>14</Row><Col>3</Col></Cell></Item84><Item85 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Cell><Row>14</Row><Col>4</Col></Cell></Item85><Item86 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>14</Row><Col>5</Col></Cell></Item86><Item87 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>14</Row><Col>6</Col></Cell></Item87><Item88 Class="Label"><Text>融创基金</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>15</Row><Col>0</Col></Cell></Item88><Item89 Class="Label"><Text>信瑞基金</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>16</Row><Col>0</Col></Cell></Item89><Item90 Class="Label"><Text>募集基金</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>15</Row><Col>1</Col></Cell></Item90><Item91 Class="Label"><Text>募集基金</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>16</Row><Col>1</Col></Cell></Item91><Item92 Class="Label"><Text>融投集团基金业务合计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>17</Row><Col>0</Col><ColSpan>2</ColSpan></Cell></Item92><Item93 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Cell><Row>15</Row><Col>2</Col></Cell></Item93><Item94 Class="Label"><Border/><Cell><Row>15</Row><Col>3</Col></Cell></Item94><Item95 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Cell><Row>15</Row><Col>4</Col></Cell></Item95><Item96 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>15</Row><Col>5</Col></Cell></Item96><Item97 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>15</Row><Col>6</Col></Cell></Item97><Item98 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Cell><Row>16</Row><Col>2</Col></Cell></Item98><Item99 Class="Label"><Border/><Cell><Row>16</Row><Col>3</Col></Cell></Item99><Item100 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Cell><Row>16</Row><Col>4</Col></Cell></Item100><Item101 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>16</Row><Col>5</Col></Cell></Item101><Item102 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>16</Row><Col>6</Col></Cell></Item102><Item103 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Cell><Row>17</Row><Col>2</Col></Cell></Item103><Item104 Class="Label"><Border/><Cell><Row>17</Row><Col>3</Col></Cell></Item104><Item105 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Cell><Row>17</Row><Col>4</Col></Cell></Item105><Item106 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>17</Row><Col>5</Col></Cell></Item106><Item107 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>17</Row><Col>6</Col></Cell></Item107><Item108 Class="RowPanel"><Cell><Row>2</Row><Col>0</Col><ColSpan>7</ColSpan></Cell><Children ItemClass="RowPanel"><Item0><Cell><Row>2</Row><Col>0</Col><ColSpan>7</ColSpan></Cell><Children><Item0 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>2</Row><Col>4</Col></Cell></Item0><Item1 Class="Text"><Variable>=$.id=="01"?"担保":"委贷"</Variable><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>1</Col></Cell></Item1><Item2 Class="Label"><Text>担保集团</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><PrintStyle>united-level:1;</PrintStyle><Cell><Row>2</Row><Col>0</Col></Cell></Item2><Item3 Class="Text"><Variable>=$.id=="01"?index_column4_1.overplusSum{$.id}.sum():index_column4_2.overplusSum{$.id}.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>2</Row><Col>3</Col></Cell></Item3><Item4 Class="Text"><Variable>=index_column6.Flsum{$.id}.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>2</Row><Col>5</Col></Cell></Item4><Item5 Class="Text"><Variable>=index_column7.returnSum{$.id}.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>2</Row><Col>6</Col></Cell></Item5><Item6 Class="Text"><Variable>=$.id=="01"?index_column3_1.guarantySum{$.id}:index_column3_2.guarantySum{$.id}</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>2</Row><Col>2</Col></Cell></Item6></Children><NodePath>Row</NodePath></Item0></Children><NodePath>id</NodePath></Item108><Item109 Class="Text"><Variable>=index_column2.guarantySum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>2</Col></Cell></Item109><Item110 Class="Text"><Variable>=index_column4.overplusSum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>3</Col></Cell></Item110><Item111 Class="Text"><Variable>=index_column6_1.Flsum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>0.0</Pattern></Format><Cell><Row>1</Row><Col>5</Col></Cell></Item111><Item112 Class="Text"><Variable>=index_column7_1.returnSum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>0.0</Pattern></Format><Cell><Row>1</Row><Col>6</Col></Cell></Item112></Children><ColumnWidths>96,144,228,207,144,144,126</ColumnWidths><RowHeights>40,20,20,20,20,20,20,20,20,20,20,20,20,20,40,20,20,40</RowHeights></Item0></Children><Type>102</Type></Item2></Children><PageFormat><Width>1558</Width><Height>1122</Height></PageFormat></Page><NodeSource><Children ItemClass="DatasetNodeSource"><Item0><Children ItemClass="GroupNodeSource"><Item0><Children ItemClass="RowNodeSource"><Item0/></Children><Group><Field>id</Field></Group></Item0></Children><Reader Class="SqlReader"><Name>tab_guarantee</Name><Sql>SELECT DISTINCT
+	p.busiClass  as id
+FROM pro_project p 
+WHERE 1=1  and 	p.busiClass is not null
+
+${has(enddatesql)?(" and p.reportDate&lt;='"+enddatesql+"'"):""}
+
+
+${has(fullBankCodesql)?(" and fl.fullBankCode like '"+fullBankCodesql+"%'"):""}
+${has(fullBusiTypeCodesql)?(" and fl.fullBusiTypeCode like'"+fullBusiTypeCodesql+"%'"):""}
+${has(guaraSumMinsql)?(" and (fl.loadSum&gt;"+guaraSumMinsql):""}
+${has(sumMinEqualsql)?(" or fl.loadSum="+guaraSumMinsql+")"):""}
+${has(guaraSumMaxsql)?(" and fl.loadSum&lt;"+guaraSumMaxsql):""}
+${has(guaraPeriodMonthsMinsql)?(" and ( fl.preiodMonth&gt;"+guaraPeriodMonthsMinsql):""}
+${has(monthsMinEqualsql)?(" or fl.preiodMonth="+guaraPeriodMonthsMinsql+")"):""}
+${has(guaraPeriodMonthsMaxsql)?(" and fl.preiodMonth&lt; "+guaraPeriodMonthsMaxsql):""}
+
+${has(busiPropIDsql)?(" and p.busiPropID = '"+busiPropIDsql+"'"):""}
+${has(projTypeIDsql)?(" and p.projTypeID = '"+projTypeIDsql+"'"):""}
+${has(fullDepartCodesql)?(" and p.fullDepartCode like'"+fullDepartCodesql+"%'"):""}
+${has(amanIDsql)?(" and p.aManID="+amanIDsql):""}
+${has(bmanIDsql)?(" and p.bManID="+bmanIDsql):""}
+${has(cmanIDsql)?(" and p.cManID="+cmanIDsql):""}
+${has(fullAreaCodesql)?(" and p.fullAreaCode like '"+fullAreaCodesql+"%'"):""}
+</Sql><Description>SELECT DISTINCT
+	p.busiClass  as id
+FROM pro_project p 
+WHERE 1=1  and 	p.busiClass is not null
+
+${has(enddatesql)?(" and p.reportDate&lt;='"+enddatesql+"'"):""}
+
+
+${has(fullBankCodesql)?(" and fl.fullBankCode like '"+fullBankCodesql+"%'"):""}
+${has(fullBusiTypeCodesql)?(" and fl.fullBusiTypeCode like'"+fullBusiTypeCodesql+"%'"):""}
+${has(guaraSumMinsql)?(" and (fl.loadSum&gt;"+guaraSumMinsql):""}
+${has(sumMinEqualsql)?(" or fl.loadSum="+guaraSumMinsql+")"):""}
+${has(guaraSumMaxsql)?(" and fl.loadSum&lt;"+guaraSumMaxsql):""}
+${has(guaraPeriodMonthsMinsql)?(" and ( fl.preiodMonth&gt;"+guaraPeriodMonthsMinsql):""}
+${has(monthsMinEqualsql)?(" or fl.preiodMonth="+guaraPeriodMonthsMinsql+")"):""}
+${has(guaraPeriodMonthsMaxsql)?(" and fl.preiodMonth&lt; "+guaraPeriodMonthsMaxsql):""}
+
+${has(busiPropIDsql)?(" and p.busiPropID = '"+busiPropIDsql+"'"):""}
+${has(projTypeIDsql)?(" and p.projTypeID = '"+projTypeIDsql+"'"):""}
+${has(fullDepartCodesql)?(" and p.fullDepartCode like'"+fullDepartCodesql+"%'"):""}
+${has(amanIDsql)?(" and p.aManID="+amanIDsql):""}
+${has(bmanIDsql)?(" and p.bManID="+bmanIDsql):""}
+${has(cmanIDsql)?(" and p.cManID="+cmanIDsql):""}
+${has(fullAreaCodesql)?(" and p.fullAreaCode like '"+fullAreaCodesql+"%'"):""}
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><TagName>tab_guarantee</TagName></Item0><Item1><Children ItemClass="CrossIndexNodeSource"><Item0><IndexFields Len="1">busiTypeID</IndexFields><IndexFields2 Len="1">Flsum</IndexFields2><TagName>index_column6</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab_column6</Name><Sql>SELECT 
+p.busiClass  as busiTypeID,
+SUM((IFNULL(fl.replaceSum,0)-IFNULL(tab2.returnSums,0))) AS Flsum
+FROM pro_replace fl
+LEFT JOIN pro_project p ON p.project_ID = fl.project_ID
+LEFT JOIN
+(
+	SELECT  pr.projectID AS project_ID,SUM(IFNULL(pr.returnSum,0)) as returnSums from pro_returndetail pr where  
+	 ${has(enddatesql)?("pr.returnDate&lt;='"+enddatesql+"'"):"pr.returnDate&lt;=CURDATE()"}
+	GROUP BY pr.projectID
+) tab2 on tab2.project_ID = fl.project_ID
+WHERE 
+ ${has(enddatesql)?(" fl.replaceDate&lt;='"+enddatesql+"'"):" fl.replaceDate&lt;=CURDATE()"}
+GROUP BY p.busiClass	</Sql><Description>SELECT 
+p.busiClass  as busiTypeID,
+SUM((IFNULL(fl.replaceSum,0)-IFNULL(tab2.returnSums,0))) AS Flsum
+FROM pro_replace fl
+LEFT JOIN pro_project p ON p.project_ID = fl.project_ID
+LEFT JOIN
+(
+	SELECT  pr.projectID AS project_ID,SUM(IFNULL(pr.returnSum,0)) as returnSums from pro_returndetail pr where  
+	 ${has(enddatesql)?("pr.returnDate&lt;='"+enddatesql+"'"):"pr.returnDate&lt;=CURDATE()"}
+	GROUP BY pr.projectID
+) tab2 on tab2.project_ID = fl.project_ID
+WHERE 
+ ${has(enddatesql)?(" fl.replaceDate&lt;='"+enddatesql+"'"):" fl.replaceDate&lt;=CURDATE()"}
+GROUP BY p.busiClass	</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">busiPropID</IndexFields><IndexFields2 Len="1">Flsum</IndexFields2><TagName>tab_column6</TagName></Item1><Item2><Children ItemClass="CrossIndexNodeSource"><Item0><IndexFields Len="1">busiTypeID</IndexFields><IndexFields2 Len="1">overplusSum</IndexFields2><TagName>index_column4_1</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab_column4_1</Name><Sql>SELECT 
+fl.busiClass  as busiTypeID,
+sum((IFNULL(fl.loadSum,0)-IFNULL(tab.freeSum,0)-IFNULL(tab2.replacesSum,0))) AS overplusSum
+ FROM pro_project fl
+LEFT JOIN (
+SELECT fd.project_ID,SUM(IFNULL(fd.payCapitalSum,0)) AS freeSum FROM pro_factpay fd 
+WHERE 1=1
+ ${has(enddatesql)?(" and fd.payDate&lt;='"+enddatesql+"'"):" and fd.payDate &lt;=CURDATE()"}
+GROUP BY fd.project_ID
+) tab ON tab.project_ID = fl.project_ID
+LEFT JOIN(
+	SELECT pr.project_ID,SUM(IFNULL(pr.replaceCapitalSum,0)) as replacesSum from pro_replace pr where 1=1
+ ${has(enddatesql)?(" and pr.replaceDate&lt;='"+enddatesql+"'"):" and pr.replaceDate&lt;=CURDATE()"}
+	GROUP BY pr.project_ID
+) tab2 on tab2.project_ID=fl.project_ID 
+WHERE fl.busiClass = '01'
+ AND ( (fl.isOver = 1  ${has(enddatesql)?(" and fl.overDate&lt;='"+enddatesql+"'"):""} ) or (fl.finishDate is NULL and ${has(enddatesql)?("  fl.delayEndDate &lt;='"+enddatesql+"'"):" fl.delayEndDate&lt;=now()"}) or fl.finishDate&gt; fl.overDate)
+ ${has(enddatesql)?(" and fl.reportDate&lt;='"+enddatesql+"'"):" and fl.reportDate&lt;=CURDATE()"}
+group by  fl.busiClass</Sql><Description>SELECT 
+fl.busiClass  as busiTypeID,
+sum((IFNULL(fl.loadSum,0)-IFNULL(tab.freeSum,0)-IFNULL(tab2.replacesSum,0))) AS overplusSum
+ FROM pro_project fl
+LEFT JOIN (
+SELECT fd.project_ID,SUM(IFNULL(fd.payCapitalSum,0)) AS freeSum FROM pro_factpay fd 
+WHERE 1=1
+ ${has(enddatesql)?(" and fd.payDate&lt;='"+enddatesql+"'"):" and fd.payDate &lt;=CURDATE()"}
+GROUP BY fd.project_ID
+) tab ON tab.project_ID = fl.project_ID
+LEFT JOIN(
+	SELECT pr.project_ID,SUM(IFNULL(pr.replaceCapitalSum,0)) as replacesSum from pro_replace pr where 1=1
+ ${has(enddatesql)?(" and pr.replaceDate&lt;='"+enddatesql+"'"):" and pr.replaceDate&lt;=CURDATE()"}
+	GROUP BY pr.project_ID
+) tab2 on tab2.project_ID=fl.project_ID 
+WHERE fl.busiClass = '01'
+ AND ( (fl.isOver = 1  ${has(enddatesql)?(" and fl.overDate&lt;='"+enddatesql+"'"):""} ) or (fl.finishDate is NULL and ${has(enddatesql)?("  fl.delayEndDate &lt;='"+enddatesql+"'"):" fl.delayEndDate&lt;=now()"}) or fl.finishDate&gt; fl.overDate)
+ ${has(enddatesql)?(" and fl.reportDate&lt;='"+enddatesql+"'"):" and fl.reportDate&lt;=CURDATE()"}
+group by  fl.busiClass</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">busiTypeID</IndexFields><IndexFields2 Len="1">overplusSum</IndexFields2><TagName>tab_column4_1</TagName></Item2><Item3><Children ItemClass="CrossIndexNodeSource"><Item0><IndexFields Len="1">busiTypeID</IndexFields><IndexFields2 Len="1">overplusSum</IndexFields2><TagName>index_column4_2</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab_column4_2</Name><Sql>SELECT 
+fl.busiClass  as busiTypeID,
+sum((IFNULL(fl.loadSum,0)-IFNULL(tab.freeSum,0)-IFNULL(tab2.replaceSums,0)-IFNULL(tab5.creditorsum,0))) AS overplusSum
+ FROM pro_project fl
+LEFT JOIN 
+(SELECT 
+fd.project_ID,
+SUM(IFNULL(fd.payCapitalSum,0)) AS freeSum 
+FROM pro_factpay fd 
+LEFT JOIN pro_project AS fl ON fl.project_ID = fd.project_ID
+WHERE 1=1
+	 ${has(enddatesql)?(" and fd.payDate&lt;='"+enddatesql+"'"):"and fd.payDate&lt;=CURDATE()"}
+GROUP BY fd.project_ID
+) tab ON tab.project_ID = fl.project_ID
+LEFT JOIN
+(
+  SELECT pr.project_ID,SUM(IFNULL(pr.replaceCapitalSum,0)) as replaceSums from pro_replace pr  
+	LEFT JOIN pro_project AS fl ON fl.project_ID = pr.project_ID
+	where 1=1
+	 ${has(enddatesql)?(" and pr.replaceDate&lt;='"+enddatesql+"'"):"and pr.replaceDate&lt;=CURDATE()"}
+  GROUP BY pr.project_ID
+) tab2 on tab2.project_ID = fl.project_ID
+LEFT JOIN (
+	SELECT
+		 precre.project_ID,
+		SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum 
+	FROM 
+		pro_creditor precre
+    	WHERE 1=1 
+		${has(enddatesql)?(" and DATE_FORMAT(precre.creditor_date,'%Y-%m')='"+enddatesql+"'"):""}
+	GROUP BY precre.project_ID
+   )tab5 ON tab5.project_ID =  fl.project_ID
+WHERE fl.busiClass = '02'
+ AND ( (fl.isOver = 1  ${has(enddatesql)?(" and fl.overDate&lt;='"+enddatesql+"'"):""} ) or (fl.finishDate is NULL and ${has(enddatesql)?("  fl.delayEndDate &lt;='"+enddatesql+"'"):" fl.delayEndDate&lt;=now()"}) or fl.finishDate&gt; fl.overDate)
+	 ${has(enddatesql)?(" and fl.reportDate&lt;='"+enddatesql+"'"):" and fl.reportDate&lt;=CURDATE()"} 
+GROUP BY fl.busiClass </Sql><Description>SELECT 
+fl.busiClass  as busiTypeID,
+sum((IFNULL(fl.loadSum,0)-IFNULL(tab.freeSum,0)-IFNULL(tab2.replaceSums,0)-IFNULL(tab5.creditorsum,0))) AS overplusSum
+ FROM pro_project fl
+LEFT JOIN 
+(SELECT 
+fd.project_ID,
+SUM(IFNULL(fd.payCapitalSum,0)) AS freeSum 
+FROM pro_factpay fd 
+LEFT JOIN pro_project AS fl ON fl.project_ID = fd.project_ID
+WHERE 1=1
+	 ${has(enddatesql)?(" and fd.payDate&lt;='"+enddatesql+"'"):"and fd.payDate&lt;=CURDATE()"}
+GROUP BY fd.project_ID
+) tab ON tab.project_ID = fl.project_ID
+LEFT JOIN
+(
+  SELECT pr.project_ID,SUM(IFNULL(pr.replaceCapitalSum,0)) as replaceSums from pro_replace pr  
+	LEFT JOIN pro_project AS fl ON fl.project_ID = pr.project_ID
+	where 1=1
+	 ${has(enddatesql)?(" and pr.replaceDate&lt;='"+enddatesql+"'"):"and pr.replaceDate&lt;=CURDATE()"}
+  GROUP BY pr.project_ID
+) tab2 on tab2.project_ID = fl.project_ID
+LEFT JOIN (
+	SELECT
+		 precre.project_ID,
+		SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum 
+	FROM 
+		pro_creditor precre
+    	WHERE 1=1 
+		${has(enddatesql)?(" and DATE_FORMAT(precre.creditor_date,'%Y-%m')='"+enddatesql+"'"):""}
+	GROUP BY precre.project_ID
+   )tab5 ON tab5.project_ID =  fl.project_ID
+WHERE fl.busiClass = '02'
+ AND ( (fl.isOver = 1  ${has(enddatesql)?(" and fl.overDate&lt;='"+enddatesql+"'"):""} ) or (fl.finishDate is NULL and ${has(enddatesql)?("  fl.delayEndDate &lt;='"+enddatesql+"'"):" fl.delayEndDate&lt;=now()"}) or fl.finishDate&gt; fl.overDate)
+	 ${has(enddatesql)?(" and fl.reportDate&lt;='"+enddatesql+"'"):" and fl.reportDate&lt;=CURDATE()"} 
+GROUP BY fl.busiClass </Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">busiTypeID</IndexFields><IndexFields2 Len="1">overplusSum</IndexFields2><TagName>tab_column4_2</TagName></Item3><Item4><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">busiTypeID</IndexFields><TagName>index_column3_1</TagName></Item0></Children><Reader Class="SqlReader"><Name>column3_1</Name><Sql>SELECT
+ SUM((IFNULL(fl.loadSum,0)-IFNULL(tab.freeSum,0)-IFNULL(tab2.returnSum,0)-IFNULL(tab3.replaceSum,0)-IFNULL(tab5.creditorsum,0))) AS guarantySum,
+  fl.busiClass   as busiTypeID
+FROM pro_project fl 
+LEFT JOIN 
+(SELECT fd.project_ID,SUM(IFNULL(fd.payCapitalSum,0)) AS freeSum FROM pro_factPay fd 
+WHERE    ${has(enddatesql)?(" fd.payDate&lt;='"+enddatesql+"'"):" fd.payDate&lt;=CURDATE()"}
+GROUP BY fd.project_ID
+) tab ON tab.project_ID = fl.project_ID
+LEFT JOIN(
+	SELECT pr.projectID AS project_ID,sum(IFNULL(pr.returnCapitalSum,0)) as returnSum from pro_returndetail pr WHERE
+	  ${has(enddatesql)?(" pr.returnDate&lt;='"+enddatesql+"'"):" pr.returnDate&lt;=CURDATE()"}
+	GROUP BY  pr.projectID
+) tab2 on tab2.project_ID = fl.project_ID
+LEFT JOIN
+(select pr.project_ID,sum(IFNULL(pr.replaceCapitalSum,0)) as replaceSum from pro_replace pr 
+where 1=1
+ ${has(enddatesql)?(" and pr.replaceDate&lt;='"+enddatesql+"'"):"and pr.replaceDate&lt;=CURDATE()"}
+GROUP BY pr.project_ID ) tab3 on tab3.project_ID = fl.project_ID
+LEFT JOIN (
+	SELECT
+		 precre.project_ID,
+		SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum 
+	FROM 
+		pro_creditor precre
+    	WHERE 1=1 
+		${has(enddatesql)?(" and DATE_FORMAT(precre.creditor_date,'%Y-%m')='"+enddatesql+"'"):""}
+	GROUP BY precre.project_ID
+   )tab5 ON tab5.project_ID =  fl.project_ID
+WHERE fl.busiClass='01'
+ ${has(enddatesql)?(" and fl.reportDate&lt;='"+enddatesql+"'"):" and fl.reportDate&lt;=CURDATE()"}
+GROUP BY fl.busiClass 
+</Sql><Description>SELECT
+ SUM((IFNULL(fl.loadSum,0)-IFNULL(tab.freeSum,0)-IFNULL(tab2.returnSum,0)-IFNULL(tab3.replaceSum,0)-IFNULL(tab5.creditorsum,0))) AS guarantySum,
+  fl.busiClass   as busiTypeID
+FROM pro_project fl 
+LEFT JOIN 
+(SELECT fd.project_ID,SUM(IFNULL(fd.payCapitalSum,0)) AS freeSum FROM pro_factPay fd 
+WHERE    ${has(enddatesql)?(" fd.payDate&lt;='"+enddatesql+"'"):" fd.payDate&lt;=CURDATE()"}
+GROUP BY fd.project_ID
+) tab ON tab.project_ID = fl.project_ID
+LEFT JOIN(
+	SELECT pr.projectID AS project_ID,sum(IFNULL(pr.returnCapitalSum,0)) as returnSum from pro_returndetail pr WHERE
+	  ${has(enddatesql)?(" pr.returnDate&lt;='"+enddatesql+"'"):" pr.returnDate&lt;=CURDATE()"}
+	GROUP BY  pr.projectID
+) tab2 on tab2.project_ID = fl.project_ID
+LEFT JOIN
+(select pr.project_ID,sum(IFNULL(pr.replaceCapitalSum,0)) as replaceSum from pro_replace pr 
+where 1=1
+ ${has(enddatesql)?(" and pr.replaceDate&lt;='"+enddatesql+"'"):"and pr.replaceDate&lt;=CURDATE()"}
+GROUP BY pr.project_ID ) tab3 on tab3.project_ID = fl.project_ID
+LEFT JOIN (
+	SELECT
+		 precre.project_ID,
+		SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum 
+	FROM 
+		pro_creditor precre
+    	WHERE 1=1 
+		${has(enddatesql)?(" and DATE_FORMAT(precre.creditor_date,'%Y-%m')='"+enddatesql+"'"):""}
+	GROUP BY precre.project_ID
+   )tab5 ON tab5.project_ID =  fl.project_ID
+WHERE fl.busiClass='01'
+ ${has(enddatesql)?(" and fl.reportDate&lt;='"+enddatesql+"'"):" and fl.reportDate&lt;=CURDATE()"}
+GROUP BY fl.busiClass 
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">busiTypeID</IndexFields><TagName>column3_1</TagName></Item4><Item5><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">busiTypeID</IndexFields><TagName>index_column3_2</TagName></Item0></Children><Reader Class="SqlReader"><Name>column3_2</Name><Sql>SELECT
+ SUM((IFNULL(fl.loadSum,0)-IFNULL(tab.freeSum,0)-IFNULL(tab1.badSum,0))) AS guarantySum,
+  fl.busiClass  as busiTypeID
+FROM pro_project fl 
+LEFT JOIN 
+(SELECT fd.project_ID,SUM(IFNULL(fd.payCapitalSum,0)) AS freeSum FROM pro_factpay fd 
+WHERE ${has(enddatesql)?(" fd.payDate&lt;='"+enddatesql+"'"):" fd.payDate&lt;=NOW()"}
+GROUP BY fd.project_ID
+) tab ON tab.project_ID = fl.project_ID
+LEFT JOIN
+(SELECT 
+fl1.project_ID,
+fl1.badSum AS badSum
+FROM 
+pro_project fl1
+WHERE
+	${has(begindatesql)?("fl1.badDate&lt;'"+begindatesql+"'"):"DATE_FORMAT(fl1.badDate,'%Y-%m')&lt; DATE_FORMAT(NOW(),'%Y-%m')"}
+ ) tab1 ON tab1.project_ID=fl.project_ID
+ LEFT JOIN pro_project p ON  fl.project_ID = p.project_ID
+ WHERE fl.busiClass ='02'
+ ${has(enddatesql)?(" and fl.reportDate&lt;='"+enddatesql+"'"):" and fl.reportDate&lt;=CURDATE()"}
+ GROUP BY fl.busiClass
+
+</Sql><Description>SELECT
+ SUM((IFNULL(fl.loadSum,0)-IFNULL(tab.freeSum,0)-IFNULL(tab1.badSum,0))) AS guarantySum,
+  fl.busiClass  as busiTypeID
+FROM pro_project fl 
+LEFT JOIN 
+(SELECT fd.project_ID,SUM(IFNULL(fd.payCapitalSum,0)) AS freeSum FROM pro_factpay fd 
+WHERE ${has(enddatesql)?(" fd.payDate&lt;='"+enddatesql+"'"):" fd.payDate&lt;=NOW()"}
+GROUP BY fd.project_ID
+) tab ON tab.project_ID = fl.project_ID
+LEFT JOIN
+(SELECT 
+fl1.project_ID,
+fl1.badSum AS badSum
+FROM 
+pro_project fl1
+WHERE
+	${has(begindatesql)?("fl1.badDate&lt;'"+begindatesql+"'"):"DATE_FORMAT(fl1.badDate,'%Y-%m')&lt; DATE_FORMAT(NOW(),'%Y-%m')"}
+ ) tab1 ON tab1.project_ID=fl.project_ID
+ LEFT JOIN pro_project p ON  fl.project_ID = p.project_ID
+ WHERE fl.busiClass ='02'
+ ${has(enddatesql)?(" and fl.reportDate&lt;='"+enddatesql+"'"):" and fl.reportDate&lt;=CURDATE()"}
+ GROUP BY fl.busiClass
+
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">busiTypeID</IndexFields><TagName>column3_2</TagName></Item5><Item6><Children ItemClass="CrossIndexNodeSource"><Item0><IndexFields Len="1">busiTypeID</IndexFields><IndexFields2 Len="1">returnSum</IndexFields2><TagName>index_column7</TagName></Item0></Children><Reader Class="SqlReader"><Name>column7</Name><Sql>SELECT fl.busiClass  as busiTypeID,
+  IFNULL(SUM((IFNULL(rd.returnSum,0))),0) AS  returnSum
+FROM   pro_returndetail rd 
+LEFT JOIN pro_project fl  ON rd.projectID=fl.project_ID 
+WHERE ${has(enddatesql)?("  rd.returnDate&lt;='"+enddatesql+"'"):" rd.returnDate&lt;=NOW()"} 
+               and  fl.busiClass="01" 
+group by fl.busiClass</Sql><Description>SELECT fl.busiClass  as busiTypeID,
+  IFNULL(SUM((IFNULL(rd.returnSum,0))),0) AS  returnSum
+FROM   pro_returndetail rd 
+LEFT JOIN pro_project fl  ON rd.projectID=fl.project_ID 
+WHERE ${has(enddatesql)?("  rd.returnDate&lt;='"+enddatesql+"'"):" rd.returnDate&lt;=NOW()"} 
+               and  fl.busiClass="01" 
+group by fl.busiClass</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">busiTypeID</IndexFields><IndexFields2 Len="1">returnSum</IndexFields2><TagName>column7</TagName></Item6><Item7><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">replaceSum</IndexFields><TagName>index_cumulative_replaceSum_current</TagName></Item0></Children><Reader Class="SqlReader"><Name>col3_row2_leiji_replaceSum_current</Name><Sql>-- 本月 累计代偿金额 start ...
+SELECT SUM(IFNULL(pre.replaceSum,0)) AS replaceSum
+ FROM pro_replace pre
+ LEFT JOIN pro_project pp ON pp.project_ID=pre.project_ID
+WHERE  pp.busiClass='01'
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 本月 累计代偿金额 over ...
+</Sql><Description>-- 本月 累计代偿金额 start ...
+SELECT SUM(IFNULL(pre.replaceSum,0)) AS replaceSum
+ FROM pro_replace pre
+ LEFT JOIN pro_project pp ON pp.project_ID=pre.project_ID
+WHERE  pp.busiClass='01'
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 本月 累计代偿金额 over ...
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">replaceSum</IndexFields><TagName>col3_row2_leiji_replaceSum_current</TagName></Item7><Item8><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">returnSum</IndexFields><TagName>index_free_returnSum_current</TagName></Item0></Children><Reader Class="SqlReader"><Name>col3_row4_leiji_returnSum_current</Name><Sql>-- 本月累计追偿金额 start...
+SELECT 
+  SUM(IFNULL(prd.returnSum,0)) AS returnSum
+FROM pro_returndetail prd
+LEFT JOIN  pro_project pp ON pp.project_ID=prd.projectID
+WHERE pp.busiClass='01'
+${has(endyearmonthsql)?(" and  DATE_FORMAT(prd.returnDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 本月累计追偿金额 over ...</Sql><Description>-- 本月累计追偿金额 start...
+SELECT 
+  SUM(IFNULL(prd.returnSum,0)) AS returnSum
+FROM pro_returndetail prd
+LEFT JOIN  pro_project pp ON pp.project_ID=prd.projectID
+WHERE pp.busiClass='01'
+${has(endyearmonthsql)?(" and  DATE_FORMAT(prd.returnDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 本月累计追偿金额 over ...</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">returnSum</IndexFields><TagName>col3_row4_leiji_returnSum_current</TagName></Item8><Item9><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">guarantySum</IndexFields><TagName>index_column2</TagName></Item0></Children><Reader Class="SqlReader"><Name>column2_1</Name><Sql>SELECT  SUM((IFNULL(fl.`loadSum`,0)-IFNULL(tab.freeSum,0))) AS guarantySum
+FROM pro_project fl 
+LEFT JOIN 
+(SELECT fd.project_ID,SUM(IFNULL(fd.payCapitalSum,0)) AS freeSum FROM pro_factPay fd 
+where 1=1
+ ${has(enddatesql)?(" and fd.payDate&lt;='"+enddatesql+"'"):""}
+GROUP BY fd.project_ID
+) tab ON tab.`project_ID` = fl.`project_ID`
+LEFT JOIN pro_apply pa ON pa.apply_ID=fl.apply_ID
+WHERE fl.busiClass = '02'  AND fl.isFree&lt;&gt;1 
+ and pa.guarantyOrgID in ('9d230c752d384cc78c199c2cdf2c1088')
+ ${has(enddatesql)?(" and fl.reportDate&lt;='"+enddatesql+"'"):""}</Sql><Description>SELECT  SUM((IFNULL(fl.`loadSum`,0)-IFNULL(tab.freeSum,0))) AS guarantySum
+FROM pro_project fl 
+LEFT JOIN 
+(SELECT fd.project_ID,SUM(IFNULL(fd.payCapitalSum,0)) AS freeSum FROM pro_factPay fd 
+where 1=1
+ ${has(enddatesql)?(" and fd.payDate&lt;='"+enddatesql+"'"):""}
+GROUP BY fd.project_ID
+) tab ON tab.`project_ID` = fl.`project_ID`
+LEFT JOIN pro_apply pa ON pa.apply_ID=fl.apply_ID
+WHERE fl.busiClass = '02'  AND fl.isFree&lt;&gt;1 
+ and pa.guarantyOrgID in ('9d230c752d384cc78c199c2cdf2c1088')
+ ${has(enddatesql)?(" and fl.reportDate&lt;='"+enddatesql+"'"):""}</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">guarantySum</IndexFields><TagName>column2_1</TagName></Item9><Item10><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">overplusSum</IndexFields><TagName>index_column4</TagName></Item0></Children><Reader Class="SqlReader"><Name>column4_1</Name><Sql>SELECT (IFNULL(fl.loadSum,0)-IFNULL(tab.freeSum,0)-IFNULL(tab2.badSum,0)-IFNULL(tab5.creditorsum,0)) AS overplusSum FROM pro_project fl
+LEFT JOIN pro_project AS p ON p.project_ID = fl.project_ID 
+LEFT JOIN pro_apply pa ON pa.apply_ID=fl.apply_ID
+LEFT JOIN (
+SELECT fd.project_ID,SUM(IFNULL(fd.payCapitalSum,0)) AS freeSum FROM pro_factPay fd 
+WHERE 1=1 
+  ${has(enddatesql)?(" and fd.payDate&lt;='"+enddatesql+"'"):" and fd.payDate&lt;=now()"}
+GROUP BY fd.project_ID
+) tab ON tab.`project_ID` = fl.project_ID
+LEFT JOIN (
+SELECT fl2.project_ID,fl2.badSum FROM pro_project fl2
+WHERE 1=1
+  ${has(enddatesql)?(" and fl2.badDate&lt;='"+enddatesql+"'"):"and fl2.badDate&lt;=now()"}
+) tab2 ON tab2.project_ID = fl.project_ID
+LEFT JOIN (
+	SELECT
+		 precre.project_ID,
+		SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum 
+	FROM 
+		pro_creditor precre
+    	WHERE 1=1 
+		${has(enddatesql)?(" and DATE_FORMAT(precre.creditor_date,'%Y-%m')&lt;='"+enddatesql+"'"):""}
+	GROUP BY precre.project_ID
+   )tab5 ON tab5.project_ID =  fl.project_ID
+WHERE fl.busiClass = '02' 
+AND ( (p.isOver = 1  ${has(enddatesql)?(" and p.overDate&lt;='"+enddatesql+"'"):""} ) or (p.finishDate is NULL and ${has(enddatesql)?("  p.delayEndDate &lt;='"+enddatesql+"'"):" p.delayEndDate&lt;=now()"}) or p.finishDate&gt; p.overDate)
+and pa.guarantyOrgID in ('9d230c752d384cc78c199c2cdf2c1088')
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}</Sql><Description>SELECT (IFNULL(fl.loadSum,0)-IFNULL(tab.freeSum,0)-IFNULL(tab2.badSum,0)-IFNULL(tab5.creditorsum,0)) AS overplusSum FROM pro_project fl
+LEFT JOIN pro_project AS p ON p.project_ID = fl.project_ID 
+LEFT JOIN pro_apply pa ON pa.apply_ID=fl.apply_ID
+LEFT JOIN (
+SELECT fd.project_ID,SUM(IFNULL(fd.payCapitalSum,0)) AS freeSum FROM pro_factPay fd 
+WHERE 1=1 
+  ${has(enddatesql)?(" and fd.payDate&lt;='"+enddatesql+"'"):" and fd.payDate&lt;=now()"}
+GROUP BY fd.project_ID
+) tab ON tab.`project_ID` = fl.project_ID
+LEFT JOIN (
+SELECT fl2.project_ID,fl2.badSum FROM pro_project fl2
+WHERE 1=1
+  ${has(enddatesql)?(" and fl2.badDate&lt;='"+enddatesql+"'"):"and fl2.badDate&lt;=now()"}
+) tab2 ON tab2.project_ID = fl.project_ID
+LEFT JOIN (
+	SELECT
+		 precre.project_ID,
+		SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum 
+	FROM 
+		pro_creditor precre
+    	WHERE 1=1 
+		${has(enddatesql)?(" and DATE_FORMAT(precre.creditor_date,'%Y-%m')&lt;='"+enddatesql+"'"):""}
+	GROUP BY precre.project_ID
+   )tab5 ON tab5.project_ID =  fl.project_ID
+WHERE fl.busiClass = '02' 
+AND ( (p.isOver = 1  ${has(enddatesql)?(" and p.overDate&lt;='"+enddatesql+"'"):""} ) or (p.finishDate is NULL and ${has(enddatesql)?("  p.delayEndDate &lt;='"+enddatesql+"'"):" p.delayEndDate&lt;=now()"}) or p.finishDate&gt; p.overDate)
+and pa.guarantyOrgID in ('9d230c752d384cc78c199c2cdf2c1088')
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">overplusSum</IndexFields><TagName>column4_1</TagName></Item10><Item11><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">Flsum</IndexFields><TagName>index_column6_1</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab_column6_1</Name><Sql>SELECT 
+SUM((IFNULL(fl.replaceSum,0)-IFNULL(tab2.returnSums,0))) AS Flsum
+FROM pro_replace fl
+LEFT JOIN pro_project p ON p.project_ID = fl.project_ID
+LEFT JOIN pro_apply pa ON pa.apply_ID=p.apply_ID
+LEFT JOIN
+(
+	SELECT  pr.projectID AS project_ID,SUM(IFNULL(pr.returnSum,0)) as returnSums from pro_returndetail pr where  1=1
+	 ${has(enddatesql)?("and pr.returnDate&lt;='"+enddatesql+"'"):""}
+	GROUP BY pr.projectID
+) tab2 on tab2.project_ID = fl.project_ID
+WHERE 1=1
+ and pa.guarantyOrgID in ('9d230c752d384cc78c199c2cdf2c1088')
+ ${has(enddatesql)?(" and fl.replaceDate&lt;='"+enddatesql+"'"):""}</Sql><Description>SELECT 
+SUM((IFNULL(fl.replaceSum,0)-IFNULL(tab2.returnSums,0))) AS Flsum
+FROM pro_replace fl
+LEFT JOIN pro_project p ON p.project_ID = fl.project_ID
+LEFT JOIN pro_apply pa ON pa.apply_ID=p.apply_ID
+LEFT JOIN
+(
+	SELECT  pr.projectID AS project_ID,SUM(IFNULL(pr.returnSum,0)) as returnSums from pro_returndetail pr where  1=1
+	 ${has(enddatesql)?("and pr.returnDate&lt;='"+enddatesql+"'"):""}
+	GROUP BY pr.projectID
+) tab2 on tab2.project_ID = fl.project_ID
+WHERE 1=1
+ and pa.guarantyOrgID in ('9d230c752d384cc78c199c2cdf2c1088')
+ ${has(enddatesql)?(" and fl.replaceDate&lt;='"+enddatesql+"'"):""}</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">Flsum</IndexFields><TagName>tab_column6_1</TagName></Item11><Item12><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">returnSum</IndexFields><TagName>index_column7_1</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab_column7_1</Name><Sql>SELECT  fl.busiClass  as busiTypeID,
+  IFNULL(SUM((IFNULL(rd.returnSum,0))),0) AS  returnSum
+FROM   pro_returndetail rd 
+LEFT JOIN pro_project fl  ON rd.projectID=fl.project_ID 
+WHERE ${has(enddatesql)?("  rd.returnDate&lt;='"+enddatesql+"'"):" rd.returnDate&lt;=NOW()"} 
+               and  fl.busiClass="02" </Sql><Description>SELECT  fl.busiClass  as busiTypeID,
+  IFNULL(SUM((IFNULL(rd.returnSum,0))),0) AS  returnSum
+FROM   pro_returndetail rd 
+LEFT JOIN pro_project fl  ON rd.projectID=fl.project_ID 
+WHERE ${has(enddatesql)?("  rd.returnDate&lt;='"+enddatesql+"'"):" rd.returnDate&lt;=NOW()"} 
+               and  fl.busiClass="02" </Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">returnSum</IndexFields><TagName>tab_column7_1</TagName></Item12></Children></NodeSource></jatools>

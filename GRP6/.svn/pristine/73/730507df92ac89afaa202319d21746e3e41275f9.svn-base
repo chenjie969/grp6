@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><jatools Class="jatools.ReportDocument" Name="jatools report template"><VariableContext/><Page><Children ItemClass="PagePanel"><Item0><Width>1359</Width><Height>131</Height><Children><Item0 Class="Label"><Text>各市续保续贷情况表</Text><Font><Face>宋体</Face><Style>1</Style><Size>36</Size></Font><HorizontalAlignment>1</HorizontalAlignment><X>132</X><Y>6</Y><Width>730</Width><Height>58</Height></Item0><Item1 Class="Label"><Text>截止日期：</Text><X>431</X><Y>69</Y><Width>58</Width><Height>23</Height></Item1><Item2 Class="Text"><Variable>=if(has(enddatesql)) return enddatesql;else return $today;</Variable><HorizontalAlignment>1</HorizontalAlignment><X>492</X><Y>69</Y><Width>82</Width><Height>23</Height></Item2><Item3 Class="Label"><Text>金额单位：亿元</Text><HorizontalAlignment>2</HorizontalAlignment><X>716</X><Y>108</Y><Width>110</Width><Height>23</Height></Item3></Children><Type>100</Type></Item0><Item1><Y>802</Y><Width>1359</Width><Height>280</Height><Type>103</Type></Item1><Item2><Y>131</Y><Width>1359</Width><Height>671</Height><Children ItemClass="Table"><Item0><NodePath>tab_detail</NodePath><X>157</X><Y>3</Y><Children><Item0 Class="Label"><Text>序号</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col></Cell></Item0><Item1 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>0</Row><Col>0</Col></Cell></Item1><Item2 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>0</Row><Col>1</Col></Cell></Item2><Item3 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>0</Row><Col>2</Col></Cell></Item3><Item4 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>0</Row><Col>3</Col></Cell></Item4><Item5 Class="Label"><Text>地市</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col></Cell></Item5><Item6 Class="Label"><Text>续保续贷合计金额</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>2</Col></Cell></Item6><Item7 Class="Label"><Text>续保续贷占比</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>3</Col></Cell></Item7><Item8 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>2</Row><Col>3</Col></Cell></Item8><Item9 Class="Label"><Text>合计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>0</Col><ColSpan>2</ColSpan></Cell></Item9><Item10 Class="RowPanel"><Cell><Row>1</Row><Col>0</Col><ColSpan>4</ColSpan></Cell><Children ItemClass="Text"><Item0><Variable>=$.position + 1</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>0</Col></Cell></Item0><Item1><Variable>=$.areaName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>1</Col></Cell></Item1><Item2><Variable>=index_sum.loadSum{$.id}.sum()/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.##########</Pattern></Format><Cell><Row>1</Row><Col>2</Col></Cell></Item2><Item3><Variable>=index_sum.loadSum{$.id}.sum()!=0?index_sum.loadSum{$.id}.sum()/index_sum.loadSum.sum():0</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>0.00%</Pattern></Format><Cell><Row>1</Row><Col>3</Col></Cell></Item3></Children><NodePath>Row</NodePath></Item10><Item11 Class="Text"><Variable>=index_sum.loadSum.sum()/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.##########</Pattern></Format><Cell><Row>2</Row><Col>2</Col></Cell></Item11></Children><ColumnWidths>99,159,183,228</ColumnWidths><RowHeights>30,30,30</RowHeights></Item0></Children><Type>102</Type></Item2></Children><PageFormat><Width>1399</Width><Height>1122</Height></PageFormat></Page><NodeSource><Children ItemClass="DatasetNodeSource"><Item0><Children ItemClass="RowNodeSource"><Item0/></Children><Reader Class="SqlReader"><Name>tab_detail</Name><Sql> SELECT 
+     dic.dicTypeID  AS id,
+     dic.dicTypeName AS areaName
+     
+    FROM 
+    c_dictype  dic 
+     WHERE  dic.dicTypePID  = 'be8ae49cd7b944b6ad20743671f1d964' </Sql><Description> SELECT 
+     dic.dicTypeID  AS id,
+     dic.dicTypeName AS areaName
+     
+    FROM 
+    c_dictype  dic 
+     WHERE  dic.dicTypePID  = 'be8ae49cd7b944b6ad20743671f1d964' </Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><TagName>tab_detail</TagName></Item0><Item1><Children ItemClass="CrossIndexNodeSource"><Item0><IndexFields Len="1">hostAreaID</IndexFields><IndexFields2 Len="1">loadSum</IndexFields2><TagName>index_sum</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab_sum</Name><Sql>SELECT  
+   SUM(IFNULL(pp.loadSum,0)) AS loadSum,
+   pa.hostAreaID
+   
+   FROM
+   pro_project pp
+   LEFT JOIN pro_apply pa ON pa.apply_ID = pp.apply_ID
+    WHERE 1=1  AND pp.busiClass = '01' and  pa.hostAreaID  IS NOT NULL
+${has(enddatesql)?("and pp.delayBeginDate&lt;='"+enddatesql+"'"):""}
+   GROUP BY pa.hostAreaID 
+  </Sql><Description>SELECT  
+   SUM(IFNULL(pp.loadSum,0)) AS loadSum,
+   pa.hostAreaID
+   
+   FROM
+   pro_project pp
+   LEFT JOIN pro_apply pa ON pa.apply_ID = pp.apply_ID
+    WHERE 1=1  AND pp.busiClass = '01' and  pa.hostAreaID  IS NOT NULL
+${has(enddatesql)?("and pp.delayBeginDate&lt;='"+enddatesql+"'"):""}
+   GROUP BY pa.hostAreaID 
+  </Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">hostAreaID</IndexFields><IndexFields2 Len="1">loadSum</IndexFields2><TagName>tab_sum</TagName></Item1></Children></NodeSource></jatools>

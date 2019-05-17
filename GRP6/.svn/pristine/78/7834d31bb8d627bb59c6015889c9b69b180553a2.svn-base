@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><jatools Class="jatools.ReportDocument" Name="jatools report template"><VariableContext/><Page><Children ItemClass="PagePanel"><Item0><Width>1548</Width><Height>140</Height><Children><Item0 Class="Label"><Text>财务台账报表</Text><Font><Face>宋体</Face><Style>1</Style><Size>36</Size></Font><X>595</X><Y>15</Y><Width>239</Width><Height>59</Height></Item0><Item1 Class="Label"><Text>截止年月：</Text><HorizontalAlignment>2</HorizontalAlignment><X>638</X><Y>94</Y><Width>80</Width><Height>23</Height></Item1><Item2 Class="Text"><Variable>=if(has(endyearmonthsql)) return endyearmonthsql;else return ($today+"").substring(0,7);</Variable><X>721</X><Y>94</Y><Width>71</Width><Height>23</Height></Item2></Children><Type>100</Type></Item0><Item1><Y>802</Y><Width>1548</Width><Height>280</Height><Type>103</Type></Item1><Item2><Y>140</Y><Width>1548</Width><Height>662</Height><Children ItemClass="Table"><Item0><NodePath>tab_detail</NodePath><X>180</X><Y>74</Y><Children><Item0 Class="Label"><Text>序号</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col></Cell></Item0><Item1 Class="Label"><Text>承办公司</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col></Cell></Item1><Item2 Class="Label"><Text>项目名称</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>2</Col></Cell></Item2><Item3 Class="Label"><Text>放款金额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>3</Col></Cell></Item3><Item4 Class="Label"><Text>结息方式</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>4</Col></Cell></Item4><Item5 Class="Label"><Text>累计欠息</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>7</Col></Cell></Item5><Item6 Class="Label"><Text>利息额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>8</Col></Cell></Item6><Item7 Class="Label"><Text>复利额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>9</Col></Cell></Item7><Item8 Class="Label"><Text>罚息额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>10</Col></Cell></Item8><Item9 Class="RowPanel"><Cell><Row>1</Row><Col>0</Col><ColSpan>11</ColSpan></Cell><Children ItemClass="Text"><Item0><Variable>=$.position + 1</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>0</Col></Cell></Item0><Item1><Variable>=$.oprationCompanyName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>1</Col></Cell></Item1><Item2><Variable>=$.projectName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>2</Col></Cell></Item2><Item3><Variable>=$.loadSum</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>3</Col></Cell></Item3><Item4><Variable>=$.InterestMethodName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>4</Col></Cell></Item4><Item5><Variable>=if($.isyq&lt;=0&amp;&amp;$.interestMethod==1) return ($.interestYQQLJ);else if($.isyq&lt;=0&amp;&amp;$.interestMethod!=1) return ($.surplusInterest+$.surplusFlinterest);else return ($.interestYQHLJ)	</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000</Pattern></Format><Cell><Row>1</Row><Col>7</Col></Cell></Item5><Item6><Variable>=if($.isyq&lt;=0&amp;&amp;$.interestMethod==1) return ($.interestYQQLX);else if($.isyq&lt;=0&amp;&amp;$.interestMethod!=1) return ($.surplusInterest);else return ($.interestYQHLX)</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000</Pattern></Format><Cell><Row>1</Row><Col>8</Col></Cell></Item6><Item7><Variable>=if($.isyq&lt;=0&amp;&amp;$.interestMethod==1) return 0;else if($.isyq&lt;=0&amp;&amp;$.interestMethod!=1) return ($.surplusFlinterest);else return ($.interestYQHFL)</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000</Pattern></Format><Cell><Row>1</Row><Col>9</Col></Cell></Item7><Item8><Variable>=if($.isyq&lt;=0&amp;&amp;$.interestMethod==1) return 0;else if($.isyq&lt;=0&amp;&amp;$.interestMethod!=1) return (0);else return ($.interestYQHFX)</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000</Pattern></Format><Cell><Row>1</Row><Col>10</Col></Cell></Item8><Item9><Variable>=$.bankRate</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>5</Col></Cell></Item9><Item10><Variable>=$.punishRate</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>6</Col></Cell></Item10></Children><NodePath>Row</NodePath></Item9><Item10 Class="Label"><Text>委贷利率</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>5</Col></Cell></Item10><Item11 Class="Label"><Text>罚息利率</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>6</Col></Cell></Item11></Children><ColumnWidths>64,136,136,80,98,69,69,102,102,102,102</ColumnWidths><RowHeights>47,47</RowHeights></Item0></Children><Type>102</Type></Item2></Children><PageFormat><Width>1588</Width><Height>1122</Height></PageFormat></Page><NodeSource><Children ItemClass="DatasetNodeSource"><Item0><Children ItemClass="RowNodeSource"><Item0/></Children><Reader Class="SqlReader"><Name>tab_detail</Name><Sql>SELECT
+pa.`guarantyOrgID`,
+pa.`guarantyOrgName`,
+     pa.`oprationCompanyName`,
+     pa.`hostAreaName`,
+     pa.`attributionName`,
+     pp.projectName,
+     pp.loadSum,
+     pp.`bankName`,
+     pp.`subBankName`,
+     pp.`delayBeginDate`,
+     pp.`delayEndDate`,
+    CASE  pp.InterestMethodID WHEN 'b85bf0a498964da49851e1d26b9a26d9' THEN '1'   WHEN 'fb089b600736427698abfb6c9706349c' THEN '2'  WHEN '2bc16cfc9d3a41fa925bb6b385f155b8' THEN '2' END AS interestMethod,
+     pp.InterestMethodID,
+     pp.InterestMethodName,
+TIMESTAMPDIFF(DAY,pp.loadEndDate, ${has(endyearmonthsql)?("date_add( '"+endyearmonthsql+"-01"+"',INTERVAL 1  MONTH )"):"NOW()"}) AS isyq,
+    -- pp.`overSum`,
+  pp.loadSum-
+        (SELECT IFNULL(SUM(replaceCapitalSum) ,0) replaceCapitalSum from pro_replace WHERE project_ID=pp.project_ID ${has(endyearmonthsql)?("and  DATE_FORMAT(replaceDate,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""}  ) -
+        (SELECT IFNULL(SUM(payCapitalSum) ,0) payCapitalSum from pro_factpay where  project_ID=pp.project_ID ${has(endyearmonthsql)?("and  DATE_FORMAT(payDate,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""}  ) -
+        (SELECT IFNULL(SUM(creditor_sum) ,0) creditorSum from pro_creditor where  project_ID=pp.project_ID ${has(endyearmonthsql)?("and  DATE_FORMAT(creditor_date,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""}  ) as overSum,
+    (IFNULL(tab1.interest,0)
+    + IFNULL((pp.loadSum
+    - (SELECT IFNULL(SUM(replaceCapitalSum) ,0) replaceCapitalSum from pro_replace WHERE project_ID=pp.project_ID ${has(endyearmonthsql)?("and  DATE_FORMAT(replaceDate,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""}  ) -      (SELECT IFNULL(SUM(payCapitalSum) ,0) payCapitalSum from pro_factpay where  project_ID=pp.project_ID ${has(endyearmonthsql)?("and  DATE_FORMAT(payDate,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""}  )
+		- (SELECT IFNULL(SUM(creditor_sum) ,0) creditorSum from pro_creditor where  project_ID=pp.project_ID ${has(endyearmonthsql)?("and  DATE_FORMAT(creditor_date,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""}  ))*bankRate/100/360*(TIMESTAMPDIFF(DAY,IFNULL(tab1.factDate,pp.loadBeginDate), ${has(endyearmonthsql)?("date_add( '"+endyearmonthsql+"-01"+"',INTERVAL 1  MONTH )"):"NOW()"})+1),0)
+		) as interestYQQLJ,
+		
+		(IFNULL(tab2.interest,pp.interest)+IFNULL((pp.loadSum
+    - (SELECT IFNULL(SUM(replaceCapitalSum) ,0) replaceCapitalSum from pro_replace WHERE project_ID=pp.project_ID  ${has(endyearmonthsql)?("and  DATE_FORMAT(replaceDate,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""} ) 
+    - (SELECT IFNULL(SUM(payCapitalSum) ,0) payCapitalSum from pro_factpay where  project_ID=pp.project_ID  ${has(endyearmonthsql)?("and  DATE_FORMAT(payDate,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""} )
+    - (SELECT IFNULL(SUM(creditor_sum) ,0) creditorSum from pro_creditor where  project_ID=pp.project_ID  ${has(endyearmonthsql)?("and  DATE_FORMAT(creditor_date,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""} ))*pp.punishRate/100/360*(TIMESTAMPDIFF(DAY,IFNULL(DATE_SUB( tab2.factDate,INTERVAL 1 DAY),pp.loadEndDate), ${has(endyearmonthsql)?("date_add( '"+endyearmonthsql+"-01"+"',INTERVAL 1  MONTH )"):"NOW()"})),0)
+		+ IFNULL(pp.interest*pp.punishRate/100/360*(TIMESTAMPDIFF(DAY,IFNULL(DATE_SUB( tab2.factDate,INTERVAL 1 DAY),pp.delayEndDate), ${has(endyearmonthsql)?("date_add( '"+endyearmonthsql+"-01"+"',INTERVAL 1  MONTH )"):"NOW()"})),0)
+		) AS interestYQHLJ,
+-- -(SELECT IFNULL(SUM(payInterestSum) ,0)  from pro_factpay where  project_ID=pp.project_ID ${has(endyearmonthsql)?("and  DATE_FORMAT(payDate,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""} )
+
+(IFNULL(tab1.interest,0)+IFNULL((pp.loadSum-
+        (SELECT IFNULL(SUM(replaceCapitalSum) ,0) replaceCapitalSum from pro_replace WHERE project_ID=pp.project_ID  ${has(endyearmonthsql)?("and  DATE_FORMAT(replaceDate,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""} ) -
+        (SELECT IFNULL(SUM(payCapitalSum) ,0) payCapitalSum from pro_factpay where  project_ID=pp.project_ID  ${has(endyearmonthsql)?("and  DATE_FORMAT(payDate,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""} ) -
+        (SELECT IFNULL(SUM(creditor_sum) ,0) creditorSum from pro_creditor where  project_ID=pp.project_ID  ${has(endyearmonthsql)?("and  DATE_FORMAT(creditor_date,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""} ))*pp.bankRate/100/360*(TIMESTAMPDIFF(DAY,IFNULL(tab1.factDate,pp.loadBeginDate), ${has(endyearmonthsql)?("date_add( '"+endyearmonthsql+"-01"+"',INTERVAL 1  MONTH )"):"NOW()"})),0)
+-- +IFNULL(pp.interest*pp.punishRate/100/360*(TIMESTAMPDIFF(DAY,tab1.factDate, now())),0)
+-- -IFNULL(tab1.payInterestSum,0)
+-- (SELECT IFNULL(SUM(payInterestSum) ,0)  from pro_factpay where  project_ID=pp.project_ID ${has(endyearmonthsql)?("and  DATE_FORMAT(payDate,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""} )
+) AS interestYQQLX,
+
+
+(IFNULL(tab2.fxinterest,0)+IFNULL((pp.loadSum-
+        (SELECT IFNULL(SUM(replaceCapitalSum) ,0) replaceCapitalSum from pro_replace WHERE project_ID=pp.project_ID  ${has(endyearmonthsql)?("and  DATE_FORMAT(replaceDate,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""} ) -
+        (SELECT IFNULL(SUM(payCapitalSum) ,0) payCapitalSum from pro_factpay where  project_ID=pp.project_ID  ${has(endyearmonthsql)?("and  DATE_FORMAT(payDate,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""} ) -
+        (SELECT IFNULL(SUM(creditor_sum) ,0) creditorSum from pro_creditor where  project_ID=pp.project_ID  ${has(endyearmonthsql)?("and  DATE_FORMAT(creditor_date,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""} ))*pp.punishRate/100/360*(TIMESTAMPDIFF(DAY,IFNULL(DATE_SUB( tab2.factDate,INTERVAL 1 DAY),pp.delayEndDate), ${has(endyearmonthsql)?("date_add( '"+endyearmonthsql+"-01"+"',INTERVAL 1  MONTH )"):"NOW()"})),0)
+) AS interestYQHFX,
+IFNULL(tab2.flinterest,0)+pp.interest*pp.punishRate/100/360*(TIMESTAMPDIFF(DAY,IFNULL(DATE_SUB( tab2.factDate,INTERVAL 1 DAY),pp.delayEndDate), ${has(endyearmonthsql)?("date_add( '"+endyearmonthsql+"-01"+"',INTERVAL 1  MONTH )"):"NOW()"})) 
+AS interestYQHFL,
+-- ) AS interestYQHFL,
+   IFNULL(tab2.lxinterest ,pp.interest) AS interestYQHLX,
+   tab4.surplusInterest,
+   tab4.surplusFlinterest,
+     pp.`overDesc`,
+     pp.`amanName`,
+     pp.`bmanName`,
+     pp.beforeAManName,
+     pp.beforeBManName,
+     pp.bankRate,
+     pp.punishRate,
+     pp.serviceRate,
+     cc.relationMainName,
+     tab3.disposeRemark
+ FROM pro_project pp
+ LEFT JOIN pro_apply pa ON pa.`apply_ID`=pp.`apply_ID`
+ LEFT JOIN crm_client cc ON cc.`client_ID`=pa.`client_ID`
+ LEFT JOIN (SELECT GROUP_CONCAT(po.disposeRemark) disposeRemark,po.apply_ID FROM pro_optguaranty po
+		WHERE 1=1 GROUP BY po.apply_ID) tab3 ON tab3.apply_ID = pp.`apply_ID`
+LEFT JOIN (SELECT pf.factDate,pf.project_ID,pf.interest,pf.payInterestSum FROM pro_factpay pf,pro_project pp
+		WHERE pf.project_ID=pp.project_ID AND pf.factDate&lt;=pp.loadEndDate AND pf.factDate=(SELECT MAX(factDate) FROM pro_factpay 
+		WHERE project_ID=pf.project_ID) GROUP BY pp.project_ID  ${has(endyearmonthsql)?("and  DATE_FORMAT(payDate,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""}
+  )tab1 ON tab1.project_ID =  pp.project_ID
+LEFT JOIN (SELECT pf.factDate,pf.project_ID,pf.interest,pf.lxinterest,pf.flinterest,pf.fxinterest FROM pro_factpay pf,pro_project pp
+		WHERE pf.project_ID=pp.project_ID AND pf.factDate&gt;pp.loadEndDate AND pf.factDate=(SELECT MAX(factDate) FROM pro_factpay 
+		WHERE project_ID=pf.project_ID) GROUP BY pp.project_ID ${has(endyearmonthsql)?("and  DATE_FORMAT(payDate,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""}
+  )tab2 ON tab2.project_ID =  pp.project_ID
+LEFT JOIN (SELECT pcf.project_ID,surplusInterest,surplusFxinterest,surplusFlinterest FROM pro_calculationfactpay pcf,pro_project pp
+		WHERE pcf.project_ID=pp.project_ID AND pcf.interestDate&lt;=pp.delayEndDate AND pcf.interestDate=(SELECT MAX(interestDate) FROM pro_calculationfactpay
+              	                        WHERE project_ID=pcf.project_ID) GROUP BY pp.project_ID   ${has(endyearmonthsql)?("and  DATE_FORMAT(interestDate,'%Y-%m') &lt;='"+endyearmonthsql+"-20"+"'"):""})tab4 ON tab4.project_ID =  pp.project_ID
+ WHERE pp.`busiClass`='02' 
+ AND ( (pp.isOver = 1  ${has(endyearmonthsql)?(" and pp.overDate&lt;='"+endyearmonthsql+"'"):""} ) or (pp.finishDate is NULL and ${has(endyearmonthsql)?("  pp.delayEndDate&lt;='"+endyearmonthsql+"'"):"pp.delayEndDate&lt;=now()"}) or pp.finishDate&gt; pp.overDate)
+ ${has(endyearmonthsql)?(" and pp.reportDate&lt;='"+endyearmonthsql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+ORDER BY pa.attributionName,pp.`delayBeginDate` desc</Sql><Description>SELECT
+pa.`guarantyOrgID`,
+pa.`guarantyOrgName`,
+     pa.`oprationCompanyName`,
+     pa.`hostAreaName`,
+     pa.`attributionName`,
+     pp.projectName,
+     pp.loadSum,
+     pp.`bankName`,
+     pp.`subBankName`,
+     pp.`delayBeginDate`,
+     pp.`delayEndDate`,
+    CASE  pp.InterestMethodID WHEN 'b85bf0a498964da49851e1d26b9a26d9' THEN '1'   WHEN 'fb089b600736427698abfb6c9706349c' THEN '2'  WHEN '2bc16cfc9d3a41fa925bb6b385f155b8' THEN '2' END AS interestMethod,
+     pp.InterestMethodID,
+     pp.InterestMethodName,
+TIMESTAMPDIFF(DAY,pp.loadEndDate, ${has(endyearmonthsql)?("date_add( '"+endyearmonthsql+"-01"+"',INTERVAL 1  MONTH )"):"NOW()"}) AS isyq,
+    -- pp.`overSum`,
+  pp.loadSum-
+        (SELECT IFNULL(SUM(replaceCapitalSum) ,0) replaceCapitalSum from pro_replace WHERE project_ID=pp.project_ID ${has(endyearmonthsql)?("and  DATE_FORMAT(replaceDate,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""}  ) -
+        (SELECT IFNULL(SUM(payCapitalSum) ,0) payCapitalSum from pro_factpay where  project_ID=pp.project_ID ${has(endyearmonthsql)?("and  DATE_FORMAT(payDate,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""}  ) -
+        (SELECT IFNULL(SUM(creditor_sum) ,0) creditorSum from pro_creditor where  project_ID=pp.project_ID ${has(endyearmonthsql)?("and  DATE_FORMAT(creditor_date,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""}  ) as overSum,
+    (IFNULL(tab1.interest,0)
+    + IFNULL((pp.loadSum
+    - (SELECT IFNULL(SUM(replaceCapitalSum) ,0) replaceCapitalSum from pro_replace WHERE project_ID=pp.project_ID ${has(endyearmonthsql)?("and  DATE_FORMAT(replaceDate,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""}  ) -      (SELECT IFNULL(SUM(payCapitalSum) ,0) payCapitalSum from pro_factpay where  project_ID=pp.project_ID ${has(endyearmonthsql)?("and  DATE_FORMAT(payDate,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""}  )
+		- (SELECT IFNULL(SUM(creditor_sum) ,0) creditorSum from pro_creditor where  project_ID=pp.project_ID ${has(endyearmonthsql)?("and  DATE_FORMAT(creditor_date,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""}  ))*bankRate/100/360*(TIMESTAMPDIFF(DAY,IFNULL(tab1.factDate,pp.loadBeginDate), ${has(endyearmonthsql)?("date_add( '"+endyearmonthsql+"-01"+"',INTERVAL 1  MONTH )"):"NOW()"})+1),0)
+		) as interestYQQLJ,
+		
+		(IFNULL(tab2.interest,pp.interest)+IFNULL((pp.loadSum
+    - (SELECT IFNULL(SUM(replaceCapitalSum) ,0) replaceCapitalSum from pro_replace WHERE project_ID=pp.project_ID  ${has(endyearmonthsql)?("and  DATE_FORMAT(replaceDate,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""} ) 
+    - (SELECT IFNULL(SUM(payCapitalSum) ,0) payCapitalSum from pro_factpay where  project_ID=pp.project_ID  ${has(endyearmonthsql)?("and  DATE_FORMAT(payDate,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""} )
+    - (SELECT IFNULL(SUM(creditor_sum) ,0) creditorSum from pro_creditor where  project_ID=pp.project_ID  ${has(endyearmonthsql)?("and  DATE_FORMAT(creditor_date,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""} ))*pp.punishRate/100/360*(TIMESTAMPDIFF(DAY,IFNULL(DATE_SUB( tab2.factDate,INTERVAL 1 DAY),pp.loadEndDate), ${has(endyearmonthsql)?("date_add( '"+endyearmonthsql+"-01"+"',INTERVAL 1  MONTH )"):"NOW()"})),0)
+		+ IFNULL(pp.interest*pp.punishRate/100/360*(TIMESTAMPDIFF(DAY,IFNULL(DATE_SUB( tab2.factDate,INTERVAL 1 DAY),pp.delayEndDate), ${has(endyearmonthsql)?("date_add( '"+endyearmonthsql+"-01"+"',INTERVAL 1  MONTH )"):"NOW()"})),0)
+		) AS interestYQHLJ,
+-- -(SELECT IFNULL(SUM(payInterestSum) ,0)  from pro_factpay where  project_ID=pp.project_ID ${has(endyearmonthsql)?("and  DATE_FORMAT(payDate,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""} )
+
+(IFNULL(tab1.interest,0)+IFNULL((pp.loadSum-
+        (SELECT IFNULL(SUM(replaceCapitalSum) ,0) replaceCapitalSum from pro_replace WHERE project_ID=pp.project_ID  ${has(endyearmonthsql)?("and  DATE_FORMAT(replaceDate,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""} ) -
+        (SELECT IFNULL(SUM(payCapitalSum) ,0) payCapitalSum from pro_factpay where  project_ID=pp.project_ID  ${has(endyearmonthsql)?("and  DATE_FORMAT(payDate,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""} ) -
+        (SELECT IFNULL(SUM(creditor_sum) ,0) creditorSum from pro_creditor where  project_ID=pp.project_ID  ${has(endyearmonthsql)?("and  DATE_FORMAT(creditor_date,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""} ))*pp.bankRate/100/360*(TIMESTAMPDIFF(DAY,IFNULL(tab1.factDate,pp.loadBeginDate), ${has(endyearmonthsql)?("date_add( '"+endyearmonthsql+"-01"+"',INTERVAL 1  MONTH )"):"NOW()"})),0)
+-- +IFNULL(pp.interest*pp.punishRate/100/360*(TIMESTAMPDIFF(DAY,tab1.factDate, now())),0)
+-- -IFNULL(tab1.payInterestSum,0)
+-- (SELECT IFNULL(SUM(payInterestSum) ,0)  from pro_factpay where  project_ID=pp.project_ID ${has(endyearmonthsql)?("and  DATE_FORMAT(payDate,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""} )
+) AS interestYQQLX,
+
+
+(IFNULL(tab2.fxinterest,0)+IFNULL((pp.loadSum-
+        (SELECT IFNULL(SUM(replaceCapitalSum) ,0) replaceCapitalSum from pro_replace WHERE project_ID=pp.project_ID  ${has(endyearmonthsql)?("and  DATE_FORMAT(replaceDate,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""} ) -
+        (SELECT IFNULL(SUM(payCapitalSum) ,0) payCapitalSum from pro_factpay where  project_ID=pp.project_ID  ${has(endyearmonthsql)?("and  DATE_FORMAT(payDate,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""} ) -
+        (SELECT IFNULL(SUM(creditor_sum) ,0) creditorSum from pro_creditor where  project_ID=pp.project_ID  ${has(endyearmonthsql)?("and  DATE_FORMAT(creditor_date,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""} ))*pp.punishRate/100/360*(TIMESTAMPDIFF(DAY,IFNULL(DATE_SUB( tab2.factDate,INTERVAL 1 DAY),pp.delayEndDate), ${has(endyearmonthsql)?("date_add( '"+endyearmonthsql+"-01"+"',INTERVAL 1  MONTH )"):"NOW()"})),0)
+) AS interestYQHFX,
+IFNULL(tab2.flinterest,0)+pp.interest*pp.punishRate/100/360*(TIMESTAMPDIFF(DAY,IFNULL(DATE_SUB( tab2.factDate,INTERVAL 1 DAY),pp.delayEndDate), ${has(endyearmonthsql)?("date_add( '"+endyearmonthsql+"-01"+"',INTERVAL 1  MONTH )"):"NOW()"})) 
+AS interestYQHFL,
+-- ) AS interestYQHFL,
+   IFNULL(tab2.lxinterest ,pp.interest) AS interestYQHLX,
+   tab4.surplusInterest,
+   tab4.surplusFlinterest,
+     pp.`overDesc`,
+     pp.`amanName`,
+     pp.`bmanName`,
+     pp.beforeAManName,
+     pp.beforeBManName,
+     pp.bankRate,
+     pp.punishRate,
+     pp.serviceRate,
+     cc.relationMainName,
+     tab3.disposeRemark
+ FROM pro_project pp
+ LEFT JOIN pro_apply pa ON pa.`apply_ID`=pp.`apply_ID`
+ LEFT JOIN crm_client cc ON cc.`client_ID`=pa.`client_ID`
+ LEFT JOIN (SELECT GROUP_CONCAT(po.disposeRemark) disposeRemark,po.apply_ID FROM pro_optguaranty po
+		WHERE 1=1 GROUP BY po.apply_ID) tab3 ON tab3.apply_ID = pp.`apply_ID`
+LEFT JOIN (SELECT pf.factDate,pf.project_ID,pf.interest,pf.payInterestSum FROM pro_factpay pf,pro_project pp
+		WHERE pf.project_ID=pp.project_ID AND pf.factDate&lt;=pp.loadEndDate AND pf.factDate=(SELECT MAX(factDate) FROM pro_factpay 
+		WHERE project_ID=pf.project_ID) GROUP BY pp.project_ID  ${has(endyearmonthsql)?("and  DATE_FORMAT(payDate,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""}
+  )tab1 ON tab1.project_ID =  pp.project_ID
+LEFT JOIN (SELECT pf.factDate,pf.project_ID,pf.interest,pf.lxinterest,pf.flinterest,pf.fxinterest FROM pro_factpay pf,pro_project pp
+		WHERE pf.project_ID=pp.project_ID AND pf.factDate&gt;pp.loadEndDate AND pf.factDate=(SELECT MAX(factDate) FROM pro_factpay 
+		WHERE project_ID=pf.project_ID) GROUP BY pp.project_ID ${has(endyearmonthsql)?("and  DATE_FORMAT(payDate,'%Y-%m') &lt;='"+endyearmonthsql+"'"):""}
+  )tab2 ON tab2.project_ID =  pp.project_ID
+LEFT JOIN (SELECT pcf.project_ID,surplusInterest,surplusFxinterest,surplusFlinterest FROM pro_calculationfactpay pcf,pro_project pp
+		WHERE pcf.project_ID=pp.project_ID AND pcf.interestDate&lt;=pp.delayEndDate AND pcf.interestDate=(SELECT MAX(interestDate) FROM pro_calculationfactpay
+              	                        WHERE project_ID=pcf.project_ID) GROUP BY pp.project_ID   ${has(endyearmonthsql)?("and  DATE_FORMAT(interestDate,'%Y-%m') &lt;='"+endyearmonthsql+"-20"+"'"):""})tab4 ON tab4.project_ID =  pp.project_ID
+ WHERE pp.`busiClass`='02' 
+ AND ( (pp.isOver = 1  ${has(endyearmonthsql)?(" and pp.overDate&lt;='"+endyearmonthsql+"'"):""} ) or (pp.finishDate is NULL and ${has(endyearmonthsql)?("  pp.delayEndDate&lt;='"+endyearmonthsql+"'"):"pp.delayEndDate&lt;=now()"}) or pp.finishDate&gt; pp.overDate)
+ ${has(endyearmonthsql)?(" and pp.reportDate&lt;='"+endyearmonthsql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+ORDER BY pa.attributionName,pp.`delayBeginDate` desc</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><TagName>tab_detail</TagName></Item0></Children></NodeSource></jatools>

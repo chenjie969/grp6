@@ -1,0 +1,145 @@
+package com.zjm.pro.costReturn.web;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.zjm.common.db.model.AjaxRes;
+import com.zjm.pro.costMust.service.CostMustService;
+import com.zjm.pro.costReturn.service.CostReturnService;
+import com.zjm.pro.db.model.Pro_costFact;
+import com.zjm.pro.db.model.Pro_costReturn;
+import com.zjm.pro.db.model.Pro_meetingDetail;
+import com.zjm.pro.meetDetail.service.MeetingDetailService;
+import com.zjm.sys.db.model.C_dictype;
+import com.zjm.sys.dicType.service.DicTypeService;
+import com.zjm.util.CustomDispatchServlet;
+import com.zjm.util.SystemSession;
+
+/**
+ * 事项中收费登记 -退费action
+ */
+@Controller
+@RequestMapping(value="/project/costReturn")
+public class CostReturnAction {
+	@Resource
+	private CostMustService costMustService;
+	@Resource
+	private CostReturnService costReturnService;
+	
+	@Resource
+	private MeetingDetailService meetingDetailService;
+	@Resource
+	private DicTypeService dicTypeService;
+	
+	
+	/**
+	 * confirmationCostMust
+	 * 退费-确认退费
+	 * @param  
+	 * @return
+	 */
+	@RequestMapping(value="/costReturnToCostPre", method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes costReturnToCostPre(@RequestBody Pro_costReturn  pro_costReturn){
+		
+		Boolean b= costReturnService.costReturnToCostPre(SystemSession.getUserSession(),pro_costReturn);
+		AjaxRes ar=new AjaxRes();
+		ar.setSucceed(true);
+		return ar;
+	}
+	
+	/*******************************************************************************************/
+	/**********************************以下是放款复核确认收费****************************************/
+	/*******************************************************************************************/
+	/**
+     * @param meetingDetail_ID
+     * @return 添加退费 ———— 展示页面
+     */
+    @RequestMapping(value="/showAddCostReturnPage")
+	public ModelAndView showAddCostReturnPage(String  meetingDetail_ID){
+		ModelAndView mv=CustomDispatchServlet.getModeAndView();
+		String condition = " and meetingDetail_ID='"+meetingDetail_ID+"' ";
+		//评审会产品明细
+		Pro_meetingDetail meetingDetail = meetingDetailService.selectOneMeetingDetailByWhereSql(condition);
+		//获取费用类别
+		List<C_dictype> costTypeList = dicTypeService.selectAllDicTypeList(" and dicTypePID='386a21c7b12a45c88a70e462fb0cfdc7'");
+		
+		mv.getModel().put("costTypeList",costTypeList);
+		mv.getModel().put("meetingDetail",meetingDetail);
+		
+		mv.setViewName("/project/loan/singleLoanReview/costReturnAdd");
+		return mv;
+	}
+    /**
+	 * 执行退费新增操作
+	 */
+	@RequestMapping(value="/insertOneCostReturn")
+	@ResponseBody
+	public AjaxRes insertOneCostReturn(@RequestBody Pro_costReturn costReturn){
+		AjaxRes ar = new AjaxRes();
+		Boolean b = costReturnService.insertOneCostReturn(SystemSession.getUserSession(), costReturn);
+		ar.setSucceed(b);
+		return ar;
+	}
+	/**
+     * @param costReturn_ID
+     * @return 修改退费 ———— 展示页面
+     */
+    @RequestMapping(value="/showUpdateCostReturnPage")
+	public ModelAndView showUpdateCostReturnPage(String costReturn_ID){
+		ModelAndView mv=CustomDispatchServlet.getModeAndView();
+		//获取费用类别
+		List<C_dictype> costTypeList = dicTypeService.selectAllDicTypeList(" and dicTypePID='386a21c7b12a45c88a70e462fb0cfdc7'");
+		Pro_costReturn costReturn = costReturnService.selectOneCostReturnByWhereSql(" and costReturn_ID='"+costReturn_ID+"' ");
+		
+		String condition = " and meetingDetail_ID='"+costReturn.getMeetingDetail_ID()+"' ";
+		//评审会产品明细
+		Pro_meetingDetail meetingDetail = meetingDetailService.selectOneMeetingDetailByWhereSql(condition);
+		mv.getModel().put("meetingDetail",meetingDetail);
+		mv.getModel().put("costTypeList",costTypeList);
+		mv.getModel().put("costReturn",costReturn);
+		
+		mv.setViewName("/project/loan/singleLoanReview/costReturnUpdate");
+		return mv;
+	}
+    /**
+	 * 执行退费修改操作
+	 */
+	@RequestMapping(value="/updateOneCostReturn")
+	@ResponseBody
+	public AjaxRes updateOneCostReturn(@RequestBody Pro_costReturn costReturn){
+		AjaxRes ar = new AjaxRes();
+		Boolean b = costReturnService.updateOneCostReturn(SystemSession.getUserSession(), costReturn);
+		ar.setSucceed(b);
+		return ar;
+	}
+	/**
+     * @return 删除退费 ———— 展示页面
+     */
+    @RequestMapping(value="/showDelCostReturnPage")
+	public ModelAndView showDelCostReturnPage(){
+		ModelAndView mv=CustomDispatchServlet.getModeAndView();
+		
+		mv.setViewName("/project/loan/singleLoanReview/costReturnDel");
+		return mv;
+	}
+    /**
+	 * 执行退费删除操作
+	 */
+	@RequestMapping(value="/delOneCostReturn")
+	@ResponseBody
+	public AjaxRes delOneCostReturn(@RequestBody Pro_costReturn costReturn){
+		AjaxRes ar = new AjaxRes();
+		Boolean b = costReturnService.delOneCostReturn(SystemSession.getUserSession(), costReturn);
+		ar.setSucceed(b);
+		return ar;
+	}
+}

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.sys.db.map.Sys_usergroupMapper">
+
+	<!-- 项目组表信息 -->
+	<resultMap type="com.zjm.sys.db.model.Sys_usergroup" id="UserGroupResultMap">
+		<result property="userGroup_uuid" column="userGroup_uuid" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="userGroupName" column="userGroupName" />
+		<result property="order_id" column="order_id" />
+		<result property="createdatetime" column="createdatetime" />
+		<result property="create_user" column="create_user" />
+		<result property="updatedatetime" column="updatedatetime" />
+		<result property="update_user" column="update_user" />
+		<result property="user_uids" column="user_uids" />
+		<result property="user_names" column="user_names" />
+	</resultMap>
+	
+	
+	<!-- 查询  项目组列表 -->
+	<select id="selectUserGroupPageTables" resultMap="UserGroupResultMap" parameterType="com.zjm.common.db.model.PageTable">
+		<![CDATA[
+		SELECT e.userGroup_uuid,e.unit_uid,e.userGroupName,e.order_id,e.createdatetime,e.create_user,e.updatedatetime,e.update_user,f.user_names,f.user_uids FROM sys_usergroup e
+		left join (
+			SELECT c.userGroup_uuid,c.unit_uid,group_concat(a.user_uid) as user_uids,group_concat(a.user_name) as user_names 
+			FROM sys_users a
+			left join sys_user_usergroup b on b.user_uid=a.user_uid and a.unit_uid=b.unit_uid
+			left join sys_usergroup c on c.userGroup_uuid=b.userGroup_uuid and c.unit_uid=b.unit_uid
+			group by c.userGroup_uuid,c.unit_uid
+		) f on f.userGroup_uuid=e.userGroup_uuid and f.unit_uid=e.unit_uid
+		WHERE 1=1 ${wheresql} limit #{pageNumber},#{pageSize}	
+		]]>
+	</select>
+	
+	<!-- 查询 项目组列表 总记录数-->
+	<select id="selectUserGroupPageTables_Count" parameterType="com.zjm.common.db.model.PageTable"  resultType="java.lang.Long">
+		<![CDATA[
+		SELECT count(userGroup_uuid) FROM sys_usergroup e
+		WHERE 1=1 ${wheresql} 		
+		]]>		 
+	</select>
+	
+	
+	<!-- 插入一个项目组信息 -->
+	<insert id="insertOneUserGroupInfo"	parameterType="com.zjm.sys.db.model.Sys_usergroup">
+		<![CDATA[
+		INSERT INTO sys_usergroup (
+		userGroup_uuid,
+		unit_uid,
+		userGroupName,
+		order_id,
+		createdatetime,
+		create_user,
+		updatedatetime,
+		update_user
+		)
+		VALUES
+		(
+		#{userGroup_uuid},
+		#{unit_uid},
+		#{userGroupName},
+		#{order_id},
+		NOW(),
+		#{create_user},
+		NOW(),
+		#{update_user}
+		) ;
+		]]>
+	</insert>
+	<!-- 查询一个项目组信息-->
+	<select id="selectOneUserGroupInfo" parameterType="com.zjm.sys.db.model.Sys_usergroup"  resultMap="UserGroupResultMap">
+	<![CDATA[
+		SELECT userGroup_uuid,unit_uid,userGroupName FROM sys_usergroup 
+		WHERE userGroup_uuid=#{userGroup_uuid}  and unit_uid=#{unit_uid}
+		]]> 				 
+	</select>
+	<!-- 判断项目组名称是否重复-->
+	<select id="selectUserGroupNameIsExist" parameterType="java.lang.String"  resultType="java.lang.Integer">
+	<![CDATA[
+		SELECT count(userGroup_uuid) FROM sys_usergroup 
+		WHERE 1=1 ${value} 		
+		]]>		 
+	</select>
+	<!-- 更新一个项目组信息 -->	
+	<update id="updateOneUserGroupInfo" parameterType="com.zjm.sys.db.model.Sys_usergroup">
+		<![CDATA[
+		UPDATE 
+		  sys_usergroup
+		SET
+		  userGroupName = #{userGroupName},
+		  updatedatetime = NOW(),
+		  update_user = #{update_user}
+		WHERE userGroup_uuid=#{userGroup_uuid}  and unit_uid=#{unit_uid} 
+		  ]]>
+	</update>
+	
+	<!-- 删除一个项目组信息 -->
+	<delete id="delectOneUserGroupInfo" parameterType="com.zjm.sys.db.model.Sys_usergroup">
+		<![CDATA[DELETE FROM sys_usergroup WHERE userGroup_uuid=#{userGroup_uuid}  and unit_uid=#{unit_uid}  ]]>
+	</delete>
+	<!-- 查询项目组List-->
+	<select id="selectUserGroupList" parameterType="java.lang.String"  resultMap="UserGroupResultMap">
+	<![CDATA[
+		SELECT userGroup_uuid,unit_uid,userGroupName FROM sys_usergroup 
+		WHERE 1=1 ${value} 	ORDER BY order_id
+		]]>
+	</select>
+</mapper>  

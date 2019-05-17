@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zjm.gworkFlow.db.map.OsHistorystepMapper">
+	
+	<resultMap type="com.zjm.gworkFlow.db.model.OsHistorystep" id="OsHistorystepResultMap">
+		<result property="id" column="ID" />
+		<result property="entry_ID" column="ENTRY_ID" />
+		<result property="step_ID" column="STEP_ID" />
+		<result property="action_ID" column="ACTION_ID" />
+		<result property="owner" column="OWNER" />
+		<result property="start_date" column="START_DATE" />
+		<result property="finish_date" column="FINISH_DATE" />
+		<result property="due_date" column="DUE_DATE" />
+		<result property="status" column="STATUS" />
+		<result property="caller" column="CALLER" />
+		<result property="stepName" column="stepName" />
+		<result property="action_ID" column="action_ID" />
+		<result property="limitDate" column="limitDate" />
+		<result property="limitDateUnit" column="limitDateUnit" />
+	</resultMap>
+	
+	<resultMap type="com.zjm.gworkFlow.db.model.OsHistorystep" id="OsCurrentStep_prevResultMap">
+		<result property="id" column="ID" />
+		<result property="previous_ID" column="PREVIOUS_ID" />
+	</resultMap>
+	
+	<resultMap type="com.zjm.gworkFlow.db.model.OsHistorystep" id="CurStepsResultMap">
+		<result property="id" column="ID" />
+		<result property="entry_ID" column="ENTRY_ID" />
+		<result property="step_ID" column="STEP_ID" />
+		<result property="action_ID" column="ACTION_ID" />
+		<result property="owner" column="OWNER" />
+		<result property="start_date" column="START_DATE" />
+		<result property="finish_date" column="FINISH_DATE" />
+		<result property="due_date" column="DUE_DATE" />
+		<result property="status" column="STATUS" />
+		<result property="caller" column="CALLER" />
+		<result property="stepName" column="stepName" />
+		<result property="statusName" column="statusName" />
+		<result property="limitDate" column="limitDate" />
+		<result property="limitDateUnit" column="limitDateUnit" />
+	</resultMap>
+	
+	<!-- 取得某一个流程实例的所有历史步骤 -->
+	<select id="getAllHistoryStep" resultMap="OsHistorystepResultMap" parameterType="com.zjm.gworkFlow.db.model.OsHistorystep">
+		<![CDATA[
+		    SELECT 
+			  A.ID,
+			  A.ENTRY_ID,
+			  A.STEP_ID,
+			  C.user_name AS 'OWNER',
+			  A.ACTION_ID,
+			  A.START_DATE,
+			  A.FINISH_DATE,
+			  A.DUE_DATE,
+			  A.STATUS,
+			  A.CALLER,
+			  A.stepName,
+			  B.statusName,
+			  A.limitDate,
+			  A.limitDateUnit 
+			FROM
+			  os_historystep A 
+			  LEFT JOIN os_gworkflow_stepstauts B 
+			    ON B.status = A.STATUS 
+			  LEFT JOIN sys_users C 
+			    ON A.OWNER = C.user_uid 
+			WHERE A.ENTRY_ID = #{entry_ID} 
+			ORDER BY A.ID
+		]]>
+	</select>
+	
+	<!-- 取得历史步骤ID的上一个步骤记录ID，有可能是多个 -->
+	<select id="getHistoryPREVIOUS_ID" resultMap="OsCurrentStep_prevResultMap" parameterType="java.lang.Long">
+		<![CDATA[
+		    SELECT 
+			  * 
+			FROM
+			  os_historystep_prev 
+			WHERE ID = #{value} 
+		]]>
+	</select>
+	
+	<!-- 取得历史步骤表中的某一个步骤的名称 -->
+	<select id="getHistoryPREVIOUS_stepName" resultMap="OsHistorystepResultMap" parameterType="java.lang.Long">
+		<![CDATA[
+		   SELECT 
+			  stepName 
+			FROM
+			  os_historystep 
+			WHERE ID = #{id}
+		]]>
+	</select>
+	
+	<!-- 取得某一个流程实例的所有当前步骤 -->
+	<select id="getAllCurSteps" resultMap="CurStepsResultMap" parameterType="java.lang.Long">
+		<![CDATA[
+		   SELECT 
+			  A.ID,
+			  A.ENTRY_ID,
+			  A.STEP_ID,
+			  C.user_name AS 'OWNER',
+			  A.ACTION_ID,
+			  A.START_DATE,
+			  A.FINISH_DATE,
+			  A.DUE_DATE,
+			  A.STATUS,
+			  A.OWNER  AS 'CALLER',
+			  A.stepName,
+			  B.statusName,
+			  A.limitDate,
+			  A.limitDateUnit 
+			FROM
+			  os_currentstep A 
+			  LEFT JOIN os_gworkflow_stepstauts B 
+			    ON B.status = A.STATUS 
+			  LEFT JOIN sys_users C 
+			    ON A.OWNER = C.user_uid 
+			WHERE A.ENTRY_ID = #{value}
+			ORDER BY A.ID
+		]]>
+	</select>
+	
+	<!-- 取得当前步骤ID的上一个步骤记录ID，有可能是多个 -->
+	<select id="getAllCurPreviousSteps" resultMap="OsCurrentStep_prevResultMap" parameterType="java.lang.Long">
+		<![CDATA[
+		   SELECT 
+			  * 
+			FROM
+			  os_currentstep_prev 
+			WHERE ID = #{value}
+		]]>
+	</select>
+	<!-- 删除一个项目的流程信息-->
+	<delete id="delOneProjectFlow" parameterType="java.lang.String">
+		DELETE 
+			A,B,C,D,E,F,G,H,I,J
+			FROM os_gworkflow_projidflowid A
+			LEFT JOIN os_wfentry B ON B.ID=A.ENTRY_ID
+			LEFT JOIN os_entryids C ON  C.ID=A.ENTRY_ID
+			LEFT JOIN os_currentstep D ON  D.ENTRY_ID=A.ENTRY_ID
+			LEFT JOIN os_currentstep_prev E ON  E.ID=D.ID
+			LEFT JOIN os_gworkflow_projsuggest F ON  F.flowid=A.ENTRY_ID
+			LEFT JOIN os_historystep G ON  G.ENTRY_ID=A.ENTRY_ID
+			LEFT JOIN os_historystep_prev H  ON H.ID=G.ID
+			LEFT JOIN os_stepids I ON  I.ID=G.ID
+			LEFT JOIN os_stepids J ON  J.ID=E.ID
+			WHERE ${value}
+	</delete>
+
+
+
+	<!-- 获取项目的所有待办流程 -->
+	<select id="returnProjPendingList" resultMap="OsHistorystepResultMap" parameterType="com.zjm.gworkFlow.db.model.PendingWorkFlow">
+		SELECT 
+		  B.ID,
+		  B.ENTRY_ID,
+		  B.STEP_ID,
+		  B.ACTION_ID,
+		  B.OWNER,
+		  B.START_DATE,
+		  B.FINISH_DATE,
+		  B.DUE_DATE,
+		  B.STATUS,
+		  B.CALLER,
+		  B.stepName,
+		  C.PREVIOUS_ID AS 'action_ID'
+		FROM
+		  view_waitdeelprojects A 
+		  LEFT JOIN os_currentstep B 
+		    ON A.flowid = B.ENTRY_ID 
+		    AND A.stetpid = B.STEP_ID 
+		  LEFT JOIN os_currentstep_prev C 
+		    ON B.ID = C.ID  
+		WHERE A.unit_uid = #{unit_uid} 
+		  AND A.projectID = #{projectID}
+	</select>
+
+
+	<!-- 插入一条历史记录 -->
+	<insert id="insertOneHistoryStep" parameterType="com.zjm.gworkFlow.db.model.OsHistorystep">
+		INSERT INTO os_historystep (
+			  ID,
+			  ENTRY_ID,
+			  STEP_ID,
+			  ACTION_ID,
+			  OWNER,
+			  START_DATE,
+			  FINISH_DATE,
+			  DUE_DATE,
+			  STATUS,
+			  CALLER,
+			  stepName
+			) 
+			VALUES
+			  (
+			    #{id},
+			    #{entry_ID},
+			    #{step_ID},
+			    #{action_ID},
+			    #{owner},
+			    #{start_date},
+			    #{finish_date},
+			    #{due_date},
+			    #{status},
+			    #{caller},
+			    #{stepName}
+			  )
+	</insert>
+	<!-- 删除 代办记录 -->
+	<delete id="deletePending" parameterType="com.zjm.gworkFlow.db.model.OsHistorystep">
+		DELETE 
+		FROM
+		  os_currentstep
+		WHERE ENTRY_ID = #{entry_ID}
+		AND STEP_ID = #{step_ID}
+	</delete>
+	
+	<!-- 删除 代办记录 步骤对应表记录 -->
+	<delete id="deletePendingOfBeforeStep" parameterType="com.zjm.gworkFlow.db.model.OsHistorystep">
+		DELETE 
+		FROM
+		  os_currentstep_prev
+		WHERE ID = #{id}
+	</delete>
+	
+	<!-- 改变 流程状态 -->
+	<update id="updateWfentryStatus" parameterType="java.util.Map">
+		UPDATE 
+		  os_wfentry 
+		SET
+		  STATE = #{status} 
+		WHERE ID = #{flowID}
+	</update>
+
+
+	<!-- 删除一个公文的流程信息-->
+	<delete id="delOneDocsFlow" parameterType="java.lang.String">
+		DELETE 
+			A,B,C,D,E,F,G,H,I,J
+			FROM os_gworkflow_projidflowid A
+			LEFT JOIN os_wfentry B ON B.ID=A.ENTRY_ID
+			LEFT JOIN os_entryids C ON  C.ID=A.ENTRY_ID
+			LEFT JOIN os_currentstep D ON  D.ENTRY_ID=A.ENTRY_ID
+			LEFT JOIN os_currentstep_prev E ON  E.ID=D.ID
+			LEFT JOIN cgs_gworkflow_suggest F ON  F.flowid=A.ENTRY_ID
+			LEFT JOIN os_historystep G ON  G.ENTRY_ID=A.ENTRY_ID
+			LEFT JOIN os_historystep_prev H  ON H.ID=G.ID
+			LEFT JOIN os_stepids I ON  I.ID=G.ID
+			LEFT JOIN os_stepids J ON  J.ID=E.ID
+			WHERE ${value}
+	</delete>
+	
+	
+	<!-- 删除一个客户的流程信息-->
+	<delete id="delOneCRMFlow" parameterType="java.lang.String">
+		DELETE 
+			A,B,C,D,E,F,G,H,I,J
+			FROM os_gworkflow_projidflowid A
+			LEFT JOIN os_wfentry B ON B.ID=A.ENTRY_ID
+			LEFT JOIN os_entryids C ON  C.ID=A.ENTRY_ID
+			LEFT JOIN os_currentstep D ON  D.ENTRY_ID=A.ENTRY_ID
+			LEFT JOIN os_currentstep_prev E ON  E.ID=D.ID
+			LEFT JOIN crm_gworkflow_suggest F ON  F.flowid=A.ENTRY_ID
+			LEFT JOIN os_historystep G ON  G.ENTRY_ID=A.ENTRY_ID
+			LEFT JOIN os_historystep_prev H  ON H.ID=G.ID
+			LEFT JOIN os_stepids I ON  I.ID=G.ID
+			LEFT JOIN os_stepids J ON  J.ID=E.ID
+			WHERE ${value}
+	</delete>
+	
+	
+	
+	<!-- 更新指定的待办人员-->
+	<update id="updateWaitUserInfo" parameterType="com.zjm.gworkFlow.db.model.PendingWorkFlow">
+		UPDATE 
+		  os_currentstep 
+		SET
+		  OWNER = #{user_uid} 
+		WHERE ENTRY_ID = #{flowid}
+		AND STEP_ID = #{stetpid}
+		AND ID = #{historyID}
+	</update>
+	
+	
+	<!-- 查询流程项目实例对应表，返回流程ENTRY_ID-->
+	<select id="returnOneWorkFlowENTRYID" resultType="java.lang.Long" parameterType="java.lang.String">
+		SELECT 
+		  MAX(ENTRY_ID)
+		FROM
+		  os_gworkflow_projidflowid 
+		WHERE ${value}
+	</select>
+	
+	<!--  修改步骤的限办时间-->
+	<update id="updateOneWorkFlowStepLimitDate" parameterType="java.lang.String">
+		${value}
+	</update>
+</mapper> 

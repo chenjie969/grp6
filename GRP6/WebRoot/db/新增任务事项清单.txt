@@ -1,0 +1,46 @@
+放款复核（制作放款计划）:	/project/loan/selectLoanReviewList  王振坤    20171023
+担保责任解除:	/project/project/showReimAndCompen  王振坤    20171023
+项目展期:  	/project/delay/selectProDelayList   王振坤    20171023
+保后检查登记:  /project/afterCheck/selectCheckRegister  王振坤    20171025  
+合同制作:     /pro/contractdoc/selectContract     王振坤    20171030 
+档案移交:     /project/arcTransfer/arcTransfer    王振坤    20171104
+收费登记:     /pro/meetResolution/meetingResolution/selectFeeRegister  王振坤    20171104
+复核放款(单次放款):     /project/project/selectSingleLoanReview  王振坤    20171104
+
+放款子流程   WHDB:   /project/loan/selectLoanApply  王振坤    20171110
+解除子流程   WHDB:	/project/project/showDutyRemove   王振坤    20171110
+
+
+客户资料录入 : /clientDetailGBPM   张可要  20171024
+风险等级评定: /crm/riskLevel/selectRiskLevelTable  定超飞 20171024
+项目结案:    /project/apply/endProPage            定超飞 20171024
+案件进展:    /project/lawsuitProgress/selectLawsuitProgressTable  定超飞 20171024      
+
+指定AB角:	/project/apply/showSetABManPage		徐昱倬
+指定风控评审人:	/project/apply/showSetReviewManPage		徐昱倬
+指定法务评审人:	/project/apply/showSetLegalManPage	 徐昱倬  2017/11/10	
+放款计划,还款计划与应收费用:	 /project/loanPlan/showLoanPlanPage     徐昱倬  
+文担:合同审批流程:	/pro/contractdoc/showWHDBContractDocPageTables	 徐昱倬  2017/11/10	
+融投：录入总办会纪要： /project/meetingSummary/showMeetSummaryPage   定超飞   2017/11/22
+
+融投：档案移交目录及清单:  /project/arcMoveRec/returArcMoveRecIndex 张可要  2017/11/27
+融投：新增档案移交:      /project/arcMoveRec/returArcMoveRecAddIndex 张可要  2017/11/27
+
+融投：录入风委会评议表： /project/riskAppraise/showRiskAppraisePage   定超飞   2017/11/27
+融投：风险处置通用意见 : /project/riskScheme/projectSuggetEditPage 张可要
+
+融投：风险处置查看审批信息 : /project/riskScheme/riskSchemeViewPage 陈扬
+融投：风险处置修改审批信息 : /project/riskScheme/riskSchemeEditPage 陈扬
+
+融投：续保续贷 -子公司风险部上传《项目评议委员会评审通过项目情况简表（Ⅱ）》、《党政联席会会议材料》
+	  修改：/project/delay/riskUpload
+	  查看：/project/delay/riskUpload    白龙飞 2018/03/27
+	  
+融投：续保续贷 - 	上传放款通知和放款凭证
+	  修改：/project/delay/loanFilesUpload
+	  查看：/project/delay/loanFilesUpload    白龙飞 2018/03/27
+	  
+融投：续保续贷 - 	子公司审核放款通知和放款凭证
+	  修改：/project/delay/loanCheck
+	  查看：/project/delay/loanCheck    白龙飞 2018/03/27	
+	    

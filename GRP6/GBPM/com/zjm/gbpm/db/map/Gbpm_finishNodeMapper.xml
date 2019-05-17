@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.gbpm.db.map.Gbpm_finishNodeMapper">
+
+	<resultMap type="com.zjm.gbpm.db.model.Gbpm_finishNode" id="finishNodeResultMap">
+	    <result column="finishNode_ID" 	property="finishNode_ID"  />
+		<result column="productInstanceID" 	property="productInstanceID"  />
+		<result column="nodeNames" 	property="nodeNames"  />
+		<result column="limitDay" 	property="limitDay"  />
+		<result column="nodeSort" 	property="nodeSort"  />
+		<result column="transferResultID" 	property="transferResultID	"  />
+		<result column="transferResultName" 	property="transferResultName"  />
+		<result column="assignDateTime" 	property="assignDateTime"  />
+		<result column="unit_uid" 	property="unit_uid"  />
+		<result column="unit_uidName" 	property="unit_uidName"  />
+		<result column="updateUserName" 	property="updateUserName"  />
+		<result column="updateDateTime" 	property="updateDateTime"  />
+	</resultMap>
+	
+	
+	
+	<!-- 查询一条已完成节点-->  
+	<select id="selectOneFinishNodeByWhereSql" parameterType="java.lang.String" resultMap="finishNodeResultMap">
+		<![CDATA[
+		SELECT 
+				finishNode_ID,
+				productInstanceID,
+				nodeNames,
+				limitDay,
+				nodeSort,	
+				transferResultID,
+				transferResultName,
+				assignDateTime,
+				unit_uid,
+				unit_uidName,
+				updateUserName,
+				updateDateTime
+			
+		FROM gbpm_finishNode
+		WHERE  1=1
+		   ${value}
+		   limit 1
+		
+		]]>
+	</select>
+	
+	<!-- 查询已完成节点集合-->  
+	<select id="selectFinishNodeListByWheresql" parameterType="java.lang.String" resultMap="finishNodeResultMap">
+		<![CDATA[
+		SELECT 
+				finishNode_ID,
+				productInstanceID,
+				nodeNames,
+				limitDay,
+				nodeSort	,	
+				transferResultID	,
+				transferResultName,
+				assignDateTime,
+				unit_uid,
+				unit_uidName,
+				updateUserName,
+				updateDateTime
+			
+		FROM gbpm_finishNode
+		WHERE  1=1
+		   ${value}
+		]]>
+	</select>
+	
+	
+	<!-- 插入一条已完成节点 -->
+	<insert id="insertOneFinishNode" parameterType="com.zjm.gbpm.db.model.Gbpm_finishNode">
+		INSERT INTO gbpm_finishNode(
+			finishNode_ID,
+			productInstanceID,
+			nodeNames,
+			limitDay,
+			nodeSort,	
+			transferResultID,
+			transferResultName,
+			assignDateTime,
+			unit_uid,
+			unit_uidName,
+			updateUserName,
+			updateDateTime 
+		) VALUES(
+			#{finishNode_ID},
+			#{productInstanceID},
+			#{nodeNames}, 
+			#{limitDay}, 
+			#{nodeSort}, 
+			#{transferResultID}, 
+			#{transferResultName}, 
+			NOW(),
+			#{unit_uid}, 
+			#{unit_uidName},  
+			#{updateUserName},  
+			NOW()
+		)
+	</insert> 
+	
+	<!-- 删除 -->
+	<delete id="deleteFinishNodeByWheresql" parameterType="java.lang.String">
+		<![CDATA[
+			delete from gbpm_finishNode
+			where 1=1 ${value}
+		]]>
+	</delete>
+	
+</mapper>

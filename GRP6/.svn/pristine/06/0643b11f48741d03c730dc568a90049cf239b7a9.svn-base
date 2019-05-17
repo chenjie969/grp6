@@ -1,0 +1,1147 @@
+package com.zjm.pro.db.model;
+
+import java.io.Serializable;
+import java.util.Date;
+
+public class pro_projectMode implements Serializable{
+	private static final long serialVersionUID = 1L;
+	private	String	project_ID	;//	项目ID	Variable characters (32)
+	private	String	apply_ID	;//	对应业务申请ID	Variable characters (32)
+	private	String	applyDetail_ID	;//	对应产品ID	Variable characters (32)
+	private	String	projectCode	;//	项目编号	Variable characters (20)
+	private	String	projectName	;//	项目名称	Variable characters (200)
+	private	String	busiClass	;//	业务大类(01：担保02：委贷)	Variable characters (50)
+	private	String	busiTypeID	;//	业务品种ID	Variable characters (32)
+	private	String	busiTypeName	;//	业务品种名称	Variable characters (50)
+	private	String	bankID	;//	合作机构ID	Variable characters (32)
+	private	String	bankName	;//	合作机构名称	Variable characters (50)
+	private	String	subBankName	;//	合作子机构（或个人）（手工录入）	Variable characters (100)
+	private	Double	loadSum	;//	放款金额	Decimal (18,6)
+	private	Double	guarantyScale	;//	担保责任比例	Decimal (18,6)
+	private	String	guarantyScope	;//	担保责任范围	Variable characters (20)
+	private	Double	guarantyDutySum	;//	担保责任金额	Decimal (18,6)
+	private	Double	guarantyDutyResSum	;//	担保责任余金额	Decimal (18,6)
+	private	Double	guarantySum	;//	在保余额	Decimal (18,6)
+	
+	private	Integer	periodMonth	;//	期限.月	Short integer
+	private	Integer	periodDay	;//	期限.天	Short integer
+	private	String	periodMonthDay	;//	期限.月天	Variable characters (20)
+	private	Date	loadBeginDate	;//	担保起始日期	Date
+	private	Date	loadEndDate	;//	担保到期日期	Date
+	private	Date	billBeginDate	;//	借据起始日期	Date
+	private	Date	billEndDate	;//	借据到期日期	Date
+	private	Date	delayBeginDate	;//	展期起始日期（初始为借据起始日期）	Date
+	private	Date	delayEndDate	;//	展期到期日期（初始为借据到期日期）	Date
+	private	String	loadCode	;//	放款单编号	Variable characters (30)
+	private	String	amanID	;//	项目经理A角ID	Variable characters (32)
+	private	String	amanName	;//	项目经理A角名称	Variable characters (20)
+	private	String	bmanID	;//	项目经理B角ID	Variable characters (32)
+	private	String	bmanName	;//	项目经理B角名称	Variable characters (20)
+	private	String	reviewManID	;//	风控评审人ID	Variable characters (32)
+	private	String	reviewManName	;//	风控评审人名称	Variable characters (20)
+	private	Integer	isDelay	;//	是否展期	Boolean
+	private	Double	delaySum	;//	展期金额	Decimal (18,6)
+	private	Integer	isOver	;//	正式确认是否逾期	Boolean
+	private	Date	overDate	;//	正式确认逾期日期	Date(根据客户需求自20171213日后此字段名称改为上报日期)
+	private	Date	overFactDate	;//	正式确认逾期日期	Date
+	
+	private	Double	overSum	;//	正式确认逾期金额	Decimal (18,6)
+	private	String	overDesc	;//	逾期原因	Variable characters (200)
+	private	Double	normalFreeSum	;//	还款总金额	Decimal (18,6)
+	private	Double	normalCapitalSum	;//	其中：还款本金	Decimal (18,6)
+	private	Double	normalInterestSum	;//	其中：还款利息	Decimal (18,6)
+	private	Double	replaceFreeSum	;//	代偿总金额	Decimal (18,6)
+	private	Double	replaceCapitalSum	;//	分类1其中：代偿本金	Decimal (18,6)
+	private	Double	replaceInterestSum	;//	分类1其中：代偿利息	Decimal (18,6)
+	private	Double	replaceOtherSum	;//	分类1其中：代偿其它	Decimal (18,6)
+	private	Double	selfReplaceSum	;//	分类2其中：自有资金代偿	Decimal (18,6)
+	private	Double	dangerReplaceSum	;//	分类2其中：准备金冲抵	Decimal (18,6)
+	private	Double	returnSum	;//	追偿总金额	Decimal (18,6)
+	
+	private	Double	returnCapitalSum	;//	其中：追偿本金	Decimal (18,6)
+	private	Double	returnInterestSum	;//	其中：追偿利息	Decimal (18,6)
+	private	Double	returnOtherSum	;//	其中：追偿其它	Decimal (18,6)
+	private	Double	badSum	;//	损失金额	Decimal (18,6)
+	private	Date	badDate	;//	核销日期	Date
+	private	String	badUserID	;//	核销人ID	Variable characters (32)
+	private	String	badUserName	;//	核销人名称	Variable characters (20)
+	private	Integer	isFree	;//	担保责任是否完全解除	Boolean
+	private	String	freeTypeID	;//	担保责任解除类型ID(字典)	Variable characters (32)
+	private	String	freeTypeName	;//	担保责任解除类型名称	Variable characters (20)
+	private	String	freeMethodID	;//	担保责任解除方式ID(字典)	Variable characters (32)
+	private	String	freeMethodName	;//	担保责任解除方式名称	Variable characters (20)
+	
+	private	Date	freeDate	;//	完全解除日期	Date
+	private	String	loanMethod	;//	放款方式（中文：一次性放款/多次放款）	Variable characters (10)
+	private	String	payMethod	;//	还款方式（中文：一次性还款/多次还款）	Variable characters (10)
+	private	String	InterestMethodID	;//	结息方式ID（字典）	Variable characters (32)
+	private	String	InterestMethodName	;//	结息方式名称	Variable characters (20)
+	private	String	unit_uid	;//	担保机构编号unit_uid	Variable characters (32)
+	private	String	unit_uidName	;//	担保机构名称	Variable characters (50)
+	private	Date	reportDate	;//	上报日期----------------融投特有开始	Date
+	private	Integer	isCreditor	;//	是否涉及敏感债权人	Boolean
+	private	String	creditorTypeID	;//	债权人种类ID	Variable characters (32)
+	private	String	creditorTypeName	;//	债权人种类名称	Variable characters (20)
+	private	Integer	creditorCount	;//	债权人数量	Short integer
+	private	String	idCard	;//	身份证编号	Text
+	private	String	creditorDistr	;//	债权方诉求	Text
+	private	String	creditorDesc	;//	债权人备注	Text
+	private	Integer	isGuaranty	;//	是否担保集团担保	Boolean
+	private	Integer	isBeforeEnd	;//	是否提前到期	Boolean
+	private	Date	beforeEndDate	;//	提前到期日期	Date
+	private	Double	beforeEndSum	;//	提前到期金额	Decimal (18,6)
+	private	String	beforeEndDesc	;//	提前到期原因----------------融投特有结束	Text
+	private	String	updateUserName	;//	最后修改人姓名	Variable characters (20)
+	private	Date	updateDateTime	;//	最后修改时间	Date & Time
+	private	String	finishUserID	;//项目完结人ID	Variable characters (32)
+	private	String	finishUserName	;//	项目完结人名称	Variable characters (20)
+	private	String	finishTypeID	;//项目完结类型ID	Variable characters (32)
+	private	String	finishTypeName	;//	项目完结类型名称	Variable characters (20)
+	private	String	projAppraisal	;//	项目评价	text
+	private	Date	finishDate	;//	项目完结日期	Date
+	private Double  bankRate	;//	贷款利率（委贷利率）	Float(zky add 2017-7-31)
+	private Double  guarantyRate	;//	担保费率	Float(zky add 2017-7-31)
+	private Double  reviewRate	;//	评审费率	Float(zky add 2017-7-31)
+	private Double  serviceRate	;//	金融服务费率	Float(zky add 2017-7-31)
+	private Double  punishRate	;//	罚息利率（针对委贷）	Float(zky add 2017-7-31)
+	private String 	fundType     ;//资金方类型（中文：银行/非银行/个人）
+	private String 	fundTypeID     ;//资金方类型（中文：银行/非银行/个人）ID
+	private String 	fundName	;//资金方名称 
+	private String  meetingDetail_ID;//评审会产品明细ID
+	private Float bzScale;//保证金比例
+	private  String fundSource;//资金来源：省内／省外
+	private  String remark;//备注
+	private String	loanPlan_ID;	//冗余字段, 计划放款ID
+	/**===========自定义统计分析用==========================**/
+	private Integer projCount;//笔数zky add 2017-7-31
+	private Date   replaceDate;	//代偿解除日期(pro_replace表冗余字段) zky add 2017-7-31
+	private Integer clientCount;//户数  zky add 2017-7-31
+	private Integer analysisYears;//统计年份标识;
+	private Integer analysisMonths;//统计月份标识;
+	
+	private Integer normolCount;//无代偿解除笔数zky add 2017-7-31
+	private Integer replaceCount;//代偿解除笔数zky add 2017-7-31
+	private Integer guarantyCount;///在保笔数笔数zky add 2017-7-31
+	private	Double	factCostSum	;//冗余字段,保费清收	Decimal (18,6)
+	private	Double	payCapitalSum	;//冗余字段,清收本金	Decimal (18,6)
+	private	Double	payInterestSum	;//冗余字段,清收利息	Decimal (18,6)
+	private Double  clearSum;//冗余字段,清收清欠金额;
+	/**===========自定义统计分析用==========================**/
+	
+	/**===========冗余字段 显示用==========================**/
+	private String	departName;//主办部门名称	varchar(50)
+	/**===========冗余字段 显示用==========================**/	
+	private Integer notYetEndDate;//距离到期天数;
+	
+	
+	private String guarantyOrgName;//承保机构名称 (pro_apply表冗余字段) zky add 2017-9-13:保后跟踪列表展示使用
+	private String guarantyOrgID;//承保机构ID（字典）  (pro_apply表冗余字段) zky add 2017-9-13:保后跟踪列表展示使用
+	private String hostAreaName;//承办地名称       (pro_apply表冗余字段) zky add 2017-9-13:保后跟踪列表展示使用
+	private String hostAreaID;//承办地ID（字典） (pro_apply表冗余字段) zky add 2017-9-13  :保后跟踪列表展示使用
+	private String oprationCompanyName;//经办公司名称(pro_apply表冗余字段) zky add 2017-9-13:保后跟踪列表展示使用
+	private String oprationCompanyID;//经办公司ID(字典) (pro_apply表冗余字段) zky add 2017-9-13 :保后跟踪列表展示使用
+	private String attributionName;//属地划分名称(pro_apply表冗余字段) zky add 2017-9-13:保后跟踪列表展示使用
+	private String attributionID;//属地划分ID（字典）  (pro_apply表冗余字段) zky add 2017-9-13:保后跟踪列表展示使用
+	private String 	fundID     ;//资金方（中文：银行/非银行/个人）ID(pro_apply表冗余字段)zky add 2018-1-30:保后跟踪列表展示使用
+	private String 	fundChinese     ;//资金方中文名（中文：银行/非银行/个人）(pro_apply表冗余字段)zky add 2018-1-30:保后跟踪列表展示使用
+	//借款合同号(pro_applyDetail表冗余字段) zky add 2017-9-25:保后跟踪列表新增保后项目使用
+	private String	jcontractCode;
+	//保证合同号(pro_applyDetail表冗余字段) zky add 2017-9-25:保后跟踪列表新增保后项目使用
+	private String	bcontractCode;
+	//委托担保合同号（委托贷款合同号）(pro_applyDetail表冗余字段) zky add 2017-9-25:保后跟踪列表新增保后项目使用
+	private String	dcontractCode;
+	
+	private String   client_ID;//客户ID
+	private String   clientGUID;//客户唯一标识
+	private String 	 clientName;//客户名称
+	private String   clientTypeID;// 客户类型ID    '01企业02个人经营类03个人消费类（不做字典，直接写在程序中）'
+	private String   clientTypeName;//客户类型名称
+
+	
+	private String dicTypeName;//五级字段名称
+	
+	private String productInstance_ID; //冗余字段，首页项目监控后列表无实例后弹出提醒框. rd_Xujy add 2018-2-7
+	
+	/**===================冗余字段，项目移交===========================**/
+	private String beforeAManID;//移交前A角ID（初始与A角字段值一样）
+	private String beforeAManName;//移交前A角名（初始与A角字段值一样）
+	private String beforeBManID;//移交前B角ID（初始与B角字段值一样）
+	private String beforeBManName;//移交前B角名称（初始与B角字段值一样）
+	private String changeManID;//移交操作人ID
+	private String changeManName;//移交操作人名称
+	private Date changeDate;//移交时间
+	
+	private String guarantorsName; //冗余字段 ，方便报表对承包机构的数据做判断
+	private	Integer	isNewClient;//冗余字段	是否新用户	Boolean
+	private int limitType;//冗余字段  期限种类（数据库统计生成）
+	
+	private Integer oldPeriodMonth; //录入时的期限月
+	private Integer oldPeriodDay;//录入时的期限日
+	private String oldPeriodMonthDay;//录入时的期限月日
+	
+	private Integer isCreditorMark;//是否债权项目  add 2018-4-20 默认0非债权项目    1 债权项目
+	
+	private Integer isCreditorAll ;//是否全额转让 2018-5-30  默认 0非全额项目    1 全额项目
+	
+	private Date replaceOverDate;//代偿到期日期  add 2018-5-15
+	
+	private Integer isUrgeLetter; //是否有催告函   add 2018-5-15
+	
+	private	Integer	isSensitiveCreditor	;//	是否敏感债权人	Boolean
+	
+	private	Integer	sensitiveCreditorNumber	;//	敏感债权人數	Boolean
+	
+	/**===================追加字段，累计利息相关===========================**/
+	
+	private Double interest;   //计复利基数；
+	private Double interestSum; //累计利息额；
+	public String getProject_ID() {
+		return project_ID;
+	}
+	public void setProject_ID(String project_ID) {
+		this.project_ID = project_ID;
+	}
+	public String getApply_ID() {
+		return apply_ID;
+	}
+	public void setApply_ID(String apply_ID) {
+		this.apply_ID = apply_ID;
+	}
+	public String getApplyDetail_ID() {
+		return applyDetail_ID;
+	}
+	public void setApplyDetail_ID(String applyDetail_ID) {
+		this.applyDetail_ID = applyDetail_ID;
+	}
+	public String getProjectCode() {
+		return projectCode;
+	}
+	public void setProjectCode(String projectCode) {
+		this.projectCode = projectCode;
+	}
+	public String getProjectName() {
+		return projectName;
+	}
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+	public String getBusiClass() {
+		return busiClass;
+	}
+	public void setBusiClass(String busiClass) {
+		this.busiClass = busiClass;
+	}
+	public String getBusiTypeID() {
+		return busiTypeID;
+	}
+	public void setBusiTypeID(String busiTypeID) {
+		this.busiTypeID = busiTypeID;
+	}
+	public String getBusiTypeName() {
+		return busiTypeName;
+	}
+	public void setBusiTypeName(String busiTypeName) {
+		this.busiTypeName = busiTypeName;
+	}
+	public String getBankID() {
+		return bankID;
+	}
+	public void setBankID(String bankID) {
+		this.bankID = bankID;
+	}
+	public String getBankName() {
+		return bankName;
+	}
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
+	}
+	public String getSubBankName() {
+		return subBankName;
+	}
+	public void setSubBankName(String subBankName) {
+		this.subBankName = subBankName;
+	}
+	public Double getLoadSum() {
+		return loadSum;
+	}
+	public void setLoadSum(Double loadSum) {
+		this.loadSum = loadSum;
+	}
+	public Double getGuarantyScale() {
+		return guarantyScale;
+	}
+	public void setGuarantyScale(Double guarantyScale) {
+		this.guarantyScale = guarantyScale;
+	}
+	public String getGuarantyScope() {
+		return guarantyScope;
+	}
+	public void setGuarantyScope(String guarantyScope) {
+		this.guarantyScope = guarantyScope;
+	}
+	public Double getGuarantyDutySum() {
+		return guarantyDutySum;
+	}
+	public void setGuarantyDutySum(Double guarantyDutySum) {
+		this.guarantyDutySum = guarantyDutySum;
+	}
+	public Double getGuarantyDutyResSum() {
+		return guarantyDutyResSum;
+	}
+	public void setGuarantyDutyResSum(Double guarantyDutyResSum) {
+		this.guarantyDutyResSum = guarantyDutyResSum;
+	}
+	public Double getGuarantySum() {
+		return guarantySum;
+	}
+	public void setGuarantySum(Double guarantySum) {
+		this.guarantySum = guarantySum;
+	}
+	public Integer getPeriodMonth() {
+		return periodMonth;
+	}
+	public void setPeriodMonth(Integer periodMonth) {
+		this.periodMonth = periodMonth;
+	}
+	public Integer getPeriodDay() {
+		return periodDay;
+	}
+	public void setPeriodDay(Integer periodDay) {
+		this.periodDay = periodDay;
+	}
+	public String getPeriodMonthDay() {
+		return periodMonthDay;
+	}
+	public void setPeriodMonthDay(String periodMonthDay) {
+		this.periodMonthDay = periodMonthDay;
+	}
+	public Date getLoadBeginDate() {
+		return loadBeginDate;
+	}
+	public void setLoadBeginDate(Date loadBeginDate) {
+		this.loadBeginDate = loadBeginDate;
+	}
+	public Date getLoadEndDate() {
+		return loadEndDate;
+	}
+	public void setLoadEndDate(Date loadEndDate) {
+		this.loadEndDate = loadEndDate;
+	}
+	public Date getBillBeginDate() {
+		return billBeginDate;
+	}
+	public void setBillBeginDate(Date billBeginDate) {
+		this.billBeginDate = billBeginDate;
+	}
+	public Date getBillEndDate() {
+		return billEndDate;
+	}
+	public void setBillEndDate(Date billEndDate) {
+		this.billEndDate = billEndDate;
+	}
+	public Date getDelayBeginDate() {
+		return delayBeginDate;
+	}
+	public void setDelayBeginDate(Date delayBeginDate) {
+		this.delayBeginDate = delayBeginDate;
+	}
+	public Date getDelayEndDate() {
+		return delayEndDate;
+	}
+	public void setDelayEndDate(Date delayEndDate) {
+		this.delayEndDate = delayEndDate;
+	}
+	public String getLoadCode() {
+		return loadCode;
+	}
+	public void setLoadCode(String loadCode) {
+		this.loadCode = loadCode;
+	}
+	public String getAmanID() {
+		return amanID;
+	}
+	public void setAmanID(String amanID) {
+		this.amanID = amanID;
+	}
+	public String getAmanName() {
+		return amanName;
+	}
+	public void setAmanName(String amanName) {
+		this.amanName = amanName;
+	}
+	public String getBmanID() {
+		return bmanID;
+	}
+	public void setBmanID(String bmanID) {
+		this.bmanID = bmanID;
+	}
+	public String getBmanName() {
+		return bmanName;
+	}
+	public void setBmanName(String bmanName) {
+		this.bmanName = bmanName;
+	}
+	public String getReviewManID() {
+		return reviewManID;
+	}
+	public void setReviewManID(String reviewManID) {
+		this.reviewManID = reviewManID;
+	}
+	public String getReviewManName() {
+		return reviewManName;
+	}
+	public void setReviewManName(String reviewManName) {
+		this.reviewManName = reviewManName;
+	}
+	public Integer getIsDelay() {
+		return isDelay;
+	}
+	public void setIsDelay(Integer isDelay) {
+		this.isDelay = isDelay;
+	}
+	public Double getDelaySum() {
+		return delaySum;
+	}
+	public void setDelaySum(Double delaySum) {
+		this.delaySum = delaySum;
+	}
+	public Integer getIsOver() {
+		return isOver;
+	}
+	public void setIsOver(Integer isOver) {
+		this.isOver = isOver;
+	}
+	public Date getOverDate() {
+		return overDate;
+	}
+	public void setOverDate(Date overDate) {
+		this.overDate = overDate;
+	}
+	public Date getOverFactDate() {
+		return overFactDate;
+	}
+	public void setOverFactDate(Date overFactDate) {
+		this.overFactDate = overFactDate;
+	}
+	public Double getOverSum() {
+		return overSum;
+	}
+	public void setOverSum(Double overSum) {
+		this.overSum = overSum;
+	}
+	public String getOverDesc() {
+		return overDesc;
+	}
+	public void setOverDesc(String overDesc) {
+		this.overDesc = overDesc;
+	}
+	public Double getNormalFreeSum() {
+		return normalFreeSum;
+	}
+	public void setNormalFreeSum(Double normalFreeSum) {
+		this.normalFreeSum = normalFreeSum;
+	}
+	public Double getNormalCapitalSum() {
+		return normalCapitalSum;
+	}
+	public void setNormalCapitalSum(Double normalCapitalSum) {
+		this.normalCapitalSum = normalCapitalSum;
+	}
+	public Double getNormalInterestSum() {
+		return normalInterestSum;
+	}
+	public void setNormalInterestSum(Double normalInterestSum) {
+		this.normalInterestSum = normalInterestSum;
+	}
+	public Double getReplaceFreeSum() {
+		return replaceFreeSum;
+	}
+	public void setReplaceFreeSum(Double replaceFreeSum) {
+		this.replaceFreeSum = replaceFreeSum;
+	}
+	public Double getReplaceCapitalSum() {
+		return replaceCapitalSum;
+	}
+	public void setReplaceCapitalSum(Double replaceCapitalSum) {
+		this.replaceCapitalSum = replaceCapitalSum;
+	}
+	public Double getReplaceInterestSum() {
+		return replaceInterestSum;
+	}
+	public void setReplaceInterestSum(Double replaceInterestSum) {
+		this.replaceInterestSum = replaceInterestSum;
+	}
+	public Double getReplaceOtherSum() {
+		return replaceOtherSum;
+	}
+	public void setReplaceOtherSum(Double replaceOtherSum) {
+		this.replaceOtherSum = replaceOtherSum;
+	}
+	public Double getSelfReplaceSum() {
+		return selfReplaceSum;
+	}
+	public void setSelfReplaceSum(Double selfReplaceSum) {
+		this.selfReplaceSum = selfReplaceSum;
+	}
+	public Double getDangerReplaceSum() {
+		return dangerReplaceSum;
+	}
+	public void setDangerReplaceSum(Double dangerReplaceSum) {
+		this.dangerReplaceSum = dangerReplaceSum;
+	}
+	public Double getReturnSum() {
+		return returnSum;
+	}
+	public void setReturnSum(Double returnSum) {
+		this.returnSum = returnSum;
+	}
+	public Double getReturnCapitalSum() {
+		return returnCapitalSum;
+	}
+	public void setReturnCapitalSum(Double returnCapitalSum) {
+		this.returnCapitalSum = returnCapitalSum;
+	}
+	public Double getReturnInterestSum() {
+		return returnInterestSum;
+	}
+	public void setReturnInterestSum(Double returnInterestSum) {
+		this.returnInterestSum = returnInterestSum;
+	}
+	public Double getReturnOtherSum() {
+		return returnOtherSum;
+	}
+	public void setReturnOtherSum(Double returnOtherSum) {
+		this.returnOtherSum = returnOtherSum;
+	}
+	public Double getBadSum() {
+		return badSum;
+	}
+	public void setBadSum(Double badSum) {
+		this.badSum = badSum;
+	}
+	public Date getBadDate() {
+		return badDate;
+	}
+	public void setBadDate(Date badDate) {
+		this.badDate = badDate;
+	}
+	public String getBadUserID() {
+		return badUserID;
+	}
+	public void setBadUserID(String badUserID) {
+		this.badUserID = badUserID;
+	}
+	public String getBadUserName() {
+		return badUserName;
+	}
+	public void setBadUserName(String badUserName) {
+		this.badUserName = badUserName;
+	}
+	public Integer getIsFree() {
+		return isFree;
+	}
+	public void setIsFree(Integer isFree) {
+		this.isFree = isFree;
+	}
+	public String getFreeTypeID() {
+		return freeTypeID;
+	}
+	public void setFreeTypeID(String freeTypeID) {
+		this.freeTypeID = freeTypeID;
+	}
+	public String getFreeTypeName() {
+		return freeTypeName;
+	}
+	public void setFreeTypeName(String freeTypeName) {
+		this.freeTypeName = freeTypeName;
+	}
+	public String getFreeMethodID() {
+		return freeMethodID;
+	}
+	public void setFreeMethodID(String freeMethodID) {
+		this.freeMethodID = freeMethodID;
+	}
+	public String getFreeMethodName() {
+		return freeMethodName;
+	}
+	public void setFreeMethodName(String freeMethodName) {
+		this.freeMethodName = freeMethodName;
+	}
+	public Date getFreeDate() {
+		return freeDate;
+	}
+	public void setFreeDate(Date freeDate) {
+		this.freeDate = freeDate;
+	}
+	public String getLoanMethod() {
+		return loanMethod;
+	}
+	public void setLoanMethod(String loanMethod) {
+		this.loanMethod = loanMethod;
+	}
+	public String getPayMethod() {
+		return payMethod;
+	}
+	public void setPayMethod(String payMethod) {
+		this.payMethod = payMethod;
+	}
+	public String getInterestMethodID() {
+		return InterestMethodID;
+	}
+	public void setInterestMethodID(String interestMethodID) {
+		InterestMethodID = interestMethodID;
+	}
+	public String getInterestMethodName() {
+		return InterestMethodName;
+	}
+	public void setInterestMethodName(String interestMethodName) {
+		InterestMethodName = interestMethodName;
+	}
+	public String getUnit_uid() {
+		return unit_uid;
+	}
+	public void setUnit_uid(String unit_uid) {
+		this.unit_uid = unit_uid;
+	}
+	public String getUnit_uidName() {
+		return unit_uidName;
+	}
+	public void setUnit_uidName(String unit_uidName) {
+		this.unit_uidName = unit_uidName;
+	}
+	public Date getReportDate() {
+		return reportDate;
+	}
+	public void setReportDate(Date reportDate) {
+		this.reportDate = reportDate;
+	}
+	public Integer getIsCreditor() {
+		return isCreditor;
+	}
+	public void setIsCreditor(Integer isCreditor) {
+		this.isCreditor = isCreditor;
+	}
+	public String getCreditorTypeID() {
+		return creditorTypeID;
+	}
+	public void setCreditorTypeID(String creditorTypeID) {
+		this.creditorTypeID = creditorTypeID;
+	}
+	public String getCreditorTypeName() {
+		return creditorTypeName;
+	}
+	public void setCreditorTypeName(String creditorTypeName) {
+		this.creditorTypeName = creditorTypeName;
+	}
+	public Integer getCreditorCount() {
+		return creditorCount;
+	}
+	public void setCreditorCount(Integer creditorCount) {
+		this.creditorCount = creditorCount;
+	}
+	public String getIdCard() {
+		return idCard;
+	}
+	public void setIdCard(String idCard) {
+		this.idCard = idCard;
+	}
+	public String getCreditorDistr() {
+		return creditorDistr;
+	}
+	public void setCreditorDistr(String creditorDistr) {
+		this.creditorDistr = creditorDistr;
+	}
+	public String getCreditorDesc() {
+		return creditorDesc;
+	}
+	public void setCreditorDesc(String creditorDesc) {
+		this.creditorDesc = creditorDesc;
+	}
+	public Integer getIsGuaranty() {
+		return isGuaranty;
+	}
+	public void setIsGuaranty(Integer isGuaranty) {
+		this.isGuaranty = isGuaranty;
+	}
+	public Integer getIsBeforeEnd() {
+		return isBeforeEnd;
+	}
+	public void setIsBeforeEnd(Integer isBeforeEnd) {
+		this.isBeforeEnd = isBeforeEnd;
+	}
+	public Date getBeforeEndDate() {
+		return beforeEndDate;
+	}
+	public void setBeforeEndDate(Date beforeEndDate) {
+		this.beforeEndDate = beforeEndDate;
+	}
+	public Double getBeforeEndSum() {
+		return beforeEndSum;
+	}
+	public void setBeforeEndSum(Double beforeEndSum) {
+		this.beforeEndSum = beforeEndSum;
+	}
+	public String getBeforeEndDesc() {
+		return beforeEndDesc;
+	}
+	public void setBeforeEndDesc(String beforeEndDesc) {
+		this.beforeEndDesc = beforeEndDesc;
+	}
+	public String getUpdateUserName() {
+		return updateUserName;
+	}
+	public void setUpdateUserName(String updateUserName) {
+		this.updateUserName = updateUserName;
+	}
+	public Date getUpdateDateTime() {
+		return updateDateTime;
+	}
+	public void setUpdateDateTime(Date updateDateTime) {
+		this.updateDateTime = updateDateTime;
+	}
+	public String getFinishUserID() {
+		return finishUserID;
+	}
+	public void setFinishUserID(String finishUserID) {
+		this.finishUserID = finishUserID;
+	}
+	public String getFinishUserName() {
+		return finishUserName;
+	}
+	public void setFinishUserName(String finishUserName) {
+		this.finishUserName = finishUserName;
+	}
+	public String getFinishTypeID() {
+		return finishTypeID;
+	}
+	public void setFinishTypeID(String finishTypeID) {
+		this.finishTypeID = finishTypeID;
+	}
+	public String getFinishTypeName() {
+		return finishTypeName;
+	}
+	public void setFinishTypeName(String finishTypeName) {
+		this.finishTypeName = finishTypeName;
+	}
+	public String getProjAppraisal() {
+		return projAppraisal;
+	}
+	public void setProjAppraisal(String projAppraisal) {
+		this.projAppraisal = projAppraisal;
+	}
+	public Date getFinishDate() {
+		return finishDate;
+	}
+	public void setFinishDate(Date finishDate) {
+		this.finishDate = finishDate;
+	}
+	public Double getBankRate() {
+		return bankRate;
+	}
+	public void setBankRate(Double bankRate) {
+		this.bankRate = bankRate;
+	}
+	public Double getGuarantyRate() {
+		return guarantyRate;
+	}
+	public void setGuarantyRate(Double guarantyRate) {
+		this.guarantyRate = guarantyRate;
+	}
+	public Double getReviewRate() {
+		return reviewRate;
+	}
+	public void setReviewRate(Double reviewRate) {
+		this.reviewRate = reviewRate;
+	}
+	public Double getServiceRate() {
+		return serviceRate;
+	}
+	public void setServiceRate(Double serviceRate) {
+		this.serviceRate = serviceRate;
+	}
+	public Double getPunishRate() {
+		return punishRate;
+	}
+	public void setPunishRate(Double punishRate) {
+		this.punishRate = punishRate;
+	}
+	public String getFundType() {
+		return fundType;
+	}
+	public void setFundType(String fundType) {
+		this.fundType = fundType;
+	}
+	public String getFundTypeID() {
+		return fundTypeID;
+	}
+	public void setFundTypeID(String fundTypeID) {
+		this.fundTypeID = fundTypeID;
+	}
+	public String getFundName() {
+		return fundName;
+	}
+	public void setFundName(String fundName) {
+		this.fundName = fundName;
+	}
+	public String getMeetingDetail_ID() {
+		return meetingDetail_ID;
+	}
+	public void setMeetingDetail_ID(String meetingDetail_ID) {
+		this.meetingDetail_ID = meetingDetail_ID;
+	}
+	public Float getBzScale() {
+		return bzScale;
+	}
+	public void setBzScale(Float bzScale) {
+		this.bzScale = bzScale;
+	}
+	public String getFundSource() {
+		return fundSource;
+	}
+	public void setFundSource(String fundSource) {
+		this.fundSource = fundSource;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	public String getLoanPlan_ID() {
+		return loanPlan_ID;
+	}
+	public void setLoanPlan_ID(String loanPlan_ID) {
+		this.loanPlan_ID = loanPlan_ID;
+	}
+	public Integer getProjCount() {
+		return projCount;
+	}
+	public void setProjCount(Integer projCount) {
+		this.projCount = projCount;
+	}
+	public Date getReplaceDate() {
+		return replaceDate;
+	}
+	public void setReplaceDate(Date replaceDate) {
+		this.replaceDate = replaceDate;
+	}
+	public Integer getClientCount() {
+		return clientCount;
+	}
+	public void setClientCount(Integer clientCount) {
+		this.clientCount = clientCount;
+	}
+	public Integer getAnalysisYears() {
+		return analysisYears;
+	}
+	public void setAnalysisYears(Integer analysisYears) {
+		this.analysisYears = analysisYears;
+	}
+	public Integer getAnalysisMonths() {
+		return analysisMonths;
+	}
+	public void setAnalysisMonths(Integer analysisMonths) {
+		this.analysisMonths = analysisMonths;
+	}
+	public Integer getNormolCount() {
+		return normolCount;
+	}
+	public void setNormolCount(Integer normolCount) {
+		this.normolCount = normolCount;
+	}
+	public Integer getReplaceCount() {
+		return replaceCount;
+	}
+	public void setReplaceCount(Integer replaceCount) {
+		this.replaceCount = replaceCount;
+	}
+	public Integer getGuarantyCount() {
+		return guarantyCount;
+	}
+	public void setGuarantyCount(Integer guarantyCount) {
+		this.guarantyCount = guarantyCount;
+	}
+	public Double getFactCostSum() {
+		return factCostSum;
+	}
+	public void setFactCostSum(Double factCostSum) {
+		this.factCostSum = factCostSum;
+	}
+	public Double getPayCapitalSum() {
+		return payCapitalSum;
+	}
+	public void setPayCapitalSum(Double payCapitalSum) {
+		this.payCapitalSum = payCapitalSum;
+	}
+	public Double getPayInterestSum() {
+		return payInterestSum;
+	}
+	public void setPayInterestSum(Double payInterestSum) {
+		this.payInterestSum = payInterestSum;
+	}
+	public Double getClearSum() {
+		return clearSum;
+	}
+	public void setClearSum(Double clearSum) {
+		this.clearSum = clearSum;
+	}
+	public String getDepartName() {
+		return departName;
+	}
+	public void setDepartName(String departName) {
+		this.departName = departName;
+	}
+	public Integer getNotYetEndDate() {
+		return notYetEndDate;
+	}
+	public void setNotYetEndDate(Integer notYetEndDate) {
+		this.notYetEndDate = notYetEndDate;
+	}
+	public String getGuarantyOrgName() {
+		return guarantyOrgName;
+	}
+	public void setGuarantyOrgName(String guarantyOrgName) {
+		this.guarantyOrgName = guarantyOrgName;
+	}
+	public String getGuarantyOrgID() {
+		return guarantyOrgID;
+	}
+	public void setGuarantyOrgID(String guarantyOrgID) {
+		this.guarantyOrgID = guarantyOrgID;
+	}
+	public String getHostAreaName() {
+		return hostAreaName;
+	}
+	public void setHostAreaName(String hostAreaName) {
+		this.hostAreaName = hostAreaName;
+	}
+	public String getHostAreaID() {
+		return hostAreaID;
+	}
+	public void setHostAreaID(String hostAreaID) {
+		this.hostAreaID = hostAreaID;
+	}
+	public String getOprationCompanyName() {
+		return oprationCompanyName;
+	}
+	public void setOprationCompanyName(String oprationCompanyName) {
+		this.oprationCompanyName = oprationCompanyName;
+	}
+	public String getOprationCompanyID() {
+		return oprationCompanyID;
+	}
+	public void setOprationCompanyID(String oprationCompanyID) {
+		this.oprationCompanyID = oprationCompanyID;
+	}
+	public String getAttributionName() {
+		return attributionName;
+	}
+	public void setAttributionName(String attributionName) {
+		this.attributionName = attributionName;
+	}
+	public String getAttributionID() {
+		return attributionID;
+	}
+	public void setAttributionID(String attributionID) {
+		this.attributionID = attributionID;
+	}
+	public String getFundID() {
+		return fundID;
+	}
+	public void setFundID(String fundID) {
+		this.fundID = fundID;
+	}
+	public String getFundChinese() {
+		return fundChinese;
+	}
+	public void setFundChinese(String fundChinese) {
+		this.fundChinese = fundChinese;
+	}
+	public String getJcontractCode() {
+		return jcontractCode;
+	}
+	public void setJcontractCode(String jcontractCode) {
+		this.jcontractCode = jcontractCode;
+	}
+	public String getBcontractCode() {
+		return bcontractCode;
+	}
+	public void setBcontractCode(String bcontractCode) {
+		this.bcontractCode = bcontractCode;
+	}
+	public String getDcontractCode() {
+		return dcontractCode;
+	}
+	public void setDcontractCode(String dcontractCode) {
+		this.dcontractCode = dcontractCode;
+	}
+	public String getClient_ID() {
+		return client_ID;
+	}
+	public void setClient_ID(String client_ID) {
+		this.client_ID = client_ID;
+	}
+	public String getClientGUID() {
+		return clientGUID;
+	}
+	public void setClientGUID(String clientGUID) {
+		this.clientGUID = clientGUID;
+	}
+	public String getClientName() {
+		return clientName;
+	}
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
+	}
+	public String getClientTypeID() {
+		return clientTypeID;
+	}
+	public void setClientTypeID(String clientTypeID) {
+		this.clientTypeID = clientTypeID;
+	}
+	public String getClientTypeName() {
+		return clientTypeName;
+	}
+	public void setClientTypeName(String clientTypeName) {
+		this.clientTypeName = clientTypeName;
+	}
+	public String getDicTypeName() {
+		return dicTypeName;
+	}
+	public void setDicTypeName(String dicTypeName) {
+		this.dicTypeName = dicTypeName;
+	}
+	public String getProductInstance_ID() {
+		return productInstance_ID;
+	}
+	public void setProductInstance_ID(String productInstance_ID) {
+		this.productInstance_ID = productInstance_ID;
+	}
+	public String getBeforeAManID() {
+		return beforeAManID;
+	}
+	public void setBeforeAManID(String beforeAManID) {
+		this.beforeAManID = beforeAManID;
+	}
+	public String getBeforeAManName() {
+		return beforeAManName;
+	}
+	public void setBeforeAManName(String beforeAManName) {
+		this.beforeAManName = beforeAManName;
+	}
+	public String getBeforeBManID() {
+		return beforeBManID;
+	}
+	public void setBeforeBManID(String beforeBManID) {
+		this.beforeBManID = beforeBManID;
+	}
+	public String getBeforeBManName() {
+		return beforeBManName;
+	}
+	public void setBeforeBManName(String beforeBManName) {
+		this.beforeBManName = beforeBManName;
+	}
+	public String getChangeManID() {
+		return changeManID;
+	}
+	public void setChangeManID(String changeManID) {
+		this.changeManID = changeManID;
+	}
+	public String getChangeManName() {
+		return changeManName;
+	}
+	public void setChangeManName(String changeManName) {
+		this.changeManName = changeManName;
+	}
+	public Date getChangeDate() {
+		return changeDate;
+	}
+	public void setChangeDate(Date changeDate) {
+		this.changeDate = changeDate;
+	}
+	public String getGuarantorsName() {
+		return guarantorsName;
+	}
+	public void setGuarantorsName(String guarantorsName) {
+		this.guarantorsName = guarantorsName;
+	}
+	public Integer getIsNewClient() {
+		return isNewClient;
+	}
+	public void setIsNewClient(Integer isNewClient) {
+		this.isNewClient = isNewClient;
+	}
+	public int getLimitType() {
+		return limitType;
+	}
+	public void setLimitType(int limitType) {
+		this.limitType = limitType;
+	}
+	public Integer getOldPeriodMonth() {
+		return oldPeriodMonth;
+	}
+	public void setOldPeriodMonth(Integer oldPeriodMonth) {
+		this.oldPeriodMonth = oldPeriodMonth;
+	}
+	public Integer getOldPeriodDay() {
+		return oldPeriodDay;
+	}
+	public void setOldPeriodDay(Integer oldPeriodDay) {
+		this.oldPeriodDay = oldPeriodDay;
+	}
+	public String getOldPeriodMonthDay() {
+		return oldPeriodMonthDay;
+	}
+	public void setOldPeriodMonthDay(String oldPeriodMonthDay) {
+		this.oldPeriodMonthDay = oldPeriodMonthDay;
+	}
+	public Integer getIsCreditorMark() {
+		return isCreditorMark;
+	}
+	public void setIsCreditorMark(Integer isCreditorMark) {
+		this.isCreditorMark = isCreditorMark;
+	}
+	public Integer getIsCreditorAll() {
+		return isCreditorAll;
+	}
+	public void setIsCreditorAll(Integer isCreditorAll) {
+		this.isCreditorAll = isCreditorAll;
+	}
+	public Date getReplaceOverDate() {
+		return replaceOverDate;
+	}
+	public void setReplaceOverDate(Date replaceOverDate) {
+		this.replaceOverDate = replaceOverDate;
+	}
+	public Integer getIsUrgeLetter() {
+		return isUrgeLetter;
+	}
+	public void setIsUrgeLetter(Integer isUrgeLetter) {
+		this.isUrgeLetter = isUrgeLetter;
+	}
+	public Integer getIsSensitiveCreditor() {
+		return isSensitiveCreditor;
+	}
+	public void setIsSensitiveCreditor(Integer isSensitiveCreditor) {
+		this.isSensitiveCreditor = isSensitiveCreditor;
+	}
+	public Integer getSensitiveCreditorNumber() {
+		return sensitiveCreditorNumber;
+	}
+	public void setSensitiveCreditorNumber(Integer sensitiveCreditorNumber) {
+		this.sensitiveCreditorNumber = sensitiveCreditorNumber;
+	}
+	public Double getInterest() {
+		return interest;
+	}
+	public void setInterest(Double interest) {
+		this.interest = interest;
+	}
+	public Double getInterestSum() {
+		return interestSum;
+	}
+	public void setInterestSum(Double interestSum) {
+		this.interestSum = interestSum;
+	}
+	
+}

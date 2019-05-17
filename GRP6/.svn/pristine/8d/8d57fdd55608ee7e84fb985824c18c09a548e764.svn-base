@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><jatools Class="jatools.ReportDocument" Name="jatools report template"><VariableContext/><Page><Children ItemClass="PagePanel"><Item0><Width>1062</Width><Height>140</Height><Children><Item0 Class="Label"><Text>融投系前10大客户名录</Text><Font><Face>宋体</Face><Style>1</Style><Size>36</Size></Font><HorizontalAlignment>1</HorizontalAlignment><X>192</X><Y>9</Y><Width>656</Width><Height>71</Height></Item0><Item1 Class="Label"><Text>金额单位：亿元</Text><HorizontalAlignment>2</HorizontalAlignment><X>911</X><Y>114</Y><Width>101</Width><Height>23</Height></Item1><Item2 Class="Label"><Text>截止日期：</Text><X>433</X><Y>80</Y><Width>56</Width><Height>23</Height></Item2><Item3 Class="Text"><Variable>=if(has(endyearmonthsql)) return endyearmonthsql;else return ($today+"").substring(0,7)</Variable><X>494</X><Y>81</Y><Width>110</Width><Height>23</Height></Item3></Children><Type>100</Type></Item0><Item1><Y>1021</Y><Width>1062</Width><Height>61</Height><Type>103</Type></Item1><Item2><Y>140</Y><Width>1062</Width><Height>881</Height><Children ItemClass="Table"><Item0><NodePath>tab_detail</NodePath><X>128</X><Y>4</Y><Children><Item0 Class="Label"><Text>序号  </Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col></Cell></Item0><Item1 Class="Label"><Text>关联主体</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col></Cell></Item1><Item2 Class="Label"><Text>担保</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>2</Col></Cell></Item2><Item3 Class="Label"><Text>融投系委贷</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>3</Col></Cell></Item3><Item4 Class="Label"><Text>扣减已担保的委贷</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>4</Col></Cell></Item4><Item5 Class="Label"><Text>合计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>0</Col><ColSpan>2</ColSpan></Cell></Item5><Item6 Class="Label"><Text>合计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>5</Col></Cell></Item6><Item7 Class="Text"><Variable>=$.total.sum()/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>2</Row><Col>2</Col></Cell></Item7><Item8 Class="Text"><Variable>=$.eTotal.sum()/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>2</Row><Col>3</Col></Cell></Item8><Item9 Class="Text"><Variable>=$.guarantySum.sum()/10000
+</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>4</Col></Cell></Item9><Item10 Class="RowPanel"><Cell><Row>1</Row><Col>0</Col><ColSpan>6</ColSpan></Cell><Children ItemClass="Text"><Item0><Variable>=$.eTotal/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>1</Row><Col>3</Col></Cell></Item0><Item1><Variable>=$.total/10000
+</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>1</Row><Col>2</Col></Cell></Item1><Item2><Variable>=$.guarantySum/10000
+</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>1</Row><Col>4</Col></Cell></Item2><Item3><Variable>=$.relationMainName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>1</Col></Cell></Item3><Item4><Variable>=$.position+1</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>0</Col></Cell></Item4><Item5><Variable>=$.total/10000+$.eTotal/10000+$.guarantySum/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>1</Row><Col>5</Col></Cell></Item5><Item6><Variable>=$.total.sum()/10000+$.eTotal.sum()/10000+$.guarantySum.sum()/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>2</Row><Col>5</Col></Cell></Item6></Children><NodePath>Row</NodePath></Item10></Children><ColumnWidths>143,93,153,177,167,130</ColumnWidths><RowHeights>39,45,61</RowHeights></Item0></Children><Type>102</Type></Item2></Children><PageFormat><Width>1102</Width><Height>1122</Height></PageFormat></Page><NodeSource><Children ItemClass="DatasetNodeSource"><Item0><Children ItemClass="RowNodeSource"><Item0/></Children><Reader Class="SqlReader"><Name>tab_detail</Name><Sql>SELECT cc.relationMainName,
+sum(pp.loadSum) AS total,
+IFNULL(tab2.guarantySum,0) as guarantySum,
+IFNULL(tab.eTotal,0) as eTotal
+FROM crm_client cc 
+LEFT JOIN pro_apply pa ON cc.client_ID = pa.client_ID
+LEFT JOIN pro_project pp ON pa.apply_ID = pp.apply_ID
+LEFT JOIN(
+	SELECT cc.relationMainName,
+	sum(pp.loadSum) AS eTotal
+	FROM crm_client cc 
+	LEFT JOIN pro_apply pa ON cc.client_ID = pa.client_ID
+	LEFT JOIN pro_project pp ON pa.apply_ID = pp.apply_ID
+	WHERE cc.relationMainName is not null 
+	and pp.busiClass = '02'
+	${has(endyearmonthsql)?(" and DATE_FORMAT(pp.reportDate,'%Y-%m') &lt;= '"+endyearmonthsql+"'"):""}
+	GROUP BY cc.relationMainName
+) tab on tab.relationMainName = cc.relationMainName
+LEFT JOIN(
+	SELECT cc.relationMainName,
+	SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)-IFNULL(tab5.creditorsum,0))) AS guarantySum
+	FROM crm_client cc 
+	LEFT JOIN pro_apply pa ON cc.client_ID = pa.client_ID
+	LEFT JOIN pro_project pp ON pa.apply_ID = pp.apply_ID
+	LEFT JOIN (
+		SELECT 
+		pfp.project_ID,
+   		SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum  
+    		FROM
+    		pro_factpay pfp
+   		WHERE 1=1 
+		${has(enddatesql)?(" and pfp.payDate&lt;='"+endyearmonthsql+"'"):""}
+		group by pfp.project_ID
+	)tab1 ON tab1.project_ID =  pp.project_ID
+	LEFT JOIN (
+		SELECT 
+		pre.project_ID,
+    		SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum  
+    		FROM
+    		pro_replace pre
+    		WHERE 1=1 
+    		${has(enddatesql)?(" and pre.replaceDate&lt;='"+endyearmonthsql+"'"):""}	
+    		group by  pre.project_ID
+	)tab2 ON tab2.project_ID =  pp.project_ID
+	LEFT JOIN (
+		SELECT 
+		precre.project_ID,        
+		SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum          
+		FROM
+		pro_creditor precre
+		WHERE 1=1   
+		${has(enddatesql)?(" and  precre.creditor_date&lt;='"+endyearmonthsql+"'"):""}
+		GROUP BY precre.project_ID 
+	)tab5 ON tab5.project_ID =  pp.project_ID
+	WHERE cc.relationMainName is not null 
+	AND pp.busiClass = '02'
+	${has(endyearmonthsql)?(" and DATE_FORMAT(pp.reportDate,'%Y-%m') &lt;= '"+endyearmonthsql+"'"):""}
+	${has(endyearmonthsql)?("AND (pp.finishDate is null or pp.finishDate &gt;= '"+endyearmonthsql+"')"):""}
+	GROUP BY cc.relationMainName
+) tab2 on tab2.relationMainName = cc.relationMainName
+WHERE cc.relationMainName is not null 
+and pp.busiClass = '01'
+${has(endyearmonthsql)?(" and DATE_FORMAT(pp.reportDate,'%Y-%m') &lt;= '"+endyearmonthsql+"'"):""}
+GROUP BY cc.relationMainName
+ORDER BY total DESC LIMIT 10
+
+
+</Sql><Description>SELECT cc.relationMainName,
+sum(pp.loadSum) AS total,
+IFNULL(tab2.guarantySum,0) as guarantySum,
+IFNULL(tab.eTotal,0) as eTotal
+FROM crm_client cc 
+LEFT JOIN pro_apply pa ON cc.client_ID = pa.client_ID
+LEFT JOIN pro_project pp ON pa.apply_ID = pp.apply_ID
+LEFT JOIN(
+	SELECT cc.relationMainName,
+	sum(pp.loadSum) AS eTotal
+	FROM crm_client cc 
+	LEFT JOIN pro_apply pa ON cc.client_ID = pa.client_ID
+	LEFT JOIN pro_project pp ON pa.apply_ID = pp.apply_ID
+	WHERE cc.relationMainName is not null 
+	and pp.busiClass = '02'
+	${has(endyearmonthsql)?(" and DATE_FORMAT(pp.reportDate,'%Y-%m') &lt;= '"+endyearmonthsql+"'"):""}
+	GROUP BY cc.relationMainName
+) tab on tab.relationMainName = cc.relationMainName
+LEFT JOIN(
+	SELECT cc.relationMainName,
+	SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)-IFNULL(tab5.creditorsum,0))) AS guarantySum
+	FROM crm_client cc 
+	LEFT JOIN pro_apply pa ON cc.client_ID = pa.client_ID
+	LEFT JOIN pro_project pp ON pa.apply_ID = pp.apply_ID
+	LEFT JOIN (
+		SELECT 
+		pfp.project_ID,
+   		SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum  
+    		FROM
+    		pro_factpay pfp
+   		WHERE 1=1 
+		${has(enddatesql)?(" and pfp.payDate&lt;='"+endyearmonthsql+"'"):""}
+		group by pfp.project_ID
+	)tab1 ON tab1.project_ID =  pp.project_ID
+	LEFT JOIN (
+		SELECT 
+		pre.project_ID,
+    		SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum  
+    		FROM
+    		pro_replace pre
+    		WHERE 1=1 
+    		${has(enddatesql)?(" and pre.replaceDate&lt;='"+endyearmonthsql+"'"):""}	
+    		group by  pre.project_ID
+	)tab2 ON tab2.project_ID =  pp.project_ID
+	LEFT JOIN (
+		SELECT 
+		precre.project_ID,        
+		SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum          
+		FROM
+		pro_creditor precre
+		WHERE 1=1   
+		${has(enddatesql)?(" and  precre.creditor_date&lt;='"+endyearmonthsql+"'"):""}
+		GROUP BY precre.project_ID 
+	)tab5 ON tab5.project_ID =  pp.project_ID
+	WHERE cc.relationMainName is not null 
+	AND pp.busiClass = '02'
+	${has(endyearmonthsql)?(" and DATE_FORMAT(pp.reportDate,'%Y-%m') &lt;= '"+endyearmonthsql+"'"):""}
+	${has(endyearmonthsql)?("AND (pp.finishDate is null or pp.finishDate &gt;= '"+endyearmonthsql+"')"):""}
+	GROUP BY cc.relationMainName
+) tab2 on tab2.relationMainName = cc.relationMainName
+WHERE cc.relationMainName is not null 
+and pp.busiClass = '01'
+${has(endyearmonthsql)?(" and DATE_FORMAT(pp.reportDate,'%Y-%m') &lt;= '"+endyearmonthsql+"'"):""}
+GROUP BY cc.relationMainName
+ORDER BY total DESC LIMIT 10
+
+
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><TagName>tab_detail</TagName></Item0></Children></NodeSource></jatools>

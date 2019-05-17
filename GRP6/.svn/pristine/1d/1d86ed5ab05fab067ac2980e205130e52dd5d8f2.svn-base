@@ -1,0 +1,342 @@
+package com.zjm.sys.dicType.web;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.zjm.common.db.model.AjaxRes;
+import com.zjm.common.db.model.PageTable;
+import com.zjm.common.db.model.Phone;
+import com.zjm.common.db.model.User;
+import com.zjm.sys.db.model.C_dictype;
+import com.zjm.sys.dicType.service.DicTypeService;
+import com.zjm.util.SystemSession;
+import com.zjm.util.Tool;
+
+@Controller
+public class DicTypeAction {
+
+	@Resource
+	private DicTypeService dicTypeService;
+	
+	/**
+	 * 查询所有字典 用于改变上下级顺序
+	 * @return
+	 */
+	@RequestMapping(value="/selectDicTypeListJSON", method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes selectDicTypeListJSON(@RequestBody C_dictype c_dictype){
+		List<Map<String, String>> mapList = new ArrayList<Map<String,String>>();
+		Map<String, String> map = new HashMap<String, String>();
+		String wheresql="";//" and unit_uid=\'"+SystemSession.getUserSession().getUnit_uid()+"\'";
+		if(c_dictype!=null){
+			if(c_dictype.getDicTypePID()!=null){
+				wheresql=wheresql+" and dicTypePID = \'"+ c_dictype.getDicTypePID()+"\'";
+			}
+		}
+		List<C_dictype>  dicTypeList=dicTypeService.selectAllDicTypeList(wheresql);
+		for (C_dictype c_dictype2 : dicTypeList) {
+			map = new HashMap<String, String>();
+			map.put(c_dictype2.getDicTypeID(), c_dictype2.getDicTypeName());
+			mapList.add(map);
+		}
+		AjaxRes ar=new AjaxRes();
+		ar.setSucceed(mapList);
+		return ar;
+	}
+	
+	
+	/**
+	 * 查询项目类型 用于select选择
+	 * @return
+	 */
+	@RequestMapping(value="/selectDicProjectTypeByPID", method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes selectDicProjectTypeByPID(){
+		String wheresql="";//" and unit_uid=\'"+SystemSession.getUserSession().getUnit_uid()+"\'";
+		wheresql=wheresql+" and dicTypePID = \'"+ "7262e0635f4a49dfa4b03a9619ad4c19"+"\'";
+		List<C_dictype>  dicTypeList=dicTypeService.selectAllDicTypeList(wheresql);
+		List<Map<String, Object>> mapList = new ArrayList<Map<String,Object>>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		for (C_dictype dictype : dicTypeList) {
+			map = new HashMap<String, Object>();
+			map.put("id", dictype.getDicTypeID());
+			map.put("name", dictype.getDicTypeName());
+			mapList.add(map);
+		}
+		AjaxRes ar=new AjaxRes();
+		ar.setSucceed(mapList);
+		return ar;
+	}
+	
+	/**
+	 * 查询所属区域类型 用于select选择
+	 * @return
+	 */
+	@RequestMapping(value="/selectDicAreaByPID", method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes selectDicAreaByPID(){
+		String wheresql="";//" and unit_uid=\'"+SystemSession.getUserSession().getUnit_uid()+"\'";
+		wheresql=wheresql+" and dicTypePID = \'"+ "97fcca5785d14a1e9968db411a524883"+"\'";
+		List<C_dictype>  dicTypeList=dicTypeService.selectAllDicTypeList(wheresql);
+		List<Map<String, Object>> mapList = new ArrayList<Map<String,Object>>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		for (C_dictype dictype : dicTypeList) {
+			map = new HashMap<String, Object>();
+			map.put("id", dictype.getDicTypeID());
+			map.put("name", dictype.getDicTypeName());
+			mapList.add(map);
+		}
+		AjaxRes ar=new AjaxRes();
+		ar.setSucceed(mapList);
+		return ar;
+	}
+	
+	/**
+	 * 查询所有字典 用于select选择
+	 * @return
+	 */
+	@RequestMapping(value="/selectDicTypeSelectJSON", method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes selectDicTypeSelectJSON(@RequestBody C_dictype c_dictype){
+		List<Map<String, String>> mapList = new ArrayList<Map<String,String>>();
+		Map<String, String> map = new HashMap<String, String>();
+		String wheresql="";//" and unit_uid=\'"+SystemSession.getUserSession().getUnit_uid()+"\'";
+		if(c_dictype!=null){
+			if(c_dictype.getDicTypePID()!=null){
+				wheresql=wheresql+" and dicTypePID = \'"+ c_dictype.getDicTypePID()+"\'";
+			}
+		}
+		List<C_dictype>  dicTypeList=dicTypeService.selectAllDicTypeList(wheresql);
+		for (C_dictype c_dictype2 : dicTypeList) {
+			map = new HashMap<String, String>();
+			map.put(c_dictype2.getDicTypeName(), c_dictype2.getDicTypeName());
+			mapList.add(map);
+		}
+		AjaxRes ar=new AjaxRes();
+		ar.setSucceed(mapList);
+		return ar;
+	}
+	
+	
+	/**
+	 * 查询所有字典 用于手机select选择
+	 * @return
+	 */
+	@RequestMapping(value="/selectPhoneDicTypeSelectJSON", method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes selectPhoneDicTypeSelectJSON(@RequestBody C_dictype c_dictype){
+		List<Phone> mapList = new ArrayList<Phone>();
+		
+		String wheresql="";//" and unit_uid=\'"+SystemSession.getUserSession().getUnit_uid()+"\'";
+		if(c_dictype!=null){
+			if(c_dictype.getDicTypePID()!=null){
+				wheresql=wheresql+" and dicTypePID = \'"+ c_dictype.getDicTypePID()+"\'";
+			}
+		}
+		List<C_dictype>  dicTypeList=dicTypeService.selectAllDicTypeList(wheresql);
+		for (C_dictype c_dictype2 : dicTypeList) {
+			Phone phone = new Phone();
+			phone.setLabel(c_dictype2.getDicTypeName());
+			phone.setValue(c_dictype2.getDicTypeName());
+			mapList.add(phone);
+		}
+		AjaxRes ar=new AjaxRes();
+		ar.setSucceed(mapList);
+		return ar;
+	}
+	
+	/**
+	 * 查询所有字典 用于select选择
+	 * 数据格式为： key --- value . dicTypeID --- dicTypeName
+	 * @return
+	 */
+	@RequestMapping(value="/selectDicTypeSelectJSONKeyValue", method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes selectDicTypeSelectJSONKeyValue(@RequestBody C_dictype c_dictype){
+		List<Map<String, String>> mapList = new ArrayList<Map<String,String>>();
+		Map<String, String> map = new HashMap<String, String>();
+		String wheresql="";//" and unit_uid=\'"+SystemSession.getUserSession().getUnit_uid()+"\'";
+		if(c_dictype!=null){
+			if(c_dictype.getDicTypePID()!=null){
+				wheresql=wheresql+" and dicTypePID = \'"+ c_dictype.getDicTypePID()+"\'";
+			}
+		}
+		List<C_dictype>  dicTypeList=dicTypeService.selectAllDicTypeList(wheresql);
+		for (C_dictype c_dictype2 : dicTypeList) {
+			map = new HashMap<String, String>();
+			map.put(c_dictype2.getDicTypeID(), c_dictype2.getDicTypeName());
+			mapList.add(map);
+		}
+		AjaxRes ar=new AjaxRes();
+		ar.setSucceed(mapList);
+		return ar;
+	}
+	
+	/**
+	 * 查询所有字典  用于树形显示
+	 * @return
+	 */
+	@RequestMapping(value="/selectAllDicTypeListTree", method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes selectAllDicTypeListTree(){
+		List<Map<String, Object>> mapList = new ArrayList<Map<String,Object>>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		String whereSQL = "";//" and unit_uid=\'"+SystemSession.getUserSession().getUnit_uid()+"\'";
+		List<C_dictype>  dicTypeList=dicTypeService.selectAllDicTypeList(whereSQL);
+		for (C_dictype C_dictype : dicTypeList) {
+			map = new HashMap<String, Object>();
+			map.put("id", C_dictype.getDicTypeID());
+			map.put("pId", C_dictype.getDicTypePID());
+			map.put("name", C_dictype.getDicTypeName());
+			if("1".equals(C_dictype.getDicTypePID())){
+				map.put("open",true);
+			}
+			mapList.add(map);
+		}
+		AjaxRes ar=new AjaxRes();
+		ar.setSucceed(mapList);
+		return ar;
+	}
+	/**
+	 * 查询字典分页列表
+	 * @param pageTable
+	 * @return
+	 */
+	@RequestMapping(value = "/selectDicTypePageTables")
+	@ResponseBody
+	public AjaxRes selectDicTypePageTables(@RequestBody PageTable<C_dictype> pageTable) {
+		pageTable.setWheresql(queryConditionSql(pageTable));
+		pageTable=dicTypeService.selectDicTypePageTables(pageTable);
+		pageTable.setWheresql("");
+		AjaxRes ar=new AjaxRes();
+		ar.setSucceed(pageTable);
+		return ar;
+	}
+	/**
+	 * 字典分页列表查询条件
+	 * @param pageTable
+	 * @return
+	 */
+	private String queryConditionSql(PageTable<C_dictype> pageTable){
+		String wheresql="";//" and unit_uid=\'"+SystemSession.getUserSession().getUnit_uid()+"\'";
+		if(pageTable==null){
+			return "";
+		}
+		//搜索框功能
+		//当查询条件中包含中文时，get请求默认会使用ISO-8859-1编码请求参数，在服务端需要对其解码
+		if ( null != pageTable.getSearchText()) {
+			wheresql=wheresql+" and dicTypeName like \'%"+pageTable.getSearchText().trim()+"%\'";
+		}
+		if(pageTable.getQueryCondition()!=null){
+			if ( null == pageTable.getSearchText()) {
+				if(pageTable.getQueryCondition().getDicTypePID()!=null && !pageTable.getQueryCondition().getDicTypePID().equals("") && !pageTable.getQueryCondition().getDicTypePID().equals("-1")){
+					wheresql=wheresql+" and dicTypePID =\'"+pageTable.getQueryCondition().getDicTypePID().trim()+"\'";
+				}else if(pageTable.getQueryCondition().getDicTypeID()!=null && !pageTable.getQueryCondition().getDicTypeID().equals("") && !pageTable.getQueryCondition().getDicTypeID().equals("-1")){
+					wheresql=wheresql+" and dicTypeID =\'"+pageTable.getQueryCondition().getDicTypeID().trim()+"\'";
+				}
+			}
+			
+		}
+		if(pageTable.getSortName()!=null && !pageTable.getSortName().equals("") && pageTable.getSortOrder()!=null && !pageTable.getSortOrder().equals("")){
+				wheresql=wheresql+" order by "+pageTable.getSortName().trim()+"  " +pageTable.getSortOrder()+"";
+		}else{
+			wheresql=wheresql+" ORDER BY order_id ";
+		}
+		return wheresql;
+	}
+	/**
+	 * 插入一个字典信息
+	 * @return
+	 */
+	@RequestMapping(value="/insertOneDicTypeInfo", method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes insertOneDicTypeInfo(@RequestBody C_dictype c_dictype){
+		AjaxRes ar=new AjaxRes();
+		User user = SystemSession.getUserSession();
+		c_dictype.setDicTypeID(Tool.createUUID32());
+		c_dictype.setUnit_uid(user.getUnit_uid());
+		c_dictype.setCreate_user(user.getUser_name());
+		c_dictype.setUpdate_user(user.getUser_name());
+		Boolean b=dicTypeService.insertOneDicTypeInfo(user,c_dictype);
+		ar.setSucceed(b);
+		return ar;
+	}
+	/**
+	 * 查询一个字典信息
+	 * @param c_dictype
+	 * @return
+	 */
+	@RequestMapping(value="/selectOneDicTypeInfo", method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes selectOneDicTypeInfo(@RequestBody C_dictype c_dictype){
+		AjaxRes ar=new AjaxRes();
+		C_dictype  dictype=dicTypeService.selectOneDicTypeInfo(c_dictype);
+		ar.setSucceed(dictype);
+		return ar;
+	}
+	/**
+	 * 更新一个字典信息
+	 * @param sys_modules
+	 * @return
+	 */
+	@RequestMapping(value="/updateOneDicTypeInfo", method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes updateOneDicTypeInfo(@RequestBody C_dictype c_dictype){
+		AjaxRes ar=new AjaxRes();
+		User user = SystemSession.getUserSession();
+		c_dictype.setUpdate_user(user.getUser_name());
+		Boolean b=dicTypeService.updateOneDicTypeInfo(user,c_dictype);
+		ar.setSucceed(b);
+		return ar;
+	}
+	/**
+	 * 删除一个字典信息
+	 * @param sys_modules
+	 * @return
+	 */
+	@RequestMapping(value="/deleteOneDicTypeInfo")
+	@ResponseBody
+	public AjaxRes deleteOneDicTypeInfo(@RequestBody C_dictype c_dictype){
+		AjaxRes ar=new AjaxRes();
+		Boolean b=dicTypeService.deleteOneDicTypeInfo(SystemSession.getUserSession(),c_dictype);
+		ar.setSucceed(b);
+		return ar;
+	}
+	
+	/**
+	 * 判断字典名称是否存在（全部单级字典）
+	 */
+	@RequestMapping(value="/isExistDictypeNameForALL")
+	@ResponseBody
+	public AjaxRes isExistDictypeNameForALL(@RequestBody C_dictype c_dictype){
+		AjaxRes ar=new AjaxRes();
+		c_dictype.setUnit_uid(SystemSession.getUserSession().getUnit_uid());
+		Boolean b=dicTypeService.isExistDictypeNameForALL(c_dictype);
+		ar.setSucceed(b);
+		return ar;
+	}
+	
+	/**
+	 * 判断字典名称是否存在（同级目录字典）
+	 */
+	@RequestMapping(value="/isExistDictypeNameForParent")
+	@ResponseBody
+	public AjaxRes isExistDictypeNameForParent(@RequestBody C_dictype c_dictype){
+		AjaxRes ar=new AjaxRes();
+		c_dictype.setUnit_uid(SystemSession.getUserSession().getUnit_uid());
+		Boolean b=dicTypeService.isExistDictypeNameForParent(c_dictype);
+		ar.setSucceed(b);
+		return ar;
+	}
+	
+}

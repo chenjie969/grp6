@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><jatools Class="jatools.ReportDocument" Name="jatools report template"><VariableContext/><Page><Children ItemClass="PagePanel"><Item0><Width>1418</Width><Height>109</Height><Children><Item0 Class="Label"><Text>项目进展情况日报表(集团)</Text><Font><Face>宋体</Face><Style>1</Style><Size>36</Size></Font><HorizontalAlignment>1</HorizontalAlignment><X>381</X><Y>1</Y><Width>656</Width><Height>59</Height></Item0><Item1 Class="Label"><Text>金额单位：万元</Text><HorizontalAlignment>2</HorizontalAlignment><X>1292</X><Y>80</Y><Width>101</Width><Height>23</Height></Item1><Item2 Class="Text"><Variable>=if(has(enddatesql)) return enddatesql;else return $today;</Variable><X>710</X><Y>69</Y><Width>110</Width><Height>23</Height></Item2><Item3 Class="Label"><Text>统计日期：</Text><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><X>599</X><Y>69</Y><Width>110</Width><Height>23</Height></Item3></Children><Type>100</Type></Item0><Item1><Y>967</Y><Width>1418</Width><Height>10</Height><Type>103</Type></Item1><Item2><Y>109</Y><Width>1418</Width><Height>858</Height><Children ItemClass="Table"><Item0><X>18</X><Y>9</Y><Children ItemClass="RowPanel"><Item0><Cell><Row>6</Row><Col>0</Col><RowSpan>3</RowSpan><ColSpan>14</ColSpan></Cell><Children><Item0 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>8</Row><Col>6</Col></Cell></Item0><Item1 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>8</Row><Col>8</Col></Cell></Item1><Item2 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>8</Row><Col>9</Col></Cell></Item2><Item3 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>8</Row><Col>11</Col></Cell></Item3><Item4 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>8</Row><Col>12</Col></Cell></Item4><Item5 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>8</Row><Col>13</Col></Cell></Item5><Item6 Class="Label"><Text>展期合计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>8</Row><Col>0</Col><ColSpan>2</ColSpan></Cell></Item6><Item7 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>8</Row><Col>3</Col></Cell></Item7><Item8 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>8</Row><Col>4</Col></Cell></Item8><Item9 Class="Text"><Variable>=$.delaySum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>8</Row><Col>2</Col></Cell></Item9><Item10 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>8</Row><Col>10</Col></Cell></Item10><Item11 Class="Label"><Text>项目</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>6</Row><Col>0</Col></Cell></Item11><Item12 Class="Label"><Text>企业名称</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>6</Row><Col>1</Col></Cell></Item12><Item13 Class="Label"><Text>展期金额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>6</Row><Col>2</Col></Cell></Item13><Item14 Class="Label"><Text>担保/委贷</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>6</Row><Col>3</Col></Cell></Item14><Item15 Class="Label"><Text>合作放款方</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>6</Row><Col>4</Col></Cell></Item15><Item16 Class="Label"><Text>资金方名称</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>6</Row><Col>6</Col></Cell></Item16><Item17 Class="Label"><Text>起始-到期日期</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>6</Row><Col>8</Col></Cell></Item17><Item18 Class="Label"><Text>展期到期日期</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>6</Row><Col>9</Col></Cell></Item18><Item19 Class="Label"><Text>A角</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>6</Row><Col>10</Col></Cell></Item19><Item20 Class="Label"><Text>B角</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>6</Row><Col>11</Col></Cell></Item20><Item21 Class="Label"><Text>放款单编号</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>6</Row><Col>13</Col></Cell></Item21><Item22 Class="Label"><Text>委托担保合同号</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>6</Row><Col>12</Col></Cell></Item22><Item23 Class="RowPanel"><Cell><Row>7</Row><Col>0</Col><ColSpan>14</ColSpan></Cell><Children><Item0 Class="Text"><Variable>=$.clientName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>7</Row><Col>1</Col></Cell></Item0><Item1 Class="Text"><Variable>=$.delaySum</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>7</Row><Col>2</Col></Cell></Item1><Item2 Class="Text"><Variable>=$.bankName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>7</Row><Col>4</Col></Cell></Item2><Item3 Class="Text"><Variable>=$.fundChinese</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>7</Row><Col>6</Col></Cell></Item3><Item4 Class="Text"><Variable>=$.delayEndDate</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>7</Row><Col>9</Col></Cell></Item4><Item5 Class="Text"><Variable>=$.beforeAManName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>7</Row><Col>10</Col></Cell></Item5><Item6 Class="Text"><Variable>=$.beforeBManName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>7</Row><Col>11</Col></Cell></Item6><Item7 Class="Text"><Variable>=$.dcontractCode</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>7</Row><Col>12</Col></Cell></Item7><Item8 Class="Text"><Variable>=$.loadCode </Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>7</Row><Col>13</Col></Cell></Item8><Item9 Class="Label"><Text>展期项目</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><PrintStyle>united-level:1;</PrintStyle><Cell><Row>7</Row><Col>0</Col></Cell></Item9><Item10 Class="Text"><Variable>=$.busiClass</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>7</Row><Col>3</Col></Cell></Item10><Item11 Class="Text"><Variable>=$.delayBeginDate+ "~"+$.delayEndDate</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>7</Row><Col>8</Col></Cell></Item11><Item12 Class="Text"><Variable>=$.subBankName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>7</Row><Col>5</Col></Cell></Item12><Item13 Class="Text"><Variable>=$.fundName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>7</Row><Col>7</Col></Cell></Item13></Children><NodePath>Row</NodePath></Item23><Item24 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>8</Row><Col>5</Col></Cell></Item24><Item25 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>8</Row><Col>7</Col></Cell></Item25><Item26 Class="Label"><Text>合作子机构</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>6</Row><Col>5</Col></Cell></Item26><Item27 Class="Label"><Text>资金方子机构</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>6</Row><Col>7</Col></Cell></Item27></Children><NodePath>tab_delay</NodePath></Item0><Item1><Cell><Row>0</Row><Col>0</Col><RowSpan>3</RowSpan><ColSpan>14</ColSpan></Cell><Children><Item0 Class="Label"><Text>企业名称</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col></Cell></Item0><Item1 Class="Label"><Text>项目</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>0</Col></Cell></Item1><Item2 Class="Label"><Text>项目金额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>2</Col></Cell></Item2><Item3 Class="Label"><Text>担保/委贷</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>3</Col></Cell></Item3><Item4 Class="Label"><Text>合作放款方</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>4</Col></Cell></Item4><Item5 Class="Label"><Text>资金方名称</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>6</Col></Cell></Item5><Item6 Class="Label"><Text>起始日期</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>8</Col></Cell></Item6><Item7 Class="Label"><Text>到期日期</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>9</Col></Cell></Item7><Item8 Class="Label"><Text>A角</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>10</Col></Cell></Item8><Item9 Class="Label"><Text>B角</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>11</Col></Cell></Item9><Item10 Class="Label"><Text>委托担保合同号</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>12</Col></Cell></Item10><Item11 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>13</Col></Cell></Item11><Item12 Class="Label"><Text>放款合计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>0</Col><ColSpan>2</ColSpan></Cell></Item12><Item13 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>6</Col></Cell></Item13><Item14 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>8</Col></Cell></Item14><Item15 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>9</Col></Cell></Item15><Item16 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>10</Col></Cell></Item16><Item17 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>11</Col></Cell></Item17><Item18 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>12</Col></Cell></Item18><Item19 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>13</Col></Cell></Item19><Item20 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>3</Col></Cell></Item20><Item21 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>4</Col></Cell></Item21><Item22 Class="Text"><Variable>=$.loadSum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>2</Col></Cell></Item22><Item23 Class="RowPanel"><Cell><Row>1</Row><Col>0</Col><ColSpan>14</ColSpan></Cell><Children><Item0 Class="Label"><Text>放款项目</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><PrintStyle>united-level:1;</PrintStyle><Cell><Row>1</Row><Col>0</Col></Cell></Item0><Item1 Class="Text"><Variable>=$.clientName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>1</Col></Cell></Item1><Item2 Class="Text"><Variable>=$.loadSum</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>1</Row><Col>2</Col></Cell></Item2><Item3 Class="Text"><Variable>=$.busiClass</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>3</Col></Cell></Item3><Item4 Class="Text"><Variable>=$.bankName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>4</Col></Cell></Item4><Item5 Class="Text"><Variable>=$.fundChinese</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>6</Col></Cell></Item5><Item6 Class="Text"><Variable>=$.loadBeginDate</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>8</Col></Cell></Item6><Item7 Class="Text"><Variable>=$.loadEndDate</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>9</Col></Cell></Item7><Item8 Class="Text"><Variable>=$.beforeAManName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>10</Col></Cell></Item8><Item9 Class="Text"><Variable>=$.beforeBManName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>11</Col></Cell></Item9><Item10 Class="Text"><Variable>=$.dcontractCode</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>12</Col></Cell></Item10><Item11 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>13</Col></Cell></Item11><Item12 Class="Text"><Variable>=$.subBankName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>5</Col></Cell></Item12><Item13 Class="Text"><Variable>=$.fundName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>7</Col></Cell></Item13></Children><NodePath>Row</NodePath></Item23><Item24 Class="Label"><Text>合作子机构</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>5</Col></Cell></Item24><Item25 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>5</Col></Cell></Item25><Item26 Class="Label"><Text>资金方子机构</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>7</Col></Cell></Item26><Item27 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>7</Col></Cell></Item27></Children><NodePath>tab_load</NodePath></Item1><Item2><Cell><Row>3</Row><Col>0</Col><RowSpan>3</RowSpan><ColSpan>14</ColSpan></Cell><Children><Item0 Class="Label"><Text>项目</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>0</Col></Cell></Item0><Item1 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>13</Col></Cell></Item1><Item2 Class="Label"><Text>委托担保合同号</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>12</Col></Cell></Item2><Item3 Class="Label"><Text>B角</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>11</Col></Cell></Item3><Item4 Class="Label"><Text>A角</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>10</Col></Cell></Item4><Item5 Class="Label"><Text>实际还款日期</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>9</Col></Cell></Item5><Item6 Class="Label"><Text>起始-到期日期</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>8</Col></Cell></Item6><Item7 Class="Label"><Text>资金方名称</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>6</Col></Cell></Item7><Item8 Class="Label"><Text>合作放款方</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>4</Col></Cell></Item8><Item9 Class="Label"><Text>担保/委贷</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>3</Col></Cell></Item9><Item10 Class="Label"><Text>还款金额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>2</Col></Cell></Item10><Item11 Class="Label"><Text>企业名称</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>1</Col></Cell></Item11><Item12 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>5</Row><Col>6</Col></Cell></Item12><Item13 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>5</Row><Col>8</Col></Cell></Item13><Item14 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>5</Row><Col>9</Col></Cell></Item14><Item15 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>5</Row><Col>10</Col></Cell></Item15><Item16 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>5</Row><Col>11</Col></Cell></Item16><Item17 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>5</Row><Col>12</Col></Cell></Item17><Item18 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>5</Row><Col>13</Col></Cell></Item18><Item19 Class="Label"><Text>还款合计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>5</Row><Col>0</Col><ColSpan>2</ColSpan></Cell></Item19><Item20 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>5</Row><Col>3</Col></Cell></Item20><Item21 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>5</Row><Col>4</Col></Cell></Item21><Item22 Class="Text"><Variable>=$.paySum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>5</Row><Col>2</Col></Cell></Item22><Item23 Class="RowPanel"><Cell><Row>4</Row><Col>0</Col><ColSpan>14</ColSpan></Cell><Children><Item0 Class="Text"><Variable>=$.paySum</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>4</Row><Col>2</Col></Cell></Item0><Item1 Class="Text"><Variable>=$.bankName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>4</Row><Col>4</Col></Cell></Item1><Item2 Class="Text"><Variable>=$.fundChinese</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>4</Row><Col>6</Col></Cell></Item2><Item3 Class="Text"><Variable>=$.delayBeginDate+ "~"+$.delayEndDate</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>4</Row><Col>8</Col></Cell></Item3><Item4 Class="Text"><Variable>=$.payDate</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>4</Row><Col>9</Col></Cell></Item4><Item5 Class="Text"><Variable>=$.beforeAManName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>4</Row><Col>10</Col></Cell></Item5><Item6 Class="Text"><Variable>=$.beforeBManName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>4</Row><Col>11</Col></Cell></Item6><Item7 Class="Text"><Variable>=$.dcontractCode</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>4</Row><Col>12</Col></Cell></Item7><Item8 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>4</Row><Col>13</Col></Cell></Item8><Item9 Class="Text"><Variable>=$.clientName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>4</Row><Col>1</Col></Cell></Item9><Item10 Class="Label"><Text>还款项目</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><PrintStyle>united-level:1;</PrintStyle><Cell><Row>4</Row><Col>0</Col></Cell></Item10><Item11 Class="Text"><Variable>=$.busiClass</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>4</Row><Col>3</Col></Cell></Item11><Item12 Class="Text"><Variable>=$.subBankName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>4</Row><Col>5</Col></Cell></Item12><Item13 Class="Text"><Variable>=$.fundName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>4</Row><Col>7</Col></Cell></Item13></Children><NodePath>Row</NodePath></Item23><Item24 Class="Label"><Text>合作子机构</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>5</Col></Cell></Item24><Item25 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>5</Row><Col>5</Col></Cell></Item25><Item26 Class="Label"><Text>资金方子机构</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>3</Row><Col>7</Col></Cell></Item26><Item27 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>5</Row><Col>7</Col></Cell></Item27></Children><NodePath>tab_pay</NodePath></Item2></Children><ColumnWidths>100,200,93,69,76,72,66,75,100,100,60,60,124,96</ColumnWidths><RowHeights>30,30,30,30,30,30,30,30,30</RowHeights></Item0><Item1><NodePath>tab_creditor</NodePath><X>17</X><Y>307</Y><Children><Item0 Class="Label"><Text>企业名称</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col></Cell></Item0><Item1 Class="Label"><Text>转让金额</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>2</Col></Cell></Item1><Item2 Class="Label"><Text>担保/委贷</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>3</Col></Cell></Item2><Item3 Class="Label"><Text>合作放款机构</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>4</Col></Cell></Item3><Item4 Class="Label"><Text>资金来源</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>5</Col></Cell></Item4><Item5 Class="Label"><Text>起始日期</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>6</Col></Cell></Item5><Item6 Class="Label"><Text>到期日期</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>7</Col></Cell></Item6><Item7 Class="Label"><Text>委托担保合同号</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>8</Col></Cell></Item7><Item8 Class="RowPanel"><Cell><Row>1</Row><Col>0</Col><ColSpan>10</ColSpan></Cell><Children ItemClass="Text"><Item0><Variable>=$.projectName</Variable><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>1</Col></Cell></Item0><Item1><Variable>=$.creditor_sum</Variable><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>2</Col></Cell></Item1><Item2><Variable>=$.busiClass</Variable><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>3</Col></Cell></Item2><Item3><Variable>=$.fundChinese</Variable><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>4</Col></Cell></Item3><Item4><Variable>=$.fundName</Variable><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>5</Col></Cell></Item4><Item5><Variable>=$.loadBeginDate</Variable><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>6</Col></Cell></Item5><Item6><Variable>=$.loadEndDate</Variable><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>7</Col></Cell></Item6><Item7><Variable>=$.dContractCode</Variable><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>8</Col></Cell></Item7></Children><NodePath>Row</NodePath></Item8><Item9 Class="Text"><Variable>=$.loadCode</Variable><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>9</Col></Cell></Item9><Item10 Class="Text"><Variable>=$.creditor_sum.sum()</Variable><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000</Pattern></Format><Cell><Row>2</Row><Col>2</Col></Cell></Item10><Item11 Class="Text"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>3</Col></Cell></Item11><Item12 Class="Text"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>4</Col></Cell></Item12><Item13 Class="Text"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>5</Col></Cell></Item13><Item14 Class="Text"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>6</Col></Cell></Item14><Item15 Class="Text"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>7</Col></Cell></Item15><Item16 Class="Text"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>8</Col></Cell></Item16><Item17 Class="Text"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>9</Col></Cell></Item17><Item18 Class="Label"><Text>项目</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col></Cell></Item18><Item19 Class="Label"><Text>原债权情况</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>0</Col></Cell></Item19><Item20 Class="Label"><Text>合计：</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>0</Col><ColSpan>2</ColSpan></Cell></Item20><Item21 Class="Label"><Text>放款单编号</Text><Border><StyleText>border-top:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>9</Col></Cell></Item21></Children><ColumnWidths>101,201,93,144,138,75,99,102,243,96</ColumnWidths><RowHeights>27,27,29</RowHeights></Item1><Item2><NodePath>tab_creditor_new</NodePath><X>15</X><Y>403</Y><Children><Item0 Class="Label"><Text>企业名称</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col></Cell></Item0><Item1 Class="Label"><Text>转让金额</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>2</Col></Cell></Item1><Item2 Class="Label"><Text>担保/委贷</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>3</Col></Cell></Item2><Item3 Class="Label"><Text>合作放款机构</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>4</Col></Cell></Item3><Item4 Class="Label"><Text>资金来源</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>5</Col></Cell></Item4><Item5 Class="Label"><Text>起始日期</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>6</Col></Cell></Item5><Item6 Class="Label"><Text>到期日期</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>7</Col></Cell></Item6><Item7 Class="Label"><Text>委托担保合同号</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>8</Col></Cell></Item7><Item8 Class="RowPanel"><Cell><Row>1</Row><Col>0</Col><ColSpan>10</ColSpan></Cell><Children><Item0 Class="Text"><Variable>=$.projectName</Variable><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>1</Col></Cell></Item0><Item1 Class="Text"><Variable>=$.creditor_sum</Variable><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>2</Col></Cell></Item1><Item2 Class="Text"><Variable>=$.busiClass</Variable><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>3</Col></Cell></Item2><Item3 Class="Text"><Variable>=$.fundChinese</Variable><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>4</Col></Cell></Item3><Item4 Class="Text"><Variable>=$.fundName</Variable><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>5</Col></Cell></Item4><Item5 Class="Text"><Variable>=$.loadBeginDate</Variable><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>6</Col></Cell></Item5><Item6 Class="Text"><Variable>=$.loadEndDate</Variable><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>7</Col></Cell></Item6><Item7 Class="Text"><Variable>=$.dContractCode</Variable><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>8</Col></Cell></Item7><Item8 Class="Label"><Text>债权变更情况</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>0</Col></Cell></Item8><Item9 Class="Text"><Variable>=$.loadCode</Variable><Border><StyleText>border-right:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>9</Col></Cell></Item9></Children><NodePath>Row</NodePath></Item8><Item9 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>3</Col></Cell></Item9><Item10 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>4</Col></Cell></Item10><Item11 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>5</Col></Cell></Item11><Item12 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>6</Col></Cell></Item12><Item13 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>7</Col></Cell></Item13><Item14 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>8</Col></Cell></Item14><Item15 Class="Label"><Text>项目</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col></Cell></Item15><Item16 Class="Label"><Text>合计：</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>0</Col><ColSpan>2</ColSpan></Cell></Item16><Item17 Class="Label"><Text>放款单编号</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>9</Col></Cell></Item17><Item18 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>9</Col></Cell></Item18><Item19 Class="Text"><Variable>=$.creditor_sum.sum()</Variable><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>2</Col></Cell></Item19></Children><ColumnWidths>103,201,93,144,138,75,99,102,243,96</ColumnWidths><RowHeights>27,27,32</RowHeights></Item2></Children><Type>102</Type></Item2></Children><PageFormat><Width>1438</Width><Height>1011</Height><Right>0</Right><Bottom>14</Bottom></PageFormat></Page><NodeSource><Children ItemClass="DatasetNodeSource"><Item0><Children ItemClass="RowNodeSource"><Item0/></Children><Reader Class="SqlReader"><Name>tab_load</Name><Sql>SELECT pp.projectName,
+cc.clientName,
+-- pp.busiClass,
+pa.guarantyOrgName,
+CASE pp.busiClass
+	WHEN "01" THEN "担保"
+	WHEN "02" THEN "委贷"
+ END busiClass,
+pp.busiTypeName,
+pp.bankName,
+pp.loadBeginDate,
+pp.loadEndDate,
+pp.delayBeginDate,
+pp.delayEndDate,
+-- pp.amanName,
+pp.beforeAManName,
+pp.beforeBManName,
+pa.fundSource,
+pa.guarantyOrgName,
+pa.hostAreaName,
+pa.oprationCompanyName,
+pa.attributionName,
+pp.bmanName,
+pp.subBankName,
+pa.fundChinese,
+pa.fundName,
+pp.loadSum,
+pad.dcontractCode,
+cc.relationMainName
+FROM pro_project pp
+LEFT JOIN pro_applyDetail pad ON  pad.`apply_ID`=pp.`apply_ID`
+LEFT JOIN pro_apply  pa ON pa.`apply_ID`=pp.`apply_ID`
+LEFT JOIN crm_client cc ON cc.client_ID=pad.client_ID
+WHERE 1=1  
+${has(enddatesql)?(" and pp.reportDate ='"+enddatesql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}  
+ORDER BY pp.loadBeginDate ASC</Sql><Description>SELECT pp.projectName,
+cc.clientName,
+-- pp.busiClass,
+pa.guarantyOrgName,
+CASE pp.busiClass
+	WHEN "01" THEN "担保"
+	WHEN "02" THEN "委贷"
+ END busiClass,
+pp.busiTypeName,
+pp.bankName,
+pp.loadBeginDate,
+pp.loadEndDate,
+pp.delayBeginDate,
+pp.delayEndDate,
+-- pp.amanName,
+pp.beforeAManName,
+pp.beforeBManName,
+pa.fundSource,
+pa.guarantyOrgName,
+pa.hostAreaName,
+pa.oprationCompanyName,
+pa.attributionName,
+pp.bmanName,
+pp.subBankName,
+pa.fundChinese,
+pa.fundName,
+pp.loadSum,
+pad.dcontractCode,
+cc.relationMainName
+FROM pro_project pp
+LEFT JOIN pro_applyDetail pad ON  pad.`apply_ID`=pp.`apply_ID`
+LEFT JOIN pro_apply  pa ON pa.`apply_ID`=pp.`apply_ID`
+LEFT JOIN crm_client cc ON cc.client_ID=pad.client_ID
+WHERE 1=1  
+${has(enddatesql)?(" and pp.reportDate ='"+enddatesql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}  
+ORDER BY pp.loadBeginDate ASC</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><TagName>tab_load</TagName></Item0><Item1><Children ItemClass="RowNodeSource"><Item0/></Children><Reader Class="SqlReader"><Name>tab_delay</Name><Sql>SELECT 
+cc.clientName,
+pp.projectName,
+CASE pp.busiClass
+	WHEN "01" THEN "担保"
+	WHEN "02" THEN "委贷"
+END busiClass,
+pp.bankName,
+CASE 
+	WHEN pd.delayBeginDate IS NULL THEN pp.delayBeginDate
+	ELSE pd.delayBeginDate
+END delayBeginDate,
+pd.delayEndDate,
+-- pp.amanName,
+-- pp.bmanName,
+pp.beforeAManName,
+pp.beforeBManName,
+pa.fundSource,
+pp.subBankName,
+pa.fundChinese,
+pa.fundName,
+pd.delaySum,
+pa.guarantyOrgName,
+pa.hostAreaName,
+pa.oprationCompanyName,
+pa.attributionName,
+pa.`guarantyOrgName`,
+pad.dcontractCode,
+cc.relationMainName,
+pp.loadCode 
+FROM   pro_delay  pd 
+LEFT JOIN pro_applyDetail pad  ON  pad.`apply_ID`=pd.applyID
+LEFT JOIN pro_project pp ON pd.project_ID=pp.`project_ID`
+LEFT JOIN pro_apply  pa ON  pa.`apply_ID`=pd.`applyID`
+LEFT JOIN crm_client cc ON cc.client_ID=pa.client_ID
+WHERE 1=1  
+${has(enddatesql)?(" and pd.delayBeginDate='"+enddatesql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}  
+ORDER BY pd.delayBeginDate ASC</Sql><Description>SELECT 
+cc.clientName,
+pp.projectName,
+CASE pp.busiClass
+	WHEN "01" THEN "担保"
+	WHEN "02" THEN "委贷"
+END busiClass,
+pp.bankName,
+CASE 
+	WHEN pd.delayBeginDate IS NULL THEN pp.delayBeginDate
+	ELSE pd.delayBeginDate
+END delayBeginDate,
+pd.delayEndDate,
+-- pp.amanName,
+-- pp.bmanName,
+pp.beforeAManName,
+pp.beforeBManName,
+pa.fundSource,
+pp.subBankName,
+pa.fundChinese,
+pa.fundName,
+pd.delaySum,
+pa.guarantyOrgName,
+pa.hostAreaName,
+pa.oprationCompanyName,
+pa.attributionName,
+pa.`guarantyOrgName`,
+pad.dcontractCode,
+cc.relationMainName,
+pp.loadCode 
+FROM   pro_delay  pd 
+LEFT JOIN pro_applyDetail pad  ON  pad.`apply_ID`=pd.applyID
+LEFT JOIN pro_project pp ON pd.project_ID=pp.`project_ID`
+LEFT JOIN pro_apply  pa ON  pa.`apply_ID`=pd.`applyID`
+LEFT JOIN crm_client cc ON cc.client_ID=pa.client_ID
+WHERE 1=1  
+${has(enddatesql)?(" and pd.delayBeginDate='"+enddatesql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}  
+ORDER BY pd.delayBeginDate ASC</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">id</IndexFields><TagName>tab_delay</TagName></Item1><Item2><Children ItemClass="RowNodeSource"><Item0/></Children><Reader Class="SqlReader"><Name>tab_pay</Name><Sql>SELECT 
+pp.projectName,
+cc.clientName,
+pfp.paySum,
+pa.`guarantyOrgName`,
+CASE pp.busiClass
+	WHEN "01" THEN "担保"
+	WHEN "02" THEN "委贷"
+END busiClass,
+pp.delayBeginDate,
+pp.delayEndDate,
+pa.fundSource,
+pp.bankName,   
+pfp.payDate,
+-- pp.amanName,
+-- pp.bmanName,
+pp.beforeAManName,
+pp.beforeBManName,
+pp.subBankName,
+pa.fundChinese,
+pa.fundName,
+pa.guarantyOrgName,
+pa.hostAreaName,
+pa.oprationCompanyName,
+pa.attributionName,
+pad.dcontractCode,
+cc.relationMainName
+FROM   pro_factPay  pfp          
+LEFT JOIN pro_applyDetail pad ON  pad.`apply_ID`=pfp.applyID
+LEFT JOIN pro_project pp ON pfp.applyID=pp.`apply_ID`
+LEFT JOIN pro_apply  pa ON  pa.`apply_ID`=pfp.`applyID`
+LEFT JOIN crm_client cc ON cc.client_ID = pa.client_ID
+WHERE 1=1  
+${has(enddatesql)?(" and pfp.payDate='"+enddatesql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}  
+ORDER BY pfp.payDate ASC</Sql><Description>SELECT 
+pp.projectName,
+cc.clientName,
+pfp.paySum,
+pa.`guarantyOrgName`,
+CASE pp.busiClass
+	WHEN "01" THEN "担保"
+	WHEN "02" THEN "委贷"
+END busiClass,
+pp.delayBeginDate,
+pp.delayEndDate,
+pa.fundSource,
+pp.bankName,   
+pfp.payDate,
+-- pp.amanName,
+-- pp.bmanName,
+pp.beforeAManName,
+pp.beforeBManName,
+pp.subBankName,
+pa.fundChinese,
+pa.fundName,
+pa.guarantyOrgName,
+pa.hostAreaName,
+pa.oprationCompanyName,
+pa.attributionName,
+pad.dcontractCode,
+cc.relationMainName
+FROM   pro_factPay  pfp          
+LEFT JOIN pro_applyDetail pad ON  pad.`apply_ID`=pfp.applyID
+LEFT JOIN pro_project pp ON pfp.applyID=pp.`apply_ID`
+LEFT JOIN pro_apply  pa ON  pa.`apply_ID`=pfp.`applyID`
+LEFT JOIN crm_client cc ON cc.client_ID = pa.client_ID
+WHERE 1=1  
+${has(enddatesql)?(" and pfp.payDate='"+enddatesql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}  
+ORDER BY pfp.payDate ASC</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><TagName>tab_pay</TagName></Item2><Item3><Children ItemClass="RowNodeSource"><Item0/></Children><Reader Class="SqlReader"><Name>tab_creditor</Name><Sql>SELECT 
+	pc.creditor_sum,
+	pp.projectName,
+	CASE pp.busiClass
+	WHEN "01" THEN "担保"
+	WHEN "02" THEN "委贷"
+	END busiClass,
+	pa.fundChinese,
+	pa.fundName,
+	pp.loadBeginDate,
+	pp.loadEndDate,
+	pa.dContractCode,
+	pp.loadCode 
+FROM	
+	pro_creditor pc
+ 	LEFT JOIN pro_project pp ON pp.project_ID=pc.project_id 
+ 	LEFT JOIN pro_apply pa ON pa.apply_ID=pc.apply_id 
+where 1=1
+${has(enddatesql)?(" and pc.creditor_date &lt;='"+enddatesql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}</Sql><Description>SELECT 
+	pc.creditor_sum,
+	pp.projectName,
+	CASE pp.busiClass
+	WHEN "01" THEN "担保"
+	WHEN "02" THEN "委贷"
+	END busiClass,
+	pa.fundChinese,
+	pa.fundName,
+	pp.loadBeginDate,
+	pp.loadEndDate,
+	pa.dContractCode,
+	pp.loadCode 
+FROM	
+	pro_creditor pc
+ 	LEFT JOIN pro_project pp ON pp.project_ID=pc.project_id 
+ 	LEFT JOIN pro_apply pa ON pa.apply_ID=pc.apply_id 
+where 1=1
+${has(enddatesql)?(" and pc.creditor_date &lt;='"+enddatesql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><TagName>tab_creditor</TagName></Item3><Item4><Children ItemClass="RowNodeSource"><Item0/></Children><Reader Class="SqlReader"><Name>tab_creditor_new</Name><Sql>SELECT 
+	pc.creditor_sum,
+	pp.projectName,
+	CASE pp.busiClass
+	WHEN "01" THEN "担保"
+	WHEN "02" THEN "委贷"
+	END busiClass,
+	pa.fundChinese,
+	pa.fundName,
+	pp.loadBeginDate,
+	pp.loadEndDate,
+	pa.dContractCode,
+	pp.loadCode 
+FROM	
+	pro_creditor pc
+ 	LEFT JOIN pro_project pp ON pp.project_ID=pc.credit_project_id
+ 	LEFT JOIN pro_apply pa ON pa.apply_ID=pc.credit_apply_id 
+where 1=1 
+ ${has(enddatesql)?(" and pc.creditor_date &lt;='"+enddatesql+"'"):""}
+ ${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+ ${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+ </Sql><Description>SELECT 
+	pc.creditor_sum,
+	pp.projectName,
+	CASE pp.busiClass
+	WHEN "01" THEN "担保"
+	WHEN "02" THEN "委贷"
+	END busiClass,
+	pa.fundChinese,
+	pa.fundName,
+	pp.loadBeginDate,
+	pp.loadEndDate,
+	pa.dContractCode,
+	pp.loadCode 
+FROM	
+	pro_creditor pc
+ 	LEFT JOIN pro_project pp ON pp.project_ID=pc.credit_project_id
+ 	LEFT JOIN pro_apply pa ON pa.apply_ID=pc.credit_apply_id 
+where 1=1 
+ ${has(enddatesql)?(" and pc.creditor_date &lt;='"+enddatesql+"'"):""}
+ ${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+ ${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+ </Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><TagName>tab_creditor_new</TagName></Item4></Children></NodeSource></jatools>

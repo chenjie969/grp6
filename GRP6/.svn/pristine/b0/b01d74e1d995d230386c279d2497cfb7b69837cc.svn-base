@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjm.crm.db.map.Crm_upDownClientMapper" >
+  
+	<resultMap id="upDownClientResultMap" type="com.zjm.crm.db.model.Crm_upDownClient" >
+		<result column="upDownClient_ID" property="upDownClient_ID"  />
+		<result column="client_ID" property="client_ID"  />
+		<result column="contractPeriod" property="contractPeriod"  />
+		<result column="upDownFlag" property="upDownFlag"  />
+		<result column="customerName" property="customerName"  />
+		<result column="productName" property="productName"  />
+		<result column="currentSum" property="currentSum"  />
+		<result column="remark" property="remark"  />
+		<result column="unit_uid" property="unit_uid"  />
+		<result column="unit_uidName" property="unit_uidName"  />
+		<result column="updateUserName" property="updateUserName"  />
+		<result column="updateDateTime" property="updateDateTime"  />
+	</resultMap>
+
+	<!-- 分页查询上下游客户列表 -->
+	<select id="selectUpDownClientPageTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="upDownClientResultMap">
+		SELECT 
+			upDownClient_ID,
+			client_ID,
+			contractPeriod,  
+			upDownFlag,  
+			customerName,  
+			productName, 
+			currentSum,  
+			remark,  
+			unit_uid, 
+			unit_uidName, 
+			updateUserName,
+			updateDateTime  
+		FROM crm_updownclient
+		WHERE unit_uid = #{queryCondition.unit_uid}
+		AND upDownFlag = #{queryCondition.upDownFlag}
+		AND client_ID = #{queryCondition.client_ID}
+		ORDER BY updateDateTime DESC
+		LIMIT #{pageNumber},#{pageSize}  
+	</select>
+
+	<!-- 分页查询上下游客户列表-查询总记录数 -->
+	<select id="selectUpDownClientPageTable_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+	 	SELECT 
+	 		COUNT(1) 
+	 	FROM 
+	 		crm_updownclient 
+	 	WHERE
+	 		unit_uid = #{queryCondition.unit_uid}
+		AND	upDownFlag = #{queryCondition.upDownFlag}
+		AND client_ID = #{queryCondition.client_ID}
+	</select>
+	
+	<!-- 查询上下游客户列表 -->
+	<select id="selectUpDownClientList" parameterType="java.lang.String" resultMap="upDownClientResultMap">
+		SELECT 
+			upDownClient_ID,
+			client_ID,
+			contractPeriod,  
+			upDownFlag,  
+			customerName,  
+			productName, 
+			currentSum,  
+			remark,  
+			unit_uid, 
+			unit_uidName, 
+			updateUserName,
+			updateDateTime  
+		FROM crm_updownclient
+		WHERE 1=1 ${value}
+	</select>
+
+	<!-- 查询一条上下游客户信息-->  
+	<select id="selectOneUpDownClient" parameterType="com.zjm.crm.db.model.Crm_upDownClient" resultMap="upDownClientResultMap">
+		SELECT 
+			upDownClient_ID,
+			client_ID,
+			contractPeriod,  
+			upDownFlag,  
+			customerName,  
+			productName, 
+			currentSum,  
+			remark,  
+			unit_uid, 
+			unit_uidName, 
+			updateUserName,
+			updateDateTime  
+		FROM crm_updownclient
+		WHERE unit_uid = #{unit_uid}
+		AND upDownClient_ID = #{upDownClient_ID}
+	</select>
+	
+	<!-- 插入一条上下游客户信息 -->
+	<insert id="insertOneUpDownClient" parameterType="com.zjm.crm.db.model.Crm_upDownClient">
+		INSERT INTO crm_updownclient(
+			upDownClient_ID,
+			client_ID,
+			contractPeriod,  
+			upDownFlag,  
+			customerName,  
+			productName, 
+			currentSum,  
+			remark,  
+			unit_uid, 
+			unit_uidName, 
+			updateUserName,
+			updateDateTime  
+		) VALUES(
+			#{upDownClient_ID},
+			#{client_ID},
+			#{contractPeriod},  
+			#{upDownFlag},  
+			#{customerName},  
+			#{productName}, 
+			#{currentSum},  
+			#{remark},  
+			#{unit_uid},
+			#{unit_uidName},
+			#{updateUserName},
+			NOW()
+		)
+	</insert>
+	
+	<!-- 修改一条上下游客户信息 -->
+	<update id="updateOneUpDownClient" parameterType="com.zjm.crm.db.model.Crm_upDownClient">
+		UPDATE crm_updownclient
+		SET
+			contractPeriod = #{contractPeriod},
+			customerName = #{customerName},
+			productName = #{productName},
+			currentSum = #{currentSum},
+			remark = #{remark},
+			updateUserName = #{updateUserName},
+			updateDateTime = NOW()
+		WHERE unit_uid=#{unit_uid}
+		AND upDownClient_ID = #{upDownClient_ID}
+	</update>
+	
+	<!-- 删除一条上下游客户信息 -->
+	<delete id="deleteOneUpDownClient" parameterType="com.zjm.crm.db.model.Crm_upDownClient">
+		DELETE FROM 
+			crm_updownclient
+		WHERE
+			unit_uid = #{unit_uid}
+		AND upDownClient_ID = #{upDownClient_ID}
+	</delete>
+ 	
+ 	
+ 	<delete id="deleteUpDownClientByWhereSql" parameterType="string">
+ 		DELETE FROM 
+			crm_updownclient
+		WHERE  1=1  ${value}
+ 	</delete>
+ 	
+</mapper>

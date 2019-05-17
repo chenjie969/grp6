@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><jatools Class="jatools.ReportDocument" Name="jatools report template"><VariableContext/><Page><Children ItemClass="PagePanel"><Item0><Width>1029</Width><Height>140</Height><Children><Item0 Class="Label"><Text>金额单位：万元</Text><HorizontalAlignment>2</HorizontalAlignment><X>865</X><Y>115</Y><Width>110</Width><Height>23</Height></Item0><Item1 Class="Label"><Text>河北融投控股集团在保（在贷、基金、租赁）企业风险分类情况汇总</Text><Font><Face>宋体</Face><Style>1</Style><Size>26</Size></Font><HorizontalAlignment>1</HorizontalAlignment><X>86</X><Y>4</Y><Width>869</Width><Height>65</Height></Item1><Item2 Class="Text"><Variable>=if(has(enddatesql)) return enddatesql;else return $today;</Variable><X>488</X><Y>73</Y><Width>110</Width><Height>23</Height></Item2><Item3 Class="Label"><Text>按风险等级划分</Text><X>54</X><Y>115</Y><Width>110</Width><Height>23</Height></Item3><Item4 Class="Label"><Text>统计截止日期：</Text><HorizontalAlignment>2</HorizontalAlignment><X>380</X><Y>73</Y><Width>110</Width><Height>23</Height></Item4></Children><Type>100</Type></Item0><Item1><Y>1021</Y><Width>1029</Width><Height>61</Height><Type>103</Type></Item1><Item2><Y>140</Y><Width>1029</Width><Height>881</Height><Children ItemClass="Table"><Item0><NodePath>tab_risk</NodePath><X>55</X><Y>6</Y><Children><Item0 Class="Label"><Text>风险等级分类</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col></Cell></Item0><Item1 Class="Label"><Text>担保（委贷、租赁）余额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col></Cell></Item1><Item2 Class="Label"><Text>预计损失</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>2</Col></Cell></Item2><Item3 Class="Text"><Variable>=index_column2.remainedSum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>2</Row><Col>1</Col></Cell></Item3><Item4 Class="Text"><Variable>=index_column3.loseSum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>2</Row><Col>2</Col></Cell></Item4><Item5 Class="Label"><Text>合计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>0</Col></Cell></Item5><Item6 Class="RowPanel"><Cell><Row>1</Row><Col>0</Col><ColSpan>3</ColSpan></Cell><Children ItemClass="Text"><Item0><Variable>=$.riskLevelName</Variable><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>0</Col></Cell></Item0><Item1><Variable>=if(has(index_column2.remainedSum{$.riskLevelName})) return index_column2.remainedSum{$.riskLevelName}; else return 0;</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>1</Row><Col>1</Col></Cell></Item1><Item2><Variable>=if(has(index_column2.remainedSum{$.riskLevelName})) return index_column2.remainedSum{$.riskLevelName} * $.scale; else return 0;</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>1</Row><Col>2</Col></Cell></Item2></Children><NodePath>Row</NodePath></Item6></Children><ColumnWidths>192,363,366</ColumnWidths><RowHeights>40,20,31</RowHeights></Item0></Children><Type>102</Type></Item2></Children><PageFormat><Width>1066</Width><Height>1122</Height><Right>17</Right></PageFormat></Page><NodeSource><Children ItemClass="DatasetNodeSource"><Item0><Children ItemClass="RowNodeSource"><Item0/></Children><Reader Class="SqlReader"><Name>tab_risk</Name><Sql>SELECT 
+	dicTypeID AS riskLevelID,
+	dicTypeName AS riskLevelName,
+	remark/1000 AS scale
+FROM c_dictype
+WHERE dicTypePID="50f858be37284937af4e6a8d3c9bee4b"
+ORDER BY order_id</Sql><Description>SELECT 
+	dicTypeID AS riskLevelID,
+	dicTypeName AS riskLevelName,
+	remark/1000 AS scale
+FROM c_dictype
+WHERE dicTypePID="50f858be37284937af4e6a8d3c9bee4b"
+ORDER BY order_id</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">riskLevelID</IndexFields><TagName>tab_risk</TagName></Item0><Item1><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">riskLevelName</IndexFields><TagName>index_column2</TagName></Item0></Children><Reader Class="SqlReader"><Name>first_colum3</Name><Sql>SELECT
+	SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0))) AS remainedSum,
+	cc.riskLevelName
+FROM pro_project pp
+LEFT JOIN (
+	SELECT 
+		pfp.factPay_ID,
+		pfp.project_ID,
+		SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM
+		pro_factpay pfp
+	WHERE 	1=1 
+		${has(enddatesql)?(" and pfp.payDate&lt;='"+enddatesql+"'"):""}
+	GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+LEFT JOIN (
+	SELECT 
+		pre.replace_ID,
+		pre.project_ID,        
+		SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum         
+	FROM
+		pro_replace pre
+	WHERE 	1=1   
+		${has(enddatesql)?(" and pre.replaceDate&lt;='"+enddatesql+"'"):""}
+	GROUP BY pre.project_ID 
+)tab2 ON tab2.project_ID =  pp.project_ID 
+LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+LEFT JOIN  crm_client  cc ON cc.client_ID=pa.client_ID
+WHERE	pp.busiClass IS NOT NULL
+	${has(enddatesql)?(" and pp.delayBeginDate&lt;='"+enddatesql+"'"):""}
+GROUP BY cc.riskLevelName</Sql><Description>SELECT
+	SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0))) AS remainedSum,
+	cc.riskLevelName
+FROM pro_project pp
+LEFT JOIN (
+	SELECT 
+		pfp.factPay_ID,
+		pfp.project_ID,
+		SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM
+		pro_factpay pfp
+	WHERE 	1=1 
+		${has(enddatesql)?(" and pfp.payDate&lt;='"+enddatesql+"'"):""}
+	GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+LEFT JOIN (
+	SELECT 
+		pre.replace_ID,
+		pre.project_ID,        
+		SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum         
+	FROM
+		pro_replace pre
+	WHERE 	1=1   
+		${has(enddatesql)?(" and pre.replaceDate&lt;='"+enddatesql+"'"):""}
+	GROUP BY pre.project_ID 
+)tab2 ON tab2.project_ID =  pp.project_ID 
+LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+LEFT JOIN  crm_client  cc ON cc.client_ID=pa.client_ID
+WHERE	pp.busiClass IS NOT NULL
+	${has(enddatesql)?(" and pp.delayBeginDate&lt;='"+enddatesql+"'"):""}
+GROUP BY cc.riskLevelName</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">riskLevelName</IndexFields><TagName>first_colum3</TagName></Item1><Item2><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">loseSum</IndexFields><TagName>index_column3</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab_column3</Name><Sql>SELECT
+	SUM(rst.guarantySum*rst.scale) loseSum
+FROM (
+	SELECT
+		SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0))) AS guarantySum,
+		cc.riskLevelName,
+		cc.riskLevelID,
+		dic.remark/1000 AS scale
+	FROM pro_project pp
+	LEFT JOIN (
+		SELECT 
+			pfp.factPay_ID,
+			pfp.project_ID,
+			SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+		FROM
+			pro_factpay pfp
+		WHERE 	1=1 
+		${has(enddatesql)?(" and pfp.payDate&lt;='"+enddatesql+"'"):""}
+		GROUP BY pfp.project_ID
+	)tab1 ON tab1.project_ID =  pp.project_ID
+	LEFT JOIN (
+		SELECT 
+			pre.replace_ID,
+			pre.project_ID,        
+			SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum         
+		FROM
+			pro_replace pre
+		WHERE 	1=1   
+		${has(enddatesql)?(" and pre.replaceDate&lt;='"+enddatesql+"'"):""}
+		GROUP BY pre.project_ID 
+	)tab2 ON tab2.project_ID =  pp.project_ID 
+	LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+	LEFT JOIN  crm_client  cc ON cc.client_ID=pa.client_ID
+	LEFT JOIN c_dictype dic ON dic.dicTypeID=cc.riskLevelID
+	WHERE	pp.busiClass IS NOT NULL
+		${has(enddatesql)?(" and pp.delayBeginDate&lt;='"+enddatesql+"'"):""}
+	GROUP BY cc.riskLevelName
+) rst
+</Sql><Description>SELECT
+	SUM(rst.guarantySum*rst.scale) loseSum
+FROM (
+	SELECT
+		SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0))) AS guarantySum,
+		cc.riskLevelName,
+		cc.riskLevelID,
+		dic.remark/1000 AS scale
+	FROM pro_project pp
+	LEFT JOIN (
+		SELECT 
+			pfp.factPay_ID,
+			pfp.project_ID,
+			SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+		FROM
+			pro_factpay pfp
+		WHERE 	1=1 
+		${has(enddatesql)?(" and pfp.payDate&lt;='"+enddatesql+"'"):""}
+		GROUP BY pfp.project_ID
+	)tab1 ON tab1.project_ID =  pp.project_ID
+	LEFT JOIN (
+		SELECT 
+			pre.replace_ID,
+			pre.project_ID,        
+			SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum         
+		FROM
+			pro_replace pre
+		WHERE 	1=1   
+		${has(enddatesql)?(" and pre.replaceDate&lt;='"+enddatesql+"'"):""}
+		GROUP BY pre.project_ID 
+	)tab2 ON tab2.project_ID =  pp.project_ID 
+	LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+	LEFT JOIN  crm_client  cc ON cc.client_ID=pa.client_ID
+	LEFT JOIN c_dictype dic ON dic.dicTypeID=cc.riskLevelID
+	WHERE	pp.busiClass IS NOT NULL
+		${has(enddatesql)?(" and pp.delayBeginDate&lt;='"+enddatesql+"'"):""}
+	GROUP BY cc.riskLevelName
+) rst
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">loseSum</IndexFields><TagName>tab_column3</TagName></Item2></Children></NodeSource></jatools>

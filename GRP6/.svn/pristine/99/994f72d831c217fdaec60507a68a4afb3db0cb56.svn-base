@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><jatools Class="jatools.ReportDocument" Name="jatools report template"><VariableContext/><Page><Children ItemClass="PagePanel"><Item0><Width>1129</Width><Height>129</Height><Children><Item0 Class="Label"><Text>河北融投担保集团有限公司委贷业务</Text><Font><Face>宋体</Face><Style>1</Style><Size>36</Size></Font><HorizontalAlignment>1</HorizontalAlignment><X>63</X><Y>27</Y><Width>631</Width><Height>40</Height></Item0><Item1 Class="Label"><Text>统计年月：</Text><HorizontalAlignment>2</HorizontalAlignment><X>300</X><Y>87</Y><Width>77</Width><Height>23</Height></Item1><Item2 Class="Text"><Variable>=if(has(endyearmonthsql)) return endyearmonthsql;else return ($today+"").substring(0,7);</Variable><X>377</X><Y>87</Y><Width>83</Width><Height>23</Height></Item2></Children><Type>100</Type></Item0><Item1><Y>804</Y><Width>1129</Width><Height>0</Height><Type>103</Type></Item1><Item2><Y>129</Y><Width>1129</Width><Height>675</Height><Children><Item0 Class="Table"><X>29</X><Y>33</Y><Children><Item0 Class="Text"><Variable>=index_expires_number_before.touchSum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>0</Pattern></Format><Cell><Row>6</Row><Col>3</Col></Cell></Item0><Item1 Class="Text"><Variable>=index_expires_number_current.touchSum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>0</Pattern></Format><Cell><Row>6</Row><Col>2</Col></Cell></Item1><Item2 Class="Label"><Text>笔数</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>6</Row><Col>1</Col></Cell></Item2><Item3 Class="Text"><Variable>=index_expires_cnameCount_before.clientName.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>0</Pattern></Format><Cell><Row>5</Row><Col>3</Col></Cell></Item3><Item4 Class="Text"><Variable>=index_expires_cnameCount_current.clientName.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>0</Pattern></Format><Cell><Row>5</Row><Col>2</Col></Cell></Item4><Item5 Class="Label"><Text>户数（按户名统计）</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>5</Row><Col>1</Col></Cell></Item5><Item6 Class="Text"><Variable>=index_expires_sum_before.overSum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>4</Row><Col>3</Col></Cell></Item6><Item7 Class="Label"><Text>金额</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>4</Row><Col>1</Col></Cell></Item7><Item8 Class="Label"><Text>逾期</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>20</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>4</Row><Col>0</Col><RowSpan>3</RowSpan></Cell></Item8><Item9 Class="Text"><Variable>=index_number_before.touchSum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>0</Pattern></Format><Cell><Row>3</Row><Col>3</Col></Cell></Item9><Item10 Class="Label"><Text>笔数</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>1</Col></Cell></Item10><Item11 Class="Text"><Variable>=index_count_before.cnameCount.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>0</Pattern></Format><Cell><Row>2</Row><Col>3</Col></Cell></Item11><Item12 Class="Text"><Variable>=index_count_current.cnameCount.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>0</Pattern></Format><Cell><Row>2</Row><Col>2</Col></Cell></Item12><Item13 Class="Label"><Text>户数（按户名统计）</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>1</Col></Cell></Item13><Item14 Class="Text"><Variable>=index_guSum_before.guarantySum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>1</Row><Col>3</Col></Cell></Item14><Item15 Class="Text"><Variable>=index_guSum_current.guarantySum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>1</Row><Col>2</Col></Cell></Item15><Item16 Class="Label"><Text>余额</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>1</Col></Cell></Item16><Item17 Class="Label"><Text>在贷</Text><Border/><Font><Face>宋体</Face><Style>1</Style><Size>20</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>0</Col><RowSpan>3</RowSpan></Cell></Item17><Item18 Class="Label"><Text>上月</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>3</Col></Cell></Item18><Item19 Class="Label"><Text>本月</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>2</Col></Cell></Item19><Item20 Class="Label"><Text>事项</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col><ColSpan>2</ColSpan></Cell></Item20><Item21 Class="Text"><Variable>=index_expires_sum_current.overSum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>4</Row><Col>2</Col></Cell></Item21><Item22 Class="Text"><Variable>=index_number_current.touchSum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>0</Pattern></Format><Cell><Row>3</Row><Col>2</Col></Cell></Item22></Children><ColumnWidths>156,195,156,186</ColumnWidths><RowHeights>30,30,30,30,30,30,30</RowHeights></Item0><Item1 Class="Label"><Text>委贷业务概况</Text><Font><Face>宋体</Face><Style>1</Style><Size>20</Size></Font><HorizontalAlignment>1</HorizontalAlignment><X>257</X><Width>242</Width><Height>32</Height></Item1><Item2 Class="Table"><NodePath>guaranty_guSum_current</NodePath><X>839</X><Y>566</Y><ColumnWidths>156</ColumnWidths><RowHeights>20</RowHeights></Item2><Item3 Class="Table"><X>29</X><Y>321</Y><Children><Item0 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>1</Row><Col>0</Col></Cell></Item0><Item1 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>1</Row><Col>1</Col></Cell></Item1><Item2 Class="Text"><Variable>=index_free_paySum_before.paySum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>4</Row><Col>3</Col></Cell></Item2><Item3 Class="Text"><Variable>=index_free_paySum_current.paySum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>4</Row><Col>2</Col></Cell></Item3><Item4 Class="Label"><Text>累计偿还金额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>4</Row><Col>1</Col></Cell></Item4><Item5 Class="Text"><Variable>=index_cumulative_overSum_before.overSum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>3</Row><Col>3</Col></Cell></Item5><Item6 Class="Text"><Variable>=index_cumulative_overSum_current.overSum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>3</Row><Col>2</Col></Cell></Item6><Item7 Class="Label"><Text>累计逾期金额</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>1</Col></Cell></Item7><Item8 Class="Text"><Variable>=index_cumulative_cnameCount_before.cnameCount.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>0</Pattern></Format><Cell><Row>2</Row><Col>3</Col></Cell></Item8><Item9 Class="Text"><Variable>=index_cumulative_cnameCount_current.cnameCount.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>0</Pattern></Format><Cell><Row>2</Row><Col>2</Col></Cell></Item9><Item10 Class="Label"><Text>累计委贷户数</Text><Border><StyleText>border-top:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>1</Col></Cell></Item10><Item11 Class="Text"><Variable>=index_cumulative_loadSum_before.loadSum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>1</Row><Col>3</Col></Cell></Item11><Item12 Class="Text"><Variable>=index_cumulative_loadSum_current.loadSum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>1</Row><Col>2</Col></Cell></Item12><Item13 Class="Label"><Text>累计委贷金额</Text><Border><StyleText>border-top:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>1</Col></Cell></Item13><Item14 Class="Label"><Text>自成立至今</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>20</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>0</Col><RowSpan>4</RowSpan></Cell></Item14><Item15 Class="Label"><Text>上月</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>3</Col></Cell></Item15><Item16 Class="Label"><Text>本月</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>2</Col></Cell></Item16><Item17 Class="Label"><Text>事项</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col><ColSpan>2</ColSpan></Cell></Item17></Children><ColumnWidths>156,195,156,186</ColumnWidths><RowHeights>30,30,30,30,30</RowHeights></Item3><Item4 Class="Label"><Text>累计</Text><Font><Face>宋体</Face><Style>1</Style><Size>20</Size></Font><HorizontalAlignment>1</HorizontalAlignment><X>314</X><Y>291</Y><Width>110</Width><Height>29</Height></Item4><Item5 Class="Label"><Text>金额单位：万元</Text><HorizontalAlignment>1</HorizontalAlignment><X>614</X><Y>6</Y><Width>101</Width><Height>23</Height></Item5></Children><Type>102</Type></Item2></Children><PageFormat><Width>1165</Width><Height>822</Height><Left>18</Left><Top>18</Top><Right>18</Right><Bottom>0</Bottom></PageFormat></Page><NodeSource><Children ItemClass="DatasetNodeSource"><Item0><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">guarantySum</IndexFields><TagName>index_guSum_current</TagName></Item0></Children><Reader Class="SqlReader"><Name>col3_row1_zaibao_guaranty_guSum_current</Name><Sql>-- 计算本月在保余额 begin...
+SELECT SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0))) AS guarantySum
+FROM pro_project pp
+LEFT JOIN pro_apply pa ON pa.apply_ID=pp.apply_ID
+LEFT JOIN ( SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM pro_factpay pfp WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+--  AND (IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)) &gt; 0
+WHERE  pp.`busiClass` = '02' AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+and (pp.finishDate is null  ${has(endyearmonthsql)?("or DATE_FORMAT(pp.finishDate ,'%Y-%m')&gt; '"+endyearmonthsql+"'"):""})
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.`reportDate`,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""} 
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 计算本月在保余额 over...</Sql><Description>-- 计算本月在保余额 begin...
+SELECT SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0))) AS guarantySum
+FROM pro_project pp
+LEFT JOIN pro_apply pa ON pa.apply_ID=pp.apply_ID
+LEFT JOIN ( SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM pro_factpay pfp WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+--  AND (IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)) &gt; 0
+WHERE  pp.`busiClass` = '02' AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+and (pp.finishDate is null  ${has(endyearmonthsql)?("or DATE_FORMAT(pp.finishDate ,'%Y-%m')&gt; '"+endyearmonthsql+"'"):""})
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.`reportDate`,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""} 
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 计算本月在保余额 over...</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">guarantySum</IndexFields><TagName>col3_row1_zaibao_guaranty_guSum_current</TagName></Item0><Item1><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">guarantySum</IndexFields><TagName>index_guSum_before</TagName></Item0></Children><Reader Class="SqlReader"><Name>col4_row1_zaibao_guaranty_guSum_before</Name><Sql>-- 计算上月在保余额 begin...
+SELECT SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0))) AS guarantySum
+FROM pro_project pp
+LEFT JOIN pro_apply pa ON pa.apply_ID=pp.apply_ID
+LEFT JOIN ( SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM pro_factpay pfp WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt; '"+endyearmonthsql+"'"):""} GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+WHERE  pp.`busiClass` = '02' AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+and (pp.finishDate is null  ${has(endyearmonthsql)?("or DATE_FORMAT(pp.finishDate ,'%Y-%m')&gt;  DATE_FORMAT( date_sub( '"+endyearmonthsql+"-01"+"',INTERVAL 1  MONTH ),'%Y-%m')"):""})
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.`reportDate`,'%Y-%m')&lt;'"+endyearmonthsql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""} 
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 计算上月在保余额 over...</Sql><Description>-- 计算上月在保余额 begin...
+SELECT SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0))) AS guarantySum
+FROM pro_project pp
+LEFT JOIN pro_apply pa ON pa.apply_ID=pp.apply_ID
+LEFT JOIN ( SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM pro_factpay pfp WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt; '"+endyearmonthsql+"'"):""} GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+WHERE  pp.`busiClass` = '02' AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+and (pp.finishDate is null  ${has(endyearmonthsql)?("or DATE_FORMAT(pp.finishDate ,'%Y-%m')&gt;  DATE_FORMAT( date_sub( '"+endyearmonthsql+"-01"+"',INTERVAL 1  MONTH ),'%Y-%m')"):""})
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.`reportDate`,'%Y-%m')&lt;'"+endyearmonthsql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""} 
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 计算上月在保余额 over...</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">guarantySum</IndexFields><TagName>col4_row1_zaibao_guaranty_guSum_before</TagName></Item1><Item2><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">cnameCount</IndexFields><TagName>index_count_current</TagName></Item0></Children><Reader Class="SqlReader"><Name>col3_row2_zaibao_guaranty_cnameCount_current</Name><Sql>-- 本月在保户数统计 start...
+SELECT COUNT(DISTINCT pa.clientGUID) AS cnameCount
+FROM pro_project pp
+-- LEFT JOIN ( SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+--	FROM pro_factpay pfp WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.`payDate`,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY pfp.project_ID
+-- )tab1 ON tab1.project_ID =  pp.project_ID AND (IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)) &gt; 0
+LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.apply_ID
+WHERE pp.`busiClass` = '02' AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+and (pp.finishDate is null  ${has(endyearmonthsql)?("or DATE_FORMAT(pp.finishDate ,'%Y-%m')&gt; '"+endyearmonthsql+"'"):""})
+ ${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.`reportDate`,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} 
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 本月在保 户数统计  over --
+</Sql><Description>-- 本月在保户数统计 start...
+SELECT COUNT(DISTINCT pa.clientGUID) AS cnameCount
+FROM pro_project pp
+-- LEFT JOIN ( SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+--	FROM pro_factpay pfp WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.`payDate`,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY pfp.project_ID
+-- )tab1 ON tab1.project_ID =  pp.project_ID AND (IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)) &gt; 0
+LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.apply_ID
+WHERE pp.`busiClass` = '02' AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+and (pp.finishDate is null  ${has(endyearmonthsql)?("or DATE_FORMAT(pp.finishDate ,'%Y-%m')&gt; '"+endyearmonthsql+"'"):""})
+ ${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.`reportDate`,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} 
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 本月在保 户数统计  over --
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">cnameCount</IndexFields><TagName>col3_row2_zaibao_guaranty_cnameCount_current</TagName></Item2><Item3><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">cnameCount</IndexFields><TagName>index_count_before</TagName></Item0></Children><Reader Class="SqlReader"><Name>col4_row2_zaibao_guaranty_cnameCount_before</Name><Sql>-- 上月在保户数统计 start...
+SELECT COUNT(DISTINCT pa.clientGUID) AS cnameCount
+FROM pro_project pp
+-- LEFT JOIN ( SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+-- 	FROM pro_factpay pfp WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.`payDate`,'%Y-%m')&lt;'"+endyearmonthsql+"'"):""} GROUP BY pfp.project_ID
+-- )tab1 ON tab1.project_ID =  pp.project_ID AND (IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)) &gt; 0
+LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.apply_ID
+WHERE pp.`busiClass` = '02' AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+and (pp.finishDate is null  ${has(endyearmonthsql)?("or DATE_FORMAT(pp.finishDate ,'%Y-%m')&gt;  DATE_FORMAT( date_sub( '"+endyearmonthsql+"-01"+"',INTERVAL 1  MONTH ),'%Y-%m')"):""})
+ ${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.`reportDate`,'%Y-%m')&lt;'"+endyearmonthsql+"'"):""} 
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 上月在保 户数统计  over --
+</Sql><Description>-- 上月在保户数统计 start...
+SELECT COUNT(DISTINCT pa.clientGUID) AS cnameCount
+FROM pro_project pp
+-- LEFT JOIN ( SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+-- 	FROM pro_factpay pfp WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.`payDate`,'%Y-%m')&lt;'"+endyearmonthsql+"'"):""} GROUP BY pfp.project_ID
+-- )tab1 ON tab1.project_ID =  pp.project_ID AND (IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)) &gt; 0
+LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.apply_ID
+WHERE pp.`busiClass` = '02' AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+and (pp.finishDate is null  ${has(endyearmonthsql)?("or DATE_FORMAT(pp.finishDate ,'%Y-%m')&gt;  DATE_FORMAT( date_sub( '"+endyearmonthsql+"-01"+"',INTERVAL 1  MONTH ),'%Y-%m')"):""})
+ ${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.`reportDate`,'%Y-%m')&lt;'"+endyearmonthsql+"'"):""} 
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 上月在保 户数统计  over --
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">cnameCount</IndexFields><TagName>col4_row2_zaibao_guaranty_cnameCount_before</TagName></Item3><Item4><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">touchSum</IndexFields><TagName>index_number_current</TagName></Item0></Children><Reader Class="SqlReader"><Name>col3_row3_zaibao_guaranty_number_current</Name><Sql>-- 本月在保笔数统计 start ..
+SELECT COUNT(DISTINCT pp.project_ID) AS touchSum
+FROM pro_project pp
+-- LEFT JOIN ( SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+-- 	FROM pro_factpay pfp WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.`payDate`,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY pfp.project_ID
+-- )tab1 ON tab1.project_ID =  pp.project_ID AND (IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)) &gt; 0
+LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.apply_ID
+WHERE pp.`busiClass` = '02' AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+and (pp.finishDate is null  ${has(endyearmonthsql)?("or DATE_FORMAT(pp.finishDate ,'%Y-%m')&gt; '"+endyearmonthsql+"'"):""})
+ ${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.`reportDate`,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} 
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}	
+-- 本月在保 笔数统计 over ..</Sql><Description>-- 本月在保笔数统计 start ..
+SELECT COUNT(DISTINCT pp.project_ID) AS touchSum
+FROM pro_project pp
+-- LEFT JOIN ( SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+-- 	FROM pro_factpay pfp WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.`payDate`,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY pfp.project_ID
+-- )tab1 ON tab1.project_ID =  pp.project_ID AND (IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)) &gt; 0
+LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.apply_ID
+WHERE pp.`busiClass` = '02' AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+and (pp.finishDate is null  ${has(endyearmonthsql)?("or DATE_FORMAT(pp.finishDate ,'%Y-%m')&gt; '"+endyearmonthsql+"'"):""})
+ ${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.`reportDate`,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} 
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}	
+-- 本月在保 笔数统计 over ..</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">touchSum</IndexFields><TagName>col3_row3_zaibao_guaranty_number_current</TagName></Item4><Item5><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">touchSum</IndexFields><TagName>index_number_before</TagName></Item0></Children><Reader Class="SqlReader"><Name>col4_row3_zaibao_guaranty_number_before</Name><Sql>-- 上月在保 笔数统计 start ..
+SELECT COUNT(DISTINCT pp.project_ID) AS touchSum
+FROM pro_project pp
+-- LEFT JOIN ( SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+-- 	FROM pro_factpay pfp WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):""} GROUP BY pfp.project_ID
+-- )tab1 ON tab1.project_ID =  pp.project_ID AND (IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)) &gt; 0
+LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.apply_ID
+WHERE  pp.`busiClass` = '02' AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+and (pp.finishDate is null  ${has(endyearmonthsql)?("or DATE_FORMAT(pp.finishDate ,'%Y-%m')&gt;  DATE_FORMAT( date_sub( '"+endyearmonthsql+"-01"+"',INTERVAL 1  MONTH ),'%Y-%m')"):""})
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.`reportDate`,'%Y-%m')&lt;'"+endyearmonthsql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""} 
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}	
+-- 上月在保 笔数统计 over ..</Sql><Description>-- 上月在保 笔数统计 start ..
+SELECT COUNT(DISTINCT pp.project_ID) AS touchSum
+FROM pro_project pp
+-- LEFT JOIN ( SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+-- 	FROM pro_factpay pfp WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):""} GROUP BY pfp.project_ID
+-- )tab1 ON tab1.project_ID =  pp.project_ID AND (IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)) &gt; 0
+LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.apply_ID
+WHERE  pp.`busiClass` = '02' AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+and (pp.finishDate is null  ${has(endyearmonthsql)?("or DATE_FORMAT(pp.finishDate ,'%Y-%m')&gt;  DATE_FORMAT( date_sub( '"+endyearmonthsql+"-01"+"',INTERVAL 1  MONTH ),'%Y-%m')"):""})
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.`reportDate`,'%Y-%m')&lt;'"+endyearmonthsql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""} 
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}	
+-- 上月在保 笔数统计 over ..</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">touchSum</IndexFields><TagName>col4_row3_zaibao_guaranty_number_before</TagName></Item5><Item6><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">overSum</IndexFields><TagName>index_expires_sum_current</TagName></Item0></Children><Reader Class="SqlReader"><Name>col3_row1_yuqi_expires_sum_current</Name><Sql>-- 计算本月逾期金额 start ...
+SELECT 
+  SUM(IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)) AS overSum
+   FROM pro_project pp
+LEFT JOIN ( SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM pro_factpay pfp WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.apply_ID
+WHERE pp.busiClass='02' 
+AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+-- AND pp.isOver = 1
+ AND ( (pp.isOver = 1  ${has(endyearmonthsql)?(" and DATE_FORMAT(pp.overDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} ) or (pp.finishDate is NULL and ${has(endyearmonthsql)?("  DATE_FORMAT(pp.delayEndDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):" DATE_FORMAT(pp.delayEndDate,'%Y-%m')&lt;=now()"}) or pp.finishDate &gt; pp.overDate)
+ -- ${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.overDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} 
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 计算本月逾期金额 over ...</Sql><Description>-- 计算本月逾期金额 start ...
+SELECT 
+  SUM(IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)) AS overSum
+   FROM pro_project pp
+LEFT JOIN ( SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM pro_factpay pfp WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.apply_ID
+WHERE pp.busiClass='02' 
+AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+-- AND pp.isOver = 1
+ AND ( (pp.isOver = 1  ${has(endyearmonthsql)?(" and DATE_FORMAT(pp.overDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} ) or (pp.finishDate is NULL and ${has(endyearmonthsql)?("  DATE_FORMAT(pp.delayEndDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):" DATE_FORMAT(pp.delayEndDate,'%Y-%m')&lt;=now()"}) or pp.finishDate &gt; pp.overDate)
+ -- ${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.overDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} 
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 计算本月逾期金额 over ...</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">overSum</IndexFields><TagName>col3_row1_yuqi_expires_sum_current</TagName></Item6><Item7><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">overSum</IndexFields><TagName>index_expires_sum_before</TagName></Item0></Children><Reader Class="SqlReader"><Name>col4_row1_yuqi_expires_sum_before</Name><Sql>-- 计算上月逾期金额 start ...
+SELECT 
+  SUM(IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)) AS overSum
+   FROM pro_project pp
+LEFT JOIN ( SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM pro_factpay pfp WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt; '"+endyearmonthsql+"'"):""} GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.apply_ID
+WHERE pp.busiClass='02'
+AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+-- AND pp.`isOver` = 1
+-- ${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.overDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):""} 
+ AND ( (pp.isOver = 1  ${has(endyearmonthsql)?(" and DATE_FORMAT(pp.overDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):""} ) or (pp.finishDate is NULL and ${has(endyearmonthsql)?("  DATE_FORMAT(pp.delayEndDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):" pp.delayEndDate&lt;=now()"}) or pp.finishDate &gt; pp.overDate)
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 计算上月逾期金额 over ...</Sql><Description>-- 计算上月逾期金额 start ...
+SELECT 
+  SUM(IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)) AS overSum
+   FROM pro_project pp
+LEFT JOIN ( SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM pro_factpay pfp WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt; '"+endyearmonthsql+"'"):""} GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.apply_ID
+WHERE pp.busiClass='02'
+AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+-- AND pp.`isOver` = 1
+-- ${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.overDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):""} 
+ AND ( (pp.isOver = 1  ${has(endyearmonthsql)?(" and DATE_FORMAT(pp.overDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):""} ) or (pp.finishDate is NULL and ${has(endyearmonthsql)?("  DATE_FORMAT(pp.delayEndDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):" pp.delayEndDate&lt;=now()"}) or pp.finishDate &gt; pp.overDate)
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 计算上月逾期金额 over ...</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">overSum</IndexFields><TagName>col4_row1_yuqi_expires_sum_before</TagName></Item7><Item8><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">clientName</IndexFields><TagName>index_expires_cnameCount_current</TagName></Item0></Children><Reader Class="SqlReader"><Name>col3_row2_yuqi_expires_cnameCount_current</Name><Sql>-- 本月逾期户数统计 start...
+SELECT COUNT(DISTINCT pa.clientGUID) AS clientName 
+FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.apply_ID
+WHERE pp.`busiClass` = '02' 
+AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+-- AND pp.`isOver` = 1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.`overDate`,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} 
+ AND ( (pp.isOver = 1  ${has(endyearmonthsql)?(" and DATE_FORMAT(pp.overDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} ) or (pp.finishDate is NULL and ${has(endyearmonthsql)?("  DATE_FORMAT(pp.delayEndDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):" DATE_FORMAT(pp.delayEndDate,'%Y-%m')&lt;=now()"}) or pp.finishDate &gt; pp.overDate)
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 本月逾期户数统计  over --
+
+</Sql><Description>-- 本月逾期户数统计 start...
+SELECT COUNT(DISTINCT pa.clientGUID) AS clientName 
+FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.apply_ID
+WHERE pp.`busiClass` = '02' 
+AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+-- AND pp.`isOver` = 1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.`overDate`,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} 
+ AND ( (pp.isOver = 1  ${has(endyearmonthsql)?(" and DATE_FORMAT(pp.overDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} ) or (pp.finishDate is NULL and ${has(endyearmonthsql)?("  DATE_FORMAT(pp.delayEndDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):" DATE_FORMAT(pp.delayEndDate,'%Y-%m')&lt;=now()"}) or pp.finishDate &gt; pp.overDate)
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 本月逾期户数统计  over --
+
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">clientName</IndexFields><TagName>col3_row2_yuqi_expires_cnameCount_current</TagName></Item8><Item9><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">clientName</IndexFields><TagName>index_expires_cnameCount_before</TagName></Item0></Children><Reader Class="SqlReader"><Name>col4_row2_yuqi_expires_cnameCount_before</Name><Sql>-- 计算上月逾期户数 start ...
+SELECT COUNT(DISTINCT pa.clientGUID) AS clientName 
+FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.apply_ID
+WHERE pp.`busiClass` = '02' 
+AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+-- AND pp.`isOver` = 1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.`overDate`,'%Y-%m')&lt;'"+endyearmonthsql+"'"):""} 
+ AND ( (pp.isOver = 1  ${has(endyearmonthsql)?(" and DATE_FORMAT(pp.overDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):""} ) or (pp.finishDate is NULL and ${has(endyearmonthsql)?("  DATE_FORMAT(pp.delayEndDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):" pp.delayEndDate&lt;=now()"}) or pp.finishDate &gt; pp.overDate)
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 计算上月逾期户数 over ...
+</Sql><Description>-- 计算上月逾期户数 start ...
+SELECT COUNT(DISTINCT pa.clientGUID) AS clientName 
+FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.apply_ID
+WHERE pp.`busiClass` = '02' 
+AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+-- AND pp.`isOver` = 1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.`overDate`,'%Y-%m')&lt;'"+endyearmonthsql+"'"):""} 
+ AND ( (pp.isOver = 1  ${has(endyearmonthsql)?(" and DATE_FORMAT(pp.overDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):""} ) or (pp.finishDate is NULL and ${has(endyearmonthsql)?("  DATE_FORMAT(pp.delayEndDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):" pp.delayEndDate&lt;=now()"}) or pp.finishDate &gt; pp.overDate)
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 计算上月逾期户数 over ...
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">clientName</IndexFields><TagName>col4_row2_yuqi_expires_cnameCount_before</TagName></Item9><Item10><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">touchSum</IndexFields><TagName>index_expires_number_current</TagName></Item0></Children><Reader Class="SqlReader"><Name>col3_row3_yuqi_expires_number_current</Name><Sql>-- 计算本月逾期笔数统计 start...
+SELECT COUNT(DISTINCT pp.project_id) AS touchSum FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.apply_ID
+WHERE pp.`busiClass` = '02' 
+AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+-- AND pp.`isOver` = 1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.`overDate`,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} 
+ AND ( (pp.isOver = 1  ${has(endyearmonthsql)?(" and DATE_FORMAT(pp.overDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} ) or (pp.finishDate is NULL and ${has(endyearmonthsql)?("  DATE_FORMAT(pp.delayEndDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):" DATE_FORMAT(pp.delayEndDate,'%Y-%m')&lt;=now()"}) or pp.finishDate &gt; pp.overDate)
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 本月逾期笔数统计  over --
+	
+  
+</Sql><Description>-- 计算本月逾期笔数统计 start...
+SELECT COUNT(DISTINCT pp.project_id) AS touchSum FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.apply_ID
+WHERE pp.`busiClass` = '02' 
+AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+-- AND pp.`isOver` = 1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.`overDate`,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} 
+ AND ( (pp.isOver = 1  ${has(endyearmonthsql)?(" and DATE_FORMAT(pp.overDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} ) or (pp.finishDate is NULL and ${has(endyearmonthsql)?("  DATE_FORMAT(pp.delayEndDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):" DATE_FORMAT(pp.delayEndDate,'%Y-%m')&lt;=now()"}) or pp.finishDate &gt; pp.overDate)
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 本月逾期笔数统计  over --
+	
+  
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">touchSum</IndexFields><TagName>col3_row3_yuqi_expires_number_current</TagName></Item10><Item11><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">touchSum</IndexFields><TagName>index_expires_number_before</TagName></Item0></Children><Reader Class="SqlReader"><Name>col4_row3_yuqi_expires_number_before</Name><Sql>
+-- 计算上月逾期 笔数 start ...
+SELECT COUNT(DISTINCT pp.project_id) AS touchSum FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.apply_ID
+WHERE pp.`busiClass` = '02'
+AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+--  AND pp.`isOver` = 1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.`overDate`,'%Y-%m')&lt;'"+endyearmonthsql+"'"):""} 
+ AND ( (pp.isOver = 1  ${has(endyearmonthsql)?(" and DATE_FORMAT(pp.overDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):""} ) or (pp.finishDate is NULL and ${has(endyearmonthsql)?("  DATE_FORMAT(pp.delayEndDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):" pp.delayEndDate&lt;=now()"}) or pp.finishDate &gt; pp.overDate)
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 计算上月逾期 笔数 over ...</Sql><Description>
+-- 计算上月逾期 笔数 start ...
+SELECT COUNT(DISTINCT pp.project_id) AS touchSum FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.apply_ID
+WHERE pp.`busiClass` = '02'
+AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+--  AND pp.`isOver` = 1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.`overDate`,'%Y-%m')&lt;'"+endyearmonthsql+"'"):""} 
+ AND ( (pp.isOver = 1  ${has(endyearmonthsql)?(" and DATE_FORMAT(pp.overDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):""} ) or (pp.finishDate is NULL and ${has(endyearmonthsql)?("  DATE_FORMAT(pp.delayEndDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):" pp.delayEndDate&lt;=now()"}) or pp.finishDate &gt; pp.overDate)
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 计算上月逾期 笔数 over ...</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">touchSum</IndexFields><TagName>col4_row3_yuqi_expires_number_before</TagName></Item11><Item12><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">cnameCount</IndexFields><TagName>index_cumulative_cnameCount_before</TagName></Item0></Children><Reader Class="SqlReader"><Name>col4_row2_leiji_cumulative_cnameCount_before</Name><Sql>-- 上月累计委贷户数 start ...
+SELECT COUNT(DISTINCT pa.clientGUID) AS cnameCount FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.apply_ID
+WHERE pp.`busiClass` = '02' 
+AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+ ${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.`reportDate`,'%Y-%m')&lt;'"+endyearmonthsql+"'"):""} 
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 上月累计委贷户数 over ...</Sql><Description>-- 上月累计委贷户数 start ...
+SELECT COUNT(DISTINCT pa.clientGUID) AS cnameCount FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.apply_ID
+WHERE pp.`busiClass` = '02' 
+AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+ ${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.`reportDate`,'%Y-%m')&lt;'"+endyearmonthsql+"'"):""} 
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 上月累计委贷户数 over ...</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">cnameCount</IndexFields><TagName>col4_row2_leiji_cumulative_cnameCount_before</TagName></Item12><Item13><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">cnameCount</IndexFields><TagName>index_cumulative_cnameCount_current</TagName></Item0></Children><Reader Class="SqlReader"><Name>col3_row2_leiji_cumulative_cnameCount_current</Name><Sql>-- 本月累计委贷户数 start ...
+
+SELECT COUNT(DISTINCT pa.clientGUID) AS cnameCount FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.apply_ID
+WHERE pp.`busiClass` = '02' 
+AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+ ${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.`reportDate`,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} 
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 本月累计委贷户数 over ...</Sql><Description>-- 本月累计委贷户数 start ...
+
+SELECT COUNT(DISTINCT pa.clientGUID) AS cnameCount FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.apply_ID
+WHERE pp.`busiClass` = '02' 
+AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+ ${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.`reportDate`,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} 
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 本月累计委贷户数 over ...</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">cnameCount</IndexFields><TagName>col3_row2_leiji_cumulative_cnameCount_current</TagName></Item13><Item14><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">paySum</IndexFields><TagName>index_free_paySum_current</TagName></Item0></Children><Reader Class="SqlReader"><Name>col3_row4_leiji_cumulative_paySum_current</Name><Sql>-- 本月累计偿还金额 start...
+SELECT 
+  SUM(IFNULL(pfp.payCapitalSum,0)) AS paySum
+FROM pro_factpay pfp
+LEFT JOIN  pro_project pp ON pp.project_ID=pfp.project_ID
+LEFT JOIN pro_apply pa ON pa.apply_ID=pp.apply_ID
+WHERE pp.busiClass='02'
+AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 本月累计偿还金额 over ...</Sql><Description>-- 本月累计偿还金额 start...
+SELECT 
+  SUM(IFNULL(pfp.payCapitalSum,0)) AS paySum
+FROM pro_factpay pfp
+LEFT JOIN  pro_project pp ON pp.project_ID=pfp.project_ID
+LEFT JOIN pro_apply pa ON pa.apply_ID=pp.apply_ID
+WHERE pp.busiClass='02'
+AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 本月累计偿还金额 over ...</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">paySum</IndexFields><TagName>col3_row4_leiji_cumulative_paySum_current</TagName></Item14><Item15><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">paySum</IndexFields><TagName>index_free_paySum_before</TagName></Item0></Children><Reader Class="SqlReader"><Name>col4_row4_leiji_cumulative_paySum_before</Name><Sql>-- 上月累计偿还金额 start...
+SELECT 
+  SUM(IFNULL(pfp.payCapitalSum,0)) AS paySum
+FROM pro_factpay pfp
+LEFT JOIN  pro_project pp ON pp.project_ID=pfp.project_ID
+LEFT JOIN pro_apply pa ON pa.apply_ID=pp.apply_ID
+WHERE pp.busiClass='02' 
+AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 上月累计偿还金额 over ...</Sql><Description>-- 上月累计偿还金额 start...
+SELECT 
+  SUM(IFNULL(pfp.payCapitalSum,0)) AS paySum
+FROM pro_factpay pfp
+LEFT JOIN  pro_project pp ON pp.project_ID=pfp.project_ID
+LEFT JOIN pro_apply pa ON pa.apply_ID=pp.apply_ID
+WHERE pp.busiClass='02' 
+AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 上月累计偿还金额 over ...</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">paySum</IndexFields><TagName>col4_row4_leiji_cumulative_paySum_before</TagName></Item15><Item16><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">loadSum</IndexFields><TagName>index_cumulative_loadSum_current</TagName></Item0></Children><Reader Class="SqlReader"><Name>col3_row1_leiji_cumulative_loadSum_current</Name><Sql>-- 本月 累计委贷金额计算 start ...
+
+SELECT 
+  SUM(IFNULL(pp.loadSum,0)) AS loadSum
+FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pa.apply_ID=pp.apply_ID
+WHERE pp.busiClass='02' 
+AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.reportDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 本月 累计委贷金额计算 over ... </Sql><Description>-- 本月 累计委贷金额计算 start ...
+
+SELECT 
+  SUM(IFNULL(pp.loadSum,0)) AS loadSum
+FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pa.apply_ID=pp.apply_ID
+WHERE pp.busiClass='02' 
+AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.reportDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 本月 累计委贷金额计算 over ... </Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">loadSum</IndexFields><TagName>col3_row1_leiji_cumulative_loadSum_current</TagName></Item16><Item17><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">loadSum</IndexFields><TagName>index_cumulative_loadSum_before</TagName></Item0></Children><Reader Class="SqlReader"><Name>col4_row1_leiji_cumulative_loadSum_before</Name><Sql>-- 上月 累计委贷金额计算 start ...
+SELECT 
+  SUM(IFNULL(pp.loadSum,0)) AS loadSum
+FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pa.apply_ID=pp.apply_ID
+WHERE pp.busiClass='02' 
+AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.reportDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 上月 累计委贷金额计算 over ... </Sql><Description>-- 上月 累计委贷金额计算 start ...
+SELECT 
+  SUM(IFNULL(pp.loadSum,0)) AS loadSum
+FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pa.apply_ID=pp.apply_ID
+WHERE pp.busiClass='02' 
+AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.reportDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 上月 累计委贷金额计算 over ... </Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">loadSum</IndexFields><TagName>col4_row1_leiji_cumulative_loadSum_before</TagName></Item17><Item18><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">overSum</IndexFields><TagName>index_cumulative_overSum_current</TagName></Item0></Children><Reader Class="SqlReader"><Name>col3_row3_leiji_cumulative_overSum_current</Name><Sql>-- 计算累计逾期金额 start ...
+SELECT 
+ SUM(IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)) AS overSum
+   FROM pro_project pp
+LEFT JOIN ( SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM pro_factpay pfp WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID 
+LEFT JOIN pro_apply pa ON pa.apply_ID=pp.apply_ID
+WHERE pp.busiClass='02' 
+AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+-- AND pp.`isOver` = 1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.overDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} 
+ AND ( (pp.isOver = 1  ${has(endyearmonthsql)?(" and DATE_FORMAT(pp.overDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} ) or (pp.finishDate is NULL and ${has(endyearmonthsql)?("  DATE_FORMAT(pp.delayEndDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):" DATE_FORMAT(pp.delayEndDate,'%Y-%m')&lt;=now()"}) or pp.finishDate &gt; pp.overDate)
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 计算累计逾期金额 over ...</Sql><Description>-- 计算累计逾期金额 start ...
+SELECT 
+ SUM(IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)) AS overSum
+   FROM pro_project pp
+LEFT JOIN ( SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM pro_factpay pfp WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID 
+LEFT JOIN pro_apply pa ON pa.apply_ID=pp.apply_ID
+WHERE pp.busiClass='02' 
+AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+-- AND pp.`isOver` = 1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.overDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} 
+ AND ( (pp.isOver = 1  ${has(endyearmonthsql)?(" and DATE_FORMAT(pp.overDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} ) or (pp.finishDate is NULL and ${has(endyearmonthsql)?("  DATE_FORMAT(pp.delayEndDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):" DATE_FORMAT(pp.delayEndDate,'%Y-%m')&lt;=now()"}) or pp.finishDate &gt; pp.overDate)
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 计算累计逾期金额 over ...</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">overSum</IndexFields><TagName>col3_row3_leiji_cumulative_overSum_current</TagName></Item18><Item19><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">overSum</IndexFields><TagName>index_cumulative_overSum_before</TagName></Item0></Children><Reader Class="SqlReader"><Name>col3_row3_leiji_cumulative_overSum_before</Name><Sql>-- 计算上月累计逾期金额 start ...
+SELECT 
+ SUM(IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)) AS overSum
+   FROM pro_project pp
+LEFT JOIN ( SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM pro_factpay pfp WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt; '"+endyearmonthsql+"'"):""} GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID 
+LEFT JOIN pro_apply pa ON pa.apply_ID=pp.apply_ID
+WHERE pp.busiClass='02' 
+AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+-- AND pp.`isOver` = 1  ${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.overDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):""} 
+ AND ( (pp.isOver = 1  ${has(endyearmonthsql)?(" and DATE_FORMAT(pp.overDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):""} ) or (pp.finishDate is NULL and ${has(endyearmonthsql)?("  DATE_FORMAT(pp.delayEndDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):" DATE_FORMAT(pp.delayEndDate,'%Y-%m')&lt;now()"}) or pp.finishDate &gt; pp.overDate)
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 计算上月累计逾期金额 over ...</Sql><Description>-- 计算上月累计逾期金额 start ...
+SELECT 
+ SUM(IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)) AS overSum
+   FROM pro_project pp
+LEFT JOIN ( SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM pro_factpay pfp WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt; '"+endyearmonthsql+"'"):""} GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID 
+LEFT JOIN pro_apply pa ON pa.apply_ID=pp.apply_ID
+WHERE pp.busiClass='02' 
+AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+-- AND pp.`isOver` = 1  ${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.overDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):""} 
+ AND ( (pp.isOver = 1  ${has(endyearmonthsql)?(" and DATE_FORMAT(pp.overDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):""} ) or (pp.finishDate is NULL and ${has(endyearmonthsql)?("  DATE_FORMAT(pp.delayEndDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):" DATE_FORMAT(pp.delayEndDate,'%Y-%m')&lt;now()"}) or pp.finishDate &gt; pp.overDate)
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+-- 计算上月累计逾期金额 over ...</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">overSum</IndexFields><TagName>col3_row3_leiji_cumulative_overSum_before</TagName></Item19></Children></NodeSource></jatools>

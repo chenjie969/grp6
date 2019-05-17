@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_replaceMapper">
+	<!-- 代偿明细表 -->
+	 <resultMap id="ProReplaceMap" type="com.zjm.pro.db.model.Pro_replace" >
+	 
+        <result column="replace_ID" property="replace_ID"/>
+        <result column="project_ID" property="project_ID"/>
+        <result column="apply_ID" property="apply_ID"/>
+        <result column="replaceDate" property="replaceDate"/>
+        <result column="replaceFactDate" property="replaceFactDate"/>
+        <result column="replaceSum" property="replaceSum"/>
+        <result column="replaceCapitalSum" property="replaceCapitalSum"/>
+        <result column="replaceInterestSum" property="replaceInterestSum"/>
+        <result column="replaceOtherSum" property="replaceOtherSum"/>
+        <result column="selfReplaceSum" property="selfReplaceSum"/>
+        <result column="dangerReplaceSum" property="dangerReplaceSum"/>
+        <result column="repalceState" property="repalceState"/>
+        <result column="remark" property="remark"/>
+        <result column="replaceReason" property="replaceReason"/>
+		<result column="unit_uid" property="unit_uid"/>
+		<result column="updateUserName" property="updateUserName"/>
+		<result column="updateDateTime" property="updateDateTime"/>
+		<result column="projectName" property="projectName"/><!-- 冗余字段 -->
+		<result column="bankName" property="bankName"/><!-- 冗余字段 -->
+		<result column="busiTypeName" property="busiTypeName"/><!-- 冗余字段 -->
+		<result column="projectCode" property="projectCode"/><!-- 冗余字段 -->
+		<result column="isUseRepay" property="isUseRepay"/><!-- 冗余字段 -->
+		
+		
+  </resultMap>
+	<!-- 新增业务代偿信息表Pro_replace -->
+	<insert id="insertOneReplaceInfo"	parameterType="com.zjm.pro.db.model.Pro_replace">
+		<![CDATA[
+		INSERT INTO pro_replace (
+					replace_ID,
+					project_ID,
+					apply_ID,
+					replaceDate,
+					replaceFactDate,
+					replaceSum,
+					replaceCapitalSum,
+					replaceInterestSum,
+					replaceOtherSum,
+					selfReplaceSum,
+					dangerReplaceSum,
+					remark,
+					repalceState,
+					unit_uid,
+					replaceReason,
+					updateUserName,
+					isUseRepay,
+					updateDateTime
+
+		
+		       )
+		VALUES
+		(
+				#{replace_ID},
+				#{project_ID},
+				#{apply_ID},
+				#{replaceDate},
+				#{replaceFactDate},
+				#{replaceSum},
+				#{replaceCapitalSum},
+				#{replaceInterestSum},
+				#{replaceOtherSum},
+				#{selfReplaceSum},
+				#{dangerReplaceSum},
+				#{remark},
+				#{repalceState},
+				#{unit_uid},
+				#{replaceReason},
+				#{updateUserName},
+				#{isUseRepay},
+				NOW()
+		) ;
+		]]>
+	</insert>
+	
+	<!-- 分页查询列表 -->
+	<select id="selectReplacePageTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="ProReplaceMap">
+		<![CDATA[
+		SELECT 
+			pro_replace.replace_ID,
+			pro_replace.project_ID,
+			pro_replace.apply_ID,
+			pro_replace.replaceDate,
+			pro_replace.replaceFactDate,
+			pro_replace.replaceSum,
+			pro_replace.replaceCapitalSum,
+			pro_replace.replaceInterestSum,
+			pro_replace.replaceOtherSum,
+			pro_replace.selfReplaceSum,
+			pro_replace.dangerReplaceSum,
+			pro_replace.remark,
+			pro_replace.replaceReason,
+			pro_replace.repalceState,
+			pro_replace.unit_uid,
+			pro_replace.updateUserName,
+			pro_replace.updateDateTime,
+			apply.projectName,
+			project.bankName,
+			project.projectCode,
+			project.busiTypeName
+		FROM 
+		     pro_replace pro_replace
+		LEFT JOIN Pro_project project ON pro_replace.project_ID = project.project_ID	
+	    LEFT JOIN pro_apply apply ON project.apply_ID = apply.apply_ID
+		WHERE 1=1 ${wheresql} 	
+		LIMIT #{pageNumber},#{pageSize}  
+		]]>
+	</select>
+	
+	<!-- 分页查询列表-查询总记录数 -->
+	<select id="selectReplacePageTable_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="long">
+	<![CDATA[
+	 	SELECT 
+	 		COUNT(1) 
+	 	FROM 
+	 		pro_replace pro_replace
+	 		LEFT JOIN Pro_project project ON pro_replace.project_ID = project.project_ID	
+	    LEFT JOIN pro_apply apply ON project.apply_ID = apply.apply_ID
+	 	WHERE 1=1
+	 		${wheresql}
+	 	]]>	
+	</select>
+	<!-- 分页查询列表 -->
+	<select id="selectOneReplaceInfo" parameterType="java.lang.String" resultMap="ProReplaceMap">
+		<![CDATA[
+		SELECT 
+			replace_ID,
+			project_ID,
+			apply_ID,
+			replaceDate,
+			replaceFactDate,
+			replaceSum,
+			replaceCapitalSum,
+			replaceInterestSum,
+			replaceOtherSum,
+			selfReplaceSum,
+			dangerReplaceSum,
+			remark,
+			repalceState,
+			unit_uid,
+			updateUserName,
+			updateDateTime,
+			isUseRepay
+		FROM 
+		     pro_replace pro_replace
+		WHERE 1=1 
+		${value}
+		]]>
+	</select>
+	
+	<!-- 更新一个代偿明细表信息 -->	
+	<update id="updateOneReplaceInfo" parameterType="com.zjm.pro.db.model.Pro_replace">
+		UPDATE 
+		     pro_replace
+		
+		<set >
+			replaceDate= #{replaceDate},
+			replaceFactDate=#{replaceFactDate},
+			replaceSum= #{replaceSum},
+			replaceCapitalSum= #{replaceCapitalSum},
+			replaceInterestSum= #{replaceInterestSum},
+			replaceOtherSum= #{replaceOtherSum},
+			selfReplaceSum= #{selfReplaceSum},
+			dangerReplaceSum= #{dangerReplaceSum},
+			remark= #{remark},
+			repalceState= #{repalceState},
+			updateUserName= #{updateUserName},
+			isUseRepay = #{isUseRepay},
+		  	updateDateTime = NOW()		
+		</set>
+			 
+		WHERE replace_ID=#{replace_ID} 
+	</update>
+	
+	<!-- 根据查询条件查询一个保后（贷后）产品放款明细表信息-->
+	<select id="showRepalceViewPage" parameterType="java.lang.String"  resultMap="ProReplaceMap">
+	<![CDATA[
+		SELECT 
+			pro_replace.replace_ID,
+			pro_replace.project_ID,
+			pro_replace.apply_ID,
+			pro_replace.replaceDate,
+			pro_replace.replaceFactDate,
+			pro_replace.replaceSum,
+			pro_replace.replaceCapitalSum,
+			pro_replace.replaceInterestSum,
+			pro_replace.replaceOtherSum,
+			pro_replace.selfReplaceSum,
+			pro_replace.dangerReplaceSum,
+			pro_replace.remark,
+			pro_replace.repalceState,
+			pro_replace.unit_uid,
+			pro_replace.updateUserName,
+			pro_replace.updateDateTime,
+			pro_replace.isUseRepay
+		FROM 
+		     pro_replace pro_replace    
+		WHERE 1=1 ${value}
+		]]> 				 
+	</select>
+	
+
+	<!-- 分页查询列表    对应的项目 -->
+	<select id="selectReplaceTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="ProReplaceMap">
+		<![CDATA[
+		SELECT 
+			pro_replace.replace_ID,
+			pro_replace.project_ID,
+			pro_replace.replaceDate,
+			pro_replace.replaceFactDate,
+			pro_replace.replaceSum,
+			pro_replace.replaceCapitalSum,
+			pro_replace.replaceInterestSum,
+			pro_replace.replaceOtherSum,
+			pro_replace.selfReplaceSum,
+			pro_replace.dangerReplaceSum,
+			pro_replace.remark,
+			pro_replace.replaceReason,
+			pro_replace.repalceState,
+			pro_replace.unit_uid,
+			pro_replace.updateUserName,
+			pro_replace.updateDateTime,
+			pro_replace.isUseRepay
+		FROM 
+		     pro_replace pro_replace
+		WHERE 1=1 ${wheresql} 	
+		LIMIT #{pageNumber},#{pageSize}  
+		]]>
+	</select>
+	
+	<!-- 分页查询列表-查询总记录数    对应的项目 -->
+	<select id="selectReplaceTable_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="long">
+		<![CDATA[
+		 	SELECT 
+		 		COUNT(1) 
+		 	FROM 
+		 		pro_replace pro_replace
+		 	WHERE 1=1
+	 			${wheresql}
+	 	]]>	
+	</select>
+	<!-- 根据查询条件查询保后（贷后）产品放款明细表信息-->
+	<select id="selectReplaceList" parameterType="java.lang.String"  resultMap="ProReplaceMap">
+	<![CDATA[
+		SELECT 
+			replace_ID,
+			project_ID,
+			apply_ID,
+			replaceDate,
+			replaceFactDate,
+			replaceSum,
+			replaceCapitalSum,
+			replaceInterestSum,
+			replaceOtherSum,
+			selfReplaceSum,
+			dangerReplaceSum,
+			remark,
+			replaceReason,
+			repalceState,
+			unit_uid,
+			updateUserName,
+			updateDateTime,
+			isUseRepay
+		FROM 
+		     pro_replace    
+		WHERE 1=1 ${value}
+		]]> 				 
+	</select>
+	
+	<delete id="cancelReplaceDel"	parameterType="com.zjm.pro.db.model.Pro_replace">
+		<![CDATA[
+		
+		delete from pro_replace where replace_ID=#{replace_ID}
+		]]>
+	</delete>
+	
+	<delete id="deleteReplaceByProject_ID" parameterType="string"	>
+		DELETE FROM 
+			pro_replace
+		WHERE  project_ID = #{project_ID}
+	</delete>
+	
+</mapper>  

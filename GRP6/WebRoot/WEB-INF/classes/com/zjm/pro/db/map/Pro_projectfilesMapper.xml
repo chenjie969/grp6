@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjm.pro.db.map.Pro_projectfilesMapper" >
+  <resultMap id="BaseResultMap" type="com.zjm.pro.db.model.Pro_projectfiles" >
+    <id column="projectFiles_ID" property="projectFiles_ID"  />
+    <result column="flowID" property="flowID"  />
+    <result column="stepID" property="stepID"  />
+    <result column="taskID" property="taskID"  />
+    <result column="fileType" property="fileType"  />
+    <result column="entityID" property="entityID"  />
+    <result column="sourceFileName" property="sourceFileName"  />
+    <result column="pathFile" property="pathFile"  />
+    <result column="extend" property="extend"  />
+    <result column="uploadManID" property="uploadManID"  />
+    <result column="uploadManName" property="uploadManName"  />
+    <result column="uploadDateTime" property="uploadDateTime"  />
+    <result column="fileSize" property="fileSize"  />
+    <result column="unit_uid" property="unit_uid"  />
+    <result column="updateUserName" property="updateUserName"  />
+    <result column="updateDateTime" property="updateDateTime"  />
+    
+
+    
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    projectFiles_ID, flowID,taskID, stepID, fileType, entityID, sourceFileName, pathFile, extend, 
+    uploadManID, uploadManName, uploadDateTime, fileSize, unit_uid, updateUserName, updateDateTime
+  </sql>
+  
+  
+  <delete id="deleteOneInfoByProFiles_ID" parameterType="java.lang.String" >
+    delete from pro_projectfiles
+    where projectFiles_ID = #{projectFiles_ID}
+  </delete>
+  
+   <delete id="deleteProFilesInfoByEntityID" parameterType="java.lang.String" >
+    delete from pro_projectfiles
+    where entityID = #{entityID}
+  </delete>
+  
+  <delete id="deleteOneProFilesByEntityID" parameterType="java.lang.String">
+		<![CDATA[DELETE FROM pro_projectfiles WHERE 1=1 ${value} ]]>
+	</delete>
+  
+  <insert id="insertOneProFilesInfo" parameterType="com.zjm.pro.db.model.Pro_projectfiles" >
+    insert into pro_projectfiles 
+    (projectFiles_ID, flowID, stepID,taskID, 
+      fileType, entityID, sourceFileName, 
+      pathFile, extend, uploadManID, 
+      uploadManName, uploadDateTime, fileSize, 
+      unit_uid, updateUserName, updateDateTime
+      )
+    values (#{projectFiles_ID}, #{flowID}, #{stepID}, #{taskID},
+      #{fileType}, #{entityID}, #{sourceFileName}, 
+      #{pathFile}, #{extend}, #{uploadManID}, 
+      #{uploadManName}, NOW(), #{fileSize}, 
+      #{unit_uid}, #{updateUserName}, NOW()
+      )
+  </insert>
+	
+	<select id="selectOneProFilesInfo" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	    select 
+	    projectFiles_ID, flowID, stepID, taskID,fileType, entityID, sourceFileName, pathFile, extend, 
+	    uploadManID, uploadManName, uploadDateTime, fileSize, unit_uid, updateUserName, updateDateTime
+	    from pro_projectfiles
+	    where projectFiles_ID = #{projectFiles_ID} limit 1
+  	</select>
+  	
+  	<select id="selectProFilesListByEntityID" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	    select 
+	    projectFiles_ID, flowID, stepID, taskID,fileType, entityID, sourceFileName, pathFile, extend, 
+	    uploadManID, uploadManName, uploadDateTime, fileSize, unit_uid, updateUserName, updateDateTime
+	    from pro_projectfiles
+	    where entityID = #{entityID} 
+  	</select>
+  	
+  	<select id="selectProFilesListByEntityIDType" resultMap="BaseResultMap" >
+	    select 
+	    projectFiles_ID, flowID, stepID, taskID,fileType, entityID, sourceFileName, pathFile, extend, 
+	    uploadManID, uploadManName, uploadDateTime, fileSize, unit_uid, updateUserName, updateDateTime
+	    from pro_projectfiles
+	    where entityID = #{entityID}  ${wheresql} 
+  	</select>
+	 
+	<select id="selectProjectFilesPageTables" resultMap="BaseResultMap" parameterType="com.zjm.common.db.model.PageTable">
+		select 
+	    projectFiles_ID, flowID, stepID, taskID,fileType, entityID, sourceFileName, pathFile, extend, 
+	    uploadManID, uploadManName, uploadDateTime, fileSize, unit_uid, updateUserName, updateDateTime
+	    from pro_projectfiles
+	    where 1=1 ${wheresql} 
+	    limit #{pageNumber},#{pageSize}
+	</select>
+	
+	
+	<select id="selectProjectFilesPageTables_Count" resultType="java.lang.Integer"  parameterType="com.zjm.common.db.model.PageTable">
+		select 
+		count(projectFiles_ID)
+		from  pro_projectfiles
+		where 1=1  ${wheresql} 
+		
+	</select>
+	
+	<select id="selectProFilesListByCheckPlanID" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	  	    select 
+	    p.projectFiles_ID, p.flowID, p.stepID, p.taskID,p.fileType,p.entityID, p.sourceFileName, p.pathFile, p.extend, 
+	    p.uploadManID, p.uploadManName, p.uploadDateTime, p.fileSize, p.unit_uid, p.updateUserName, p.updateDateTime
+	    from pro_projectfiles p
+left join pro_checkplan  o on p.entityID=o.apply_ID 
+	    where p.entityID = #{checkPlan_ID}  
+
+  	</select>
+  	<!-- 根据entityID查询一对一的附件信息 -->
+	<select id="selectOneProFilesByEntityID" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	  	    select 
+	    projectFiles_ID, flowID, stepID, taskID,fileType,entityID, sourceFileName, pathFile, extend, 
+	    uploadManID, uploadManName, uploadDateTime, fileSize, unit_uid, updateUserName, updateDateTime
+	    from pro_projectfiles 
+
+	    where 1=1 ${value}  
+
+  	</select>
+	
+	
+	<!-- 根据entityID查询一对一的附件信息 -->
+	<select id="selectListProFilesByWhereSql" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	  	    select 
+	    projectFiles_ID, flowID, stepID, taskID,fileType,entityID, sourceFileName, pathFile, extend, 
+	    uploadManID, uploadManName, uploadDateTime, fileSize, unit_uid, updateUserName, updateDateTime
+	    from pro_projectfiles 
+	    where 1=1 ${value}  
+
+  	</select>
+	
+</mapper>

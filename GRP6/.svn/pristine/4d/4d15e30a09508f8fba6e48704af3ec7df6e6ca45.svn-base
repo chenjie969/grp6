@@ -1,0 +1,104 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+	<%-- <div class="page-header"><!--begin页头部分 -->
+		
+    	<h5>客户名称：
+    		<span class="ztb_view_clientName "></span>
+			<span style="margin-left:2em;" class="grey">客户编号：
+				<span class="ztb_view_clientBH"></span>
+			</span>
+		</h5>
+		
+	</div><!-- /.page-header end 页头部分-->TODO：豆豆添加 2017年5月5日 14:06:39
+	 --%>
+	<%@ include file="/crm/client/companyClient/companyClientHead.jsp"%>
+	
+	
+	
+	
+	<h4 class="header smaller lighter blue">
+		基本信息
+		<button type="button" name="button" class="btn btn-minier btn-warning pull-right" id="btn_updateBasicInfo">
+			<i class="icon-edit bigger-110"></i>
+			<span class="bigger-110 no-text-shadow">修改</span>
+		</button>
+	</h4>
+    <div class="row" style="margin:0;">
+         <h5 class="col-sm-4">所属区域：<span class="grey ztb_view_fullAreaName"></span></h5>
+         <h5 class="col-sm-4">行业类别：<span class="grey ztb_view_fullTradeName"></span></h5>
+         <h5 class="col-sm-4">企业类型：<span class="grey ztb_view_enterpriseTypeName"></span></h5>
+         <h5 class="col-sm-4">社会信用代码：<span class="grey ztb_view_certificateCode"></span></h5>
+         <h5 class="col-sm-6">注册地址：<span class="grey ztb_view_fullRegisteName"></span></h5>
+         <h5 class="col-sm-12">实体所在地：<span class="grey ztb_view_workAddress"></span></h5>
+         <h5 class="col-sm-4">法定代表人：<span class="grey ztb_view_legalPerson"></span></h5>
+         <h5 class="col-sm-8">身份证号码：<span class="grey ztb_view_legalPersonNum"></span></h5>
+         <h5 class="col-sm-4">实际控制人：<span class="grey ztb_view_controlPerson"></span></h5>
+         <h5 class="col-sm-4">实际控制人联系电话：<span class="grey ztb_view_controlPersonPhone"></span></h5>
+         <h5 class="col-sm-8">身份证号码：<span class="grey ztb_view_controlPersonNum"></span></h5>
+         <h5 class="col-sm-4">币别：<span class="grey ztb_view_currencyName"></span></h5>
+         <h5 class="col-sm-4">注册资本：<span class="grey ztb_view_registerSum"></span>&nbsp;万元</h5>
+         <h5 class="col-sm-4">企业性质：<span class="grey ztb_view_natureName"></span></h5>
+         <h5 class="col-sm-4">成立日期：<span class="grey ztb_view_createDate"></span></h5>
+         <h5 class="col-sm-8">营业期限：<span class="grey ztb_view_busiTerm"></span></h5>
+         <h5 class="col-sm-4">工商登记机关：<span class="grey ztb_view_industryCommerceOrg"></span></h5>
+         <h5 class="col-sm-8">贷款卡号码：<span class="grey ztb_view_loanCode"></span></h5>
+         <h5 class="col-sm-12">经营范围：<span class="grey ztb_view_busiScope" 
+         style="white-space: pre-wrap;line-height:26px;"></span></h5>
+         <h5 class="col-sm-12">主营业务：<span class="grey ztb_view_leadBusi"  
+         style="white-space: pre-wrap;line-height:26px;"></span></h5>
+         <h5 class="col-sm-4">国税登记机关：<span class="grey ztb_view_nationalTaxOrg"></span></h5>
+         <h5 class="col-sm-8">地税登记机关：<span class="grey ztb_view_landTaxOrg"></span></h5>
+         <h5 class="col-sm-4">员工总数：<span class="grey ztb_view_employeeSum"></span>&nbsp;人</h5>
+         <h5 class="col-sm-8">实收资本：<span class="grey ztb_view_factSum"></span>&nbsp;万元</h5>
+         <h5 class="col-sm-4">总资产：<span class="grey ztb_view_capitalSum"></span>&nbsp;万元</h5>
+         <h5 class="col-sm-8">负债总额：<span class="grey ztb_view_liabilitySum"></span>&nbsp;万元</h5>
+         <h5 class="col-sm-12">上年：<span class="grey ztb_view_lastYear"></span>&nbsp;年</h5>
+         <h5 class="col-sm-4">上年销售收入：<span class="grey ztb_view_lastYearSale"></span>&nbsp;万元</h5>
+         <h5 class="col-sm-4">上年销售利润：<span class="grey ztb_view_lastYearSaleProfit"></span>&nbsp;万元</h5>
+         <h5 class="col-sm-4">上年净利润：<span class="grey ztb_view_lastYearProfit"></span>&nbsp;万元</h5>
+         <h5 class="col-sm-4">有证土地：<span class="grey ztb_view_selfArea"></span>&nbsp;亩</h5>
+         <h5 class="col-sm-8">租赁土地：<span class="grey ztb_view_rentalArea"></span>&nbsp;亩</h5>
+         <h5 class="col-sm-4">有证厂房：<span class="grey ztb_view_selfWorkShop"></span>&nbsp;㎡</h5>
+         <h5 class="col-sm-8">租赁厂房：<span class="grey ztb_view_rentalWorkShop"></span>&nbsp;㎡</h5>
+         <h5 class="col-sm-4">是否高新企业：<span class="grey ztb_view_isHighTechnology"></span></h5>
+         <h5 class="col-sm-4">高新企业证号：<span class="grey ztb_view_highTechnologyCode"></span></h5>
+         <h5 class="col-sm-4">高新认定日期：<span class="grey ztb_view_highTechnologyDate"></span></h5>
+         <h5 class="col-sm-4">联系人1：<span class="grey ztb_view_contactOne"></span></h5>
+         <h5 class="col-sm-4">职位：<span class="grey ztb_view_positionOneName"></span></h5>
+         <h5 class="col-sm-4">联系方式：<span class="grey ztb_view_phoneOne"></span></h5>
+         <h5 class="col-sm-4">联系人2：<span class="grey ztb_view_contactTwo"></span></h5>
+         <h5 class="col-sm-4">职位：<span class="grey ztb_view_positionTwoName"></span></h5>
+         <h5 class="col-sm-4">联系方式：<span class="grey ztb_view_phoneTwo"></span></h5>
+         <h5 class="col-sm-4">分类处置划分：<span class="grey ztb_view_divisionName"></span></h5>
+         <h5 class="col-sm-12" >备注：<span class="grey ztb_view_remark" 
+         style="white-space: pre-wrap;line-height:26px;"></span></h5>
+    </div>
+	<br>
+    <h4 class="header smaller lighter blue">
+		开户信息
+		<button type="button" name="button" class="btn btn-minier btn-warning pull-right" id="addCompanyBankAccount">
+			<i class="icon-edit bigger-110"></i>
+			<span class="bigger-110 no-text-shadow">添加</span>
+		</button>
+	</h4>
+	<%--加载开户信息列表页面 --%>
+	<div class="table-responsive"   id="openMessageList">
+		<table id="openMessage-table" style="font-size:13px !important;"></table>
+    </div>
+	<br>
+	<h4 class="header smaller lighter blue">
+		客户来源
+		<button type="button" name="button" class="btn btn-minier btn-warning pull-right"  id="updateClientSource">
+			<span class="ztb_view_client_ID" style="display:none"></span>
+			<span class="ztb_view_clientTypeID" style="display:none"></span>
+			<i class="icon-edit bigger-110"></i>
+			  <span class="bigger-110 no-text-shadow">修改</span>
+		</button>
+	</h4>
+	<div class="row" style="margin:0;">
+		<h5 class="col-sm-4">客户来源：<span class="grey ztb_view_clientSourceName"></span></h5>
+		<h5 class="col-sm-8">来源说明：<span class="grey ztb_view_clientSourceDesc"></span></h5>
+		<h5 class="col-sm-4">创建部门：<span class="grey ztb_view_fullDepartName"></span></h5> <%--调用部门接口获取?? --%>
+		<h5 class="col-sm-4">创建人：<span class="grey ztb_view_createUserName"></span></h5>
+		<h5 class="col-sm-4">创建时间：<span class="grey ztb_view_createDateTime"></span></h5>
+	</div>
+ <script src="<%=path %>/crm/client/companyClient/clientBasicInfo.js?v=<%=vardate%>"></script>

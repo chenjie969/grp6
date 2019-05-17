@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><jatools Class="jatools.ReportDocument" Name="jatools report template"><VariableContext/><Page><Children ItemClass="PagePanel"><Item0><Width>1167</Width><Height>182</Height><Children><Item0 Class="Label"><Text>河北融投担保集团各地区业务情况统计表（总表）</Text><Font><Face>宋体</Face><Style>1</Style><Size>36</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><X>274</X><Y>9</Y><Width>557</Width><Height>71</Height></Item0><Item1 Class="Label"><Text>单位：万元</Text><HorizontalAlignment>2</HorizontalAlignment><X>708</X><Y>108</Y><Width>122</Width><Height>23</Height></Item1><Item2 Class="Label"><Text>截止年月：</Text><HorizontalAlignment>2</HorizontalAlignment><X>435</X><Y>109</Y><Width>68</Width><Height>23</Height></Item2><Item3 Class="Text"><Variable>=if(has(endyearmonthsql)) return endyearmonthsql;else return ($today+"").substring(0,7);</Variable><X>503</X><Y>109</Y><Width>110</Width><Height>23</Height></Item3></Children><Type>100</Type></Item0><Item1><Y>802</Y><Width>1167</Width><Height>280</Height><Type>103</Type></Item1><Item2><Y>182</Y><Width>1167</Width><Height>620</Height><Children ItemClass="Table"><Item0><NodePath>tab_detail_project_byarea</NodePath><X>44</X><Y>33</Y><Children><Item0 Class="Label"><Text>地市</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col></Cell></Item0><Item1 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col></Cell></Item1><Item2 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col></Cell></Item2><Item3 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>0</Col></Cell></Item3><Item4 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>1</Col></Cell></Item4><Item5 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>6</Col></Cell></Item5><Item6 Class="Label"><Text>户数</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>3</Col></Cell></Item6><Item7 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>0</Col></Cell></Item7><Item8 Class="RowPanel"><Cell><Row>1</Row><Col>0</Col><ColSpan>10</ColSpan></Cell><Children><Item0 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col></Cell></Item0><Item1 Class="Label"><Text>=index_column3_byarea.guarantySum{$.attributionName}/10000</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>0</Col></Cell></Item1><Item2 Class="Text"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>0</Col></Cell></Item2><Item3 Class="Text"><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>0</Col></Cell></Item3><Item4 Class="Label"><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>0</Col></Cell></Item4><Item5 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>0</Col></Cell></Item5><Item6 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>1</Col></Cell></Item6><Item7 Class="Text"><Variable>=$.attributionName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>1</Col></Cell></Item7><Item8 Class="Text"><Variable>=index_client.clientNum{$.attributionName}</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>0</Pattern></Format><Cell><Row>1</Row><Col>3</Col></Cell></Item8><Item9 Class="Text"><Variable>=$.position + 1</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>0</Col></Cell></Item9><Item10 Class="Text"><Variable>=index_column3_byarea.guarantySum{$.attributionName}/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000</Pattern></Format><Cell><Row>1</Row><Col>2</Col></Cell></Item10><Item11 Class="Text"><Variable>=if(has(index_column4_byarea.guarantySum{$.attributionName})) return index_column4_byarea.guarantySum{$.attributionName}/10000;else return 0</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000</Pattern></Format><Cell><Row>1</Row><Col>4</Col></Cell></Item11><Item12 Class="Text"><Variable>=if(has(index_column5_byarea.replaceCapitalSum{$.attributionName})) return index_column5_byarea.replaceCapitalSum{$.attributionName}/10000;else return 0</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000</Pattern></Format><Cell><Row>1</Row><Col>6</Col></Cell></Item12><Item13 Class="Text"><Variable>=if(!has(index_column5_byarea.replaceCapitalSum{$.attributionName}) &amp;&amp; !has(index_column4_byarea.guarantySum{$.attributionName})) return index_column3_byarea.guarantySum{$.attributionName}/10000;
+else if(!has(index_column5_byarea.replaceCapitalSum{$.attributionName})) return index_column3_byarea.guarantySum{$.attributionName}/10000+index_column4_byarea.guarantySum{$.attributionName}/10000;
+else if(!has(index_column4_byarea.guarantySum{$.attributionName})) return index_column3_byarea.guarantySum{$.attributionName}/10000+index_column5_byarea.replaceCapitalSum{$.attributionName}/10000;
+else return index_column3_byarea.guarantySum{$.attributionName}/10000+index_column4_byarea.guarantySum{$.attributionName}/10000+index_column5_byarea.replaceCapitalSum{$.attributionName}/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000</Pattern></Format><Cell><Row>1</Row><Col>7</Col></Cell></Item13><Item14 Class="Text"><Variable>=if(!has(index_column5_byarea.replaceCapitalSum{$.attributionName}) &amp;&amp; !has(index_column4_byarea.guarantySum{$.attributionName})) return (index_column3_byarea.guarantySum{$.attributionName}/10000)/(index_column3_byarea.guarantySum.sum()/10000+index_column4_byarea.guarantySum.sum()/10000+index_column5_byarea.replaceCapitalSum.sum()/10000);
+else if(!has(index_column5_byarea.replaceCapitalSum{$.attributionName})) return (index_column3_byarea.guarantySum{$.attributionName}/10000+index_column4_byarea.guarantySum{$.attributionName}/10000)/(index_column3_byarea.guarantySum.sum()/10000+index_column4_byarea.guarantySum.sum()/10000+index_column5_byarea.replaceCapitalSum.sum()/10000);
+else if(!has(index_column4_byarea.guarantySum{$.attributionName})) return (index_column3_byarea.guarantySum{$.attributionName}/10000+index_column5_byarea.replaceCapitalSum{$.attributionName}/10000)/(index_column3_byarea.guarantySum.sum()/10000+index_column4_byarea.guarantySum.sum()/10000+index_column5_byarea.replaceCapitalSum.sum()/10000);
+else return (index_column3_byarea.guarantySum{$.attributionName}/10000+index_column4_byarea.guarantySum{$.attributionName}/10000+index_column5_byarea.replaceCapitalSum{$.attributionName}/10000)/(index_column3_byarea.guarantySum.sum()/10000+index_column4_byarea.guarantySum.sum()/10000+index_column5_byarea.replaceCapitalSum.sum()/10000);
+</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>0.000%</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>9</Col></Cell></Item14><Item15 Class="Text"><Variable>=index_client.clientNum{$.attributionName}/index_client.clientNum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>0.000%</Pattern></Format><Cell><Row>1</Row><Col>8</Col></Cell></Item15><Item16 Class="Text"><Variable>=if(has(index_column6_byarea.guarantySum{$.attributionName})) return index_column6_byarea.guarantySum{$.attributionName}/10000;else return 0</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000</Pattern></Format><Cell><Row>1</Row><Col>5</Col></Cell></Item16><Item17 Class="Text"><Variable>=index_column6_byarea.guarantySum.sum()/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000</Pattern></Format><Cell><Row>2</Row><Col>5</Col></Cell></Item17></Children><NodePath>Row</NodePath></Item8><Item9 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Cell><Row>2</Row><Col>0</Col></Cell></Item9><Item10 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>0</Col></Cell></Item10><Item11 Class="Label"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>0</Col></Cell></Item11><Item12 Class="Label"><Text>序号</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col></Cell></Item12><Item13 Class="Label"><Text>总计：</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>0</Col><ColSpan>2</ColSpan></Cell></Item13><Item14 Class="Label"><Text>在保余额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>2</Col></Cell></Item14><Item15 Class="Label"><Text>担保集团
+委贷余额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>4</Col></Cell></Item15><Item16 Class="Label"><Text>代偿余额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>6</Col></Cell></Item16><Item17 Class="Label"><Text>业务合计</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>7</Col></Cell></Item17><Item18 Class="Text"><Variable>=index_column3_byarea.guarantySum.sum()/10000</Variable><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.0000</Pattern></Format><Cell><Row>2</Row><Col>2</Col></Cell></Item18><Item19 Class="Text"><Variable>=index_client.clientNum.sum()</Variable><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>0</Pattern></Format><Cell><Row>2</Row><Col>3</Col></Cell></Item19><Item20 Class="Text"><Variable>=index_column4_byarea.guarantySum.sum()/10000</Variable><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000</Pattern></Format><Cell><Row>2</Row><Col>4</Col></Cell></Item20><Item21 Class="Text"><Variable>=index_column5_byarea.replaceCapitalSum.sum()/10000</Variable><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000</Pattern></Format><Cell><Row>2</Row><Col>6</Col></Cell></Item21><Item22 Class="Text"><Variable>=index_column3_byarea.guarantySum.sum()/10000+index_column4_byarea.guarantySum.sum()/10000+index_column5_byarea.replaceCapitalSum.sum()/10000</Variable><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000</Pattern></Format><Cell><Row>2</Row><Col>7</Col></Cell></Item22><Item23 Class="Label"><Text>企业数量占
+全省比例</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>8</Col></Cell></Item23><Item24 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>9</Col></Cell></Item24><Item25 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>8</Col></Cell></Item25><Item26 Class="Label"><Text>地市</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col></Cell></Item26><Item27 Class="Label"><Text>业务总额占
+全省比例</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>9</Col></Cell></Item27><Item28 Class="Label"><Text>融投系无担保的委贷余额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>5</Col></Cell></Item28></Children><ColumnWidths>60,80,105,102,99,96,106,116,153,99</ColumnWidths><RowHeights>37,52,52</RowHeights></Item0></Children><Type>102</Type></Item2></Children><PageFormat><Width>1207</Width><Height>1122</Height></PageFormat></Page><NodeSource><Children ItemClass="DatasetNodeSource"><Item0><Children><Item0 Class="RowNodeSource"/><Item1 Class="IndexNodeSource"><IndexFields Len="1">attributionName</IndexFields><TagName>index_client</TagName></Item1></Children><Reader Class="SqlReader"><Name>tab_detail_project_byarea</Name><Sql>SELECT 
+	-- pa.hostAreaName,
+	pa.attributionName,
+	COUNT(DISTINCT cr.relationMain_ID) clientNum
+FROM pro_project pp
+LEFT JOIN pro_apply pa ON pa.apply_ID=pp.apply_ID
+LEFT JOIN crm_client cc ON pa.client_ID=cc.client_ID
+LEFT JOIN crm_client_relationmain ccr ON ccr.`client_ID` = cc.client_ID
+LEFT JOIN crm_relationmain cr ON cr.`clientID` = ccr.`client_ID`
+WHERE 	pp.busiClass="01"
+${has(endyearmonthsql)?(" and DATE_FORMAT(pp.reportDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY pa.attributionName</Sql><Description>SELECT 
+	-- pa.hostAreaName,
+	pa.attributionName,
+	COUNT(DISTINCT cr.relationMain_ID) clientNum
+FROM pro_project pp
+LEFT JOIN pro_apply pa ON pa.apply_ID=pp.apply_ID
+LEFT JOIN crm_client cc ON pa.client_ID=cc.client_ID
+LEFT JOIN crm_client_relationmain ccr ON ccr.`client_ID` = cc.client_ID
+LEFT JOIN crm_relationmain cr ON cr.`clientID` = ccr.`client_ID`
+WHERE 	pp.busiClass="01"
+${has(endyearmonthsql)?(" and DATE_FORMAT(pp.reportDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY pa.attributionName</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">clientNum</IndexFields><TagName>tab_detail_project_byarea</TagName></Item0><Item1><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">attributionName</IndexFields><TagName>index_column3_byarea</TagName></Item0></Children><Reader Class="SqlReader"><Name>column3_byarea</Name><Sql>SELECT
+	SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)-IFNULL(tab5.creditorsum,0))) AS guarantySum,
+	pa.attributionName
+FROM pro_project pp
+LEFT JOIN (
+	SELECT 
+		pfp.project_ID,
+		SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM
+		pro_factpay pfp
+	WHERE 	1=1  ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+LEFT JOIN (
+	SELECT
+		pre.project_ID,        
+		SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum         
+	FROM
+		pro_replace pre
+	WHERE 	1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	GROUP BY pre.project_ID 
+)tab2 ON tab2.project_ID =  pp.project_ID 
+LEFT JOIN (
+	SELECT
+		 precre.project_ID,
+		SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum 
+	FROM 
+		pro_creditor precre
+    	WHERE 1=1 
+		${has(endyearmonthsql)?(" and DATE_FORMAT(precre.creditor_date,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	GROUP BY precre.project_ID
+   )tab5 ON tab5.project_ID =  pp.project_ID 
+LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+WHERE	pp.busiClass= '01' and pa.hostAreaName IS NOT NULL
+ ${has(endyearmonthsql)?(" and DATE_FORMAT(pp.reportDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+ ${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+ ${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+ GROUP BY pa.attributionName</Sql><Description>SELECT
+	SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)-IFNULL(tab5.creditorsum,0))) AS guarantySum,
+	pa.attributionName
+FROM pro_project pp
+LEFT JOIN (
+	SELECT 
+		pfp.project_ID,
+		SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM
+		pro_factpay pfp
+	WHERE 	1=1  ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+LEFT JOIN (
+	SELECT
+		pre.project_ID,        
+		SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum         
+	FROM
+		pro_replace pre
+	WHERE 	1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	GROUP BY pre.project_ID 
+)tab2 ON tab2.project_ID =  pp.project_ID 
+LEFT JOIN (
+	SELECT
+		 precre.project_ID,
+		SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum 
+	FROM 
+		pro_creditor precre
+    	WHERE 1=1 
+		${has(endyearmonthsql)?(" and DATE_FORMAT(precre.creditor_date,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	GROUP BY precre.project_ID
+   )tab5 ON tab5.project_ID =  pp.project_ID 
+LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+WHERE	pp.busiClass= '01' and pa.hostAreaName IS NOT NULL
+ ${has(endyearmonthsql)?(" and DATE_FORMAT(pp.reportDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+ ${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+ ${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+ GROUP BY pa.attributionName</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">attributionName</IndexFields><TagName>column3_byarea</TagName></Item1><Item2><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">attributionName</IndexFields><TagName>index_column4_byarea</TagName></Item0></Children><Reader Class="SqlReader"><Name>colum4_byarea</Name><Sql>SELECT
+	SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)-IFNULL(tab5.creditorsum,0))) AS guarantySum,
+	pa.attributionName
+FROM pro_project pp
+LEFT JOIN (
+	SELECT 
+		pfp.project_ID,
+		SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM
+		pro_factpay pfp
+	WHERE 	1=1  ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+LEFT JOIN (
+	SELECT
+		pre.project_ID,        
+		SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum         
+	FROM
+		pro_replace pre
+	WHERE 	1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	GROUP BY pre.project_ID 
+)tab2 ON tab2.project_ID =  pp.project_ID 
+LEFT JOIN (
+	SELECT
+		 precre.project_ID,
+		SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum 
+	FROM 
+		pro_creditor precre
+    	WHERE 1=1 
+		${has(endyearmonthsql)?(" and DATE_FORMAT(precre.creditor_date,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	GROUP BY precre.project_ID
+   )tab5 ON tab5.project_ID =  pp.project_ID 
+LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+WHERE	pp.busiClass= '02' and pa.hostAreaName !='' 
+ -- AND pa.guarantyOrgID IN ('1b6f710ce5054d1d8f9d495f7bc1e142','fbe555a29dd94ed08dacf374dcd85ead','d6f953c683ea41abb946a42fc1004642','73c1bb3d20614bdfa91281622c5b9334')
+ ${has(endyearmonthsql)?(" and DATE_FORMAT(pp.reportDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+ ${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+ ${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+ GROUP BY pa.attributionName</Sql><Description>SELECT
+	SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)-IFNULL(tab5.creditorsum,0))) AS guarantySum,
+	pa.attributionName
+FROM pro_project pp
+LEFT JOIN (
+	SELECT 
+		pfp.project_ID,
+		SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM
+		pro_factpay pfp
+	WHERE 	1=1  ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+LEFT JOIN (
+	SELECT
+		pre.project_ID,        
+		SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum         
+	FROM
+		pro_replace pre
+	WHERE 	1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	GROUP BY pre.project_ID 
+)tab2 ON tab2.project_ID =  pp.project_ID 
+LEFT JOIN (
+	SELECT
+		 precre.project_ID,
+		SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum 
+	FROM 
+		pro_creditor precre
+    	WHERE 1=1 
+		${has(endyearmonthsql)?(" and DATE_FORMAT(precre.creditor_date,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	GROUP BY precre.project_ID
+   )tab5 ON tab5.project_ID =  pp.project_ID 
+LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+WHERE	pp.busiClass= '02' and pa.hostAreaName !='' 
+ -- AND pa.guarantyOrgID IN ('1b6f710ce5054d1d8f9d495f7bc1e142','fbe555a29dd94ed08dacf374dcd85ead','d6f953c683ea41abb946a42fc1004642','73c1bb3d20614bdfa91281622c5b9334')
+ ${has(endyearmonthsql)?(" and DATE_FORMAT(pp.reportDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+ ${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+ ${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+ GROUP BY pa.attributionName</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">attributionName</IndexFields><TagName>colum4_byarea</TagName></Item2><Item3><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">attributionName</IndexFields><TagName>index_column5_byarea</TagName></Item0></Children><Reader Class="SqlReader"><Name>colum5_replace</Name><Sql>select 
+	pa.attributionName,
+	SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum 
+from 
+	pro_replace pre
+ LEFT JOIN pro_apply pa ON pa.apply_ID=pre.apply_ID 
+WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} 
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""} 
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""} 
+GROUP BY pa.attributionName
+          </Sql><Description>select 
+	pa.attributionName,
+	SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum 
+from 
+	pro_replace pre
+ LEFT JOIN pro_apply pa ON pa.apply_ID=pre.apply_ID 
+WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} 
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""} 
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""} 
+GROUP BY pa.attributionName
+          </Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">attributionName</IndexFields><TagName>colum5_replace</TagName></Item3><Item4><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">attributionName</IndexFields><TagName>index_column6_byarea</TagName></Item0></Children><Reader Class="SqlReader"><Name>colum6_byarea</Name><Sql>SELECT
+	SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)-IFNULL(tab5.creditorsum,0))) AS guarantySum,
+	pa.attributionName
+FROM pro_project pp
+LEFT JOIN (
+	SELECT 
+		pfp.project_ID,
+		SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM
+		pro_factpay pfp
+	WHERE 	1=1  ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+LEFT JOIN (
+	SELECT
+		pre.project_ID,        
+		SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum         
+	FROM
+		pro_replace pre
+	WHERE 	1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	GROUP BY pre.project_ID 
+)tab2 ON tab2.project_ID =  pp.project_ID 
+LEFT JOIN (
+	SELECT
+		 precre.project_ID,
+		SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum 
+	FROM 
+		pro_creditor precre
+    	WHERE 1=1 
+		${has(endyearmonthsql)?(" and DATE_FORMAT(precre.creditor_date,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	GROUP BY precre.project_ID
+   )tab5 ON tab5.project_ID =  pp.project_ID 
+LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+WHERE	pp.busiClass= '02' and pa.hostAreaName !='' AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+ ${has(endyearmonthsql)?(" and DATE_FORMAT(pp.reportDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+ ${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+ ${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+ GROUP BY pa.attributionName</Sql><Description>SELECT
+	SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)-IFNULL(tab5.creditorsum,0))) AS guarantySum,
+	pa.attributionName
+FROM pro_project pp
+LEFT JOIN (
+	SELECT 
+		pfp.project_ID,
+		SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM
+		pro_factpay pfp
+	WHERE 	1=1  ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+LEFT JOIN (
+	SELECT
+		pre.project_ID,        
+		SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum         
+	FROM
+		pro_replace pre
+	WHERE 	1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	GROUP BY pre.project_ID 
+)tab2 ON tab2.project_ID =  pp.project_ID 
+LEFT JOIN (
+	SELECT
+		 precre.project_ID,
+		SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum 
+	FROM 
+		pro_creditor precre
+    	WHERE 1=1 
+		${has(endyearmonthsql)?(" and DATE_FORMAT(precre.creditor_date,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	GROUP BY precre.project_ID
+   )tab5 ON tab5.project_ID =  pp.project_ID 
+LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+WHERE	pp.busiClass= '02' and pa.hostAreaName !='' AND pa.`guarantyOrgID` = '9d230c752d384cc78c199c2cdf2c1088'
+ ${has(endyearmonthsql)?(" and DATE_FORMAT(pp.reportDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+ ${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+ ${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+ GROUP BY pa.attributionName</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">attributionName</IndexFields><TagName>colum6_byarea</TagName></Item4></Children></NodeSource></jatools>

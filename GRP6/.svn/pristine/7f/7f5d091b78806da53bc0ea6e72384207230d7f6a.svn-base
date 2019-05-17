@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjm.crm.db.map.Crm_payTaxInfoMapper" >
+  
+	<resultMap id="payTaxInfoResultMap" type="com.zjm.crm.db.model.Crm_payTaxInfo" >
+		<result column="payTaxInfo_ID" property="payTaxInfo_ID"  />
+		<result column="client_ID" property="client_ID"  />
+		<result column="period" property="period"  />
+		<result column="accountSum" property="accountSum"  />
+		<result column="taxSum" property="taxSum"  />
+		<result column="remark" property="remark"  />
+		<result column="unit_uid" property="unit_uid"  />
+		<result column="unit_uidName" property="unit_uidName"  />
+		<result column="updateUserName" property="updateUserName"  />
+		<result column="updateDateTime" property="updateDateTime"  />
+	</resultMap>
+
+	<!-- 分页查询企业纳税情况列表 -->
+	<select id="selectPayTaxInfoPageTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="payTaxInfoResultMap">
+		SELECT 
+			payTaxInfo_ID,
+			client_ID,
+			period,  
+			accountSum,  
+			taxSum, 
+			remark,  
+			unit_uid, 
+			unit_uidName, 
+			updateUserName,
+			updateDateTime  
+		FROM crm_payTaxInfo
+		WHERE unit_uid = #{queryCondition.unit_uid}
+		AND client_ID = #{queryCondition.client_ID}
+		ORDER BY updateDateTime DESC
+		LIMIT #{pageNumber},#{pageSize}  
+	</select>
+
+	<!-- 分页查询企业纳税情况列表-查询总记录数 -->
+	<select id="selectPayTaxInfoPageTable_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+	 	SELECT 
+	 		COUNT(1) 
+	 	FROM 
+	 		crm_payTaxInfo 
+	 	WHERE
+	 		unit_uid = #{queryCondition.unit_uid}
+		AND client_ID = #{queryCondition.client_ID}
+	</select>
+	
+	<!-- 查询企业纳税情况列表 -->
+	<select id="selectPayTaxInfoList" parameterType="java.lang.String" resultMap="payTaxInfoResultMap">
+		SELECT 
+			payTaxInfo_ID,
+			client_ID,
+			period,  
+			accountSum,  
+			taxSum, 
+			remark,  
+			unit_uid, 
+			unit_uidName, 
+			updateUserName,
+			updateDateTime  
+		FROM crm_payTaxInfo
+		WHERE 1=1 ${value}
+	</select>	
+
+	<!-- 查询一条企业纳税情况-->  
+	<select id="selectOnePayTaxInfo" parameterType="com.zjm.crm.db.model.Crm_payTaxInfo" resultMap="payTaxInfoResultMap">
+		SELECT 
+			payTaxInfo_ID,
+			client_ID,
+			period,  
+			accountSum,  
+			taxSum, 
+			remark,  
+			unit_uid, 
+			unit_uidName, 
+			updateUserName,
+			updateDateTime    
+		FROM crm_payTaxInfo
+		WHERE unit_uid = #{unit_uid}
+		AND payTaxInfo_ID = #{payTaxInfo_ID}
+	</select>
+	
+	<!-- 插入一条企业纳税情况 -->
+	<insert id="insertOnePayTaxInfo" parameterType="com.zjm.crm.db.model.Crm_payTaxInfo">
+		INSERT INTO crm_payTaxInfo(
+			payTaxInfo_ID,
+			client_ID,
+			period,  
+			accountSum,  
+			taxSum, 
+			remark,  
+			unit_uid, 
+			unit_uidName, 
+			updateUserName,
+			updateDateTime     
+		) VALUES(
+			#{payTaxInfo_ID},
+			#{client_ID},
+			#{period},  
+			#{accountSum},  
+			#{taxSum}, 
+			#{remark},  
+			#{unit_uid}, 
+			#{unit_uidName}, 
+			#{updateUserName},
+			NOW()
+		)
+	</insert>
+	
+	<!-- 修改一条企业纳税情况 -->
+	<update id="updateOnePayTaxInfo" parameterType="com.zjm.crm.db.model.Crm_payTaxInfo">
+		UPDATE crm_payTaxInfo
+		SET
+			period = #{period},  
+			accountSum = #{accountSum},  
+			taxSum = #{taxSum},
+			remark = #{remark},  
+			updateUserName = #{updateUserName},
+			updateDateTime = NOW()
+		WHERE unit_uid=#{unit_uid}
+		AND payTaxInfo_ID = #{payTaxInfo_ID}
+	</update>
+	
+	<!-- 删除一条企业纳税情况 -->
+	<delete id="deleteOnePayTaxInfo" parameterType="com.zjm.crm.db.model.Crm_payTaxInfo">
+		DELETE FROM 
+			crm_payTaxInfo
+		WHERE
+			unit_uid = #{unit_uid}
+		AND payTaxInfo_ID = #{payTaxInfo_ID}
+	</delete>
+ 	
+ 	<delete id="deletePayTaxByClient_ID"  parameterType="string">
+ 		DELETE FROM  crm_payTaxInfo
+		WHERE  client_ID = #{client_ID}
+ 	</delete>
+</mapper>

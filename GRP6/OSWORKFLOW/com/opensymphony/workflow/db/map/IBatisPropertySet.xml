@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="IBatisPropertySet">
+
+        <typeAlias alias="PropertyData" type="com.opensymphony.workflow.spi.ibatis.PropertyData"/>
+        
+        <cacheModel id="propertydata-cache" type="LRU">
+                <flushInterval minutes="30"/>
+                <property name="size" value="1000" />
+                <flushOnExecute statement="insertProperty"/>
+                <flushOnExecute statement="updateProperty"/>
+                <flushOnExecute statement="deleteProperty"/>
+        </cacheModel>
+        
+        <resultMap id="PropertyDataResult" class="PropertyData">
+                <result property="globalKey" column="GLOBAL_KEY"/>
+                <result property="itemKey" column="ITEM_KEY"/>
+                <result property="itemType" column="ITEM_TYPE"/>
+                <result property="stringValue" column="STRING_VALUE"/>
+                <result property="dateValue" column="DATE_VALUE"/>
+                <result property="dataValue" column="DATA_VALUE"/>
+                <result property="floatValue" column="FLOAT_VALUE"/>
+                <result property="numberValue" column="NUMBER_VALUE"/>
+        </resultMap>
+        
+        <select id="selectProperty" parameterClass="java.util.Map" resultMap="PropertyDataResult" cacheModel="propertydata-cache">
+                SELECT 
+                        `GLOBAL_KEY`, `ITEM_KEY`, `ITEM_TYPE`, `STRING_VALUE`, `DATE_VALUE`, `DATA_VALUE`, `FLOAT_VALUE`, `NUMBER_VALUE` 
+                FROM 
+                        `os_propertyentry` WHERE 1=1
+                <dynamic prepend="">
+                        <isNotNull prepend="AND" property="prefix">
+                                `ITEM_KEY` LIKE '$prefix$%'
+                        </isNotNull>
+                        <isNotNull prepend="AND" property="itemKey">
+                                `ITEM_KEY`=#itemKey#
+                        </isNotNull>
+                        <isNotNull prepend="AND" property="globalKey">
+                                `GLOBAL_KEY`=#globalKey#
+                        </isNotNull>
+                        <isNotNull prepend="AND" property="itemType">
+                                `ITEM_TYPE`=#itemType#
+                        </isNotNull>
+                </dynamic>
+        </select>
+        
+        <insert id="insertProperty" parameterClass="PropertyData">
+                INSERT INTO `os_propertyentry` (
+                        `STRING_VALUE`, `DATE_VALUE`, `DATA_VALUE`, `FLOAT_VALUE`, `NUMBER_VALUE`, `ITEM_TYPE`, `GLOBAL_KEY`, `ITEM_KEY`
+                ) VALUES (
+                        #stringValue#, #dateValue#, #dataValue#, #floatValue#, #numberValue#, #itemType#, #globalKey#, #itemKey#
+                )
+        </insert>
+        
+        <update id="updateProperty" parameterClass="PropertyData">
+                UPDATE `os_propertyentry`
+                SET
+                <dynamic prepend="">
+                        <isNotNull prepend="" property="stringValue">
+                                `STRING_VALUE` = #stringValue#,
+                        </isNotNull>
+                        <isNotNull prepend="" property="dateValue">
+                                `DATE_VALUE` = #dateValue#,
+                        </isNotNull>
+                        <isNotNull prepend="" property="dataValue">
+                                `DATA_VALUE` = #dataValue#,
+                        </isNotNull>
+                        <isNotNull prepend="" property="floatValue">
+                                `FLOAT_VALUE` = #floatValue#,
+                        </isNotNull>
+                        <isNotNull prepend="" property="numberValue">
+                                `NUMBER_VALUE` = #numberValue#,
+                        </isNotNull>
+                        <isNotNull prepend="" property="itemType">
+                                `ITEM_TYPE` = #itemType#,
+                        </isNotNull>
+                </dynamic>
+                        `ITEM_KEY` = `ITEM_KEY`
+                WHERE 
+                        `GLOBAL_KEY` = #globalKey#
+                        AND `ITEM_KEY` = #itemKey#
+        </update>
+        
+        <delete id="deleteProperty" parameterClass="PropertyData">
+                DELETE FROM 
+                        `os_propertyentry` 
+                WHERE 
+                        `GLOBAL_KEY` = #globalKey# 
+                        AND `ITEM_KEY` = #itemKey#
+        </delete>
+
+</sqlMap>

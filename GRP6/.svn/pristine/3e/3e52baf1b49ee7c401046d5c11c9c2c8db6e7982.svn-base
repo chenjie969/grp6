@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><jatools Class="jatools.ReportDocument" Name="jatools report template"><VariableContext/><Page><Children ItemClass="PagePanel"><Item0><Width>1509</Width><Height>107</Height><Children><Item0 Class="Label"><Text>担保业务月报表（地区汇总）</Text><Font><Face>宋体</Face><Style>1</Style><Size>36</Size></Font><HorizontalAlignment>1</HorizontalAlignment><X>332</X><Y>5</Y><Width>665</Width><Height>41</Height></Item0><Item1 Class="Label"><Text>填报单位：</Text><X>55</X><Y>78</Y><Width>62</Width><Height>23</Height></Item1><Item2 Class="Label"><Text>金额单位：万元</Text><X>1242</X><Y>78</Y><Width>101</Width><Height>23</Height></Item2><Item3 Class="Text"><Variable>=if(has(endyearmonthsql)) return endyearmonthsql;else return ($today+"").substring(0,7);</Variable><X>628</X><Y>52</Y><Width>110</Width><Height>23</Height></Item3><Item4 Class="Label"><Text>担保集团风险管理部</Text><HorizontalAlignment>1</HorizontalAlignment><X>117</X><Y>78</Y><Width>137</Width><Height>23</Height></Item4><Item5 Class="Label"><Text>统计年月：</Text><HorizontalAlignment>1</HorizontalAlignment><X>556</X><Y>52</Y><Width>68</Width><Height>23</Height></Item5></Children><Type>100</Type></Item0><Item1><Y>802</Y><Width>1509</Width><Height>280</Height><Type>103</Type></Item1><Item2><Y>107</Y><Width>1509</Width><Height>695</Height><Children ItemClass="Table"><Item0><NodePath>tab_detail</NodePath><X>57</X><Y>14</Y><Children><Item0 Class="Label"><Text>期初在保额</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>2</Col></Cell></Item0><Item1 Class="Label"><Text>本月放款额</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>3</Col></Cell></Item1><Item2 Class="Label"><Text>本月还款额</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>4</Col></Cell></Item2><Item3 Class="Label"><Text>期末在保额</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>5</Col></Cell></Item3><Item4 Class="Label"><Text>较期初增加担保额</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>6</Col></Cell></Item4><Item5 Class="Label"><Text>期末在保户数（户）</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>7</Col></Cell></Item5><Item6 Class="Label"><Text>较期初增加户数（户）</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>8</Col></Cell></Item6><Item7 Class="Label"><Text>序号</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col></Cell></Item7><Item8 Class="Label"><Text>地区</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col></Cell></Item8><Item9 Class="Text"><Border><StyleText>border-top:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>2</Row><Col>3</Col></Cell></Item9><Item10 Class="Text"><Border><StyleText>border-top:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>2</Row><Col>4</Col></Cell></Item10><Item11 Class="Text"><Border><StyleText>border-top:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>2</Row><Col>5</Col></Cell></Item11><Item12 Class="Text"><Border><StyleText>border-top:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>2</Row><Col>6</Col></Cell></Item12><Item13 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>0</Pattern></Format><Cell><Row>2</Row><Col>8</Col></Cell></Item13><Item14 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>0</Pattern></Format><Cell><Row>2</Row><Col>7</Col></Cell></Item14><Item15 Class="Label"><Text>合计</Text><Border/><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>0</Col></Cell></Item15><Item16 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>2</Row><Col>1</Col></Cell></Item16><Item17 Class="RowPanel"><Cell><Row>1</Row><Col>0</Col><ColSpan>9</ColSpan></Cell><Children ItemClass="Text"><Item0><Variable>=$.AreaCodeName</Variable><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>united-level:1;auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>1</Col></Cell></Item0><Item1><Variable>=$.position+1</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>1</Row><Col>0</Col></Cell></Item1><Item2><Variable>=index_column6.guarantySum{$.AreaCodeName}.sum()-index_column3.guarantySum{$.AreaCodeName}.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>1</Row><Col>6</Col></Cell></Item2><Item3><Variable>=index_column5.payCapitalSum{$.AreaCodeName}.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>1</Row><Col>4</Col></Cell></Item3><Item4><Variable>=index_column7.num{$.AreaCodeName}.sum()-index_column8.num{$.AreaCodeName}.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>0</Pattern></Format><Cell><Row>1</Row><Col>8</Col></Cell></Item4><Item5><Variable>=index_column4.loadSum{$.AreaCodeName}.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>1</Row><Col>3</Col></Cell></Item5><Item6><Name>=index_column3.guarantySum{$.AreaCodeName}.sum()</Name><Variable>=index_column3.guarantySum{$.AreaCodeName}.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>1</Row><Col>2</Col></Cell></Item6><Item7><Variable>=index_column6.guarantySum{$.AreaCodeName}.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>1</Row><Col>5</Col></Cell></Item7><Item8><Variable>=index_column7.num{$.AreaCodeName}.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>1</Row><Col>7</Col></Cell></Item8></Children><NodePath>Row</NodePath></Item17><Item18 Class="Text"><Border><StyleText>border-top:1.0px solid #000000;border-right:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>2</Row><Col>2</Col></Cell></Item18></Children><ColumnWidths>118,118,174,159,162,147,159,117,129</ColumnWidths><RowHeights>40,28,40</RowHeights></Item0></Children><Type>102</Type></Item2></Children><PageFormat><Width>1549</Width><Height>1122</Height></PageFormat></Page><NodeSource><Children ItemClass="DatasetNodeSource"><Item0><Children ItemClass="RowNodeSource"><Item0/></Children><Reader Class="SqlReader"><Name>tab_detail</Name><Sql>SELECT 
+	applydetail.AreaCodeName
+
+ FROM pro_project project
+ LEFT JOIN pro_applydetail applydetail ON applydetail.applyDetail_ID = project.applyDetail_ID
+ WHERE project.busiClass = '01' 
+
+ GROUP BY applydetail.AreaCodeName
+
+${has(endyearmonthsql)?(" and DATE_FORMAT(project.loadBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):" and DATE_FORMAT(project.loadBeginDate,'%Y-%m')&lt;=DATE_FORMAT(now(),'%Y-%m')"}</Sql><Description>SELECT 
+	applydetail.AreaCodeName
+
+ FROM pro_project project
+ LEFT JOIN pro_applydetail applydetail ON applydetail.applyDetail_ID = project.applyDetail_ID
+ WHERE project.busiClass = '01' 
+
+ GROUP BY applydetail.AreaCodeName
+
+${has(endyearmonthsql)?(" and DATE_FORMAT(project.loadBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):" and DATE_FORMAT(project.loadBeginDate,'%Y-%m')&lt;=DATE_FORMAT(now(),'%Y-%m')"}</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><TagName>tab_detail</TagName></Item0><Item1><Children ItemClass="CrossIndexNodeSource"><Item0><IndexFields Len="1">AreaCodeName</IndexFields><IndexFields2 Len="1">guarantySum</IndexFields2><TagName>index_column3</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab_column3</Name><Sql>SELECT  applyDetail.AreaCodeName,SUM(IFNULL(project.loadSum,0)-IFNULL(tab.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)) AS guarantySum
+FROM pro_project project
+
+LEFT JOIN 
+(SELECT factPay.project_ID,
+SUM(IFNULL(factPay.payCapitalSum,0)) AS payCapitalSum 
+FROM pro_factPay factPay
+WHERE 1=1
+${has(endyearmonthsql)?(" and DATE_FORMAT(factPay.payDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):" and DATE_FORMAT(factPay.payDate,'%Y-%m')&lt;DATE_FORMAT(now(),'%Y-%m')"}
+GROUP BY factPay.project_ID) tab ON tab.project_ID = project.project_ID
+
+LEFT JOIN 
+(SELECT r.project_ID,
+SUM(IFNULL(r.replaceCapitalSum,0)) AS replaceCapitalSum 
+FROM pro_replace r
+WHERE 1=1
+${has(endyearmonthsql)?(" and DATE_FORMAT(r.replaceDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):" and DATE_FORMAT(r.replaceDate,'%Y-%m')&lt;DATE_FORMAT(now(),'%Y-%m')"}
+GROUP BY r.project_ID) tab2 ON tab2.project_ID = project.project_ID
+
+
+LEFT JOIN pro_applydetail applyDetail ON applyDetail.applyDetail_ID = project.applyDetail_ID
+WHERE 1=1
+${has(endyearmonthsql)?(" and DATE_FORMAT(project.loadBeginDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):" and DATE_FORMAT(project.loadBeginDate,'%Y-%m')&lt;DATE_FORMAT(now(),'%Y-%m')"}
+GROUP BY project.project_ID</Sql><Description>SELECT  applyDetail.AreaCodeName,SUM(IFNULL(project.loadSum,0)-IFNULL(tab.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)) AS guarantySum
+FROM pro_project project
+
+LEFT JOIN 
+(SELECT factPay.project_ID,
+SUM(IFNULL(factPay.payCapitalSum,0)) AS payCapitalSum 
+FROM pro_factPay factPay
+WHERE 1=1
+${has(endyearmonthsql)?(" and DATE_FORMAT(factPay.payDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):" and DATE_FORMAT(factPay.payDate,'%Y-%m')&lt;DATE_FORMAT(now(),'%Y-%m')"}
+GROUP BY factPay.project_ID) tab ON tab.project_ID = project.project_ID
+
+LEFT JOIN 
+(SELECT r.project_ID,
+SUM(IFNULL(r.replaceCapitalSum,0)) AS replaceCapitalSum 
+FROM pro_replace r
+WHERE 1=1
+${has(endyearmonthsql)?(" and DATE_FORMAT(r.replaceDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):" and DATE_FORMAT(r.replaceDate,'%Y-%m')&lt;DATE_FORMAT(now(),'%Y-%m')"}
+GROUP BY r.project_ID) tab2 ON tab2.project_ID = project.project_ID
+
+
+LEFT JOIN pro_applydetail applyDetail ON applyDetail.applyDetail_ID = project.applyDetail_ID
+WHERE 1=1
+${has(endyearmonthsql)?(" and DATE_FORMAT(project.loadBeginDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):" and DATE_FORMAT(project.loadBeginDate,'%Y-%m')&lt;DATE_FORMAT(now(),'%Y-%m')"}
+GROUP BY project.project_ID</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">AreaCodeName</IndexFields><IndexFields2 Len="1">guarantySum</IndexFields2><TagName>tab_column3</TagName></Item1><Item2><Children ItemClass="CrossIndexNodeSource"><Item0><IndexFields Len="1">AreaCodeName</IndexFields><IndexFields2 Len="1">loadSum</IndexFields2><TagName>index_column4</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab_column4</Name><Sql>SELECT 
+	applyDetail.AreaCodeName, IFNULL(project.loadSum,0) AS loadSum
+ FROM pro_project project
+ LEFT JOIN pro_applydetail applydetail ON applydetail.applyDetail_ID = project.applyDetail_ID
+ WHERE 1=1  
+
+${has(endyearmonthsql)?(" and DATE_FORMAT(project.loadBeginDate,'%Y-%m')='"+endyearmonthsql+"'"):" and DATE_FORMAT(project.loadBeginDate,'%Y-%m')=DATE_FORMAT(now(),'%Y-%m')"}</Sql><Description>SELECT 
+	applyDetail.AreaCodeName, IFNULL(project.loadSum,0) AS loadSum
+ FROM pro_project project
+ LEFT JOIN pro_applydetail applydetail ON applydetail.applyDetail_ID = project.applyDetail_ID
+ WHERE 1=1  
+
+${has(endyearmonthsql)?(" and DATE_FORMAT(project.loadBeginDate,'%Y-%m')='"+endyearmonthsql+"'"):" and DATE_FORMAT(project.loadBeginDate,'%Y-%m')=DATE_FORMAT(now(),'%Y-%m')"}</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">AreaCodeName</IndexFields><IndexFields2 Len="1">loadSum</IndexFields2><TagName>tab_column4</TagName></Item2><Item3><Children ItemClass="CrossIndexNodeSource"><Item0><IndexFields Len="1">AreaCodeName</IndexFields><IndexFields2 Len="1">payCapitalSum</IndexFields2><TagName>index_column5</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab_column5</Name><Sql>SELECT 
+	applyDetail.AreaCodeName,SUM(IFNULL(factpay.payCapitalSum,0)) AS payCapitalSum
+	
+ FROM pro_factpay factpay
+ LEFT JOIN pro_project project ON project.project_ID = factpay.project_ID
+ LEFT JOIN pro_applydetail applydetail ON applyDetail.applyDetail_ID = project.applyDetail_ID
+ WHERE 1=1
+${has(endyearmonthsql)?(" and DATE_FORMAT(factpay.payDate,'%Y-%m')='"+endyearmonthsql+"'"):" and DATE_FORMAT(factpay.payDate,'%Y-%m')=DATE_FORMAT(now(),'%Y-%m')"}
+
+ORDER BY project.project_ID
+
+
+</Sql><Description>SELECT 
+	applyDetail.AreaCodeName,SUM(IFNULL(factpay.payCapitalSum,0)) AS payCapitalSum
+	
+ FROM pro_factpay factpay
+ LEFT JOIN pro_project project ON project.project_ID = factpay.project_ID
+ LEFT JOIN pro_applydetail applydetail ON applyDetail.applyDetail_ID = project.applyDetail_ID
+ WHERE 1=1
+${has(endyearmonthsql)?(" and DATE_FORMAT(factpay.payDate,'%Y-%m')='"+endyearmonthsql+"'"):" and DATE_FORMAT(factpay.payDate,'%Y-%m')=DATE_FORMAT(now(),'%Y-%m')"}
+
+ORDER BY project.project_ID
+
+
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">AreaCodeName</IndexFields><IndexFields2 Len="1">payCapitalSum</IndexFields2><TagName>tab_column5</TagName></Item3><Item4><Children ItemClass="CrossIndexNodeSource"><Item0><IndexFields Len="1">AreaCodeName</IndexFields><IndexFields2 Len="1">guarantySum</IndexFields2><TagName>index_column6</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab_column6</Name><Sql>SELECT  applyDetail.AreaCodeName,SUM(IFNULL(project.loadSum,0)-IFNULL(tab.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)) AS guarantySum
+FROM pro_project project
+
+LEFT JOIN 
+(SELECT factPay.project_ID,
+SUM(IFNULL(factPay.payCapitalSum,0)) AS payCapitalSum 
+FROM pro_factPay factPay
+WHERE 1=1
+${has(endyearmonthsql)?(" and DATE_FORMAT(factPay.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):" and DATE_FORMAT(factPay.payDate,'%Y-%m')&lt;=DATE_FORMAT(now(),'%Y-%m')"}
+GROUP BY factPay.project_ID) tab ON tab.project_ID = project.project_ID
+
+LEFT JOIN 
+(SELECT r.project_ID,
+SUM(IFNULL(r.replaceCapitalSum,0)) AS replaceCapitalSum 
+FROM pro_replace r
+WHERE 1=1
+${has(endyearmonthsql)?(" and DATE_FORMAT(r.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):" and DATE_FORMAT(r.replaceDate,'%Y-%m')&lt;=DATE_FORMAT(now(),'%Y-%m')"}
+GROUP BY r.project_ID) tab2 ON tab2.project_ID = project.project_ID
+
+
+LEFT JOIN pro_applydetail applyDetail ON applyDetail.applyDetail_ID = project.applyDetail_ID
+WHERE 1=1
+${has(endyearmonthsql)?(" and DATE_FORMAT(project.loadBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):" and DATE_FORMAT(project.loadBeginDate,'%Y-%m')&lt;=DATE_FORMAT(now(),'%Y-%m')"}
+GROUP BY project.project_ID</Sql><Description>SELECT  applyDetail.AreaCodeName,SUM(IFNULL(project.loadSum,0)-IFNULL(tab.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)) AS guarantySum
+FROM pro_project project
+
+LEFT JOIN 
+(SELECT factPay.project_ID,
+SUM(IFNULL(factPay.payCapitalSum,0)) AS payCapitalSum 
+FROM pro_factPay factPay
+WHERE 1=1
+${has(endyearmonthsql)?(" and DATE_FORMAT(factPay.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):" and DATE_FORMAT(factPay.payDate,'%Y-%m')&lt;=DATE_FORMAT(now(),'%Y-%m')"}
+GROUP BY factPay.project_ID) tab ON tab.project_ID = project.project_ID
+
+LEFT JOIN 
+(SELECT r.project_ID,
+SUM(IFNULL(r.replaceCapitalSum,0)) AS replaceCapitalSum 
+FROM pro_replace r
+WHERE 1=1
+${has(endyearmonthsql)?(" and DATE_FORMAT(r.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):" and DATE_FORMAT(r.replaceDate,'%Y-%m')&lt;=DATE_FORMAT(now(),'%Y-%m')"}
+GROUP BY r.project_ID) tab2 ON tab2.project_ID = project.project_ID
+
+
+LEFT JOIN pro_applydetail applyDetail ON applyDetail.applyDetail_ID = project.applyDetail_ID
+WHERE 1=1
+${has(endyearmonthsql)?(" and DATE_FORMAT(project.loadBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):" and DATE_FORMAT(project.loadBeginDate,'%Y-%m')&lt;=DATE_FORMAT(now(),'%Y-%m')"}
+GROUP BY project.project_ID</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">AreaCodeName</IndexFields><IndexFields2 Len="1">guarantySum</IndexFields2><TagName>tab_column6</TagName></Item4><Item5><Children ItemClass="CrossIndexNodeSource"><Item0><IndexFields Len="1">AreaCodeName</IndexFields><IndexFields2 Len="1">num</IndexFields2><TagName>index_column7</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab_column7</Name><Sql>SELECT applyDetail.AreaCodeName,COUNT(DISTINCT applyDetail.client_ID) AS num
+FROM pro_project project
+
+LEFT JOIN 
+(SELECT factPay.project_ID,
+SUM(IFNULL(factPay.payCapitalSum,0)) AS payCapitalSum 
+FROM pro_factPay factPay
+WHERE 1=1
+${has(endyearmonthsql)?(" and DATE_FORMAT(factPay.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):" and DATE_FORMAT(factPay.payDate,'%Y-%m')&lt;=DATE_FORMAT(now(),'%Y-%m')"}
+GROUP BY factPay.project_ID) tab ON tab.project_ID = project.project_ID
+
+LEFT JOIN 
+(SELECT r.project_ID,
+SUM(IFNULL(r.replaceCapitalSum,0)) AS replaceCapitalSum 
+FROM pro_replace r
+WHERE 1=1
+${has(endyearmonthsql)?(" and DATE_FORMAT(r.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):" and DATE_FORMAT(r.replaceDate,'%Y-%m')&lt;=DATE_FORMAT(now(),'%Y-%m')"}
+GROUP BY r.project_ID) tab2 ON tab2.project_ID = project.project_ID
+
+
+LEFT JOIN pro_applydetail applyDetail ON applyDetail.applyDetail_ID = project.applyDetail_ID
+WHERE 1=1
+AND (IFNULL(project.loadSum,0)-IFNULL(tab.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)) &gt; 0 
+${has(endyearmonthsql)?(" and DATE_FORMAT(project.loadBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):" and DATE_FORMAT(project.loadBeginDate,'%Y-%m')&lt;=DATE_FORMAT(now(),'%Y-%m')"}
+GROUP BY project.project_ID </Sql><Description>SELECT applyDetail.AreaCodeName,COUNT(DISTINCT applyDetail.client_ID) AS num
+FROM pro_project project
+
+LEFT JOIN 
+(SELECT factPay.project_ID,
+SUM(IFNULL(factPay.payCapitalSum,0)) AS payCapitalSum 
+FROM pro_factPay factPay
+WHERE 1=1
+${has(endyearmonthsql)?(" and DATE_FORMAT(factPay.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):" and DATE_FORMAT(factPay.payDate,'%Y-%m')&lt;=DATE_FORMAT(now(),'%Y-%m')"}
+GROUP BY factPay.project_ID) tab ON tab.project_ID = project.project_ID
+
+LEFT JOIN 
+(SELECT r.project_ID,
+SUM(IFNULL(r.replaceCapitalSum,0)) AS replaceCapitalSum 
+FROM pro_replace r
+WHERE 1=1
+${has(endyearmonthsql)?(" and DATE_FORMAT(r.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):" and DATE_FORMAT(r.replaceDate,'%Y-%m')&lt;=DATE_FORMAT(now(),'%Y-%m')"}
+GROUP BY r.project_ID) tab2 ON tab2.project_ID = project.project_ID
+
+
+LEFT JOIN pro_applydetail applyDetail ON applyDetail.applyDetail_ID = project.applyDetail_ID
+WHERE 1=1
+AND (IFNULL(project.loadSum,0)-IFNULL(tab.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)) &gt; 0 
+${has(endyearmonthsql)?(" and DATE_FORMAT(project.loadBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):" and DATE_FORMAT(project.loadBeginDate,'%Y-%m')&lt;=DATE_FORMAT(now(),'%Y-%m')"}
+GROUP BY project.project_ID </Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">AreaCodeName</IndexFields><IndexFields2 Len="1">num</IndexFields2><TagName>tab_column7</TagName></Item5><Item6><Children ItemClass="CrossIndexNodeSource"><Item0><IndexFields Len="1">AreaCodeName</IndexFields><IndexFields2 Len="1">num</IndexFields2><TagName>index_column8</TagName></Item0></Children><Reader Class="SqlReader"><Name>index_column8</Name><Sql>SELECT applyDetail.AreaCodeName,COUNT(DISTINCT applyDetail.client_ID) AS num
+FROM pro_project project
+
+LEFT JOIN 
+(SELECT factPay.project_ID,
+SUM(IFNULL(factPay.payCapitalSum,0)) AS payCapitalSum 
+FROM pro_factPay factPay
+WHERE 1=1
+${has(endyearmonthsql)?(" and DATE_FORMAT(factPay.payDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):" and DATE_FORMAT(factPay.payDate,'%Y-%m')&lt;DATE_FORMAT(now(),'%Y-%m')"}
+GROUP BY factPay.project_ID) tab ON tab.project_ID = project.project_ID
+
+LEFT JOIN 
+(SELECT r.project_ID,
+SUM(IFNULL(r.replaceCapitalSum,0)) AS replaceCapitalSum 
+FROM pro_replace r
+WHERE 1=1
+${has(endyearmonthsql)?(" and DATE_FORMAT(r.replaceDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):" and DATE_FORMAT(r.replaceDate,'%Y-%m')&lt;DATE_FORMAT(now(),'%Y-%m')"}
+GROUP BY r.project_ID) tab2 ON tab2.project_ID = project.project_ID
+
+
+LEFT JOIN pro_applydetail applyDetail ON applyDetail.applyDetail_ID = project.applyDetail_ID
+WHERE 1=1
+AND (IFNULL(project.loadSum,0)-IFNULL(tab.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)) &gt; 0 
+${has(endyearmonthsql)?(" and DATE_FORMAT(project.loadBeginDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):" and DATE_FORMAT(project.loadBeginDate,'%Y-%m')&lt;DATE_FORMAT(now(),'%Y-%m')"}
+GROUP BY project.project_ID </Sql><Description>SELECT applyDetail.AreaCodeName,COUNT(DISTINCT applyDetail.client_ID) AS num
+FROM pro_project project
+
+LEFT JOIN 
+(SELECT factPay.project_ID,
+SUM(IFNULL(factPay.payCapitalSum,0)) AS payCapitalSum 
+FROM pro_factPay factPay
+WHERE 1=1
+${has(endyearmonthsql)?(" and DATE_FORMAT(factPay.payDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):" and DATE_FORMAT(factPay.payDate,'%Y-%m')&lt;DATE_FORMAT(now(),'%Y-%m')"}
+GROUP BY factPay.project_ID) tab ON tab.project_ID = project.project_ID
+
+LEFT JOIN 
+(SELECT r.project_ID,
+SUM(IFNULL(r.replaceCapitalSum,0)) AS replaceCapitalSum 
+FROM pro_replace r
+WHERE 1=1
+${has(endyearmonthsql)?(" and DATE_FORMAT(r.replaceDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):" and DATE_FORMAT(r.replaceDate,'%Y-%m')&lt;DATE_FORMAT(now(),'%Y-%m')"}
+GROUP BY r.project_ID) tab2 ON tab2.project_ID = project.project_ID
+
+
+LEFT JOIN pro_applydetail applyDetail ON applyDetail.applyDetail_ID = project.applyDetail_ID
+WHERE 1=1
+AND (IFNULL(project.loadSum,0)-IFNULL(tab.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)) &gt; 0 
+${has(endyearmonthsql)?(" and DATE_FORMAT(project.loadBeginDate,'%Y-%m')&lt;'"+endyearmonthsql+"'"):" and DATE_FORMAT(project.loadBeginDate,'%Y-%m')&lt;DATE_FORMAT(now(),'%Y-%m')"}
+GROUP BY project.project_ID </Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">AreaCodeName</IndexFields><IndexFields2 Len="1">num</IndexFields2><TagName>index_column8</TagName></Item6></Children></NodeSource></jatools>

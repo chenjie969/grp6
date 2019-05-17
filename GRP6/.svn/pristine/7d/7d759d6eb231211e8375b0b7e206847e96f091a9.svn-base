@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.sys.db.map.Sys_departsMapper">
+	<!-- 部门表信息 -->
+  <resultMap id="DepartsResultMap" type="com.zjm.sys.db.model.Sys_departs">
+    <result column="depart_uid" property="depart_uid" />
+    <result column="pdepart_id"  property="pdepart_id" />
+    <result column="depart_name" property="depart_name" />
+    <result column="url" property="url" />
+    <result column="order_id"  property="order_id" />
+    <result column="leve1_user_id"  property="leve1_user_id" />
+    <result column="leve1_user_name"  property="leve1_user_name" />
+    <result column="leve2_user_id"  property="leve2_user_id" />
+    <result column="leve3_user_id"  property="leve3_user_id" />
+    <result column="createdatetime"  property="createdatetime" />
+    <result column="create_user"  property="create_user" />
+    <result column="upatedatetime" property="upatedatetime" />
+    <result column="update_user" property="update_user" />
+    <result column="depart_fullcode"  property="depart_fullcode" />
+    <result column="isRoot"  property="isRoot" />
+    
+    
+    
+    <result column="user_name"  property="user_name" /><!--sys_user表 -->
+    <result column="user_uid"  property="user_uid" /><!--sys_user表 -->
+    
+    
+  </resultMap>
+  <!-- 查询所有的部门 -->
+	<select id="selectAllDepartsList" resultMap="DepartsResultMap" parameterType="java.lang.String">
+		<![CDATA[
+		SELECT 
+			depart_uid,
+			unit_uid,
+			pdepart_id,
+			depart_name,
+			url,
+			order_id,
+			leve1_user_id,
+			leve1_user_name,
+			leve2_user_id,
+			leve3_user_id,
+			createdatetime,
+			create_user,
+			upatedatetime,
+			update_user,
+			depart_fullcode,
+			isRoot 
+		FROM 
+			sys_departs where 1=1 ${value}  ORDER BY order_id
+		]]>
+	</select>
+	<!-- 插入一个部门信息 -->
+	<insert id="insertOneDepartsInfo"	parameterType="com.zjm.sys.db.model.Sys_departs">
+		<![CDATA[
+		INSERT INTO 
+		sys_departs (
+		    depart_uid,
+			unit_uid,
+			pdepart_id,
+			depart_name,
+			url,
+			order_id,
+			leve1_user_id,
+			leve1_user_name,
+			leve2_user_id,
+			leve3_user_id,
+			createdatetime,
+			create_user,
+			upatedatetime,
+			update_user,
+			depart_fullcode,
+			isRoot,
+			depart_type 
+		)
+		VALUES
+		(
+		    
+			#{depart_uid},
+			#{unit_uid},
+			#{pdepart_id},
+			#{depart_name},
+			#{url},
+			#{order_id},
+			#{leve1_user_id},
+			#{leve1_user_name},
+			#{leve2_user_id},
+			#{leve3_user_id},
+			NOW(),
+			#{create_user},
+			NOW(),
+			#{update_user},
+			#{depart_fullcode},
+			#{isRoot},
+			#{depart_type} 
+		)
+		]]>
+	</insert>
+	<!-- 查询一个部门信息 -->
+	<select id="selectOneDepartsInfo" parameterType="com.zjm.sys.db.model.Sys_departs" resultMap="DepartsResultMap">
+		<![CDATA[
+		SELECT 
+			depart_uid,
+			unit_uid,
+			pdepart_id,
+			depart_name,
+			url,
+			order_id,
+			leve1_user_id,
+			leve1_user_name,
+			leve2_user_id,
+			leve3_user_id,
+			createdatetime,
+			create_user,
+			upatedatetime,
+			update_user,
+			depart_fullcode,
+			isRoot,
+			depart_type    
+		FROM 
+			sys_departs where depart_uid=#{depart_uid}]]>
+	</select>
+	<!-- 更新一个部门信息 -->	
+	<update id="updateOneDepartsInfo" parameterType="com.zjm.sys.db.model.Sys_departs">
+		<![CDATA[
+		UPDATE 
+		  sys_departs
+		SET
+		  depart_name = #{depart_name},
+		  url = #{url},
+		  leve1_user_id = #{leve1_user_id},
+		  leve1_user_name = #{leve1_user_name},
+		  leve2_user_id = #{leve2_user_id},
+		  leve3_user_id = #{leve3_user_id},
+		  upatedatetime = NOW(),
+		  update_user = #{update_user},
+		  depart_fullcode = #{depart_fullcode},
+		  isRoot = #{isRoot},
+		  depart_type = #{depart_type} 
+		WHERE depart_uid = #{depart_uid}
+		  ]]>
+	</update>
+	<!-- 删除一个部门信息 -->
+	<delete id="deleteOneDepartsInfo" parameterType="com.zjm.sys.db.model.Sys_departs">
+		<![CDATA[DELETE FROM sys_departs WHERE depart_uid = #{depart_uid} ]]>
+	</delete>
+	<!-- 判断是否存在-->
+	<select id="selectDepartsIsExist" parameterType="java.lang.String" resultType="java.lang.Integer">
+		<![CDATA[SELECT count(depart_uid) FROM sys_departs where 1=1 ${value} ]]>
+	</select>
+	<!--  查询同级节点下共有多少部门 -->
+	<select id="selectDepartsOrderId" parameterType="com.zjm.sys.db.model.Sys_departs" resultType="java.lang.Integer">
+		<![CDATA[SELECT count(pdepart_id) FROM sys_departs where pdepart_id=#{pdepart_id}]]>
+	</select>
+	
+	
+	
+	<!-- 返回部门下的用户列表 -->
+	<select id="returnDepartOfUser" resultMap="DepartsResultMap" parameterType="com.zjm.sys.db.model.Sys_departs">
+		SELECT    A.depart_uid,
+		          A.user_uid,
+				  C.user_name,
+				  D.depart_name
+		FROM sys_dep_user A 
+				LEFT JOIN sys_users  C  ON  C.user_uid  = A.user_uid
+				LEFT JOIN sys_departs D ON D.depart_uid = A.depart_uid
+		    where  
+		       C.isEable = false
+		        AND A.depart_uid =#{depart_uid} 
+		        AND A.unit_uid = #{unit_uid} 
+	</select>
+	<!-- WHERE C.isactive = true
+				AND A.depart_uid =#{depart_uid} 
+				AND A.unit_uid = #{unit_uid}  -->
+	
+	
+	
+	<!-- 查询一个部门信息 -->
+	<select id="selectPDepartsByPdepartID" parameterType="java.lang.String" resultType="com.zjm.sys.db.model.Sys_departs">
+		<![CDATA[
+		SELECT 
+			depart_uid,
+			unit_uid,
+			pdepart_id,
+			depart_name,
+			url,
+			order_id,
+			leve1_user_id,
+			leve1_user_name,
+			leve2_user_id,
+			leve3_user_id,
+			createdatetime,
+			create_user,
+			upatedatetime,
+			update_user,
+			depart_fullcode,
+			isRoot  
+		FROM 
+			sys_departs where depart_uid=#{pdepart_id}]]>
+	</select>
+	
+	<!-- 获取当前机构下的部门根节点 -->
+	<select id="selectRootDepartByUnits" parameterType="com.zjm.sys.db.model.Sys_departs"  resultMap="DepartsResultMap">
+		SELECT 
+			depart_uid,
+			unit_uid,
+			pdepart_id,
+			depart_name,
+			url,
+			order_id,
+			leve1_user_id,
+			leve1_user_name,
+			leve2_user_id,
+			leve3_user_id,
+			createdatetime,
+			create_user,
+			upatedatetime,
+			update_user,
+			depart_fullcode,
+			isRoot  
+		FROM 
+			sys_departs
+		where unit_uid=#{unit_uid} 
+		<if test="pdepart_id != null">
+			and pdepart_id =#{pdepart_id}
+		</if>
+	
+	</select>
+	<!-- 根据机构删除机构下的部门信息 -->
+	<delete id="deleteDepartByUnits"  parameterType="string">
+		DELETE FROM sys_departs WHERE unit_uid=#{unit_uid}
+	</delete>
+	
+</mapper>

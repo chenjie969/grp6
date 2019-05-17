@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_arcMoveMapper">
+	<!--档案信息表 -->
+	 <resultMap id="ArcMoveMap" type="com.zjm.pro.db.model.Pro_arcMove" >
+		<result column="arcMove_ID" property="arcMove_ID"/>
+		<result column="arcMoveRec_ID" property="arcMoveRec_ID"/>
+		<result column="apply_ID" property="apply_ID"/>
+		<result column="arcTypeID" property="arcTypeID"/>
+		<result column="arcTypeName" property="arcTypeName"/>
+		<result column="fileTitleID" property="fileTitleID"/>
+		<result column="fileTitleName" property="fileTitleName"/>
+		<result column="pageCount" property="pageCount"/>
+		<result column="pageNumber" property="pageNumber"/>
+		<result column="pageNumberEnd" property="pageNumberEnd"/>
+		<result column="isOriginal" property="isOriginal"/>
+		<result column="isAll" property="isAll"/>
+		<result column="remark" property="remark"/>
+		<result column="isMove" property="isMove"/>
+		<result column="status" property="status"/>
+		<result column="acceptStatus" property="acceptStatus"/>
+		<result column="acceptDate" property="acceptDate"/>
+		<result column="acceptUserName" property="acceptUserName"/>
+		<result column="unit_uid" property="unit_uid"/>
+		<result column="updateUserName" property="updateUserName"/>
+		<result column="updateDateTime" property="updateDateTime"/>
+		
+ 			
+  </resultMap>
+	
+<!-- 新增 档案信息表 -->
+	<insert id="insertOneArcMoveInfo"	parameterType="com.zjm.pro.db.model.Pro_arcMove">
+		<![CDATA[
+		INSERT INTO pro_arcMove (
+		        arcMove_ID,
+				arcMoveRec_ID,
+				apply_ID,
+				arcTypeID,
+				arcTypeName,
+				fileTitleID,
+				fileTitleName,
+				pageCount,
+				pageNumber,
+				pageNumberEnd,
+				isOriginal,
+				isAll,
+				remark,
+				isMove,
+				status,
+				acceptStatus,
+				acceptDate,
+				acceptUserName,
+				unit_uid,
+				updateUserName,
+				updateDateTime
+
+		       
+		)
+		VALUES
+		(
+			#{arcMove_ID},
+			#{arcMoveRec_ID},
+			#{apply_ID},
+			#{arcTypeID},
+			#{arcTypeName},
+			#{fileTitleID},
+			#{fileTitleName},
+			#{pageCount},
+			#{pageNumber},
+			#{pageNumberEnd},
+			#{isOriginal},
+			#{isAll},
+			#{remark},
+			#{isMove},
+			#{status},
+			#{acceptStatus},
+			#{acceptDate},
+			#{acceptUserName},
+			#{unit_uid},
+			#{updateUserName},
+			NOW()
+		
+		) ;
+		]]>
+	</insert>
+	<!-- 根据查询条件查询一个档案信息表-->
+	<select id="selectOneArcMoveByWhereSql" parameterType="java.lang.String"  resultMap="ArcMoveMap">
+	<![CDATA[
+		SELECT 
+		        arcMove_ID,
+				arcMoveRec_ID,
+				apply_ID,
+				arcTypeID,
+				arcTypeName,
+				fileTitleID,
+				fileTitleName,
+				pageCount,
+				pageNumber,
+				pageNumberEnd,
+				isOriginal,
+				isAll,
+				remark,
+				isMove,
+				status,
+				acceptStatus,
+				acceptDate,
+				acceptUserName,
+				unit_uid,
+				updateUserName,
+				updateDateTime
+
+	    FROM 
+	         pro_arcMove 
+		WHERE 1=1 ${value}
+		limit 1 
+		]]> 				 
+	</select>
+	
+	<!-- 根据查询条件查询档案信息表List-->
+	<select id="selectArcMoveListByWhereSql" parameterType="java.lang.String"  resultMap="ArcMoveMap">
+	<![CDATA[
+		SELECT 
+		        arcMove_ID,
+				arcMoveRec_ID,
+				apply_ID,
+				arcTypeID,
+				arcTypeName,
+				fileTitleID,
+				fileTitleName,
+				pageCount,
+				pageNumber,
+				pageNumberEnd,
+				isOriginal,
+				isAll,
+				remark,
+				isMove,
+				status,
+				acceptStatus,
+				acceptDate,
+				acceptUserName,
+				unit_uid,
+				updateUserName,
+				updateDateTime
+	    FROM 
+	         pro_arcMove 
+		WHERE 1=1 ${value}
+		]]> 				 
+	</select>
+	
+	
+	
+	<!--根据wheresql删除档案信息 -->
+	<delete id="deleteOneArcMoveByWhereSql"  parameterType="java.lang.String" >
+		<![CDATA[DELETE FROM pro_arcMove WHERE 1=1 ${value} ]]>
+	</delete>
+	
+	<!-- 查询 档案信息  列表 -->
+	<select id="selectArcMovePageTables" resultMap="ArcMoveMap" parameterType="com.zjm.common.db.model.PageTable">
+		<![CDATA[
+		SELECT
+				arcMove_ID,
+				arcMoveRec_ID,
+				apply_ID,
+				arcTypeID,
+				arcTypeName,
+				fileTitleID,
+				fileTitleName,
+				pageCount,
+				pageNumber,
+				pageNumberEnd,
+				isOriginal,
+				isAll,
+				remark,
+				isMove,
+				status,
+				acceptStatus,
+				acceptDate,
+				acceptUserName,
+				unit_uid,
+				updateUserName,
+				updateDateTime
+		   FROM
+		   pro_arcMove  
+		WHERE 1=1 ${wheresql} 
+		ORDER BY ${sortName} ${sortOrder}
+		limit #{pageNumber},#{pageSize}
+		]]>
+	</select>
+		<!-- 查询  档案信息   列表 总记录数-->
+	<select id="selectArcMovePageTables_Count" parameterType="com.zjm.common.db.model.PageTable"  resultType="java.lang.Long">
+		<![CDATA[
+		SELECT count(arcMove_ID) FROM pro_arcMove
+		WHERE 1=1 ${wheresql} 		
+		]]>		 
+	</select>
+	<!-- 更新一个 档案信息  -->	
+	<update id="updateOneArcMoveInfo" parameterType="com.zjm.pro.db.model.Pro_arcMove">
+		UPDATE 
+		     pro_arcMove
+		<set >
+	      <if test="apply_ID != null" >apply_ID= #{apply_ID},</if>
+	      <if test="pageCount != null" >pageCount= #{pageCount},</if>
+	      <if test="pageNumber != null" >pageNumber= #{pageNumber},</if>
+	      <if test="pageNumberEnd != null" >pageNumberEnd= #{pageNumberEnd},</if>
+	      <if test="isOriginal != null" >isOriginal= #{isOriginal},</if>
+	      <if test="isAll != null" >isAll= #{isAll},</if>
+	      <if test="remark != null" >remark= #{remark},</if>
+	      <if test="isMove != null" >isMove= #{isMove},</if>
+	      <if test="status != null" >status= #{status},</if>
+	      <if test="acceptStatus != null" >acceptStatus= #{acceptStatus},</if>
+		  <if test="acceptDate != null" >acceptDate= #{acceptDate},</if>
+		  <if test="acceptUserName != null" >acceptUserName= #{acceptUserName},</if>
+	      <if test="updateUserName != null" >updateUserName= #{updateUserName},</if>
+               updateDateTime = NOW()
+		 </set>
+			 
+		WHERE arcMove_ID=#{arcMove_ID} 
+	</update>
+</mapper>  

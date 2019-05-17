@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_projectoverdueMapper">
+	<!-- 代偿明细表 -->
+	 <resultMap id="OverdueMap" type="com.zjm.pro.db.model.Pro_projectoverdue" >
+	 
+        <result column="overdue_ID" property="overdue_ID"/>
+        <result column="project_ID" property="project_ID"/>
+        <result column="capital" property="capital"/>
+        <result column="interest" property="interest"/>
+        <result column="defautInterest" property="defautInterest"/>
+        <result column="compoundInterest" property="compoundInterest"/>
+        <result column="interestSum" property="interestSum"/>
+        <result column="startTime" property="startTime"/>
+        <result column="endTime" property="endTime"/>
+        <result column="createTime" property="createTime"/>
+	
+ 	</resultMap>
+ 	
+ 	
+ 	<insert id="insertOneOverdueInfo"	parameterType="com.zjm.pro.db.model.Pro_projectoverdue">
+		<![CDATA[
+		INSERT INTO pro_projectoverdue (
+					overdue_ID,
+					project_ID,
+					capital,
+					interest,
+					defautInterest,
+					compoundInterest,
+					interestSum,
+					startTime,
+					endTime,
+					createTime
+		       )
+		VALUES
+		(
+				#{overdue_ID},
+				#{project_ID},
+				#{capital},
+				#{interest},
+				#{defautInterest},
+				#{compoundInterest},
+				#{interestSum},
+				#{startTime},
+				#{endTime},
+				NOW()
+		) ;
+		]]>
+	</insert>
+	
+	<select id="selectOneOverdueInfo" parameterType="java.lang.String" resultMap="OverdueMap">
+		<![CDATA[
+		SELECT 
+			overdue_ID,
+			project_ID,
+			capital,
+			interest,
+			defautInterest,
+			compoundInterest,
+			interestSum,
+			startTime,
+			endTime,
+			createTime
+		FROM 
+		     pro_projectoverdue
+		WHERE 1=1 
+		${value}
+		ORDER BY endTime DESC LIMIT 1
+		]]>
+	</select>
+</mapper>

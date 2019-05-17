@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+       "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <mapper namespace="com.zjm.oa.db.map.Hr_socialInsuranceMapper">
+     <resultMap type="com.zjm.oa.db.model.Hr_socialInsurance" id="insuranceResultMap">
+          <result property="socialInsuranceID" column="socialInsuranceID"/>
+          <result property="staffcase_Id" column="staffcase_Id"/>
+          <result property="socialInsuranceDate" column="socialInsuranceDate"/>
+          <result property="socialInsurancePension" column="socialInsurancePension"/>
+          <result property="socialInsuranceInjury" column="socialInsuranceInjury"/>
+          <result property="socialInsuranceMedical" column="socialInsuranceMedical"/>
+          <result property="socialInsuranceFertility" column="socialInsuranceFertility"/>
+          <result property="socialInsuranceUnemploy" column="socialInsuranceUnemploy"/>
+          <result property="socialInsuranceCum" column="socialInsuranceCum"/>
+          <result property="socialInsuranceNotes" column="socialInsuranceNotes"/>   
+     </resultMap>
+     <!-- 插入一份社会保险 -->
+     <insert id="insertOneSocialInsurance" parameterType="com.zjm.oa.db.model.Hr_socialInsurance">
+     <![CDATA[
+       INSERT INTO hr_socialInsurance (
+			socialInsuranceID,
+			staffCase_Id,
+			socialInsuranceDate,
+			socialInsurancePension,
+			socialInsuranceInjury,
+			socialInsuranceMedical,
+			socialInsuranceFertility,
+			socialInsuranceUnemploy,
+			socialInsuranceCum,
+			socialInsuranceNotes)
+		VALUES (
+			#{socialInsuranceID},
+			#{staffcase_Id},
+			#{socialInsuranceDate},
+			#{socialInsurancePension},
+			#{socialInsuranceInjury},
+			#{socialInsuranceMedical},
+			#{socialInsuranceFertility},
+			#{socialInsuranceUnemploy},
+			#{socialInsuranceCum},
+			#{socialInsuranceNotes}
+		)
+     ]]>
+     </insert>
+    <!-- 更改一条社会保险--> 
+  
+   <update id="updateOneSocialInsurance" parameterType="com.zjm.oa.db.model.Hr_socialInsurance">
+   <![CDATA[
+      UPDATE 
+          hr_socialInsurance
+      SET
+        socialInsuranceDate=#{socialInsuranceDate},
+        socialInsurancePension=#{socialInsurancePension},
+        socialInsuranceInjury=#{socialInsuranceInjury},
+        socialInsuranceMedical=#{socialInsuranceMedical},
+        socialInsuranceFertility=#{socialInsuranceFertility},
+        socialInsuranceUnemploy=#{socialInsuranceUnemploy},
+        socialInsuranceCum=#{socialInsuranceCum},
+        socialInsuranceNotes=#{socialInsuranceNotes}
+       WHERE socialInsuranceID = #{socialInsuranceID}
+   
+   ]]>
+   </update>
+    <!-- 查询社会保险表 -->
+   <select id="selectSocialInsuranceTable" resultMap="insuranceResultMap" parameterType="com.zjm.common.db.model.PageTable">
+   <![CDATA[
+ 	SELECT 
+		socialInsuranceID,
+		socialInsuranceDate,
+		socialInsurancePension,
+		socialInsuranceInjury,
+		socialInsuranceMedical,
+		socialInsuranceFertility,
+		socialInsuranceUnemploy,
+		socialInsuranceCum,
+		socialInsuranceNotes
+   	 FROM hr_socialInsurance
+   	 WHERE 
+		staffCase_Id = #{queryCondition.staffcase_Id}
+   ]]>
+   </select>
+   <!-- 查询一条社会保险 -->
+      <select id="selectOneSocialInsurance" resultMap="insuranceResultMap" parameterType="java.lang.String">
+      <![CDATA[
+ 	SELECT 
+		socialInsuranceID,
+		socialInsuranceDate,
+		socialInsurancePension,
+		socialInsuranceInjury,
+		socialInsuranceMedical,
+		socialInsuranceFertility,
+		socialInsuranceUnemploy,
+		socialInsuranceCum,
+		socialInsuranceNotes
+   	 FROM hr_socialInsurance
+   	 WHERE 
+		socialInsuranceID = #{socialInsuranceID}
+   ]]>  
+   </select>
+    
+    
+</mapper>     

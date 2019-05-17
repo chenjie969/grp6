@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">  
+    
+   	<!-- spring的数据库源配置文件导入,又引入jdbc.properties为设置数据库开始 -->
+	<import resource="classpath:db/db-config.xml" />		
+    <bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:properties/jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	
+	
+	<!-- OSWORKFLOW配置开始 -->
+    <bean id="workflowStore" class="com.opensymphony.workflow.spi.jdbc.MySQLWorkflowStore" init-method="init">
+      <property name="dataSource" ref="dataSource" />
+      <property name="jdbcTemplateProperties">
+        <props>        
+           <prop key="entry.sequence">
+              select max(id)+1 from OS_WFENTRY
+           </prop>
+           <prop key="entry.table">OS_WFENTRY</prop>
+           <prop key="entry.id">ID</prop>
+           <prop key="entry.name">NAME</prop>
+           <prop key="entry.state">STATE</prop>
+           <prop key="step.sequence">       
+              SELECT max(ID)+1 FROM OS_STEPIDS
+           </prop>
+           <prop key="step.sequence.increment">
+             INSERT INTO OS_STEPIDS(ID) values (null)
+           </prop>
+           <prop key="step.sequence.retrieve">
+             SELECT max(ID) FROM OS_STEPIDS
+           </prop>
+           <prop key="entry.sequence.increment">
+              INSERT INTO OS_ENTRYIDS(ID) values (null)
+           </prop>
+           <prop key="entry.sequence.retrieve">
+              SELECT max(ID) FROM OS_ENTRYIDS
+           </prop>
+           <prop key="history.table">OS_HISTORYSTEP</prop>
+           <prop key="current.table">OS_CURRENTSTEP</prop>           
+           <prop key="historyPrev.table">OS_HISTORYSTEP_PREV</prop>
+           <prop key="currentPrev.table">OS_CURRENTSTEP_PREV</prop>
+           <prop key="step.id">ID</prop>
+           <prop key="step.entryId">ENTRY_ID</prop>
+           <prop key="step.stepId">STEP_ID</prop>
+           <prop key="step.actionId">ACTION_ID</prop>
+           <prop key="step.owner">OWNER</prop>
+           <prop key="step.caller">CALLER</prop>
+           <prop key="step.startDate">START_DATE</prop>
+           <prop key="step.finishDate">FINISH_DATE</prop>
+           <prop key="step.dueDate">DUE_DATE</prop>
+           <prop key="step.status">STATUS</prop>
+           <prop key="step.previousId">PREVIOUS_ID</prop>
+           <!-- zhongzk add -->
+           <prop key="step.stepName">stepName</prop>
+           
+       </props>
+    </property>
+  </bean>
+  <bean id="workflowFactory" 
+
+        class="com.opensymphony.workflow.loader.SpringWorkflowFactory" 
+
+        init-method="init"> 
+
+    <property name="resource"><value>workflows.xml</value></property> 
+
+    <property name="reload"><value>true</value></property> 
+
+  </bean> 
+      
+  <bean id="workflowConfiguration" class="com.opensymphony.workflow.config.SpringConfiguration">
+
+    <property name="store" ref="workflowStore" />
+
+    <property name="factory" ref="workflowFactory" />
+
+  </bean>
+
+  <bean id="workflowTypeResolver" class="com.opensymphony.workflow.util.SpringTypeResolver"/>
+
+  <bean id="workflow" class="com.opensymphony.workflow.basic.BasicWorkflow" scope="prototype" destroy-method="destroyBean">
+	
+     <constructor-arg value="bjsurong" />
+
+     <property name="configuration" ref="workflowConfiguration" />
+
+     <property name="resolver" ref="workflowTypeResolver" />
+
+  </bean>
+  
+  <!-- OSWORKFLOW配置结束 -->
+	
+	
+	
+	<!-- 自动扫描业务包 -->    
+    <context:component-scan base-package="com.zjm.*" /> 
+     
+	<import resource="spring-shiro.xml"/>
+	<import resource="applicationActiviti.xml"/>
+      
+	<!-- <import resource="springmvc-servlet.xml"/> -->
+	
+	
+	
+	
+	
+	
+	
+	
+      
+    
+	
+</beans>

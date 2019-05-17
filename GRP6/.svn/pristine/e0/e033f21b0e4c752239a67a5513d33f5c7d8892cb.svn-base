@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_meetingSummaryMapper">
+	 <resultMap id="ProMeetSummaryMap" type="com.zjm.pro.db.model.Pro_meetingSummary" >
+	    <id column="meetingSummary_ID" property="meetingSummary_ID"  />
+		<result column="apply_ID" property="apply_ID"/>
+		<result column="meetingCode" property="meetingCode"/>
+		<result column="signUserName" property="signUserName"/>
+		<result column="meetingDateTime" property="meetingDateTime"/>
+		<result column="compereUserName" property="compereUserName"/>
+		<result column="userNameList" property="userNameList"/>
+		<result column="absenceUserNameList" property="absenceUserNameList"/>
+		<result column="attendUserNameList" property="attendUserNameList"/>
+		<result column="recordUserName" property="recordUserName"/>
+		<result column="mainContent" property="mainContent"/>
+		<result column="unit_uid" property="unit_uid"/>	
+		<result column="updateUserName" property="updateUserName"/>
+		<result column="updateDateTime" property="updateDateTime"/>
+  </resultMap>	
+<!-- 新增 -->
+	<insert id="insertOneMeetSummary"	parameterType="com.zjm.pro.db.model.Pro_meetingSummary">
+		<![CDATA[
+		INSERT INTO pro_meetingSummary (
+		        meetingSummary_ID,		
+		        apply_ID,	
+		        meetingCode,
+		        signUserName,
+		        meetingDateTime,
+				compereUserName,				
+				userNameList,				
+				absenceUserNameList,
+				attendUserNameList,
+				recordUserName,
+				mainContent,
+				unit_uid,		
+				updateUserName,			
+				updateDateTime
+		)
+		VALUES
+		(
+				#{meetingSummary_ID},
+				#{apply_ID},
+				#{meetingCode},
+				#{signUserName},
+				#{meetingDateTime},				
+				#{compereUserName},				
+				#{userNameList},				
+				#{absenceUserNameList},
+				#{attendUserNameList},
+				#{recordUserName},
+				#{mainContent},
+				#{unit_uid},			
+				#{updateUserName},		
+				NOW()			
+		) ;
+		]]>
+	</insert>		
+	
+	
+	<!-- 查询一个-->
+	<select id="selectOneMeetSummary" parameterType="java.lang.String"  resultMap="ProMeetSummaryMap">
+	<![CDATA[
+			select 
+			   meetingSummary_ID,		
+		        apply_ID,	
+		        meetingCode,
+		        signUserName,
+		        meetingDateTime,
+				compereUserName,				
+				userNameList,				
+				absenceUserNameList,
+				attendUserNameList,
+				recordUserName,
+				mainContent,
+				unit_uid,		
+				updateUserName,			
+				updateDateTime
+				from pro_meetingSummary
+		WHERE 1=1 ${value}
+		]]> 				 
+	</select>
+
+	<!-- 更新 -->	
+	<update id="updateOneMeetSummary" parameterType="com.zjm.pro.db.model.Pro_meetingSummary">
+		<![CDATA[
+		UPDATE 
+		  pro_meetingSummary
+		SET
+		apply_ID=#{apply_ID},
+		meetingCode=#{meetingCode},
+		signUserName=#{signUserName},
+		meetingDateTime=#{meetingDateTime},
+		compereUserName=#{compereUserName},
+		userNameList=#{userNameList},
+		absenceUserNameList=#{absenceUserNameList},
+		attendUserNameList=#{attendUserNameList},
+		recordUserName = #{recordUserName},
+		mainContent = #{mainContent},
+		updatedatetime = NOW(),
+		unit_uid=#{unit_uid},
+		updateUserName = #{updateUserName}
+		
+		WHERE  meetingSummary_ID=#{meetingSummary_ID}  
+		  ]]>
+	</update>
+	
+</mapper>  

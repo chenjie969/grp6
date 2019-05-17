@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.crm.db.map.Crm_reportSyMapper">
+
+	<!-- 损益表信息 -->
+	<resultMap type="com.zjm.crm.db.model.Crm_reportSy" id="reportSyResultMap">
+		<result property="reportSy_ID" column="reportSy_ID" />
+		<result property="client_ID" column="client_ID" />
+		<result property="reportTypeUuid" column="reportTypeUuid" />
+		<result property="yearMonth" column="yearMonth" />
+		<result property="reportTypeName" column="reportTypeName" />
+		<result property="mainIncome" column="mainIncome" />
+		<result property="mainCost" column="mainCost" />
+		<result property="mainBusiTax" column="mainBusiTax" />
+		<result property="otherBusiProfit" column="otherBusiProfit" />
+		<result property="busiFee" column="busiFee" />
+		<result property="managementFee" column="managementFee" />
+		<result property="financialFee" column="financialFee" />
+		<result property="exchangeLoss" column="exchangeLoss" />
+		<result property="operatingProfit" column="operatingProfit" />
+		<result property="incomeInvestment" column="incomeInvestment" />
+		<result property="subsidizeRevenue" column="subsidizeRevenue" />
+		<result property="operatingIncome" column="operatingIncome" />
+		<result property="busiExpenditure" column="busiExpenditure" />
+		<result property="annualProfitLoss" column="annualProfitLoss" />
+		<result property="profitSum" column="profitSum" />
+		<result property="incomeTax" column="incomeTax" />
+		<result property="mainOperatingProfit" column="mainOperatingProfit" />
+		<result property="netProfit" column="netProfit" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="unit_uidName" column="unit_uidName" />
+		<result property="updateUserName" column="updateUserName" />
+		<result property="updateDateTime" column="updateDateTime" />
+	</resultMap>
+	
+	
+	<!-- 查询  损益列表 -->
+	<select id="selectReportSyPageTables" resultMap="reportSyResultMap" parameterType="com.zjm.common.db.model.PageTable">
+		<![CDATA[
+		SELECT
+				reportSy_ID,
+				client_ID,
+				reportTypeUuid,
+				yearMonth,
+				reportTypeName,
+				mainIncome,
+				mainCost,
+				mainBusiTax,
+				otherBusiProfit,
+				busiFee,
+				managementFee,
+				financialFee,
+				exchangeLoss,
+				operatingProfit,
+				incomeInvestment,
+				subsidizeRevenue,
+				operatingIncome,
+				busiExpenditure,
+				annualProfitLoss,
+				profitSum,
+				incomeTax,
+				mainOperatingProfit,
+				netProfit,
+				unit_uid,
+				unit_uidName,
+				updateUserName,
+				updateDateTime        
+		   FROM
+		   crm_reportSy		   
+		WHERE 1=1 ${wheresql} limit #{pageNumber},#{pageSize}	
+		]]>
+	</select>
+	
+	<!-- 查询 损益列表 总记录数-->
+	<select id="selectReportSyPageTables_Count" parameterType="com.zjm.common.db.model.PageTable"  resultType="java.lang.Long">
+		<![CDATA[
+		SELECT count(reportSy_ID) FROM crm_reportSy
+		WHERE 1=1 ${wheresql} 		
+		]]>		 
+	</select>
+	
+	
+	<!-- 插入一个损益信息 -->
+	<insert id="insertOneReportSyInfo"	parameterType="com.zjm.crm.db.model.Crm_reportSy">
+		<![CDATA[
+		INSERT INTO crm_reportSy (
+		        reportSy_ID,
+				client_ID,
+				reportTypeUuid,
+				yearMonth,
+				reportTypeName,
+				mainIncome,
+				mainCost,
+				mainBusiTax,
+				otherBusiProfit,
+				busiFee,
+				managementFee,
+				financialFee,
+				exchangeLoss,
+				operatingProfit,
+				incomeInvestment,
+				subsidizeRevenue,
+				operatingIncome,
+				busiExpenditure,
+				annualProfitLoss,
+				profitSum,
+				incomeTax,
+				mainOperatingProfit,
+				netProfit,
+				unit_uid,
+				unit_uidName,
+				updateUserName,
+				updateDateTime   
+		)
+		VALUES
+		(
+			#{reportSy_ID},
+			#{client_ID},
+			#{reportTypeUuid},
+			#{yearMonth},
+			#{reportTypeName},
+			#{mainIncome},
+			#{mainCost},
+			#{mainBusiTax},
+			#{otherBusiProfit},
+			#{busiFee},
+			#{managementFee},
+			#{financialFee},
+			#{exchangeLoss},
+			#{operatingProfit},
+			#{incomeInvestment},
+			#{subsidizeRevenue},
+			#{operatingIncome},
+			#{busiExpenditure},
+			#{annualProfitLoss},
+			#{profitSum},
+			#{incomeTax},
+			#{mainOperatingProfit},
+			#{netProfit},
+			#{unit_uid},
+			#{unit_uidName},
+			#{updateUserName},
+			NOW()		
+		) ;
+		]]>
+	</insert>
+	<!-- 根据查询条件查询一个损益表信息-->
+	<select id="selectOneReportSyWhereSql" parameterType="java.lang.String"  resultMap="reportSyResultMap">
+	<![CDATA[
+		SELECT 
+		        reportSy_ID,
+		        client_ID,
+				reportTypeUuid,
+				yearMonth,
+				reportTypeName,
+				mainIncome,
+				mainCost,
+				mainBusiTax,
+				otherBusiProfit,
+				busiFee,
+				managementFee,
+				financialFee,
+				exchangeLoss,
+				operatingProfit,
+				incomeInvestment,
+				subsidizeRevenue,
+				operatingIncome,
+				busiExpenditure,
+				annualProfitLoss,
+				profitSum,
+				incomeTax,
+				mainOperatingProfit,
+				netProfit,
+				unit_uid,
+				unit_uidName,
+				updateUserName,
+				updateDateTime   
+		       
+	    FROM 
+	         crm_reportSy 
+		WHERE 1=1 ${value}
+		]]> 				 
+	</select>
+	
+	<!-- 更新一个损益信息 -->	
+	<update id="updateOneReportSyInfo" parameterType="com.zjm.crm.db.model.Crm_reportSy">
+		<![CDATA[
+		UPDATE 
+		     crm_reportSy
+		SET
+		    client_ID = #{client_ID},
+		    reportTypeUuid = #{reportTypeUuid},
+		    yearMonth = #{yearMonth},
+		    reportTypeName = #{reportTypeName},
+			mainIncome = #{mainIncome},
+			mainCost = #{mainCost},
+			mainBusiTax = #{mainBusiTax},
+			otherBusiProfit = #{otherBusiProfit},
+			busiFee = #{busiFee},
+			managementFee = #{managementFee},
+			financialFee = #{financialFee},
+			exchangeLoss = #{exchangeLoss},
+			operatingProfit = #{operatingProfit},
+			incomeInvestment = #{incomeInvestment},
+			subsidizeRevenue = #{subsidizeRevenue},
+			operatingIncome = #{operatingIncome},
+			busiExpenditure = #{busiExpenditure},
+			annualProfitLoss = #{annualProfitLoss},
+			profitSum = #{profitSum},
+			incomeTax = #{incomeTax},
+			mainOperatingProfit = #{mainOperatingProfit},
+			netProfit = #{netProfit},
+			unit_uid = #{unit_uid},
+			unit_uidName = #{unit_uidName},
+			updateUserName = #{updateUserName},
+			updateDateTime = NOW()		 
+		WHERE reportSy_ID=#{reportSy_ID}  and unit_uid=#{unit_uid} 
+		  ]]>
+	</update>
+	
+	<!--根据wheresql删除一个损益表信息 -->
+	<delete id="delectReportSyByWhereSql" parameterType="java.lang.String">
+		<![CDATA[DELETE FROM crm_reportSy WHERE 1=1 ${value} ]]>
+	</delete>
+	<!-- 查询损益表List-->
+	<select id="selectReportSyList" parameterType="java.lang.String"  resultMap="reportSyResultMap">
+	<![CDATA[
+		SELECT 
+		        reportSy_ID,
+		        client_ID,
+				reportTypeUuid,
+				yearMonth,
+				reportTypeName,
+				mainIncome,
+				mainCost,
+				mainBusiTax,
+				otherBusiProfit,
+				busiFee,
+				managementFee,
+				financialFee,
+				exchangeLoss,
+				operatingProfit,
+				incomeInvestment,
+				subsidizeRevenue,
+				operatingIncome,
+				busiExpenditure,
+				annualProfitLoss,
+				profitSum,
+				incomeTax,
+				mainOperatingProfit,
+				netProfit,
+				unit_uid,
+				unit_uidName,
+				updateUserName,
+				updateDateTime   
+		FROM 
+		    crm_reportSy 
+		WHERE 1=1 ${value} 	ORDER BY reportSy_ID
+		]]>
+	</select>
+</mapper>  

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zjm.gworkFlow.db.map.OsGworkflowProjsuggestMapper">
+
+	<resultMap type="com.zjm.gworkFlow.db.model.OsGworkflowProjsuggest" id="OsGworkflowProjsuggestResultMap">
+		<result property="opsuggest_ID" column="opsuggest_ID" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="user_uid" column="user_uid" />
+		<result property="user_name" column="user_name" />
+		<result property="depart_uid" column="depart_uid" />
+		<result property="depart_name" column="depart_name" />
+		<result property="projectID" column="projectID" />
+		<result property="stepID" column="stepID" />
+		<result property="stepName" column="stepName" />
+		<result property="stepStatus" column="stepStatus" />
+		<result property="flowID" column="flowID" />
+		<result property="actionID" column="actionID" />
+		<result property="actionName" column="actionName" />
+		<result property="historyID" column="historyID" />
+		<result property="suggestContent" column="suggestContent" />
+		<result property="suggestResult" column="suggestResult" />
+		<result property="suggestTime" column="suggestTime" />
+		<result property="isCheckMan" column="isCheckMan" />
+	</resultMap>
+
+	<!-- 插入一条 意见记录 -->
+	<insert id="insertOneOsGworkflowProjsuggest" parameterType="com.zjm.gworkFlow.db.model.OsGworkflowProjsuggest">
+		INSERT INTO os_gworkflow_projsuggest (
+		  opsuggest_ID,
+		  unit_uid,
+		  projectID,
+		  user_uid,
+		  user_name,
+		  depart_uid,
+		  depart_name,
+		  suggestContent,
+		  suggestResult,
+		  suggestTime,
+		  flowID,
+		  stepID,
+		  stepName,
+		  isCheckMan,
+		  historyID
+		) 
+		VALUES
+		  (
+		    #{opsuggest_ID},
+		    #{unit_uid},
+		    #{projectID},
+		    #{user_uid},
+		    #{user_name},
+		    #{depart_uid},
+		    #{depart_name},
+		    #{suggestContent},
+		    #{suggestResult},
+		    NOW(),
+		    #{flowID},
+		    #{stepID},
+		    #{stepName},
+		    #{isCheckMan},
+		    #{historyID}
+		  )
+	</insert>
+	
+	<!-- 取得一条意见信息 -->
+	<select id="selectOneOsGworkflowProjsuggest" resultMap="OsGworkflowProjsuggestResultMap" parameterType="com.zjm.gworkFlow.db.model.OsGworkflowProjsuggest">
+  		  SELECT 
+			  A.opsuggest_ID,
+			  A.unit_uid,
+			  A.projectID,
+			  A.user_uid,
+			  A.user_name,
+			  A.depart_uid,
+			  A.depart_name,
+			  
+			  D.stepName,
+			  D.STEP_ID AS stepID,
+			  D.STATUS as stepStatus,
+			  
+			  A.flowID,
+			  A.stepID,
+			  A.stepName,
+			  A.historyID,
+			  A.suggestContent,
+			  A.suggestResult,
+			  A.suggestTime,
+			  A.isCheckMan
+			  
+			FROM
+			  os_gworkflow_projsuggest A 
+			  LEFT JOIN view_steps D 
+			    ON A.stepID = D.STEP_ID 
+			    AND A.flowID = D.ENTRY_ID 
+			    AND D.OWNER = A.user_uid 
+			    AND D.ID = A.historyID
+			WHERE A.unit_uid = #{unit_uid} 
+	  		  AND A.projectID = #{projectID}
+	  		  AND A.stepID = #{stepID}
+	  		  AND A.flowID = #{flowID}
+	  		  AND A.user_uid = #{user_uid}
+	  		  AND A.historyID = #{historyID}
+			ORDER BY A.suggestTime DESC
+	</select>
+	
+	<!-- 查询意见记录是否存在 -->
+	<select id="selectSuggestIsExist" resultType="java.lang.Integer" parameterType="com.zjm.gworkFlow.db.model.OsGworkflowProjsuggest">
+		SELECT 
+		  count(*)
+		FROM
+		  os_gworkflow_projsuggest A
+		  LEFT JOIN os_currentstep B ON A.flowID = B.ENTRY_ID
+		  LEFT JOIN sys_users C ON A.user_uid = C.user_uid
+		WHERE A.unit_uid = #{unit_uid} 
+  		  AND A.projectID = #{projectID}
+  		  AND A.stepID = #{stepID}
+  		  AND A.flowID = #{flowID}
+  		  AND A.user_uid = #{user_uid}
+  		  AND A.historyID = #{historyID}
+	</select>
+	
+	<!-- 更新一条意见  -->
+	<update id="updateOneOsGworkflowProjsuggest" parameterType="com.zjm.gworkFlow.db.model.OsGworkflowProjsuggest">
+		UPDATE 
+		  os_gworkflow_projsuggest 
+		SET
+		  suggestContent = #{suggestContent},
+		  suggestResult = #{suggestResult},
+		  isCheckMan = #{isCheckMan},
+		  suggestTime = now()
+		WHERE unit_uid = #{unit_uid} 
+  		  AND projectID = #{projectID}
+  		  AND stepID = #{stepID}
+  		  AND flowID = #{flowID}
+  		  AND user_uid = #{user_uid}
+  		  AND historyID = #{historyID}
+	</update>
+	
+	
+	
+	<!-- 查询一个流程的所有用户意见 -->
+	<select id="selectAllOsGworkflowProjsuggest" resultMap="OsGworkflowProjsuggestResultMap" parameterType="com.zjm.gworkFlow.db.model.OsGworkflowProjsuggest">
+  		  SELECT 
+			  A.opsuggest_ID,
+			  A.unit_uid,
+			  A.projectID,
+			  A.user_uid,
+			  A.user_name,
+			  A.depart_uid,
+			  A.depart_name,
+			  
+			  D.stepName,
+			  D.STEP_ID AS stepID,
+			  D.STATUS as stepStatus,
+			  
+			  A.flowID,
+			  A.stepID,
+			  A.stepName,
+			  A.historyID,
+			  A.suggestContent,
+			  A.suggestResult,
+			  A.suggestTime,
+			  A.isCheckMan
+			  
+			FROM  os_gworkflow_projsuggest A
+			LEFT JOIN  view_steps D
+			   
+			    ON A.stepID = D.STEP_ID 
+			    AND A.flowID = D.ENTRY_ID 
+			    AND D.OWNER = A.user_uid 
+			    AND D.ID = A.historyID
+			WHERE D.ENTRY_ID = #{flowID}
+			ORDER BY D.ID
+	</select>
+	
+
+</mapper> 

@@ -1,0 +1,323 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ include file="/common_timestamp.jsp" %>
+<%-- <%@ include file="/common_head.jsp" %> --%>
+<script type="text/javascript">
+/**
+ *获取下拉框值;
+ */
+function getSelectText2 (v){
+    var  selectID = v.id;
+    var selectName = selectID.replace(/List/, "Name");
+　    document.getElementById(selectName).value=v.options[v.options.selectedIndex].text;
+};
+
+/**
+ * 动态删除行;
+ */
+function delAdd(v){
+	var rowNum = $("#table2").find("tr").length;	
+	 if(rowNum != 2){
+		var  delID= v.id;
+		var tr = $("#tr"+delID);
+		var tr = document.getElementById("tr"+delID);
+	    tr.parentNode.removeChild(tr);
+		$(this).parent('tr').remove();
+	}
+ };
+</script>
+
+<div class="page-content" style="padding-bottom:100px;">   
+      <div class="page-header">
+			<h4>申请登记信息</h4>
+      </div>
+      <div class="row">
+		<div class="col-xs-12">
+		<form class="form-horizontal" role="form" id="applyEdit_from0">
+		     <input type="hidden" id="" class="pageType" name="" value="0"><!-- 页面标识:0:单笔页面,1:多笔页面,2:集团关联页面 -->
+		     <input type="hidden" id="apply_ID0" class="" name="apply_ID" value="${applyDetail.apply_ID}">
+		     <input type="hidden" id="projectType0" class="" name="projectType" value="单笔"><!--单笔/多笔/关联/综合授信  -->
+			 <input type="hidden" id="rowNum0" class="" name="rowNum" value="${fn:length(applyDetailList)}" ><!--计算添加按钮点击次数即:行数 -->	
+             <input type="hidden" id="busiDetails0" class="" name="busiDetails" ><!-- 获取申请明细详情冗余字段 -->
+		     <input type="hidden" id="projectStageID0" name="projectStageID" value="${applyDetail.projectStageID}">	 <!--项目阶段id -->		 			
+		     <input type="hidden" id="projectStageName0" name="projectStageName" value="${applyDetail.projectStageName}">	 <!--项目阶段名称 -->		 			
+			 <input type="hidden" id="departName0" name="departName" value="${applyDetail.departName}"><!--经办机构名称 -->		 			
+   		     <input type="hidden" id="departID0" name="departID" value="${applyDetail.departID}"><!--经办机构id -->				
+             <input type="hidden" id="createManName0" name="createManName" value="${applyDetail.createManName}"><!--经办人 -->		 			
+    		 <input type="hidden" id="createManID0" name="createManID" value="${applyDetail.createManID}"><!--经办人id -->	
+      		 <input type="hidden" id="amanName0" name="amanName" value="${applyDetail.amanName}">	 <!--A角 -->		 			
+		     <input type="hidden" id="amanID0" name="amanID" value="${applyDetail.amanID}">	 <!--A角id -->	
+		     <input type="hidden" id="bmanName0" name="bmanName" value="${applyDetail.bmanName}">	 <!--B角 -->		 			
+		     <input type="hidden" id="bmanID0" name="bmanID" value="${applyDetail.bmanID}">	 <!--B角id -->
+      		 <input type="hidden" id="clientTypeID0" name="clientTypeID" value="${applyDetail.clientTypeID}"><!--客户类型 -->	
+			 <input type="hidden" id="clientGUID0" name="clientGUID" value="${applyDetail.clientGUID}"/><!-- 客户唯一标示 -->
+         <div class="space-4"></div>
+         <div class="form-group">
+			<label class="col-md-2 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>业务性质： </label>
+			<div class="col-md-6">
+				<input type="hidden" id="busiNatureName0" class="busiNatureName" name="busiNatureName"  value="${applyDetail.busiNatureName}">
+					<select id="busiNatureList0" class="col-sm-6 col-md-6 validate[required]" onchange='getSelectText2(this)' name="busiNatureID"  >		
+							<option value="">&nbsp;请选择</option>
+							<c:forEach items="${busiNatureList}" var="busiNature">
+								<option value="${busiNature.dicTypeID}" <c:if test="${applyDetail.busiNatureID eq busiNature.dicTypeID}"> selected="selected"</c:if>  >${busiNature.dicTypeName}</option>
+							</c:forEach>
+				    </select>
+			</div>
+      	</div>
+
+        <div class="space-4"></div>
+        <div class="form-group">
+		   	<label class="col-md-2 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>项目类型： </label>
+	        <div class="col-md-6">
+	       		  <input type="hidden" id="projectTypeName0" class="projectTypeName" name="projectTypeName01" value="${applyDetail.projectTypeName}">
+				  <select id="projectTypeList0" class="col-sm-6 col-md-6 validate[required]" onchange='getSelectText2(this)' name="projectTypeID01"  >		
+							<option value="">&nbsp;请选择</option>
+							<c:forEach items="${projectTypeList}" var="projectType">
+								<option value="${projectType.dicTypeID}" <c:if test="${applyDetail.projectTypeID eq projectType.dicTypeID}"> selected="selected"</c:if> >${projectType.dicTypeName}</option>
+							</c:forEach>
+				  </select>
+			</div>
+         </div>
+
+         <%--  <div class="space-4"></div>
+            <div class="form-group">
+				<label class="col-md-2 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>客户类型： </label>
+				<div class="col-md-6 col-lg-4">
+					<input type="hidden" id="clientTypeName1" class="clientTypeName" name="clientTypeName" >
+					  <select id="clientTypeList1" class="selectList  col-md-6 validate[required]"  name="clientTypeID"  >		
+								<option value="">&nbsp;请选择</option>
+								<c:forEach items="${clientTypeList}" var="clientType">
+									<option value="${clientType.dicTypeID}" <c:if test="${applyDetail.clientTypeID eq clientType.dicTypeID}"> selected="selected"</c:if> >${clientType.dicTypeName}</option>
+								</c:forEach>
+					  </select>
+				</div>
+           </div> --%>
+            <div class="space-4"></div>
+            <div class="form-group">
+				<label class="col-md-2 control-label no-padding-right" for="form-field-1"> <i class="icon-asterisk orange"></i>客户名称： </label>
+				<div class="col-md-10">
+					  <input type="hidden" id="clientName10" name="clientName01" value="${applyDetail.clientName}"/><!-- 用于添加时候遍历使用 -->
+					  <input type="hidden" id="clientID10" name="client_ID01" value="${applyDetail.client_ID}"><!-- 用于添加时候遍历使用 -->
+				   
+					<input type="text" id="clientName0" name="clientName" value="${applyDetail.clientName}"  class="col-md-5 col-sm-6" />
+	                <input type="hidden" id="clientID0"  name="client_ID" value="${applyDetail.client_ID}">
+	                <div class="col-md-7 col-sm-6">
+	                	<button class="btn btn-xs btn-info" type="button" name="button" id="selectClient0" data-toggle="modal" data-target="#select">选择已有</button>
+	          		 </div>
+				</div>
+			</div>
+
+          <div class="space-4"></div>
+          <div class="form-group">
+          <label class="col-md-2 control-label no-padding-right" for="form-field-1"> <i class="icon-asterisk orange"></i>项目名称： </label>
+			<div class="col-md-10">
+            <input type="text" id="projectName0" name="projectName" value="${applyDetail.projectName}" class="col-md-5 col-sm-6" />
+			</div>
+          </div>
+
+           <div class="space-4"></div>
+           <div class="form-group">
+				<label class="col-md-2 control-label no-padding-right" for="form-input">项目来源： </label>
+				<div class="col-md-6">
+	                 	<input type="hidden" id="projectSourceName0" class="projectSourceName" name="projectSourceName" value="${applyDetail.projectSourceName}">
+						<select id="projectSourceList0" class="col-sm-6 col-md-6 "  name="projectSourceID"  >		
+								<option value="">&nbsp;请选择</option>
+								<c:forEach items="${projectSourceList}" var="projectSource">
+									<option value="${projectSource.dicTypeID}" <c:if test="${applyDetail.projectSourceID eq projectSource.dicTypeID}"> selected="selected"</c:if>>${projectSource.dicTypeName}</option>
+								</c:forEach>
+					    </select>
+				</select>
+				</div>
+          </div>
+
+          <div class="space-4"></div>
+           <div class="form-group">
+			   <label class="col-md-2 control-label no-padding-right" for="form-input">来源说明： </label>
+	           <div class="col-md-6">
+	               <textarea class="col-md-12 col-sm-8 limited validate[maxSize[250]]" id="sourceDesc0" name="sourceDesc" rows="5">${applyDetail.sourceDesc}</textarea>
+	           </div>
+	           <div class="col-md-8 col-sm-8">
+	                 <span class="light-grey" style="float:right;">限制250个字符</span>
+	            </div>
+			</div>
+             <div class="space-4"></div>
+              <div class="form-group">
+			   	<label class="col-md-2 control-label no-padding-right" for="form-field-1"><i class="icon-asterisk orange"></i>业务品种： </label>
+		        <div class="col-md-6">
+					<div class="col-sm-6 col-md-6 input-group busiSortDicTree01">
+							<input  type="text"  class="form-control" autoField="busiTypeID01"   id="busiSortDicTree01" value="${applyDetail.busiTypeName}" dataValue="${applyDetail.busiTypeID}" name="busiTypeName01"  readonly="readonly"/>
+							<span class="input-group-addon ">
+								<i class="icon-caret-down bigger-110"></i>
+							</span>
+				    </div>
+				</div>
+	           </div>
+		  <%--  <div class="space-4"></div>
+           <div class="form-group">
+			   <label class="col-md-2 control-label no-padding-right" for="form-input">绿色通道： </label>
+				<div class="col-md-6">
+						<input type="hidden" id="greenChannelName0" class="greenChannelName" name="greenChannelName01" value="${applyDetail.greenChannelName}">
+						<select id="greenChannelList0" class="greenChannelList col-sm-6 col-md-6 " onchange='getSelectText2(this)' name="greenChannelID01"  >		
+								<option value="">&nbsp;请选择</option>
+								<c:forEach items="${greenChannelList}" var="greenChannel">
+									<option value="${greenChannel.dicTypeID}" <c:if test="${applyDetail.greenChannelID eq greenChannel.dicTypeID}"> selected="selected"</c:if> >${greenChannel.dicTypeName}</option>
+								</c:forEach>
+					    </select>
+				</div>
+           </div> --%>
+		   <div class="space-4"></div>
+           <div class="form-group">
+           	 <label class="col-md-2 control-label no-padding-right" for="form-field-1"> <i class="icon-asterisk orange"></i>申请金额： </label>
+             <div class="col-md-10">
+                 <input type="text" id="applySum" name="applySum01" value="<fmt:formatNumber value="${applyDetail.applySum}" pattern="###.######"/>" class="col-md-2 col-lg-1" />
+                 <span class="col-md-10 col-lg-11" style="line-height:28px;">万元</span>
+             </div>
+			</div>
+			<div class="space-4"></div>
+            <div class="form-group">
+              <label class="col-md-2 control-label no-padding-right" for="form-field-1"> <i class="icon-asterisk orange"></i>申请期限： </label>
+				 <div class="col-md-10">
+	                 <div class="col-md-6 no-padding-left">
+	                  <input type="text" id="periodMonth0" value="${applyDetail.periodMonth}" name="periodMonth01" style="width:4em;" />
+	                   &nbsp;个月&nbsp;
+	                  <input type="text" id="periodDay0" value="${applyDetail.periodDay}" name="periodDay" style="width:4em;" />
+	                   &nbsp;天&nbsp;
+	                 </div>
+              	 </div>
+		   </div>
+
+		    <div class="space-4"></div>
+		    <div class="form-group" >
+		   		<label class="col-md-2 control-label no-padding-right" for="form-field-1">合作机构： </label>
+		        <div class="col-md-6">
+					<div class="col-md-6 col-sm-6 input-group cooperationTree01">
+							<input  type="text"  class="form-control " autoField="bankID01"   id="cooperationTree01"  value="${applyDetail.bankName}" dataValue="${applyDetail.bankID}" name="bankName01"  readonly="readonly"/>
+							<span class="input-group-addon ">
+								<i class="icon-caret-down bigger-110"></i>
+							</span>
+				    </div>
+				</div>
+           	</div>
+
+             <%-- <div class="space-4"></div>
+             <div class="form-group">
+		   	    <label class="col-md-2 control-label no-padding-right" for="form-input">贷款(担保)用途： </label>
+                 <div class="col-md-6">
+                     <textarea class="col-md-12 col-sm-8 limited validate[maxSize[2000]]" id="loadUsed0" name="loadUsed" rows="5">${applyDetail.loadUsed}</textarea>
+                 </div>
+                 <div class="col-md-8 col-sm-8">
+                     <span class="light-grey" style="float:right;">限制2000个字符</span>
+                 </div>
+			 </div>
+
+            <div class="space-4"></div>
+            <div class="form-group">
+	   	    <label class="col-md-2 control-label no-padding-right" for="form-input">还款计划和来源： </label>
+                  <div class="col-md-6">
+                      <textarea class="col-md-12 col-sm-8 limited validate[maxSize[2000]]" id="repaymentPlan0" name="repaymentPlan" rows="5">${applyDetail.repaymentPlan}</textarea>
+                  </div>
+                  <div class="col-md-8 col-sm-8">
+                      <span class="light-grey" style="float:right;">限制2000个字符</span>
+                  </div>
+			</div>
+
+            <div class="space-4"></div>
+            <div class="form-group">
+		   	    <label class="col-md-2 control-label no-padding-right" for="form-input">拟提供的保证措施： </label>
+	             <div class="col-md-6">
+	                 <textarea class="col-md-12 col-sm-8 limited validate[maxSize[2000]]" id="provideGuaranty0" name="provideGuaranty" rows="5">${applyDetail.provideGuaranty}</textarea>
+	             </div>
+	             <div class="col-md-8 col-sm-8">
+	                 <span class="light-grey" style="float:right;">限制2000个字符</span>
+	             </div>
+		   </div>
+
+           <div class="space-4"></div>
+           <div class="form-group">
+	   	    <label class="col-md-2 control-label no-padding-right" for="form-input">备注： </label>
+	            <div class="col-md-6">
+	                <textarea class="col-md-12 col-sm-8 limited " id="otherDesc0" name="otherDesc" rows="5">${applyDetail.otherDesc}</textarea>
+	            </div>
+	
+	            <div class="col-md-8 col-sm-8">
+	                <span class="light-grey" style="float:right;">限制2000个字符</span>
+	            </div>
+		    </div> --%>
+
+            <div class="space-4"></div>
+            <div class="form-group">
+			  	<label class="col-md-2 control-label no-padding-right" for="form-field-1">经办部门： </label>
+				  <div class="col-md-6">				  
+						<div class="col-md-6 col-sm-6 input-group allDepartsTree0">
+							<input  type="text"  class="form-control" autoField="departID00"   id="allDepartsTree0"  value="${applyDetail.departName}" dataValue="${applyDetail.departID}" name="departName00"  readonly="readonly"/>
+							<span class="input-group-addon ">
+								<i class="icon-caret-down bigger-110"></i>
+							</span>
+						</div>
+					</div>
+				  
+			</div>
+            <div class="space-4"></div>
+           	<div class="form-group">
+				<label class="col-md-2 control-label no-padding-right" for="form-field-1">经办人： </label>		
+					<div class="col-md-6">
+						<div class="col-md-6 col-sm-6 input-group txt_id0">
+							<input  type="text"  class="form-control " autoField="createManID00"   id="txt_id0"  value="${applyDetail.createManName}" dataValue="${applyDetail.createManID}" name="createManName00"  readonly="readonly"/>
+							<span class="input-group-addon ">
+								<i class="icon-caret-down bigger-110"></i>
+							</span>
+						</div>
+					</div>
+			</div>
+		<div class="space-4"></div>
+	           	<div class="form-group">
+					<label class="col-md-2 control-label no-padding-right" for="form-field-1">A角： </label>		
+						<div class="col-md-6">
+							<div class="col-md-6 col-sm-6 input-group amanTree0">
+								<input  type="text"  class="form-control " autoField="amanID00"   id="amanTree0"  value="${applyDetail.amanName}" dataValue="${applyDetail.amanID}" name="amanName00"  readonly="readonly"/>
+								<span class="input-group-addon ">
+									<i class="icon-caret-down bigger-110"></i>
+								</span>
+							</div>
+						</div>
+				</div>
+	            <div class="space-4"></div>
+	           	<div class="form-group">
+					<label class="col-md-2 control-label no-padding-right" for="form-field-1">B角： </label>		
+						<div class="col-md-6">
+							<div class="col-md-6 col-sm-6 input-group bmanTree0">
+								<input  type="text"  class="form-control " autoField="bmanID00"   id="bmanTree0"  value="${applyDetail.bmanName}" dataValue="${applyDetail.bmanID}" name="bmanName00"  readonly="readonly"/>
+								<span class="input-group-addon ">
+									<i class="icon-caret-down bigger-110"></i>
+								</span>
+							</div>
+						</div>
+				</div>	
+
+        <div class="space-4"></div>
+			<div class="form-group">
+		   	    <label class="col-md-2 control-label no-padding-right" for="form-input">受理日期： </label>
+	         	<div class="col-md-6">
+					<div class="input-group col-md-6 col-sm-6">
+						<input class="form-control date-picker" id="createDate0" name="createDate" type="text" value="<fmt:formatDate value="${applyDetail.createDate}" type="time" timeStyle="full" pattern="yyyy-MM-dd"/>"  data-date-format="yyyy-mm-dd"/>
+						<span class="input-group-addon">
+							<i class="icon-calendar bigger-110"></i>
+						</span>
+					</div>
+				</div>
+	        </div>
+        </form>
+      <div class="clearfix form-actions">
+			<div class="col-md-offset-3 col-md-9">
+		       <button class="btn btn-primary btn_applyUpdate" value="0" type="button"><i class="icon-ok bigger-110"></i>保存</button>
+		        &nbsp; &nbsp; &nbsp;
+		      
+		      <!--  <button class="btn btn_colse" type="button" value="0"><i class="icon-remove bigger-110 "></i>关闭</button> -->
+            </div>
+      </div>     
+     </div>
+    </div>
+</div>
+<%-- <%@ include file="/common_modelFoot.jsp" %>	 --%>
+<%-- ​<%@ include file="/common_foot.jsp" %> --%>
+<%@ include file="/project/apply/clientList.jsp" %>
+<script src="<%=path %>/project/apply/applyEdit.js?v=<%=vardate%>"></script>

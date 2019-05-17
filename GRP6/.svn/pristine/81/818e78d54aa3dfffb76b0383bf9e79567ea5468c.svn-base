@@ -1,0 +1,232 @@
+package com.zjm.pro.riskScheme.service.impl;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.zjm.common.db.model.PageTable;
+import com.zjm.common.db.model.User;
+import com.zjm.common.log.service.LogService;
+import com.zjm.pro.db.map.Pro_projectfilesMapper;
+import com.zjm.pro.db.map.Pro_riskSchemeMapper;
+import com.zjm.pro.db.model.Pro_projectfiles;
+import com.zjm.pro.db.model.Pro_riskScheme;
+import com.zjm.pro.riskScheme.serivce.RiskSchemeService;
+@Service("riskSchemeService")
+@Transactional
+public class RiskSchemeServiceImpl implements RiskSchemeService {
+    @Resource
+	private Pro_riskSchemeMapper pro_riskSchemeMapper;
+    @Resource
+	private LogService logService;
+    @Resource
+	 private Pro_projectfilesMapper pro_projectfilesMapper;
+	  /**
+	   * 
+	   * 新增一条化解方案
+	   * 
+	   */
+	@Override
+	public Boolean insertOneRiskSchemeInfo(User user, Pro_riskScheme riskScheme) {
+		Integer count = 0;
+		Boolean isTrue = false;
+		riskScheme.setIsMeeting(0);
+		riskScheme.setUnit_uid(user.getUnit_uid());
+		riskScheme.setUpdateUserName(user.getUser_name());
+		try {
+			count = pro_riskSchemeMapper.insertOneRiskSchemeInfo(riskScheme);
+			if(count>0){
+				isTrue=true;
+				logService.insertOneOperatorLogInfo(user, "新增一条化解方案", "新增", "Pro_riskScheme");
+			}
+			return true;
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		
+		
+		return isTrue;
+	}
+
+	@Override
+	public PageTable<Pro_riskScheme> selectRiskSchemePageTables(PageTable<Pro_riskScheme> pageTable) {
+		List<Pro_riskScheme> riskSchemeList = pro_riskSchemeMapper.selectRiskSchemePageTables(pageTable);
+		Long total=pro_riskSchemeMapper.selectRiskSchemePageTables_Count(pageTable);
+		pageTable.setRows(riskSchemeList);
+		pageTable.setTotal(total);
+		return pageTable;
+	}
+
+	@Override
+	public Pro_riskScheme selectOneRiskShemeInfo(String whereSql) {
+		Pro_riskScheme pro_riskScheme = pro_riskSchemeMapper.selectOneRiskShemeInfo(whereSql);
+		List<Pro_projectfiles> fileList = new ArrayList<Pro_projectfiles>();
+		List<Pro_projectfiles> schemeList = new ArrayList<Pro_projectfiles>();
+		if(null !=pro_riskScheme){
+			//获取附件文件列表(附件fileType =08)
+			PageTable pageTable=new PageTable<>();
+			String sql =whereSql+" and  fileType = '08' ";
+			sql  = sql.replace("riskScheme_ID", "entityID");
+			pageTable.setWheresql(sql);
+			fileList  = pro_projectfilesMapper.selectProjectFilesPageTables(pageTable);
+			pro_riskScheme.setFilesList(fileList);
+			//获取方案文件列表(重点项目审批特有  fileType = 09)
+			sql =whereSql+" and  fileType = '09' ";
+			sql  = sql.replace("riskScheme_ID", "entityID");
+			pageTable.setWheresql(sql);
+			schemeList  = pro_projectfilesMapper.selectProjectFilesPageTables(pageTable);
+			pro_riskScheme.setSchemeFileList(schemeList);
+			
+		}
+		
+		return pro_riskScheme;
+	}
+
+	@Override
+	public Boolean updateOneRiskSchemeInfo(User user, Pro_riskScheme riskScheme) {
+		Integer count = 0;
+		Boolean isTrue = false;
+		riskScheme.setUpdateUserName(user.getUser_name());
+		try {
+			count = pro_riskSchemeMapper.updateOneRiskSchemeInfo(riskScheme);
+			if(count>0){
+				isTrue=true;
+				logService.insertOneOperatorLogInfo(user, "修改一条化解方案", "修改", "Pro_riskScheme");
+			}
+			return true;
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return isTrue;
+	}
+	
+	@Override
+	public Boolean finishRiskScheme(User user, Pro_riskScheme riskScheme) {
+		Integer count = 0;
+		Boolean isTrue = false;
+		riskScheme.setStatus("审批通过");
+		riskScheme.setUpdateUserName(user.getUser_name());
+		try {
+			count = pro_riskSchemeMapper.finishRiskScheme(riskScheme);
+			if(count>0){
+				isTrue=true;
+				logService.insertOneOperatorLogInfo(user, "修改一条化解方案", "审批通过", "Pro_riskScheme");
+			}
+			return true;
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return isTrue;
+	}
+
+	/**
+	 * 查询最新工作进度-更多列表
+	 * @param pageTable
+	 * @author xuyz
+	 * @return
+	 */
+	 public PageTable<Pro_riskScheme> selectMoreRiskSchemeTable(PageTable<Pro_riskScheme> pageTable){
+		 try {
+			List<Pro_riskScheme> riskSchemeList = pro_riskSchemeMapper.selectMoreRiskSchemeTable(pageTable);
+			Long total=pro_riskSchemeMapper.selectRiskSchemePageTables_Count(pageTable);
+			pageTable.setRows(riskSchemeList);
+			pageTable.setTotal(total);
+			return pageTable;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	 }
+
+	 /**
+	 * 查询最新工作进度-更多列表
+	 * @param pageTable
+	 * @author xuyz
+	 * @return
+	 */
+	public List<Pro_riskScheme> selectRiskSchemeStageList() {
+		// TODO Auto-generated method stub
+		return pro_riskSchemeMapper.selectRiskSchemeStageList();
+	}
+	
+	/**
+	 * 查询首页工作进度提醒_统计数量
+	 */
+	@SuppressWarnings("unchecked")
+	public Long selectSchemeNoticeList_count(User user, String type){
+		try {
+			PageTable pageTable = new PageTable<>();
+			pageTable.setWheresql(" AND prs.status='审批完成' AND prs.unit_uid='"+user.getUnit_uid()+"' AND prs.reviewType LIKE '%工作进度%'");
+			pageTable.getQueryCondition().setQueryType(type);
+			pageTable = setPageTableWheresql(pageTable);
+			Long count = pro_riskSchemeMapper.selectSchemeNoticeList_count(pageTable);
+			return count==null?0:count;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	 
+	/**
+	 * 查询首页工作进度提醒
+	 */
+	public PageTable<Pro_riskScheme> selectSchemeNoticeList(PageTable<Pro_riskScheme> pageTable){
+		try {
+			pageTable = setPageTableWheresql(pageTable);
+			List<Pro_riskScheme> schemeList = pro_riskSchemeMapper.selectSchemeNoticeList(pageTable);
+			Long total = pro_riskSchemeMapper.selectSchemeNoticeList_count(pageTable);
+			pageTable.setRows(schemeList);
+			pageTable.setTotal(total);
+			return pageTable;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+  
+	/**
+	 * 处理工作进度提醒查询分类
+	 * @throws ParseException 
+	 */
+	private PageTable setPageTableWheresql(PageTable pageTable) throws ParseException{
+		String type = pageTable.getQueryCondition().getQueryType();
+		Date today = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		today = sdf.parse(sdf.format(today));
+		Calendar calendar = Calendar.getInstance();  
+		calendar.setTime(today);  
+		if(type.equals("harfMonth")){			// 半个月到一个月
+			calendar.add(Calendar.DAY_OF_MONTH, -15);	// 15天前
+			pageTable.getQueryCondition().setFinishEndDate(calendar.getTime());
+			calendar.add(Calendar.DAY_OF_MONTH, -15);	// 30天前
+			pageTable.getQueryCondition().setFinishBeginDate(calendar.getTime());
+		}else if(type.equals("oneMonth")){		// 一个月到两个月
+			calendar.add(Calendar.DAY_OF_MONTH, -30);	// 30天前
+			pageTable.getQueryCondition().setFinishEndDate(calendar.getTime());
+			calendar.add(Calendar.DAY_OF_MONTH, -30);	// 60天前
+			pageTable.getQueryCondition().setFinishBeginDate(calendar.getTime());
+		}else if(type.equals("twoMonth")){		//
+			calendar.add(Calendar.DAY_OF_MONTH, -60);	// 60天前
+			pageTable.getQueryCondition().setFinishEndDate(calendar.getTime());
+		}
+		return pageTable;
+	}
+
+	@Override
+	public List<Pro_riskScheme> selectSchemeByRelaMain(String relamMainName) {
+		
+		String sql = "and reviewType = \'方案\' and relationMainName = \'"+relamMainName+"\'";
+		
+		List<Pro_riskScheme> list = pro_riskSchemeMapper.selectSchemeByRelaMain(sql);
+
+		return list;
+	}
+}

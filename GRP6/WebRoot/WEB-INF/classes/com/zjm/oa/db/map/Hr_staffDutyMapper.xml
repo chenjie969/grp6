@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+<mapper namespace="com.zjm.oa.db.map.Hr_staffDutyMapper">
+	<resultMap type="com.zjm.oa.db.model.Hr_staffDuty" id="DutyResultMap">	
+		<result property="dutyID" column="dutyID" />
+		<result property="staffcase_Id" column="staffcase_Id" />
+		<result property="dutyName" column="dutyName" />
+		<result property="dutyDepGID" column="dutyDepGID" />
+		<result property="dutySuperior" column="dutySuperior" />
+		<result property="superiorLV" column="superiorLV" />
+		<result property="dutyDirection" column="dutyDirection" />
+		<result property="dutySalary" column="dutySalary" />
+		<result property="dutyNotes" column="dutyNotes" />	
+	</resultMap>  
+    	<!-- 查询所有的员工  分页列表-->
+	<select id="selectDutyListByCase_ID" resultMap="DutyResultMap" parameterType="java.lang.String">
+		<![CDATA[
+		SELECT	
+			DutyID,
+			staffCase_ID,
+			DutyName,
+			DutyDepGID,
+			DutySuperior,
+			SuperiorLV,
+			DutyDirection,
+			DutySalary,
+			DutyNotes		
+		FROM 
+			Hr_staffDuty 
+		 where staffcase_Id = #{staffcase_Id}
+		]]>
+	</select>
+
+<!--根据岗位ID查询  -->
+<select id="selectOneByDutyId" resultMap="DutyResultMap" parameterType="java.lang.String">
+		<![CDATA[
+		SELECT	
+			DutyID,
+			staffCase_ID,
+			DutyName,
+			DutyDepGID,
+			DutySuperior,
+			SuperiorLV,
+			DutyDirection,
+			DutySalary,
+			DutyNotes			
+		FROM 
+			Hr_staffDuty
+		 where dutyID = #{dutyID}
+		]]>
+	</select>
+<!-- 增加一条数据 -->
+ <insert id="insertOneDutyInfo" parameterType="com.zjm.oa.db.model.Hr_staffDuty" >  
+  
+		<![CDATA[
+		INSERT INTO Hr_staffDuty (		
+			DutyID,
+			staffCase_ID,
+			DutyName,
+			DutyDepGID,
+			DutySuperior,
+			SuperiorLV,
+			DutyDirection,
+			DutySalary,
+			DutyNotes
+		)
+		VALUES (
+			#{dutyID},		
+			#{staffcase_Id},
+			#{dutyName},
+			#{dutyDepGID},
+			#{dutySuperior},
+			#{superiorLV},
+			#{dutyDirection},
+			#{dutySalary},			
+			#{dutyNotes}
+		)
+		]]>
+	</insert>		
+<!--修改一条数据  -->
+  <update id="updateOneDutyInfo" parameterType="com.zjm.oa.db.model.Hr_staffDuty" >
+	update Hr_staffDuty
+	set
+
+		
+		dutyName=#{dutyName},
+		dutyDepGID=#{dutyDepGID},
+		dutySuperior=#{dutySuperior},
+		superiorLV=#{superiorLV},
+		dutyDirection=#{dutyDirection},
+		dutySalary=#{dutySalary},
+		dutyNotes=#{dutyNotes}
+	where
+		dutyID=#{dutyID}
+  </update>
+
+</mapper>

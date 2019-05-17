@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.gbpm.db.map.Gbpm_dicNodeMapper">
+
+	<resultMap type="com.zjm.gbpm.db.model.Gbpm_dicNode" id="dicNodeResultMap">
+		<result column="node_ID" property="node_ID"  />
+		<result column="nodeNames" property="nodeNames"  />
+		<result column="nodeCode" property="nodeCode"  />
+		<result column="remark" property="remark"  />
+		<result column="nodeSort" property="nodeSort"  />
+		<result column="unit_uid" property="unit_uid"  />
+		<result column="unit_uidName" property="unit_uidName"  />
+		<result column="updatedatetime" property="updatedatetime"  />
+		<result column="updateUserName" property="updateUserName"  />
+	</resultMap>
+	
+	<!-- 分页查询节点列表 -->
+	<select id="selectDicNodePageTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="dicNodeResultMap">
+		SELECT 
+			node_ID,
+			nodeNames,
+			nodeCode,
+			remark,  
+			nodeSort,  
+			unit_uid, 
+			unit_uidName,  
+			updateUserName, 
+			updatedatetime
+		FROM gbpm_dic_node 
+		WHERE unit_uid = #{queryCondition.unit_uid} 
+			  ${wheresql}
+		LIMIT #{pageNumber},#{pageSize}  
+	</select>
+	
+	<!-- 分页查询节点列表-查询总记录数 -->
+	<select id="selectDicNodePageTable_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="long">
+	 	SELECT 
+	 		COUNT(1) 
+	 	FROM 
+	 		gbpm_dic_node 
+	 	WHERE
+	 		unit_uid = #{queryCondition.unit_uid}
+	</select>
+	
+	<!-- 查询一条节点-->  
+	<select id="selectOneDicNode" parameterType="com.zjm.gbpm.db.model.Gbpm_dicNode" resultMap="dicNodeResultMap">
+		SELECT 
+			node_ID,
+			nodeNames,
+			nodeCode,
+			remark,  
+			nodeSort,  
+			unit_uid, 
+			unit_uidName,  
+			updateUserName, 
+			updatedatetime  
+		FROM gbpm_dic_node
+		WHERE 
+		node_ID = #{node_ID}
+	</select>
+	
+	<!-- 插入一条节点 -->
+	<insert id="insertOneDicNode" parameterType="com.zjm.gbpm.db.model.Gbpm_dicNode">
+		INSERT INTO gbpm_dic_node(
+			node_ID,
+			nodeNames,
+			nodeCode,
+			remark, 
+			nodeSort, 
+			unit_uid, 
+			unit_uidName,  
+			updateUserName,  
+			updatedatetime    
+		) VALUES(
+			#{node_ID},
+			#{nodeNames},
+			#{nodeCode},
+			#{remark}, 
+			#{nodeSort}, 
+			#{unit_uid}, 
+			#{unit_uidName},  
+			#{updateUserName},  
+			NOW()
+		)
+	</insert>
+	
+	<!-- 修改一条节点 -->
+	<update id="updateOneDicNode" parameterType="com.zjm.gbpm.db.model.Gbpm_dicNode">
+		UPDATE gbpm_dic_node
+		SET
+			<if test="nodeNames != null">nodeNames = #{nodeNames},</if>
+			<if test="nodeCode != null">nodeCode = #{nodeCode},</if>
+			<if test="remark != null">remark = #{remark},</if>
+			<if test="nodeSort != null">nodeSort = #{nodeSort},</if>
+			<if test="unit_uid != null">unit_uid = #{unit_uid},</if>
+			<if test="unit_uidName != null">unit_uidName = #{unit_uidName},</if>
+			<if test="updateUserName != null">updateUserName = #{updateUserName},</if> 
+			updateDateTime = NOW() 
+		WHERE node_ID = #{node_ID}
+	</update>
+	
+	<!-- 删除一条节点 -->
+	<delete id="deleteOneDicNode" parameterType="com.zjm.gbpm.db.model.Gbpm_dicNode">
+		DELETE FROM 
+			gbpm_dic_node
+		WHERE
+			unit_uid = #{unit_uid}
+		AND node_ID = #{node_ID}
+	</delete>
+ 
+ 	<!-- 判断节点名称是否存在 ，如果有node_ID，说明是更新数据，要排除与自身的nodeNames比较-->
+	<select id="isExistDicNodeNames" parameterType="com.zjm.gbpm.db.model.Gbpm_dicNode" resultType="java.lang.Integer">
+		<![CDATA[
+			SELECT 
+				COUNT(1) 
+			FROM 
+				gbpm_dic_node 
+			WHERE 
+				unit_uid = #{unit_uid} 
+			AND nodeNames = #{nodeNames}
+		]]>
+			<if test="node_ID != null">
+				AND node_ID != #{node_ID}
+			</if>
+	</select>
+	
+	
+	<!-- 判断节点编号是否存在 ，如果有node_ID，说明是更新数据，要排除与自身的nodeCode比较-->
+	<select id="isExistNodeCode" parameterType="com.zjm.gbpm.db.model.Gbpm_dicNode" resultType="java.lang.Integer">
+		<![CDATA[
+			SELECT 
+				COUNT(1) 
+			FROM 
+				gbpm_dic_node 
+			WHERE 
+				unit_uid = #{unit_uid} 
+			AND nodeCode = #{nodeCode}
+		]]>
+			<if test="node_ID != null">
+				AND node_ID != #{node_ID}
+			</if>
+	</select>
+ 
+ 	<!-- 获取所有节点-->
+	<select id="selectAllNodeList" parameterType="com.zjm.gbpm.db.model.Gbpm_dicNode" resultMap="dicNodeResultMap">
+		<![CDATA[
+			SELECT 
+				node_ID,
+				nodeNames,
+				nodeCode,
+				remark,  
+				nodeSort,  
+				unit_uid, 
+				unit_uidName,  
+				updateUserName, 
+				updatedatetime
+			FROM 
+				gbpm_dic_node 
+			WHERE 
+				unit_uid = #{unit_uid}
+			order By nodeSort,updatedatetime
+		]]>
+	</select>
+</mapper>

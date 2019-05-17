@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjm.sys.db.map.Sys_logloginMapper" >
+  <resultMap id="BaseResultMap" type="com.zjm.sys.db.model.Sys_loglogin" >
+    <id column="logLoginID" property="logloginid"  />
+    <result column="unit_uid" property="unitUid"  />
+    <result column="loginDateTime" property="logindatetime" />
+    <result column="userName" property="username"  />
+    <result column="departName" property="departname"  />
+    <result column="logType" property="logtype"  />
+    <result column="logDescr" property="logdescr"  />
+    <result column="loginAccount" property="loginaccount"  />
+    <result column="ipAddress" property="ipaddress"  />
+    <result column="unit_uidName" property="unit_uidName"  /><!-- 添加担保机构名称 -->
+  </resultMap>
+  <sql id="Base_Column_List" >
+    logLoginID, unit_uid, loginDateTime, userName, departName, logType, logDescr, loginAccount, 
+    ipAddress,unit_uidName
+  </sql>
+ 
+ <!-- 查看登录日志分页列表 -->
+ <select id="selectLogLoginPageTables" resultMap="BaseResultMap" parameterType="com.zjm.common.db.model.PageTable">
+ 	<![CDATA[
+ 	select 
+	   	logLoginID, unit_uid, loginDateTime, userName, departName, logType, logDescr, loginAccount, 
+	    ipAddress,unit_uidName
+	    from sys_loglogin
+	    where 1=1 ${wheresql}  limit #{pageNumber},#{pageSize}
+	]]>
+ </select>
+ 
+ <!-- 获取登录日志总记录数 -->
+ <select id="selectLogLoginPageTables_Count" resultType="java.lang.Long" parameterType="com.zjm.common.db.model.PageTable">
+ 	select 
+ 	count(logLoginID)
+ 	from sys_loglogin
+ 	where 1=1  ${wheresql}
+ </select>
+ 
+ 
+  <!-- 查看一条登录日志信息 -->
+  <select id="selectOneLogLoginInfo" resultMap="BaseResultMap" parameterType="com.zjm.sys.db.model.Sys_loglogin" >
+  	<![CDATA[
+    select 
+	   	logLoginID, unit_uid, loginDateTime, userName, departName, logType, logDescr, loginAccount, 
+	    ipAddress,unit_uidName
+	    from sys_loglogin
+	where logLoginID = #{logloginid}  and unit_uid = #{unitUid}
+    ]]>
+  </select>
+  
+  <!-- 删除一条日志记录 -->
+  <delete id="deleteOneLogLoginInfo" parameterType="com.zjm.sys.db.model.Sys_loglogin" >
+  	<![CDATA[
+	    delete from sys_loglogin
+	    where logLoginID = #{logloginid} and unit_uid = #{unitUid}
+     ]]>
+  </delete>
+  
+   <!-- 清空全部登录日志 -->
+   <delete id="deleteAllLogLogin" parameterType="com.zjm.sys.db.model.Sys_loglogin" >
+  	<![CDATA[
+   		 delete from sys_loglogin where unit_uid = #{unitUid}
+     ]]>
+ 	</delete>
+ 	
+  
+  <!-- 添加一条日志 -->
+  <insert id="insertOneLogLoginInfo" parameterType="com.zjm.sys.db.model.Sys_loglogin" >
+  	<![CDATA[
+	    insert into sys_loglogin (
+	    	logLoginID, 
+	    	unit_uid, 
+	    	loginDateTime, 
+	      	userName, 
+	      	departName, 
+	      	logType, 
+	      	logDescr, 
+	      	loginAccount, 
+	      	ipAddress,
+	      	unit_uidName
+	      )
+	    values (
+	    	#{logloginid}, 
+	    	#{unitUid}, 
+	    	NOW(), 
+	      	#{username}, 
+	      	#{departname}, 
+	      	#{logtype}, 
+	      	#{logdescr}, 
+	      	#{loginaccount}, 
+	      	#{ipaddress},
+	      	#{unit_uidName}
+	      )
+      ]]>
+  </insert>
+  
+  <select id="selectCountLogLogins" parameterType="com.zjm.sys.db.model.Sys_loglogin" resultType="integer">
+  	<![CDATA[
+  		select 
+  		count(logloginid) 
+  		from
+  		sys_loglogin
+  		where unit_uid = #{unitUid}
+  	]]>
+  </select>
+  
+  
+  <!-- 不应该存在修改方法，备用 -->
+  <update id="updateByPrimaryKey" parameterType="com.zjm.sys.db.model.Sys_loglogin" >
+  	<![CDATA[
+	    update sys_loglogin
+	    set unit_uid = #{unitUid},
+	      loginDateTime = #{logindatetime},
+	      userName = #{username},
+	      departName = #{departname},
+	      logType = #{logtype},
+	      logDescr = #{logdescr},
+	      loginAccount = #{loginaccount},
+	      ipAddress = #{ipaddress},
+	      unit_uidName=#{unit_uidName}
+	    where logLoginID = #{logloginid}
+     ]]>
+  </update>
+  
+  
+  
+</mapper>

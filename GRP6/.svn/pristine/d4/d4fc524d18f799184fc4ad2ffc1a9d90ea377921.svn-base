@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_meetingDetailMapper">
+	<!-- 评审会产品明细表 -->
+	 <resultMap id="ProMeetDetailMap" type="com.zjm.pro.db.model.Pro_meetingDetail" >
+	    <id column="meetingDetail_ID" property="meetingDetail_ID"  />
+	    <result column="meetingResolution_ID" property="meetingResolution_ID"/>
+	    <result column="apply_ID" property="apply_ID"/>
+  		<result column="applyDetail_ID" property="applyDetail_ID"/>
+		<result column="busiTypeID" property="busiTypeID"/>
+		<result column="busiTypeName" property="busiTypeName"/>
+		<result column="bankTypeID" property="bankTypeID"/>
+		<result column="bantTypeName" property="bantTypeName"/>
+		<result column="bankID" property="bankID"/>
+		<result column="bankName" property="bankName"/>
+		<result column="subBankName" property="subBankName"/>
+		<result column="agreeSum" property="agreeSum"/>
+		<result column="guarantyScale" property="guarantyScale"/>
+		<result column="guarantyScope" property="guarantyScope"/>
+		<result column="guarantyDutySum" property="guarantyDutySum"/>
+		<result column="periodDay" property="periodDay"/>
+		<result column="periodMonth" property="periodMonth"/>
+		<result column="periodMonthDay" property="periodMonthDay"/>
+		<result column="guarantyRate" property="guarantyRate"/>
+		<result column="costBase" property="costBase"/>
+		<result column="reviewRate" property="reviewRate"/>
+		<result column="serviceRate" property="serviceRate"/>
+		<result column="bzScale" property="bzScale"/>
+		<result column="interestRate" property="interestRate"/>
+		<result column="otherRateOne" property="otherRateOne"/>
+		<result column="otherRateOneDesc" property="otherRateOneDesc"/>
+		<result column="otherRateTwo" property="otherRateTwo"/>
+		<result column="otherRateTwoDesc" property="otherRateTwoDesc"/>
+		<result column="unit_uid" property="unit_uid"/>
+		<result column="unit_uidName" property="unit_uidName"/>
+		<result column="updateUserName" property="updateUserName"/>
+		<result column="updateDateTime" property="updateDateTime"/>	   
+	 </resultMap>
+		            
+	  <!-- 增加评审会产品明细表内容-->       
+	<insert id="insertOneMeetingDetail" parameterType="com.zjm.pro.db.model.Pro_meetingDetail">
+	 insert into Pro_meetingDetail (
+	 		meetingDetail_ID,
+	 		meetingResolution_ID,
+			apply_ID,
+			applyDetail_ID,
+			busiTypeID,
+			busiTypeName,
+			bankTypeID,
+			bantTypeName,
+			bankID,
+			bankName,
+			subBankName,
+			agreeSum,
+			guarantyScale,
+			guarantyScope,
+			guarantyDutySum,
+			periodDay,
+			periodMonth,
+			periodMonthDay,
+			guarantyRate,
+			costBase,
+			reviewRate,
+			serviceRate,
+			bzScale,
+			interestRate,
+			otherRateOne,
+			otherRateOneDesc,
+			otherRateTwo,
+			otherRateTwoDesc,
+			unit_uid,
+			unit_uidName,
+			updateUserName,
+			updateDateTime
+	) values (
+			#{meetingDetail_ID},
+			#{meetingResolution_ID},
+			#{apply_ID},
+			#{applyDetail_ID},
+			#{busiTypeID},
+			#{busiTypeName},
+			#{bankTypeID},
+			#{bantTypeName},
+			#{bankID},
+			#{bankName},
+			#{subBankName},
+			#{agreeSum},
+			#{guarantyScale},
+			#{guarantyScope},
+			#{guarantyDutySum},
+			#{periodDay},
+			#{periodMonth},
+			#{periodMonthDay},
+			#{guarantyRate},
+			#{costBase},
+			#{reviewRate},
+			#{serviceRate},
+			#{bzScale},
+			#{interestRate},
+			#{otherRateOne},
+			#{otherRateOneDesc},
+			#{otherRateTwo},
+			#{otherRateTwoDesc},
+			#{unit_uid},
+			#{unit_uidName},
+			#{updateUserName},
+			NOW()
+	)
+	
+	</insert>	
+	<!-- 删除一个评审会产品明细内容-->
+	<delete id="deleteOnemeetingDetail" parameterType="java.lang.String">
+		<![CDATA[
+		DELETE FROM 
+			Pro_meetingDetail
+		WHERE
+			meetingDetail_ID = #{value}
+		LIMIT 1
+		]]>
+	</delete>        
+	
+	<!-- 查询一条评审会产品明细内容-->
+	<select id="selectOneMeetingDetailByWhereSql" parameterType="java.lang.String"  resultMap="ProMeetDetailMap">
+	<![CDATA[
+		SELECT 
+		    meetingDetail_ID,
+		    meetingResolution_ID,
+			apply_ID,
+			applyDetail_ID,
+			busiTypeID,
+			busiTypeName,
+			bankTypeID,
+			bantTypeName,
+			bankID,
+			bankName,
+			subBankName,
+			agreeSum,
+			guarantyScale,
+			guarantyScope,
+			guarantyDutySum,
+			periodDay,
+			periodMonth,
+			periodMonthDay,
+			guarantyRate,
+			costBase,
+			reviewRate,
+			serviceRate,
+			bzScale,
+			interestRate,
+			otherRateOne,
+			otherRateOneDesc,
+			otherRateTwo,
+			otherRateTwoDesc,
+			unit_uid,
+			unit_uidName,
+			updateUserName,
+			updateDateTime
+	    FROM 
+	         Pro_meetingDetail 
+		WHERE 1=1 ${value}
+		]]> 				 
+	</select>
+	<!-- 查询多条评审会产品明细内容-->
+	<select id="selectMeetingDetailListByWhereSql" parameterType="java.lang.String"  resultMap="ProMeetDetailMap">
+	<![CDATA[
+		SELECT 
+		    meetingDetail_ID,
+		    meetingResolution_ID,
+			apply_ID,
+			applyDetail_ID,
+			busiTypeID,
+			busiTypeName,
+			bankTypeID,
+			bantTypeName,
+			bankID,
+			bankName,
+			subBankName,
+			agreeSum,
+			guarantyScale,
+			guarantyScope,
+			guarantyDutySum,
+			periodDay,
+			periodMonth,
+			periodMonthDay,
+			guarantyRate,
+			costBase,
+			reviewRate,
+			serviceRate,
+			bzScale,
+			interestRate,
+			otherRateOne,
+			otherRateOneDesc,
+			otherRateTwo,
+			otherRateTwoDesc,
+			unit_uid,
+			unit_uidName,
+			updateUserName,
+			updateDateTime
+	    FROM 
+	         Pro_meetingDetail 
+		WHERE 1=1 ${value}
+		]]> 				 
+	</select>
+	<!-- 更新一个评审会明细内容信息 -->	
+	<update id="updateOneMeetingDetail" parameterType="com.zjm.pro.db.model.Pro_meetingDetail">
+		UPDATE 
+		     Pro_meetingDetail
+		set 
+			busiTypeID= #{busiTypeID},
+			busiTypeName= #{busiTypeName},
+			bankTypeID= #{bankTypeID},
+			bantTypeName= #{bantTypeName},
+			bankID= #{bankID},
+			bankName= #{bankName},
+			subBankName= #{subBankName},
+			agreeSum= #{agreeSum},
+			guarantyScale= #{guarantyScale},
+			guarantyScope= #{guarantyScope},
+			guarantyDutySum= #{guarantyDutySum},
+			periodDay= #{periodDay},
+			periodMonth= #{periodMonth},
+			periodMonthDay= #{periodMonthDay},
+			guarantyRate= #{guarantyRate},
+			costBase= #{costBase},
+			reviewRate= #{reviewRate},
+			serviceRate= #{serviceRate},
+			bzScale= #{bzScale},
+			interestRate= #{interestRate},
+			otherRateOne= #{otherRateOne},
+			otherRateOneDesc= #{otherRateOneDesc},
+			otherRateTwo= #{otherRateTwo},
+			unit_uidName= #{unit_uidName},
+			updateUserName= #{updateUserName},
+			updateDateTime = NOW()		
+			
+		WHERE meetingDetail_ID=#{meetingDetail_ID}  and unit_uid=#{unit_uid} 
+	</update>
+	
+	<delete id="deleteMeetingDetailByApply_ID">
+		delete 
+		from Pro_meetingDetail
+		where apply_ID = #{apply_ID}
+	</delete>
+	
+</mapper>  

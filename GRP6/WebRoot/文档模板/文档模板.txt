@@ -1,0 +1,7 @@
+   			文档编号     文档名称                                事项名称	      			  url
+			A006	业务档案交接单.doc	   生成业务档案交接单			  	/documentAction/documentList?documentCode=A006	
+			A005	同意担保意向书.doc	  生成	同意担保意向书						/documentAction/documentList?documentCode=A005	
+			A004	调查报告.doc		  生成调查报告   						/documentAction/documentList?documentCode=A004	
+			A003	收费通知.docx	            生成收费通知   						/documentAction/documentList?documentCode=A003	
+			A002	风险评估意见书.doc	  生成	风险评估意见书						/documentAction/documentList?documentCode=A002	
+			A001	贷款通知书.doc     生成贷款通知书   							/documentAction/documentList?documentCode=A001	

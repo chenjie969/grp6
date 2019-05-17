@@ -1,0 +1,411 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<div class="modal fade bs-example-modal-sm" id="updateBasicInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">修改企业客户基本信息</h4>
+      </div>
+      <div class="modal-body">
+		<form class="form-horizontal row" role="form" id="edit_clientBasicInfo" >
+			<input type="hidden" id="client_ID" name="client_ID" class="ztb_edit_client_ID">
+			<input type="hidden" id="clientTypeID" name="clientTypeID" class="ztb_edit_clientTypeID">
+           	
+           	<div class="form-group col-sm-6">
+				<label class="col-sm-4 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>客户名称： </label>
+				<div class="col-sm-8">
+					<input  type="text" class="col-sm-12 ztb_edit_clientName validate[required,maxSize[50]]"  name="clientName" id="edit_clientName" value="" />
+				</div>
+			</div>
+           	<div class="form-group col-sm-6">
+				<label class="col-sm-4 control-label no-padding-right" for="form-input">客户编号： </label>
+				<div class="col-sm-8">
+					<input  type="text" class="col-sm-12 ztb_edit_clientBH validate[maxSize[10]]"  name="clientBH" id="edit_clientBH" value="" />
+				</div>
+			</div>
+           	<div class="form-group col-sm-6" >
+			   	<label class="col-sm-4 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>所属区域： </label>
+		        <div class="col-sm-8">						
+						<div class="input-group fullAreaCode">
+						         <input type="hidden" class="ztb_edit_fullAreaName ">
+						         <input type="hidden" class="ztb_edit_fullAreaCode ">
+								 <input type="text"  class="form-control validate[required] " autoField="fullAreaCode" style="line-height:28px;" id="fullAreaCode"  value="" dataValue="" name="fullAreaName" readonly="readonly"/>							
+								 <span class="input-group-addon ">
+									<i class="icon-caret-down bigger-110"></i>
+								 </span>
+						</div>
+				</div>
+            </div>
+			<div class="form-group col-sm-6">
+				   	<label class="col-sm-4 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>行业类别： </label>
+			        <div class="col-sm-8">
+						<div class="input-group fullTradeCode">
+						         <input type="hidden" class="ztb_edit_fullTradeName ">
+						         <input type="hidden" class="ztb_edit_fullTradeCode ">
+								 <input type="text"  class="form-control validate[required] " autoField="fullTradeCode" style="line-height:28px;" id="fullTradeCode"  value="" dataValue="" name="fullTradeName" readonly="readonly"/>							
+								 <span class="input-group-addon ">
+									<i class="icon-caret-down bigger-110"></i>
+								 </span>
+						</div>
+					</div>
+             </div>
+			<div class="form-group col-sm-6">
+			   	<label class="col-sm-4 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>企业类型： </label>
+		        <div class="col-sm-8">
+		             <input type="hidden" id="enterpriseTypeName" name="enterpriseTypeName" class="ztb_edit_enterpriseTypeName">
+					
+					<select class="col-sm-12 ztb_edit_enterpriseTypeID select_EnterpriseType btn_ztb_select validate[required]"     name="enterpriseTypeID" class_name='ztb_edit_enterpriseTypeName' id="select_EnterpriseType">
+						<option value="">&nbsp;</option>
+					</select>
+				</div>
+            </div>
+			
+			<div class="form-group col-sm-6">
+				<label class="col-sm-4 control-label no-padding-right " for="form-input"> <i class="icon-asterisk orange"></i> 社会信用代码： </label>
+				<div class="col-sm-8">
+					<input  type="text" class="col-sm-12  ztb_edit_certificateCode validate[required,maxSize[18]]"  name="certificateCode" id="edit_certificateCode" value="" />
+				    
+				</div>
+			</div>		
+			<div class="form-group col-sm-6">
+				<label class="col-sm-4 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i> 注册地址： </label>
+				<div class="col-sm-8">
+					<input  type="text" class="col-sm-12 ztb_edit_fullRegisteName validate[required,maxSize[100]]"  name="fullRegisteName" id="edit_fullRegisteName" value="" />
+				</div>
+			</div>
+			<div class="form-group col-sm-6">
+				<label class="col-sm-4 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>实体所在地： </label>
+				<div class="col-sm-8">
+					<input  type="text" class="col-sm-12  ztb_edit_workAddress validate[required,maxSize[100]]"  name="workAddress"	id="edit_workAddress" value="" />
+				</div>
+			</div>
+			<div class="space-2"></div>
+				<div class="form-group col-sm-6">
+					<label class="col-sm-4 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i> 法定代表人： </label>
+					<div class="col-sm-8">
+						<input  type="text" class="col-sm-12  ztb_edit_legalPerson validate[required,maxSize[10]]"  name="legalPerson"	id="edit_legalPerson" value="" />
+					</div>
+				</div>
+				<div class="form-group col-sm-6">
+					<label class="col-sm-4 control-label no-padding-right" for="form-input"> 身份证号码： </label>
+					<div class="col-sm-8">
+						<input  type="text" class="col-sm-12  ztb_edit_legalPersonNum validate[maxSize[18],maxSize[18]]"  name="legalPersonNum"	 id="edit_legalPersonNum" value="" />
+					</div>
+				</div>
+				<div class="form-group col-sm-6">
+					<label class="col-sm-4 control-label no-padding-right" for="form-input"> 实际控制人： </label>
+					<div class="col-sm-8">
+						<input  type="text" class="col-sm-12  ztb_edit_controlPerson validate[maxSize[10]]"  name="controlPerson"	 id="edit_controlPerson" value="" />
+					</div>
+				</div>
+				<div class="form-group col-sm-6">
+					<label class="col-sm-4 control-label no-padding-right" for="form-input"> 实际控制人联系电话： </label>
+					<div class="col-sm-8">
+						<input  type="text" class="col-sm-12  ztb_edit_controlPersonPhone validate[maxSize[20]]"  name="controlPersonPhone"	 id="edit_controlPersonPhone" value="" />
+					</div>
+				</div>
+				<div class="form-group col-sm-6">
+					<label class="col-sm-4 control-label no-padding-right" for="form-input"> 身份证号码： </label>
+					<div class="col-sm-8">
+						<input  type="text" class="col-sm-12  ztb_edit_controlPersonNum validate[maxSize[18],maxSize[18]]"  name="controlPersonNum"	 id="edit_controlPersonNum" value="" />
+					</div>
+				</div>
+				<div class="form-group col-sm-6">
+				   	<label class="col-sm-4 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i> 币别： </label>
+			        <div class="col-sm-8">
+						<input type="hidden" id="currencyName" name="currencyName" class="ztb_edit_currencyName">
+						<select class="col-sm-12  ztb_edit_currencyID select_currencyID btn_ztb_select validate[required]"   name="currencyID" class_name="ztb_edit_currencyName" id="select_currencyID">
+						</select>
+					</div>
+	            </div>
+				<div class="form-group col-sm-6">
+					<label class="col-sm-4 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>注册资本： </label>
+					<div class="col-sm-8">
+						<input  type="text" class="col-sm-8  ztb_edit_registerSum validate[required,maxSize[18],custom[number]]"  name="registerSum"	 id="edit_registerSum" value="" />
+						<span class="midden col-sm-4 " style="line-height:28px;">万元</span>
+					</div>
+				</div>
+				
+				<div class="form-group col-sm-6">
+				   	<label class="col-sm-4 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i> 企业性质： </label>
+			        <div class="col-sm-8">
+						<input type="hidden" id="natureName" name="natureName" class="ztb_edit_natureName">
+						<select class="col-sm-12  ztb_edit_natureID select_natureID btn_ztb_select validate[required]"   name="natureID" class_name="ztb_edit_natureName" id="select_natureID">
+						</select>
+					</div>
+	            </div>
+				<div class="form-group col-sm-6">
+			   	    <label class="col-sm-4 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>成立日期： </label>
+		         	<div class="col-sm-8">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="input-group">
+									<input  type="text" class="form-control date-picker  ztb_edit_createDate validate[required,custom[date]]" style="line-height:28px;"  name="createDate"	id="id-date-picker-1" data-date-format="yyyy-mm-dd" />								
+									<span class="input-group-addon">
+										<i class="icon-calendar bigger-110"></i>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+	            </div>
+				<div class="form-group col-sm-6">
+			   	    <label class="col-sm-4 control-label no-padding-right" for="form-input">营业期限： </label>
+		         	<div class="col-sm-8">					
+	                   <input  type="text" class="col-sm-12  ztb_edit_busiTerm validate[maxSize[25]]"   name="busiTerm"  id="edit_busiTerm"  value="" />
+					</div>
+	            </div>
+				<div class="form-group col-sm-6">			
+					<label class="col-sm-4 control-label no-padding-right" for="form-input">工商登记机关： </label>
+					<div class="col-sm-8">
+						<input  type="text" class="col-sm-12  ztb_edit_industryCommerceOrg validate[maxSize[25]]"  name="industryCommerceOrg" id="edit_industryCommerceOrg" value="" />
+					</div>
+				</div>
+				<div class="form-group col-sm-6">
+					<label class="col-sm-4 control-label no-padding-right" for="form-input">贷款卡号码： </label>
+					<div class="col-sm-8">
+						<input  type="text" class="col-sm-12  ztb_edit_loanCode validate[maxSize[20]]"  name="loanCode"	 id="edit_loanCode" value="" />
+					</div>
+				</div>		
+				<div class="form-group col-sm-6">
+			   			<label class="col-sm-4 control-label no-padding-right" for="form-input" style="line-height:28px;">&nbsp;</label>
+                </div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right" for="form-input">经营范围：</label>
+					<div class="col-sm-10">
+						<textarea class="col-sm-10 limited  ztb_edit_busiScope validate[maxSize[2000]]" rows="5" name="busiScope" id="edit_busiScope" ></textarea>
+					     <span class="col-sm-4 light-grey col-sm-push-8">限制输入字数2000个</span>			        	
+					</div>
+				</div>            	
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right" for="form-input">主营业务：</label>									   	    
+		         	<div class="col-sm-10">
+						<textarea class="col-sm-10 limited  ztb_edit_leadBusi validate[maxSize[2000]]" rows="5"  name="leadBusi" id="edit_leadBusi" ></textarea>							
+
+					    <span class="col-sm-4 light-grey col-sm-push-8">限制输入字数2000个</span>
+					</div>
+				</div>
+					
+				<div class="form-group col-sm-6">
+					<label class="col-sm-4 control-label no-padding-right" for="form-input">国税登记机关： </label>
+					<div class="col-sm-8">
+						<input  type="text" class="col-sm-12  ztb_edit_nationalTaxOrg validate[maxSize[25]]"  name="nationalTaxOrg"	id="edit_nationalTaxOrg"  value="" />
+					</div>
+				</div>
+				<div class="form-group col-sm-6">
+					<label class="col-sm-4 control-label no-padding-right" for="form-input">地税登记机关： </label>
+					<div class="col-sm-8">
+						<input  type="text" class="col-sm-12  ztb_edit_landTaxOrg validate[maxSize[25]]"  name="landTaxOrg"	 id="edit_landTaxOrg" value="" />
+					</div>
+				</div>
+				<div class="form-group col-sm-6">
+					<label class="col-sm-4 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i> 员工总数： </label>
+					<div class="col-sm-8">
+						<input  type="text" class="col-sm-8  ztb_edit_employeeSum validate[required,maxSize[6],custom[integer]]"  name="employeeSum"	 id="edit_employeeSum" value="" />
+						<span class="midden col-sm-4 " style="line-height:28px;">人</span>
+					</div>
+				</div>
+			<div class="space-2">
+			</div>
+				<div class="form-group col-sm-6">
+					<label class="col-sm-4 control-label no-padding-right" for="form-input"> 实收资本： </label>
+					<div class="col-sm-8">
+						<input  type="text" class="col-sm-8  ztb_edit_factSum validate[maxSize[18],custom[number]]"  name="factSum"	 id="edit_factSum" value="" />
+						<span class="midden col-sm-4 " style="line-height:28px;">万元</span>
+					</div>
+				</div>
+				<div class="form-group col-sm-6">
+					<label class="col-sm-4 control-label no-padding-right" for="form-input"> 总资产： </label>
+					<div class="col-sm-8">
+						<input  type="text" class="col-sm-8  ztb_edit_capitalSum validate[maxSize[18],custom[number]]"   name="capitalSum"	 id="edit_capitalSum" value="" />
+						<span class="midden col-sm-4 " style="line-height:28px;">万元</span>
+					</div>
+				</div>
+				<div class="form-group col-sm-6">
+					<label class="col-sm-4 control-label no-padding-right" for="form-input"> 负债总额： </label>
+					<div class="col-sm-8">
+						<input  type="text" class="col-sm-8  ztb_edit_liabilitySum validate[maxSize[18],custom[number]]"   name="liabilitySum"	 id="edit_liabilitySum" value="" />
+						<span class="midden col-sm-4 " style="line-height:28px;">万元</span>
+					</div>
+				</div>
+				<div class="form-group col-sm-6">
+					<label class="col-sm-4 control-label no-padding-right" for="form-input">上年： </label>
+					<div class="col-sm-8">
+						<input  type="text" class="col-sm-8  ztb_edit_lastYear validate[maxSize[4],custom[integer],maxSize[4]]"  name="lastYear"	 id="edit_lastYear" value="" />						
+					    <span class="midden col-sm-4 " style="line-height:28px;">年</span>
+					</div>
+				</div>
+				<div class="form-group col-sm-6">
+					<label class="col-sm-4 control-label no-padding-right" for="form-input"> 上年销售收入： </label>
+					<div class="col-sm-8">
+						<input  type="text" class="col-sm-8  ztb_edit_lastYearSale validate[maxSize[18],custom[number]]"  name="lastYearSale"	 id="edit_lastYearSale" value="" />
+						<span class="midden col-sm-4 " style="line-height:28px;">万元</span>
+					</div>
+				</div>
+				
+				<div class="form-group col-sm-6">
+					<label class="col-sm-4 control-label no-padding-right" for="form-input"> 上年销售利润： </label>
+					<div class="col-sm-8">
+						<input  type="text" class="col-sm-8  ztb_edit_lastYearSaleProfit validate[maxSize[18],custom[number]]"  name="lastYearSaleProfit"	 id="edit_lastYearSaleProfit" value="" />
+						<span class="midden col-sm-4" style="line-height:28px;">万元</span>
+					</div>
+				</div>
+				<div class="form-group col-sm-6">
+					<label class="col-sm-4 control-label no-padding-right" for="form-input"> 上年净利润： </label>
+					<div class="col-sm-8">
+						<input  type="text" class="col-sm-8  ztb_edit_lastYearProfit validate[maxSize[18],custom[number]]"   name="lastYearProfit"	 id="edit_lastYearProfit" value="" />
+						<span class="midden col-sm-4" style="line-height:28px;">万元</span>
+					</div>
+				</div>
+			<div class="space-2"></div>
+				<div class="form-group col-sm-6">
+					<label class="col-sm-4 control-label no-padding-right" for="form-input"> 有证土地： </label>
+					<div class="col-sm-8">
+						<input  type="text" class="col-sm-8  ztb_edit_selfArea validate[maxSize[18],custom[number]]"  name="selfArea"	 id="edit_selfArea" value="" />
+						<span class="midden col-sm-4" style="line-height:28px;">亩</span>
+					</div>
+				</div>
+				<div class="form-group col-sm-6">
+					<label class="col-sm-4 control-label no-padding-right" for="form-input"> 租赁土地： </label>
+					<div class="col-sm-8">
+						<input  type="text" class="col-sm-8  ztb_edit_rentalArea validate[maxSize[18],custom[number]]"  name="rentalArea"	id="edit_rentalArea" value="" />
+					    <span class="midden col-sm-4" style="line-height:28px;">亩</span>
+					   
+					</div>
+				</div>
+				<div class="form-group col-sm-6">
+					<label class="col-sm-4 control-label no-padding-right" for="form-input"> 有证厂房： </label>
+					<div class="col-sm-8">
+						<input  type="text" class="col-sm-8  ztb_edit_selfWorkShop validate[maxSize[18],custom[number]]"  name="selfWorkShop"	 id="edit_selfWorkShop" value="" />
+					     <span class="midden col-sm-4" style="line-height:28px;">㎡</span>
+					</div>
+				</div>
+				<div class="form-group col-sm-6">
+					<label class="col-sm-4 control-label no-padding-right" for="form-input"> 租赁厂房： </label>
+					<div class="col-sm-8">
+						<input  type="text" class="col-sm-8  ztb_edit_rentalWorkShop validate[maxSize[18],custom[number]]"  name="rentalWorkShop"	 id="edit_rentalWorkShop" value="" />
+					    <span class="midden col-sm-4" style="line-height:28px;">㎡</span>
+					</div>
+				</div>
+				<!-- <div class="form-group col-sm-6">
+			   			<label class="col-sm-4 control-label no-padding-right" for="form-input" style="line-height:28px;">&nbsp;</label>
+                </div> -->	
+				<div class="form-group col-sm-6">
+				   	<label class="col-sm-4 control-label no-padding-right" for="form-input">是否高新企业： </label>
+		              <div class="col-sm-8">
+						<div class="radio">
+						
+							<label>
+								<input   type="radio"  name="isHighTechnology"  id="isHighTechnology1"   class="ace  form-field-radio ztb_edit_isHighTechnology ztb_edit" value="1" />
+								<span class="lbl">是</span>
+							</label>
+							<label>
+								<input   type="radio" name="isHighTechnology"   id="isHighTechnology0"  class="ace  form-field-radio ztb_edit_isHighTechnology ztb_edit" value="0" />
+								<span class="lbl">否</span>
+							</label>
+							
+						</div>
+					</div>
+		         </div>
+			<!-- <div class="space-2"></div> -->
+				<div class="space-2"></div>
+				<div class="form-group col-sm-6">
+			   	    <label class="col-sm-4 control-label no-padding-right" for="form-input">高新认定日期： </label>
+		         	<div class="col-sm-8">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="input-group">
+									<input class="form-control date-picker  ztb_edit_highTechnologyDate validate[custom[date]]" style="line-height:28px;" name="highTechnologyDate"	 id="id-date-picker-2" type="text" data-date-format="yyyy-mm-dd" />
+									<span class="input-group-addon">
+										<i class="icon-calendar bigger-110"></i>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+	            </div>
+				<div class="form-group col-sm-6">
+					<label class="col-sm-4 control-label no-padding-right" for="form-input"> 高新企业证号： </label>
+					<div class="col-sm-8">
+						<input  type="text" class="col-sm-12  ztb_edit_highTechnologyCode validate[maxSize[50]]"  name="highTechnologyCode"	 id="edit_highTechnologyCode" value="" />
+					</div>
+				</div>
+				<div class="form-group col-sm-6">
+					<label class="col-sm-4 control-label no-padding-right" for="form-input"> 联系人1： </label>
+					<div class="col-sm-8">
+						<input  type="text" class="col-sm-12  ztb_edit_contactOne validate[maxSize[20]]"  name="contactOne"	 id="edit_contactOne" value="" />
+					</div>
+				</div>
+				<div class="form-group col-sm-6">
+					<label class="col-sm-4 control-label no-padding-right" for="form-input"> 职位： </label>
+					<div class="col-sm-8">
+						<input  type="text" class="col-sm-12  ztb_edit_positionOneName validate[maxSize[20]]"  name="positionOneName"	 id="edit_positionOneName" value="" />
+					</div>
+				</div>
+				<div class="form-group col-sm-6">
+					<label class="col-sm-4 control-label no-padding-right" for="form-input"> 联系方式： </label>
+					<div class="col-sm-8">
+						<input  type="text" class="col-sm-12  ztb_edit_phoneOne validate[maxSize[50]]"  name="phoneOne"	 id="edit_phoneOne" value="" />
+					</div>
+				</div>
+			<!-- <div class="space-2"></div> -->
+				<div class="form-group col-sm-6">
+					<label class="col-sm-4 control-label no-padding-right" for="form-input"> 联系人2： </label>
+					<div class="col-sm-8">
+						<input  type="text" class="col-sm-12  ztb_edit_contactTwo validate[maxSize[20]]"  name="contactTwo"	 id="edit_contactTwo" value="" />
+					</div>
+				</div>
+				<div class="form-group col-sm-6">
+					<label class="col-sm-4 control-label no-padding-right" for="form-input"> 职位： </label>
+					<div class="col-sm-8">
+						<input  type="text" class="col-sm-12  ztb_edit_positionTwoName validate[maxSize[20]]"  name="positionTwoName"	 id="edit_positionTwoName" value="" />
+					</div>
+				</div>
+				<div class="form-group col-sm-6">
+					<label class="col-sm-4 control-label no-padding-right" for="form-input"> 联系方式： </label>
+					<div class="col-sm-8">
+						<input  type="text" class="col-sm-12  ztb_edit_phoneTwo validate[maxSize[50]]"  name="phoneTwo"	 id="edit_phoneTwo" value="" />
+					</div>
+				</div>             	
+             	<div class="form-group col-sm-6">
+			   		<label class="col-sm-4 control-label no-padding-right" for="form-input"> 五级分类： </label>
+					<div class="col-sm-8">
+						<input type="hidden" id="riskLevelName" name="riskLevelName" class="ztb_edit_riskLevelName">
+						
+						<select class="col-sm-12 ztb_edit_riskLevelID select_riskLevelName btn_ztb_select "     name="riskLevelID" class_name='ztb_edit_riskLevelName' id="select_riskLevelName">
+							<option value="">&nbsp;请选择</option>
+						</select>
+					</div>
+                </div>	
+                <div class="form-group col-sm-6">
+				   	<label class="col-sm-4 control-label no-padding-right" for="form-input">分类处置划分： </label>
+			        <div class="col-sm-8">
+			             <input type="hidden" id="divisionName" name="divisionName" class="ztb_edit_divisionName">
+						
+						<select class="col-sm-12 ztb_edit_divisionID select_divisionType btn_ztb_select "     name="divisionID" class_name='ztb_edit_divisionName' id="select_divisionType">
+							<option value="">&nbsp;请选择</option>
+						</select>
+					</div>
+                </div>		
+                <div class="form-group col-sm-6">
+			   			<label class="col-sm-4 control-label no-padding-right" for="form-input" style="line-height:28px;">&nbsp;</label>
+                </div>		
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right" for="form-input"> 备注：</label>									   	    
+		         	<div class="col-sm-10">
+						<textarea class="col-sm-10 limited  ztb_edit_remark validate[maxSize[2000]]" rows="5"  name="remark" id="edit_remark" ></textarea>							
+					    <span class="col-sm-4 light-grey col-sm-push-8">限制输入字数2000个</span>
+					</div>
+				</div>
+				
+
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn_submit" > <i class='icon-ok bigger-110'></i>保存</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class='icon-remove bigger-110'></i>关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+					

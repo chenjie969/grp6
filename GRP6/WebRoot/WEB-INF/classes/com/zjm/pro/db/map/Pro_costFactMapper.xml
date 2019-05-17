@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_costFactMapper">
+	
+	<!-- 实收费用表信息 -->
+	<resultMap type="com.zjm.pro.db.model.Pro_costFact" id="costFactMap">
+		<result property="costFact_ID" column="costFact_ID" />
+		<result property="apply_ID" column="apply_ID" />
+		<result property="applyDetail_ID" column="applyDetail_ID" />
+		<result property="costTypeID" column="costTypeID" />
+		<result property="costTypeName" column="costTypeName" />
+		<result property="costRate" column="costRate" />
+		<result property="costUnit" column="costUnit" />
+		<result property="factCostSum" column="factCostSum" />
+		<result property="factCostDate" column="factCostDate" />
+		<result property="remark" column="remark" />
+		<result property="operationDepartID" column="operationDepartID" />
+		<result property="operationDepartName" column="operationDepartName" />
+		<result property="operationUserID" column="operationUserID" />
+		<result property="operationUserName" column="operationUserName" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="updateUserName" column="updateUserName" />
+		<result property="updateDateTime" column="updateDateTime" />
+		<result property="loanPlan_ID" column="loanPlan_ID" />
+		<result property="costPre_ID" column="costPre_ID" />
+		<result property="costFactState" column="costFactState" />	
+		<result property="planFactCostDate" column="planFactCostDate" />	
+		<result property="meetingDetail_ID" column="meetingDetail_ID" />	
+		
+	</resultMap>
+	
+	<!-- 查询实收费用列表 -->
+	<select id="selectCostFactListByWhereSql" parameterType="string" resultMap="costFactMap">
+	<![CDATA[
+			SELECT
+		 		    costFact_ID,
+					apply_ID,
+					applyDetail_ID,
+					loanPlan_ID,
+					costPre_ID,
+					meetingDetail_ID,
+					costFactState,
+					costTypeID,
+					costTypeName,
+					costRate,
+					costUnit,
+					factCostSum,
+					factCostDate,
+					remark,
+					operationDepartID,
+					operationDepartName,
+					operationUserID,
+					operationUserName,
+					unit_uid,
+					updateUserName,
+					updateDateTime,
+					planFactCostDate
+			FROM pro_costFact
+			WHERE 1=1 ${value}
+			order by planFactCostDate asc
+		]]>
+	
+	</select>
+	
+	
+	
+	<!-- 添加一条实收费用信息 -->
+	<insert id="insertOneCostFact" parameterType="com.zjm.pro.db.model.Pro_costFact">
+		INSERT INTO pro_costFact(
+			        costFact_ID,
+					apply_ID,
+					applyDetail_ID,
+					meetingDetail_ID,
+					loanPlan_ID,
+					costPre_ID,
+					costFactState,
+					costTypeID,
+					costTypeName,
+					costRate,
+					costUnit,
+					factCostSum,
+					factCostDate,
+					remark,
+					operationDepartID,
+					operationDepartName,
+					operationUserID,
+					operationUserName,
+					unit_uid,
+					updateUserName,
+					updateDateTime,
+					planFactCostDate	
+		) VALUES(
+					#{costFact_ID},
+					#{apply_ID},
+					#{applyDetail_ID},
+					#{meetingDetail_ID},
+					#{loanPlan_ID},
+					#{costPre_ID},
+					#{costFactState},
+					#{costTypeID},
+					#{costTypeName},
+					#{costRate},
+					#{costUnit},
+					#{factCostSum},
+					#{factCostDate},
+					#{remark},
+					#{operationDepartID},
+					#{operationDepartName},
+					#{operationUserID},
+					#{operationUserName},
+					#{unit_uid},
+					#{updateUserName},
+			        NOW(),
+			        #{planFactCostDate}
+		)
+	</insert>
+	<!-- 根据查询条件查询一个预收费用信息-->
+	<select id="selectOneCostFactByWhereSql" parameterType="java.lang.String"  resultMap="costFactMap">
+	<![CDATA[
+		SELECT 
+		        costFact_ID,
+				apply_ID,
+				applyDetail_ID,
+				meetingDetail_ID,
+				loanPlan_ID,
+				costPre_ID,
+				costFactState,
+				costTypeID,
+				costTypeName,
+				costRate,
+				costUnit,
+				factCostSum,
+				factCostDate,
+				remark,
+				operationDepartID,
+				operationDepartName,
+				operationUserID,
+				operationUserName,
+				unit_uid,
+				updateUserName,
+				updateDateTime,
+				planFactCostDate
+	       
+	    FROM 
+	         pro_costFact 
+		WHERE 1=1 ${value}
+		limit 1 
+		]]> 				 
+	</select>
+	<!-- 删除一条实收费用信息  -->
+	<delete id="deleteOneCostFact" parameterType="com.zjm.pro.db.model.Pro_costFact">
+		DELETE FROM pro_costFact
+		WHERE costFact_ID = #{costFact_ID}
+		LIMIT 1
+	</delete>
+	
+	<!-- 删除一条实收费用信息  -->
+	<delete id="deleteOneCostFactByWhereSql" parameterType="java.lang.String"  >
+		<![CDATA[
+			DELETE FROM pro_costFact
+			WHERE  1=1 ${value}
+		]]> 
+	</delete>
+	<!-- 更新一个实收费用信息  -->	
+	<update id="updateOneCostFact" parameterType="com.zjm.pro.db.model.Pro_costFact">
+		UPDATE 
+		     pro_costFact
+		<set >
+			    <if test="apply_ID != null" >apply_ID = #{apply_ID},</if>
+				<if test="applyDetail_ID != null" >applyDetail_ID = #{applyDetail_ID},</if>
+				<if test="loanPlan_ID != null" >loanPlan_ID = #{loanPlan_ID},</if>
+				<if test="costPre_ID != null" >costPre_ID = #{costPre_ID},</if>
+				<if test="costFactState != null" >costFactState = #{costFactState},</if>
+				<if test="costTypeID != null" >costTypeID = #{costTypeID},</if>
+				<if test="costTypeName != null" >costTypeName = #{costTypeName},</if>
+				<if test="costRate != null" >costRate = #{costRate},</if>
+				<if test="costUnit != null" >costUnit = #{costUnit},</if>
+				<if test="factCostSum != null" >factCostSum = #{factCostSum},</if>
+				<if test="factCostDate != null" >factCostDate = #{factCostDate},</if>
+				<if test="remark != null" >remark = #{remark},</if>
+				<if test="operationDepartID != null" >operationDepartID = #{operationDepartID},</if>
+				<if test="operationDepartName != null" >operationDepartName = #{operationDepartName},</if>
+				<if test="operationUserID != null" >operationUserID = #{operationUserID},</if>
+				<if test="operationUserName != null" >operationUserName = #{operationUserName},</if>
+				<if test="unit_uid != null" >unit_uid = #{unit_uid},</if>
+				<if test="updateUserName != null" >updateUserName = #{updateUserName},</if>
+			     	updateDateTime = NOW(),
+				<if test="planFactCostDate != null" >planFactCostDate = #{planFactCostDate},</if>
+				<if test="meetingDetail_ID != null" >meetingDetail_ID = #{meetingDetail_ID}</if>
+				
+			</set>
+			 
+		WHERE costFact_ID=#{costFact_ID} 
+	</update>
+	
+	<!-- 分组查询 -->
+	<select id="selectCostFactListByWhereSqlGroup" parameterType="string" resultMap="costFactMap">
+	<![CDATA[
+			SELECT  costTypeID,
+					costTypeName,
+					IFNULL(SUM(factCostSum),0) AS factCostSum
+			FROM pro_costFact
+			WHERE 1=1 ${value}
+		]]>
+	</select>
+	
+</mapper>

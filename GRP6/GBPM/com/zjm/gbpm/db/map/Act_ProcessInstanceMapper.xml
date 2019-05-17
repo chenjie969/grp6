@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.gbpm.db.map.Act_ProcessInstanceMapper">
+
+	<!-- activiti流程实例-->
+	<resultMap type="com.zjm.gbpm.db.model.Act_ProcessInstance" id="GBPMProcessInstanceResultMap">
+		<result property="processInstanceID" column="processInstanceID" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="executionID" column="executionID" />
+		<result property="procDefID" column="procDefID" />
+		<result property="entityType" column="entityType" />
+		<result property="entityID" column="entityID" />
+		<result property="entityName" column="entityName" />
+		<result property="processTemplateName" column="processTemplateName" />
+		<result property="initiatorID" column="initiatorID" />
+		<result property="initiatorName" column="initiatorName" />
+		<result property="taskName" column="taskName" />
+		<result property="transactorType" column="transactorType" />
+		<result property="transactorGroupID" column="transactorGroupID" />
+		<result property="transactorUserID" column="transactorUserID" />
+		<result property="transactorID" column="transactorID" />
+		<result property="transactorName" column="transactorName" />
+		<result property="taskBeginDate" column="taskBeginDate" />
+		<result property="taskEndDate" column="taskEndDate" />
+		<result property="taskTotalDate" column="taskTotalDate" />
+		<result property="state" column="state" />
+		<result property="createDate" column="createDate" />
+		<result property="updateUserName" column="updateUserName" />
+		<result property="updateDateTime" column="updateDateTime" />
+		<result property="taskID" column="taskID" />
+		<result property="owner" column="owner" />
+		<result property="suspensionState" column="suspensionState" />
+		<result property="deleteReason" column="deleteReason" />
+	</resultMap>
+	
+	
+	
+	<!-- 查询所有的流程实例 流转中    分页列表-->
+	<select id="selectProcessInstanceExecutionPageTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="GBPMProcessInstanceResultMap">
+		<![CDATA[
+		SELECT distinct 
+		    b.PROC_INST_ID_ as processInstanceID,
+		    b.ID_ as executionID,
+		    b.PROC_DEF_ID_ as procDefID,
+		    c.NAME_ as processTemplateName,
+		    a.NAME_ as taskName,
+		    d.TYPE_ as transactorType,
+		    d.GROUP_ID_ as transactorGroupID,
+		    d.USER_ID_ as transactorUserID,
+		    a.ASSIGNEE_ as transactorID,
+		    a.CREATE_TIME_ as taskBeginDate,
+		    a.DUE_DATE_ as taskEndDate,
+		    e.START_TIME_ as createDate,
+		    e.START_USER_ID_ as initiatorID,
+		    f.entityType,
+		    f.entityID,
+		    f.entityName,
+		    f.instanceEntity_ID,
+		    a.ID_ as taskID,
+		    a.OWNER_ as owner,
+		    b.SUSPENSION_STATE_ as suspensionState,
+		    e.DELETE_REASON_ as deleteReason
+		 FROM act_ru_task a 
+		 left join act_ru_execution b on a.EXECUTION_ID_=b.ID_
+		 left join act_re_procdef c on c.ID_=b.PROC_DEF_ID_
+		 left join act_ru_identitylink d on d.TASK_ID_=a.ID_
+		 left join act_hi_procinst e on e.PROC_INST_ID_=a.PROC_INST_ID_
+		 left join pro_instance_entity f on f.instanceID=a.PROC_INST_ID_
+		 where 1=1 ${wheresql}   
+		 limit #{pageNumber},#{pageSize}
+	   ]]>
+	</select>
+	<!-- 查询所有的流程实例 流转中  分页列表 总记录数-->
+	<select id="selectProcessInstanceExecutionPageTable_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		<![CDATA[
+		SELECT
+		   count(distinct  a.ID_)
+		 FROM act_ru_task a 
+		 left join act_ru_execution b on a.EXECUTION_ID_=b.ID_
+		 left join act_re_procdef c on c.ID_=b.PROC_DEF_ID_
+		 left join act_ru_identitylink d on d.TASK_ID_=a.ID_
+		 left join act_hi_procinst e on e.PROC_INST_ID_=a.PROC_INST_ID_
+		 left join pro_instance_entity f on f.instanceID=a.PROC_INST_ID_
+		where 1=1 ${wheresql} ]]>
+	</select>
+	
+	
+	
+	<!-- 查询所有的流程实例  已完成   分页列表-->
+	<select id="selectProcessInstanceHistoryPageTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="GBPMProcessInstanceResultMap">
+		<![CDATA[
+		SELECT distinct 
+		    e.PROC_INST_ID_ as processInstanceID,
+		    e.ID_ as executionID,
+		    e.PROC_DEF_ID_ as procDefID,
+		    c.NAME_ as processTemplateName,
+		    e.START_TIME_ as createDate,
+		    e.START_USER_ID_ as initiatorID,
+		    f.entityType,
+		    f.entityID,
+		    f.entityName,
+		    f.instanceEntity_ID,
+		    e.DELETE_REASON_ as deleteReason
+		 FROM  act_hi_procinst e
+		 left join act_hi_taskinst a on a.EXECUTION_ID_=e.ID_
+		 left join act_re_procdef c on c.ID_=e.PROC_DEF_ID_
+		 left join act_hi_identitylink d on d.TASK_ID_=a.ID_
+		 left join pro_instance_entity f on f.instanceID=a.PROC_INST_ID_
+		 where 1=1 ${wheresql}   
+		 limit #{pageNumber},#{pageSize}
+	   ]]>
+	</select>
+	<!-- 查询所有的流程实例  已完成  分页列表 总记录数-->
+	<select id="selectProcessInstanceHistoryPageTable_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		<![CDATA[
+		SELECT
+		   count(distinct  e.ID_)
+		  FROM  act_hi_procinst e
+		 left join act_hi_taskinst a on a.EXECUTION_ID_=e.ID_
+		 left join act_re_procdef c on c.ID_=e.PROC_DEF_ID_
+		 left join act_hi_identitylink d on d.TASK_ID_=a.ID_
+		 left join pro_instance_entity f on f.instanceID=a.PROC_INST_ID_
+		where 1=1 ${wheresql} ]]>
+	</select>
+	
+	<!-- 插入一个流程实例与业务对应关系信息 -->
+	<insert id="insertOneProInstanceEntityInfo" parameterType="com.zjm.gbpm.db.model.Act_ProcessInstance">
+		<![CDATA[
+		INSERT INTO pro_instance_entity (
+		instanceEntity_ID,
+		instanceID,
+		unit_uid,
+		entityType,
+		entityID,
+		entityName,
+		updateUserName,
+		updateDateTime
+		)
+		VALUES
+		(
+		#{instanceEntity_ID},
+		#{processInstanceID},
+		#{unit_uid},
+		#{entityType},
+		#{entityID},
+		#{entityName},
+		#{updateUserName},
+		NOW()
+		) ;
+		]]>
+	</insert>
+	
+	
+	<!-- 查询所有的流程实例 流转中    分页列表-->
+	<select id="selectProcessTaskExecutionPageTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="GBPMProcessInstanceResultMap">
+		<![CDATA[
+		SELECT distinct 
+		    b.PROC_INST_ID_ as processInstanceID,
+		    b.ID_ as executionID,
+		    b.PROC_DEF_ID_ as procDefID,
+		    c.NAME_ as processTemplateName,
+		    a.NAME_ as taskName,
+		    d.TYPE_ as transactorType,
+		    d.GROUP_ID_ as transactorGroupID,
+		    d.USER_ID_ as transactorUserID,
+		    a.ASSIGNEE_ as transactorID,
+		    a.CREATE_TIME_ as taskBeginDate,
+		    a.DUE_DATE_ as taskEndDate,
+		    e.START_TIME_ as createDate,
+		    e.START_USER_ID_ as initiatorID,
+		    f.entityType,
+		    f.entityID,
+		    f.entityName,
+		    f.instanceEntity_ID,
+		    a.ID_ as taskID,
+		    a.OWNER_ as owner,
+		    b.SUSPENSION_STATE_ as suspensionState,
+		    e.DELETE_REASON_ as deleteReason
+		 FROM act_ru_task a 
+		 left join act_ru_execution b on a.EXECUTION_ID_=b.ID_
+		 left join act_re_procdef c on c.ID_=b.PROC_DEF_ID_
+		 left join act_ru_identitylink d on d.TASK_ID_=a.ID_
+		 left join act_hi_procinst e on e.PROC_INST_ID_=a.PROC_INST_ID_
+		 left join pro_instance_entity f on f.instanceID=a.PROC_INST_ID_
+		 where 1=1 ${wheresql}   
+		 limit #{pageNumber},#{pageSize}
+	   ]]>
+	</select>
+	<!-- 查询所有的流程实例 流转中  分页列表 总记录数-->
+	<select id="selectProcessTaskExecutionPageTable_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		<![CDATA[
+		SELECT
+		   count(distinct a.ID_)
+		 FROM act_ru_task a 
+		 left join act_ru_execution b on a.EXECUTION_ID_=b.ID_
+		 left join act_re_procdef c on c.ID_=b.PROC_DEF_ID_
+		 left join act_ru_identitylink d on d.TASK_ID_=a.ID_
+		 left join act_hi_procinst e on e.PROC_INST_ID_=a.PROC_INST_ID_
+		 left join pro_instance_entity f on f.instanceID=a.PROC_INST_ID_
+		where 1=1 ${wheresql} ]]>
+	</select>
+	
+	
+	<!-- 查询所有的流程实例  已完成   分页列表-->
+	<select id="selectProcessTaskHistoryTaskPageTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="GBPMProcessInstanceResultMap">
+		<![CDATA[
+		SELECT distinct 
+		    e.PROC_INST_ID_ as processInstanceID,
+		    e.ID_ as executionID,
+		    e.PROC_DEF_ID_ as procDefID,
+		    c.NAME_ as processTemplateName,
+		    a.NAME_ as taskName,
+		    d.TYPE_ as transactorType,
+		    d.GROUP_ID_ as transactorGroupID,
+		    d.USER_ID_ as transactorUserID,
+		    a.ASSIGNEE_ as transactorID,
+		    a.START_TIME_ as taskBeginDate,
+		    a.END_TIME_ as taskEndDate,
+		    e.START_TIME_ as createDate,
+		    e.START_USER_ID_ as initiatorID,
+		    f.entityType,
+		    f.entityID,
+		    f.entityName,
+		    f.instanceEntity_ID,
+		    a.ID_ as taskID,
+		    a.OWNER_ as owner,
+		    e.DELETE_REASON_ as deleteReason
+		 FROM act_hi_taskinst a 
+		 left join act_hi_procinst e on a.EXECUTION_ID_=e.ID_
+		 left join act_re_procdef c on c.ID_=e.PROC_DEF_ID_
+		 left join act_hi_identitylink d on d.TASK_ID_=a.ID_
+		 left join pro_instance_entity f on f.instanceID=a.PROC_INST_ID_
+		 where 1=1 ${wheresql}   
+		 limit #{pageNumber},#{pageSize}
+	   ]]>
+	</select>
+	<!-- 查询所有的流程实例  已完成  分页列表 总记录数-->
+	<select id="selectProcessTaskHistoryTaskPageTable_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		<![CDATA[
+		SELECT
+		   count(distinct a.ID_)
+		 FROM act_hi_taskinst a 
+		 left join act_hi_procinst e on a.EXECUTION_ID_=e.ID_
+		 left join act_re_procdef c on c.ID_=e.PROC_DEF_ID_
+		 left join act_hi_identitylink d on d.TASK_ID_=a.ID_
+		 left join pro_instance_entity f on f.instanceID=a.PROC_INST_ID_
+		where 1=1 ${wheresql} ]]>
+	</select>
+	
+	
+	
+	<!-- 更新一个流程实例与业务对应关系信息 -->	
+	<update id="updateOneProInstanceEntityInfo" parameterType="com.zjm.gbpm.db.model.Act_ProcessInstance">
+		<![CDATA[
+		UPDATE 
+		  pro_instance_entity
+		SET
+		  stopTypeID = #{stopTypeID},
+		  stopTypeName = #{stopTypeName},
+		  stopDate = #{stopDate},
+		  stopReason = #{stopReason},
+		  updateUserName = #{updateUserName},
+		  updateDateTime = NOW()
+		WHERE instanceEntity_ID=#{instanceEntity_ID}  and unit_uid=#{unit_uid} 
+		  ]]>
+	</update>
+	<!-- 删除一个流程实例与业务对应关系信息-->
+	<delete id="deleteOneProInstanceEntityInfo" parameterType="com.zjm.gbpm.db.model.Act_ProcessInstance">
+		<![CDATA[DELETE FROM pro_instance_entity WHERE instanceEntity_ID=#{instanceEntity_ID}  and unit_uid=#{unit_uid}   ]]>
+	</delete>
+	
+	
+	<!-- 根据任务id查询一个任务上配置的任务事项-->
+	<select id="selectOneTaskFormItemInfo" parameterType="java.lang.String" resultType="java.lang.String">
+		<![CDATA[
+		SELECT FORM_KEY_ FROM act_hi_taskinst where ID_=${value} limit 1
+		 ]]>
+	</select>
+</mapper>  

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjm.sys.db.map.Sys_postMapper" >
+	<!-- 岗位表信息 -->
+  <resultMap id="PostResultMap" type="com.zjm.sys.db.model.Sys_post" >
+    <result column="post_ID" property="post_ID"/>
+    <result column="unit_uid" property="unit_uid"/>
+    <result column="parentPostID" property="parentPostID"/>
+    <result column="postFullCode" property="postFullCode"/>
+    <result column="postCode" property="postCode"/>
+    <result column="postName" property="postName"/>
+    <result column="postDescription" property="postDescription"/>
+    <result column="isDelete" property="isDelete" />
+    <result column="order_id" property="order_id"/>
+    <result column="createUserName" property="createUserName"/>
+    <result column="createDateTime" property="createDateTime"/>
+    <result column="updateUserName" property="updateUserName"/>
+    <result column="updateDateTime" property="updateDateTime"/>
+  </resultMap>
+  <!-- 查询所有的担保岗位 -->
+	<select id="selectAllPostList" resultMap="PostResultMap" parameterType="java.lang.String">
+		<![CDATA[
+		SELECT
+			post_ID,
+			unit_uid,
+			parentPostID,
+			postFullCode,
+			postCode,
+			postName,
+			postDescription,
+			isDelete,
+			order_id,
+			createUserName,
+			createDateTime,
+			updateUserName,
+			updateDateTime	
+		FROM sys_post  where 1=1 ${value} 
+		ORDER BY post_ID
+		]]>
+	</select>
+    <!-- 插入一个岗位信息 -->
+	<insert id="insertOnePostInfo"	parameterType="com.zjm.sys.db.model.Sys_post">
+		<![CDATA[
+		INSERT INTO sys_post (
+		    post_ID,
+			unit_uid,
+			parentPostID,
+			postFullCode,
+			postCode,
+			postName,
+			postDescription,
+			isDelete,
+			order_id,
+			createUserName,
+			createDateTime
+		)
+		VALUES
+		(
+		#{post_ID},
+		#{unit_uid},
+		#{parentPostID},
+		#{postFullCode},
+		#{postCode},
+		#{postName},
+		#{postDescription},
+		#{isDelete},
+		#{order_id},
+		#{createUserName},
+		NOW()
+		)
+		]]>
+	</insert>
+  <!--  查询同级节点下共有多少岗位 -->
+	<select id="selectPostOrderId" parameterType="com.zjm.sys.db.model.Sys_post" resultType="java.lang.Integer">
+		<![CDATA[SELECT count(post_ID) FROM sys_post where parentPostID=#{parentPostID}]]>
+	</select>
+	<!-- 查询所有的岗位    分页列表-->
+	<select id="selectPostPageTables" parameterType="com.zjm.common.db.model.PageTable" resultMap="PostResultMap">
+		<![CDATA[
+		SELECT
+		    post_ID,
+		    unit_uid,
+			parentPostID,
+			postFullCode,
+			postCode,
+			postName,
+			postDescription,
+			isDelete,
+			order_id,
+			createUserName,
+			createDateTime,
+			updateUserName,
+			updateDateTime	
+		 FROM sys_post 
+		 where 1=1 ${wheresql}   
+		 limit #{pageNumber},#{pageSize}
+	   ]]>
+	</select>
+	<!-- 查询所有的岗位  分页列表 总记录数-->
+	<select id="selectPostPageTables_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		<![CDATA[SELECT count(post_ID) FROM sys_post where 1=1 ${wheresql} ]]>
+	</select>
+	<!-- 查询一个岗位-->
+	<select id="selectOnePostInfo" parameterType="com.zjm.sys.db.model.Sys_post" resultMap="PostResultMap">
+		<![CDATA[
+		SELECT 
+			post_ID,
+			unit_uid,
+			parentPostID,
+			postFullCode,
+			postCode,
+			postName,
+			postDescription,
+			isDelete,
+			order_id,
+			createUserName,
+			createDateTime,
+			updateUserName,
+			updateDateTime	
+		FROM sys_post 
+		where post_ID=#{post_ID} 
+		]]>
+	</select>
+	<!-- 查询一个岗位的父岗位-->
+	<select id="selectParentPostInfo" parameterType="com.zjm.sys.db.model.Sys_post" resultMap="PostResultMap">
+		<![CDATA[
+		SELECT 
+			post_ID,
+			unit_uid,
+			parentPostID,
+			postFullCode,
+			postCode,
+			postName,
+			postDescription,
+			isDelete,
+			order_id,
+			createUserName,
+			createDateTime,
+			updateUserName,
+			updateDateTime	
+		FROM sys_post 
+		where post_ID=#{parentPostID} 
+		]]>
+	</select>
+	<!-- 更新一个岗位信息 -->	
+	<update id="updateOnePostInfo" parameterType="com.zjm.sys.db.model.Sys_post">
+		<![CDATA[
+		UPDATE 
+		  sys_post
+		SET
+		unit_uid = #{unit_uid},
+		parentPostID = #{parentPostID},
+		postFullCode = #{postFullCode},
+		postCode = #{postCode},
+		postName = #{postName},
+		postDescription = #{postDescription},
+		isDelete = #{isDelete},
+		order_id = #{order_id},
+		updateUserName = #{updateUserName},
+		updateDateTime = NOW()
+		WHERE post_ID = #{post_ID}
+		  ]]>
+	</update>
+	<!-- 删除一个岗位信息 -->
+	<delete id="deleteOnePostInfo" parameterType="com.zjm.sys.db.model.Sys_post">
+		<![CDATA[DELETE FROM sys_post WHERE post_ID = #{post_ID} ]]>
+	</delete>
+	
+	<!-- 判断岗位名是否存在-->
+	<select id="selectPostIsExist" parameterType="java.lang.String" resultType="java.lang.Integer">
+		<![CDATA[SELECT count(post_ID) FROM sys_post where 1=1 ${value} ]]>
+	</select>
+</mapper>

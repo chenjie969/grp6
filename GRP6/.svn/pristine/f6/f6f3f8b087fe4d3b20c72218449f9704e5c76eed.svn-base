@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_assetSealUpMapper">
+	 <resultMap id="ProSealUpMap" type="com.zjm.pro.db.model.Pro_assetSealUp" >
+	    <id column="assetSealUp_ID" property="assetSealUp_ID"  />
+		<result column="project_ID" property="project_ID"/>
+		<result column="serialNum" property="serialNum"/>
+		<result column="applyPerson" property="applyPerson"/>
+		<result column="busiType" property="busiType"/>
+		<result column="targetSum" property="targetSum"/>		
+		<result column="plaintiff" property="plaintiff"/>
+		<result column="defendant" property="defendant"/>
+		<result column="lawsuitDate" property="lawsuitDate"/>
+		<result column="effectiveLegalDocuments" property="effectiveLegalDocuments"/>
+		<result column="firstSeal" property="firstSeal"/>
+		<result column="waiting" property="waiting"/>
+		<result column="firstSealAssetValue" property="firstSealAssetValue"/>
+		<result column="ifWorkingGroup" property="ifWorkingGroup"/>
+		<result column="propertyType" property="propertyType"/>
+		<result column="isRecord" property="isRecord"/>
+		<result column="recordNum" property="recordNum"/>
+		<result column="lawCourt" property="lawCourt"/>
+		<result column="executeBasis" property="executeBasis"/>
+		<result column="projectIDList" property="projectIDList"/>
+		<result column="projectNameList" property="projectNameList"/>
+		<result column="affiliateGroup" property="affiliateGroup"/>
+		<result column="assetSealUpType" property="assetSealUpType"/>
+		<result column="remark" property="remark"/>
+		<result column="unit_uid" property="unit_uid"/>
+		<result column="createUserName" property="createUserName"/>
+		<result column="createDateTime" property="createDateTime"/>		
+		<result column="updateUserName" property="updateUserName"/>
+		<result column="updateDateTime" property="updateDateTime"/>
+  </resultMap>	
+<!-- 新增 -->
+	<insert id="insertOneSeaulUp"	parameterType="com.zjm.pro.db.model.Pro_assetSealUp">
+		<![CDATA[
+		INSERT INTO pro_assetSealUp (
+		        assetSealUp_ID,		
+		        project_ID,	
+		        serialNum,
+		        applyPerson,
+		        busiType,
+				targetSum,				
+		        plaintiff,
+		        defendant,
+				lawsuitDate,				
+				effectiveLegalDocuments,				
+				firstSeal,
+				waiting,
+				firstSealAssetValue,
+				ifWorkingGroup,		
+				propertyType,				
+				isRecord,
+				recordNum,
+				lawCourt,
+				executeBasis,
+				projectIDList,
+				projectNameList,
+				affiliateGroup,
+				assetSealUpType,
+				remark,
+				unit_uid,		
+				createUserName,
+				createDateTime,
+				updateUserName,			
+				updateDateTime
+		)
+		VALUES
+		(
+				#{assetSealUp_ID},
+				#{project_ID},
+				#{serialNum},
+				#{applyPerson},
+				#{busiType},				
+				#{targetSum},	
+		        #{plaintiff},
+		        #{defendant},
+				#{lawsuitDate},				
+				#{effectiveLegalDocuments},				
+				#{firstSeal},
+				#{waiting},
+				#{firstSealAssetValue},
+				#{ifWorkingGroup},				
+				#{propertyType},				
+				#{isRecord},
+				#{recordNum},
+				#{lawCourt},
+				#{executeBasis},
+				#{projectIDList},
+				#{projectNameList},
+				#{affiliateGroup},
+				#{assetSealUpType},
+				#{remark},
+				#{unit_uid},			
+				#{createUserName},
+				NOW(),
+				#{updateUserName},		
+				NOW()			
+		) ;
+		]]>
+	</insert>		
+	<!-- 查询  列表 -->
+	<select id="selectProSeaulUpPageTables" resultMap="ProSealUpMap" parameterType="com.zjm.common.db.model.PageTable">
+		<![CDATA[
+		select 
+			    assetSealUp_ID,		
+		        project_ID,	
+		        serialNum,
+		        applyPerson,
+		        busiType,
+				targetSum,
+		        plaintiff,
+		        defendant,
+				lawsuitDate,				
+				effectiveLegalDocuments,				
+				firstSeal,
+				waiting,
+				firstSealAssetValue,
+				ifWorkingGroup,					
+				propertyType,				
+				isRecord,
+				recordNum,
+				lawCourt,
+				executeBasis,
+				projectIDList,
+				projectNameList,
+				affiliateGroup,
+				assetSealUpType,
+				remark,
+				unit_uid,		
+				createUserName,
+				createDateTime,
+				updateUserName,			
+				updateDateTime
+				from pro_assetSealUp
+		WHERE 1=1 ${wheresql} limit #{pageNumber},#{pageSize}	
+		]]>
+	</select>	
+	<!-- 查询总记录数-->
+	<select id="selectSealUpPageTables_Count" parameterType="com.zjm.common.db.model.PageTable"  resultType="java.lang.Long">
+		<![CDATA[
+		SELECT count(assetSealUp_ID) FROM pro_assetSealUp 
+		WHERE 1=1 ${wheresql} 		
+		]]>		 
+	</select>
+	
+	
+	<!-- 查询一个-->
+	<select id="selectOneSealUpInfo" parameterType="java.lang.String"  resultMap="ProSealUpMap">
+	<![CDATA[
+			select 
+			    assetSealUp_ID,		
+		        project_ID,	
+		        serialNum,
+		        applyPerson,
+		        busiType,
+				targetSum,
+		        plaintiff,
+		        defendant,
+				lawsuitDate,				
+				effectiveLegalDocuments,				
+				firstSeal,
+				waiting,
+				firstSealAssetValue,
+				ifWorkingGroup,					
+				propertyType,				
+				isRecord,
+				recordNum,
+				lawCourt,
+				executeBasis,
+				projectIDList,
+				projectNameList,
+				affiliateGroup,
+				assetSealUpType,
+				remark,
+				unit_uid,		
+				createUserName,
+				createDateTime,
+				updateUserName,			
+				updateDateTime
+				from pro_assetSealUp
+		WHERE 1=1 ${value}
+		]]> 				 
+	</select>
+
+	<!-- 更新 -->	
+	<update id="updateOneSealUpInfo" parameterType="com.zjm.pro.db.model.Pro_assetSealUp">
+		<![CDATA[
+		UPDATE 
+		  pro_assetSealUp
+		SET
+		recordNum=#{recordNum},
+		serialNum=#{serialNum},
+		targetSum=#{targetSum},
+        plaintiff=#{plaintiff},
+        defendant=#{defendant},
+		lawsuitDate=#{lawsuitDate},				
+		effectiveLegalDocuments=#{effectiveLegalDocuments},				
+		firstSeal=#{firstSeal},
+		waiting=#{waiting},
+		firstSealAssetValue=#{firstSealAssetValue},
+		ifWorkingGroup=#{ifWorkingGroup},	
+		propertyType=#{propertyType},
+		lawCourt=#{lawCourt},
+		executeBasis=#{executeBasis},
+		projectIDList=#{projectIDList},
+		projectNameList=#{projectNameList},
+		affiliateGroup=#{affiliateGroup},
+		assetSealUpType=#{assetSealUpType},
+		remark=#{remark},
+		isRecord=#{isRecord},
+		applyPerson = #{applyPerson},
+		createUserName = #{createUserName},
+		createDateTime=NOW(),
+		updatedatetime = NOW(),
+		updateUserName = #{updateUserName}
+		WHERE assetSealUp_ID=#{assetSealUp_ID}  and unit_uid=#{unit_uid} 
+		  ]]>
+	</update>
+	
+	<!-- 删除一个-->
+	<delete id="deleteSeaulUpsBySealUpID" parameterType="com.zjm.pro.db.model.Pro_assetSealUp">
+		<![CDATA[DELETE FROM pro_assetSealUp WHERE assetSealUp_ID=#{assetSealUp_ID}   ]]>
+	</delete>
+	
+	<delete id="deleteSeaulUpsByProject_ID" parameterType="string">
+ 		DELETE FROM 
+			pro_assetSealUp
+		where project_ID = #{project_ID}
+	</delete>
+</mapper>  

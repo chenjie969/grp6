@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_costMustMapper">
+	
+	<!-- 应收费用表信息 -->
+	<resultMap type="com.zjm.pro.db.model.Pro_costMust" id="CostMustMap">
+		<result property="costMust_ID" column="costMust_ID" />
+		<result property="apply_ID" column="apply_ID" />
+		<result property="applyDetail_ID" column="applyDetail_ID" />
+		<result property="costTypeID" column="costTypeID" />
+		<result property="costName" column="costName" />
+		<result property="costRate" column="costRate" />
+		<result property="costUnit" column="costUnit" />
+		<result property="mustCostSum" column="mustCostSum" />
+		<result property="remark" column="remark" />
+		<result property="costMustState" column="costMustState" />
+		<result property="operationDepartID" column="operationDepartID" />
+		<result property="operationDepartName" column="operationDepartName" />
+		<result property="operationUserID" column="operationUserID" />
+		<result property="operationUserName" column="operationUserName" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="updateUserName" column="updateUserName" />
+		<result property="updateDateTime" column="updateDateTime" />
+		<result property="loanPlan_ID" column="loanPlan_ID" />
+		<result property="meetingDetail_ID" column="meetingDetail_ID" />
+		<result property="mustCostDate" column="mustCostDate" />
+	</resultMap>
+	<!-- 查询应收费用表  列表 -->
+	<select id="selectApplyPageTables" resultMap="CostMustMap" parameterType="com.zjm.common.db.model.PageTable">
+		<![CDATA[
+		SELECT
+				costMust_ID,
+				apply_ID,
+				applyDetail_ID,
+				costTypeID,
+				costName,
+				costRate,
+				costUnit,
+				mustCostSum,
+				remark,
+				costMustState,
+				operationDepartID,
+				operationDepartName,
+				operationUserID,
+				operationUserName,
+				unit_uid,
+				updateUserName,
+				updateDateTime,
+				meetingDetail_ID,
+				mustCostDate,
+				loanPlan_ID
+				
+		   FROM
+		       pro_costMust		   
+		WHERE 1=1 ${wheresql} 
+		]]>
+	</select>
+		<!-- 查询应收费用表  总记录数-->
+	<select id="selectApplyPageTables_Count" parameterType="com.zjm.common.db.model.PageTable"  resultType="java.lang.Long">
+		<![CDATA[
+		SELECT count(costMust_ID) FROM pro_costMust
+		WHERE 1=1 ${wheresql} 		
+		]]>		 
+	</select>
+	<!-- 根据查询条件查询一个应收费用表信息-->
+	<select id="selectOneCostMustByWhereSql" parameterType="java.lang.String"  resultMap="CostMustMap">
+	<![CDATA[
+		SELECT 
+	        costMust_ID,
+			apply_ID,
+			applyDetail_ID,
+			costTypeID,
+			costName,
+			costRate,
+			costUnit,
+			interestSum,
+			capitalMustCostSum,
+			interestMustCostSum,
+			mustCostSum,
+			remark,
+			costMustState,
+			operationDepartID,
+			operationDepartName,
+			operationUserID,
+			operationUserName,
+			unit_uid,
+			updateUserName,
+			updateDateTime,
+			meetingDetail_ID,
+			mustCostDate,
+			loanPlan_ID
+	       
+	    FROM 
+	         pro_costMust 
+		WHERE 1=1 ${value}
+		]]> 				 
+	</select>
+	<!-- 更新一个应收费用表信息 -->	
+	<update id="updateOneCostMust" parameterType="com.zjm.pro.db.model.Pro_costMust">
+		UPDATE 
+		     pro_costMust
+		<set >
+		    <if test="apply_ID != null" >apply_ID = #{apply_ID},</if>
+			<if test="applyDetail_ID != null" >applyDetail_ID = #{applyDetail_ID},</if>
+			<if test="costTypeID != null" >costTypeID = #{costTypeID},</if>
+			<if test="costName != null" >costName = #{costName},</if>
+			<if test="costRate != null" >costRate = #{costRate},</if>
+			<if test="costUnit != null" >costUnit = #{costUnit},</if>
+			<if test="interestSum != null" >interestSum = #{interestSum},</if>
+			<if test="capitalMustCostSum != null" >capitalMustCostSum = #{capitalMustCostSum},</if>
+			<if test="interestMustCostSum != null" >interestMustCostSum = #{interestMustCostSum},</if>
+			<if test="mustCostSum != null" >mustCostSum = #{mustCostSum},</if>
+			<if test="remark != null" >remark= #{remark},</if>
+			<if test="costMustState != null" >costMustState= #{costMustState},</if>
+			<if test="operationDepartID != null" >operationDepartID= #{operationDepartID},</if>
+			<if test="operationDepartName != null" >operationDepartName= #{operationDepartName},</if>
+			<if test="operationUserID != null" >operationUserID= #{operationUserID},</if>
+			<if test="operationUserName != null" >operationUserName= #{operationUserName},</if>
+			<if test="unit_uid != null" >unit_uid= #{unit_uid},</if>
+			<if test="updateUserName != null" >updateUserName= #{updateUserName},</if>
+			   updateDateTime = NOW(),
+			<if test="loanPlan_ID!= null" >loanPlan_ID= #{loanPlan_ID},</if>
+			<if test="mustCostDate!= null" >mustCostDate= #{mustCostDate},</if>
+			<if test="meetingDetail_ID!= null" >meetingDetail_ID= #{meetingDetail_ID}</if>
+		</set>
+		WHERE costMust_ID=#{costMust_ID} 
+	</update>
+	<!-- 查询多个应收费用表信息 -->
+	<select id="selectCostMustListByWheresql" parameterType="string" resultMap="CostMustMap">
+		<![CDATA[
+			SELECT
+		 		costMust_ID,
+				apply_ID,
+				applyDetail_ID,
+				costTypeID,
+				costName,
+				costRate,
+				costUnit,
+				interestSum,
+				capitalMustCostSum,
+				interestMustCostSum,
+				mustCostSum,
+				remark,
+				costMustState,
+				operationDepartID,
+				operationDepartName,
+				operationUserID,
+				operationUserName,
+				unit_uid,
+				updateUserName,
+				updateDateTime,
+				meetingDetail_ID,
+				mustCostDate,
+				loanPlan_ID
+			FROM pro_costMust
+			WHERE 1=1 ${value}
+		]]>
+	</select>
+	
+	<delete id="deleteCostMustByWheresql" parameterType="string">
+		DELETE FROM pro_costMust
+		WHERE 1=1 ${value}
+	</delete>
+	
+	<insert id="insertOneCostMust"  parameterType="com.zjm.pro.db.model.Pro_costMust">
+		INSERT INTO pro_costMust (
+			costMust_ID,
+			apply_ID,
+			applyDetail_ID,
+			costTypeID,
+			costName,
+			costRate,
+			costUnit,
+			interestSum,
+			capitalMustCostSum,
+			interestMustCostSum,
+			mustCostSum,
+			remark,
+			costMustState,
+			operationDepartID,
+			operationDepartName,
+			operationUserID,
+			operationUserName,
+			unit_uid,
+			updateUserName,
+			updateDateTime,
+			meetingDetail_ID,
+			mustCostDate,
+			loanPlan_ID
+		) VALUES (
+			#{costMust_ID},
+			#{apply_ID},
+			#{applyDetail_ID},
+			#{costTypeID},
+			#{costName},
+			#{costRate},
+			#{costUnit},
+			#{interestSum},
+			#{capitalMustCostSum},
+			#{interestMustCostSum},
+			#{mustCostSum},
+			#{remark},
+			#{costMustState},
+			#{operationDepartID},
+			#{operationDepartName},
+			#{operationUserID},
+			#{operationUserName},
+			#{unit_uid},
+			#{updateUserName},
+			NOW(),
+			#{meetingDetail_ID},
+			#{mustCostDate},
+			#{loanPlan_ID}
+		)
+	</insert>
+	
+	<!-- 分组查询-->
+	<select id="selectCostMustListByWheresqlGroup" parameterType="java.lang.String"  resultMap="CostMustMap">
+	<![CDATA[
+		SELECT 
+			costTypeID,
+			costName,
+			IFNULL(SUM(mustCostSum),0) AS mustCostSum
+	    FROM 
+	         pro_costMust 
+		WHERE 1=1 ${value}
+		]]> 				 
+	</select>
+	
+	<!-- 改变预收状态 -->	
+	<update id="updateCostMustState" parameterType="com.zjm.pro.db.model.Pro_costMust">
+		UPDATE 
+		     pro_costMust
+		<set >
+			costMustState= #{costMustState},
+			   updateDateTime = NOW()
+		</set>
+		WHERE costMust_ID=#{costMust_ID} 
+	</update>
+	
+</mapper>

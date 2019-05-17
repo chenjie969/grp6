@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.sys.db.map.Sys_role_dataMapper">
+	<insert id="insertOneDataAndRolesInfo"	parameterType="com.zjm.sys.db.model.Sys_role_user">
+		<![CDATA[
+		INSERT INTO sys_roles_data (
+		id,
+		role_uid,
+		operation_type,
+		accredit_type,
+		unit_uid
+		)
+		VALUES
+		(
+		#{id},
+		#{role_uid},
+		#{operation_type},
+		#{accredit_type},
+		#{unit_uid}
+		) ;
+		]]>
+	</insert>
+
+	<update id="updateOneSysRolesData" parameterType="com.zjm.sys.db.model.Sys_role_user" >
+		update sys_roles_data 
+		set accredit_type = #{accredit_type}
+		where role_uid = #{role_uid} and operation_type =#{operation_type}
+	</update>
+	
+	<!-- 
+	<delete id="deleteDataAndRolesInfoByRoleId">
+		<![CDATA[DELETE FROM sys_roles_data WHERE role_uid=#{role_uid}]]>
+	</delete>
+	 -->
+	
+	<select id="selectByRoleId" parameterType="java.lang.String" resultType="com.zjm.sys.db.model.Sys_role_data">
+		select * from sys_roles_data WHERE role_uid = #{roleId}
+	</select>
+	
+	<select id = "selectClientDataByUserId" parameterType = "java.lang.String" resultType = "com.zjm.sys.db.model.Sys_role_data">
+	select  * from sys_roles_data
+	where sys_roles_data.role_uid in (
+		select sys_roles.role_uid from sys_roles 
+		left join sys_roles_user on sys_roles.role_uid = sys_roles_user.role_uid
+		where sys_roles_user.user_uid = #{userId}
+		)
+	and sys_roles_data.operation_type = 1
+	</select>
+	
+	<select id = "selectProDataByUserId" parameterType = "java.lang.String" resultType = "com.zjm.sys.db.model.Sys_role_data">
+	select  * from sys_roles_data
+	where sys_roles_data.role_uid in (
+		select sys_roles.role_uid from sys_roles 
+		left join sys_roles_user on sys_roles.role_uid = sys_roles_user.role_uid
+		where sys_roles_user.user_uid = #{userId}
+		)
+	and sys_roles_data.operation_type = 2
+	</select>
+	
+	<select id="selectOneData" parameterType="com.zjm.sys.db.model.Sys_role_data" resultType="com.zjm.sys.db.model.Sys_role_data">
+		select * from sys_roles_data 
+		where role_uid = #{role_uid} 
+		and	  operation_type = #{operation_type}
+	</select>
+	
+</mapper>

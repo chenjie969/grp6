@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><jatools Class="jatools.ReportDocument" Name="jatools report template"><VariableContext/><Page><Children ItemClass="PagePanel"><Item0><Width>1068</Width><Height>137</Height><Children><Item0 Class="Label"><Text>金额单位：万元</Text><HorizontalAlignment>2</HorizontalAlignment><X>859</X><Y>110</Y><Width>110</Width><Height>23</Height></Item0><Item1 Class="Text"><Variable>=if(has(endyearmonthsql)) return endyearmonthsql+"月";else return $today.substring(0,7)+"月";</Variable><Font><Face>宋体</Face><Style>1</Style><Size>26</Size></Font><X>392</X><Y>28</Y><Width>128</Width><Height>68</Height></Item1><Item2 Class="Label"><Text>河北融投控股集团各公司</Text><Font><Face>宋体</Face><Style>1</Style><Size>26</Size></Font><X>86</X><Y>28</Y><Width>305</Width><Height>68</Height></Item2><Item3 Class="Label"><Text>末在保（在贷）企业风险分类情况明细</Text><Font><Face>宋体</Face><Style>1</Style><Size>26</Size></Font><X>521</X><Y>28</Y><Width>467</Width><Height>68</Height></Item3></Children><Type>100</Type></Item0><Item1><Y>1082</Y><Width>1068</Width><Height>0</Height><Type>103</Type></Item1><Item2><Y>137</Y><Width>1068</Width><Height>945</Height><Children><Item0 Class="Table"><X>101</X><Y>104</Y><Children><Item0 Class="Label"><Text>单位名称</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col></Cell></Item0><Item1 Class="Label"><Text>分类</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col></Cell></Item1><Item2 Class="Label"><Text>户数</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>3</Col></Cell></Item2><Item3 Class="Label"><Text>金额占比</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>4</Col></Cell></Item3><Item4 Class="Label"><Text>预计损失</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>5</Col></Cell></Item4><Item5 Class="RowPanel"><Cell><Row>1</Row><Col>0</Col><ColSpan>6</ColSpan></Cell><Children ItemClass="RowPanel"><Item0><Cell><Row>1</Row><Col>0</Col><ColSpan>6</ColSpan></Cell><Children><Item0 Class="Label"><Text>融投集团本部</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><PrintStyle>united-level:1;</PrintStyle><Cell><Row>1</Row><Col>0</Col></Cell></Item0><Item1 Class="Text"><Variable>=if(has(index2_ent_guaSum.entrustSum{$.riskLevelName})) return index2_ent_guaSum.entrustSum{$.riskLevelName} ;else return 0;</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>2</Col></Cell></Item1><Item2 Class="Text"><Variable>=$.riskLevelName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>1</Col></Cell></Item2><Item3 Class="Text"><Variable>=if(has(index2_clientNum.clientNum{$.riskLevelName})) return index2_clientNum.clientNum{$.riskLevelName} ;else return 0;</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>3</Col></Cell></Item3><Item4 Class="Text"><Variable>=(index2_ent_guaSum.entrustSum{$.riskLevelName})/(index2_ent_guaSum.entrustSum.sum())</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>0.000%</Pattern></Format><Cell><Row>1</Row><Col>4</Col></Cell></Item4><Item5 Class="Text"><Variable>=if(has(index2_loseSum.loseSum{$.riskLevelName})) return index2_loseSum.loseSum{$.riskLevelName} ;else return 0;</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>5</Col></Cell></Item5></Children><NodePath>Row</NodePath></Item0></Children><NodePath>tab_risk</NodePath></Item5><Item6 Class="Label"><Text>融投集团本部小计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>0</Col><ColSpan>2</ColSpan></Cell></Item6><Item7 Class="Text"><Variable>=index2_clientNum.clientNum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>3</Col></Cell></Item7><Item8 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>2</Row><Col>4</Col></Cell></Item8><Item9 Class="Label"><Text>委贷余额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>2</Col></Cell></Item9><Item10 Class="Text"><Variable>=index2_ent_guaSum.entrustSum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>2</Col></Cell></Item10><Item11 Class="Text"><Variable>=index2_loseSum.loseSum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>5</Col></Cell></Item11></Children><ColumnWidths>147,144,162,147,123,144</ColumnWidths><RowHeights>40,20,33</RowHeights></Item0><Item1 Class="Table"><X>101</X><Y>199</Y><Children><Item0 Class="Label"><Text>单位名称</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col></Cell></Item0><Item1 Class="Label"><Text>分类</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col></Cell></Item1><Item2 Class="Label"><Text>户数</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>3</Col></Cell></Item2><Item3 Class="Label"><Text>金额占比</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>4</Col></Cell></Item3><Item4 Class="Label"><Text>预计损失</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>5</Col></Cell></Item4><Item5 Class="RowPanel"><Cell><Row>1</Row><Col>0</Col><ColSpan>6</ColSpan></Cell><Children ItemClass="RowPanel"><Item0><Cell><Row>1</Row><Col>0</Col><ColSpan>6</ColSpan></Cell><Children><Item0 Class="Label"><Text>盈和公司</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><PrintStyle>united-level:1;</PrintStyle><Cell><Row>1</Row><Col>0</Col></Cell></Item0><Item1 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>1</Row><Col>1</Col></Cell></Item1><Item2 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>1</Row><Col>2</Col></Cell></Item2><Item3 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>1</Row><Col>3</Col></Cell></Item3><Item4 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>1</Row><Col>4</Col></Cell></Item4><Item5 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>1</Row><Col>5</Col></Cell></Item5></Children><NodePath>Row</NodePath></Item0></Children><NodePath>tab_detail</NodePath></Item5><Item6 Class="Label"><Text>盈和公司小计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>0</Col><ColSpan>2</ColSpan></Cell></Item6><Item7 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>2</Row><Col>2</Col></Cell></Item7><Item8 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>2</Row><Col>3</Col></Cell></Item8><Item9 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>2</Row><Col>4</Col></Cell></Item9><Item10 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>2</Row><Col>5</Col></Cell></Item10><Item11 Class="Label"><Text>委贷余额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>2</Col></Cell></Item11></Children><ColumnWidths>147,144,162,147,123,144</ColumnWidths><RowHeights>40,20,33</RowHeights></Item1><Item2 Class="Table"><X>102</X><Y>390</Y><Children><Item0 Class="Label"><Text>单位名称</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col></Cell></Item0><Item1 Class="Label"><Text>分类</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col></Cell></Item1><Item2 Class="Label"><Text>户数</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>3</Col></Cell></Item2><Item3 Class="Label"><Text>金额占比</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>4</Col></Cell></Item3><Item4 Class="Label"><Text>预计损失</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>5</Col></Cell></Item4><Item5 Class="Label"><Text>置业公司小计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>0</Col><ColSpan>2</ColSpan></Cell></Item5><Item6 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>2</Row><Col>2</Col></Cell></Item6><Item7 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>2</Row><Col>3</Col></Cell></Item7><Item8 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>2</Row><Col>4</Col></Cell></Item8><Item9 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>2</Row><Col>5</Col></Cell></Item9><Item10 Class="Label"><Text>置业公司</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><PrintStyle>united-level:1;</PrintStyle><Cell><Row>1</Row><Col>0</Col></Cell></Item10><Item11 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>1</Row><Col>4</Col></Cell></Item11><Item12 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>1</Row><Col>2</Col></Cell></Item12><Item13 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>1</Row><Col>3</Col></Cell></Item13><Item14 Class="Text"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>1</Col></Cell></Item14><Item15 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>1</Row><Col>5</Col></Cell></Item15><Item16 Class="Label"><Text>委贷余额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>2</Col></Cell></Item16></Children><ColumnWidths>147,144,162,147,123,144</ColumnWidths><RowHeights>40,20,33</RowHeights></Item2><Item3 Class="Table"><X>103</X><Y>485</Y><Children><Item0 Class="Label"><Text>单位名称</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col></Cell></Item0><Item1 Class="Label"><Text>分类</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col></Cell></Item1><Item2 Class="Label"><Text>户数</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>3</Col></Cell></Item2><Item3 Class="Label"><Text>金额占比</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>4</Col></Cell></Item3><Item4 Class="Label"><Text>预计损失</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>5</Col></Cell></Item4><Item5 Class="Label"><Text>中聚公司小计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>0</Col><ColSpan>2</ColSpan></Cell></Item5><Item6 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>2</Row><Col>2</Col></Cell></Item6><Item7 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>2</Row><Col>3</Col></Cell></Item7><Item8 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>2</Row><Col>4</Col></Cell></Item8><Item9 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>2</Row><Col>5</Col></Cell></Item9><Item10 Class="Label"><Text>中聚公司</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><PrintStyle>united-level:1;</PrintStyle><Cell><Row>1</Row><Col>0</Col></Cell></Item10><Item11 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>1</Row><Col>4</Col></Cell></Item11><Item12 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>1</Row><Col>2</Col></Cell></Item12><Item13 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>1</Row><Col>3</Col></Cell></Item13><Item14 Class="Text"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>1</Col></Cell></Item14><Item15 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>1</Row><Col>5</Col></Cell></Item15><Item16 Class="Label"><Text>委贷余额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>2</Col></Cell></Item16></Children><ColumnWidths>147,144,162,147,123,144</ColumnWidths><RowHeights>40,20,33</RowHeights></Item3><Item4 Class="Table"><X>102</X><Y>295</Y><Children><Item0 Class="Label"><Text>单位名称</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col></Cell></Item0><Item1 Class="Label"><Text>分类</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col></Cell></Item1><Item2 Class="Label"><Text>户数</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>3</Col></Cell></Item2><Item3 Class="Label"><Text>金额占比</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>4</Col></Cell></Item3><Item4 Class="Label"><Text>预计损失</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>5</Col></Cell></Item4><Item5 Class="RowPanel"><Cell><Row>1</Row><Col>0</Col><ColSpan>6</ColSpan></Cell><Children ItemClass="RowPanel"><Item0><Cell><Row>1</Row><Col>0</Col><ColSpan>6</ColSpan></Cell><Children><Item0 Class="Label"><Text>创投公司</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><PrintStyle>united-level:1;</PrintStyle><Cell><Row>1</Row><Col>0</Col></Cell></Item0><Item1 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>1</Row><Col>1</Col></Cell></Item1><Item2 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>1</Row><Col>2</Col></Cell></Item2><Item3 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>1</Row><Col>3</Col></Cell></Item3><Item4 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>1</Row><Col>4</Col></Cell></Item4><Item5 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>1</Row><Col>5</Col></Cell></Item5></Children><NodePath>Row</NodePath></Item0></Children><NodePath>tab_detail</NodePath></Item5><Item6 Class="Label"><Text>创投公司小计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>0</Col><ColSpan>2</ColSpan></Cell></Item6><Item7 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>2</Row><Col>2</Col></Cell></Item7><Item8 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>2</Row><Col>3</Col></Cell></Item8><Item9 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>2</Row><Col>4</Col></Cell></Item9><Item10 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>2</Row><Col>5</Col></Cell></Item10><Item11 Class="Label"><Text>委贷余额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>2</Col></Cell></Item11></Children><ColumnWidths>147,144,162,147,123,144</ColumnWidths><RowHeights>40,20,33</RowHeights></Item4><Item5 Class="Table"><X>103</X><Y>580</Y><Children><Item0 Class="Label"><Text>单位名称</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col></Cell></Item0><Item1 Class="Label"><Text>分类</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col></Cell></Item1><Item2 Class="Label"><Text>户数</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>3</Col></Cell></Item2><Item3 Class="Label"><Text>金额占比</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>4</Col></Cell></Item3><Item4 Class="Label"><Text>预计损失</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>5</Col></Cell></Item4><Item5 Class="Label"><Text>融创公司小计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>0</Col><ColSpan>2</ColSpan></Cell></Item5><Item6 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>2</Row><Col>4</Col></Cell></Item6><Item7 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>2</Row><Col>5</Col></Cell></Item7><Item8 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>2</Row><Col>2</Col></Cell></Item8><Item9 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>2</Row><Col>3</Col></Cell></Item9><Item10 Class="Label"><Text>融创公司</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><PrintStyle>united-level:1;</PrintStyle><Cell><Row>1</Row><Col>0</Col></Cell></Item10><Item11 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>1</Row><Col>2</Col></Cell></Item11><Item12 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>1</Row><Col>3</Col></Cell></Item12><Item13 Class="Text"><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>1</Col></Cell></Item13><Item14 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>1</Row><Col>4</Col></Cell></Item14><Item15 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>1</Row><Col>5</Col></Cell></Item15><Item16 Class="Label"><Text>委贷余额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>2</Col></Cell></Item16></Children><ColumnWidths>147,144,162,147,123,144</ColumnWidths><RowHeights>40,20,33</RowHeights></Item5><Item6 Class="Table"><X>104</X><Y>675</Y><Children><Item0 Class="Label"><Text>单位名称</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col></Cell></Item0><Item1 Class="Label"><Text>分类</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col></Cell></Item1><Item2 Class="Label"><Text>户数</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>3</Col></Cell></Item2><Item3 Class="Label"><Text>金额占比</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>4</Col></Cell></Item3><Item4 Class="Label"><Text>预计损失</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>5</Col></Cell></Item4><Item5 Class="Label"><Text>信瑞公司小计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>0</Col><ColSpan>2</ColSpan></Cell></Item5><Item6 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>2</Row><Col>4</Col></Cell></Item6><Item7 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>2</Row><Col>2</Col></Cell></Item7><Item8 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>2</Row><Col>3</Col></Cell></Item8><Item9 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>2</Row><Col>5</Col></Cell></Item9><Item10 Class="Label"><Text>信瑞公司</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><PrintStyle>united-level:1;</PrintStyle><Cell><Row>1</Row><Col>0</Col></Cell></Item10><Item11 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>1</Row><Col>2</Col></Cell></Item11><Item12 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>1</Row><Col>1</Col></Cell></Item12><Item13 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>1</Row><Col>3</Col></Cell></Item13><Item14 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>1</Row><Col>4</Col></Cell></Item14><Item15 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Cell><Row>1</Row><Col>5</Col></Cell></Item15><Item16 Class="Label"><Text>委贷余额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>2</Col></Cell></Item16></Children><ColumnWidths>147,144,162,147,123,144</ColumnWidths><RowHeights>40,20,33</RowHeights></Item6><Item7 Class="Label"><Text>租赁公司：</Text><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><X>104</X><Y>770</Y><Width>116</Width><Height>26</Height></Item7><Item8 Class="Table"><X>107</X><Y>799</Y><Children><Item0 Class="Label"><Text>户数</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>4</Col><RowSpan>2</RowSpan></Cell></Item0><Item1 Class="Label"><Text>预计损失</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>5</Col><RowSpan>2</RowSpan></Cell></Item1><Item2 Class="RowPanel"><Cell><Row>2</Row><Col>0</Col><ColSpan>6</ColSpan></Cell><Children ItemClass="RowPanel"><Item0><Cell><Row>2</Row><Col>0</Col><ColSpan>6</ColSpan></Cell><Children ItemClass="Text"><Item0><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>2</Row><Col>0</Col></Cell></Item0><Item1><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>2</Row><Col>1</Col></Cell></Item1><Item2><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>2</Row><Col>2</Col></Cell></Item2><Item3><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>2</Row><Col>3</Col></Cell></Item3><Item4><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>2</Row><Col>4</Col></Cell></Item4><Item5><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>2</Row><Col>5</Col></Cell></Item5></Children><NodePath>Row</NodePath></Item0></Children><NodePath>tab_detail</NodePath></Item2><Item3 Class="Label"><Text>业务种类及金额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col><ColSpan>2</ColSpan></Cell></Item3><Item4 Class="Label"><Text>委贷业务</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>1</Col></Cell></Item4><Item5 Class="Label"><Text>租赁业务</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>2</Col></Cell></Item5><Item6 Class="Label"><Text>总计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>3</Col><RowSpan>2</RowSpan></Cell></Item6><Item7 Class="Label"><Text>分类</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col><RowSpan>2</RowSpan></Cell></Item7><Item8 Class="Label"><Text>租赁公司小计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>0</Col></Cell></Item8><Item9 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>3</Row><Col>1</Col></Cell></Item9><Item10 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>3</Row><Col>2</Col></Cell></Item10><Item11 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>3</Row><Col>3</Col></Cell></Item11><Item12 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>3</Row><Col>4</Col></Cell></Item12><Item13 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Cell><Row>3</Row><Col>5</Col></Cell></Item13></Children><ColumnWidths>147,138,138,180,117,147</ColumnWidths><RowHeights>40,20,20,33</RowHeights></Item8><Item9 Class="Table"><NodePath>tab_risk</NodePath><X>101</X><Y>11</Y><Children><Item0 Class="Label"><Text>单位名称</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col></Cell></Item0><Item1 Class="Label"><Text>分类</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col></Cell></Item1><Item2 Class="Label"><Text>担保余额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>2</Col></Cell></Item2><Item3 Class="Label"><Text>委贷余额</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>3</Col></Cell></Item3><Item4 Class="Label"><Text>户数</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>4</Col></Cell></Item4><Item5 Class="Label"><Text>预计损失</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>5</Col></Cell></Item5><Item6 Class="Label"><Text>担保集团小计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>0</Col><ColSpan>2</ColSpan></Cell></Item6><Item7 Class="Text"><Variable>=index1_gua_guaSum.guarantySum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>2</Col></Cell></Item7><Item8 Class="Text"><Variable>=index1_clientNum.clientNum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>4</Col></Cell></Item8><Item9 Class="Text"><Variable>=index1_ent_entSum.entrustSum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>3</Col></Cell></Item9><Item10 Class="Text"><Variable>=index1_loseSum.loseSum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>5</Col></Cell></Item10><Item11 Class="RowPanel"><Cell><Row>1</Row><Col>0</Col><ColSpan>6</ColSpan></Cell><Children><Item0 Class="Label"><Text>担保集团</Text><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-right:1.0px solid #000000;</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>united-level:1;</PrintStyle><Cell><Row>1</Row><Col>0</Col></Cell></Item0><Item1 Class="Text"><Variable>=$.riskLevelName</Variable><Border><StyleText>border-top:1.0px solid #000000;border-left:1.0px solid #000000;border-bottom:1.0px solid #000000;</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>1</Col></Cell></Item1><Item2 Class="Text"><Variable>=if(has(index1_gua_guaSum.guarantySum{$.riskLevelName})) return index1_gua_guaSum.guarantySum{$.riskLevelName} ;else return 0;</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>2</Col></Cell></Item2><Item3 Class="Text"><Variable>=if(has(index1_clientNum.clientNum{$.riskLevelName})) return index1_clientNum.clientNum{$.riskLevelName} ;else return 0;</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>4</Col></Cell></Item3><Item4 Class="Text"><Variable>=if(has(index1_loseSum.loseSum{$.riskLevelName})) return index1_loseSum.loseSum{$.riskLevelName} ;else return 0;</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>5</Col></Cell></Item4><Item5 Class="Text"><Variable>=if(has(index1_ent_entSum.entrustSum{$.riskLevelName})) return index1_ent_entSum.entrustSum{$.riskLevelName} ;else return 0;</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.####</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>3</Col></Cell></Item5></Children><NodePath>Row</NodePath></Item11></Children><ColumnWidths>147,144,162,147,123,144</ColumnWidths><RowHeights>40,20,31</RowHeights></Item9></Children><Type>102</Type></Item2></Children><PageFormat><Width>1117</Width><Height>1122</Height><Right>29</Right></PageFormat></Page><NodeSource><Children ItemClass="DatasetNodeSource"><Item0><Children ItemClass="RowNodeSource"><Item0/></Children><Reader Class="SqlReader"><Name>tab_risk</Name><Sql>SELECT 
+	dicTypeID AS id,
+	dicTypeName AS riskLevelName,
+	remark/1000 AS scale
+FROM c_dictype
+WHERE dicTypePID="50f858be37284937af4e6a8d3c9bee4b"
+ORDER BY order_id
+</Sql><Description>SELECT 
+	dicTypeID AS id,
+	dicTypeName AS riskLevelName,
+	remark/1000 AS scale
+FROM c_dictype
+WHERE dicTypePID="50f858be37284937af4e6a8d3c9bee4b"
+ORDER BY order_id
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><TagName>tab_risk</TagName></Item0><Item1><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">riskLevelName</IndexFields><TagName>index1_gua_guaSum</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab1_gua</Name><Sql>SELECT 
+	out2.riskLevelName,
+	SUM(out1.guarantySum) guarantySum
+FROM(
+	SELECT
+		SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0))) AS guarantySum,
+		cc.clientGUID
+	FROM pro_project pp
+	LEFT JOIN (
+		SELECT
+			pfp.factPay_ID,
+			pfp.project_ID,
+			SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum
+		FROM
+			pro_factpay pfp
+		WHERE   1=1
+		${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+		GROUP BY pfp.project_ID
+	)tab1 ON tab1.project_ID =  pp.project_ID
+	LEFT JOIN (
+		SELECT
+			pre.replace_ID,
+			pre.project_ID,
+			SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum
+
+		FROM
+			pro_replace pre
+		WHERE   1=1
+		${has(endyearmonthsql)?(" and  DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+		GROUP BY pre.project_ID
+	)tab2 ON tab2.project_ID =  pp.project_ID
+	LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+	LEFT JOIN  crm_client  cc ON cc.client_ID=pa.client_ID
+	WHERE   pp.busiClass= '01'
+	and pp.finishDate IS NULL
+	${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.delayBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	GROUP BY cc.clientGUID 
+	) out1 
+LEFT JOIN (
+	SELECT 
+		clientGUID,
+		riskLevelName
+	FROM crm_client
+	WHERE isMainVersion="1"
+	) out2 ON out1.clientGUID=out2.clientGUID
+WHERE 1=1
+GROUP BY out2.riskLevelName</Sql><Description>SELECT 
+	out2.riskLevelName,
+	SUM(out1.guarantySum) guarantySum
+FROM(
+	SELECT
+		SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0))) AS guarantySum,
+		cc.clientGUID
+	FROM pro_project pp
+	LEFT JOIN (
+		SELECT
+			pfp.factPay_ID,
+			pfp.project_ID,
+			SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum
+		FROM
+			pro_factpay pfp
+		WHERE   1=1
+		${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+		GROUP BY pfp.project_ID
+	)tab1 ON tab1.project_ID =  pp.project_ID
+	LEFT JOIN (
+		SELECT
+			pre.replace_ID,
+			pre.project_ID,
+			SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum
+
+		FROM
+			pro_replace pre
+		WHERE   1=1
+		${has(endyearmonthsql)?(" and  DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+		GROUP BY pre.project_ID
+	)tab2 ON tab2.project_ID =  pp.project_ID
+	LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+	LEFT JOIN  crm_client  cc ON cc.client_ID=pa.client_ID
+	WHERE   pp.busiClass= '01'
+	and pp.finishDate IS NULL
+	${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.delayBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	GROUP BY cc.clientGUID 
+	) out1 
+LEFT JOIN (
+	SELECT 
+		clientGUID,
+		riskLevelName
+	FROM crm_client
+	WHERE isMainVersion="1"
+	) out2 ON out1.clientGUID=out2.clientGUID
+WHERE 1=1
+GROUP BY out2.riskLevelName</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">riskLevelName</IndexFields><TagName>tab1_gua</TagName></Item1><Item2><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">riskLevelName</IndexFields><TagName>index1_ent_entSum</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab1_ent</Name><Sql>SELECT 
+	out2.riskLevelName,
+	SUM(out1.entrustSum) entrustSum
+FROM(
+	SELECT
+		SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0))) AS entrustSum,
+		cc.clientGUID
+	FROM pro_project pp
+	LEFT JOIN (
+		SELECT
+			pfp.factPay_ID,
+			pfp.project_ID,
+			SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum
+		FROM
+			pro_factpay pfp
+		WHERE   1=1
+		${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+		GROUP BY pfp.project_ID
+	)tab1 ON tab1.project_ID =  pp.project_ID
+	LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+	LEFT JOIN  crm_client  cc ON cc.client_ID=pa.client_ID
+	WHERE   pp.busiClass= '02'
+	${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.delayBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	GROUP BY cc.clientGUID 
+	) out1 
+LEFT JOIN (
+	SELECT 
+		clientGUID,
+		riskLevelName
+	FROM crm_client
+	WHERE isMainVersion="1" AND riskLevelName IS NOT NULL
+	) out2 ON out1.clientGUID=out2.clientGUID
+WHERE out2.riskLevelName IS NOT NULL
+GROUP BY out2.riskLevelName</Sql><Description>SELECT 
+	out2.riskLevelName,
+	SUM(out1.entrustSum) entrustSum
+FROM(
+	SELECT
+		SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0))) AS entrustSum,
+		cc.clientGUID
+	FROM pro_project pp
+	LEFT JOIN (
+		SELECT
+			pfp.factPay_ID,
+			pfp.project_ID,
+			SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum
+		FROM
+			pro_factpay pfp
+		WHERE   1=1
+		${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+		GROUP BY pfp.project_ID
+	)tab1 ON tab1.project_ID =  pp.project_ID
+	LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+	LEFT JOIN  crm_client  cc ON cc.client_ID=pa.client_ID
+	WHERE   pp.busiClass= '02'
+	${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.delayBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	GROUP BY cc.clientGUID 
+	) out1 
+LEFT JOIN (
+	SELECT 
+		clientGUID,
+		riskLevelName
+	FROM crm_client
+	WHERE isMainVersion="1" AND riskLevelName IS NOT NULL
+	) out2 ON out1.clientGUID=out2.clientGUID
+WHERE out2.riskLevelName IS NOT NULL
+GROUP BY out2.riskLevelName</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">riskLevelName</IndexFields><TagName>tab1_ent</TagName></Item2><Item3><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">riskLevelName</IndexFields><TagName>index1_clientNum</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab1_clientNum</Name><Sql>SELECT 
+	COUNT(DISTINCT pa.`clientGUID`) clientNum, 
+	cc.`riskLevelName`
+FROM pro_project pp
+LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.`apply_ID`
+LEFT JOIN crm_client cc ON cc.`clientGUID` = pa.`clientGUID`
+WHERE 	cc.`isMainVersion`="1"
+	AND pp.busiClass IS NOT NULL
+	${has(enddatesql)?(" and pp.delayBeginDate&lt;='"+enddatesql+"'"):""}
+GROUP BY cc.`riskLevelName`</Sql><Description>SELECT 
+	COUNT(DISTINCT pa.`clientGUID`) clientNum, 
+	cc.`riskLevelName`
+FROM pro_project pp
+LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.`apply_ID`
+LEFT JOIN crm_client cc ON cc.`clientGUID` = pa.`clientGUID`
+WHERE 	cc.`isMainVersion`="1"
+	AND pp.busiClass IS NOT NULL
+	${has(enddatesql)?(" and pp.delayBeginDate&lt;='"+enddatesql+"'"):""}
+GROUP BY cc.`riskLevelName`</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">riskLevelName</IndexFields><TagName>tab1_clientNum</TagName></Item3><Item4><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">riskLevelName</IndexFields><TagName>index1_loseSum</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab1_loseSum</Name><Sql>SELECT 
+	out2.riskLevelName,
+	SUM(out1.guarantySum)*dic.remark/1000 loseSum
+	
+FROM(
+	SELECT
+		SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0))) AS guarantySum,
+		cc.clientGUID
+	FROM pro_project pp
+	LEFT JOIN (
+		SELECT
+			pfp.factPay_ID,
+			pfp.project_ID,
+			SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum
+		FROM
+			pro_factpay pfp
+		WHERE   1=1
+			${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+		GROUP BY pfp.project_ID
+	)tab1 ON tab1.project_ID =  pp.project_ID
+	LEFT JOIN (
+		SELECT
+			pre.replace_ID,
+			pre.project_ID,
+			SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum
+
+		FROM
+			pro_replace pre
+		WHERE   1=1
+			${has(endyearmonthsql)?(" and  DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+		GROUP BY pre.project_ID
+	)tab2 ON tab2.project_ID =  pp.project_ID
+	LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+	LEFT JOIN  crm_client  cc ON cc.client_ID=pa.client_ID
+	WHERE   pp.busiClass IS NOT NULL
+		${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.delayBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	GROUP BY cc.clientGUID 
+	) out1 
+LEFT JOIN (
+	SELECT 
+		clientGUID,
+		riskLevelName
+	FROM crm_client
+	WHERE isMainVersion="1"
+	) out2 ON out1.clientGUID=out2.clientGUID
+LEFT JOIN c_dicType dic ON dic.dicTypeName = out2.riskLevelName
+WHERE 	out2.riskLevelName IS NOT NULL
+	AND dic.dicTypePID="50f858be37284937af4e6a8d3c9bee4b" 
+GROUP BY out2.riskLevelName</Sql><Description>SELECT 
+	out2.riskLevelName,
+	SUM(out1.guarantySum)*dic.remark/1000 loseSum
+	
+FROM(
+	SELECT
+		SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0))) AS guarantySum,
+		cc.clientGUID
+	FROM pro_project pp
+	LEFT JOIN (
+		SELECT
+			pfp.factPay_ID,
+			pfp.project_ID,
+			SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum
+		FROM
+			pro_factpay pfp
+		WHERE   1=1
+			${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+		GROUP BY pfp.project_ID
+	)tab1 ON tab1.project_ID =  pp.project_ID
+	LEFT JOIN (
+		SELECT
+			pre.replace_ID,
+			pre.project_ID,
+			SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum
+
+		FROM
+			pro_replace pre
+		WHERE   1=1
+			${has(endyearmonthsql)?(" and  DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+		GROUP BY pre.project_ID
+	)tab2 ON tab2.project_ID =  pp.project_ID
+	LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+	LEFT JOIN  crm_client  cc ON cc.client_ID=pa.client_ID
+	WHERE   pp.busiClass IS NOT NULL
+		${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.delayBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	GROUP BY cc.clientGUID 
+	) out1 
+LEFT JOIN (
+	SELECT 
+		clientGUID,
+		riskLevelName
+	FROM crm_client
+	WHERE isMainVersion="1"
+	) out2 ON out1.clientGUID=out2.clientGUID
+LEFT JOIN c_dicType dic ON dic.dicTypeName = out2.riskLevelName
+WHERE 	out2.riskLevelName IS NOT NULL
+	AND dic.dicTypePID="50f858be37284937af4e6a8d3c9bee4b" 
+GROUP BY out2.riskLevelName</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">riskLevelName</IndexFields><TagName>tab1_loseSum</TagName></Item4><Item5><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">riskLevelName</IndexFields><TagName>index2_ent_guaSum</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab2_ent</Name><Sql>SELECT 
+	out2.riskLevelName,
+	SUM(out1.entrustSum) entrustSum
+FROM(
+	SELECT
+		SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0))) AS entrustSum,
+		cc.clientGUID
+	FROM pro_project pp
+	LEFT JOIN (
+		SELECT
+			pfp.factPay_ID,
+			pfp.project_ID,
+			SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum
+		FROM
+			pro_factpay pfp
+		WHERE   1=1
+		${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+		GROUP BY pfp.project_ID
+	)tab1 ON tab1.project_ID =  pp.project_ID
+	LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+	LEFT JOIN  crm_client  cc ON cc.client_ID=pa.client_ID
+	WHERE   pp.busiClass= '02'
+	AND pa.guarantyOrgID='9d230c752d384cc78c199c2cdf2c1088'
+	${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.delayBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	GROUP BY cc.clientGUID 
+	) out1 
+LEFT JOIN (
+	SELECT 
+		clientGUID,
+		riskLevelName
+	FROM crm_client
+	WHERE isMainVersion="1" AND riskLevelName IS NOT NULL
+	) out2 ON out1.clientGUID=out2.clientGUID
+WHERE 1=1
+GROUP BY out2.riskLevelName</Sql><Description>SELECT 
+	out2.riskLevelName,
+	SUM(out1.entrustSum) entrustSum
+FROM(
+	SELECT
+		SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0))) AS entrustSum,
+		cc.clientGUID
+	FROM pro_project pp
+	LEFT JOIN (
+		SELECT
+			pfp.factPay_ID,
+			pfp.project_ID,
+			SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum
+		FROM
+			pro_factpay pfp
+		WHERE   1=1
+		${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+		GROUP BY pfp.project_ID
+	)tab1 ON tab1.project_ID =  pp.project_ID
+	LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+	LEFT JOIN  crm_client  cc ON cc.client_ID=pa.client_ID
+	WHERE   pp.busiClass= '02'
+	AND pa.guarantyOrgID='9d230c752d384cc78c199c2cdf2c1088'
+	${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.delayBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	GROUP BY cc.clientGUID 
+	) out1 
+LEFT JOIN (
+	SELECT 
+		clientGUID,
+		riskLevelName
+	FROM crm_client
+	WHERE isMainVersion="1" AND riskLevelName IS NOT NULL
+	) out2 ON out1.clientGUID=out2.clientGUID
+WHERE 1=1
+GROUP BY out2.riskLevelName</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">riskLevelName</IndexFields><TagName>tab2_ent</TagName></Item5><Item6><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">riskLevelName</IndexFields><TagName>index2_clientNum</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab2_clientNum</Name><Sql>SELECT 
+	COUNT(DISTINCT pa.`clientGUID`) clientNum, 
+	cc.`riskLevelName`
+FROM pro_project pp
+LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.`apply_ID`
+LEFT JOIN crm_client cc ON cc.`clientGUID` = pa.`clientGUID`
+WHERE 	cc.`isMainVersion`="1"
+	AND pa.guarantyOrgID='9d230c752d384cc78c199c2cdf2c1088'
+	AND pp.busiClass IS NOT NULL
+	${has(enddatesql)?(" and pp.delayBeginDate&lt;='"+enddatesql+"'"):""}
+GROUP BY cc.`riskLevelName`</Sql><Description>SELECT 
+	COUNT(DISTINCT pa.`clientGUID`) clientNum, 
+	cc.`riskLevelName`
+FROM pro_project pp
+LEFT JOIN pro_apply pa ON pp.`apply_ID` = pa.`apply_ID`
+LEFT JOIN crm_client cc ON cc.`clientGUID` = pa.`clientGUID`
+WHERE 	cc.`isMainVersion`="1"
+	AND pa.guarantyOrgID='9d230c752d384cc78c199c2cdf2c1088'
+	AND pp.busiClass IS NOT NULL
+	${has(enddatesql)?(" and pp.delayBeginDate&lt;='"+enddatesql+"'"):""}
+GROUP BY cc.`riskLevelName`</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">riskLevelName</IndexFields><TagName>tab2_clientNum</TagName></Item6><Item7><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">riskLevelName</IndexFields><TagName>index2_loseSum</TagName></Item0></Children><Reader Class="SqlReader"><Name>tab2_loseSum</Name><Sql>SELECT 
+	out2.riskLevelName,
+	SUM(out1.guarantySum)*dic.remark/1000 loseSum
+	
+FROM(
+	SELECT
+		SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0))) AS guarantySum,
+		cc.clientGUID
+	FROM pro_project pp
+	LEFT JOIN (
+		SELECT
+			pfp.factPay_ID,
+			pfp.project_ID,
+			SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum
+		FROM
+			pro_factpay pfp
+		WHERE   1=1
+			${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+		GROUP BY pfp.project_ID
+	)tab1 ON tab1.project_ID =  pp.project_ID
+	LEFT JOIN (
+		SELECT
+			pre.replace_ID,
+			pre.project_ID,
+			SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum
+
+		FROM
+			pro_replace pre
+		WHERE   1=1
+			${has(endyearmonthsql)?(" and  DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+		GROUP BY pre.project_ID
+	)tab2 ON tab2.project_ID =  pp.project_ID
+	LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+	LEFT JOIN  crm_client  cc ON cc.client_ID=pa.client_ID
+	WHERE   pp.busiClass IS NOT NULL
+	AND pa.guarantyOrgID='9d230c752d384cc78c199c2cdf2c1088'
+	${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.delayBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	GROUP BY cc.clientGUID 
+	) out1 
+LEFT JOIN (
+	SELECT 
+		clientGUID,
+		riskLevelName
+	FROM crm_client
+	WHERE isMainVersion="1"
+	) out2 ON out1.clientGUID=out2.clientGUID
+LEFT JOIN c_dicType dic ON dic.dicTypeName = out2.riskLevelName
+WHERE 	1=1
+	AND dic.dicTypePID="50f858be37284937af4e6a8d3c9bee4b" 
+GROUP BY out2.riskLevelName</Sql><Description>SELECT 
+	out2.riskLevelName,
+	SUM(out1.guarantySum)*dic.remark/1000 loseSum
+	
+FROM(
+	SELECT
+		SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0))) AS guarantySum,
+		cc.clientGUID
+	FROM pro_project pp
+	LEFT JOIN (
+		SELECT
+			pfp.factPay_ID,
+			pfp.project_ID,
+			SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum
+		FROM
+			pro_factpay pfp
+		WHERE   1=1
+			${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+		GROUP BY pfp.project_ID
+	)tab1 ON tab1.project_ID =  pp.project_ID
+	LEFT JOIN (
+		SELECT
+			pre.replace_ID,
+			pre.project_ID,
+			SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum
+
+		FROM
+			pro_replace pre
+		WHERE   1=1
+			${has(endyearmonthsql)?(" and  DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+		GROUP BY pre.project_ID
+	)tab2 ON tab2.project_ID =  pp.project_ID
+	LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+	LEFT JOIN  crm_client  cc ON cc.client_ID=pa.client_ID
+	WHERE   pp.busiClass IS NOT NULL
+	AND pa.guarantyOrgID='9d230c752d384cc78c199c2cdf2c1088'
+	${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.delayBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	GROUP BY cc.clientGUID 
+	) out1 
+LEFT JOIN (
+	SELECT 
+		clientGUID,
+		riskLevelName
+	FROM crm_client
+	WHERE isMainVersion="1"
+	) out2 ON out1.clientGUID=out2.clientGUID
+LEFT JOIN c_dicType dic ON dic.dicTypeName = out2.riskLevelName
+WHERE 	1=1
+	AND dic.dicTypePID="50f858be37284937af4e6a8d3c9bee4b" 
+GROUP BY out2.riskLevelName</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">riskLevelName</IndexFields><TagName>tab2_loseSum</TagName></Item7></Children></NodeSource></jatools>

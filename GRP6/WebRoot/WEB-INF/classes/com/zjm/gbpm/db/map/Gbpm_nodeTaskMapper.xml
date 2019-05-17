@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.gbpm.db.map.Gbpm_nodeTaskMapper">
+
+	<resultMap type="com.zjm.gbpm.db.model.Gbpm_nodeTask" id="nodeTaskResultMap">
+		<result column="nodeTask_ID" property="nodeTask_ID"  />
+		<result column="productID" property="productID"  />
+		<result column="productNodeID" property="productNodeID"  />
+		<result column="nodeNames" property="nodeNames"  />
+		<result column="taskMangerID" property="taskMangerID"  />
+		<result column="taskName" property="taskName"  />
+		<result column="taskSort" property="taskSort"  />
+		<result column="operationType" property="operationType"  />
+		<result column="isBeforeTask" property="isBeforeTask"  />
+		<result column="beforeTaskID" property="beforeTaskID"  />
+		<result column="beforeTaskName" property="beforeTaskName"  />
+		<result column="isStartProcess" property="isStartProcess"  />
+		<result column="processID" property="processID"  />
+		<result column="processName" property="processName"  />
+		<result column="isAfterTask" property="isAfterTask"  />
+		<result column="afterTaskIDList" property="afterTaskIDList"  />
+		<result column="afterTaskNameList" property="afterTaskNameList"  />
+		<result column="warnMethodIDList" property="warnMethodIDList"  />
+		<result column="warnMethodNameList" property="warnMethodNameList"  />
+		<result column="operaterTypeID" property="operaterTypeID"  />
+		<result column="operaterTypeName" property="operaterTypeName"  />
+		<result column="operatorID" property="operatorID"  />
+		<result column="operatorName" property="operatorName"  />
+		<result column="unit_uid" property="unit_uid"  />
+		<result column="unit_uidName" property="unit_uidName"  />
+		<result column="updatedatetime" property="updateDateTime"  />
+		<result column="updateUserName" property="updateUserName"  />
+		<result column="taskCode" property="taskCode"  /><!-- taskmanager表冗餘字段 -->
+		<result column="taskUrl" property="taskUrl"  /><!-- taskmanager表冗餘字段 -->
+		<result column="viewTaskUrl" property="viewTaskUrl"  /><!-- taskmanager表冗餘字段 -->
+		
+		
+		
+		
+	</resultMap>
+	
+	<!-- 分页查询节点任务事项列表 -->
+	<select id="selectNodeTaskPageTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="nodeTaskResultMap">
+		<![CDATA[
+		SELECT 
+			nodeTask_ID,
+			productID,
+			productNodeID,
+			nodeNames,
+			taskMangerID,
+			taskSort,
+			operationType,
+			isBeforeTask,
+			beforeTaskID,
+			isStartProcess,
+			processID,
+		 	taskmanager.taskCode,
+		 	taskmanager.taskName,
+			taskmanager.taskUrl,
+   			taskmanager.viewTaskUrl,
+			isAfterTask,
+			afterTaskIDList,
+			warnMethodIDList,
+			operaterTypeID,
+			operaterTypeName,
+			operatorID,
+			operatorName,
+			beforeTaskName,
+			afterTaskNameList,
+			processName,
+			warnMethodNameList,
+			taskmanager.unit_uid, 
+			taskmanager.unit_uidName,  
+			updateUserName, 
+			taskmanager.updatedatetime
+		FROM gbpm_nodeTask  nodeTask
+		LEFT JOIN gbpm_dic_taskmanager taskmanager ON taskmanager.taskManager_ID = nodeTask.taskMangerID 
+		
+		WHERE 1=1 ${wheresql}
+		order by taskSort	
+		LIMIT #{pageNumber},#{pageSize}  
+		]]>
+	</select>
+	
+	<!-- 分页查询节点任务事项列表-查询总记录数 -->
+	<select id="selectNodeTaskPageTable_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="long">
+	 	
+	 	SELECT 
+	 		COUNT(1) 
+	 	FROM 
+	 		gbpm_nodeTask nodeTask
+	 		LEFT JOIN gbpm_dic_taskmanager taskmanager ON taskmanager.taskManager_ID = nodeTask.taskMangerID 
+	 	WHERE 1=1
+	 		${wheresql}
+	 		
+	</select>
+	
+	<!-- 查询一条节点任务事项-->  
+	<select id="selectOneNodeTask" parameterType="com.zjm.gbpm.db.model.Gbpm_nodeTask" resultMap="nodeTaskResultMap">
+		SELECT 
+			nodeTask_ID,
+			productID,
+			productNodeID,
+			nodeNames,
+			taskMangerID,
+			taskSort,
+			operationType,
+			isBeforeTask,
+			beforeTaskID,
+			isStartProcess,
+			processID,
+			taskName,
+			isAfterTask,
+			afterTaskIDList,
+			warnMethodIDList,
+			operaterTypeID,
+			operaterTypeName,
+			operatorID,
+			operatorName,
+			beforeTaskName,
+			afterTaskNameList,
+			processName,
+			warnMethodNameList,
+			unit_uid, 
+			unit_uidName,  
+			updateUserName, 
+			updatedatetime
+		FROM gbpm_nodeTask
+		WHERE 
+		nodeTask_ID = #{nodeTask_ID}
+	</select>
+	
+	<!-- 查询节点任务事项List-->  
+	<select id="selectNodeTaskListByWheresql" parameterType="java.lang.String" resultMap="nodeTaskResultMap">
+		SELECT 
+			nodeTask_ID,
+			productID,
+			productNodeID,
+			nodeNames,
+			taskMangerID,
+			taskSort,
+			operationType,
+			isBeforeTask,
+			beforeTaskID,
+			isStartProcess,
+			processID,
+			taskName,
+			isAfterTask,
+			afterTaskIDList,
+			warnMethodIDList,
+			operaterTypeID,
+			operaterTypeName,
+			operatorID,
+			operatorName,
+			beforeTaskName,
+			afterTaskNameList,
+			processName,
+			warnMethodNameList,
+			unit_uid, 
+			unit_uidName,  
+			updateUserName, 
+			updatedatetime
+		FROM gbpm_nodeTask
+		WHERE 
+		1=1 ${value}
+	</select>
+	
+	<!-- 插入一条节点任务事项 -->
+	<insert id="insertOneNodeTask" parameterType="com.zjm.gbpm.db.model.Gbpm_nodeTask">
+		INSERT INTO gbpm_nodeTask(
+			nodeTask_ID,
+			productID,
+			productNodeID,
+			nodeNames,
+			taskMangerID,
+			taskSort,
+			operationType,
+			isBeforeTask,
+			beforeTaskID,
+			isStartProcess,
+			processID,
+			taskName,
+			isAfterTask,
+			afterTaskIDList,
+			warnMethodIDList,
+			operaterTypeID,
+			operaterTypeName,
+			operatorID,
+			operatorName,
+			beforeTaskName,
+			afterTaskNameList,
+			processName,
+			warnMethodNameList,
+			unit_uid, 
+			unit_uidName,  
+			updateUserName, 
+			updatedatetime
+		) VALUES(
+			#{nodeTask_ID},
+			#{productID},
+			#{productNodeID},
+			#{nodeNames},
+			#{taskMangerID},
+			#{taskSort},
+			#{operationType},
+			#{isBeforeTask},
+			#{beforeTaskID},
+			#{isStartProcess},
+			#{processID},
+			#{taskName},
+			#{isAfterTask},
+			#{afterTaskIDList},
+			#{warnMethodIDList},
+			#{operaterTypeID},
+			#{operaterTypeName},
+			#{operatorID},
+			#{operatorName},
+			#{beforeTaskName},
+			#{afterTaskNameList},
+			#{processName},
+			#{warnMethodNameList},
+			#{unit_uid}, 
+			#{unit_uidName},  
+			#{updateUserName}, 
+			NOW()
+		)
+	</insert>
+	
+	<!-- 修改一条节点任务事项 -->
+	<update id="updateOneNodeTask" parameterType="com.zjm.gbpm.db.model.Gbpm_nodeTask">
+		UPDATE gbpm_nodeTask
+		SET
+			taskMangerID = #{taskMangerID},
+			operationType = #{operationType},
+			isBeforeTask = #{isBeforeTask},
+			beforeTaskID = #{beforeTaskID},
+			isStartProcess = #{isStartProcess},
+			processID = #{processID},
+			taskName = #{taskName},
+			isAfterTask = #{isAfterTask},
+			afterTaskIDList = #{afterTaskIDList},
+			warnMethodIDList = #{warnMethodIDList},
+			operaterTypeID = #{operaterTypeID},
+			operaterTypeName = #{operaterTypeName},
+			operatorID = #{operatorID},
+			operatorName = #{operatorName},
+			beforeTaskName = #{beforeTaskName},
+			afterTaskNameList = #{afterTaskNameList},
+			processName = #{processName},
+			warnMethodNameList = #{warnMethodNameList},
+			unit_uid = #{unit_uid}, 
+			unit_uidName = #{unit_uidName},  
+			updateUserName = #{updateUserName}, 
+			updatedatetime =  NOW()
+		
+		WHERE nodeTask_ID = #{nodeTask_ID}
+	</update>
+	
+	<!-- 删除一条节点任务事项 -->
+	<delete id="deleteOneNodeTask" parameterType="com.zjm.gbpm.db.model.Gbpm_nodeTask">
+		DELETE FROM 
+			gbpm_nodeTask
+		WHERE
+			nodeTask_ID = #{nodeTask_ID}
+	</delete>
+	
+	<!-- 根据wheresql删除节点任务事项 -->
+	<delete id="deleteNodeTaskByWheresql" parameterType="java.lang.String">
+		DELETE FROM 
+			gbpm_nodeTask
+		WHERE
+			1=1 ${value}
+	</delete>
+ 
+ 	<!-- 判断节点任务事项名称是否存在 ，如果有nodeTask_ID，说明是更新数据，要排除与自身的nodeTaskName比较-->
+	<select id="isExistNodeTaskName" parameterType="com.zjm.gbpm.db.model.Gbpm_nodeTask" resultType="java.lang.Integer">
+		<![CDATA[
+			SELECT 
+				COUNT(1) 
+			FROM 
+				gbpm_nodeTask 
+			WHERE 
+				unit_uid = #{unit_uid} 
+			AND nodeTaskName = #{nodeTaskName}
+		]]>
+			<if test="nodeTask_ID != null">
+				AND nodeTask_ID != #{nodeTask_ID}
+			</if>
+	</select>
+	
+	<!-- 修改一条产品节点任务顺序 -->
+	<update id="updateSortNodeTask" parameterType="com.zjm.gbpm.db.model.Gbpm_productNode">
+		UPDATE gbpm_nodeTask
+		SET
+			taskSort = #{taskSort},
+			updateUserName = #{updateUserName},  
+			updateDateTime = NOW() 
+		WHERE nodeTask_ID = #{nodeTask_ID}
+	</update>
+</mapper>

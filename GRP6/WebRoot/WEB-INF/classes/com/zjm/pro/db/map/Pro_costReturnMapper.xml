@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_costReturnMapper">
+	
+	<!-- 实收费用表信息 -->
+	<resultMap type="com.zjm.pro.db.model.Pro_costReturn" id="costReturnMap">
+		<result property="costReturn_ID" column="costReturn_ID" />
+		<result property="apply_ID" column="apply_ID" />
+		<result property="applyDetail_ID" column="applyDetail_ID" />
+		<result property="costTypeID" column="costTypeID" />
+		<result property="costTypeName" column="costTypeName" />
+		<result property="returnCostSum" column="returnCostSum" />
+		<result property="returnCostDate" column="returnCostDate" />
+		<result property="remark" column="remark" />
+		<result property="operationDepartID" column="operationDepartID" />
+		<result property="operationDepartName" column="operationDepartName" />
+		<result property="operationUserID" column="operationUserID" />
+		<result property="operationUserName" column="operationUserName" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="updateUserName" column="updateUserName" />
+        <result property="costPre_ID" column="costPre_ID" />
+		<result property="oldCostSum" column="oldCostSum" />
+		<result property="newCostSum" column="newCostSum" />
+		<result property="returnCostTypeID" column="returnCostTypeID" />
+		<result property="returnCostTypeName" column="returnCostTypeName" />
+		<result property="returnDesc" column="returnDesc" />	
+		<result property="loanPlan_ID" column="loanPlan_ID" />	
+		<result property="meetingDetail_ID" column="meetingDetail_ID" />	
+		<result property="costReturnState" column="costReturnState" />	
+		
+	</resultMap>
+	
+	<!-- 查询实收费用列表 -->
+	<select id="selectCostReturnListByWhereSql" parameterType="string" resultMap="costReturnMap">
+		<![CDATA[
+			SELECT
+		 		costReturn_ID,
+				apply_ID,
+				applyDetail_ID,
+				meetingDetail_ID,
+				costTypeID,
+				costTypeName,
+				returnCostSum,
+				returnCostDate,
+				remark,
+				operationDepartID,
+				operationDepartName,
+				operationUserID,
+				operationUserName,
+				unit_uid,
+				updateUserName,
+				updateDateTime,
+				costPre_ID,
+				loanPlan_ID,
+				costReturnState,
+				oldCostSum,
+				newCostSum,
+				returnCostTypeID,
+				returnCostTypeName,
+				returnDesc
+			FROM pro_costReturn
+			WHERE 1=1 ${value}
+		]]>
+	</select>
+	
+	<!-- 添加一条实收费用信息 -->
+	<insert id="insertOneCostReturn" parameterType="com.zjm.pro.db.model.Pro_costReturn">
+		INSERT INTO pro_costReturn(
+			costReturn_ID,
+			apply_ID,
+			applyDetail_ID,
+			meetingDetail_ID,
+			costTypeID,
+			costTypeName,
+			returnCostSum,
+			returnCostDate,
+			remark,
+			operationDepartID,
+			operationDepartName,
+			operationUserID,
+			operationUserName,
+			unit_uid,
+			updateUserName,
+			updateDateTime,
+			costPre_ID,
+			loanPlan_ID,
+			costReturnState,
+			oldCostSum,
+			newCostSum,
+			returnCostTypeID,
+			returnCostTypeName,
+			returnDesc
+
+		) VALUES(
+			#{costReturn_ID},
+			#{apply_ID},
+			#{applyDetail_ID},
+			#{meetingDetail_ID},
+			#{costTypeID},
+			#{costTypeName},
+			#{returnCostSum},
+			#{returnCostDate},
+			#{remark},
+			#{operationDepartID},
+			#{operationDepartName},
+			#{operationUserID},
+			#{operationUserName},
+			#{unit_uid},
+			#{updateUserName},
+			NOW(),
+			#{costPre_ID},
+			#{loanPlan_ID},
+			#{costReturnState},
+			#{oldCostSum},
+			#{newCostSum},
+			#{returnCostTypeID},
+			#{returnCostTypeName},
+			#{returnDesc}			
+		)
+	</insert>
+	<!-- 根据查询条件查询一个退费用表信息-->
+	<select id="selectOneCostReturnByWhereSql" parameterType="java.lang.String"  resultMap="costReturnMap">
+	<![CDATA[
+		SELECT 
+	        costReturn_ID,
+			apply_ID,
+			applyDetail_ID,
+			meetingDetail_ID,
+			costTypeID,
+			costTypeName,
+			returnCostSum,
+			returnCostDate,
+			remark,
+			operationDepartID,
+			operationDepartName,
+			operationUserID,
+			operationUserName,
+			unit_uid,
+			updateUserName,
+			updateDateTime,
+			costPre_ID,
+			loanPlan_ID,
+			costReturnState,
+			oldCostSum,
+			newCostSum,
+			returnCostTypeID,
+			returnCostTypeName,
+			returnDesc
+	       
+	    FROM 
+	         pro_costReturn 
+		WHERE 1=1 ${value}
+		]]> 				 
+	</select>
+	<!-- 更新一个退费表信息 -->	
+	<update id="updateOneCostReturn" parameterType="com.zjm.pro.db.model.Pro_costReturn">
+		UPDATE 
+		     pro_costReturn
+		<set >
+				
+			    <if test="apply_ID != null" >apply_ID = #{apply_ID},</if>
+				<if test="applyDetail_ID != null" >applyDetail_ID = #{applyDetail_ID},</if>
+				<if test="costTypeID != null" >costTypeID = #{costTypeID},</if>
+				<if test="costTypeName != null" >costTypeName = #{costTypeName},</if>
+				<if test="returnCostSum != null" >returnCostSum = #{returnCostSum},</if>
+				<if test="returnCostDate != null" >returnCostDate = #{returnCostDate},</if>
+				<if test="remark != null" >remark = #{remark},</if>
+				<if test="operationDepartID != null" >operationDepartID = #{operationDepartID},</if>
+				<if test="operationDepartName != null" >operationDepartName = #{operationDepartName},</if>
+				<if test="operationUserID != null" >operationUserID = #{operationUserID},</if>
+				<if test="operationUserName != null" >operationUserName = #{operationUserName},</if>
+				<if test="unit_uid != null" >unit_uid = #{unit_uid},</if>
+				<if test="updateUserName != null" >updateUserName = #{updateUserName},</if>
+				    updateDateTime = NOW(),
+				<if test="costPre_ID != null" >costPre_ID = #{costPre_ID},</if>
+				<if test="loanPlan_ID != null" >loanPlan_ID = #{loanPlan_ID},</if>
+				<if test="costReturnState != null" >costReturnState = #{costReturnState},</if>
+				<if test="oldCostSum != null" >oldCostSum = #{oldCostSum},</if>
+				<if test="newCostSum != null" >newCostSum = #{newCostSum},</if>
+				<if test="returnCostTypeID != null" >returnCostTypeID = #{returnCostTypeID},</if>
+				<if test="returnCostTypeName != null" >returnCostTypeName = #{returnCostTypeName},</if>
+				<if test="returnDesc != null" >returnDesc = #{returnDesc},</if>
+				<if test="meetingDetail_ID != null" >meetingDetail_ID = #{meetingDetail_ID}</if>
+				
+			</set>
+			 
+		WHERE costReturn_ID=#{costReturn_ID} 
+	</update>
+	
+	<!-- 删除一条退费信息  -->
+	<delete id="delOneCostReturn" parameterType="com.zjm.pro.db.model.Pro_costReturn">
+		DELETE FROM pro_costReturn
+		WHERE costReturn_ID = #{costReturn_ID}
+		LIMIT 1
+	</delete>
+	<!-- 分组查询 -->
+	<select id="selectCostReturnListByWhereSqlGroup" parameterType="string" resultMap="costReturnMap">
+		<![CDATA[
+			SELECT
+				costTypeID,
+				costTypeName,
+				IFNULL(SUM(returnCostSum),0) AS returnCostSum
+			FROM pro_costReturn
+			WHERE 1=1 ${value}
+		]]>
+	</select>
+</mapper>

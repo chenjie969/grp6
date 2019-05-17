@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_delayMapper">
+	<!-- 业务展期信息表pro_delay -->
+	 <resultMap id="DelayMap" type="com.zjm.pro.db.model.Pro_delay" >
+		<result column="delay_ID" property="delay_ID"/>
+		<result column="project_ID" property="project_ID"/>
+		<result column="applyID" property="applyID"/>
+		<result column="delaySum" property="delaySum"/>
+		<result column="delayMonth" property="delayMonth"/>
+		<result column="delayDay" property="delayDay"/>
+		<result column="delayMonthDay" property="delayMonthDay"/>
+		<result column="delayBeginDate" property="delayBeginDate"/>
+		<result column="factBeginDate" property="factBeginDate"/>
+		<result column="delayEndDate" property="delayEndDate"/>
+		<result column="delayRate" property="delayRate"/>
+		<result column="delayServiceRate" property="delayServiceRate"/>
+		<result column="delayReason" property="delayReason"/>
+		<result column="delayState" property="delayState"/>
+		<result column="unit_uid" property="unit_uid"/>
+		<result column="updateUserName" property="updateUserName"/>
+		<result column="updateDateTime" property="updateDateTime"/>
+		<result column="projectName" property="projectName"/><!-- 冗余字段 -->
+		<result column="bankName" property="bankName"/><!-- 冗余字段 -->
+		<result column="busiTypeName" property="busiTypeName"/><!-- 冗余字段 -->
+		<result column="projectCode" property="projectCode"/><!-- 冗余字段 -->
+		<result column="loadSum" property="loadSum"/><!-- 冗余字段 -->
+		
+  </resultMap>
+	<!-- 新增业务展期信息表pro_delay-->
+	<insert id="insertOneDelayInfo"	parameterType="com.zjm.pro.db.model.Pro_delay">
+		<![CDATA[
+		INSERT INTO pro_delay (
+					delay_ID,
+					project_ID,
+					applyID,
+					delaySum,
+					delayMonth,
+					delayDay,
+					delayMonthDay,
+					delayBeginDate,
+					factBeginDate,
+					delayEndDate,
+					delayRate,
+					delayServiceRate,
+					delayReason,
+					delayState,
+					unit_uid,
+					updateUserName,
+					updateDateTime
+
+		
+		       )
+		VALUES
+		(
+				#{delay_ID}, 
+				#{project_ID}, 
+				#{applyID}, 
+				#{delaySum}, 
+				#{delayMonth}, 
+				#{delayDay}, 
+				#{delayMonthDay}, 
+				#{delayBeginDate}, 
+				#{factBeginDate}, 
+				#{delayEndDate}, 
+				#{delayRate}, 
+				#{delayServiceRate}, 
+				#{delayReason}, 
+				#{delayState}, 
+				#{unit_uid}, 
+				#{updateUserName},   
+				NOW()
+		) ;
+		]]>
+	</insert>
+	<!-- 查询展期列表 -->
+	<select id="selectDelayTables" resultMap="DelayMap" parameterType="com.zjm.common.db.model.PageTable">
+	<![CDATA[
+		SELECT
+				    delay.delay_ID,
+					delay.project_ID,
+					delay.delaySum,
+					delay.delayMonth,
+					delay.delayDay,
+					delay.delayMonthDay,
+					delay.delayBeginDate,
+					delay.factBeginDate,
+					delay.delayEndDate,
+					delay.delayRate,
+					delay.delayServiceRate,
+					delay.delayReason,
+					delay.delayState,
+					delay.unit_uid,
+					delay.updateUserName,
+					delay.updateDateTime,
+					apply.apply_ID,
+					apply.projectName,
+					project.bankName,
+					project.loadSum,
+					project.projectCode,
+					project.busiTypeName
+	     FROM
+	   		pro_delay	delay
+	    LEFT JOIN Pro_project project ON delay.project_ID = project.project_ID	
+	    LEFT JOIN pro_apply apply ON project.apply_ID = apply.apply_ID
+		WHERE 1=1 ${wheresql} 
+		ORDER BY ${sortName} ${sortOrder}
+		limit #{pageNumber},#{pageSize}
+		]]>
+	</select>
+		<!-- 查询 展期列表 总记录数-->
+	<select id="selectDelayTables_Count" parameterType="com.zjm.common.db.model.PageTable"  resultType="java.lang.Long">
+		<![CDATA[
+		SELECT count(delay_ID) FROM pro_delay	delay	
+	    LEFT JOIN Pro_project project ON delay.project_ID = project.project_ID
+	    LEFT JOIN pro_apply apply ON project.apply_ID = apply.apply_ID	
+		WHERE 1=1 ${wheresql} 		
+		]]>		 
+	</select>
+	
+		<!--根据wheresql删除展期表信息 -->
+	<delete id="deleteDelayByWhereSql"  parameterType="java.lang.String" >
+		<![CDATA[DELETE FROM pro_delay WHERE 1=1 ${value} ]]>
+	</delete>
+	
+	<!-- 根据ID查询展期列表 -->
+	<select id="selectOneDelayInfoByID" resultMap="DelayMap" parameterType="java.lang.String">
+	<![CDATA[
+		SELECT
+				    delay.delay_ID,
+					delay.project_ID,
+					delay.applyID,
+					delay.delaySum,
+					delay.delayMonth,
+					delay.delayDay,
+					delay.delayMonthDay,
+					delay.delayBeginDate,
+					delay.factBeginDate,
+					delay.delayEndDate,
+					delay.delayRate,
+					delay.delayServiceRate,
+					delay.delayReason,
+					delay.delayState,
+					delay.unit_uid,
+					delay.updateUserName,
+					delay.updateDateTime,
+					apply.apply_ID,
+					apply.projectName,
+					project.bankName,
+					project.loadSum,
+					project.projectCode,
+					project.busiTypeName
+	     FROM
+	   		pro_delay	delay
+	    LEFT JOIN Pro_project project ON delay.project_ID = project.project_ID	
+	    LEFT JOIN pro_apply apply ON project.apply_ID = apply.apply_ID
+		WHERE 1=1 ${value} 
+		]]>
+	</select>
+	
+	<!-- 修改一条业务展期信息 -->	
+	<update id="updateProDelay" parameterType="com.zjm.pro.db.model.Pro_delay">
+		UPDATE 
+		     pro_delay
+		<set >
+			<if test="project_ID != null" >project_ID= #{project_ID},</if>
+			<if test="applyID != null" >applyID= #{applyID},</if>
+			<if test="delaySum != null" >delaySum= #{delaySum},</if>
+			<if test="delayMonth != null" >delayMonth= #{delayMonth},</if>
+			<if test="delayDay != null" >delayDay= #{delayDay},</if>
+			<if test="delayMonthDay != null" >delayMonthDay= #{delayMonthDay},</if>
+			<!-- <if test="dcontractCode != null" >dcontractCode= #{dcontractCode},</if> -->
+			<if test="delayBeginDate != null" >delayBeginDate= #{delayBeginDate},</if>
+			<if test="factBeginDate != null" >factBeginDate= #{factBeginDate},</if>
+			<if test="delayEndDate != null" >delayEndDate= #{delayEndDate},</if>
+			<if test="delayRate != null" >delayRate= #{delayRate},</if>
+			<if test="delayServiceRate != null" >delayServiceRate= #{delayServiceRate},</if>
+			<!-- <if test="jcontractCode != null" >jcontractCode= #{jcontractCode},</if>
+			<if test="bcontractCode != null" >bcontractCode= #{bcontractCode},</if> -->
+			<if test="delayReason != null" >delayReason= #{delayReason},</if>
+			<if test="delayState != null" >delayState= #{delayState},</if>
+			<if test="unit_uid != null" >unit_uid= #{unit_uid},</if>
+			<if test="updateUserName != null" >updateUserName= #{updateUserName},</if>
+			  updateDateTime = NOW()		
+			</set>
+			 
+		WHERE delay_ID=#{delay_ID} 
+	</update>
+	<!-- 根据查询条件查询一个展期表信息-->
+	<select id="selectOneDelayByWhereSql" parameterType="java.lang.String"  resultMap="DelayMap">
+	<![CDATA[
+		SELECT 
+	        delay_ID,
+			project_ID,
+			applyID,
+			delaySum,
+			delayMonth,
+			delayDay,
+			delayMonthDay,
+			delayBeginDate,
+			factBeginDate,
+			delayEndDate,
+			delayRate,
+			delayServiceRate,
+			delayReason,
+			delayState,
+			unit_uid,
+			updateUserName,
+			updateDateTime   
+	    FROM 
+	         pro_delay 
+		WHERE 1=1 ${value}
+		]]> 				 
+	</select>
+	
+	<!-- 更新一个展期明细表信息 -->	
+	<update id="updateOneDelay" parameterType="com.zjm.pro.db.model.Pro_delay">
+		UPDATE 
+		     pro_delay
+		
+		<set >
+		      <if test="project_ID != null" >project_ID= #{project_ID},</if>
+		      <if test="applyID != null" >applyID= #{applyID},</if>
+		      <if test="delaySum != null" >delaySum= #{delaySum},</if>
+		      <if test="delayMonth != null" >delayMonth= #{delayMonth},</if>
+		      <if test="delayDay != null" >delayDay= #{delayDay},</if>
+		      <if test="delayMonthDay != null" >delayMonthDay= #{delayMonthDay},</if>
+		      <if test="delayBeginDate != null" >delayBeginDate= #{delayBeginDate},</if>
+		      <if test="factBeginDate != null" >factBeginDate= #{factBeginDate},</if>
+		      <if test="delayEndDate != null" >delayEndDate= #{delayEndDate},</if>
+		      <if test="delayRate != null" >delayRate= #{delayRate},</if>
+		      <if test="delayServiceRate != null" >delayServiceRate= #{delayServiceRate},</if>
+		      <if test="delayReason != null" >delayReason= #{delayReason},</if>
+		      <if test="delayReason != null" >delayReason= #{delayReason},</if>
+		      <if test="delayState != null" >delayState= #{delayState},</if>
+			  <if test="unit_uid != null" >unit_uid= #{unit_uid},</if>
+			  <if test="updateUserName != null" >updateUserName= #{updateUserName},</if>
+			  updateDateTime = NOW()		
+		</set>
+			 
+		WHERE delay_ID=#{delay_ID} 
+	</update>
+	
+	<!-- 根据查询条件查询多个展期表信息-->
+	<select id="selectDelayListByWhereSql" parameterType="java.lang.String"  resultMap="DelayMap">
+	<![CDATA[
+		SELECT 
+		    delay_ID,
+			project_ID,
+			applyID,
+			delaySum,
+			delayMonth,
+			delayDay,
+			delayMonthDay,
+			delayBeginDate,
+			factBeginDate,
+			delayEndDate,
+			delayRate,
+			delayServiceRate,
+			delayReason,
+			delayState,
+			unit_uid,
+			updateUserName,
+			updateDateTime   
+	    FROM 
+	         pro_delay 
+		WHERE 1=1 ${value}
+		ORDER BY  delayEndDate asc
+		]]> 				 
+	</select>
+	
+	<!-- 根据查询条件查询一个展期表信息-->
+	<select id="manageReviewExport" parameterType="java.lang.String"  resultType="com.zjm.pro.db.model.pro_manageRreviewModeExcel">
+	<![CDATA[
+		SELECT 
+			(@i:=@i+1) as id,
+			a.*
+			FROM (
+		SELECT 
+	       	pad.busiTypeName as busiClass,
+			cc.clientName as projectName,
+			pa.applySum as loadSum,
+			pa.fundSource as fundChinese,
+			pad.bankName as bankName,
+			pad.guarantyRate as guarantyRate,
+			pad.reviewRate as reviewRate, 
+			pad.periodDay as periodMonthDay,
+			pa.amanName as amanName,
+			pa.bmanName as bmanName,
+			po.disposeRemark as guaranteeMeasures
+	    FROM 
+	         pro_apply pa
+	         left join crm_client cc on cc.client_ID=pa.client_ID
+	         left join Pro_applyDetail pad on pad.apply_ID=pa.apply_ID
+	         left join pro_optguaranty po on po.apply_ID=pa.apply_ID 
+		WHERE 1=1 ${value}
+		) a ,(select @i := 0) b
+		]]> 				 
+	</select>
+	
+	<!-- 根据查询条件查询一个展期表信息-->
+	<select id="meetingExport" parameterType="java.lang.String"  resultType="com.zjm.pro.db.model.pro_meetingExportModeExcel">
+	<![CDATA[
+	SELECT 
+			(@i:=@i+1) as id,
+			a.*
+	    FROM (
+		SELECT 
+			cc.fullAreaName as fullAreaName,
+			pa.guarantyOrgName as guarantyOrgName,
+	       	pad.busiTypeName as busiClass,
+			cc.clientName as projectName,
+			pa.applySum as loadSum,
+			pa.fundChinese as fundChinese,
+			pad.bankName as bankName,
+			pad.reviewRate as reviewRate,
+			pad.guarantyRate as guarantyRate,
+			pad.periodMonthDay as periodMonthDay,
+			pa.amanName as amanName,
+			pa.bmanName as bmanName,
+			po.disposeRemark as guaranteeMeasures
+	    FROM pro_apply pa
+	         left join crm_client cc on cc.client_ID=pa.client_ID
+	         left join pro_applydetail pad on  pad.apply_ID=pa.apply_ID
+	         left join pro_optguaranty po on po.apply_ID=pa.apply_ID 
+		WHERE 1=1 ${value}
+		) a,(select @i := 0) b
+		]]> 				 
+	</select>
+	
+	<!-- 根据查询条件查询一个展期表信息-->
+	<select id="committeeExport" parameterType="java.lang.String"  resultType="com.zjm.pro.db.model.pro_reviewCommitteeModeExcel">
+	<![CDATA[
+		SELECT 
+			(@i:=@i+1) as id,
+			a.*
+	    FROM (SELECT cc.natureName as natureName,
+						cc.fullAreaName as fullAreaName,
+						pad.busiTypeName as busiClass,
+						cc.clientName as projectName,
+						pa.applySum as loadSum,
+						pa.fundChinese as fundChinese,
+						pad.bankName as bankName,
+						pad.guarantyRate as guarantyRate,
+						pad.reviewRate as reviewRate,
+						pad.periodMonthDay as periodMonthDay,
+						pa.amanName as amanName,
+						pa.bmanName as bmanName,
+						po.disposeRemark as guaranteeMeasures
+							FROM pro_apply pa
+						left join crm_client cc on cc.client_ID=pa.client_ID
+						left join pro_applydetail pad on  pad.apply_ID=pa.apply_ID
+						left join pro_optguaranty po on po.apply_ID=pa.apply_ID 
+						WHERE 1=1 ${value}
+		) a ,(select @i := 0) b
+		]]> 				 
+	</select>
+</mapper>  

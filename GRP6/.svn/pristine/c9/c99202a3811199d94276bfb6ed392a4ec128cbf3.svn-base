@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.crm.db.map.Crm_clientfilesMapper">
+	<resultMap type="com.zjm.crm.db.model.Crm_clientfiles" id="Crm_clientfilesResultMap">
+		<result property="clientFiles_ID" column="clientFiles_ID" />
+		<result property="client_ID" column="client_ID" />
+		<result property="fileType" column="fileType" />
+		<result property="sourceFileName" column="sourceFileName" />
+		<result property="pathFile" column="pathFile" />
+		<result property="extend" column="extend" />
+		<result property="uploadManID" column="uploadManID" />
+		<result property="uploadManName" column="uploadManName" />
+		<result property="uploadDateTime" column="uploadDateTime" />
+		<result property="fileSize" column="fileSize" />
+		<result property="updateUserName" column="updateUserName" />
+		<result property="updateDateTime" column="updateDateTime" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="isFile" column="isFile" />
+		<result property="clientFileType" column="clientFileType" />
+		<result property="materialDetail_ID" column="materialDetail_ID" />
+		
+	</resultMap>
+	<!-- 插入一个客户附件 -->
+	<insert id="insertOneClientFiles"	parameterType="com.zjm.crm.db.model.Crm_clientfiles">
+		<![CDATA[
+		INSERT INTO crm_clientfiles (
+		clientFiles_ID,
+		client_ID,
+		fileType,
+		sourceFileName,
+		pathFile,
+		extend,
+		uploadManID,
+		uploadManName,
+		uploadDateTime,
+		fileSize,
+		updateUserName,
+		updateDateTime,
+		isFile,
+		clientFileType,
+		materialDetail_ID,
+		unit_uid
+		)
+		VALUES
+		(
+		#{clientFiles_ID},
+		#{client_ID},
+		#{fileType},
+		#{sourceFileName},
+		#{pathFile},
+		#{extend},
+		#{uploadManID},
+		#{uploadManName},
+		NOW(),
+		#{fileSize},
+		#{updateUserName},
+		NOW(),
+		#{isFile},
+		#{clientFileType},
+		#{materialDetail_ID},
+		#{unit_uid}
+		) ;
+		]]>
+	</insert>
+	
+	
+	
+	<!-- 客户附件List -->
+	<select id="selectAllClientFilesPageTables" parameterType="com.zjm.common.db.model.PageTable" resultMap="Crm_clientfilesResultMap">
+		<![CDATA[SELECT clientFiles_ID,unit_uid,client_ID,fileType,sourceFileName,pathFile,extend,uploadManID,uploadManName,isFile,clientFileType,uploadDateTime,fileSize,materialDetail_ID FROM crm_clientfiles where 1=1 ${wheresql}   limit #{pageNumber},#{pageSize}]]>
+	</select>
+	<!-- 图片附件List -->
+	<select id="selectPictureFileList" parameterType="java.lang.String" resultMap="Crm_clientfilesResultMap">
+		<![CDATA[SELECT clientFiles_ID,unit_uid,client_ID,fileType,sourceFileName,pathFile,extend,uploadManID,uploadManName,isFile,clientFileType,uploadDateTime,fileSize,materialDetail_ID FROM crm_clientfiles where 1=1 ${value}]]>
+	</select>
+	
+	<!-- 客户附件 记录数 -->
+	<select id="selectAllClientFilesPageTables_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		<![CDATA[SELECT count(clientFiles_ID) FROM crm_clientfiles where 1=1 ${wheresql} ]]>
+	</select>
+	
+	
+	<!-- 删除一个客户附件信息 -->
+	<delete id="delectOneClientFilesInfo" parameterType="com.zjm.crm.db.model.Crm_clientfiles">
+		<![CDATA[DELETE FROM crm_clientfiles WHERE clientFiles_ID=#{clientFiles_ID}  and unit_uid=#{unit_uid} and client_ID=#{client_ID}  ]]>
+	</delete>
+	
+	<!-- 根据客户id 删除客户附件信息 -->
+	<delete id="deleteClientFilesByClient_ID" parameterType="string">
+		delete  from crm_clientfiles  where client_ID =#{client_ID}
+	</delete>
+	
+</mapper>  

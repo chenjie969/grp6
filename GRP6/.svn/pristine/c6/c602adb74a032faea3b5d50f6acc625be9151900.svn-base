@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.common.db.map.SysDicDataMapper">
+
+	<!-- 公用字典信息-->
+	<resultMap type="com.zjm.common.db.model.SysDicData" id="SysDicDataResultMap">
+		<result property="unit_uid" column="unit_uid" />
+		<result property="id" column="id" />
+		<result property="pid" column="pid" />
+		<result property="name" column="name" />
+		<result property="icon" column="icon" />
+		<result property="mod_type" column="mod_type" />
+		<result property="isReload" column="isReload" />
+		<result property="remark" column="remark" />
+		<result property="fullCode" column="fullCode" />
+		<result property="leve1_user_id" column="leve1_user_id" />
+		<result property="leve2_user_id" column="leve2_user_id" />
+		<result property="leve3_user_id" column="leve3_user_id" />
+		<result property="isRoot" column="isRoot" />
+		<result property="user_id" column="user_id" />
+		<result property="fun_type" column="fun_type" />
+		<result property="isDefault" column="isDefault" />
+		
+	</resultMap>
+	<!-- 查询所有的字典 -->
+	<select id="selectAllSysDicDataList" resultMap="SysDicDataResultMap" parameterType="java.lang.String">
+		<![CDATA[${value}]]>
+	</select>
+	
+	
+</mapper>  

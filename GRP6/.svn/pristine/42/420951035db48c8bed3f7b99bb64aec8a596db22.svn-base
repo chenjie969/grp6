@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><jatools Class="jatools.ReportDocument" Name="jatools report template"><VariableContext/><Page><Children ItemClass="PagePanel"><Item0><Width>1794</Width><Height>125</Height><Children><Item0 Class="Label"><Text>担保集团本部委贷清收情况及进度安排</Text><Font><Face>宋体</Face><Style>1</Style><Size>36</Size></Font><HorizontalAlignment>1</HorizontalAlignment><X>461</X><Y>14</Y><Width>755</Width><Height>44</Height></Item0><Item1 Class="Text"><Variable>=if(has(enddatesql)) return enddatesql;else return $today;</Variable><HorizontalAlignment>1</HorizontalAlignment><X>916</X><Y>69</Y><Width>110</Width><Height>23</Height></Item1><Item2 Class="Label"><Text>至</Text><HorizontalAlignment>1</HorizontalAlignment><X>884</X><Y>69</Y><Width>26</Width><Height>23</Height></Item2><Item3 Class="Label"><Text>统计期间：</Text><HorizontalAlignment>1</HorizontalAlignment><X>654</X><Y>68</Y><Width>62</Width><Height>23</Height></Item3><Item4 Class="Text"><Variable>=if(has(begindatesql)) return begindatesql;</Variable><HorizontalAlignment>1</HorizontalAlignment><X>725</X><Y>68</Y><Width>152</Width><Height>23</Height></Item4><Item5 Class="Label"><Text>金额单位：万元</Text><HorizontalAlignment>2</HorizontalAlignment><X>1639</X><Y>100</Y><Width>110</Width><Height>23</Height></Item5></Children><Type>100</Type></Item0><Item1><Y>1054</Y><Width>1794</Width><Height>28</Height><Type>103</Type></Item1><Item2><Y>125</Y><Width>1794</Width><Height>929</Height><Children ItemClass="Table"><Item0><NodePath>tab_detail</NodePath><X>16</X><Y>4</Y><Children><Item0 Class="Label"><Text>序号</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col></Cell></Item0><Item1 Class="Label"><Text>企业名称</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col></Cell></Item1><Item2 Class="Label"><Text>委贷余额</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>2</Col></Cell></Item2><Item3 Class="Label"><Text>合作放款方</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>3</Col></Cell></Item3><Item4 Class="Label"><Text>资金方</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>5</Col></Cell></Item4><Item5 Class="Label"><Text>委贷利率</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>7</Col></Cell></Item5><Item6 Class="Label"><Text>担保措施</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>8</Col></Cell></Item6><Item7 Class="Label"><Text>起始日</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>9</Col></Cell></Item7><Item8 Class="Label"><Text>到期日</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>10</Col></Cell></Item8><Item9 Class="Label"><Text>是否逾期</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>11</Col></Cell></Item9><Item10 Class="Label"><Text>欠息情况</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>13</Col></Cell></Item10><Item11 Class="Label"><Text>清收情况</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>14</Col></Cell></Item11><Item12 Class="Label"><Text>近期清收进度安排</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>15</Col></Cell></Item12><Item13 Class="Label"><Text>A角</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>16</Col></Cell></Item13><Item14 Class="Label"><Text>B角</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>17</Col></Cell></Item14><Item15 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>3</Col><ColSpan>15</ColSpan></Cell></Item15><Item16 Class="Label"><Text>合计</Text><Border/><Font><Face>宋体</Face><Style>1</Style><Size>24</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>0</Col><ColSpan>2</ColSpan></Cell></Item16><Item17 Class="RowPanel"><Cell><Row>1</Row><Col>0</Col><ColSpan>18</ColSpan></Cell><Children ItemClass="Text"><Item0><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>15</Col></Cell></Item0><Item1><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>14</Col></Cell></Item1><Item2><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>13</Col></Cell></Item2><Item3><Variable>=$.isOver?"是":"否"</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>11</Col></Cell></Item3><Item4><Variable>=$.disposeRemark</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>8</Col></Cell></Item4><Item5><Variable>=$.position + 1</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>0</Col></Cell></Item5><Item6><Variable>=$.projectName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>1</Col></Cell></Item6><Item7><Variable>=$.loadSum</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>2</Col></Cell></Item7><Item8><Variable>=$.bankName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>3</Col></Cell></Item8><Item9><Variable>=$.bankRate</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.00</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>7</Col></Cell></Item9><Item10><Variable>=$.delayBeginDate</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DateFormat"/><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>9</Col></Cell></Item10><Item11><Variable>=$.delayEndDate</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DateFormat"/><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>10</Col></Cell></Item11><Item12><Variable>=$.beforeAManName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>16</Col></Cell></Item12><Item13><Variable>=$.beforeBManName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>17</Col></Cell></Item13><Item14><Variable>=$.InterestMethodName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>12</Col></Cell></Item14><Item15><Variable>=$.fundChinese</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>5</Col></Cell></Item15><Item16><Variable>=$.subBankName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>4</Col></Cell></Item16><Item17><Variable>=$.fundName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>6</Col></Cell></Item17></Children><NodePath>Row</NodePath></Item17><Item18 Class="Text"><Variable>=$.loadSum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>2</Col></Cell></Item18><Item19 Class="Label"><Text>计息方式</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>12</Col></Cell></Item19><Item20 Class="Label"><Text>合作子机构</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>4</Col></Cell></Item20><Item21 Class="Label"><Text>资金方子机构</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>6</Col></Cell></Item21></Children><ColumnWidths>72,228,102,102,75,69,81,84,144,87,90,90,90,111,141,105,51,51</ColumnWidths><RowHeights>36,30,39</RowHeights></Item0></Children><Type>102</Type></Item2></Children><PageFormat><Width>1834</Width><Height>1122</Height></PageFormat></Page><NodeSource><Children ItemClass="DatasetNodeSource"><Item0><Children ItemClass="RowNodeSource"><Item0/></Children><Reader Class="SqlReader"><Name>tab_detail</Name><Sql>select 
+  pp.projectName,
+      (pp.`loadSum` - IFNULL(tab1.payCapitalSum,0)) AS loadSum,
+    pp.bankName,
+    pp.subBankName,
+    pa.fundChinese,
+    pa.fundName,
+    pa.fundSource,
+    pp.isOver,
+    pp.delayBeginDate,
+    pp.delayEndDate,
+    pp.amanName,
+    pp.bmanName,
+    pp.beforeAManName,
+    pp.beforeBManName,
+    pp.bankRate,
+    concat(tab3.disposeRemark) AS disposeRemark,
+    pp.InterestMethodName
+   from
+pro_project pp
+
+LEFT JOIN pro_apply pa ON pa.apply_ID = PP.apply_ID
+
+ LEFT JOIN (SELECT CONCAT(po.disposeRemark) AS disposeRemark,po.apply_ID FROM pro_optguaranty po WHERE 1=1 GROUP BY po.apply_ID) tab3 ON  tab3.apply_ID = pp.`apply_ID`
+ LEFT JOIN (SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum FROM pro_factpay pfp
+    WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY pfp.project_ID
+  )tab1 ON tab1.project_ID =  pp.project_ID
+where pp.busiClass = '02' 
+ AND pa.`guarantyOrgID` = '73c1bb3d20614bdfa91281622c5b9334'
+ AND ( pp.finishDate is  null  ${has(endyearmonthsql)?(" or DATE_FORMAT(pp.finishDate,'%Y-%m') &gt; '"+endyearmonthsql+"'"):""}  )
+${has(begindatesql)?(" and pp.reportDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and pp.reportDate&lt;='"+enddatesql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+
+</Sql><Description>select 
+  pp.projectName,
+      (pp.`loadSum` - IFNULL(tab1.payCapitalSum,0)) AS loadSum,
+    pp.bankName,
+    pp.subBankName,
+    pa.fundChinese,
+    pa.fundName,
+    pa.fundSource,
+    pp.isOver,
+    pp.delayBeginDate,
+    pp.delayEndDate,
+    pp.amanName,
+    pp.bmanName,
+    pp.beforeAManName,
+    pp.beforeBManName,
+    pp.bankRate,
+    concat(tab3.disposeRemark) AS disposeRemark,
+    pp.InterestMethodName
+   from
+pro_project pp
+
+LEFT JOIN pro_apply pa ON pa.apply_ID = PP.apply_ID
+
+ LEFT JOIN (SELECT CONCAT(po.disposeRemark) AS disposeRemark,po.apply_ID FROM pro_optguaranty po WHERE 1=1 GROUP BY po.apply_ID) tab3 ON  tab3.apply_ID = pp.`apply_ID`
+ LEFT JOIN (SELECT pfp.project_ID, SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum FROM pro_factpay pfp
+    WHERE 1=1 ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} GROUP BY pfp.project_ID
+  )tab1 ON tab1.project_ID =  pp.project_ID
+where pp.busiClass = '02' 
+ AND pa.`guarantyOrgID` = '73c1bb3d20614bdfa91281622c5b9334'
+ AND ( pp.finishDate is  null  ${has(endyearmonthsql)?(" or DATE_FORMAT(pp.finishDate,'%Y-%m') &gt; '"+endyearmonthsql+"'"):""}  )
+${has(begindatesql)?(" and pp.reportDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and pp.reportDate&lt;='"+enddatesql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><TagName>tab_detail</TagName></Item0></Children></NodeSource></jatools>

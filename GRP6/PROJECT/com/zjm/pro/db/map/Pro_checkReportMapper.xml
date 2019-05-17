@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_checkReportMapper">
+	<!-- 保后检查报告表 -->
+	 <resultMap id="ProCheckReportMap" type="com.zjm.pro.db.model.Pro_checkReport" >		 
+ <id column="checkReport_ID" property="checkReport_ID"  />
+		<result column="checkPlan_ID" property="checkPlan_ID"/>
+		<result column="checkdate" property="checkdate"/>		
+		<result column="checkTypeID" property="checkTypeID"/>			 
+		<result column="checkTypeName" property="checkTypeName"/>
+		<result column="checkUserID" property="checkUserID"/>
+		<result column="checkUserName" property="checkUserName"/>
+		<result column="unit_uid" property="unit_uid"/>		
+		<result column="applyID" property="apply_ID"/>	
+		<result column="respondents" property="respondents"/>
+		<result column="guarantyDesc" property="guarantyDesc"/>
+		<result column="projectDesc" property="projectDesc"/>			 
+		 <result column="managerDesc" property="managerDesc"/>
+		<result column="reportDesc" property="reportDesc"/>
+		<result column="accountDesc" property="accountDesc"/>
+		<result column="stockDesc" property="stockDesc"/>			
+		<result column="debtDesc" property="debtDesc"/>
+		<result column="assetDesc" property="assetDesc"/>
+		<result column="currentRatioDesc" property="currentRatioDesc"/>	
+		<result column="capitalizedDesc" property="capitalizedDesc"/>
+		<result column="borrowDesc" property="borrowDesc"/>		
+		<result column="monetaryDesc" property="monetaryDesc"/>
+		<result column="costDesc" property="costDesc"/>			 
+		 <result column="otherDesc" property="otherDesc"/>
+		<result column="mortgageDesc" property="mortgageDesc"/>
+		<result column="enterpriseAssetsDesc" property="enterpriseAssetsDesc"/>
+		<result column="personAssetsDesc" property="personAssetsDesc"/>
+		<result column="otherOptDesc" property="otherOptDesc"/>
+		<result column="payDesc" property="payDesc"/>
+		<result column="riskLevelID" property="riskLevelID"/>
+		<result column="riskLevelName" property="riskLevelName"/>			 
+		 <result column="newRiskLevelID" property="newRiskLevelID"/>
+		<result column="newRiskLevelName" property="newRiskLevelName"/>
+		<result column="riskLevelDesc" property="riskLevelDesc"/>		
+		<result column="updateUserName" property="updateUserName"/>
+		<result column="updateDateTime" property="updateDateTime"/>			   
+		<result column="project_ID" property="project_ID"/>			   
+  </resultMap>
+	<!-- 更新一条检查报告信息-->	
+		<update id="updateOneCheckReportInfo"  parameterType="com.zjm.pro.db.model.Pro_checkReport">
+ update pro_checkreport
+    <set >
+    checkTypeID=#{checkTypeID},
+         checkTypeName=#{checkTypeName},   
+        checkdate = #{checkdate},      
+        respondents = #{respondents},    
+        guarantyDesc = #{guarantyDesc},
+        projectDesc = #{projectDesc},    
+        managerDesc = #{managerDesc},   
+        reportDesc = #{reportDesc},    
+        accountDesc = #{accountDesc},   
+        stockDesc = #{stockDesc},     
+        debtDesc = #{debtDesc},   
+        checkUserID=#{checkUserID},
+         checkUserName=#{checkUserName},
+        assetDesc = #{assetDesc},  
+        currentRatioDesc = #{currentRatioDesc},     
+        capitalizedDesc = #{capitalizedDesc},   
+        borrowDesc = #{borrowDesc},    
+        monetaryDesc = #{monetaryDesc},     
+        costDesc = #{costDesc},     
+        otherDesc = #{otherDesc},    
+        mortgageDesc = #{mortgageDesc},     
+        enterpriseAssetsDesc = #{enterpriseAssetsDesc},    
+        personAssetsDesc = #{personAssetsDesc},     
+        otherOptDesc = #{otherOptDesc},    
+        payDesc = #{payDesc},          
+        updateUserName = #{updateUserName},         	
+		riskLevelID=#{riskLevelID},
+		riskLevelName=#{riskLevelName},
+		newRiskLevelID=#{newRiskLevelID},
+		newRiskLevelName=#{newRiskLevelName},
+		riskLevelDesc=#{riskLevelDesc},
+		project_ID=#{project_ID},
+        updateDateTime = NOW()
+    </set>
+    where checkReport_ID = #{checkReport_ID}
+  </update>
+  <insert id="insertOneCheckReport" parameterType="com.zjm.pro.db.model.Pro_checkReport" >
+    insert into pro_checkreport 
+    (		checkReport_ID,
+		checkPlan_ID,
+		apply_ID,
+		checkdate,
+		checkTypeID,
+		checkTypeName,
+		checkUserID,
+		checkUserName,
+		respondents,
+		guarantyDesc,
+		projectDesc,
+		managerDesc,
+		reportDesc,
+		accountDesc,
+		stockDesc,
+		debtDesc,
+		assetDesc,
+		currentRatioDesc,
+		capitalizedDesc,
+		borrowDesc,
+		monetaryDesc,
+		costDesc,
+		otherDesc,
+		mortgageDesc,
+		enterpriseAssetsDesc,
+		personAssetsDesc,
+		otherOptDesc,
+		payDesc,
+		riskLevelID,
+		riskLevelName,
+		newRiskLevelID,
+		newRiskLevelName,
+		riskLevelDesc,
+		unit_uid,
+		updateUserName,
+		project_ID,
+		updateDateTime
+      )
+    values (
+				    #{checkReport_ID},
+				#{checkPlan_ID},
+				#{applyID},
+				#{checkdate},
+				#{checkTypeID},
+				#{checkTypeName},
+				#{checkUserID},
+				#{checkUserName},
+				#{respondents},
+				#{guarantyDesc},
+				#{projectDesc},
+				#{managerDesc},
+				#{reportDesc},
+				#{accountDesc},
+				#{stockDesc},
+				#{debtDesc},
+				#{assetDesc},
+				#{currentRatioDesc},
+				#{capitalizedDesc},
+				#{borrowDesc},
+				#{monetaryDesc},
+				#{costDesc},
+				#{otherDesc},
+				#{mortgageDesc},
+				#{enterpriseAssetsDesc},
+				#{personAssetsDesc},
+				#{otherOptDesc},
+				#{payDesc},
+				#{riskLevelID},
+				#{riskLevelName},
+				#{newRiskLevelID},
+				#{newRiskLevelName},
+				#{riskLevelDesc},
+				#{unit_uid},
+				#{updateUserName},
+				#{project_ID},
+				NOW()
+				    
+				  
+      
+      )
+  </insert>
+	  <select id="selectOneCheckReportInfo" resultMap="ProCheckReportMap" parameterType="java.lang.String">
+    select 
+ 		checkReport_ID,
+		checkPlan_ID,
+		apply_ID,
+		project_ID,
+		checkdate,
+		checkTypeID,
+		checkTypeName,
+		checkUserID,
+		checkUserName,
+		respondents,
+		guarantyDesc,
+		projectDesc,
+		managerDesc,
+		reportDesc,
+		accountDesc,
+		stockDesc,
+		debtDesc,
+		assetDesc,
+		currentRatioDesc,
+		capitalizedDesc,
+		borrowDesc,
+		monetaryDesc,
+		costDesc,
+		otherDesc,
+		mortgageDesc,
+		enterpriseAssetsDesc,
+		personAssetsDesc,
+		otherOptDesc,
+		payDesc,
+		riskLevelID,
+		riskLevelName,
+		newRiskLevelID,
+		newRiskLevelName,
+		unit_uid,
+		updateUserName,
+		riskLevelDesc,
+		updateDateTime
+    from pro_checkreport
+    where checkPlan_ID = #{checkPlan_ID} 
+  </select>
+</mapper>  

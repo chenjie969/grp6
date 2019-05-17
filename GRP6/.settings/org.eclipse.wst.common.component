@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="GRP6">
+        <wb-resource deploy-path="/" source-path="/WebRoot"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/resource/common"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/SYS"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/CRM"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/COMMON"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/PROJECT"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/ACTIVITI"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/GBPM"/>
+        <property name="java-output-path" value="/GRP6/WebRoot/WEB-INF/classes"/>
+        <property name="context-root" value="/"/>
+    </wb-module>
+</project-modules>

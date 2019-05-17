@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_projChangeRecMapper">
+	<!--档案记录信息表 -->
+	 <resultMap id="projChangeRecMap" type="com.zjm.pro.db.model.Pro_projChangeRec" >
+		<id column="projChangeRec_ID" property="projChangeRec_ID"/>
+		<result column="apply_ID" property="apply_ID"/>
+		<result column="project_ID" property="project_ID"/>
+		<result column="applyDetail_id" property="applyDetail_ID"/>
+		<result column="oldDepartid" property="oldDepartId"/>
+		<result column="oldAmanId" property="oldAmanId"/>
+		<result column="oldBmanId" property="oldBmanId"/>
+		<result column="oldCmanId" property="oldCmanId"/>
+		<result column="newDepartId" property="newDepartId"/>
+		<result column="newAmanId" property="newAmanId"/>
+		<result column="newBmanId" property="newBmanId"/>
+		<result column="newCmanId" property="newCmanId"/>
+		<result column="changeReason" property="changeReason"/>
+		<result column="changeManId" property="changeManId"/>
+		<result column="changeDateTime" property="changeDateTime"/>
+		<result column="unit_uid" property="unit_uid"/>
+		<result column="updateUserName" property="updateUserName"/>
+		<result column="updateDateTime" property="updateDateTime"/>
+		<result column="newAmanName" property="newAmanName"/><!-- 冗余字段 -->
+		<result column="newBmanName" property="newBmanName"/><!-- 冗余字段 -->
+		<result column="oldAmanName" property="oldAmanName"/><!-- 冗余字段 -->
+		<result column="oldBmanName" property="oldBmanName"/><!-- 冗余字段 -->
+		<result column="changeManName" property="changeManName"/><!-- 冗余字段 -->
+  </resultMap>
+	
+	<insert id="insertOneprojChangeRec" parameterType="com.zjm.pro.db.model.Pro_projChangeRec">
+		insert into 
+		pro_projChangeRec 
+		(
+		projChangeRec_ID,apply_ID,project_ID,applyDetail_ID,oldDepartid,oldAmanId,oldBmanId,oldCmanId,newDepartId,newAmanId,
+		newBmanId,newCmanId,changeReason,changeManId,changeDateTime,unit_uid,updateUserName,updateDateTime)
+		values(#{projChangeRec_ID},#{apply_ID},#{project_ID},#{applyDetail_ID},#{oldDepartId},#{oldAmanId},#{oldBmanId},#{oldCmanId},#{newDepartId},#{newAmanId},
+		#{newBmanId},#{newCmanId},#{changeReason},#{changeManId},#{changeDateTime},#{unit_uid},#{updateUserName},#{updateDateTime})
+	</insert>
+  
+	
+	<select id="selectProjChangeRecPageTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="projChangeRecMap">
+		select 
+			projChangeRec_ID,
+			apply_ID,
+			project_ID,
+			applyDetail_ID,
+			oldDepartid,
+			oldAmanId,
+			oldBmanId,
+			oldCmanId,
+			newDepartId,
+			newAmanId,
+			newBmanId,
+			newCmanId,
+			changeReason,
+			changeManId,
+			changeDateTime,
+			unit_uid,
+			updateUserName,
+			updateDateTime,
+			(select user_name from sys_users where user_uid = oldAmanId ) as oldAmanName,
+			(select user_name from sys_users where user_uid = newAmanId ) as newAmanName,
+			(select user_name from sys_users where user_uid = oldBmanId ) as oldBmanName,
+			(select user_name from sys_users where user_uid = newBmanId ) as newBmanName,
+			(select user_name from sys_users where user_uid = changeManId ) as changeManName
+			from pro_projChangeRec
+			where 1=1  ${wheresql}
+			order by #{sortName} #{sortOrder}
+			
+	</select>
+	
+	<select id="selectProjChangeRecPageTableCount" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		select 
+			COUNT(1)
+			from pro_projChangeRec
+			where 1=1  ${wheresql}
+	</select>
+	
+ 	<select id="selectOneProjChangeRecByID" parameterType="java.lang.String" resultMap="projChangeRecMap">
+		select 
+			projChangeRec_ID,
+			apply_ID,
+			project_ID,
+			applyDetail_ID,
+			oldDepartid,
+			oldAmanId,
+			oldBmanId,
+			oldCmanId,
+			newDepartId,
+			newAmanId,
+			newBmanId,
+			newCmanId,
+			changeReason,
+			changeManId,
+			changeDateTime,
+			unit_uid,
+			updateUserName,
+			updateDateTime,
+			(select user_name from sys_users where user_uid = oldAmanId ) as oldAmanName,
+			(select user_name from sys_users where user_uid = newAmanId ) as newAmanName,
+			(select user_name from sys_users where user_uid = oldBmanId ) as oldBmanName,
+			(select user_name from sys_users where user_uid = newBmanId ) as newBmanName,
+			(select user_name from sys_users where user_uid = changeManId ) as changeManName
+			from pro_projChangeRec
+			where projChangeRec_ID = #{projChangeRec_ID}
+	</select>
+	
+	<update id="updateOneProjChangeRec" parameterType="com.zjm.pro.db.model.Pro_projChangeRec">
+		update pro_projChangeRec
+          <set>
+	            <if test="apply_ID != null ">
+				apply_ID = #{apply_ID},
+	            </if>
+	            <if test="project_ID != null ">
+				project_ID = #{project_ID},
+			    </if>
+			    <if test="applyDetail_ID != null ">
+				applyDetail_ID = #{applyDetail_ID},
+			    </if>
+			    <if test="oldDepartId != null ">
+				oldDepartId =#{oldDepartId},
+			    </if>
+			    <if test="oldAmanId != null ">
+				oldAmanId =#{oldAmanId},
+				</if>
+				<if test="oldBmanId != null ">
+				oldBmanId =#{oldBmanId},
+				</if>
+				<if test="oldCmanId != null ">
+				oldCmanId=#{oldCmanId},
+				</if>
+				<if test="newDepartId != null ">
+				newDepartId =#{newDepartId},
+				</if>
+				<if test="newAmanId != null ">
+				newAmanId =#{newAmanId},
+				</if>
+				<if test="newBmanId != null ">
+				newBmanId =#{newBmanId},
+				</if>
+				<if test="newCmanId != null ">
+				newCmanId = #{newCmanId},
+				</if>
+				<if test="changeReason != null ">
+				changeReason = #{changeReason},
+				</if>
+				<if test="changeManId != null ">
+				changeManId =#{changeManId},
+				</if>
+				<if test="changeDateTime != null ">
+				changeDateTime = #{changeDateTime},
+				</if>
+				<if test="unit_uid != null ">
+				unit_uid =#{unit_uid},
+				</if>
+				<if test="updateUserName != null ">
+				updateUserName =#{updateUserName},
+				</if>
+				<if test="updateDateTime != null ">
+				updateDateTime = #{updateDateTime}
+				</if>
+        </set>    
+        where projChangeRec_ID = #{projChangeRec_ID }		
+	</update> 
+	
+	<delete id="deleteProjChangeRecByProject_ID" parameterType="string">
+		delete 
+			from pro_projChangeRec
+		where project_ID = #{project_ID}
+	</delete>
+	
+</mapper>  

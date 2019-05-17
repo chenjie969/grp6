@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.gbpm.db.map.Gbpm_productMapper">
+
+	<resultMap type="com.zjm.gbpm.db.model.Gbpm_product" id="productResultMap">
+		<result column="product_ID" property="product_ID"  />
+		<result column="productName" property="productName"  />
+		<result column="version" property="version"  />
+		<result column="productTypeID" property="productTypeID"  />
+		<result column="productTypeName" property="productTypeName"  />
+		<result column="isUsed" property="isUsed"  />
+		<result column="remark" property="remark"  />
+		<result column="unit_uid" property="unit_uid"  />
+		<result column="unit_uidName" property="unit_uidName"  />
+		<result column="updatedatetime" property="updatedatetime"  />
+		<result column="updateUserName" property="updateUserName"  />
+		<result column="productSort" property="productSort"  />
+	</resultMap>
+	
+	<!-- 分页查询节点列表 -->
+	<select id="selectProductPageTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="productResultMap">
+		<![CDATA[
+		SELECT 
+			product_ID,
+			productName,
+			version,
+			productTypeID,
+			productTypeName,
+			isUsed,
+			remark,  
+			unit_uid, 
+			unit_uidName,  
+			updateUserName, 
+			productSort, 
+			updatedatetime
+		FROM gbpm_product 
+		WHERE 1=1
+			  ${wheresql}
+	    order by productSort,updatedatetime
+		LIMIT #{pageNumber},#{pageSize}  
+		]]>
+	</select>
+	
+	<!-- 分页查询节点列表-查询总记录数 -->
+	<select id="selectProductPageTable_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="long">
+	<![CDATA[
+	 	SELECT 
+	 		COUNT(1) 
+	 	FROM 
+	 		gbpm_product 
+	 	WHERE 1=1
+	 		${wheresql}
+	 	]]>	
+	</select>
+	
+	<!-- 查询一条节点-->  
+	<select id="selectOneProduct" parameterType="com.zjm.gbpm.db.model.Gbpm_product" resultMap="productResultMap">
+		SELECT 
+			product_ID,
+			productName,
+			version,
+			productTypeID,
+			productTypeName,
+			isUsed,
+			remark,  
+			unit_uid, 
+			unit_uidName,  
+			updateUserName, 
+			productSort, 
+			updatedatetime  
+		FROM gbpm_product
+		WHERE 
+		product_ID = #{product_ID}
+	</select>
+	
+	<!-- 查询节点List-->  
+	<select id="selectProductList" parameterType="java.lang.String" resultMap="productResultMap">
+		SELECT 
+			product_ID,
+			productName,
+			version,
+			productTypeID,
+			productTypeName,
+			isUsed,
+			remark,  
+			unit_uid, 
+			unit_uidName,  
+			updateUserName, 
+			productSort, 
+			updatedatetime  
+		FROM gbpm_product
+		WHERE 
+		1=1 ${value}
+		order by productSort,updatedatetime
+	</select>
+	
+	<!-- 插入一条节点 -->
+	<insert id="insertOneProduct" parameterType="com.zjm.gbpm.db.model.Gbpm_product">
+		INSERT INTO gbpm_product(
+			product_ID,
+			productName,
+			version,
+			productTypeID,
+			productTypeName,
+			isUsed,
+			remark, 
+			unit_uid, 
+			unit_uidName,  
+			updateUserName,  
+			productSort,  
+			updatedatetime    
+		) VALUES(
+			#{product_ID},
+			#{productName},
+			#{version},
+			#{productTypeID},
+			#{productTypeName},
+			#{isUsed},
+			#{remark}, 
+			#{unit_uid}, 
+			#{unit_uidName},  
+			#{updateUserName},  
+			#{productSort},  
+			NOW()
+		)
+	</insert>
+	
+	<!-- 修改一条节点 -->
+	<update id="updateOneProduct" parameterType="com.zjm.gbpm.db.model.Gbpm_product">
+		UPDATE gbpm_product
+		SET
+			<if test="productName!=null">productName = #{productName},</if>
+			<if test="version!=null">version = #{version},</if>
+			<if test="productTypeID!=null">productTypeID = #{productTypeID},</if>
+			<if test="productTypeName!=null">productTypeName = #{productTypeName},</if>
+			<if test="isUsed!=null">isUsed = #{isUsed},</if>
+			<if test="remark!=null">remark = #{remark}, </if>
+			<if test="updateUserName!=null">updateUserName = #{updateUserName}, </if>
+			<if test="productSort!=null">productSort = #{productSort}, </if>
+			updateDateTime = NOW() 
+		WHERE product_ID = #{product_ID}
+	</update>
+	
+	<!-- 删除一条节点 -->
+	<delete id="deleteOneProduct" parameterType="com.zjm.gbpm.db.model.Gbpm_product">
+		DELETE FROM 
+			gbpm_product
+		WHERE
+			unit_uid = #{unit_uid}
+		AND product_ID = #{product_ID}
+	</delete>
+ 
+ 	<!-- 判断节点名称是否存在 ，如果有product_ID，说明是更新数据，要排除与自身的productName比较-->
+	<select id="isExistProductName" parameterType="com.zjm.gbpm.db.model.Gbpm_product" resultType="java.lang.Integer">
+		<![CDATA[
+			SELECT 
+				COUNT(1) 
+			FROM 
+				gbpm_product 
+			WHERE 
+				unit_uid = #{unit_uid} 
+			AND productName = #{productName}
+			AND version = #{version}
+		]]>
+			<if test="product_ID != null">
+				AND product_ID != #{product_ID}
+			</if>
+	</select>
+</mapper>

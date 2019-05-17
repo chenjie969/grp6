@@ -1,0 +1,1 @@
+ALTER TABLE sys_departs ADD COLUMN depart_type INT(2) DEFAULT 0 COMMENT '1.公司 2.部门'	

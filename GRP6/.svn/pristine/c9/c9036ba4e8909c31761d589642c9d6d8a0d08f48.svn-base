@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><jatools Class="jatools.ReportDocument" Name="jatools report template"><VariableContext/><Page><Children ItemClass="PagePanel"><Item0><Width>1677</Width><Height>137</Height><Children><Item0 Class="Label"><Text>还款明细月报表</Text><Font><Face>宋体</Face><Style>1</Style><Size>36</Size></Font><HorizontalAlignment>1</HorizontalAlignment><X>372</X><Y>14</Y><Width>656</Width><Height>71</Height></Item0><Item1 Class="Text"><Variable>=if(has(enddatesql)) return enddatesql;else return $today;</Variable><X>664</X><Y>91</Y><Width>110</Width><Height>23</Height></Item1><Item2 Class="Label"><Text>截止日期：</Text><X>606</X><Y>92</Y><Width>56</Width><Height>23</Height></Item2></Children><Type>100</Type></Item0><Item1><Y>790</Y><Width>1677</Width><Height>19</Height><Type>103</Type></Item1><Item2><Y>137</Y><Width>1677</Width><Height>653</Height><Children><Item0 Class="Table"><NodePath>detail_free</NodePath><X>82</X><Y>33</Y><Children><Item0 Class="Label"><Text>序号</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>0</Col></Cell></Item0><Item1 Class="Label"><Text>所属区域</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>1</Col></Cell></Item1><Item2 Class="Label"><Text>项目名称</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>2</Col></Cell></Item2><Item3 Class="Label"><Text>担保金额</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>3</Col></Cell></Item3><Item4 Class="Label"><Text>业务品种</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>4</Col></Cell></Item4><Item5 Class="Label"><Text>合作机构</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>5</Col></Cell></Item5><Item6 Class="Label"><Text>起始日期</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>8</Col></Cell></Item6><Item7 Class="Label"><Text>到期日期</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>9</Col></Cell></Item7><Item8 Class="Label"><Text>实际还款日期</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>10</Col></Cell></Item8><Item9 Class="Label"><Text>A角</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>12</Col></Cell></Item9><Item10 Class="Label"><Text>B角</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>13</Col></Cell></Item10><Item11 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>0</Col></Cell></Item11><Item12 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>4</Col></Cell></Item12><Item13 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>5</Col></Cell></Item13><Item14 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>8</Col></Cell></Item14><Item15 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>9</Col></Cell></Item15><Item16 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>10</Col></Cell></Item16><Item17 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>12</Col></Cell></Item17><Item18 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>13</Col></Cell></Item18><Item19 Class="RowPanel"><Cell><Row>1</Row><Col>0</Col><RowSpan>2</RowSpan><ColSpan>14</ColSpan></Cell><Children><Item0 Class="RowPanel"><Cell><Row>1</Row><Col>0</Col><ColSpan>14</ColSpan></Cell><Children ItemClass="Text"><Item0><Variable>=index_dic_area.name{$fullAreaCode}</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>united-level:2;auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>1</Col></Cell></Item0><Item1><Variable>=$.position + 1</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>0</Col></Cell></Item1><Item2><Variable>=$.projectName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>2</Col></Cell></Item2><Item3><Variable>=$.loadSum</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>3</Col></Cell></Item3><Item4><Variable>=$.busiTypeName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>4</Col></Cell></Item4><Item5><Variable>=$.loadBeginDate</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>8</Col></Cell></Item5><Item6><Variable>=$.loadEndDate</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>9</Col></Cell></Item6><Item7><Variable>=$.payDate</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>10</Col></Cell></Item7><Item8><Variable>=$.amanName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>12</Col></Cell></Item8><Item9><Variable>=$.bmanName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>13</Col></Cell></Item9><Item10><Variable>=$.bankName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>5</Col></Cell></Item10><Item11><Variable>=$.payCapitalSum</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>6</Col></Cell></Item11><Item12><Variable>=$.remainSUM</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>7</Col></Cell></Item12><Item13><Variable>=$.remark</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>11</Col></Cell></Item13></Children><NodePath>Row</NodePath></Item0><Item1 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>4</Col></Cell></Item1><Item2 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>5</Col></Cell></Item2><Item3 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>8</Col></Cell></Item3><Item4 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>9</Col></Cell></Item4><Item5 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>10</Col></Cell></Item5><Item6 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>12</Col></Cell></Item6><Item7 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>13</Col></Cell></Item7><Item8 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>0</Col></Cell></Item8><Item9 Class="Text"><Variable>=index_dic_area.name{$fullAreaCode}+"小计"</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>united-level:1;auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>1</Col><ColSpan>2</ColSpan></Cell></Item9><Item10 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>6</Col></Cell></Item10><Item11 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>7</Col></Cell></Item11><Item12 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>11</Col></Cell></Item12><Item13 Class="Text"><Variable>=index_column4.loadSum{$fullAreaCode}</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>3</Col></Cell></Item13></Children><NodePath>fullAreaCode</NodePath></Item19><Item20 Class="Label"><Text>总计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>3</Row><Col>1</Col><ColSpan>2</ColSpan></Cell></Item20><Item21 Class="Label"><Text>还款金额</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>6</Col></Cell></Item21><Item22 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>6</Col></Cell></Item22><Item23 Class="Label"><Text>本笔尚未解保余额</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>7</Col></Cell></Item23><Item24 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>7</Col></Cell></Item24><Item25 Class="Label"><Text>备注</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>0</Row><Col>11</Col></Cell></Item25><Item26 Class="Text"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>3</Row><Col>11</Col></Cell></Item26><Item27 Class="Text"><Variable>=index_column4.loadSum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>3</Row><Col>3</Col></Cell></Item27></Children><ColumnWidths>108,120,108,117,114,117,90,141,126,87,105,111,93,93</ColumnWidths><RowHeights>40,40,20,20</RowHeights></Item0><Item1 Class="Label"><Text>填报单位：</Text><X>80</X><Y>4</Y><Width>131</Width><Height>23</Height></Item1><Item2 Class="Label"><Text>金额单位：万元</Text><HorizontalAlignment>2</HorizontalAlignment><X>1501</X><Y>6</Y><Width>110</Width><Height>23</Height></Item2></Children><Type>102</Type></Item2></Children><PageFormat><Width>1717</Width><Height>852</Height><Top>23</Top></PageFormat></Page><NodeSource><Children ItemClass="DatasetNodeSource"><Item0><Children ItemClass="GroupNodeSource"><Item0><Children ItemClass="RowNodeSource"><Item0/></Children><Group><Order>1</Order><Field>fullAreaCode</Field></Group></Item0></Children><Reader Class="SqlReader"><Name>detail_free</Name><Sql>
+
+SELECT DISTINCT
+
+	cli.fullAreaName,
+                        cli.fullAreaCode,
+	apply.projectName,
+	
+	IFNULL(project.loadSum,0) AS loadSum,
+	project.busiTypeName,
+	applydetail.bankName,
+	factpay.payCapitalSum,
+	
+	project.loadBeginDate,
+	project.loadEndDate,
+	
+	
+(project.loadSum - (SELECT SUM(payCapitalSum) FROM pro_factpay factpay1 WHERE factpay1.project_ID = factpay.project_ID AND factpay1.payDate &lt;= factpay.payDate)) AS 'remainSUM',
+	
+	
+	factpay.payDate,
+	factpay.remark,
+	applydetail.amanName,
+	applydetail.bmanName
+	
+  FROM pro_factpay factpay
+
+ LEFT JOIN pro_project project  ON factpay.project_ID=project.project_ID
+
+ LEFT JOIN pro_apply apply ON project.apply_ID = apply.apply_ID
+ 
+ LEFT JOIN pro_applydetail applydetail ON project.applyDetail_ID = applydetail.applyDetail_ID
+ 
+ LEFT JOIN crm_client  cli ON apply.client_ID = cli.client_ID
+ 
+where 1=1 
+${has(begindatesql)?(" and factpay.payDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and factpay.payDate&lt;='"+enddatesql+"'"):"and factpay.payDate&lt;=CURDATE()"}
+ 
+order by  factpay.payDate
+</Sql><Description>
+
+SELECT DISTINCT
+
+	cli.fullAreaName,
+                        cli.fullAreaCode,
+	apply.projectName,
+	
+	IFNULL(project.loadSum,0) AS loadSum,
+	project.busiTypeName,
+	applydetail.bankName,
+	factpay.payCapitalSum,
+	
+	project.loadBeginDate,
+	project.loadEndDate,
+	
+	
+(project.loadSum - (SELECT SUM(payCapitalSum) FROM pro_factpay factpay1 WHERE factpay1.project_ID = factpay.project_ID AND factpay1.payDate &lt;= factpay.payDate)) AS 'remainSUM',
+	
+	
+	factpay.payDate,
+	factpay.remark,
+	applydetail.amanName,
+	applydetail.bmanName
+	
+  FROM pro_factpay factpay
+
+ LEFT JOIN pro_project project  ON factpay.project_ID=project.project_ID
+
+ LEFT JOIN pro_apply apply ON project.apply_ID = apply.apply_ID
+ 
+ LEFT JOIN pro_applydetail applydetail ON project.applyDetail_ID = applydetail.applyDetail_ID
+ 
+ LEFT JOIN crm_client  cli ON apply.client_ID = cli.client_ID
+ 
+where 1=1 
+${has(begindatesql)?(" and factpay.payDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and factpay.payDate&lt;='"+enddatesql+"'"):"and factpay.payDate&lt;=CURDATE()"}
+ 
+order by  factpay.payDate
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><TagName>detail_free</TagName></Item0><Item1><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">id</IndexFields><TagName>index_dic_area</TagName></Item0></Children><Reader Class="SqlReader"><Name>dic_area</Name><Sql> SELECT 
+    multiLevelSortID as id,
+    multiLevelSortName as name
+    FROM  c_multilevelsort   multilevelsort
+    WHERE multilevelsort.pmultiLevelSortID = '66547f3187194ed884e81dcd83027c36'
+ </Sql><Description> SELECT 
+    multiLevelSortID as id,
+    multiLevelSortName as name
+    FROM  c_multilevelsort   multilevelsort
+    WHERE multilevelsort.pmultiLevelSortID = '66547f3187194ed884e81dcd83027c36'
+ </Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">id</IndexFields><TagName>dic_area</TagName></Item1><Item2><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">fullAreaCode</IndexFields><TagName>index_column4</TagName></Item0></Children><Reader Class="SqlReader"><Name>column4_loadSun</Name><Sql>
+SELECT 
+SUM(tab.loadSum) AS loadSum,
+tab.fullAreaCode,
+project.project_ID
+
+FROM pro_project project
+LEFT JOIN 
+(
+   SELECT DISTINCT IFNULL(project.loadSum,0) AS loadSum,
+   cli.fullAreaCode,
+   factpay.project_ID
+   
+   
+    FROM pro_factpay factpay
+   
+    LEFT JOIN pro_project project  ON factpay.project_ID=project.project_ID
+
+   LEFT JOIN pro_apply apply ON project.apply_ID = apply.apply_ID
+ 
+
+  
+   LEFT JOIN crm_client  cli ON apply.client_ID = cli.client_ID
+ 
+   
+
+)tab ON tab.project_ID=project.project_ID
+WHERE tab.project_ID=project.project_ID
+GROUP BY tab.fullAreaCode</Sql><Description>
+SELECT 
+SUM(tab.loadSum) AS loadSum,
+tab.fullAreaCode,
+project.project_ID
+
+FROM pro_project project
+LEFT JOIN 
+(
+   SELECT DISTINCT IFNULL(project.loadSum,0) AS loadSum,
+   cli.fullAreaCode,
+   factpay.project_ID
+   
+   
+    FROM pro_factpay factpay
+   
+    LEFT JOIN pro_project project  ON factpay.project_ID=project.project_ID
+
+   LEFT JOIN pro_apply apply ON project.apply_ID = apply.apply_ID
+ 
+
+  
+   LEFT JOIN crm_client  cli ON apply.client_ID = cli.client_ID
+ 
+   
+
+)tab ON tab.project_ID=project.project_ID
+WHERE tab.project_ID=project.project_ID
+GROUP BY tab.fullAreaCode</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">fullAreaCode</IndexFields><TagName>column4_loadSun</TagName></Item2></Children></NodeSource></jatools>

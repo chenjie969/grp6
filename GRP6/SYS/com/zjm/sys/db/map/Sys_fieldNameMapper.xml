@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjm.sys.db.map.Sys_fieldNameMapper" >
+  <resultMap id="FieldNameResultMap" type="com.zjm.sys.db.model.Sys_fieldName" >  
+    <result column="fieldID" property="fieldID"  />
+    <result column="listID" property="listID"  />
+    <result column="field" property="field"  />
+    <result column="fieldName" property="fieldName" />
+    
+  </resultMap>
+  
+	<!-- 查询字段名List信息 -->
+	<select id="selectFieldNameList" resultMap="FieldNameResultMap" parameterType="com.zjm.sys.db.model.Sys_fieldName" >
+	 	<![CDATA[
+	  	 select 
+	  		field, 
+	  		fieldName
+	   from sys_fieldname
+	   where listID=#{listID}
+	   ]]>
+	</select>
+	
+</mapper>

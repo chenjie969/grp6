@@ -1,0 +1,62 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<div class="modal fade" id="viewTaskManager" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">查看任务事项</h4>
+      </div>
+      <div class="modal-body">
+			<div class="row">
+				<div class="col-sm-offset-1 col-sm-10">
+					<div class="col-sm-12">
+						<div class="row">
+							<h5 class="col-sm-12" style="line-height:26px;">任务事项类型：<span class="grey" >${taskManager.taskTypeName }</span></h5>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-offset-1 col-sm-10">
+					<div class="col-sm-12">
+						<div class="row">
+							<h5 class="col-sm-12" style="line-height:26px;">任务事项编号：<span class="grey" >${taskManager.taskCode }</span></h5>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-offset-1 col-sm-10">
+					<div class="col-sm-12">
+						<div class="row">
+							<h5 class="col-sm-12" style="line-height:26px;">任务事项名称：<span class="grey" >${taskManager.taskName }</span></h5>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-offset-1 col-sm-10">
+					<div class="col-sm-12">
+						<div class="row">
+							<h5 class="col-sm-12" style="line-height:26px;">任务事项查看URL：<span class="grey" >${taskManager.viewTaskUrl }</span></h5>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-offset-1 col-sm-10">
+					<div class="col-sm-12">
+						<div class="row">
+							<h5 class="col-sm-12" style="line-height:26px;">任务事项办理URL：<span class="grey" >${taskManager.taskUrl }</span></h5>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-offset-1 col-sm-10">
+					<div class="col-sm-12">
+						<div class="row">
+							<h5 class="col-sm-12" style="line-height:26px;">备注：<span class="grey" >${taskManager.remark }</span></h5>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+      </div>
+      <div class="modal-footer ">
+        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class='icon-remove bigger-110'></i>关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+					

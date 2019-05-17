@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.sys.db.map.Sys_user_usergroupMapper">
+
+	<!-- 用户表信息 -->
+	<resultMap type="com.zjm.sys.db.model.Sys_users" id="UserResultMap">
+		<result property="user_uid" column="user_uid" />
+		<result property="user_name" column="user_name" />
+	</resultMap>
+	
+	<!-- 查询一个项目组下的用户List-->
+	<select id="selectOneUserGroupDownUserList" parameterType="com.zjm.sys.db.model.Sys_usergroup"  resultMap="UserResultMap">
+	<![CDATA[
+		SELECT a.user_uid,a.user_name 
+		FROM sys_users a
+		left join sys_user_usergroup b on b.user_uid=a.user_uid and a.unit_uid=b.unit_uid
+		left join sys_usergroup c on c.userGroup_uuid=b.userGroup_uuid and c.unit_uid=b.unit_uid
+		WHERE c.userGroup_uuid=#{userGroup_uuid} and c.unit_uid=#{unit_uid} 
+		]]>
+	</select>
+	
+	<!-- 插入一个用户与项目组关联表信息 -->
+	<insert id="insertOneUserAndUserGroupInfo"	parameterType="com.zjm.sys.db.model.Sys_user_usergroup">
+		<![CDATA[
+		INSERT INTO sys_user_usergroup (
+		userGroup_uuid,
+		unit_uid,
+		user_uid
+		)
+		VALUES
+		(
+		#{userGroup_uuid},
+		#{unit_uid},
+		#{user_uid}
+		) ;
+		]]>
+	</insert>
+	<!-- 删除一个用户与项目组关联表信息 -->
+	<delete id="delectUserAndUserGroupInfo" parameterType="com.zjm.sys.db.model.Sys_usergroup">
+		<![CDATA[DELETE FROM sys_user_usergroup WHERE userGroup_uuid=#{userGroup_uuid}  and unit_uid=#{unit_uid}  ]]>
+	</delete>
+	<!-- 根据用户user_uid删除用户组和用户的关系 -->
+	<delete id="delectUserAndUserGroupInfoByUserUid" parameterType="java.lang.String">
+		<![CDATA[DELETE FROM sys_user_usergroup WHERE user_uid=#{value}]]>
+	</delete>
+</mapper>  

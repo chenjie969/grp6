@@ -1,0 +1,1044 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.pro.db.map.Pro_applyMapper">
+	<!-- 业务申请信息表 -->
+	 <resultMap id="ProApplyMap" type="com.zjm.pro.db.model.Pro_apply" >
+	    <id column="apply_ID" property="apply_ID"  />
+		<result column="relationID" property="relationID"/>
+		<result column="relationName" property="relationName"/>
+		<result column="client_ID" property="client_ID"/>
+		<result column="clientName" property="clientName"/>
+		<result column="clientTypeID" property="clientTypeID"/>
+		<result column="clientGUID" property="clientGUID"/>
+		<result column="busiCode" property="busiCode"/>
+		<result column="projectName" property="projectName"/>
+		<result column="creditTypeID" property="creditTypeID"/>
+		<result column="creditTypeName" property="creditTypeName"/>
+		<result column="isLoopCredit" property="isLoopCredit"/>
+		<result column="isBusiLimit" property="isBusiLimit"/>
+		<result column="isBlend" property="isBlend"/>
+		<result column="applySum" property="applySum"/>
+		<result column="agreeSum" property="agreeSum"/>
+		<result column="usedSum" property="usedSum"/>
+		<result column="busiTypeNameList" property="busiTypeNameList"/>
+		<result column="bankNameList" property="bankNameList"/>
+		<result column="creditBeginDate" property="creditBeginDate"/>
+		<result column="creditEndDate" property="creditEndDate"/>
+		<result column="dContractCode" property="dContractCode"/>
+		<result column="contractBeginDate" property="contractBeginDate"/>
+		<result column="contractEndDate" property="contractEndDate"/>
+		<result column="jContractCode" property="jContractCode"/>
+		<result column="bContractCode" property="bContractCode"/>
+		<result column="optContractCode" property="optContractCode"/>
+		<result column="unit_uid" property="unit_uid"/>
+		<result column="unit_uidName" property="unit_uidName"/>
+		<result column="departID" property="departID"/>
+		<result column="departName" property="departName"/>
+		<result column="amanID" property="amanID"/>
+		<result column="amanName" property="amanName"/>
+		<result column="bmanID" property="bmanID"/>
+		<result column="bmanName" property="bmanName"/>
+		<result column="reviewManID" property="reviewManID"/>
+		<result column="reviewManName" property="reviewManName"/>
+		<result column="legalManID" property="legalManID"/>
+		<result column="legalManName" property="legalManName"/>
+		<result column="beforeAManID" property="beforeAManID"/>
+		<result column="beforeBManID" property="beforeBManID"/>
+		<result column="beforeReviewManID" property="beforeReviewManID"/>
+		<result column="beforeLegalManID" property="beforeLegalManID"/>
+		<result column="changeDate" property="changeDate"/>
+		<result column="changeManID" property="changeManID"/>
+		<result column="createManID" property="createManID"/>
+		<result column="createManName" property="createManName"/>
+		<result column="createDate" property="createDate"/>
+		<result column="isSingle" property="isSingle"/>
+		<result column="isPlural" property="isPlural"/>
+		<result column="isRelation" property="isRelation"/>
+		<result column="isPutPackage" property="isPutPackage"/>
+		<result column="isPackage" property="isPackage"/>
+		<result column="package_ID" property="package_ID"/>
+		<result column="creditStatus" property="creditStatus"/>
+		<result column="parentApply_ID" property="parentApply_ID"/>
+		<result column="isFirstApply" property="isFirstApply"/>
+		<result column="isHistory" property="isHistory"/>
+		<result column="isStop" property="isStop"/>
+		<result column="stopTypeID" property="stopTypeID"/>
+		<result column="stopTypeName" property="stopTypeName"/>
+		<result column="stopDate" property="stopDate"/>
+		<result column="stopDesc" property="stopDesc"/>
+		<result column="projectStageID" property="projectStageID"/>
+		<result column="projectStageName" property="projectStageName"/>
+		<result column="productInstance_ID" property="productInstance_ID"/>
+		<result column="projectJudge" property="projectJudge"/>
+		<result column="judgeManID" property="judgeManID"/>
+		<result column="judgeManName" property="judgeManName"/>
+		<result column="judgeDateTime" property="judgeDateTime"/>
+		<result column="updateUserName" property="updateUserName"/>
+		<result column="updateDateTime" property="updateDateTime"/>
+		<result column="isContinue" property="isContinue"/>
+		<result column="guarantyOrgName" property="guarantyOrgName"/>
+		<result column="guarantyOrgID" property="guarantyOrgID"/>
+		<result column="hostAreaName" property="hostAreaName"/>
+		<result column="hostAreaID" property="hostAreaID"/>
+		<result column="fundType" property="fundType"/>
+		<result column="fundTypeID" property="fundTypeID"/>
+		<result column="fundName" property="fundName"/>
+		
+		<result column="oprationCompanyName" property="oprationCompanyName"/>
+		<result column="oprationCompanyID" property="oprationCompanyID"/>
+		<result column="attributionName" property="attributionName"/>
+		<result column="attributionID" property="attributionID"/>
+		
+		
+		<result column="proType" property="proType"/><!-- 业务类型(冗余字段) -->
+		<result column="riskLevelName" property="riskLevelName"/><!-- 风险等级(冗余字段) -->
+		<result column="mainStage" property="mainStage"/>
+		<result column="usableSum" property="usableSum"/>
+		<result column="applyNum" property="applyNum"/>
+		
+		<!-- 以下是上会申请用到 -->
+		<result column="isMeeting" property="isMeeting"/>
+		<result column="applyMeetingDate" property="applyMeetingDate"/>
+		<result column="operationDepartID" property="operationDepartID"/>
+		<result column="operationDepartName" property="operationDepartName"/>
+		<result column="applyMeetingUserName" property="applyMeetingUserName"/>
+		<result column="meetingSubmitDate" property="meetingSubmitDate"/>
+		<result column="meetingStatus" property="meetingStatus"/>
+		<result column="meetingTypeID" property="meetingTypeID"/>
+		<result column="meetingTypeName" property="meetingTypeName"/>
+		<result column="meetingDate" property="meetingDate"/>
+		<result column="meetingResult" property="meetingResult"/>
+		<!-- 以下是录取评审会决议取基本信息时要用 -->
+		<result column="busiNatureID" property="busiNatureID"/>
+		<result column="busiNatureName" property="busiNatureName"/>
+		<!-- 以下项目完结评价时要用 -->
+		<result column="endDate" property="endDate"/>
+		<result column="isEnd" property="isEnd"/>
+		<result column="mainStage" property="mainStage"/>
+		<!-- <result column="isArrangeMeeting" property="isArrangeMeeting"/> -->
+		<result column="usableSum" property="usableSum"/>
+		<result column="applyNum" property="applyNum"/>
+		<result column="fundSource" property="fundSource"/>
+  		<result column="fundID" property="fundID"/>
+		<result column="fundChinese" property="fundChinese"/>
+		<result column="applySumUse" property="applySumUse"/>
+  </resultMap>
+	
+<!-- 新增业务申请信息表  -->
+	<insert id="insertOneApplyInfo"	parameterType="com.zjm.pro.db.model.Pro_apply">
+		<![CDATA[
+		INSERT INTO pro_apply (
+		        apply_ID,
+				projectType,
+				clientTypeID,
+				client_ID,
+				clientGUID,
+				clientName,
+				relationID,
+				relationName,
+				busiCode,
+				projectName,
+				applySum,
+				busiTypeNameList,
+				bankNameList,
+				createManID,
+				createManName,
+				createDate,
+				departID,
+				departName,
+				projectSourceID,
+				projectSourceName,
+				sourceDesc,
+				unit_uid,
+				unit_uidName,
+				amanID,
+				amanName,
+				bmanID,
+				bmanName,
+				reviewManID,
+				reviewManName,
+				legalManID,
+				legalManName,
+				isMeeting,
+				meetingTypeID,
+				meetingTypeName,
+				meetingDate,
+				isResolution,
+				meetingCode,
+				resolutionCode,
+				monitoredAsking,
+				meetingResult,
+				agreeSum,
+				contractBeginDate,
+				contractEndDate,
+				isPutPackage,
+				isPackage,
+				package_ID,
+				isStop,
+				stopTypeID,
+				stopTypeName,
+				stopDate,
+				stopDesc,
+				checkCycleTypeID,
+				checkCycleTypeName,
+				creditStatus,
+				creditTypeID,
+				creditTypeName,
+				isLoopCredit,
+				isBusiLimit,
+				isBlend,
+				usedSum,
+				creditBeginDate,
+				creditEndDate,
+				dContractCode,
+				jContractCode,
+				bContractCode,
+				beforeAManID,
+				beforeBManID,
+				beforeReviewManID,
+				beforeLegalManID,
+				changeDate,
+				changeManID,
+				isHistory,
+				productInstance_ID,
+				projectJudge,
+				judgeManID,
+				judgeManName,
+				judgeDateTime,
+				projectStageID,
+				projectStageName,
+				updateUserName,
+				updateDateTime,
+				isContinue,
+				guarantyOrgName,
+				guarantyOrgID,
+				hostAreaName,
+				hostAreaID,
+				fundType,
+				fundTypeID,
+				fundName,
+				fundID,
+				fundChinese,
+				oprationCompanyName,
+				oprationCompanyID,
+				attributionName,
+				attributionID,
+				busiNatureID,
+				busiNatureName,
+				endDate,
+				isEnd,
+				fundSource,
+				applySumUse
+		)
+		VALUES
+		(
+				#{apply_ID},
+				#{projectType},
+				#{clientTypeID},
+				#{client_ID},
+				#{clientGUID},
+				#{clientName},
+				#{relationID},
+				#{relationName},
+				#{busiCode},
+				#{projectName},
+				#{applySum},
+				#{busiTypeNameList},
+				#{bankNameList},
+				#{createManID},
+				#{createManName},
+				#{createDate},
+				#{departID},
+				#{departName},
+				#{projectSourceID},
+				#{projectSourceName},
+				#{sourceDesc},
+				#{unit_uid},
+				#{unit_uidName},
+				#{amanID},
+				#{amanName},
+				#{bmanID},
+				#{bmanName},
+				#{reviewManID},
+				#{reviewManName},
+				#{legalManID},
+				#{legalManName},
+				#{isMeeting},
+				#{meetingTypeID},
+				#{meetingTypeName},
+				#{meetingDate},
+				#{isResolution},
+				#{meetingCode},
+				#{resolutionCode},
+				#{monitoredAsking},
+				#{meetingResult},
+				#{agreeSum},
+				#{contractBeginDate},
+				#{contractEndDate},
+				#{isPutPackage},
+				#{isPackage},
+				#{package_ID},
+				#{isStop},
+				#{stopTypeID},
+				#{stopTypeName},
+				#{stopDate},
+				#{stopDesc},
+				#{checkCycleTypeID},
+				#{checkCycleTypeName},
+				#{creditStatus},
+				#{creditTypeID},
+				#{creditTypeName},
+				#{isLoopCredit},
+				#{isBusiLimit},
+				#{isBlend},
+				#{usedSum},
+				#{creditBeginDate},
+				#{creditEndDate},
+				#{dContractCode},
+				#{jContractCode},
+				#{bContractCode},
+				#{beforeAManID},
+				#{beforeBManID},
+				#{beforeReviewManID},
+				#{beforeLegalManID},
+				#{changeDate},
+				#{changeManID},
+				#{isHistory},
+				#{productInstance_ID},
+				#{projectJudge},
+				#{judgeManID},
+				#{judgeManName},
+				#{judgeDateTime},
+				#{projectStageID},
+			    #{projectStageName},
+				#{updateUserName},
+				NOW(),
+				#{isContinue},
+				#{guarantyOrgName},
+				#{guarantyOrgID},
+				#{hostAreaName},
+				#{hostAreaID},
+				#{fundType},
+				#{fundTypeID},
+				#{fundName},
+				#{fundID},
+				#{fundChinese},
+				#{oprationCompanyName},
+				#{oprationCompanyID},
+				#{attributionName},
+				#{attributionID},
+				#{busiNatureID},
+				#{busiNatureName},
+				#{endDate},
+				#{isEnd},
+				#{fundSource},
+				#{applySumUse}
+			
+		) ;
+		]]>
+	</insert>
+	<!-- 根据查询条件查询一个申请表信息-->
+	<select id="selectOneApplyWhereSql" parameterType="java.lang.String"  resultMap="ProApplyMap">
+	<![CDATA[
+		SELECT 
+		        pa.apply_ID,
+				pa.projectType,
+				pa.clientTypeID,
+				pa.client_ID,
+				pa.clientGUID,
+				pa.clientName,
+				pa.relationID,
+				pa.relationName,
+				pa.busiCode,
+				pa.projectName,
+				pa.applySum,
+				pa.busiTypeNameList,
+				pa.bankNameList,
+				pa.createManID,
+				pa.createManName,
+				pa.createDate,
+				pa.departID,
+				pa.departName,
+				pa.projectSourceID,
+				pa.projectSourceName,
+				pa.sourceDesc,
+				pa.unit_uid,
+				pa.unit_uidName,
+				pa.amanID,
+				pa.amanName,
+				pa.bmanID,
+				pa.bmanName,
+				pa.reviewManID,
+				pa.reviewManName,
+				pa.legalManID,
+				pa.legalManName,
+				pa.isMeeting,
+				pa.meetingTypeID,
+				pa.meetingTypeName,
+				pa.meetingDate,
+				pa.isResolution,
+				pa.meetingCode,
+				pa.resolutionCode,
+				pa.monitoredAsking,
+				pa.meetingResult,
+				pa.agreeSum,
+				pa.contractBeginDate,
+				pa.contractEndDate,
+				pa.isPutPackage,
+				pa.isPackage,
+				pa.package_ID,
+				pa.isStop,
+				pa.stopTypeID,
+				pa.stopTypeName,
+				pa.stopDate,
+				pa.stopDesc,
+				pa.checkCycleTypeID,
+				pa.checkCycleTypeName,
+				pa.creditStatus,
+				pa.creditTypeID,
+				pa.creditTypeName,
+				pa.isLoopCredit,
+				pa.isBusiLimit,
+				pa.isBlend,
+				pa.usedSum,
+				pa.creditBeginDate,
+				pa.creditEndDate,
+				pa.dContractCode,
+				pa.jContractCode,
+				pa.bContractCode,
+				pa.beforeAManID,
+				pa.beforeBManID,
+				pa.beforeReviewManID,
+				pa.beforeLegalManID,
+				pa.changeDate,
+				pa.changeManID,
+				pa.isHistory,
+				pa.productInstance_ID,
+				pa.projectJudge,
+				pa.judgeManID,
+				pa.judgeManName,
+				pa.judgeDateTime,
+				pa.projectStageID,
+				pa.projectStageName,
+				pa.updateUserName,
+				pa.updateDateTime,
+				pa.isContinue,
+				cd.dicTypeName as guarantyOrgName,
+				pa.guarantyOrgID,
+				pa.hostAreaName,
+				pa.hostAreaID,
+				pa.fundType,
+				pa.fundTypeID,
+				pa.fundName,
+				pa.fundID,
+				pa.fundChinese,
+				pa.oprationCompanyName,
+				pa.oprationCompanyID,
+				pa.attributionName,
+				pa.attributionID,
+				pa.busiNatureID,
+				pa.busiNatureName,
+				pa.endDate,
+				pa.isEnd,
+				pa.fundSource,
+				pa.applySumUse
+	    FROM 
+	         pro_apply pa
+	         left join c_dictype cd  on pa.guarantyOrgID = cd.dicTypeId 
+		WHERE 1=1 ${value}
+		]]> 				 
+	</select>
+	
+	<!-- 根据查询条件查询applyList-->
+	<select id="selectApplyListByWhereSql" parameterType="java.lang.String"  resultMap="ProApplyMap">
+	<![CDATA[
+		SELECT 
+		        apply_ID,
+				projectType,
+				clientTypeID,
+				client_ID,
+				clientGUID,
+				clientName,
+				relationID,
+				relationName,
+				busiCode,
+				projectName,
+				applySum,
+				busiTypeNameList,
+				bankNameList,
+				createManID,
+				createManName,
+				createDate,
+				departID,
+				departName,
+				projectSourceID,
+				projectSourceName,
+				sourceDesc,
+				unit_uid,
+				unit_uidName,
+				amanID,
+				amanName,
+				bmanID,
+				bmanName,
+				reviewManID,
+				reviewManName,
+				legalManID,
+				legalManName,
+				isMeeting,
+				meetingTypeID,
+				meetingTypeName,
+				meetingDate,
+				isResolution,
+				meetingCode,
+				resolutionCode,
+				monitoredAsking,
+				meetingResult,
+				agreeSum,
+				contractBeginDate,
+				contractEndDate,
+				isPutPackage,
+				isPackage,
+				package_ID,
+				isStop,
+				stopTypeID,
+				stopTypeName,
+				stopDate,
+				stopDesc,
+				checkCycleTypeID,
+				checkCycleTypeName,
+				creditStatus,
+				creditTypeID,
+				creditTypeName,
+				isLoopCredit,
+				isBusiLimit,
+				isBlend,
+				usedSum,
+				creditBeginDate,
+				creditEndDate,
+				dContractCode,
+				jContractCode,
+				bContractCode,
+				beforeAManID,
+				beforeBManID,
+				beforeReviewManID,
+				beforeLegalManID,
+				changeDate,
+				changeManID,
+				isHistory,
+				productInstance_ID,
+				projectJudge,
+				judgeManID,
+				judgeManName,
+				judgeDateTime,
+				projectStageID,
+				projectStageName,
+				updateUserName,
+				updateDateTime,
+				isContinue,
+				guarantyOrgName,
+				guarantyOrgID,
+				hostAreaName,
+				hostAreaID,
+				fundType,
+				fundTypeID,
+				fundName,
+				fundID,
+				fundChinese,
+				oprationCompanyName,
+				oprationCompanyID,
+				attributionName,
+				attributionID,
+				busiNatureID,
+				busiNatureName,
+				isEnd,
+				endDate,
+				fundSource,
+				applySumUse
+	    FROM 
+	         pro_apply 
+		WHERE 1=1 ${value}
+		]]> 				 
+	</select>
+	
+	<!-- 更新一个申请表信息 -->	
+	<update id="updateOneApplyInfo" parameterType="com.zjm.pro.db.model.Pro_apply">
+		<![CDATA[
+		UPDATE 
+		     pro_apply
+		SET
+				projectType= #{projectType},
+				clientTypeID= #{clientTypeID},
+				client_ID= #{client_ID},
+				clientGUID= #{clientGUID},
+				clientName= #{clientName},
+				relationID= #{relationID},
+				relationName= #{relationName},
+				busiCode= #{busiCode},
+				projectName= #{projectName},
+				applySum= #{applySum},
+				busiTypeNameList= #{busiTypeNameList},
+				bankNameList= #{bankNameList},
+				createManID= #{createManID},
+				createManName= #{createManName},
+				createDate= #{createDate},
+				departID= #{departID},
+				departName= #{departName},
+				projectSourceID= #{projectSourceID},
+				projectSourceName= #{projectSourceName},
+				sourceDesc= #{sourceDesc},
+				unit_uid= #{unit_uid},
+				unit_uidName= #{unit_uidName},
+				amanID= #{amanID},
+				amanName= #{amanName},
+				bmanID= #{bmanID},
+				bmanName= #{bmanName},
+				reviewManID= #{reviewManID},
+				reviewManName= #{reviewManName},
+				isMeeting= #{isMeeting},
+				meetingTypeID= #{meetingTypeID},
+				meetingTypeName= #{meetingTypeName},
+				meetingDate= #{meetingDate},
+				isResolution= #{isResolution},
+				meetingCode= #{meetingCode},
+				resolutionCode= #{resolutionCode},
+				monitoredAsking= #{monitoredAsking},
+				meetingResult= #{meetingResult},
+				agreeSum= #{agreeSum},
+				contractBeginDate= #{contractBeginDate},
+				contractEndDate= #{contractEndDate},
+				isPutPackage= #{isPutPackage},
+				isPackage= #{isPackage},
+				package_ID= #{package_ID},
+				isStop= #{isStop},
+				stopTypeID= #{stopTypeID},
+				stopTypeName= #{stopTypeName},
+				stopDate= #{stopDate},
+				stopDesc= #{stopDesc},
+				checkCycleTypeID= #{checkCycleTypeID},
+				checkCycleTypeName= #{checkCycleTypeName},
+				creditStatus= #{creditStatus},
+				creditTypeID= #{creditTypeID},
+				creditTypeName= #{creditTypeName},
+				isLoopCredit= #{isLoopCredit},
+				isBusiLimit= #{isBusiLimit},
+				isBlend= #{isBlend},
+				usedSum= #{usedSum},
+				creditBeginDate= #{creditBeginDate},
+				creditEndDate= #{creditEndDate},
+				dContractCode= #{dContractCode},
+				jContractCode= #{jContractCode},
+				bContractCode= #{bContractCode},
+				beforeAManID= #{beforeAManID},
+				beforeBManID= #{beforeBManID},
+				beforeReviewManID= #{beforeReviewManID},
+				beforeLegalManID=#{beforeLegalManID},
+				changeDate= #{changeDate},
+				changeManID= #{changeManID},
+				isHistory= #{isHistory},
+				productInstance_ID= #{productInstance_ID},
+				projectJudge= #{projectJudge},
+				judgeManID= #{judgeManID},
+				judgeManName= #{judgeManName},
+				judgeDateTime= #{judgeDateTime},
+				projectStageID= #{projectStageID},
+				projectStageName= #{projectStageName},
+				updateUserName= #{updateUserName},
+			    updateDateTime = NOW(),
+			    isContinue= #{isContinue},
+			    guarantyOrgName= #{guarantyOrgName},
+				guarantyOrgID= #{guarantyOrgID},
+				hostAreaName= #{hostAreaName},
+				hostAreaID= #{hostAreaID},
+				fundType= #{fundType},
+				fundTypeID= #{fundTypeID},
+				fundName= #{fundName},
+				fundID= #{fundID},
+				fundChinese= #{fundChinese},
+				oprationCompanyName= #{oprationCompanyName},
+				oprationCompanyID= #{oprationCompanyID},
+				attributionName= #{attributionName},
+				attributionID= #{attributionID},
+				busiNatureID= #{busiNatureID},
+				busiNatureName= #{busiNatureName},
+				endDate= #{endDate},
+				isEnd= #{isEnd}, 
+				fundSource= #{fundSource},
+				applySumUse=#{applySumUse}
+		WHERE apply_ID=#{apply_ID}  and unit_uid=#{unit_uid} 
+		  ]]>
+	</update>
+	
+
+		<!-- 查询 申请  列表 -->
+	<select id="selectApplyPageTables" resultMap="ProApplyMap" parameterType="com.zjm.common.db.model.PageTable">
+		<![CDATA[
+		SELECT
+				apply_ID,
+				projectType,
+				clientTypeID,
+				client_ID,
+				clientGUID,
+				clientName,
+				relationID,
+				relationName,
+				busiCode,
+				projectName,
+				applySum,
+				busiTypeNameList,
+				bankNameList,
+				createManID,
+				createManName,
+				createDate,
+				departID,
+				departName,
+				projectSourceID,
+				projectSourceName,
+				sourceDesc,
+				unit_uid,
+				unit_uidName,
+				amanID,
+				amanName,
+				bmanID,
+				bmanName,
+				reviewManID,
+				reviewManName,
+				legalManID,
+				legalManName,
+				isMeeting,
+				applyMeetingDate,
+				operationDepartID,
+				operationDepartName,
+				applyMeetingUserName,
+				meetingSubmitDate,
+				meetingStatus,
+				meetingTypeID,
+				meetingTypeName,
+				meetingDate,
+				isResolution,
+				meetingCode,
+				resolutionCode,
+				monitoredAsking,
+				meetingResult,
+				agreeSum,
+				contractBeginDate,
+				contractEndDate,
+				isPutPackage,
+				isPackage,
+				package_ID,
+				isStop,
+				stopTypeID,
+				stopTypeName,
+				stopDate,
+				stopDesc,
+				checkCycleTypeID,
+				checkCycleTypeName,
+				creditStatus,
+				creditTypeID,
+				creditTypeName,
+				isLoopCredit,
+				isBusiLimit,
+				isBlend,
+				usedSum,
+				(agreeSum-usedSum) as usableSum,
+				creditBeginDate,
+				creditEndDate,
+				dContractCode,
+				jContractCode,
+				bContractCode,
+				beforeAManID,
+				beforeBManID,
+				beforeReviewManID,
+				beforeLegalManID,
+				changeDate,
+				changeManID,
+				isHistory,
+				productInstance_ID,
+				projectJudge,
+				judgeManID,
+				judgeManName,
+				judgeDateTime,
+				projectStageID,
+				projectStageName,
+				updateUserName,
+				updateDateTime,
+				isContinue,
+				guarantyOrgName,
+				guarantyOrgID,
+				hostAreaName,
+				hostAreaID,
+				fundType,
+				fundTypeID,
+				fundName,
+				fundID,
+				fundChinese,
+				oprationCompanyName,
+				oprationCompanyID,
+				attributionName,
+				attributionID,
+				busiNatureID,
+				busiNatureName,
+				endDate,
+			    isEnd,
+			    fundSource,
+			    applySumUse
+		   FROM
+		   pro_apply		   
+		WHERE 1=1 ${wheresql} 
+		ORDER BY ${sortName} ${sortOrder}
+		limit #{pageNumber},#{pageSize}
+		]]>
+	</select>
+		<!-- 查询 申请列表 总记录数-->
+	<select id="selectApplyPageTables_Count" parameterType="com.zjm.common.db.model.PageTable"  resultType="java.lang.Long">
+		<![CDATA[
+		SELECT count(apply_ID) FROM pro_apply
+		WHERE 1=1 ${wheresql} 		
+		]]>		 
+	</select>
+	
+		<!-- 查询 风险项目 列表 -->
+	<select id="selectRiskApplyPageTables" resultMap="ProApplyMap" parameterType="com.zjm.common.db.model.PageTable">
+		<![CDATA[
+		SELECT
+				a.apply_ID,
+				a.projectType,
+				a.clientTypeID,
+				a.client_ID,
+				a.clientGUID,
+				a.clientName,
+				a.relationID,
+				a.relationName,
+				a.busiCode,
+				a.projectName,
+				a.applySum,
+				a.busiTypeNameList,
+				a.bankNameList,
+				a.createManID,
+				a.createManName,
+				a.createDate,
+				a.departID,
+				a.departName,
+				a.projectSourceID,
+				a.projectSourceName,
+				a.sourceDesc,
+				a.unit_uid,
+				a.unit_uidName,
+				a.amanID,
+				a.amanName,
+				a.bmanID,
+				a.bmanName,
+				a.reviewManID,
+				a.reviewManName,
+				a.legalManID,
+				a.legalManName,
+				a.isMeeting,
+				a.meetingTypeID,
+				a.meetingTypeName,
+				a.meetingDate,
+				a.isResolution,
+				a.meetingCode,
+				a.resolutionCode,
+				a.monitoredAsking,
+				a.meetingResult,
+				a.agreeSum,
+				a.contractBeginDate,
+				a.contractEndDate,
+				a.isPutPackage,
+				a.isPackage,
+				a.package_ID,
+				a.isStop,
+				a.stopTypeID,
+				a.stopTypeName,
+				a.stopDate,
+				a.stopDesc,
+				a.checkCycleTypeID,
+				a.checkCycleTypeName,
+				a.creditStatus,
+				a.creditTypeID,
+				a.creditTypeName,
+				a.isLoopCredit,
+				a.isBusiLimit,
+				a.isBlend,
+				a.usedSum,
+				(a.agreeSum-a.usedSum) as usableSum,
+				a.creditBeginDate,
+				a.creditEndDate,
+				a.dContractCode,
+				a.jContractCode,
+				a.bContractCode,
+				a.beforeAManID,
+				a.beforeBManID,
+				a.beforeReviewManID,
+				a.beforeLegalManID,
+				a.changeDate,
+				a.changeManID,
+				a.isHistory,
+				a.productInstance_ID,
+				a.projectJudge,
+				a.judgeManID,
+				a.judgeManName,
+				a.judgeDateTime,
+				a.projectStageID,
+				a.projectStageName,
+				a.updateUserName,
+				a.updateDateTime,
+				a.isContinue,
+				a.guarantyOrgName,
+				a.guarantyOrgID,
+				a.hostAreaName,
+				a.hostAreaID,
+				a.fundType,
+				a.fundTypeID,
+				a.fundName,
+				a.fundID,
+				a.fundChinese,
+				a.oprationCompanyName,
+				a.oprationCompanyID,
+				a.attributionName,
+				a.attributionID,
+				c.riskLevelName,
+				a.busiNatureName,
+				a.busiNatureID,
+				a.endDate,
+				a.isEnd,
+				a.fundSource,
+				a.applySumUse
+		   FROM
+		   pro_apply a
+		   LEFT JOIN crm_client c ON c.client_ID = a.client_ID	  	   
+		WHERE 1=1 ${wheresql} 
+		ORDER BY ${sortName} ${sortOrder}
+		limit #{pageNumber},#{pageSize}
+		]]>
+	</select>
+		<!-- 查询 风险项目列表 总记录数-->
+	<select id="selectRiskApplyPageTables_Count" parameterType="com.zjm.common.db.model.PageTable"  resultType="java.lang.Long">
+		<![CDATA[
+		SELECT count(apply_ID) FROM pro_apply a
+		LEFT JOIN crm_client c ON c.client_ID = a.client_ID	  	   
+		WHERE 1=1 ${wheresql} 	
+		]]>		 
+	</select>
+	
+	<!--根据wheresql删除申请表信息 -->
+	<delete id="delectApplyByWhereSql" parameterType="java.lang.String">
+		<![CDATA[DELETE FROM pro_apply WHERE 1=1 ${value} ]]>
+	</delete>
+	
+	<!-- 根据申请ID 修改上会状态 -->
+	<update id="updateApplyMeetingStatus" parameterType="com.zjm.pro.db.model.Pro_apply">
+		UPDATE 
+			pro_apply 
+		<set>
+			<if test="applyMeetingDate != null">
+				applyMeetingDate = #{applyMeetingDate},
+			</if>
+			<if test="operationDepartID != null">
+				operationDepartID = #{operationDepartID},
+			</if>
+			<if test="operationDepartName != null">
+				operationDepartName = #{operationDepartName},
+			</if>
+			<if test="applyMeetingUserName != null">
+				applyMeetingUserName = #{applyMeetingUserName},
+			</if>
+			<if test="meetingSubmitDate != null">
+				meetingSubmitDate = #{meetingSubmitDate},
+			</if>
+			meetingStatus = #{meetingStatus}
+		</set>
+		WHERE apply_ID IN 		
+		<foreach collection="meetingApplyIDArr" item="apply_ID" index="index" open="(" close=")" separator=",">
+            #{apply_ID}
+        </foreach>		
+	</update>
+
+	<!-- 修改上会审批 -->
+	<update id="updateIsArrangeMeetById" parameterType="com.zjm.pro.db.model.Pro_apply">
+		<![CDATA[
+		UPDATE pro_apply 
+		SET meetingResult = #{meetingResult},
+		meetingDate = #{meetingDate}
+		WHERE  apply_ID=#{apply_ID} limit 1
+		
+		]]>
+	</update>
+	<!-- 修改上会审批 -->
+	<update id="updateIsArrangeMeetingByIds" parameterType="com.zjm.common.db.model.PageTable">
+		<![CDATA[
+		UPDATE pro_apply 
+		SET meetingResult = '未安排上会',
+		meetingDate=null
+		WHERE  ${wheresql}
+		
+		]]>
+	</update>
+
+	<!-- 指定项目AB角  -->
+	<update id="updateApplySetABMan" parameterType="com.zjm.pro.db.model.Pro_apply">
+		<![CDATA[
+			UPDATE pro_apply 
+			SET 
+				amanID = #{amanID},
+				amanName = #{amanName},	
+				bmanID = #{bmanID},
+				bmanName = #{bmanName},
+				beforeAManID = #{beforeAManID},
+				beforeBManID = #{beforeBManID}
+			WHERE 
+				apply_ID  = #{apply_ID}
+		]]>
+	</update>
+	<!-- 指定项目风控复核人  -->
+	<update id="updateApplySetReviewMan" parameterType="com.zjm.pro.db.model.Pro_apply">
+		<![CDATA[
+			UPDATE pro_apply 
+			SET 
+				reviewManID = #{reviewManID},
+				reviewManName = #{reviewManName},
+				beforeReviewManID = #{beforeReviewManID}
+			WHERE 
+				apply_ID  = #{apply_ID}
+		]]>
+	</update>
+	<!-- 指定项目法务评审人  -->
+	<update id="updateApplySetLegalMan" parameterType="com.zjm.pro.db.model.Pro_apply">
+		<![CDATA[
+			UPDATE pro_apply 
+			SET 
+				legalManID = #{legalManID},
+				legalManName = #{legalManName},
+				beforeLegalManID = #{beforeLegalManID}
+			WHERE 
+				apply_ID  = #{apply_ID}
+		]]>
+	</update>
+	
+	<update id="updateApplyYesPackage" parameterType="java.lang.String">
+		${value}
+	</update>
+	
+	<!-- 首页获取项目进度List-->
+	<select id="selectProjectStageList" resultMap="ProApplyMap">
+		<![CDATA[
+		SELECT count(apply_ID) as applyNum,projectStageID,projectStageName FROM pro_apply a
+			LEFT JOIN gbpm_dic_Node d on a.projectStageID = d.node_ID
+		 	WHERE isStop = 0  and projectStageName != '流程未启动'
+			GROUP BY projectStageID,projectStageName,nodeSort ORDER BY nodeSort
+		]]>		 
+	</select>
+	<!-- 更新项目结案评价  -->
+	<update id="updateApplySetProjectJudge" parameterType="com.zjm.pro.db.model.Pro_apply">
+		<![CDATA[
+			UPDATE 
+			 pro_apply 
+			SET
+			projectJudge = #{projectJudge},
+			isEnd = 1,
+			endDate=NOW()
+			WHERE 
+			apply_ID = #{apply_ID}
+				]]>
+	</update>
+</mapper>  

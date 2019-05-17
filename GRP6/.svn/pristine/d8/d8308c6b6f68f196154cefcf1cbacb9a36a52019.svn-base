@@ -1,0 +1,761 @@
+package com.zjm.pro.apply.web;
+
+import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.zjm.common.db.model.AjaxRes;
+import com.zjm.common.db.model.PageTable;
+import com.zjm.common.db.model.UrlParam;
+import com.zjm.crm.db.model.Crm_relationMain;
+import com.zjm.crm.relationMain.service.RelationMainService;
+import com.zjm.pro.apply.service.ProjectApplyService;
+import com.zjm.pro.applyDetail.service.ApplyDetailService;
+import com.zjm.pro.db.model.Pro_apply;
+import com.zjm.pro.db.model.Pro_applyDetail;
+import com.zjm.sys.db.model.C_dictype;
+import com.zjm.sys.dicType.service.DicTypeService;
+import com.zjm.sys.util.RolesDataAccreditUtil;
+import com.zjm.util.CustomDispatchServlet;
+import com.zjm.util.SystemSession;
+
+@Controller
+@RequestMapping(value="/project/apply")
+public class ProjectApplyAction {
+
+	@Resource
+	private ProjectApplyService projectApplyService;
+	
+	@Resource
+	private ApplyDetailService applyDetailService;
+	
+	@Resource
+	private RelationMainService relationMainService;
+	
+	@Resource
+	private DicTypeService dicTypeService;
+	
+	Crm_relationMain relationMain= new Crm_relationMain();
+	
+	
+	
+	/**
+	 * 申请的分页列表查询条件
+	 */
+	private String queryConditionSql(PageTable<Pro_apply> pageTable){
+		StringBuffer wheresql = new StringBuffer();
+		//搜索框功能
+		if(pageTable==null){
+			return "";
+		}
+		
+		//根据权限查看用户可查看到的数据sql
+		if(null != pageTable.getQueryCondition().getUser_uid() && !"".equals(pageTable.getQueryCondition().getUser_uid())){
+			String sql = RolesDataAccreditUtil.appendProSqlByRole(pageTable.getQueryCondition().getUser_uid(),RolesDataAccreditUtil.PRO_CREATE_SQL_STR,"");
+			if( null != sql){
+				wheresql.append(sql);
+			}
+		}
+		
+		wheresql.append(" and unit_uid = \'"+SystemSession.getUserSession().getUnit_uid()+"\' ");
+//		wheresql.append(" and isCredit = 0 and  projectStageID = \'2a80d6619eef45968ffd5cae1fc4b28e\' ");
+		wheresql.append("  and  projectStageID = \'流程未启动\' ");
+		wheresql.append(" and isPutPackage = 0  ");//是否放入打包车
+		wheresql.append(" and isStop = 0 ");//是否终止
+		//当查询条件中包含中文时，get请求默认会使用ISO-8859-1编码请求参数，在服务端需要对其解码
+		if ( null != pageTable.getSearchText()) {
+			wheresql.append(" and projectName like \'%"+pageTable.getSearchText().trim()+"%\'");
+		}
+		//根据项目名称(projectName)
+		if(pageTable.getQueryCondition().getProjectName() != null && !"".equals(pageTable.getQueryCondition().getProjectName())){
+			wheresql.append(" and projectName like \'%"+pageTable.getQueryCondition().getProjectName()+"%\'");
+		}
+		//根据客户类型ID(clientTypeID)
+		if(pageTable.getQueryCondition().getClientTypeID() != null && !"".equals(pageTable.getQueryCondition().getClientTypeID())){
+			wheresql.append(" and clientTypeID = \'"+pageTable.getQueryCondition().getClientTypeID()+"\'");
+		}
+		//根据客户名称(clientName)
+		if(pageTable.getQueryCondition().getClientName() != null && !"".equals(pageTable.getQueryCondition().getClientName())){
+			wheresql.append(" and clientName like \'%"+pageTable.getQueryCondition().getClientName()+"%\'");
+		}
+		//根据业务品种ID(busiTypeName)
+		if(pageTable.getQueryCondition().getBusiTypeName() != null && !"".equals(pageTable.getQueryCondition().getBusiTypeName())){
+			wheresql.append(" and busiTypeNameList like \'%"+pageTable.getQueryCondition().getBusiTypeName()+"%\'");
+		}
+		//根据申请金额(registerSumStart-registerSumEnd)		
+		if(pageTable.getQueryCondition().getRegisterSumStart() != null && !"".equals(pageTable.getQueryCondition().getRegisterSumStart())){
+       		if(pageTable.getQueryCondition().getRegisterSumEnd() != null && !"".equals(pageTable.getQueryCondition().getRegisterSumEnd())){
+       			
+       			wheresql.append(" and applySum >= "+pageTable.getQueryCondition().getRegisterSumStart() +" and applySum <="+pageTable.getQueryCondition().getRegisterSumEnd());
+       		}else{
+       			wheresql.append(" and applySum >="+pageTable.getQueryCondition().getRegisterSumStart());
+       		}
+       	}else{
+       		if(pageTable.getQueryCondition().getRegisterSumEnd() !=null && !"".equals(pageTable.getQueryCondition().getRegisterSumEnd())){
+       			wheresql.append(" and applySum <="+pageTable.getQueryCondition().getRegisterSumEnd());
+       		}
+       	}
+		//根据合作机构ID(bankName)
+		
+		if(pageTable.getQueryCondition().getBankName() != null && !"".equals(pageTable.getQueryCondition().getBankName())){
+			wheresql.append(" and bankNameList like \'%"+pageTable.getQueryCondition().getBankName()+"%\'");
+		}
+		//根据经办部门名称(departName)
+		if(pageTable.getQueryCondition().getDepartName() != null && !"".equals(pageTable.getQueryCondition().getDepartName())){
+			wheresql.append(" and departName = \'"+pageTable.getQueryCondition().getDepartName()+"\'");
+		}
+		//根据经办人名(createManName)
+		if(pageTable.getQueryCondition().getCreateManName() != null && !"".equals(pageTable.getQueryCondition().getCreateManName())){
+			wheresql.append(" and createManName like \'%"+pageTable.getQueryCondition().getCreateManName()+"%\'");
+		}
+		//根据受理日期(createDateStart-createDateEnd)
+		if(pageTable.getQueryCondition().getCreateDateStart() !=null && !"".equals(pageTable.getQueryCondition().getCreateDateStart())){
+       		//输入日期 转换格式
+       		String Time1=new SimpleDateFormat("yyyy-MM-dd").format(pageTable.getQueryCondition().getCreateDateStart());
+       		if(pageTable.getQueryCondition().getCreateDateEnd() !=null && !"".equals(pageTable.getQueryCondition().getCreateDateEnd())){
+       			//把输入框日期2转换格式
+       			String Time2=new SimpleDateFormat("yyyy-MM-dd").format(pageTable.getQueryCondition().getCreateDateEnd());
+       			wheresql.append(" and createDate >= \'"+Time1 +"\' and createDate <=\'"+Time2+"\'");
+       		}else{
+       			wheresql.append(" and createDate >=\'"+Time1+"\'");
+       		}
+       	}else{
+       		if(pageTable.getQueryCondition().getCreateDateEnd() !=null && !"".equals(pageTable.getQueryCondition().getCreateDateEnd())){
+       			
+       			String Time2=new SimpleDateFormat("yyyy-MM-dd").format(pageTable.getQueryCondition().getCreateDateEnd());
+       			wheresql.append(" and createDate <=\'"+Time2+"\'");
+       		}
+       	}
+		/*if(pageTable.getSortName()!=null && !pageTable.getSortName().equals("") && pageTable.getSortOrder()!=null && !pageTable.getSortOrder().equals("")){
+			wheresql=wheresql.append(" ORDER BY "+pageTable.getSortName().trim()+"  " +pageTable.getSortOrder()+"");
+		}else{
+			wheresql=wheresql.append(" ORDER BY createDate desc");
+		}		*/
+		return wheresql.toString();		
+	}
+	
+	/**
+	 * 显示页面-申请登记页面
+	 * @param
+	 * @author ZKY
+	 * @time :2017-6-20
+	 */
+	@RequestMapping(value="/applyTable")
+	public ModelAndView applyTable(){
+		ModelAndView mv = CustomDispatchServlet.getModeAndView();
+		mv.setViewName("/project/apply/applyTable");
+		return mv;
+	}
+	
+	/**
+	 * 查询申请登记页面分页列表
+	 * @param PageTable<Pro_apply> pageTable
+	 * @author ZKY
+	 * @time :2017-6-20 
+	 */
+	@RequestMapping(value="/selectProjectApplyPageTable")
+	@ResponseBody
+	public AjaxRes selectProjectApplyPageTable(@RequestBody PageTable<Pro_apply> pageTable){
+		AjaxRes ar = new AjaxRes();
+		pageTable.getQueryCondition().setUser_uid(SystemSession.getUserSession().getUser_uid());//设置用户id通过匹配用户权限来查询
+		pageTable.setWheresql(queryConditionSql(pageTable));
+		pageTable.getQueryCondition().setUnit_uid(SystemSession.getUserSession().getUnit_uid());
+		pageTable = projectApplyService.selectApplyPageTables(pageTable);		
+		ar.setSucceed(pageTable);
+		return ar;
+	}
+	
+	/**
+	 * 查询风险项目分页列表
+	 * @param PageTable<Pro_apply> pageTable
+	 */
+	@RequestMapping(value="/selectRiskApplyPageTables")
+	@ResponseBody
+	public AjaxRes selectRiskApplyPageTables(@RequestBody PageTable<Pro_apply> pageTable){
+		AjaxRes ar = new AjaxRes();
+		pageTable.setWheresql(" and c.riskLevelName != '正常' ");
+		//abc角根据其对应的数据权限查看
+		String sql = RolesDataAccreditUtil.appendProSqlByABCCreate(SystemSession.getRealUserSession().getUser_uid(), "a.");
+		if( null != sql){
+			pageTable.setWheresql(pageTable.getWheresql()+" "+sql);
+		}
+		pageTable.getQueryCondition().setUnit_uid(SystemSession.getUserSession().getUnit_uid());
+		pageTable = projectApplyService.selectRiskApplyPageTables(pageTable);		
+		ar.setSucceed(pageTable);
+		return ar;
+	}
+	
+	/**
+	 * 查询某一申请下的明细列表
+	 * @param PageTable<Pro_applyDetail> pageTable
+	 * @author xuyz
+	 * @time :2017-8-25
+	 */
+	@RequestMapping(value="/selectProApplyDetailList")
+	@ResponseBody
+	public AjaxRes selectProApplyDetailList(@RequestBody PageTable<Pro_applyDetail> pageTable){
+		AjaxRes ar = new AjaxRes();
+		String whereSql = " and apply_ID = \'"+pageTable.getQueryCondition().getApply_ID()+"\'";
+		List<Pro_applyDetail> applyDetailList = applyDetailService.selectApplyDetailList(whereSql);	
+		pageTable.setRows(applyDetailList);
+		pageTable.setTotal((long) applyDetailList.size());
+		ar.setSucceed(pageTable);
+		return ar;
+	}
+	
+	/**
+	 * 打开申请登记页面-单笔业务
+	 * @param
+	 * @author ZKY
+	 * @time :2017-6-20 
+	 */
+	@RequestMapping(value="/openSingleApplyAdd")
+	public ModelAndView openSingleApplyAdd(){
+		ModelAndView mv = CustomDispatchServlet.getModeAndView();		
+		initSelect(mv);//获取下拉框
+		mv.setViewName("/project/apply/singleApplyAdd");
+		return mv;
+	}
+	public void  initSelect(ModelAndView mv){
+		List<C_dictype> projectSourceList = dicTypeService.selectAllDicTypeList(" and dicTypePID='3fafef23e87a4b9c99807207f618883d'");//获取项目(客户)来源下拉框;
+		mv.getModelMap().put("projectSourceList",projectSourceList);		
+		
+		List<C_dictype> busiNatureList = dicTypeService.selectAllDicTypeList(" and dicTypePID='53b3870104de46f99940750515404048'");//获取业务性质下拉框;
+		mv.getModelMap().put("busiNatureList",busiNatureList);
+		
+		List<C_dictype> projectTypeList = dicTypeService.selectAllDicTypeList(" and dicTypePID='d80f39f02f4a4578aa15bd337062a6fd'");//获取项目类型下拉框;
+		mv.getModelMap().put("projectTypeList",projectTypeList);
+		
+		List<C_dictype> clientTypeList = dicTypeService.selectAllDicTypeList(" and dicTypePID='2624e18b06c34fdabd0df26d51eca41c'");//获取客户类型下拉框;
+		mv.getModelMap().put("clientTypeList",clientTypeList);
+		
+		List<C_dictype> greenChannelList = dicTypeService.selectAllDicTypeList(" and dicTypePID='70c0e21474174350856987e442c7cd37'");//获取绿色通道下拉框;
+		mv.getModelMap().put("greenChannelList",greenChannelList);
+		
+		List<C_dictype> InterestMethodList = dicTypeService.selectAllDicTypeList(" and dicTypePID='3e11e41344ce41f8930f49ab2fbc1831'");//获取结息方式下拉框
+		mv.getModelMap().put("interestMethodList",InterestMethodList);
+	}
+	
+	/**
+	 * 打开申请登记页面-多笔业务
+	 * @param 
+	 * @author ZKY
+	 * @time :2017-6-20 
+	 */
+	@RequestMapping(value="/openMultiApplyAdd")
+	public ModelAndView openMultiApplyAdd(){
+		ModelAndView mv = CustomDispatchServlet.getModeAndView();
+		initSelect(mv);//获取下拉框
+		mv.setViewName("/project/apply/multiApplyAdd");
+		return mv;
+	}
+	/**
+	 * 打开申请登记页面-多笔业务
+	 * @param 
+	 * @author ZKY
+	 * @time :2017-6-20 
+	 */
+	@RequestMapping(value="/relationMainApplyAdd")
+	public ModelAndView relationMainApplyAdd(){
+		ModelAndView mv = CustomDispatchServlet.getModeAndView();
+		initSelect(mv);//获取下拉框
+		mv.setViewName("/project/apply/relationMainApplyAdd");
+		return mv;
+	}
+	
+	/**
+	 *项目管理-申请登记-查看页面
+	 */
+	@RequestMapping(value="/projectApplyViewPage")
+	public ModelAndView projectApplyViewPage(Pro_apply pro_apply){
+		
+		ModelAndView mv = CustomDispatchServlet.getModeAndView();
+		Pro_applyDetail applyDetail  = new Pro_applyDetail();
+		String viewName="";//返回页面String
+		String whereSql = " and apply_ID = \'"+pro_apply.getApply_ID()+"\'";
+		//根据apply_ID查询Pro_apply表信息;	
+		Pro_apply apply = projectApplyService.selectOneApplyByWhereSql(whereSql);
+		
+		//根据apply_ID查询Pro_applyDetail表信息;	
+		List<Pro_applyDetail> applyDetailList = applyDetailService.selectApplyDetailList(whereSql);
+		
+		
+		applyDetail= applyDetailList.get(0);
+		applyDetail.setProjectName(apply.getProjectName());//项目名称;
+		applyDetail.setDepartName(apply.getDepartName());//创建部门
+		applyDetail.setCreateDate(apply.getCreateDate());//受理日期
+		applyDetail.setCreateManName(apply.getCreateManName());//经办人
+		applyDetail.setProjectSourceID(apply.getProjectSourceID());
+		applyDetail.setProjectSourceName(apply.getProjectSourceName());
+		applyDetail.setSourceDesc(apply.getSourceDesc());
+		if("单笔".equals(apply.getProjectType())){//单笔业务;			
+			viewName = "/project/apply/singleApplyInfo";//返回单笔业务查看页面
+		}if("多笔".equals(apply.getProjectType())){//多笔业务
+			mv.getModelMap().put("applyDetailList",applyDetailList);
+			viewName = "/project/apply/multiApplyInfo";//返回多笔业务查看页面
+		}if("关联".equals(apply.getProjectType())){//集团/关联项目
+			applyDetail.setRelationName(apply.getRelationName());//主体名称						
+			mv.getModelMap().put("applyDetailList",applyDetailList);
+			viewName = "/project/apply/ralatioMainApplyInfo";//返回多笔业务查看页面
+		}		
+		mv.getModelMap().put("applyDetail",applyDetail);
+		//mv.getModelMap().put("apply", apply);
+		mv.setViewName(viewName);
+		return mv;
+	}
+	
+	/**
+	 *流程办理-事项-申请登记-查看页面
+	 */
+	@RequestMapping(value="/projectApplyViewPageGBPM")
+	public ModelAndView projectApplyViewPageGBPM(String  entityID){
+		
+		ModelAndView mv = CustomDispatchServlet.getModeAndView();
+		Pro_applyDetail applyDetail  = new Pro_applyDetail();
+		String viewName="";//返回页面String
+		String whereSql = " and apply_ID = \'"+entityID+"\'";
+		//根据apply_ID查询Pro_apply表信息;	
+		Pro_apply apply = projectApplyService.selectOneApplyByWhereSql(whereSql);
+		
+		//根据apply_ID查询Pro_applyDetail表信息;	
+		List<Pro_applyDetail> applyDetailList = applyDetailService.selectApplyDetailList(whereSql);
+		if(null != applyDetailList){
+			applyDetail= applyDetailList.get(0);
+			applyDetail.setProjectName(apply.getProjectName());//项目名称;
+			applyDetail.setDepartName(apply.getDepartName());//创建部门
+			applyDetail.setCreateDate(apply.getCreateDate());//受理日期
+			applyDetail.setCreateManName(apply.getCreateManName());//经办人
+			applyDetail.setProjectSourceID(apply.getProjectSourceID());
+			applyDetail.setProjectSourceName(apply.getProjectSourceName());
+			applyDetail.setSourceDesc(apply.getSourceDesc());
+		}
+		if("单笔".equals(apply.getProjectType())){//单笔业务;			
+			viewName = "/project/apply/singleApplyInfoGBPM";//返回单笔业务查看页面
+		}if("多笔".equals(apply.getProjectType())){//多笔业务
+			mv.getModelMap().put("applyDetailList",applyDetailList);
+			viewName = "/project/apply/multiApplyInfoGBPM";//返回多笔业务查看页面
+		}if("关联".equals(apply.getProjectType())){//集团/关联项目
+			applyDetail.setRelationName(apply.getRelationName());//主体名称						
+			mv.getModelMap().put("applyDetailList",applyDetailList);
+			viewName = "/project/apply/ralatioMainApplyInfoGBPM";//返回多笔业务查看页面
+		}		
+		mv.getModelMap().put("applyDetail",applyDetail);
+		mv.setViewName(viewName);
+		return mv;
+	}
+	
+	
+	/**
+	 *项目管理-申请登记-修改页面
+	 */
+	@RequestMapping(value="/projectApplyEditPage")
+	public ModelAndView projectApplyEditPage(String  entityID){
+		ModelAndView mv = CustomDispatchServlet.getModeAndView();
+		Pro_applyDetail applyDetail  = new Pro_applyDetail();
+		String viewName="";//返回页面String
+		String whereSql = " and apply_ID = \'"+entityID+"\'";
+		//根据apply_ID查询Pro_apply表信息;	
+		Pro_apply apply = projectApplyService.selectOneApplyByWhereSql(whereSql);
+		//根据apply_ID查询Pro_applyDetail表信息;	
+		List<Pro_applyDetail> applyDetailList = applyDetailService.selectApplyDetailList(whereSql);		
+		try {
+			if(null != applyDetailList){
+				applyDetail= applyDetailList.get(0);	
+				applyDetail.setProjectName(apply.getProjectName());
+				applyDetail.setDepartID(apply.getDepartID());
+				applyDetail.setDepartName(apply.getDepartName());
+				applyDetail.setCreateDate(apply.getCreateDate());
+				applyDetail.setCreateManID(apply.getCreateManID());
+				applyDetail.setCreateManName(apply.getCreateManName());
+				applyDetail.setProjectStageID(apply.getProjectStageID());
+				applyDetail.setProjectStageName(apply.getProjectStageName());
+				applyDetail.setProjectSourceID(apply.getProjectSourceID());
+				applyDetail.setProjectSourceName(apply.getProjectSourceName());
+				applyDetail.setSourceDesc(apply.getSourceDesc());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if("单笔".equals(apply.getProjectType())){//单笔业务;			
+			mv.getModelMap().put("applyDetailList",applyDetailList);
+			viewName = "/project/apply/singleApplyEdit";//返回单笔业务修改页面
+		}if("多笔".equals(apply.getProjectType())){//多笔业务
+			mv.getModelMap().put("applyDetailList",applyDetailList);
+			viewName = "/project/apply/multiApplyEdit";//返回多笔业务修改页面
+		}if("关联".equals(apply.getProjectType())){//集团/关联项目	
+			applyDetail.setRelationName(apply.getRelationName());//主体名称
+			applyDetail.setRelationID(apply.getRelationID());//主体名称ID
+			//如果为主体客户,需要初始化客户名称下拉框;
+			
+			relationMain.setRelationMain_ID(apply.getRelationID());
+			relationMain.setUnit_uid(SystemSession.getUserSession().getUnit_uid());
+			Crm_relationMain relationMainClient = relationMainService.selectOneRelationMainById(relationMain);
+			mv.getModelMap().put("clientList",relationMainClient.getCmlist());
+			
+			
+			mv.getModelMap().put("applyDetailList",applyDetailList);
+			viewName = "/project/apply/relationMainApplyEdit";//返回多笔业务修改页面
+		}                              
+		mv.getModelMap().put("applyDetail",applyDetail);
+		initSelect(mv);//获取下拉框
+		mv.setViewName(viewName);
+		return mv;
+	}
+	/**
+	 *流程办理-事项-申请登记-办理-修改页面
+	 */
+	@RequestMapping(value="/projectApplyEditPageGBPM")
+	public ModelAndView projectApplyEditPageGBPM(String  entityID){
+		ModelAndView mv = CustomDispatchServlet.getModeAndView();
+		Pro_applyDetail applyDetail  = new Pro_applyDetail();
+		String viewName="";//返回页面String
+		String whereSql = " and apply_ID = \'"+entityID+"\'";
+		//根据apply_ID查询Pro_apply表信息;	
+		Pro_apply apply = projectApplyService.selectOneApplyByWhereSql(whereSql);
+		//根据apply_ID查询Pro_applyDetail表信息;	
+		List<Pro_applyDetail> applyDetailList = applyDetailService.selectApplyDetailList(whereSql);		
+		if(null != applyDetailList){
+			applyDetail= applyDetailList.get(0);		
+			applyDetail.setProjectName(apply.getProjectName());
+			applyDetail.setDepartID(apply.getDepartID());
+			applyDetail.setDepartName(apply.getDepartName());
+			applyDetail.setCreateDate(apply.getCreateDate());
+			applyDetail.setCreateManID(apply.getCreateManID());
+			applyDetail.setCreateManName(apply.getCreateManName());
+			applyDetail.setProjectStageID(apply.getProjectStageID());
+			applyDetail.setProjectStageName(apply.getProjectStageName());
+			applyDetail.setProjectSourceID(apply.getProjectSourceID());
+			applyDetail.setProjectSourceName(apply.getProjectSourceName());
+			applyDetail.setSourceDesc(apply.getSourceDesc());
+		}
+		
+		if("单笔".equals(apply.getProjectType())){//单笔业务;			
+			mv.getModelMap().put("applyDetailList",applyDetailList);
+			viewName = "/project/apply/singleApplyEditGBPM";//返回单笔业务修改页面
+		}if("多笔".equals(apply.getProjectType())){//多笔业务
+			mv.getModelMap().put("applyDetailList",applyDetailList);
+			viewName = "/project/apply/multiApplyEditGBPM";//返回多笔业务修改页面
+		}if("关联".equals(apply.getProjectType())){//集团/关联项目	
+			applyDetail.setRelationName(apply.getRelationName());//主体名称
+			applyDetail.setRelationID(apply.getRelationID());//主体名称ID
+			//如果为主体客户,需要初始化客户名称下拉框;
+			relationMain.setRelationMain_ID(apply.getRelationID());
+			relationMain.setUnit_uid(SystemSession.getUserSession().getUnit_uid());
+			Crm_relationMain relationMainClient = relationMainService.selectOneRelationMainById(relationMain);
+			mv.getModelMap().put("clientList",relationMainClient.getCmlist());
+			mv.getModelMap().put("applyDetailList",applyDetailList);
+			viewName = "/project/apply/relationMainApplyEditGBPM";//返回多笔业务修改页面
+		}                              
+		mv.getModelMap().put("applyDetail",applyDetail);
+		initSelect(mv);//获取下拉框
+		mv.setViewName(viewName);
+		return mv;
+	}
+	
+	/**
+	 * App-受理登记-查看
+	 */
+	@RequestMapping(value="/applyViewApp")
+	@ResponseBody
+	public AjaxRes applyViewApp(@RequestBody Pro_apply pro_apply){
+		AjaxRes ar = new AjaxRes();
+		String whereSql = " and apply_ID = \'"+pro_apply.getApply_ID()+"\'";
+		Pro_apply apply =projectApplyService.selectOneApplyByWhereSql(whereSql);
+		//根据apply_ID查询Pro_applyDetail表信息;	
+		List<Pro_applyDetail> applyDetailList = applyDetailService.selectApplyDetailList(whereSql);	
+		apply.setDetailList(applyDetailList);
+		ar.setSucceed(apply);
+		return ar;
+	}
+	
+	/**
+	 * App-事项处理-受理登记-查看
+	 */
+	@RequestMapping(value="/applyViewGBPMApp")
+	@ResponseBody
+	public AjaxRes applyViewAppGBPM(@RequestBody String entityID){
+		AjaxRes ar = new AjaxRes();
+		String whereSql = " and apply_ID = "+entityID;
+		Pro_apply apply =projectApplyService.selectOneApplyByWhereSql(whereSql);
+		//根据apply_ID查询Pro_applyDetail表信息;	
+		List<Pro_applyDetail> applyDetailList = applyDetailService.selectApplyDetailList(whereSql);	
+		apply.setDetailList(applyDetailList);
+		ar.setSucceed(apply);
+		return ar;
+	}
+	
+	
+	
+	/**
+	 * insertProjectApply
+	 * 新增申请登记;
+	 * 
+	 */
+	@RequestMapping(value="/insertProjectApply", method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes insertProjectApply(@RequestBody Pro_applyDetail applyDetail){
+		Boolean b = true;	
+		if(applyDetail  != null){		
+			try {
+				b=applyDetailService.insertProjectApply(SystemSession.getUserSession(), applyDetail);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}		   
+		}			
+		AjaxRes ar=new AjaxRes();
+		ar.setSucceed(b);
+		return ar;
+	}	
+	/**
+	 * updateProjectApply
+	 * 更新申请登记;
+	 * 
+	 */
+	@RequestMapping(value="/updateProjectApply", method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes updateProjectApply(@RequestBody Pro_applyDetail applyDetail){
+		Boolean b = true;	
+		if(applyDetail  != null){		
+			try {
+				b = applyDetailService.updateOneApplyDetailInfo(SystemSession.getUserSession(), applyDetail);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}		   
+		}			
+		AjaxRes ar=new AjaxRes();
+		ar.setSucceed(b);
+		return ar;
+	}	
+	
+	/**
+	 * 删除一个申请表信息
+	 * @param Crm_reportSy reportSy
+	 * @return
+	 */
+	@RequestMapping(value="/delOneProjectApply", method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes delOneProjectApply(@RequestBody Pro_apply  apply){
+		Boolean b = false;
+		apply.setUnit_uid(SystemSession.getUserSession().getUnit_uid());
+		try {
+			b = projectApplyService.delectApplyByWhereSql(SystemSession.getUserSession(),apply);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		AjaxRes ar=new AjaxRes();
+		ar.setSucceed(b);
+		return ar;
+	}
+	
+	/**
+	 *项目管理-申请登记-高级条件查询页面;
+	 */
+	@RequestMapping(value="/openApplySelectPage")
+	public ModelAndView openApplySelectPage(){
+		ModelAndView mv = CustomDispatchServlet.getModeAndView();
+		initSelect(mv);//获取下拉框
+		mv.setViewName("/project/apply/projectApplySelect");
+		return mv;
+	}
+	/**
+	 * 项目管理-申请登记-放入打包车
+	 */	
+	@RequestMapping(value="/putProjectInPackage", method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes putProjectInPackage(@RequestBody Pro_apply  apply){
+		apply.setUnit_uid(SystemSession.getUserSession().getUnit_uid());
+		String sq=" and apply_ID = '"+apply.getApply_ID()+"'".trim();
+		apply.setIsPutPackage(1);//放入打包车;
+		Boolean b= projectApplyService.updateOneApplyInfo(SystemSession.getUserSession(), apply);
+		AjaxRes ar=new AjaxRes();
+		ar.setSucceed(b);
+		return ar;
+	}
+	
+	
+	/**	xuyz	指定项目AB角 及 风控评审人	begin */
+	@RequestMapping(value="/showSetABManPage")	
+	public ModelAndView showSetABManPage(UrlParam urlParam){		//显示指定AB角页面
+		ModelAndView mv = CustomDispatchServlet.getModeAndView();
+		mv.setViewName("/project/apply/setABman");
+		Pro_apply result = projectApplyService.selectOneApplyByWhereSql(" and apply_ID = \'"+urlParam.getEntityID()+"\'");
+		result.setTaskName(getURLDecoder(urlParam.getTaskName()));
+		result.setType(urlParam.getType());
+		mv.getModelMap().put("apply", result);
+		return mv;
+	}
+	@RequestMapping(value="/updateApplySetABMan", method=RequestMethod.POST)
+	@ResponseBody	
+	public AjaxRes updateApplySetABMan(@RequestBody Pro_apply  apply){		//指定AB角
+		AjaxRes ar=new AjaxRes();
+		ar.setSucceed(projectApplyService.updateApplySetABMan(apply));
+		return ar;
+	}
+	@RequestMapping(value="/showSetReviewManPage")	
+	public ModelAndView showSetReviewManPage(UrlParam  urlParam){		//显示指定风控复核人页面
+		ModelAndView mv = CustomDispatchServlet.getModeAndView();
+		mv.setViewName("/project/apply/setReviewMan");
+		Pro_apply result = projectApplyService.selectOneApplyByWhereSql(" and apply_ID = \'"+urlParam.getEntityID()+"\'");
+		result.setTaskName(getURLDecoder(urlParam.getTaskName()));
+		result.setType(urlParam.getType());
+		mv.getModelMap().put("apply", result);
+		return mv;
+	}
+	@RequestMapping(value="/updateApplySetReviewMan", method=RequestMethod.POST)
+	@ResponseBody	
+	public AjaxRes updateApplySetReviewMan(@RequestBody Pro_apply  apply){		//指定风控复核人
+		AjaxRes ar=new AjaxRes();
+		ar.setSucceed(projectApplyService.updateApplySetReviewMan(apply));
+		return ar;
+	}
+	@RequestMapping(value="/showSetLegalManPage")	
+	public ModelAndView showSetLegalManPage(UrlParam  urlParam){		//显示指定法务评审人页面
+		ModelAndView mv = CustomDispatchServlet.getModeAndView();
+		mv.setViewName("/project/apply/setLegalMan");
+		Pro_apply result = projectApplyService.selectOneApplyByWhereSql(" and apply_ID = \'"+urlParam.getEntityID()+"\'");
+		result.setTaskName(getURLDecoder(urlParam.getTaskName()));
+		result.setType(urlParam.getType());
+		mv.getModelMap().put("apply", result);
+		return mv;
+	}
+	@RequestMapping(value="/updateApplySetLegalMan", method=RequestMethod.POST)
+	@ResponseBody	
+	public AjaxRes updateApplySetLegalMan(@RequestBody Pro_apply  apply){		//指定法务评审人
+		AjaxRes ar=new AjaxRes();
+		ar.setSucceed(projectApplyService.updateApplySetLegalMan(apply));
+		return ar;
+	}
+	/**
+	 * APP 查看AB角
+	 */
+	@RequestMapping(value="/viewABmanApp", method=RequestMethod.POST)
+	@ResponseBody	
+	public AjaxRes viewABmanApp(@RequestBody String entityID){		//指定AB角
+		AjaxRes ar=new AjaxRes();
+		Pro_apply result = projectApplyService.selectOneApplyByWhereSql(" and apply_ID = "+entityID);
+		ar.setSucceed(result);
+		return ar;
+	}
+	/**
+	 * APP 查看风控评审人
+	 */
+	@RequestMapping(value="/viewReviewManApp", method=RequestMethod.POST)
+	@ResponseBody	
+	public AjaxRes viewReviewManApp(@RequestBody String entityID){		//指定风控评审人
+		AjaxRes ar=new AjaxRes();
+		Pro_apply result = projectApplyService.selectOneApplyByWhereSql(" and apply_ID = "+entityID);
+		ar.setSucceed(result);
+		return ar;
+	}
+	/**
+	 * APP 查看法务评审人
+	 */
+	@RequestMapping(value="/viewLegalManApp", method=RequestMethod.POST)
+	@ResponseBody	
+	public AjaxRes viewLegalManApp(@RequestBody String entityID){		//指定风控评审人
+		AjaxRes ar=new AjaxRes();
+		Pro_apply result = projectApplyService.selectOneApplyByWhereSql(" and apply_ID = "+entityID);
+		ar.setSucceed(result);
+		return ar;
+	}
+	/**	xuyz	指定项目AB角 及 风控评审人	end*/
+	//转换中文乱码
+	private String  getURLDecoder(String string){
+		try {
+			return java.net.URLDecoder.decode(string,"UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	
+	
+	//以下是上会申请中用到的
+	/**
+	 * 查询申请登记页面分页列表
+	 * @param PageTable<Pro_apply> pageTable
+	 * @author ZKY
+	 * @time :2017-6-20 
+	 */
+	@RequestMapping(value="/selectMeetProjectApplyPageTable")
+	@ResponseBody
+	public AjaxRes selectMeetProjectApplyPageTable(@RequestBody PageTable<Pro_apply> pageTable){
+		AjaxRes ar = new AjaxRes();
+		try {
+			StringBuffer wheresql = new StringBuffer();
+			
+			wheresql.append(" and unit_uid = \'"+SystemSession.getUserSession().getUnit_uid()+"\' ");
+			//wheresql.append(" and projectStageID = \'2a80d6619eef45968ffd5cae1fc4b28e\' ");
+			//wheresql.append(" and projectStageID = \'流程未启动\' ");
+			wheresql.append(" and isPutPackage = 0  ");//是否放入打包车
+			wheresql.append(" and isStop = 0 ");//是否终止
+			wheresql.append(" and (meetingResult != '已安排上会' or meetingResult is null ) ");//上会结果
+			wheresql.append(" and isMeeting=0 ");//0代表默认是上会项目
+			pageTable.setWheresql(wheresql.toString());
+			
+			pageTable.getQueryCondition().setUnit_uid(SystemSession.getUserSession().getUnit_uid());
+			pageTable = projectApplyService.selectApplyPageTables(pageTable);		
+			ar.setSucceed(pageTable);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ar;
+	}
+	
+
+	/**
+	 *项目评价页面
+	 */
+	@RequestMapping(value="/endProPage")
+	public ModelAndView endProPage(String  entityID,UrlParam  urlParam){
+		ModelAndView mv = CustomDispatchServlet.getModeAndView();
+		String whereSql = " and apply_ID = \'"+entityID+"\'";
+		//根据apply_ID查询Pro_apply表信息;	
+		Pro_apply apply = projectApplyService.selectOneApplyByWhereSql(whereSql);
+		mv.getModelMap().put("urlParam", urlParam);
+		mv.getModelMap().put("apply",apply);
+		mv.setViewName("/project/endPro/endPro");
+		return mv;
+	}
+	
+	/**
+	 * 
+	 *手机APP 项目完结评价
+	 */
+	@RequestMapping(value="/endProPageAPP")
+	@ResponseBody
+	public AjaxRes endProPageAPP(@RequestBody  String  entityID,UrlParam  urlParam){
+		AjaxRes ar=new AjaxRes();
+		String whereSql = " and apply_ID = \'"+entityID+"\'";
+		//根据apply_ID查询Pro_apply表信息;	
+		Pro_apply result = projectApplyService.selectOneApplyByWhereSql(whereSql);
+		ar.setSucceed(result);
+		return ar;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value="/updateApplySetProjectJudge", method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes updateProjectJudge(@RequestParam Map<String,Object>  param){
+		//Boolean b= projectApplyService.updateOneApplyInfo(SystemSession.getUserSession(), param);
+		AjaxRes ar=new AjaxRes();
+		ar.setSucceed(projectApplyService.updateApplySetProjectJudge(SystemSession.getUserSession(), param));
+		return ar;
+	}
+	
+}

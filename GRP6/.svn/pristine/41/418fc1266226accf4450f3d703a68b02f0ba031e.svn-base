@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjm.sys.db.map.Sys_logoperatorMapper" >
+  <resultMap id="BaseResultMap" type="com.zjm.sys.db.model.Sys_logoperator" >
+    <id column="logOperatorID" property="logoperatorid"  />
+    <result column="unit_uid" property="unitUid"  />
+    <result column="operatorDateTime" property="operatordatetime"  />
+    <result column="userName" property="username"  />
+    <result column="departName" property="departname"  />
+    <result column="modName" property="modname"  />
+    <result column="logDescr" property="logdescr"  />
+    <result column="openratorType" property="openratortype"  />
+    <result column="loginAccount" property="loginaccount"  />
+    <result column="ipAddress" property="ipaddress"  />
+    <result column="unit_uidName" property="unit_uidName"  /><!-- 添加担保机构名称 -->
+  </resultMap>
+  <sql id="Base_Column_List" >
+    logOperatorID, unit_uid, operatorDateTime, userName, departName, modName, logDescr, 
+    openratorType, loginAccount, ipAddress,unit_uidName
+  </sql>
+  	
+  	<!-- 查询分页列表 -->
+   <select id="selectLogOperatorPageTables" resultMap="BaseResultMap" parameterType="com.zjm.common.db.model.PageTable" >
+   <![CDATA[
+	    select 
+		    logOperatorID, unit_uid, operatorDateTime, userName, departName, modName, logDescr, 
+		    openratorType, loginAccount, ipAddress,unit_uidName
+	    from sys_logoperator
+	    where 1=1 ${wheresql}  limit #{pageNumber},#{pageSize}
+    ]]>
+  </select>
+  
+  <!-- 查询 分页条件下总记录数 -->
+  <select id="selectLogOperatorPageTables_Count" resultType="java.lang.Long"  parameterType="com.zjm.common.db.model.PageTable" >
+  	<![CDATA[
+  		select count(logOperatorID)
+  		from  sys_logoperator
+  		where 1=1 ${wheresql} 
+  	]]>
+  	
+  </select>
+  
+  <!-- 获取一条操作日志信息 -->
+  <select id="selectOneLogOperatorInfo" resultMap="BaseResultMap" parameterType="com.zjm.sys.db.model.Sys_logoperator" >
+	  <![CDATA[
+	    select 
+	     		logOperatorID, unit_uid, operatorDateTime, userName, departName, modName, logDescr, 
+			    openratorType, loginAccount, ipAddress,unit_uidName
+	    from sys_logoperator
+	    where logOperatorID = #{logoperatorid}  and unit_uid = #{unitUid}
+	   ]]> 
+  </select>
+  
+  <!-- 删除一条操作日志信息 -->
+  <delete id="deleteOneLogOperatorInfo" parameterType="com.zjm.sys.db.model.Sys_logoperator" >
+    delete from sys_logoperator
+    where logOperatorID = #{logoperatorid}  and unit_uid = #{unitUid}
+  </delete>
+  
+  <!-- 删除全部操作日志信息 -->
+  <delete id="deleteAllLogOperator" parameterType="com.zjm.sys.db.model.Sys_logoperator">
+  	delete from sys_logoperator  where	unit_uid = #{unitUid}
+  </delete>
+  
+  <!--  插入 添加 一条操作日志信息 -->
+  <insert id="insertOneLogOperatorInfo" parameterType="com.zjm.sys.db.model.Sys_logoperator" >
+    insert into 
+    sys_logoperator (
+    	logOperatorID, 
+    	unit_uid, 
+    	operatorDateTime, 
+      	userName, 
+      	departName, 
+      	modName, 
+      	logDescr, 
+      	openratorType, 
+      	loginAccount, 
+      	ipAddress,
+      	unit_uidName
+      )
+    values (
+    	#{logoperatorid}, 
+    	#{unitUid}, 
+    	NOW(), 
+      	#{username}, 
+      	#{departname}, 
+      	#{modname}, 
+      	#{logdescr}, 
+      	#{openratortype}, 
+      	#{loginaccount}, 
+      	#{ipaddress},
+      	#{unit_uidName}
+      )
+  </insert>
+  
+   <!--统计操作日志的条数    -->
+  <select id="selectCountLogOperators" parameterType="com.zjm.sys.db.model.Sys_logoperator" resultType="Integer">
+  	select count(logOperatorID)
+  	from sys_logoperator
+  	where unit_uid = #{unitUid}
+  </select>
+  
+  <!-- 更新日志信息， 备用 -->
+  <update id="updateByPrimaryKey" parameterType="com.zjm.sys.db.model.Sys_logoperator" >
+    update sys_logoperator
+    set unit_uid = #{unitUid},
+      operatorDateTime = #{operatordatetime},
+      userName = #{username},
+      departName = #{departname},
+      modName = #{modname},
+      logDescr = #{logdescr},
+      openratorType = #{openratortype},
+      loginAccount = #{loginaccount},
+      ipAddress = #{ipaddress},
+      unit_uidName= #{unit_uidName}
+    where logOperatorID = #{logoperatorid}
+  </update>
+</mapper>

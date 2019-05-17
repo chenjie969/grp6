@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><jatools Class="jatools.ReportDocument" Name="jatools report template"><VariableContext/><Page><Children ItemClass="PagePanel"><Item0><Width>1383</Width><Height>111</Height><Children><Item0 Class="Label"><Text>融投控股集团收清欠统计表</Text><Font><Face>宋体</Face><Style>1</Style><Size>36</Size></Font><HorizontalAlignment>1</HorizontalAlignment><X>336</X><Y>25</Y><Width>542</Width><Height>44</Height></Item0><Item1 Class="Text"><Variable>=if(has(begindatesql)) return begindatesql;</Variable><HorizontalAlignment>1</HorizontalAlignment><X>528</X><Y>73</Y><Width>128</Width><Height>23</Height></Item1><Item2 Class="Label"><Text>统计期间：</Text><HorizontalAlignment>2</HorizontalAlignment><X>416</X><Y>73</Y><Width>110</Width><Height>23</Height></Item2><Item3 Class="Label"><Text>至</Text><HorizontalAlignment>1</HorizontalAlignment><X>658</X><Y>73</Y><Width>29</Width><Height>23</Height></Item3><Item4 Class="Text"><Variable>=if(has(enddatesql)) return enddatesql;else return $today;</Variable><HorizontalAlignment>1</HorizontalAlignment><X>691</X><Y>73</Y><Width>110</Width><Height>23</Height></Item4><Item5 Class="Label"><Name>制表日期：$.today</Name><Text>单位：万元</Text><HorizontalAlignment>2</HorizontalAlignment><X>1235</X><Y>86</Y><Width>110</Width><Height>23</Height></Item5><Item6 Class="Text"><Variable>$today</Variable><X>121</X><Y>88</Y><Width>110</Width><Height>23</Height></Item6><Item7 Class="Label"><Text>制表日期：</Text><HorizontalAlignment>2</HorizontalAlignment><X>46</X><Y>88</Y><Width>74</Width><Height>23</Height></Item7></Children><Type>100</Type></Item0><Item1><Y>798</Y><Width>1383</Width><Height>5</Height><Type>103</Type></Item1><Item2><Name>=$freeInterestSum</Name><Y>111</Y><Width>1383</Width><Height>687</Height><Children ItemClass="Table"><Item0><X>44</X><Y>56</Y><Children><Item0 Class="Label"><Text>合计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>0</Col><ColSpan>4</ColSpan></Cell></Item0><Item1 Class="Label"><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>8</Col></Cell></Item1><Item2 Class="Text"><Variable>=index_totalall.returnSum1.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>4</Col></Cell></Item2><Item3 Class="Text"><Variable>=index_totalall.returnSum2.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>5</Col></Cell></Item3><Item4 Class="Text"><Variable>=index_totalall.returnSum3.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>6</Col></Cell></Item4><Item5 Class="Text"><Variable>=index_totalall.returnSum1.sum()+index_totalall.returnSum2.sum()+index_totalall.returnSum3.sum()+index_totalall.returnSum4.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>9</Col></Cell></Item5><Item6 Class="Label"><Text>序号</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>0</Row><Col>0</Col></Cell></Item6><Item7 Class="Label"><Text>委贷本金清收</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>0</Row><Col>4</Col></Cell></Item7><Item8 Class="Label"><Text>委贷利息清收</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>0</Row><Col>5</Col></Cell></Item8><Item9 Class="Label"><Text>代偿清收</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>0</Row><Col>6</Col></Cell></Item9><Item10 Class="Label"><Text>保费清收</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>0</Row><Col>7</Col></Cell></Item10><Item11 Class="Label"><Text>合计清收</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>0</Row><Col>9</Col></Cell></Item11><Item12 Class="Label"><Text>清收主体</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>0</Row><Col>1</Col></Cell></Item12><Item13 Class="Label"><Text>收回日期</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>0</Row><Col>2</Col></Cell></Item13><Item14 Class="Label"><Text>项目名称</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>0</Row><Col>3</Col></Cell></Item14><Item15 Class="Label"><Text>备注</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>0</Row><Col>8</Col></Cell></Item15><Item16 Class="RowPanel"><Cell><Row>1</Row><Col>0</Col><ColSpan>10</ColSpan></Cell><Children ItemClass="RowPanel"><Item0><Cell><Row>1</Row><Col>0</Col><ColSpan>10</ColSpan></Cell><Children><Item0 Class="Text"><Variable>=$.projectName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>3</Col></Cell></Item0><Item1 Class="Text"><Variable>=$.returnDate</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DateFormat"/><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>2</Col></Cell></Item1><Item2 Class="Text"><Variable>=$.position </Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>0</Col></Cell></Item2><Item3 Class="Text"><Variable>=$.returnSum1</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>4</Col></Cell></Item3><Item4 Class="Text"><Variable>=$.returnSum3</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>6</Col></Cell></Item4><Item5 Class="Text"><Variable>=$.returnSumAll</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>9</Col></Cell></Item5><Item6 Class="Text"><Variable>=$.returnSum2</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,###.######</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>5</Col></Cell></Item6><Item7 Class="Text"><Variable>=$.guarantyOrgName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>1</Col></Cell></Item7><Item8 Class="Label"><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>8</Col></Cell></Item8><Item9 Class="Label"><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>1</Row><Col>7</Col></Cell></Item9></Children><NodePath>Row</NodePath></Item0></Children><NodePath>tab_totalall</NodePath></Item16><Item17 Class="Label"><Border/><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>7</Col></Cell></Item17></Children><ColumnWidths>118,117,93,244,105,117,75,99,232,99</ColumnWidths><RowHeights>40,26,40</RowHeights></Item0></Children><Type>102</Type></Item2></Children><PageFormat><Width>1423</Width><Height>1122</Height><Bottom>299</Bottom></PageFormat></Page><NodeSource><Children ItemClass="DatasetNodeSource"><Item0><Children><Item0 Class="RowNodeSource"/><Item1 Class="IndexNodeSource"><IndexFields Len="1">freeCapitalSum</IndexFields><TagName>index_total</TagName></Item1></Children><Reader Class="SqlReader"><Name>tab_total</Name><Sql>SELECT 
+  p.guarantyOrgID,
+  fd.freeDetail_ID,
+ fd.freeDate,
+  fl.factLoad_ID,
+  p.projectName,
+  (IFNULL(tab.freeCapitalSum,0)) AS freeCapitalSum
+  FROM pro_freedetail fd
+  LEFT JOIN pro_project p
+  ON fd.projectID=p.project_ID
+  LEFT JOIN pro_factload fl
+  ON fl.`factLoad_ID`=fd.`factLoad_ID`
+  LEFT JOIN 
+(SELECT fd1.freeInterestSum,fd1.freeCapitalSum,fd1.`freeDetail_ID` FROM pro_freedetail fd1
+LEFT JOIN pro_project p  ON  fd1.`projectID`=p.`project_ID`
+LEFT JOIN pro_factload fl ON fl.`factLoad_ID`=fd1.`factLoad_ID`
+
+WHERE fl.busiTypeID='02' ) AS tab ON tab.freeDetail_ID=fd.freeDetail_ID
+WHERE  tab.freeCapitalSum  is not  null
+${has(begindatesql)?(" and fd.freeDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and fd.freeDate&lt;='"+enddatesql+"'"):"AND fd.freeDate&lt;=NOW()"}
+
+ORDER BY  p.guarantyOrgID</Sql><Description>SELECT 
+  p.guarantyOrgID,
+  fd.freeDetail_ID,
+ fd.freeDate,
+  fl.factLoad_ID,
+  p.projectName,
+  (IFNULL(tab.freeCapitalSum,0)) AS freeCapitalSum
+  FROM pro_freedetail fd
+  LEFT JOIN pro_project p
+  ON fd.projectID=p.project_ID
+  LEFT JOIN pro_factload fl
+  ON fl.`factLoad_ID`=fd.`factLoad_ID`
+  LEFT JOIN 
+(SELECT fd1.freeInterestSum,fd1.freeCapitalSum,fd1.`freeDetail_ID` FROM pro_freedetail fd1
+LEFT JOIN pro_project p  ON  fd1.`projectID`=p.`project_ID`
+LEFT JOIN pro_factload fl ON fl.`factLoad_ID`=fd1.`factLoad_ID`
+
+WHERE fl.busiTypeID='02' ) AS tab ON tab.freeDetail_ID=fd.freeDetail_ID
+WHERE  tab.freeCapitalSum  is not  null
+${has(begindatesql)?(" and fd.freeDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and fd.freeDate&lt;='"+enddatesql+"'"):"AND fd.freeDate&lt;=NOW()"}
+
+ORDER BY  p.guarantyOrgID</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">guarantyOrgID</IndexFields><IndexFields2 Len="2">freeCapitalSum,freeInterestSum</IndexFields2><TagName>tab_total</TagName></Item0><Item1><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">id</IndexFields><TagName>index_org</TagName></Item0></Children><Reader Class="SqlReader"><Name>dic_org</Name><Sql>SELECT fieldValue AS name,fieldID AS id FROM c_dictype where dicTypeID = 29</Sql><Description>SELECT fieldValue AS name,fieldID AS id FROM c_dictype where dicTypeID = 29</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">id</IndexFields><TagName>dic_org</TagName></Item1><Item2><Children><Item0 Class="RowNodeSource"/><Item1 Class="IndexNodeSource"><IndexFields Len="1">freeInterestSum</IndexFields><TagName>index_total_1</TagName></Item1></Children><Reader Class="SqlReader"><Name>tab_total_1</Name><Sql>SELECT 
+  p.guarantyOrgID,
+  fd.freeDetail_ID,
+  fd.freeDate,
+  fl.factLoad_ID,
+  p.projectName,
+ (IFNULL(tab.freeInterestSum,0)) AS freeInterestSum
+  FROM pro_freedetail fd
+  LEFT JOIN pro_project p
+  ON fd.projectID=p.project_ID
+  LEFT JOIN pro_factload fl
+  ON fl.`factLoad_ID`=fd.`factLoad_ID`
+  LEFT JOIN 
+(SELECT fd1.freeInterestSum,fd1.freeCapitalSum,fd1.`freeDetail_ID` FROM pro_freedetail fd1
+LEFT JOIN pro_project p  ON  fd1.`projectID`=p.`project_ID`
+LEFT JOIN pro_factload fl ON fl.`factLoad_ID`=fd1.`factLoad_ID`
+WHERE fl.busiTypeID='02' ) AS tab ON tab.freeDetail_ID=fd.freeDetail_ID
+WHERE tab.freeInterestSum is not null
+${has(begindatesql)?(" and fd.freeDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and fd.freeDate&lt;='"+enddatesql+"'"):"AND fd.freeDate&lt;=NOW()"}
+${has(fullBankCodesql)?(" and fl.fullBankCode like '"+fullBankCodesql+"%'"):""}
+${has(fullBusiTypeCodesql)?(" and fl.fullBusiTypeCode like'"+fullBusiTypeCodesql+"%'"):""}
+${has(guaraSumMinsql)?(" and (fl.loadSum&gt;"+guaraSumMinsql):""}
+${has(sumMinEqualsql)?(" or fl.loadSum="+guaraSumMinsql+")"):""}
+${has(guaraSumMaxsql)?(" and fl.loadSum&lt;"+guaraSumMaxsql):""}
+${has(guaraPeriodMonthsMinsql)?(" and ( fl.preiodMonth&gt;"+guaraPeriodMonthsMinsql):""}
+${has(monthsMinEqualsql)?(" or fl.preiodMonth="+guaraPeriodMonthsMinsql+")"):""}
+${has(guaraPeriodMonthsMaxsql)?(" and fl.preiodMonth&lt; "+guaraPeriodMonthsMaxsql):""}
+
+${has(busiPropIDsql)?(" and p.busiPropID = '"+busiPropIDsql+"'"):""}
+${has(projTypeIDsql)?(" and p.projTypeID = '"+projTypeIDsql+"'"):""}
+${has(fullDepartCodesql)?(" and p.fullDepartCode like'"+fullDepartCodesql+"%'"):""}
+${has(amanIDsql)?(" and p.aManID="+amanIDsql):""}
+${has(bmanIDsql)?(" and p.bManID="+bmanIDsql):""}
+${has(cmanIDsql)?(" and p.cManID="+cmanIDsql):""}
+${has(fullAreaCodesql)?(" and p.fullAreaCode like '"+fullAreaCodesql+"%'"):""}
+ORDER BY  p.guarantyOrgID</Sql><Description>SELECT 
+  p.guarantyOrgID,
+  fd.freeDetail_ID,
+  fd.freeDate,
+  fl.factLoad_ID,
+  p.projectName,
+ (IFNULL(tab.freeInterestSum,0)) AS freeInterestSum
+  FROM pro_freedetail fd
+  LEFT JOIN pro_project p
+  ON fd.projectID=p.project_ID
+  LEFT JOIN pro_factload fl
+  ON fl.`factLoad_ID`=fd.`factLoad_ID`
+  LEFT JOIN 
+(SELECT fd1.freeInterestSum,fd1.freeCapitalSum,fd1.`freeDetail_ID` FROM pro_freedetail fd1
+LEFT JOIN pro_project p  ON  fd1.`projectID`=p.`project_ID`
+LEFT JOIN pro_factload fl ON fl.`factLoad_ID`=fd1.`factLoad_ID`
+WHERE fl.busiTypeID='02' ) AS tab ON tab.freeDetail_ID=fd.freeDetail_ID
+WHERE tab.freeInterestSum is not null
+${has(begindatesql)?(" and fd.freeDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and fd.freeDate&lt;='"+enddatesql+"'"):"AND fd.freeDate&lt;=NOW()"}
+${has(fullBankCodesql)?(" and fl.fullBankCode like '"+fullBankCodesql+"%'"):""}
+${has(fullBusiTypeCodesql)?(" and fl.fullBusiTypeCode like'"+fullBusiTypeCodesql+"%'"):""}
+${has(guaraSumMinsql)?(" and (fl.loadSum&gt;"+guaraSumMinsql):""}
+${has(sumMinEqualsql)?(" or fl.loadSum="+guaraSumMinsql+")"):""}
+${has(guaraSumMaxsql)?(" and fl.loadSum&lt;"+guaraSumMaxsql):""}
+${has(guaraPeriodMonthsMinsql)?(" and ( fl.preiodMonth&gt;"+guaraPeriodMonthsMinsql):""}
+${has(monthsMinEqualsql)?(" or fl.preiodMonth="+guaraPeriodMonthsMinsql+")"):""}
+${has(guaraPeriodMonthsMaxsql)?(" and fl.preiodMonth&lt; "+guaraPeriodMonthsMaxsql):""}
+
+${has(busiPropIDsql)?(" and p.busiPropID = '"+busiPropIDsql+"'"):""}
+${has(projTypeIDsql)?(" and p.projTypeID = '"+projTypeIDsql+"'"):""}
+${has(fullDepartCodesql)?(" and p.fullDepartCode like'"+fullDepartCodesql+"%'"):""}
+${has(amanIDsql)?(" and p.aManID="+amanIDsql):""}
+${has(bmanIDsql)?(" and p.bManID="+bmanIDsql):""}
+${has(cmanIDsql)?(" and p.cManID="+cmanIDsql):""}
+${has(fullAreaCodesql)?(" and p.fullAreaCode like '"+fullAreaCodesql+"%'"):""}
+ORDER BY  p.guarantyOrgID</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">freeInterestSum</IndexFields><TagName>tab_total_1</TagName></Item2><Item3><Children><Item0 Class="RowNodeSource"/><Item1 Class="IndexNodeSource"><IndexFields Len="1">returnSum</IndexFields><TagName>index_total_2</TagName></Item1></Children><Reader Class="SqlReader"><Name>tab_total_2</Name><Sql>SELECT 
+  p.guarantyOrgID,
+  rd.returnDate,
+  fl.factLoad_ID,
+   p.projectName,
+  (IFNULL(fab.returnSum,0)) AS  returnSum
+  FROM pro_returndetail rd
+  LEFT JOIN pro_project p ON rd.projectID=p.project_ID
+  LEFT JOIN pro_factload fl ON fl.`factLoad_ID`=rd.`factLoad_ID`
+LEFT JOIN 
+(SELECT  
+    rd1.returnSum,
+    p.factGuaraCostSum ,
+    rd1.`factLoad_ID` 
+  FROM pro_returndetail rd1 
+LEFT JOIN  pro_project p  ON rd1.`projectID`=p.`project_ID`
+LEFT JOIN pro_factload fl ON fl.`factLoad_ID`=rd1.`factLoad_ID`
+WHERE fl.busiTypeID='01' ) AS fab ON fab.factLoad_ID=rd.factLoad_ID
+WHERE  fab.returnSum IS NOT NULL  
+${has(begindatesql)?(" and rd.returnDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and rd.returnDate&lt;='"+enddatesql+"'"):"AND rd.returnDate&lt;=NOW()"}
+
+
+ORDER BY  p.guarantyOrgID</Sql><Description>SELECT 
+  p.guarantyOrgID,
+  rd.returnDate,
+  fl.factLoad_ID,
+   p.projectName,
+  (IFNULL(fab.returnSum,0)) AS  returnSum
+  FROM pro_returndetail rd
+  LEFT JOIN pro_project p ON rd.projectID=p.project_ID
+  LEFT JOIN pro_factload fl ON fl.`factLoad_ID`=rd.`factLoad_ID`
+LEFT JOIN 
+(SELECT  
+    rd1.returnSum,
+    p.factGuaraCostSum ,
+    rd1.`factLoad_ID` 
+  FROM pro_returndetail rd1 
+LEFT JOIN  pro_project p  ON rd1.`projectID`=p.`project_ID`
+LEFT JOIN pro_factload fl ON fl.`factLoad_ID`=rd1.`factLoad_ID`
+WHERE fl.busiTypeID='01' ) AS fab ON fab.factLoad_ID=rd.factLoad_ID
+WHERE  fab.returnSum IS NOT NULL  
+${has(begindatesql)?(" and rd.returnDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and rd.returnDate&lt;='"+enddatesql+"'"):"AND rd.returnDate&lt;=NOW()"}
+
+
+ORDER BY  p.guarantyOrgID</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">returnSum</IndexFields><TagName>tab_total_2</TagName></Item3><Item4><Children><Item0 Class="RowNodeSource"/><Item1 Class="IndexNodeSource"><IndexFields Len="1">factGuaraCostSum</IndexFields><TagName>index_total_3</TagName></Item1></Children><Reader Class="SqlReader"><Name>tab_total_3</Name><Sql>SELECT 
+  p.guarantyOrgID,
+  p.returnDate,
+ p.returnDate,
+  fl.factLoad_ID,
+   p.projectName,
+  (IFNULL(fab.factGuaraCostSum,0)) AS factGuaraCostSum
+  FROM   pro_project p
+  LEFT JOIN pro_returndetail rd
+  ON rd.projectID=p.project_ID
+  LEFT JOIN pro_factload fl
+  ON fl.`projectID`=p.`project_ID`
+LEFT JOIN 
+(SELECT  rd1.returnSum,p.factGuaraCostSum ,p.`project_ID` FROM  pro_project p 
+LEFT JOIN  pro_returndetail rd1  ON rd1.`projectID`=p.`project_ID`
+LEFT JOIN pro_factload fl ON fl.`factLoad_ID`=rd1.`factLoad_ID`
+WHERE fl.busiTypeID='01') AS fab ON fab.project_ID=p.`project_ID`
+WHERE  fab.factGuaraCostSum is not null
+${has(begindatesql)?(" and p.returnDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and p.returnDate&lt;='"+enddatesql+"'"):"AND p.returnDate&lt;=NOW()"}
+ORDER BY  p.guarantyOrgID</Sql><Description>SELECT 
+  p.guarantyOrgID,
+  p.returnDate,
+ p.returnDate,
+  fl.factLoad_ID,
+   p.projectName,
+  (IFNULL(fab.factGuaraCostSum,0)) AS factGuaraCostSum
+  FROM   pro_project p
+  LEFT JOIN pro_returndetail rd
+  ON rd.projectID=p.project_ID
+  LEFT JOIN pro_factload fl
+  ON fl.`projectID`=p.`project_ID`
+LEFT JOIN 
+(SELECT  rd1.returnSum,p.factGuaraCostSum ,p.`project_ID` FROM  pro_project p 
+LEFT JOIN  pro_returndetail rd1  ON rd1.`projectID`=p.`project_ID`
+LEFT JOIN pro_factload fl ON fl.`factLoad_ID`=rd1.`factLoad_ID`
+WHERE fl.busiTypeID='01') AS fab ON fab.project_ID=p.`project_ID`
+WHERE  fab.factGuaraCostSum is not null
+${has(begindatesql)?(" and p.returnDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and p.returnDate&lt;='"+enddatesql+"'"):"AND p.returnDate&lt;=NOW()"}
+ORDER BY  p.guarantyOrgID</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">factGuaraCostSum</IndexFields><TagName>tab_total_3</TagName></Item4><Item5><Children><Item0 Class="IndexNodeSource"><IndexFields Len="5">guarantyOrgID,returnSum1,returnSum2,returnSum3,returnSum4</IndexFields><TagName>index_totalall</TagName></Item0><Item1 Class="RowNodeSource"/></Children><Reader Class="SqlReader"><Name>tab_totalall</Name><Sql>SELECT 
+  tab.guarantyOrgID,
+  tab.guarantyOrgName,
+  tab.returnDate,
+  tab.project_ID,
+  tab.projectName,
+  tab.returnSum1,
+  tab.returnSum2,
+  tab.returnSum3,
+tab.returnSum4,
+(tab.returnSum1+tab.returnSum2+tab.returnSum3+tab.returnSum4) AS returnSumAll
+FROM (
+    SELECT 
+	  pa.guarantyOrgID AS guarantyOrgID,
+	  pa.guarantyOrgName AS guarantyOrgName,
+	  tab.freeDate AS returnDate,	
+	  pp.project_ID AS project_ID,
+	  pp.projectName AS projectName,
+  (IFNULL(tab.payCapitalSum,0)) AS returnSum1,
+  (IFNULL(tab.payInterestSum,0)) AS returnSum2,
+	 0 AS returnSum3,
+	 0 AS returnSum4
+  FROM pro_factpay pfp
+  LEFT JOIN  pro_project pp ON pfp.project_ID = PP.project_ID
+  LEFT JOIN pro_apply pa ON pa.apply_ID =pp.apply_ID
+  LEFT JOIN
+( SELECT 
+     pfp.payInterestSum, 
+     pfp.payDate AS freeDate,
+     pfp.payCapitalSum,
+     pfp.project_ID
+     
+ FROM pro_factpay pfp
+  
+  LEFT JOIN  pro_project pp ON pfp.project_ID = PP.project_ID
+  LEFT JOIN pro_apply pa ON pa.apply_ID =pp.apply_ID
+   
+   WHERE 1=1 AND pp.busiClass='02'
+${has(begindatesql)?(" and pfp.payDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and pfp.payDate&lt;='"+enddatesql+"'"):""}
+) AS tab ON tab.project_ID=pp.project_ID
+WHERE  tab.payCapitalSum  IS NOT  NULL
+
+UNION 
+SELECT 
+       pa.guarantyOrgID AS guarantyOrgID,
+       pa.guarantyOrgName AS guarantyOrgName,
+       fab.returnDate AS returnDate,  
+       pp.project_ID AS project_ID,
+       pp.projectName AS projectName,
+       0 AS  returnSum1,
+       0 AS  returnSum2,     
+  (IFNULL(fab.returnSum,0)) AS  returnSum3,
+       0 AS  returnSum4
+  FROM pro_returndetail prd
+  LEFT JOIN  pro_project pp ON prd.project_ID = PP.project_ID
+  LEFT JOIN pro_apply pa ON pa.apply_ID =pp.apply_ID 
+LEFT JOIN 
+
+( 
+   SELECT  
+      prd.returnSum,  
+      prd.returnDate AS returnDate,
+      prd.project_ID
+  FROM pro_returndetail prd
+  LEFT JOIN  pro_project pp ON prd.project_ID = PP.project_ID
+  LEFT JOIN pro_apply pa ON pa.apply_ID =pp.apply_ID 
+
+WHERE  1=1 AND pp.busiClass='02'
+${has(begindatesql)?(" and prd.returnDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and prd.returnDate&lt;='"+enddatesql+"'"):""}
+
+
+) AS fab ON fab.project_ID=prd.project_ID
+WHERE  
+ fab.returnSum IS NOT NULL 
+)tab
+WHERE  1=1
+${has(begindatesql)?(" and prd.returnDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and prd.returnDate&lt;='"+enddatesql+"'"):""}
+
+ORDER BY tab.returnDate desc</Sql><Description>SELECT 
+  tab.guarantyOrgID,
+  tab.guarantyOrgName,
+  tab.returnDate,
+  tab.project_ID,
+  tab.projectName,
+  tab.returnSum1,
+  tab.returnSum2,
+  tab.returnSum3,
+tab.returnSum4,
+(tab.returnSum1+tab.returnSum2+tab.returnSum3+tab.returnSum4) AS returnSumAll
+FROM (
+    SELECT 
+	  pa.guarantyOrgID AS guarantyOrgID,
+	  pa.guarantyOrgName AS guarantyOrgName,
+	  tab.freeDate AS returnDate,	
+	  pp.project_ID AS project_ID,
+	  pp.projectName AS projectName,
+  (IFNULL(tab.payCapitalSum,0)) AS returnSum1,
+  (IFNULL(tab.payInterestSum,0)) AS returnSum2,
+	 0 AS returnSum3,
+	 0 AS returnSum4
+  FROM pro_factpay pfp
+  LEFT JOIN  pro_project pp ON pfp.project_ID = PP.project_ID
+  LEFT JOIN pro_apply pa ON pa.apply_ID =pp.apply_ID
+  LEFT JOIN
+( SELECT 
+     pfp.payInterestSum, 
+     pfp.payDate AS freeDate,
+     pfp.payCapitalSum,
+     pfp.project_ID
+     
+ FROM pro_factpay pfp
+  
+  LEFT JOIN  pro_project pp ON pfp.project_ID = PP.project_ID
+  LEFT JOIN pro_apply pa ON pa.apply_ID =pp.apply_ID
+   
+   WHERE 1=1 AND pp.busiClass='02'
+${has(begindatesql)?(" and pfp.payDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and pfp.payDate&lt;='"+enddatesql+"'"):""}
+) AS tab ON tab.project_ID=pp.project_ID
+WHERE  tab.payCapitalSum  IS NOT  NULL
+
+UNION 
+SELECT 
+       pa.guarantyOrgID AS guarantyOrgID,
+       pa.guarantyOrgName AS guarantyOrgName,
+       fab.returnDate AS returnDate,  
+       pp.project_ID AS project_ID,
+       pp.projectName AS projectName,
+       0 AS  returnSum1,
+       0 AS  returnSum2,     
+  (IFNULL(fab.returnSum,0)) AS  returnSum3,
+       0 AS  returnSum4
+  FROM pro_returndetail prd
+  LEFT JOIN  pro_project pp ON prd.project_ID = PP.project_ID
+  LEFT JOIN pro_apply pa ON pa.apply_ID =pp.apply_ID 
+LEFT JOIN 
+
+( 
+   SELECT  
+      prd.returnSum,  
+      prd.returnDate AS returnDate,
+      prd.project_ID
+  FROM pro_returndetail prd
+  LEFT JOIN  pro_project pp ON prd.project_ID = PP.project_ID
+  LEFT JOIN pro_apply pa ON pa.apply_ID =pp.apply_ID 
+
+WHERE  1=1 AND pp.busiClass='02'
+${has(begindatesql)?(" and prd.returnDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and prd.returnDate&lt;='"+enddatesql+"'"):""}
+
+
+) AS fab ON fab.project_ID=prd.project_ID
+WHERE  
+ fab.returnSum IS NOT NULL 
+)tab
+WHERE  1=1
+${has(begindatesql)?(" and prd.returnDate&gt;='"+begindatesql+"'"):""}
+${has(enddatesql)?(" and prd.returnDate&lt;='"+enddatesql+"'"):""}
+
+ORDER BY tab.returnDate desc</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">guarantyOrgID</IndexFields><TagName>tab_totalall</TagName></Item5></Children></NodeSource></jatools>

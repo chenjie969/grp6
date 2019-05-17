@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.crm.db.map.Crm_receivableMapper">
+	<!-- 应收账款表信息 -->
+	<resultMap type="com.zjm.crm.db.model.Crm_receivable" id="ReceivableResultMap">
+		<result property="receivable_ID" column="receivable_ID" />
+		<result property="client_ID" column="client_ID" />
+		<result property="customerName" column="customerName" />
+		<result property="occurDate" column="occurDate" />
+		<result property="payDate" column="payDate" />
+		<result property="taxSum" column="taxSum" />
+		<result property="remark" column="remark" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="unit_uidName" column="unit_uidName" />
+		<result property="updateUserName" column="updateUserName" />
+		<result property="updateDateTime" column="updateDateTime" />
+		
+	</resultMap>
+
+	<!-- 新增一个应收账款信息 -->
+	<insert id="insertOneReceivableInfo" parameterType="com.zjm.crm.db.model.Crm_receivable">
+		<![CDATA[
+		INSERT INTO crm_receivable(
+			receivable_ID,
+			client_ID,
+			customerName,
+			occurDate,
+			payDate,
+			taxSum,
+			remark,
+			unit_uid,
+			unit_uidName,
+			updateUserName,
+			updateDateTime
+			
+		)
+		VALUES
+		(
+			#{receivable_ID},
+			#{client_ID},
+			#{customerName},
+			#{occurDate},
+			#{payDate},
+			#{taxSum},
+			#{remark},
+			#{unit_uid},
+			#{unit_uidName},
+			#{updateUserName},
+			NOW()
+			
+		) ;
+		]]>
+	</insert>
+	
+
+	<!-- 查询所有的应收账款列表 -->
+	<select id="selectReceivablePageTables" parameterType="com.zjm.crm.db.model.Crm_receivable"
+		resultMap="ReceivableResultMap">
+		<![CDATA[
+		SELECT
+			receivable_ID,
+			client_ID,
+			customerName,
+			occurDate,
+			payDate,
+			taxSum,
+			remark,
+			unit_uid,
+			unit_uidName,
+			updateUserName,
+			updateDateTime
+		FROM crm_receivable
+		where 1=1  AND client_ID=#{client_ID}]]>
+	</select>
+	
+	<!-- 删除一个应收账款 -->
+	<delete id="deleteOneReceivableInfo" parameterType="java.lang.String">
+		<![CDATA[
+			delete from crm_receivable
+			where receivable_ID=#{receivable_ID}
+		]]>
+	</delete>
+	
+	<!-- 根据relationID查询应收账款信息 -->
+	<select id="selectOneReceivableInfo" parameterType="com.zjm.crm.db.model.Crm_receivable" resultMap="ReceivableResultMap">
+		<![CDATA[
+		 	select 
+				client_ID,
+				customerName,
+				occurDate,
+				payDate,
+				taxSum,
+				remark,
+				unit_uid,
+				unit_uidName,
+				updateUserName,
+				updateDateTime
+		 	from crm_receivable
+		 	where receivable_ID = #{receivable_ID}
+		]]>
+	</select>
+	
+	<!-- 更新应收账款信息 -->
+	<update id="updateOneReceivableInfo" parameterType="com.zjm.crm.db.model.Crm_receivable">
+		<![CDATA[
+			UPDATE 
+			  crm_receivable
+			SET
+			  customerName = #{customerName},
+			  occurDate = #{occurDate},
+			  payDate = #{payDate},
+			  taxSum = #{taxSum},
+			  remark = #{remark},
+			  updateUserName = #{updateUserName},
+			  updateDateTime = NOW()
+			WHERE receivable_ID = #{receivable_ID}
+		]]>
+	</update>
+	
+	
+	<select id="selectReceivableListByWhereSql" parameterType="string" resultMap="ReceivableResultMap">
+		select 
+				client_ID,
+				customerName,
+				occurDate,
+				payDate,
+				taxSum,
+				remark,
+				unit_uid,
+				unit_uidName,
+				updateUserName,
+				updateDateTime
+	 	from crm_receivable 
+		where  1=1   ${value}
+	</select>
+	
+	<delete id="deleteReceivableListByWhereSql" parameterType="string">
+	    delete  from  crm_receivable
+	    where 1=1  ${value}
+	</delete>
+	
+</mapper>  

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><jatools Class="jatools.ReportDocument" Name="jatools report template"><VariableContext/><Page><Children ItemClass="PagePanel"><Item0><Width>1092</Width><Height>128</Height><Children><Item0 Class="Text"><Variable>=if(has(enddatesql)) return enddatesql;else return $today;</Variable><X>498</X><Y>80</Y><Width>110</Width><Height>23</Height></Item0><Item1 Class="Label"><Text>统计日期：</Text><X>438</X><Y>80</Y><Width>56</Width><Height>23</Height></Item1><Item2 Class="Label"><Text>合并关联企业统计表</Text><Font><Face>宋体</Face><Style>1</Style><Size>36</Size></Font><HorizontalAlignment>1</HorizontalAlignment><X>218</X><Y>2</Y><Width>656</Width><Height>71</Height></Item2><Item3 Class="Label"><Text>金额单位：亿元</Text><HorizontalAlignment>2</HorizontalAlignment><X>952</X><Y>100</Y><Width>110</Width><Height>23</Height></Item3></Children><Type>100</Type></Item0><Item1><Y>787</Y><Width>1092</Width><Height>34</Height><Type>103</Type></Item1><Item2><Y>128</Y><Width>1092</Width><Height>659</Height><Children ItemClass="Table"><Item0><X>77</X><Y>5</Y><Children><Item0 Class="Label"><Text>担保集团在保（委贷）情况</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>3</Col><ColSpan>3</ColSpan></Cell></Item0><Item1 Class="Label"><Text>关联主体</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col><RowSpan>2</RowSpan></Cell></Item1><Item2 Class="Label"><Text>项目名称</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>2</Col><RowSpan>2</RowSpan></Cell></Item2><Item3 Class="Label"><Text>序号</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col><RowSpan>2</RowSpan></Cell></Item3><Item4 Class="Label"><Text>担保金额</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>3</Col></Cell></Item4><Item5 Class="Label"><Text>委贷金额</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>4</Col></Cell></Item5><Item6 Class="Label"><Text>合并金额</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>5</Col></Cell></Item6><Item7 Class="Label"><Text>担保集团逾期情况</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>6</Col><ColSpan>3</ColSpan></Cell></Item7><Item8 Class="Label"><Text>担保逾期</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>6</Col></Cell></Item8><Item9 Class="Label"><Text>委贷逾期</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>7</Col></Cell></Item9><Item10 Class="Label"><Text>逾期总金额</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>8</Col></Cell></Item10><Item11 Class="Label"><Text>担保集团代偿情况</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>9</Col><ColSpan>2</ColSpan></Cell></Item11><Item12 Class="Label"><Text>代偿金额</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>9</Col></Cell></Item12><Item13 Class="Label"><Text>代偿余额</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>10</Col></Cell></Item13><Item14 Class="RowPanel"><Cell><Row>2</Row><Col>0</Col><ColSpan>11</ColSpan></Cell><Children ItemClass="RowPanel"><Item0><Cell><Row>2</Row><Col>0</Col><ColSpan>11</ColSpan></Cell><Children><Item0 Class="Label"><Cell><Row>2</Row><Col>0</Col></Cell></Item0><Item1 Class="Label"><Cell><Row>2</Row><Col>0</Col></Cell></Item1><Item2 Class="Label"><Cell><Row>2</Row><Col>1</Col></Cell></Item2><Item3 Class="Label"><Cell><Row>2</Row><Col>1</Col></Cell></Item3><Item4 Class="Label"><Cell><Row>2</Row><Col>2</Col></Cell></Item4><Item5 Class="Label"><Cell><Row>2</Row><Col>2</Col></Cell></Item5><Item6 Class="Text"><Variable>=$.position +1</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>2</Row><Col>0</Col></Cell></Item6><Item7 Class="Text"><Variable>=$.relationMainName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>1</Col></Cell></Item7><Item8 Class="Text"><Variable>=$.projectName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>2</Col></Cell></Item8><Item9 Class="Text"><Variable>=if(has(index_column4.loadSum{$.projectName})) return (index_column4.loadSum{$.projectName}/10000);else return 0;</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.0000000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>3</Col></Cell></Item9><Item10 Class="Text"><Variable>=if(has(index_column5.loadSum{$.projectName})) return (index_column5.loadSum{$.projectName}/10000);else return 0;</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.0000000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>4</Col></Cell></Item10><Item11 Class="Text"><Variable>=$.loadSum/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.0000000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>5</Col></Cell></Item11><Item12 Class="Text"><Variable>=if(has(index_column6.overSum{$.projectName})) return (index_column6.overSum{$.projectName}/10000);else return 0;</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.0000000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>6</Col></Cell></Item12><Item13 Class="Text"><Variable>=if(has(index_column7.overSum{$.projectName})) return (index_column7.overSum{$.projectName}/10000);else return 0;</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.0000000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>7</Col></Cell></Item13><Item14 Class="Text"><Name>=if($.freeSum==0) return 0;else return $.freeSum;</Name><Variable>=$.overSum/10000</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.0000000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>8</Col></Cell></Item14><Item15 Class="Text"><Variable>=if(has(index_column8.replaceCapitalSum{$.projectName})) return (index_column8.replaceCapitalSum{$.projectName}/10000);else return 0;</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.0000000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>9</Col></Cell></Item15><Item16 Class="Text"><Variable>=if(has(index_column9.remainSum{$.projectName})) return (index_column9.remainSum{$.projectName}/10000);else return 0;</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.0000000000</Pattern></Format><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>10</Col></Cell></Item16></Children><NodePath>Row</NodePath></Item0></Children><NodePath>tab_detail</NodePath></Item14></Children><ColumnWidths>108,102,201,81,96,96,60,60,60,60,60</ColumnWidths><RowHeights>30,30,30</RowHeights></Item0></Children><Type>102</Type></Item2></Children><PageFormat><Width>1132</Width><Height>861</Height></PageFormat></Page><NodeSource><Children ItemClass="DatasetNodeSource"><Item0><Children><Item0 Class="RowNodeSource"/><Item1 Class="IndexNodeSource"><IndexFields Len="1">projectName</IndexFields><TagName>index_pID</TagName></Item1></Children><Reader Class="SqlReader"><Name>tab_detail</Name><Sql>SELECT sum((IFNULL(pp.loadSum,0))) AS loadSum,
+sum(IFNULL(overTable.overSum,0)) as overSum,
+pp.projectName,
+pp.`busiClass`,
+cc.relationMainName
+FROM
+   pro_project pp 
+LEFT JOIN pro_apply pa  ON pp.apply_ID = pa.apply_ID
+LEFT JOIN crm_client cc ON cc.client_ID = pa.client_ID
+LEFT JOIN (
+-- 逾期信息总计
+select 
+pp.loadsum - 
+IFNULL((select sum(replaceCapitalSum) from pro_replace where project_ID = pp.project_ID ${has(enddatesql)?("and  replaceDate &lt;='"+enddatesql+"'"):""}),0) 
+-IFNULL((select sum(payCapitalSum) from pro_factpay  where project_ID = pp.project_ID  ${has(enddatesql)?("and  payDate &lt;='"+enddatesql+"'"):""} ),0) 
+-IFNULL((SELECT SUM(creditor_sum) FROM pro_creditor WHERE project_ID = pp.project_ID ${has(enddatesql)?(" and  creditor_date &lt;='"+enddatesql+"'"):""}),0) as overSum,
+project_ID
+from pro_project pp
+where (pp.isOver = 1  ${has(enddatesql)?(" and pp.overDate&lt;='"+enddatesql+"'"):""} ) or (pp.finishDate is NULL and ${has(enddatesql)?("  pp.delayEndDate&lt;='"+enddatesql+"'"):" pp.delayEndDate&lt;=now()"})  or pp.finishDate &gt; pp.overDate) as overTable 
+on overTable.project_ID = pp.project_ID
+WHERE 1=1 
+-- AND cc.relationMainName IS NOT NULL 
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY pp.projectName</Sql><Description>SELECT sum((IFNULL(pp.loadSum,0))) AS loadSum,
+sum(IFNULL(overTable.overSum,0)) as overSum,
+pp.projectName,
+pp.`busiClass`,
+cc.relationMainName
+FROM
+   pro_project pp 
+LEFT JOIN pro_apply pa  ON pp.apply_ID = pa.apply_ID
+LEFT JOIN crm_client cc ON cc.client_ID = pa.client_ID
+LEFT JOIN (
+-- 逾期信息总计
+select 
+pp.loadsum - 
+IFNULL((select sum(replaceCapitalSum) from pro_replace where project_ID = pp.project_ID ${has(enddatesql)?("and  replaceDate &lt;='"+enddatesql+"'"):""}),0) 
+-IFNULL((select sum(payCapitalSum) from pro_factpay  where project_ID = pp.project_ID  ${has(enddatesql)?("and  payDate &lt;='"+enddatesql+"'"):""} ),0) 
+-IFNULL((SELECT SUM(creditor_sum) FROM pro_creditor WHERE project_ID = pp.project_ID ${has(enddatesql)?(" and  creditor_date &lt;='"+enddatesql+"'"):""}),0) as overSum,
+project_ID
+from pro_project pp
+where (pp.isOver = 1  ${has(enddatesql)?(" and pp.overDate&lt;='"+enddatesql+"'"):""} ) or (pp.finishDate is NULL and ${has(enddatesql)?("  pp.delayEndDate&lt;='"+enddatesql+"'"):" pp.delayEndDate&lt;=now()"})  or pp.finishDate &gt; pp.overDate) as overTable 
+on overTable.project_ID = pp.project_ID
+WHERE 1=1 
+-- AND cc.relationMainName IS NOT NULL 
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY pp.projectName</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">projectName</IndexFields><TagName>tab_detail</TagName></Item0><Item1><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">projectName</IndexFields><TagName>index_column4</TagName></Item0></Children><Reader Class="SqlReader"><Name>column4</Name><Sql>SELECT sum(((IFNULL(pp.loadSum,0)))) AS loadSum,pp.projectName,pp.`busiClass`,cc.relationMainName
+FROM
+   pro_project pp 
+LEFT JOIN pro_apply pa  ON pp.apply_ID = pa.apply_ID
+LEFT JOIN crm_client cc ON cc.client_ID = pa.client_ID
+WHERE 1=1 
+-- AND cc.relationMainName IS NOT NULL 
+AND  pp.`busiClass`='01'
+${has(enddatesql)?(" and pp.delayBeginDate&lt;='"+enddatesql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+group by pp.projectName
+
+</Sql><Description>SELECT sum(((IFNULL(pp.loadSum,0)))) AS loadSum,pp.projectName,pp.`busiClass`,cc.relationMainName
+FROM
+   pro_project pp 
+LEFT JOIN pro_apply pa  ON pp.apply_ID = pa.apply_ID
+LEFT JOIN crm_client cc ON cc.client_ID = pa.client_ID
+WHERE 1=1 
+-- AND cc.relationMainName IS NOT NULL 
+AND  pp.`busiClass`='01'
+${has(enddatesql)?(" and pp.delayBeginDate&lt;='"+enddatesql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+group by pp.projectName
+
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">projectName</IndexFields><TagName>column4</TagName></Item1><Item2><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">projectName</IndexFields><TagName>index_column5</TagName></Item0></Children><Reader Class="SqlReader"><Name>column5</Name><Sql>SELECT sum(IFNULL(pp.loadSum,0)) AS loadSum,pp.projectName,pp.`busiClass`,cc.relationMainName
+FROM
+   pro_project pp 
+LEFT JOIN pro_apply pa  ON pp.apply_ID = pa.apply_ID
+LEFT JOIN crm_client cc ON cc.client_ID = pa.client_ID
+WHERE 1=1
+--  AND cc.relationMainName IS NOT NULL 
+AND  pp.`busiClass`='02'
+${has(enddatesql)?(" and pp.delayBeginDate&lt;='"+enddatesql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+group by pp.projectName</Sql><Description>SELECT sum(IFNULL(pp.loadSum,0)) AS loadSum,pp.projectName,pp.`busiClass`,cc.relationMainName
+FROM
+   pro_project pp 
+LEFT JOIN pro_apply pa  ON pp.apply_ID = pa.apply_ID
+LEFT JOIN crm_client cc ON cc.client_ID = pa.client_ID
+WHERE 1=1
+--  AND cc.relationMainName IS NOT NULL 
+AND  pp.`busiClass`='02'
+${has(enddatesql)?(" and pp.delayBeginDate&lt;='"+enddatesql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+group by pp.projectName</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">projectName</IndexFields><TagName>column5</TagName></Item2><Item3><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">projectName</IndexFields><TagName>index_column6</TagName></Item0></Children><Reader Class="SqlReader"><Name>column6</Name><Sql>SELECT 
+    -- ((IFNULL(pp.overSum,0))) AS overSum,
+  sum(pp.loadSum-(
+	SELECT IFNULL(SUM(replaceCapitalSum) ,0) replaceCapitalSum from pro_replace WHERE project_ID=pp.project_ID  ${has(enddatesql)?("and  replaceDate &lt;='"+enddatesql+"'"):""} ) -
+	(SELECT IFNULL(SUM(payCapitalSum) ,0) payCapitalSum from pro_factpay where  project_ID=pp.project_ID  ${has(enddatesql)?("and  payDate &lt;='"+enddatesql+"'"):""})
+	-(SELECT IFNULL(SUM(creditor_sum),0) FROM pro_creditor WHERE project_ID = pp.project_ID ${has(enddatesql)?(" and  creditor_date &lt;='"+enddatesql+"'"):""})
+)as overSum,
+     pp.projectName,pp.`busiClass`,cc.relationMainName
+FROM
+   pro_project pp 
+LEFT JOIN pro_apply pa  ON pp.apply_ID = pa.apply_ID
+LEFT JOIN crm_client cc ON cc.client_ID = pa.client_ID
+WHERE 1=1
+-- AND cc.relationMainName IS NOT NULL 
+ AND  pp.`busiClass`='01' 
+-- AND pp.`isOver`=1
+ AND ( (pp.isOver = 1  ${has(enddatesql)?(" pp.overDate &lt;='"enddatesql+"'"):""} ) or (pp.finishDate is NULL and ${has(enddatesql)?("  pp.delayEndDate &lt;='"+enddatesql+"'"):" pp.delayEndDate &lt;= now()"}) or pp.finishDate &gt; pp.overDate)
+-- ${has(enddatesql)?(" and pp.overDate&lt;='"+enddatesql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+group by pp.projectName</Sql><Description>SELECT 
+    -- ((IFNULL(pp.overSum,0))) AS overSum,
+  sum(pp.loadSum-(
+	SELECT IFNULL(SUM(replaceCapitalSum) ,0) replaceCapitalSum from pro_replace WHERE project_ID=pp.project_ID  ${has(enddatesql)?("and  replaceDate &lt;='"+enddatesql+"'"):""} ) -
+	(SELECT IFNULL(SUM(payCapitalSum) ,0) payCapitalSum from pro_factpay where  project_ID=pp.project_ID  ${has(enddatesql)?("and  payDate &lt;='"+enddatesql+"'"):""})
+	-(SELECT IFNULL(SUM(creditor_sum),0) FROM pro_creditor WHERE project_ID = pp.project_ID ${has(enddatesql)?(" and  creditor_date &lt;='"+enddatesql+"'"):""})
+)as overSum,
+     pp.projectName,pp.`busiClass`,cc.relationMainName
+FROM
+   pro_project pp 
+LEFT JOIN pro_apply pa  ON pp.apply_ID = pa.apply_ID
+LEFT JOIN crm_client cc ON cc.client_ID = pa.client_ID
+WHERE 1=1
+-- AND cc.relationMainName IS NOT NULL 
+ AND  pp.`busiClass`='01' 
+-- AND pp.`isOver`=1
+ AND ( (pp.isOver = 1  ${has(enddatesql)?(" pp.overDate &lt;='"enddatesql+"'"):""} ) or (pp.finishDate is NULL and ${has(enddatesql)?("  pp.delayEndDate &lt;='"+enddatesql+"'"):" pp.delayEndDate &lt;= now()"}) or pp.finishDate &gt; pp.overDate)
+-- ${has(enddatesql)?(" and pp.overDate&lt;='"+enddatesql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+group by pp.projectName</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">projectName</IndexFields><TagName>column6</TagName></Item3><Item4><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">projectName</IndexFields><TagName>index_column7</TagName></Item0></Children><Reader Class="SqlReader"><Name>column7</Name><Sql>SELECT 
+-- ((IFNULL(pp.overSum,0))) AS overSum,
+
+    sum(pp.loadSum-(
+	SELECT IFNULL(SUM(replaceCapitalSum) ,0) replaceCapitalSum from pro_replace WHERE project_ID=pp.project_ID  ${has(enddatesql)?("and  replaceDate &lt;='"+enddatesql+"'"):""} ) -
+	(SELECT IFNULL(SUM(payCapitalSum) ,0) payCapitalSum from pro_factpay where  project_ID=pp.project_ID  ${has(enddatesql)?("and payDate &lt;='"+enddatesql+"'"):""} )
+	-(SELECT IFNULL(SUM(creditor_sum),0) FROM pro_creditor WHERE project_ID = pp.project_ID ${has(enddatesql)?(" and  creditor_date &lt;='"+enddatesql+"'"):""}))as overSum,
+pp.projectName,
+pp.`busiClass`,cc.relationMainName
+FROM
+   pro_project pp 
+LEFT JOIN pro_apply pa  ON pp.apply_ID = pa.apply_ID
+LEFT JOIN crm_client cc ON cc.client_ID = pa.client_ID
+WHERE 1=1
+-- AND cc.relationMainName IS NOT NULL 
+ AND  pp.`busiClass`='02'
+-- AND pp.`isOver`=1
+ AND ( (pp.isOver = 1  ${has(enddatesql)?(" and pp.overDate &lt;='"+enddatesql+"'"):""} ) or (pp.finishDate is NULL and ${has(enddatesql)?("  pp.delayEndDate &lt;='"+enddatesql+"'"):" pp.delayEndDate &lt;=now()"}) or pp.finishDate &gt; pp.overDate)
+-- ${has(enddatesql)?(" and pp.overDate&lt;='"+enddatesql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+group by projectName</Sql><Description>SELECT 
+-- ((IFNULL(pp.overSum,0))) AS overSum,
+
+    sum(pp.loadSum-(
+	SELECT IFNULL(SUM(replaceCapitalSum) ,0) replaceCapitalSum from pro_replace WHERE project_ID=pp.project_ID  ${has(enddatesql)?("and  replaceDate &lt;='"+enddatesql+"'"):""} ) -
+	(SELECT IFNULL(SUM(payCapitalSum) ,0) payCapitalSum from pro_factpay where  project_ID=pp.project_ID  ${has(enddatesql)?("and payDate &lt;='"+enddatesql+"'"):""} )
+	-(SELECT IFNULL(SUM(creditor_sum),0) FROM pro_creditor WHERE project_ID = pp.project_ID ${has(enddatesql)?(" and  creditor_date &lt;='"+enddatesql+"'"):""}))as overSum,
+pp.projectName,
+pp.`busiClass`,cc.relationMainName
+FROM
+   pro_project pp 
+LEFT JOIN pro_apply pa  ON pp.apply_ID = pa.apply_ID
+LEFT JOIN crm_client cc ON cc.client_ID = pa.client_ID
+WHERE 1=1
+-- AND cc.relationMainName IS NOT NULL 
+ AND  pp.`busiClass`='02'
+-- AND pp.`isOver`=1
+ AND ( (pp.isOver = 1  ${has(enddatesql)?(" and pp.overDate &lt;='"+enddatesql+"'"):""} ) or (pp.finishDate is NULL and ${has(enddatesql)?("  pp.delayEndDate &lt;='"+enddatesql+"'"):" pp.delayEndDate &lt;=now()"}) or pp.finishDate &gt; pp.overDate)
+-- ${has(enddatesql)?(" and pp.overDate&lt;='"+enddatesql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+group by projectName</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">projectName</IndexFields><TagName>column7</TagName></Item4><Item5><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">projectName</IndexFields><TagName>index_column8</TagName></Item0></Children><Reader Class="SqlReader"><Name>column8</Name><Sql>SELECT 
+sum(ifnull(pr.replaceCapitalSum,0)) as replaceCapitalSum,
+projectName 
+FROM
+   pro_project pp 
+LEFT JOIN 
+(select sum(replaceCapitalSum) replaceCapitalSum ,project_ID from pro_replace where 1=1 ${has(enddatesql)?(" and replaceDate&lt;='"+enddatesql+"'"):""}  group by project_ID) as pr on pr.project_ID = pp.project_id
+WHERE 1=1  
+--  AND  pp.`busiClass`='01' 
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY projectName</Sql><Description>SELECT 
+sum(ifnull(pr.replaceCapitalSum,0)) as replaceCapitalSum,
+projectName 
+FROM
+   pro_project pp 
+LEFT JOIN 
+(select sum(replaceCapitalSum) replaceCapitalSum ,project_ID from pro_replace where 1=1 ${has(enddatesql)?(" and replaceDate&lt;='"+enddatesql+"'"):""}  group by project_ID) as pr on pr.project_ID = pp.project_id
+WHERE 1=1  
+--  AND  pp.`busiClass`='01' 
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY projectName</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">projectName</IndexFields><TagName>column8</TagName></Item5><Item6><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">projectName</IndexFields><TagName>index_column9</TagName></Item0></Children><Reader Class="SqlReader"><Name>column9</Name><Sql>select 
+ (IFNULL( sum(pr.replaceCapitalSum),0)-IFNULL(sum(prd.returnCapitalSum),0)) as remainSum,
+ pp.projectName
+from pro_project pp
+LEFT JOIN 
+(select sum(replaceCapitalSum) replaceCapitalSum ,project_ID from pro_replace where 1=1 ${has(enddatesql)?(" and replaceDate&lt;='"+enddatesql+"'"):""}  group by project_ID) as pr on pr.project_ID = pp.project_id
+LEFT JOIN 
+( select sum(returnCapitalSum) returnCapitalSum , projectID from pro_returndetail  where 1=1${has(enddatesql)?(" and returnDate&lt;='"+enddatesql+"'"):""}  group by projectID) as prd on prd.projectID = pp.project_ID
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+group by pp.projectName
+</Sql><Description>select 
+ (IFNULL( sum(pr.replaceCapitalSum),0)-IFNULL(sum(prd.returnCapitalSum),0)) as remainSum,
+ pp.projectName
+from pro_project pp
+LEFT JOIN 
+(select sum(replaceCapitalSum) replaceCapitalSum ,project_ID from pro_replace where 1=1 ${has(enddatesql)?(" and replaceDate&lt;='"+enddatesql+"'"):""}  group by project_ID) as pr on pr.project_ID = pp.project_id
+LEFT JOIN 
+( select sum(returnCapitalSum) returnCapitalSum , projectID from pro_returndetail  where 1=1${has(enddatesql)?(" and returnDate&lt;='"+enddatesql+"'"):""}  group by projectID) as prd on prd.projectID = pp.project_ID
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+group by pp.projectName
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">projectName</IndexFields><TagName>column9</TagName></Item6></Children></NodeSource></jatools>

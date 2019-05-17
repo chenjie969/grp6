@@ -1,0 +1,634 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<script type="text/javascript">
+//console.log(444, $("#fundTypeList").val())
+$("body").on("keyup", "#fundNameTree", function() {
+			var pbankSortID = $("#fundID").val();
+			var bankSortName = $("#fundNameTree").val();
+			var busiClass = $("#busiClass").val();
+			$.ajax({type:'POST',url:'/crm/cooperation/selectAllFundListTree',data:JSON.stringify({"bankSortName":bankSortName,"pbanksortid":pbankSortID,"banksortid":pbankSortID,"busiClass":busiClass, "fundType":"02"}),contentType:'application/json; charset=UTF-8',dataType:'json',
+				success:function(data){
+					$("#fundNameTree").selectTreeWidgets({
+						width : "46%",//设置控件宽度
+						multiple : false,//是否多选
+						data : data.obj//数据源
+					});
+				}
+			});
+    })
+if($("#fundTypeList").val() == "41035961f6674ebcb34139c0e68bbe83"){
+	var pbankSortID = "2b648b78f8914afaa8c3432fa5a290a6"//委贷只有国企类型
+	var busiClass = $("#busiClass").val();
+	//获取资金方子机构下拉树;
+	$.ajax({type:'POST',url:'/crm/cooperation/selectAllFundListTree',data:JSON.stringify({"pbanksortid":pbankSortID,"banksortid":pbankSortID,"busiClass":busiClass, "fundType":"02"}),contentType:'application/json; charset=UTF-8',dataType:'json',
+		success:function(data){
+			$("#fundNameTree").selectTreeWidgets({
+				width : "46%",//设置控件宽度
+				multiple : false,//是否多选
+				data : data.obj//数据源
+			});
+		}
+	});
+}
+if($("#cooperationTree").attr("datavalue") == '97af005f8168488790444432945410b8' || 
+	   $("#cooperationTree").attr("datavalue") == 'df86c449101c46768b174868923d0f85' ||
+	   $("#cooperationTree").attr("datavalue") ==  'f3aa8c805ce44255adb5d8a48c0bd72b' ||
+	   $("#cooperationTree").attr("datavalue") ==  'ff9e06eb0b2049afa60214c168986cab' || 
+	   $("#cooperationTree").attr("datavalue") ==  '47ebc673aeda4551908b8f91d710e281' ||
+	   $("#cooperationTree").attr("datavalue") ==  'cc505b11fb3f4e7fb0a0c085eaa50ad3' ||
+	   $("#cooperationTree").attr("datavalue") ==  '1066ead43c16455587fc191aba8a566d' || 
+	   $("#cooperationTree").attr("datavalue") ==  '6128255c86614f81b349fa5377ace83a' ||
+	   $("#cooperationTree").attr("datavalue") ==  '3b697f6f154c491c9bfff5a36ff9c174' ||
+	   $("#cooperationTree").attr("datavalue") ==  '2b648b78f8914afaa8c3432fa5a290a6' || 
+	   $("#cooperationTree").attr("datavalue") ==  'e321491c2c42483bbac0dc711638203f' ||
+	   $("#cooperationTree").attr("datavalue") ==  'c4f86026656a455498fe9e25b72bdc84' ||
+	   $("#cooperationTree").attr("datavalue") ==  '8e8a3b4170634e87ab016fa9b47b2265'){
+	var pbankSortID = $("#cooperationTree").attr("datavalue");//获取合作机构;
+	//获取合作机构子机构下拉树;
+	$.ajax({type:'POST',url:'/crm/cooperation/selectAllCooperationListTree',data:JSON.stringify({"pbanksortid":pbankSortID}),contentType:'application/json; charset=UTF-8',dataType:'json',
+		success:function(data){	
+			$("#subBankTree").selectTreeWidgets({
+				width : "46%",//设置控件宽度
+				multiple : false,//是否多选
+				data : data.obj//数据源
+			});
+		}
+	});
+}
+$(".selectList").change(function(selectID){	
+	//console.log($(this).attr("id"))
+	var busiClass = $("#busiClass").val();
+	var selectID=$(this).attr("id");	//获取当前下拉框的id;	
+	tool.getSelectText(selectID);
+	var type = document.getElementById(selectID);     
+	var pindex  = type.selectedIndex;
+	var pValue  =  type.options[pindex].value;　
+　	var pText = type.options[pindex].text;
+　	var fundArray=new Array("银行","个人","非银行");
+　	if($.inArray(pText, fundArray)!=-1){//如果是资金方类型下拉框被触动,则联动触发资金方下拉树
+　		$.zjm_projectTracking.initfundChineseTree(pValue, busiClass);
+　	}
+　	if(selectID == "fundTypeList"){
+　		var pbankSortID = '';
+	    //$("#fundChineseTree").val("");
+	　	if(pValue !== null && pValue !== undefined && pValue !== ''){
+	　		   if('6bfe4484ca634faa9ceb3f7648547842'==pValue){//银行
+	　			   pbankSortID = 'e7e282ee61b249eba0f64161fee6ff45';
+	　		   }else if('9137331cd9c7455dbe3d3c0a662b06a6'==pValue){//个人
+	　			   pbankSortID = '819ec5cb4d2640348dc3d06a78d4f08c';
+	　		   }else if('41035961f6674ebcb34139c0e68bbe83'==pValue){//非银行
+	　			   pbankSortID = '49618632db614f99a7e45c4f09c50c18';
+	　		   }
+	　		   //获取资金方下拉树;
+	　			$.ajax({type:'POST',url:'/crm/cooperation/selectAllFundListTree',data:JSON.stringify({"pbanksortid":pbankSortID,"banksortid":pbankSortID,"busiClass":busiClass,"fundType":"01"}),contentType:'application/json; charset=UTF-8',dataType:'json',
+	　				success:function(data){
+	　					$("#fundChineseTree").selectTreeWidgets({
+	　						width : "46%",//设置控件宽度
+	　						multiple : false,//是否多选
+	　						data : data.obj//数据源
+	　					});
+	　				}
+	　			});
+	　	}
+	　　    if('41035961f6674ebcb34139c0e68bbe83'==pValue){
+	　　    	 $(".fundNameGroup").children("div").remove();
+	　　    	 $(".fundNameGroup").append(
+	　　    			 "<div class='form-group col-sm-8 '> "+
+					 "	<div class='col-sm-6 col-md-6 input-group fundNameTree'> "+
+					 "	     <input  type='text'  class='form-control validate[required]' autoField='fundNameID'   id='fundNameTree' click='fundNameTreeClick()' value='' dataValue='' name='fundName'   /> "+
+					 "	     <span class='input-group-addon'> "+
+					 "		   <i class='icon-caret-down bigger-110'></i> "+
+					 "	     </span> "+
+					 "   </div> "+
+					 "</div> "
+	　　    			 )
+      			var pbankSortID = $("#fundID").val();//获取资金方名称;
+      			var busiClass = $("#busiClass").val();
+				//获取资金方子机构下拉树;
+				$.ajax({type:'POST',url:'/crm/cooperation/selectAllFundListTree',data:JSON.stringify({"pbanksortid":pbankSortID,"banksortid":pbankSortID,"busiClass":busiClass,"fundType":"02"}),contentType:'application/json; charset=UTF-8',dataType:'json',
+					success:function(data){
+						$("#fundNameTree").selectTreeWidgets({
+							width : "46%",//设置控件宽度
+							multiple : false,//是否多选
+							data : data.obj//数据源
+						});
+					}
+				});
+	　　    }else{
+	　　    	 $(".fundNameGroup").children("div").remove();
+	　　    	 $(".fundNameGroup").append(
+	　　    			 "<div class='col-md-10'>"+
+		             "	<input type='text' id='fundName' name='fundName'  class='col-md-5 col-sm-6 validate[required,maxSize[50]]' />"+
+   				 "</div>"
+	　　    			 )
+	　　    }
+　    }
+　
+});
+</script> 
+<div class="modal fade bs-example-modal-sm" id="projectAfterEdit_page" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">修改</h4>
+      </div>
+      <div class="modal-body">
+		<form class="form-horizontal row" role="form" id="projectAfter_form" >
+           	<input type="hidden" id="project_ID" class="" name="project_ID" value="${project.project_ID}">
+           	<input type="hidden" id="apply_ID" class="" name="apply_ID" value="${project.apply_ID}">
+           	<input type="hidden" id="applyDetail_ID" class="" name="applyDetail_ID" value="${project.applyDetail_ID}">
+           	<input type="hidden" id="busiClass" name="busiClass" value="${project.busiClass}">
+           	<%-- <input type="hidden" id="projectName" class="" name="projectName" value="${project.projectName}"> --%>
+           	<div class="form-group col-sm-12">
+				<label class="col-sm-2 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>项目名称： </label>
+				<label class="col-sm-10 grey">
+                        <%-- ${project.projectName} --%>
+                        <input name="projectName" value="${project.projectName}" type="text" class="validate[required]"/>
+                </label>
+			</div>
+           <!-- <div class="form-group col-sm-6">
+			   			<label class="col-sm-4 control-label no-padding-right" for="form-input" style="line-height:28px;">&nbsp;</label>
+           </div> -->
+           	<div class="form-group col-sm-6">
+                  <label class="col-sm-4 control-label no-padding-right"><i class="icon-asterisk orange"></i>报送机构： </label>
+                  <label class="col-sm-8 grey">
+                     	 <input type="hidden" id="oprationCompanyName" class="oprationCompanyName" name="oprationCompanyName" value="${apply.oprationCompanyName}">
+						<select id="oprationCompanyList" class="col-sm-12  validate[required] selectList"  name="oprationCompanyID"  >		
+								<option value="">&nbsp;请选择</option>
+								<c:forEach items="${oprationCompanyList}" var="oprationCompany">
+									<option value="${oprationCompany.dicTypeID}" <c:if test="${apply.oprationCompanyID eq oprationCompany.dicTypeID}"> selected="selected"</c:if>>${oprationCompany.dicTypeName}</option>
+								</c:forEach>
+					    </select>
+                  </label>
+              </div>
+           	<div class="form-group col-sm-6">
+                  <label class="col-sm-4 control-label no-padding-right">
+           		<c:if test="${project.busiClass =='01'}"><i class="icon-asterisk orange"></i></c:if>承贷机构： </label>
+                  <label class="col-sm-8 grey">
+                     	 <c:if test="${project.busiClass =='01'}">
+                     	 <input type="hidden" id="guarantyOrgName" class="guarantyOrgName" name="guarantyOrgName" value="${apply.guarantyOrgName}">
+							<select id="guarantyOrgList" class="col-sm-12 validate[required] selectList"  name="guarantyOrgID"  >		
+									<option value="">&nbsp;请选择</option>
+									<c:forEach items="${guarantyOrgList}" var="guarantyOrg">
+										<option value="${guarantyOrg.dicTypeID}" <c:if test="${apply.guarantyOrgID eq guarantyOrg.dicTypeID}"> selected="selected"</c:if>>${guarantyOrg.dicTypeName}</option>
+									</c:forEach>
+						    </select>
+					    </c:if>
+					     <c:if test="${project.busiClass =='02'}">
+							<select id="guarantyOrgList" class="col-sm-12"  name="guarantyOrgID"  >		
+									<option value="">&nbsp;请选择</option>
+									<c:forEach items="${guarantyOrgList}" var="guarantyOrg">
+										<option value="${guarantyOrg.dicTypeID}" <c:if test="${apply.guarantyOrgID eq guarantyOrg.dicTypeID}"> selected="selected"</c:if>>${guarantyOrg.dicTypeName}</option>
+									</c:forEach>
+						    </select>
+					    </c:if>
+                  </label>
+              </div>
+           	<div class="form-group col-sm-6">
+                  <label class="col-sm-4 control-label no-padding-right"><i class="icon-asterisk orange"></i>属地划分： </label>
+                  <label class="col-sm-8 grey">
+                     	 <input type="hidden" id="attributionName" class="attributionName" name="attributionName" value="${apply.attributionName}">
+						<select id="attributionList" class="col-sm-12 validate[required] selectList"  name="attributionID"  >		
+								<option value="">&nbsp;请选择</option>
+								<c:forEach items="${attributionList}" var="attribution">
+									<option value="${attribution.dicTypeID}" <c:if test="${apply.attributionID eq attribution.dicTypeID}"> selected="selected"</c:if>>${attribution.dicTypeName}</option>
+								</c:forEach>
+					    </select>
+                  </label>
+              </div>
+           	<div class="form-group col-sm-6">
+                  <label class="col-sm-4 control-label no-padding-right"><i class="icon-asterisk orange"></i>承贷地区： </label>
+                  <label class="col-sm-8 grey">
+                     	 <input type="hidden" id="hostAreaName" class="hostAreaName" name="hostAreaName" value="${apply.hostAreaName}">
+						<select id="hostAreaList" class="col-sm-12 validate[required] selectList"  name="hostAreaID"  >		
+								<option value="">&nbsp;请选择</option>
+								<c:forEach items="${hostAreaList}" var="hostArea">
+									<option value="${hostArea.dicTypeID}" <c:if test="${apply.hostAreaID eq hostArea.dicTypeID}"> selected="selected"</c:if>>${hostArea.dicTypeName}</option>
+								</c:forEach>
+					    </select>
+                  </label>
+              </div>
+           <%-- 	<div class="form-group col-sm-6">
+                <label class="col-md-4 control-label no-padding-right" for="form-field-1"><i class="icon-asterisk orange"></i>业务品种： </label>
+		        <div class="col-md-8">
+					<div class="  input-group busiSortDicTree">
+							<input  type="text"  class="form-control" autoField="busiTypeID"   id="busiSortDicTree" value="${applyDetail.busiTypeName}" dataValue="${applyDetail.busiTypeID}" name="busiTypeName"  readonly="readonly"/>
+							<span class="input-group-addon ">
+								<i class="icon-caret-down bigger-110"></i>
+							</span>
+				    </div>
+				</div>
+              </div> --%>
+               <%-- <div class="form-group col-sm-6">
+			   			<label class="col-sm-4 control-label no-padding-right" for="form-input" style="line-height:28px;">&nbsp;</label>
+                </div>--%>
+             <div class="form-group col-sm-6">
+				<label class="col-sm-4 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>项目金额： </label>
+				<div class="col-sm-8">
+					<input  type="text" class="col-sm-8  validate[required,maxSize[18]]"  name="loadSum" id="loadSum"  value="<fmt:formatNumber value="${project.loadSum}" pattern="###.######"/>"/>
+				   <span class="midden col-sm-4 " style="line-height:28px;">万元</span>
+				</div>
+			</div>
+             <%-- <div class="form-group col-sm-6">
+				<label class="col-sm-4 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>余额： </label>
+				<div class="col-sm-8">
+					<input  type="text" class="col-sm-8  validate[required,maxSize[18]]"  name="guarantySum" id="guarantySum" value="<fmt:formatNumber value="${project.guarantySum}" pattern="###.######"/>"/>
+				   <span class="midden col-sm-4 " style="line-height:28px;">万元</span>
+				</div>
+			</div> --%>
+             <div class="form-group col-sm-6">
+				<label class="col-sm-4 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>期限： </label>
+				<div class="col-md-8 ">
+	                  <input type="text" id="periodMonth" class="validate[required,maxSize[6],custom[integer]]" readonly="readonly" name="periodMonth" value="${project.periodMonth}" style="width:4em;" />
+	                   &nbsp;个月&nbsp;
+	                  <input type="text" id="periodDay" class="validate[required,maxSize[6],custom[integer]]" readonly="readonly" name="periodDay" value="${project.periodDay}" style="width:4em;" />
+	                   &nbsp;天&nbsp;
+	            </div>
+			</div>
+			<!-- <div class="form-group col-sm-6">
+			   		<label class="col-sm-4 control-label no-padding-right" for="form-input" style="line-height:28px;">&nbsp;</label>
+            </div> -->
+          
+         <!--  <div class="form-group col-sm-6">
+				<label class="col-sm-4 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>担保费率： </label>
+				<div class="col-sm-8"> -->
+					<input  class="col-sm-8  validate[required,maxSize[6]]" type="hidden"  name="guarantyRate" id="guarantyRate"  value="<fmt:formatNumber value="${project.guarantyRate}" pattern="###.######"/>"/>
+			<!-- 	   <span class="midden col-sm-4 " style="line-height:28px;">%</span>
+				</div>
+			</div> -->
+			 <div class="form-group col-sm-6">
+				<label class="col-sm-4 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>贷款(委贷)利率： </label>
+				<div class="col-sm-8">
+					<input  type="text" class="col-sm-8  validate[required,maxSize[8]]"  name="bankRate" id="bankRate"  value="<fmt:formatNumber value="${project.bankRate}" pattern="###.######"/>"/>
+				   <span class="midden col-sm-4 " style="line-height:28px;">%</span>
+				</div>
+			</div>
+			 <div class="form-group col-sm-6">
+				<label class="col-sm-4 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>评审费率： </label>
+				<div class="col-sm-8">
+					<input  type="text" class="col-sm-8  validate[required,maxSize[6]]"  name="reviewRate" id="reviewRate" value="<fmt:formatNumber value="${project.reviewRate}" pattern="###.######"/>"/>
+				   <span class="midden col-sm-4 " style="line-height:28px;">‰</span>
+				</div>
+			</div>
+			
+			 <div class="form-group col-sm-6">
+				<label class="col-sm-4 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>金融服务费率： </label>
+				<div class="col-sm-8">
+					<input  type="text" class="col-sm-8  validate[required,maxSize[6]]"  name="serviceRate" id="serviceRate" value="<fmt:formatNumber value="${project.serviceRate}" pattern="###.######"/>"/>
+				   <span class="midden col-sm-4 " style="line-height:28px;">%</span>
+				</div>
+			</div>
+			 <div class="form-group col-sm-6">
+				<label class="col-sm-4 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>罚息利率： </label>
+				<div class="col-sm-8">
+					<input  type="text" class="col-sm-8  validate[required,maxSize[6]]"  name="punishRate" id="punishRate"  value="<fmt:formatNumber value="${project.punishRate}" pattern="###.######"/>"/>
+				   <span class="midden col-sm-4 " style="line-height:28px;">%</span>
+				</div>
+			</div>
+			
+          
+          <div class="form-group col-sm-6">
+			   			<label class="col-sm-4 control-label no-padding-right" for="form-input" style="line-height:28px;">&nbsp;</label>
+          </div>
+          
+      <%--     <div class="form-group ">
+                 <label class="col-md-2 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>委托担保（委贷）合同号： </label>
+                 <div class="col-sm-10">
+						<textarea class="col-sm-10 limited   validate[required,maxSize[2000]]" rows="5"  name="dcontractCode" id="dcontractCode" >${applyDetail.dcontractCode}</textarea>							
+					    <span class="col-sm-4 light-grey col-sm-push-8">限制输入字数2000个</span>
+					</div>
+			</div> --%>
+          <div class="form-group ">
+                 <label class="col-md-2 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>借款合同号： </label>
+                 <div class="col-sm-10">
+						<textarea class="col-sm-10 limited   validate[maxSize[required,2000]]" rows="5"  name="jcontractCode" id="jcontractCode" >${applyDetail.jcontractCode}</textarea>							
+					    <span class="col-sm-4 light-grey col-sm-push-8">限制输入字数2000个</span>
+					</div>
+			</div>
+             
+          <div class="form-group ">
+                 <label class="col-md-2 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>保证合同号： </label>
+                 <div class="col-sm-10">
+						<textarea class="col-sm-10 limited   validate[maxSize[required,2000]]" rows="5"  name="bcontractCode" id="bcontractCode" >${applyDetail.bcontractCode}</textarea>							
+					    <span class="col-sm-4 light-grey col-sm-push-8">限制输入字数2000个</span>
+					</div>
+			</div>
+           <%--  <div class="form-group col-sm-6">
+                  <label class="col-sm-4 control-label no-padding-right">资金方类型： </label>
+                  <label class="col-sm-8 grey">
+                     	 <input type="hidden" id="fundTypeName" class="" name="fundType" value="${project.fundTypeName}">
+						<select id="fundTypeList" class="col-sm-12 validate[required] selectList"  name="fundTypeID"  >		
+								<option value="">&nbsp;请选择</option>
+								<c:forEach items="${fundTypeList}" var="fundType">
+									<option value="${fundType.dicTypeID}" <c:if test="${project.fundTypeID eq fundType.dicTypeID}"> selected="selected"</c:if>>${fundType.dicTypeName}</option>
+								</c:forEach>
+					    </select>
+                  </label>
+              </div> --%>
+              <div class="form-group col-sm-6">
+                <label class="col-md-4 control-label no-padding-right" for="form-field-1"><i class="icon-asterisk orange"></i>业务品种： </label>
+		        <div class="col-md-8">
+					<div class="  input-group busiSortDicTree">
+							<input  type="text"  class="form-control" autoField="busiTypeID" style="line-height:28px;"  id="busiSortDicTree" value="${project.busiTypeName}" dataValue="${project.busiTypeID}" name="busiTypeName"  readonly="readonly"/>
+							<span class="input-group-addon ">
+								<i class="icon-caret-down bigger-110"></i>
+							</span>
+				    </div>
+				</div>
+              </div>
+               <div class="form-group col-sm-6">
+                  <label class="col-sm-4 control-label no-padding-right"><i class="icon-asterisk orange"></i>资金来源： </label>
+                  <label class="col-sm-8 grey">
+						<select id="fundSource" class="col-sm-12  validate[required] selectList"  name="fundSource"  >		
+								<option value="">&nbsp;请选择</option>
+								<c:forEach items="${fundSourceList}" var="fundSourceList">
+									<option value="${fundSourceList.dicTypeName}" <c:if test="${project.fundSource eq fundSourceList.dicTypeName}"> selected="selected"</c:if>>${fundSourceList.dicTypeName}</option>
+								</c:forEach>
+					    </select>
+                  </label>
+              </div>
+              <div class="form-group col-sm-6">
+                  <label class="col-sm-4 control-label no-padding-right"><i class="icon-asterisk orange"></i>资金方类型： </label>
+                  <label class="col-sm-8 grey">
+                     	 <input type="hidden" id="fundTypeName" class="" name="fundType" value="${apply.fundType}">
+						<select id="fundTypeList" class="col-sm-12  selectList  validate[required]"  name="fundTypeID"  >		
+								<option value="">&nbsp;请选择</option>
+								<c:forEach items="${fundTypeList}" var="fundType">
+									<option value="${fundType.dicTypeID}" <c:if test="${apply.fundTypeID eq fundType.dicTypeID}"> selected="selected"</c:if>>${fundType.dicTypeName}</option>
+								</c:forEach>
+					    </select>
+                  </label>
+              </div>
+              
+             <!-- <div class="form-group col-sm-6">
+			   			<label class="col-sm-4 control-label no-padding-right" for="form-input" style="line-height:28px;">&nbsp;</label>
+             </div> -->
+            <div class="form-group col-sm-6">
+	            <label class="col-md-4 control-label no-padding-right" for="form-field-1"><i class="icon-asterisk orange"></i>资金方名称： </label>
+		        <div class="col-md-6">
+					<div class="  input-group fundChineseTree">
+							<input  type="text"  class="form-control validate[required]" autoField="fundID" style="line-height:28px;"  id="fundChineseTree" value="${apply.fundChinese}" dataValue="${apply.fundID}" name="fundChinese"  readonly="readonly"/>
+							<span class="input-group-addon ">
+								<i class="icon-caret-down bigger-110"></i>
+							</span>
+				    </div>
+				</div>
+             </div>
+             <c:if test="${apply.fundTypeID eq '41035961f6674ebcb34139c0e68bbe83'}">
+	             <div class='form-group col-sm-12 fundNameGroup'> 
+				 	<label class="col-sm-2 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>资金方子机构： </label>
+					<div class='col-sm-4 col-md-4 input-group fundNameTree'> 
+				 	     <input  type='text'  class='form-control validate[required]' autoField='fundNameID'   id='fundNameTree' click='fundNameTreeClick()' value='${apply.fundName}' dataValue='' name='fundName'  readonly='readonly' /> 
+				 	     <span class='input-group-addon'> 
+				 		   <i class='icon-caret-down bigger-110'></i> 
+				 	     </span> 
+				    </div> 
+				 </div> 
+             </c:if>
+             <c:if test="${apply.fundTypeID eq '6bfe4484ca634faa9ceb3f7648547842'}">
+	             <div class="form-group col-sm-12 fundNameGroup">
+					<label class="col-sm-2 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>资金方子机构： </label>
+					<div class="col-sm-10">
+						<input  type="text" class=" col-sm-10 validate[required,maxSize[50]]"  name="fundName" id="fundName" value="${apply.fundName}" />
+					</div>
+				 </div>
+             </c:if>
+             <c:if test="${apply.fundTypeID eq '9137331cd9c7455dbe3d3c0a662b06a6'}">
+	             <div class="form-group col-sm-12 fundNameGroup">
+					<label class="col-sm-2 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>资金方子机构： </label>
+					<div class="col-sm-10">
+						<input  type="text" class=" col-sm-10 validate[required,maxSize[50]]"  name="fundName" id="fundName" value="${apply.fundName}" />
+					</div>
+				 </div>
+             </c:if>
+           	<%--  <div class="space-4"></div>
+	         <div class="form-group col-sm-12">
+							<label class="col-sm-2 control-label no-padding-right" for="form-input">是否敏感债权人： </label>                            
+							<div class="radio col-sm-6">
+	                            <label style="margin-top:-5px;">
+	                                <input type="radio" name="isSensitiveCreditor" value="1" class="ace" <c:if test="${project.isSensitiveCreditor eq 1}"> checked="checked"</c:if>>
+	                                <span class="lbl">是</span>
+	                            </label>
+	                            <label style="margin-top:-5px;">
+	                                <input type="radio" name="isSensitiveCreditor" value="0" class="ace" <c:if test="${project.isSensitiveCreditor eq 0}"> checked="checked"</c:if>>
+	                                <span class="lbl">否</span>
+	                            </label>
+	                        </div>
+						</div> --%>
+			<%--  <div class="space-4"></div>
+	         <div class="form-group ">
+	         	<label class="col-md-2 control-label no-padding-right" for="form-field-1">敏感债权人數： </label>
+					<div class="col-md-10">
+		            	<input type="text" id="sensitiveCreditorNumber" name="sensitiveCreditorNumber" value="${project.sensitiveCreditorNumber}"  class="col-md-2 col-lg-1 validate[maxSize[6]]" />
+					</div>
+	         </div> --%>
+           
+           	<div class="form-group col-sm-6">
+                <label class="col-md-4 control-label no-padding-right" for="form-field-1"><i class="icon-asterisk orange"></i>合作机构： </label>
+		        <div class="col-md-8">
+					<div class="  input-group cooperationTree">
+							<input  type="text"  class="form-control" autoField="bankID" style="line-height:28px;"   id="cooperationTree" value="${project.bankName}" dataValue="${project.bankID}" name="bankName"  readonly="readonly"/>
+							<span class="input-group-addon ">
+								<i class="icon-caret-down bigger-110"></i>
+							</span>
+				    </div>
+				</div>
+              </div>  
+             <div class="form-group col-sm-12 subBankGroup">
+				<label class="col-sm-2 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>合作子机构（或个人）：</label>
+				<c:choose>
+                   <c:when test="${project.bankID == '97af005f8168488790444432945410b8' || 
+                   				   project.bankID == 'df86c449101c46768b174868923d0f85' ||
+                   				   project.bankID == 'f3aa8c805ce44255adb5d8a48c0bd72b' ||
+                   				   project.bankID == 'ff9e06eb0b2049afa60214c168986cab' || 
+                   				   project.bankID == '47ebc673aeda4551908b8f91d710e281' ||
+                   				   project.bankID == 'cc505b11fb3f4e7fb0a0c085eaa50ad3' ||
+                   				   project.bankID == '1066ead43c16455587fc191aba8a566d' || 
+                   				   project.bankID == '6128255c86614f81b349fa5377ace83a' ||
+                   				   project.bankID == '3b697f6f154c491c9bfff5a36ff9c174' ||
+                   				   project.bankID == '2b648b78f8914afaa8c3432fa5a290a6' || 
+                   				   project.bankID == 'e321491c2c42483bbac0dc711638203f' ||
+                   				   project.bankID == 'c4f86026656a455498fe9e25b72bdc84' ||
+                   				   project.bankID == '8e8a3b4170634e87ab016fa9b47b2265' }">  
+                   		 <div class="col-md-6">
+						 <div class="col-sm-6 col-md-6 input-group subBankTree"> 
+						 	     <input  type="text"  class="form-control validate[required]" autoField="subBankID"   id="subBankTree"  value="${project.subBankName}" dataValue="" name="subBank" readonly="readonly" /> 
+						 	     <span class="input-group-addon"> 
+						 		   <i class="icon-caret-down bigger-110"></i> 
+						 	     </span> 
+						    </div> 
+						 </div>     
+                   </c:when>
+                   <c:otherwise>  
+	                   	<div class="col-sm-10">
+							<input  type="text" class="col-sm-10 validate[required,maxSize[50]]"  name="subBankName" id="subBankName" value="${project.subBankName}" />
+						</div>
+                   </c:otherwise>
+                </c:choose>  
+				
+			</div>   
+                
+           <div class="space-4"></div>
+           <div class="form-group">
+				<label class="col-md-2 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>结息方式： </label>
+				<div class="col-md-6">
+				       <input type="hidden" id="interestMethodName" class="interestMethodName" name="interestMethodName" value="">
+						<select id="interestMethodList" class="col-sm-6 col-md-6  validate[required] selectList"  name="interestMethodID"  >		
+								<option value="">&nbsp;请选择</option>
+								<c:forEach items="${interestMethodList}" var="interestMethod">
+									<option value="${interestMethod.dicTypeID}" <c:if test="${project.interestMethodID eq interestMethod.dicTypeID}">selected</c:if>>${interestMethod.dicTypeName}</option>
+								</c:forEach>
+					    </select>
+				</div>
+          </div>   
+                
+                
+           	<div class="form-group col-sm-6">
+                <label class="col-md-4 control-label no-padding-right" for="form-field-1"><i class="icon-asterisk orange"></i>A角： </label>
+		        <div class="col-md-8">
+					<div class="  input-group amanNameTree">
+							<input  type="text"  class="form-control validate[required]" autoField="amanID" style="line-height:28px;"  id="amanNameTree" value="${project.amanName}" dataValue="${project.amanID}" name="amanName"  readonly="readonly"/>
+							<span class="input-group-addon ">
+								<i class="icon-caret-down bigger-110"></i>
+							</span>
+				    </div>
+				</div>
+              </div>
+           	<div class="form-group col-sm-6">
+                <label class="col-md-4 control-label no-padding-right" for="form-field-1"><i class="icon-asterisk orange"></i>B角： </label>
+		        <div class="col-md-8">
+					<div class="  input-group bmanNameTree">
+							<input  type="text"  class="form-control validate[required]" autoField="bmanID" style="line-height:28px;"   id="bmanNameTree" value="${project.bmanName}" dataValue="${project.bmanID}" name="bmanName"  readonly="readonly"/>
+							<span class="input-group-addon ">
+								<i class="icon-caret-down bigger-110"></i>
+							</span>
+				    </div>
+				</div>
+              </div>
+			<div class="form-group col-sm-6">
+                <label class="col-md-4 control-label no-padding-right" for="form-field-1"><i class="icon-asterisk orange"></i>上报日期： </label>
+		        <div class="col-md-8">
+					<div class="input-group " style="float:left;">
+						<input  type="text" class="form-control date-picker   validate[required,custom[date]]" name="reportDate" value="<fmt:formatDate value="${project.reportDate}" type="time" timeStyle="full" pattern="yyyy-MM-dd"/>" id="id-date-picker-1" data-date-format="yyyy-mm-dd" />
+						<span class="input-group-addon">
+							<i class="icon-calendar bigger-110"></i>
+						</span>
+					</div>
+				</div>
+           </div>
+			<div class="form-group col-sm-6">
+                <label class="col-md-4 control-label no-padding-right" for="form-field-1"><i class="icon-asterisk orange"></i>起始日期： </label>
+		        <div class="col-md-8">
+					<div class="input-group " style="float:left;">
+						<input  type="text" class="form-control date-picker   validate[required,custom[date]]" name="loadBeginDate" value="<fmt:formatDate value="${project.loadBeginDate}" type="time" timeStyle="full" pattern="yyyy-MM-dd"/>" id="id-date-picker-1" data-date-format="yyyy-mm-dd" />
+						<span class="input-group-addon">
+							<i class="icon-calendar bigger-110"></i>
+						</span>
+					</div>
+				</div>
+           </div>
+           	<div class="form-group col-sm-6">
+                <label class="col-md-4 control-label no-padding-right" for="form-field-1"><i class="icon-asterisk orange"></i>结束日期： </label>
+		        <div class="col-md-8">
+					<div class="input-group " style="float:left;">
+						<input  type="text" class="form-control date-picker   validate[required,custom[date]]" name="loadEndDate" value="<fmt:formatDate value="${project.loadEndDate}" type="time" timeStyle="full" pattern="yyyy-MM-dd"/>" id="id-date-picker-2" data-date-format="yyyy-mm-dd" />
+						<span class="input-group-addon">
+							<i class="icon-calendar bigger-110"></i>
+						</span>
+					</div>
+				</div>
+           </div>	
+      <%--      <div class="form-group col-sm-6">
+                <label class="col-md-4 control-label no-padding-right" for="form-field-1"><i class="icon-asterisk orange"></i>代偿到期日期： </label>
+		        <div class="col-md-8">
+					<div class="input-group " style="float:left;">
+						<input  type="text" class="form-control date-picker   validate[required,custom[date]]" name="replaceOverDate" value="<fmt:formatDate value="${project.replaceOverDate}" type="time" timeStyle="full" pattern="yyyy-MM-dd"/>" id="id-date-picker-2" data-date-format="yyyy-mm-dd" />
+						<span class="input-group-addon">
+							<i class="icon-calendar bigger-110"></i>
+						</span>
+					</div>
+				</div>
+           </div>	 --%>
+
+
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn_submit" > <i class='icon-ok bigger-110'></i>保存</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class='icon-remove bigger-110'></i>关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+//选择客户
+     $("body").on("click", "#tree-fundChineseTree", function() {
+			var pbankSortID = $("#fundID").val();//获取资金方名称;
+			var busiClass = $("#busiClass").val();
+			//获取资金方子机构下拉树;
+			$.ajax({type:'POST',url:'/crm/cooperation/selectAllFundListTree',data:JSON.stringify({"pbanksortid":pbankSortID,"banksortid":pbankSortID,"busiClass":busiClass, "fundType":"02"}),contentType:'application/json; charset=UTF-8',dataType:'json',
+				success:function(data){
+					$("#fundNameTree").selectTreeWidgets({
+						width : "46%",//设置控件宽度
+						multiple : false,//是否多选
+						data : data.obj//数据源
+					});
+				}
+			});
+    }) 
+    
+    var cooperationData = [];
+    $.ajax({type:'POST',url:'/crm/cooperation/selectAllCooperationListTree',data:JSON.stringify({}),contentType:'application/json; charset=UTF-8',dataType:'json',
+		success:function(data){	
+			data.obj.map(function(item){
+				if(item.pId == "49618632db614f99a7e45c4f09c50c18"){
+					cooperationData.push(item)
+				}
+			})
+		}
+	});
+    
+    $("body").on("click", "#tree-cooperationTree", function(e) {
+			var pbankSortID = $("#bankID").val();//获取合作机构名称;
+			var subBankFormat = false;
+			//获取合作机构子机构下拉树;
+			cooperationData.map(function(it){
+				if(it.id == pbankSortID){
+					subBankFormat = true;
+				}
+			})
+			if(subBankFormat){
+				$(".subBankGroup").children("div").remove();
+		　　    	 $(".subBankGroup").append(
+		　　    			 "<div class='col-md-6'> "+
+						 "	<div class='col-sm-6 col-md-6 input-group subBankTree'> "+
+						 "	     <input  type='text'  class='form-control validate[required]' autoField='subBankID'   id='subBankTree'  value='' dataValue='' name='subBank' readonly='readonly' /> "+
+						 "	     <span class='input-group-addon'> "+
+						 "		   <i class='icon-caret-down bigger-110'></i> "+
+						 "	     </span> "+
+						 "   </div> "+
+						 "</div> "
+		　　    			 )
+			}else{
+				$(".subBankGroup").children("div").remove();
+		　　    	$(".subBankGroup").append(
+		　　    			 "<div class='col-md-10'>"+
+			             "	<input type='text' id='subBankName' name='subBankName'  class='col-md-5 col-sm-6 validate[required,maxSize[50]]' />"+
+	    				 "</div>"
+		　　    			 )
+			}
+			
+			$.ajax({type:'POST',url:'/crm/cooperation/selectAllCooperationListTree',data:JSON.stringify({"pbanksortid":pbankSortID}),contentType:'application/json; charset=UTF-8',dataType:'json',
+				success:function(data){	
+					$("#subBankTree").selectTreeWidgets({
+						width : "46%",//设置控件宽度
+						multiple : false,//是否多选
+						data : data.obj//数据源
+					});
+				}
+			});
+	})
+</script>

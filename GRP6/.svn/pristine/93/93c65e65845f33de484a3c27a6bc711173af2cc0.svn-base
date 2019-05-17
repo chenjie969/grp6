@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.crm.db.map.Crm_relationMainMapper">
+
+	<resultMap type="com.zjm.crm.db.model.Crm_relationMain" id="relationMainMap">
+		<result property="relationMain_ID" column="relationMain_ID" />
+		<result property="relationMainName" column="relationMainName" />
+		<result property="clientID" column="clientID" />
+		<result property="clientName" column="clientName" />
+		<result property="clientGUID" column="clientGUID" />
+		<result property="relationTypeID" column="relationTypeID" />
+		<result property="relationTypeName" column="relationTypeName" />
+		<result property="remark" column="remark" />
+		<result property="updateUserName" column="updateUserName" />
+		<result property="updateDateTime" column="updateDateTime" />
+		<result property="unit_uid" column="unit_uid" />
+		<result property="unit_uidName" column="unit_uidName" />
+		
+		<result property="guarantySum" column="guarantySum" />
+		<result property="guarantyEntrustSum" column="guarantyEntrustSum" />
+		<result property="entrustSum" column="entrustSum" />
+		<result property="projectTypeID" column="projectTypeID" />
+		<result property="projectTypeName" column="projectTypeName" />
+		<result property="creditorSum" column="creditorSum" />
+		<collection property="cmlist" column="relationmain_id" ofType="com.zjm.crm.db.model.Crm_client_relationMain" select="getClientOfRelationMain"/>
+	</resultMap>
+
+	<!-- 项目类型显示信息 -->
+	<resultMap type="com.zjm.pro.db.model.Pro_projectForProVo" id="projectVoMap">
+		<result property="relationMain_ID" column="relationMain_ID" />
+		<result property="relationMainName" column="relationMainName" />
+		<result property="clientID" column="clientID" />
+		<result property="clientName" column="clientName" />
+		<result property="clientGUID" column="clientGUID" />
+		<result property="relationTypeID" column="relationTypeID" />
+		<result property="relationTypeName" column="relationTypeName" />
+		<result property="projectTypeID" column="projectTypeID" />
+		<result property="projectTypeName" column="projectTypeName" />
+		<result property="fullAreaCode" column="fullAreaCode" />
+		<result property="fullAreaName" column="fullAreaName" />
+		<result property="capitalSum" column="capitalSum" />
+		<result property="liabilitySum" column="liabilitySum" />
+<!-- 		<result property="guarantySum" column="guarantySum" />
+		<result property="guarantyEntrustSum" column="guarantyEntrustSum" />
+		<result property="entrustSum" column="entrustSum" />
+		<result property="creditorSum" column="creditorSum" />
+		<collection property="cmlist" column="relationmain_id" ofType="com.zjm.crm.db.model.Crm_client_relationMain" select="getClientOfRelationMain"/>
+		<result property="guaReSum_zaibao" column="guaReSum_zaibao" />
+		<result property="entReSum_guaGroup" column="entReSum_guaGroup" />
+		<result property="entReSum_gua" column="entReSum_gua" />
+		<result property="entReSum_noGua" column="entReSum_noGua" />
+		<result property="totalSum_gua_rt" column="totalSum_gua_rt" />
+		<result property="totalSum_noGua_rt" column="totalSum_noGua_rt" />
+		<result property="totalSum_rt" column="totalSum_rt" />
+		<result property="collectDebtsSum_rt" column="collectDebtsSum_rt" />
+		<result property="replaceReSum" column="replaceReSum" />	
+		<result property="deRiskSum" column="deRiskSum" /> -->
+	</resultMap>
+	
+	<!-- 分页查询非正常项目项目主体列表 -->	
+	<select id="selectKeyProjectRelationMain" parameterType="com.zjm.common.db.model.PageTable" resultMap="projectVoMap" >
+		SELECT 
+			cr.relationMain_ID,
+			cr.relationMainName,
+			cr.clientID,
+			cr.clientName,
+			cr.clientGUID,
+			cr.relationTypeID,
+			cr.relationTypeName,
+			cr.guarantySum,
+			cr.guarantyEntrustSum,
+			cr.entrustSum,
+			cr.projectTypeID,
+			cr.projectTypeName,
+			cr.creditorSum,
+			cc.fullAreaCode,
+			cc.fullAreaName
+		FROM crm_relationmain cr
+		LEFT JOIN crm_client cc ON cr.clientID=cc.client_ID
+		WHERE 1=1 ${wheresql}
+		LIMIT #{pageNumber},#{pageSize}
+	</select>
+	<!-- 查询非正常项目主体总数 -->
+	<select id="selectKeyProjectRelationMain_count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		SELECT COUNT(relationMain_ID) FROM crm_relationmain cr
+		LEFT JOIN crm_client cc ON cr.clientID=cc.client_ID
+		WHERE 1=1 ${wheresql}
+	</select>
+
+	<!-- 分页查询主体列表 -->	
+	<select id="selectRelationMainPageTables" parameterType="com.zjm.common.db.model.PageTable" resultMap="relationMainMap" >
+		SELECT 
+			relationMain_ID,
+			relationMainName,
+			clientID,
+			clientName,
+			clientGUID,
+			relationTypeID,
+			relationTypeName,
+			remark,
+			updateUserName,
+			updateDateTime,
+			unit_uid,
+			unit_uidName,
+			guarantySum,
+			guarantyEntrustSum,
+			entrustSum,
+			projectTypeID,
+			projectTypeName,
+			creditorSum
+		FROM 
+			crm_relationmain
+		where 1=1 ${wheresql}
+		limit #{pageNumber},#{pageSize}
+		<!-- SELECT 
+			re.*, 
+			ccr.client_ID, 
+			ccr.clientName, 
+			ccr.relationDesc 
+		FROM(	
+			SELECT 
+				cr.relationMain_ID relationMain_ID, 
+				cr.relationMainName relationMainName, 
+				cr.clientID clientID, 
+				cr.clientName clientName, 
+				cr.relationTypeID relationTypeID, 
+				cr.relationTypeName relationTypeName, 
+				cr.remark remark, 
+				cr.updateUserName updateUserName, 
+				cr.updateDateTime updateDateTime, 
+				cr.unit_uid unit_uid, 
+				cr.unit_uidName unit_uidName
+			FROM crm_relationmain cr 
+			WHERE 1=1 ${wheresql} 
+			LIMIT #{pageNumber},#{pageSize}
+		) re 
+		LEFT JOIN crm_client_relationmain ccr ON re.relationMain_ID=ccr.relationMain_ID  -->
+	</select>
+	<select id="getClientOfRelationMain" parameterType="string" resultType="com.zjm.crm.db.model.Crm_client_relationMain">
+		SELECT  
+			client_ID, 
+			relationMain_ID, 
+			clientName, 
+			relationDesc, 
+			unit_uid, 
+			unit_uidName, 
+			updateUserName, 
+			updateDateTime
+		FROM crm_client_relationmain ccr WHERE ccr.relationmain_id = #{relationmain_id} 
+	</select>
+	
+	<!-- 查询主体总数 -->
+	<select id="selectRelationMainPageTables_count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Long">
+		SELECT COUNT(relationMain_ID) FROM crm_relationmain
+		where 1=1 ${wheresql}
+	</select>
+	<!-- 新增一个主体
+		返回自增主键ID，设置两个属性：useGeneratedKeys="true" keyProperty="relationMain_ID"-->
+	<insert id="insertOneRelationMain" parameterType="com.zjm.crm.db.model.Crm_relationMain" useGeneratedKeys="true" keyProperty="relationMain_ID">
+		insert into crm_relationmain(
+			relationMain_ID,
+			relationMainName,
+			clientID,
+			clientName,
+			clientGUID,
+			relationTypeID,
+			relationTypeName,
+			remark,
+			updateUserName,
+			updateDateTime,
+			unit_uid,
+			unit_uidName,
+			guarantySum,
+			guarantyEntrustSum,
+			entrustSum,
+			projectTypeID,
+			projectTypeName,
+			creditorSum
+		)values (
+			#{relationMain_ID},
+			#{relationMainName},
+			#{clientID},
+			#{clientName},
+			#{clientGUID},
+			#{relationTypeID},
+			#{relationTypeName},
+			#{remark},
+			#{updateUserName},
+			NOW(),
+			#{unit_uid},
+			#{unit_uidName},
+			#{guarantySum},
+			#{guarantyEntrustSum},
+			#{entrustSum},
+			#{projectTypeID},
+			#{projectTypeName},
+			#{creditorSum}
+			)
+	</insert>
+	<!-- 校验新增主体名是否有重复 -->
+	<select id="isExistMainName"  parameterType="com.zjm.crm.db.model.Crm_relationMain" resultType="java.lang.Integer">
+		SELECT 
+			count(1) 
+		FROM 
+			crm_relationmain 
+		WHERE  unit_uid=#{unit_uid}
+		AND	relationMainName=#{relationMainName}
+		<if test="relationMain_ID != null">
+			AND relationMain_ID != #{relationMain_ID}
+		</if>
+	</select>
+	<!-- 批量删除主体 -->
+	<delete id="batchDeleteRelationMainByIDs" parameterType="com.zjm.crm.db.model.Crm_relationMain">
+		delete from crm_relationmain where unit_uid=#{unit_uid} and relationMain_ID in 
+		 <foreach collection="relationMainIDs" item="relationMainID" index="index" open="(" close=")" separator=",">
+             #{relationMainID}
+         </foreach>
+	</delete>
+	<!-- 根据ID查询单个关联主体的信息 -->
+	<select id="selectOneRelationMainById" parameterType="com.zjm.crm.db.model.Crm_relationMain" resultMap="relationMainMap">
+		SELECT 
+			relationMain_ID,
+			relationMainName,
+			clientID,
+			clientName,
+			clientGUID,
+			relationTypeID,
+			relationTypeName,
+			remark,
+			updateUserName,
+			updateDateTime,
+			unit_uid,
+			unit_uidName,
+			guarantySum,
+			guarantyEntrustSum,
+			entrustSum,
+			projectTypeID,
+			projectTypeName,
+			creditorSum
+		FROM crm_relationmain
+		WHERE unit_uid=#{unit_uid} and relationMain_ID=#{relationMain_ID}
+	</select>
+	<!-- 修改一个关联主体 -->
+	<update id="updateOneRelationMain" parameterType="com.zjm.crm.db.model.Crm_relationMain">
+		UPDATE crm_relationmain 
+		SET relationMainName = #{relationMainName}, 
+			clientID = #{clientID},
+			clientName = #{clientName},
+			clientGUID = #{clientGUID},
+			relationTypeID = #{relationTypeID},
+			relationTypeName = #{relationTypeName},
+			remark = #{remark},
+			updateUserName = #{updateUserName},
+			updateDateTime = NOW(),
+			
+			guarantySum = #{guarantySum},
+			guarantyEntrustSum = #{guarantyEntrustSum},
+			entrustSum = #{entrustSum},
+			projectTypeID = #{projectTypeID},
+			projectTypeName = #{projectTypeName},
+			creditorSum = #{creditorSum}			
+		WHERE unit_uid=#{unit_uid} and relationMain_ID = #{relationMain_ID} 
+	</update>
+	
+	<!-- 根据主体ID查询主体名称 -->
+	<select id="selectRelationMainNameByID" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT relationMainName FROM crm_relationmain WHERE relationMain_ID=#{relationMain_ID}
+	</select>
+	
+	<!-- 移出重点项目 -->
+	<update id="removeKeyProject" parameterType="com.zjm.crm.db.model.Crm_relationMain">
+		UPDATE	crm_relationmain
+		SET	
+			projectTypeID = #{projectTypeID},
+			projectTypeName = #{projectTypeName},
+			updateUserName = #{updateUserName},
+			updateDateTime = NOW()
+		WHERE unit_uid=#{unit_uid} 
+		AND relationMain_ID in 
+		<foreach collection="relationMainIDs" item="relationMainID" index="index" open="(" close=")" separator=",">
+             #{relationMainID}
+        </foreach>
+	</update>
+	<delete id="deleteByClient_ID">
+		DELETE FROM 
+			crm_relationmain
+		WHERE  clientID = #{client_ID} 
+	</delete>
+</mapper>

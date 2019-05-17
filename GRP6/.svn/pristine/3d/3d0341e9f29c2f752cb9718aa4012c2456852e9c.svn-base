@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><jatools Class="jatools.ReportDocument" Name="jatools report template"><VariableContext/><Page><Children ItemClass="PagePanel"><Item0><Width>1236</Width><Height>128</Height><Children><Item0 Class="Label"><Text>融资性担保机构基本情况统计表</Text><Font><Face>宋体</Face><Style>1</Style><Size>36</Size></Font><HorizontalAlignment>1</HorizontalAlignment><X>335</X><Y>8</Y><Width>569</Width><Height>71</Height></Item0><Item1 Class="Label"><Text>金额单位：万元</Text><HorizontalAlignment>2</HorizontalAlignment><X>1058</X><Y>103</Y><Width>110</Width><Height>23</Height></Item1><Item2 Class="Text"><Variable>=if(has(endyearmonthsql)) return endyearmonthsql;else return ($today+"").substring(0,7);</Variable><X>603</X><Y>80</Y><Width>110</Width><Height>23</Height></Item2><Item3 Class="Label"><Text>统计年月：</Text><HorizontalAlignment>2</HorizontalAlignment><X>533</X><Y>80</Y><Width>68</Width><Height>23</Height></Item3></Children><Type>100</Type></Item0><Item1><Y>802</Y><Width>1236</Width><Height>280</Height><Type>103</Type></Item1><Item2><Y>128</Y><Width>1236</Width><Height>674</Height><Children><Item0 Class="Table"><NodePath>tab_detail</NodePath><X>58</X><Y>2</Y><Children><Item0 Class="Label"><Text>担保单位</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>1</Col><RowSpan>2</RowSpan></Cell></Item0><Item1 Class="Label"><Text>本月担保</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>2</Col><ColSpan>4</ColSpan></Cell></Item1><Item2 Class="Label"><Text>本月担保笔数</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>2</Col></Cell></Item2><Item3 Class="Label"><Text>本月担保金额</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>3</Col></Cell></Item3><Item4 Class="Label"><Text>本月代偿金额</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>4</Col></Cell></Item4><Item5 Class="Label"><Text>在保余额</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>5</Col></Cell></Item5><Item6 Class="Label"><Text>累计担保笔数</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>6</Col></Cell></Item6><Item7 Class="Label"><Text>累计担保金额</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>7</Col></Cell></Item7><Item8 Class="Label"><Text>累计代偿金额</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>1</Row><Col>8</Col></Cell></Item8><Item9 Class="Label"><Text>累计担保</Text><Border/><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>6</Col><ColSpan>3</ColSpan></Cell></Item9><Item10 Class="Label"><Text>序号</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>0</Col><RowSpan>2</RowSpan></Cell></Item10><Item11 Class="RowPanel"><Cell><Row>2</Row><Col>0</Col><ColSpan>9</ColSpan></Cell><Children ItemClass="Text"><Item0><Variable>=$.position+1</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>0</Col></Cell></Item0><Item1><Variable>=index_dic_Org.fieldValue{$.guarantyOrgID}</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><PrintStyle>united-level:1;</PrintStyle><Cell><Row>2</Row><Col>1</Col></Cell></Item1><Item2><Variable>=if(has (index_column3.countfactload{$.guarantyOrgID})) return (index_column3.countfactload{$.guarantyOrgID});else return  0;</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>2</Col></Cell></Item2><Item3><Variable>=if (has (index_column7.allcountfactload{$.guarantyOrgID})) return (index_column7.allcountfactload{$.guarantyOrgID});else return 0 ;</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>6</Col></Cell></Item3><Item4><Variable>=if (has (index_column4.loadSum{$.guarantyOrgID})) return (index_column4.loadSum{$.guarantyOrgID}); else return 0;</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>2</Row><Col>3</Col></Cell></Item4><Item5><Variable>=if (has (index_column5.replaceFreeSum{$.guarantyOrgID})) return (index_column5.replaceFreeSum{$.guarantyOrgID}); else return 0;</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>2</Row><Col>4</Col></Cell></Item5><Item6><Variable>=if (has (index_column6.remainSum{$.guarantyOrgID})) return (index_column6.remainSum{$.guarantyOrgID});else return 0;</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>2</Row><Col>5</Col></Cell></Item6><Item7><Variable>=if (has (index_column8.allloadSum{$.guarantyOrgID})) return (index_column8.allloadSum{$.guarantyOrgID});else return 0;</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>2</Row><Col>7</Col></Cell></Item7><Item8><Variable>=if (has (index_column9.allreplaceFreeSum{$.guarantyOrgID})) return (index_column9.allreplaceFreeSum{$.guarantyOrgID});else return 0;</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>2</Row><Col>8</Col></Cell></Item8></Children><NodePath>Row</NodePath></Item11></Children><ColumnWidths>60,120,144,144,135,123,132,126,126</ColumnWidths><RowHeights>30,30,30</RowHeights></Item0><Item1 Class="Text"><X>1113</X><Y>123</Y><Width>58</Width><Height>23</Height></Item1></Children><Type>102</Type></Item2></Children><PageFormat><Width>1537</Width><Height>1122</Height><Right>281</Right></PageFormat></Page><NodeSource><Children ItemClass="DatasetNodeSource"><Item0><Children ItemClass="RowNodeSource"><Item0/></Children><Reader Class="SqlReader"><Name>tab_detail</Name><Sql>SELECT pa.guarantyOrgID
+
+FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pp.apply_ID = pa.apply_ID
+WHERE 1=1 AND pp.busiClass = '01'
+
+
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.reportDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):"and DATE_FORMAT(pp.reportDate,'%Y-%m')&lt;=DATE_FORMAT(NOW(),'%Y-%m')"}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY pa.guarantyOrgID</Sql><Description>SELECT pa.guarantyOrgID
+
+FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pp.apply_ID = pa.apply_ID
+WHERE 1=1 AND pp.busiClass = '01'
+
+
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.reportDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):"and DATE_FORMAT(pp.reportDate,'%Y-%m')&lt;=DATE_FORMAT(NOW(),'%Y-%m')"}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY pa.guarantyOrgID</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><TagName>tab_detail</TagName></Item0><Item1><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">fieldId</IndexFields><TagName>index_dic_Org</TagName></Item0></Children><Reader Class="SqlReader"><Name>dic_Org</Name><Sql>SELECT 
+     dic.dicTypeID  AS  fieldId,
+     dic.dicTypeName AS fieldValue
+     
+    FROM 
+    c_dictype  dic 
+     WHERE  dic.dicTypePID  = '78ae83f6524d458dbbd522324c80723d' </Sql><Description>SELECT 
+     dic.dicTypeID  AS  fieldId,
+     dic.dicTypeName AS fieldValue
+     
+    FROM 
+    c_dictype  dic 
+     WHERE  dic.dicTypePID  = '78ae83f6524d458dbbd522324c80723d' </Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">fieldId</IndexFields><TagName>dic_Org</TagName></Item1><Item2><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">guarantyOrgID</IndexFields><TagName>index_column3</TagName></Item0></Children><Reader Class="SqlReader"><Name>column_3</Name><Sql>SELECT 
+IFNULL(COUNT(DISTINCT pp.project_ID),0) AS countfactload,
+
+pa.guarantyOrgID
+
+FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pp.apply_ID = pa.apply_ID
+WHERE 1=1 AND pp.busiClass = '01'
+
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.reportDate,'%Y-%m')='"+endyearmonthsql+"'"):"and DATE_FORMAT(pp.reportDate,'%Y-%m')=DATE_FORMAT(NOW(),'%Y-%m')"}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+
+GROUP BY pa.guarantyOrgID</Sql><Description>SELECT 
+IFNULL(COUNT(DISTINCT pp.project_ID),0) AS countfactload,
+
+pa.guarantyOrgID
+
+FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pp.apply_ID = pa.apply_ID
+WHERE 1=1 AND pp.busiClass = '01'
+
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.reportDate,'%Y-%m')='"+endyearmonthsql+"'"):"and DATE_FORMAT(pp.reportDate,'%Y-%m')=DATE_FORMAT(NOW(),'%Y-%m')"}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+
+GROUP BY pa.guarantyOrgID</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">guarantyOrgID</IndexFields><TagName>column_3</TagName></Item2><Item3><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">guarantyOrgID</IndexFields><TagName>index_column5</TagName></Item0></Children><Reader Class="SqlReader"><Name>column_5</Name><Sql>SELECT
+      pa.guarantyOrgID,
+      SUM(IFNULL(tab.replaceCapitalSum,0)) AS replaceFreeSum
+ 
+ 
+FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pp.apply_ID = pa.apply_ID
+LEFT JOIN
+(  SELECT 
+         pa.guarantyOrgID,
+         pre.project_ID,
+        SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum 
+        
+    FROM
+    
+    pro_replace pre
+    LEFT JOIN pro_apply pa ON pa.apply_ID = pre.apply_ID
+    WHERE 1=1 
+    
+           ${has(endyearmonthsql)?(" and  DATE_FORMAT(pre.replaceDate,'%Y')&lt;='"+endyearmonthsql+"'"):"AND DATE_FORMAT(pre.replaceDate,'%Y')&lt;=DATE_FORMAT(NOW(),'%Y')"}
+   
+    GROUP BY  pa.guarantyOrgID
+   
+   
+   
+)tab  ON tab.project_ID = pp.project_ID
+
+
+WHERE 1=1 AND pp.busiClass = '01'
+
+
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.reportDate,'%Y-%m')='"+endyearmonthsql+"'"):"and DATE_FORMAT(pp.reportDate,'%Y-%m')=DATE_FORMAT(NOW(),'%Y-%m')"}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY  pa.guarantyOrgID</Sql><Description>SELECT
+      pa.guarantyOrgID,
+      SUM(IFNULL(tab.replaceCapitalSum,0)) AS replaceFreeSum
+ 
+ 
+FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pp.apply_ID = pa.apply_ID
+LEFT JOIN
+(  SELECT 
+         pa.guarantyOrgID,
+         pre.project_ID,
+        SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum 
+        
+    FROM
+    
+    pro_replace pre
+    LEFT JOIN pro_apply pa ON pa.apply_ID = pre.apply_ID
+    WHERE 1=1 
+    
+           ${has(endyearmonthsql)?(" and  DATE_FORMAT(pre.replaceDate,'%Y')&lt;='"+endyearmonthsql+"'"):"AND DATE_FORMAT(pre.replaceDate,'%Y')&lt;=DATE_FORMAT(NOW(),'%Y')"}
+   
+    GROUP BY  pa.guarantyOrgID
+   
+   
+   
+)tab  ON tab.project_ID = pp.project_ID
+
+
+WHERE 1=1 AND pp.busiClass = '01'
+
+
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.reportDate,'%Y-%m')='"+endyearmonthsql+"'"):"and DATE_FORMAT(pp.reportDate,'%Y-%m')=DATE_FORMAT(NOW(),'%Y-%m')"}
+${has(wheresql)?(" and wheresql='"+wheresql+"'"):""}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY  pa.guarantyOrgID</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">guarantyOrgID</IndexFields><TagName>column_5</TagName></Item3><Item4><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">guarantyOrgID</IndexFields><TagName>index_column6</TagName></Item0></Children><Reader Class="SqlReader"><Name>column6</Name><Sql>SELECT 
+    SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)-IFNULL(tab5.creditorsum,0))) AS remainSum,
+    
+    pa.guarantyOrgID
+
+FROM pro_project pp
+LEFT JOIN pro_apply pa ON pp.apply_ID = pa.apply_ID
+LEFT JOIN (
+   SELECT 
+        pfp.factPay_ID,
+        pfp.project_ID,
+        SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum 
+        
+    FROM
+    pro_factpay pfp
+    WHERE 1=1 
+    ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y')&lt;='"+endyearmonthsql+"'"):"AND DATE_FORMAT(pfp.payDate,'%Y')&lt;=DATE_FORMAT(NOW(),'%Y')"}
+    GROUP BY pfp.project_ID
+    
+  
+ )tab1 ON tab1.project_ID =  pp.project_ID
+ LEFT JOIN (
+   SELECT 
+        pre.replace_ID,
+        pre.project_ID,
+        
+        SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum 
+        
+    FROM
+    pro_replace pre
+    WHERE 1=1 
+    ${has(endyearmonthsql)?(" and  DATE_FORMAT(pre.replaceDate,'%Y')&lt;='"+endyearmonthsql+"'"):"AND DATE_FORMAT(pre.replaceDate,'%Y')&lt;=DATE_FORMAT(NOW(),'%Y')"}
+    GROUP BY pre.project_ID
+    
+  
+ )tab2 ON tab2.project_ID =  pp.project_ID
+
+LEFT JOIN (
+	SELECT 
+		precre.project_ID,        
+		SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum          
+	FROM
+		pro_creditor precre
+	WHERE 1=1   
+	${has(endyearmonthsql)?(" and  DATE_FORMAT(precre.creditor_date,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	GROUP BY precre.project_ID 
+)tab5 ON tab5.project_ID =  pp.project_ID
+
+
+WHERE 1=1 AND pp.busiClass = '01' 
+
+
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.reportDate,'%Y-%m')='"+endyearmonthsql+"'"):"AND DATE_FORMAT(pp.reportDate,'%Y-%m')=DATE_FORMAT(NOW(),'%Y-%m')"}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY pa.guarantyOrgID
+</Sql><Description>SELECT 
+    SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0)-IFNULL(tab5.creditorsum,0))) AS remainSum,
+    
+    pa.guarantyOrgID
+
+FROM pro_project pp
+LEFT JOIN pro_apply pa ON pp.apply_ID = pa.apply_ID
+LEFT JOIN (
+   SELECT 
+        pfp.factPay_ID,
+        pfp.project_ID,
+        SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum 
+        
+    FROM
+    pro_factpay pfp
+    WHERE 1=1 
+    ${has(endyearmonthsql)?(" and  DATE_FORMAT(pfp.payDate,'%Y')&lt;='"+endyearmonthsql+"'"):"AND DATE_FORMAT(pfp.payDate,'%Y')&lt;=DATE_FORMAT(NOW(),'%Y')"}
+    GROUP BY pfp.project_ID
+    
+  
+ )tab1 ON tab1.project_ID =  pp.project_ID
+ LEFT JOIN (
+   SELECT 
+        pre.replace_ID,
+        pre.project_ID,
+        
+        SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum 
+        
+    FROM
+    pro_replace pre
+    WHERE 1=1 
+    ${has(endyearmonthsql)?(" and  DATE_FORMAT(pre.replaceDate,'%Y')&lt;='"+endyearmonthsql+"'"):"AND DATE_FORMAT(pre.replaceDate,'%Y')&lt;=DATE_FORMAT(NOW(),'%Y')"}
+    GROUP BY pre.project_ID
+    
+  
+ )tab2 ON tab2.project_ID =  pp.project_ID
+
+LEFT JOIN (
+	SELECT 
+		precre.project_ID,        
+		SUM(IFNULL(precre.creditor_sum,0)) AS creditorsum          
+	FROM
+		pro_creditor precre
+	WHERE 1=1   
+	${has(endyearmonthsql)?(" and  DATE_FORMAT(precre.creditor_date,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+	GROUP BY precre.project_ID 
+)tab5 ON tab5.project_ID =  pp.project_ID
+
+
+WHERE 1=1 AND pp.busiClass = '01' 
+
+
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.reportDate,'%Y-%m')='"+endyearmonthsql+"'"):"AND DATE_FORMAT(pp.reportDate,'%Y-%m')=DATE_FORMAT(NOW(),'%Y-%m')"}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY pa.guarantyOrgID
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">guarantyOrgID</IndexFields><TagName>column6</TagName></Item4><Item5><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">guarantyOrgID</IndexFields><TagName>index_column7</TagName></Item0></Children><Reader Class="SqlReader"><Name>column7</Name><Sql>
+SELECT  
+COUNT(pp.project_ID) AS allcountfactload,
+pa.guarantyOrgID
+FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pp.apply_ID = pa.apply_ID
+WHERE 1=1 AND pp.busiClass = '01' 
+
+
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.reportDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):"AND DATE_FORMAT(pp.reportDate,'%Y-%m')&lt;=DATE_FORMAT(NOW(),'%Y-%m')"}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY pa.guarantyOrgID
+</Sql><Description>
+SELECT  
+COUNT(pp.project_ID) AS allcountfactload,
+pa.guarantyOrgID
+FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pp.apply_ID = pa.apply_ID
+WHERE 1=1 AND pp.busiClass = '01' 
+
+
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.reportDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):"AND DATE_FORMAT(pp.reportDate,'%Y-%m')&lt;=DATE_FORMAT(NOW(),'%Y-%m')"}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY pa.guarantyOrgID
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">guarantyOrgID</IndexFields><TagName>column7</TagName></Item5><Item6><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">guarantyOrgID</IndexFields><TagName>index_column8</TagName></Item0></Children><Reader Class="SqlReader"><Name>column8</Name><Sql>SELECT  
+SUM(pp.loadSum) AS allloadSum,
+pa.guarantyOrgID
+FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pp.apply_ID = pa.apply_ID
+WHERE 1=1 AND pp.busiClass = '01' 
+
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.reportDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):"AND DATE_FORMAT(pp.reportDate,'%Y-%m')&lt;=DATE_FORMAT(NOW(),'%Y-%m')"}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY pa.guarantyOrgID
+</Sql><Description>SELECT  
+SUM(pp.loadSum) AS allloadSum,
+pa.guarantyOrgID
+FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pp.apply_ID = pa.apply_ID
+WHERE 1=1 AND pp.busiClass = '01' 
+
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.reportDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):"AND DATE_FORMAT(pp.reportDate,'%Y-%m')&lt;=DATE_FORMAT(NOW(),'%Y-%m')"}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY pa.guarantyOrgID
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">guarantyOrgID</IndexFields><TagName>column8</TagName></Item6><Item7><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">guarantyOrgID</IndexFields><TagName>index_column9</TagName></Item0></Children><Reader Class="SqlReader"><Name>column9</Name><Sql>
+SELECT 
+        SUM(IFNULL(pre.replaceCapitalSum,0)) AS allreplaceFreeSum,
+        pa.guarantyOrgID
+        
+    FROM
+    pro_replace pre
+    LEFT JOIN pro_project pp ON pp.project_ID = pre.project_ID
+    LEFT JOIN pro_apply pa ON pa.apply_ID = pre.apply_ID
+    WHERE 1=1 AND pp.busiClass = '01' 
+    ${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.reportDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):"and DATE_FORMAT(pp.reportDate,'%Y-%m')&lt;=DATE_FORMAT(NOW(),'%Y-%m')"}
+    ${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+   GROUP BY pa.guarantyOrgID</Sql><Description>
+SELECT 
+        SUM(IFNULL(pre.replaceCapitalSum,0)) AS allreplaceFreeSum,
+        pa.guarantyOrgID
+        
+    FROM
+    pro_replace pre
+    LEFT JOIN pro_project pp ON pp.project_ID = pre.project_ID
+    LEFT JOIN pro_apply pa ON pa.apply_ID = pre.apply_ID
+    WHERE 1=1 AND pp.busiClass = '01' 
+    ${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.reportDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):"and DATE_FORMAT(pp.reportDate,'%Y-%m')&lt;=DATE_FORMAT(NOW(),'%Y-%m')"}
+    ${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+   GROUP BY pa.guarantyOrgID</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">guarantyOrgID</IndexFields><TagName>column9</TagName></Item7><Item8><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">guarantyOrgID</IndexFields><TagName>index_column4</TagName></Item0></Children><Reader Class="SqlReader"><Name>column4</Name><Sql>SELECT  
+SUM(IFNULL(pp.loadSum,0)) AS loadSum,
+pa.guarantyOrgID
+FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pp.apply_ID = pa.apply_ID
+WHERE 1=1 AND pp.busiClass = '01' 
+
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.reportDate,'%Y-%m')='"+endyearmonthsql+"'"):"AND DATE_FORMAT(pp.reportDate,'%Y-%m')=DATE_FORMAT(NOW(),'%Y-%m')"}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY pa.guarantyOrgID
+</Sql><Description>SELECT  
+SUM(IFNULL(pp.loadSum,0)) AS loadSum,
+pa.guarantyOrgID
+FROM pro_project pp 
+LEFT JOIN pro_apply pa ON pp.apply_ID = pa.apply_ID
+WHERE 1=1 AND pp.busiClass = '01' 
+
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.reportDate,'%Y-%m')='"+endyearmonthsql+"'"):"AND DATE_FORMAT(pp.reportDate,'%Y-%m')=DATE_FORMAT(NOW(),'%Y-%m')"}
+${has(dataJurisdictionSql)?(dataJurisdictionSql):""}
+GROUP BY pa.guarantyOrgID
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">guarantyOrgID</IndexFields><TagName>column4</TagName></Item8></Children></NodeSource></jatools>

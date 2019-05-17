@@ -1,0 +1,1096 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjm.pro.db.map.Pro_optGuarantyMapper" >
+  <resultMap id="BaseResultMap" type="com.zjm.pro.db.model.Pro_optGuaranty" >
+      <id column="optGuaranty_ID" property="optGuaranty_ID"  />
+    <result column="apply_ID" property="apply_ID"  />
+    <result column="applyDetail_ID" property="applyDetail_ID"  />
+    <result column="contractDoc_ID" property="contractDoc_ID"  />
+    <result column="guarantyTypeID" property="guarantyTypeID"  />
+    <result column="guarantyTypeName" property="guarantyTypeName"  />
+    <result column="optTypeID" property="optTypeID"  />
+    <result column="optTypeName" property="optTypeName"  />
+    <result column="optName" property="optName"  />
+    <result column="ownerName" property="ownerName"  />
+    <result column="oldValue" property="oldValue"  />
+    <result column="buyValue" property="buyValue"  />
+    <result column="optValue" property="optValue"  />
+    <result column="registeAuthority" property="registeAuthority"  />
+    <result column="certificateNum" property="certificateNum"  />
+    <result column="houseArea" property="houseArea"  />
+    <result column="useArea" property="useArea"  />
+    <result column="havingArea" property="havingArea"  />
+    <result column="createDate" property="createDate"  />
+    <result column="useYear" property="useYear"  />
+    <result column="otherYear" property="otherYear"  />
+    <result column="houseAddress" property="houseAddress"  />
+    <result column="preposePledgee" property="preposePledgee"  />
+    <result column="preposeSum" property="preposeSum"  />
+    <result column="preposePledgeeOne" property="preposePledgeeOne"  />
+    <result column="preposeOneSum" property="preposeOneSum"  />
+    <result column="preposePledgeeTwo" property="preposePledgeeTwo"  />
+    <result column="preposeTwoSum" property="preposeTwoSum"  />
+    <result column="preposePledgeeThree" property="preposePledgeeThree"  />
+    <result column="preposeThreeSum" property="preposeThreeSum"  />
+    <result column="landCode" property="landCode"  />
+    <result column="landProperty" property="landProperty"  />
+    <result column="landArea" property="landArea"  />
+    <result column="adderss" property="adderss"  />
+    <result column="count" property="count"  />
+    <result column="stockRegisteNum" property="stockRegisteNum"  />
+    <result column="stockRegisteAuthority" property="stockRegisteAuthority"  />
+    <result column="clientID" property="clientID"  />
+    <result column="guararelationship" property="guararelationship"  />
+    <result column="otherDesc" property="otherDesc"  />
+    <result column="sortNum" property="sortNum"  />
+    <result column="coverageRatio" property="coverageRatio"  />
+    <result column="optPeriod" property="optPeriod"  />
+    <result column="optBeginDate" property="optBeginDate"  />
+    <result column="optEndDate" property="optEndDate"  />
+    <result column="optGuarDesc" property="optGuarDesc"  />
+    <result column="isRegister" property="isRegister"  />
+    <result column="finishDate" property="finishDate"  />
+    <result column="isDispose" property="isDispose"  />
+    <result column="disposeTypeID" property="disposeTypeID"  />
+    <result column="disposeTypeName" property="disposeTypeName"  />
+    <result column="disposeSum" property="disposeSum"  />
+    <result column="chargeAgainstSum" property="chargeAgainstSum"  />
+    <result column="disposeUserId" property="disposeUserId"  />
+    <result column="disposeUserName" property="disposeUserName"  />
+    <result column="disposeDate" property="disposeDate"  />
+    <result column="freeDate" property="freeDate"  />
+    <result column="unit_uid" property="unit_uid"  />
+    <result column="unit_uidName" property="unit_uidName"  />
+    <result column="updateUserName" property="updateUserName"  />
+    <result column="updateDateTime" property="updateDateTime"  />
+    <result column="landSource" property="landSource"  />
+    <result column="pledgeLandArea" property="pledgeLandArea"  />
+    <result column="assessValue" property="assessValue"  />
+    <result column="isOther" property="isOther"  />
+    <result column="otherType" property="otherType"  />
+    <result column="isWorkable" property="isWorkable"  />
+    <result column="legalDsputeDesc" property="legalDsputeDesc"  />
+    <result column="cashabilityDesc" property="cashabilityDesc"  />
+    <result column="disposeRemark" property="disposeRemark"  />
+    
+    <result column="isProxy" property="isProxy"  />
+    <result column="proxyName" property="proxyName"  />
+    <result column="proxyPhone" property="proxyPhone"  />
+    <result column="proxyCode" property="proxyCode"  />
+    <result column="actualValue" property="actualValue"  />
+    <result column="otherOwnerID" property="otherOwnerID"  />
+    
+    
+    <!-- 冗余字段，用于查询  start-->
+    <result column="busiCode" property="busiCode"  />
+    <result column="projectName" property="projectName"  />
+    <result column="clientName" property="clientName"  />
+    <result column="personName" property="personName"  />
+    <result column="otherOwner" property="otherOwner"  />
+    <result column="clientTypeID" property="clientTypeID"  />
+    <result column="otherCreditCode" property="otherCreditCode"  />
+    <result column="otherLegalPerson" property="otherLegalPerson"  />
+    <result column="otherLegalPhone" property="otherLegalPhone"  />
+    <result column="otherLegalAddress" property="otherLegalAddress"  />
+    <result column="otherPersonNum" property="otherPersonNum"  />
+    <result column="otherPersonPhone" property="otherPersonPhone"  />
+    <result column="otherPersonAddress" property="otherPersonAddress"  />
+    <result column="otherPostCode" property="otherPostCode"  />
+    <result column="otherFax" property="otherFax"  />
+    
+    
+    <result column="thirdOwnerName" property="thirdOwnerName"  />
+    <result column="thirdrCreditCode" property="thirdrCreditCode"  />
+    <result column="thirdLegalPerson" property="thirdLegalPerson"  />
+    <result column="thirdLegalPhone" property="thirdLegalPhone"  />
+    <result column="thirdLegalAddress" property="thirdLegalAddress"  />
+    <result column="thirdPostCode" property="thirdPostCode"  />
+    <result column="thirdFax" property="thirdFax"  />
+    <result column="thirdPersonNum" property="thirdPersonNum"  />
+    <result column="thirdPersonPhone" property="thirdPersonPhone"  />
+    <result column="thirdPersonAddress" property="thirdPersonAddress"  />
+    <!-- 冗余字段  end -->
+    
+    
+    <!-- 7月13日，抵押房产部位开始增加  -->
+    <result column="pledgePart" property="pledgePart"  />
+    <result column="carBrandAndType" property="carBrandAndType"  />
+    <result column="carBuyDate" property="carBuyDate"  />
+    <result column="carCode" property="carCode"  />
+    <result column="carEngineCode" property="carEngineCode"  />
+    <result column="carFrame" property="carFrame"  />
+    <result column="keepType" property="keepType"  />
+    <result column="invoiceValue" property="invoiceValue"  />
+    <result column="isInsurance" property="isInsurance"  />
+    <result column="insuranceCompany" property="insuranceCompany"  />
+    <result column="insuranceCode" property="insuranceCode"  />
+    <result column="insuranceBeginDate" property="insuranceBeginDate"  />
+    <result column="insuranceEndDate" property="insuranceEndDate"  />
+    <result column="isLocal" property="isLocal"  />
+    <result column="trafficViolation" property="trafficViolation"  />
+    <result column="isUseOther" property="isUseOther"  />
+    <result column="otherUseName" property="otherUseName"  />
+    <result column="otherUseCode" property="otherUseCode"  />
+    <result column="otherUsePhone" property="otherUsePhone"  />
+    <result column="specifications" property="specifications"  />
+    <result column="unitName" property="unitName"  />
+    <result column="guaranteeSum" property="guaranteeSum"  />
+    <result column="bankName" property="bankName"  />
+    <result column="bankNumber" property="bankNumber"  />
+    <result column="isMarried" property="isMarried"  />
+    <result column="spouseName" property="spouseName"  />
+    <result column="spouseCode" property="spouseCode"  />
+    <result column="guaranteePattern" property="guaranteePattern"  />
+    <result column="guaranteePatternID" property="guaranteePatternID"  />
+    <result column="guaranteeScale" property="guaranteeScale"  />
+    <result column="ipoSite" property="ipoSite"  />
+    <result column="ipoName" property="ipoName"  />
+    <result column="stockCode" property="stockCode"  />
+    <result column="stockCount" property="stockCount"  />
+    <result column="landOwnerName" property="landOwnerName"  />
+    <result column="leaseName" property="leaseName"  />
+    <result column="leasePeriod" property="leasePeriod"  />
+    <result column="yearRent" property="yearRent"  />
+    <result column="payPattern" property="payPattern"  />
+    <result column="payDate" property="payDate"  />
+    <result column="alreadyTime" property="alreadyTime"  />
+    <result column="residueTime" property="residueTime"  />
+    <result column="residueRent" property="residueRent"  />
+    <result column="companyContractCode" property="companyContractCode"  />
+    <result column="companyContractName" property="companyContractName"  />
+    <result column="billNumber" property="billNumber"  />
+    <result column="billCode" property="billCode"  />
+    <result column="payPerson" property="payPerson"  />
+    <result column="leaseCode" property="leaseCode"  />
+    <result column="firstOwner" property="firstOwner"  />
+    <result column="firstOwnerCode" property="firstOwnerCode"  />
+    <result column="secondOwner" property="secondOwner"  />
+    <result column="secondOwnerCode" property="secondOwnerCode"  />
+    <result column="depositType" property="depositType"  />
+    <result column="depositCode" property="depositCode"  />
+    <result column="depositName" property="depositName"  />
+    <result column="depositAccounts" property="depositAccounts"  />
+    <result column="depositDate" property="depositDate"  />
+    <result column="depositPeriod" property="depositPeriod"  />
+    <result column="depositSum" property="depositSum"  />
+    <result column="yearScale" property="yearScale"  />
+    <result column="patentName" property="patentName"  />
+    <result column="patentCode" property="patentCode"  />
+    <result column="appalyDate" property="appalyDate"  />
+    <result column="certificateDate" property="certificateDate"  />
+    <result column="validPeriod" property="validPeriod"  />
+    <result column="patentDuty" property="patentDuty"  />
+    <result column="custodyCost" property="custodyCost"  />
+    <result column="brandCode" property="brandCode"  />
+    <result column="useCommodity" property="useCommodity"  />
+    <result column="totalAmount" property="totalAmount"  />
+    <result column="repertoryBalance" property="repertoryBalance"  />
+    <result column="insuranceCost" property="insuranceCost"  />
+    <result column="superviseCost" property="superviseCost"  />
+    <result column="leaseCost" property="leaseCost"  />
+    <result column="otherCost" property="otherCost"  />
+    <result column="pledgeDepart" property="pledgeDepart"  />
+    <result column="pledgeFile" property="pledgeFile"  />
+    <result column="pledgeFileCount" property="pledgeFileCount"  />
+    <result column="receivePerson" property="receivePerson"  />
+    <result column="realizeUserName" property="realizeUserName"  />
+    <result column="realizeUserID" property="realizeUserID"  />
+    <result column="realizeDate" property="realizeDate"  />
+    <result column="freeUserName" property="freeUserName"  />
+    <result column="freeUserID" property="freeUserID"  />
+    <result column="guaranteeRemark" property="guaranteeRemark"  />
+    <result column="isCompanyStock" property="isCompanyStock"  />
+
+
+    <result column="isFree" property="isFree"  />
+
+
+    <result column="custodyStatus" property="custodyStatus"  />
+    <result column="putStockUserName" property="putStockUserName"  />
+    <result column="putStockDate" property="putStockDate"  />
+	
+	<!-- 保证金类型，保证金名称 -->	
+	<result column="deposit_type_id" property="depositTypeId"/>
+	<!-- 2018-04-03 添加保证措施版本号-->	
+	<result column="versions" property="versions"  />
+	<result column="versions_id" property="versionsId"  />
+	<result column="isGuarantyMaxSum" property="isGuarantyMaxSum"  />
+
+	<!-- 融投项目反担保物列表显示冗余字段 -->
+	<result column="guarantySum" property="guarantySum"/>
+	<result column="fundChinese" property="fundChinese"/>
+	<result column="fundName" property="fundName"/>
+	<result column="hzbankName" property="hzbankName"/>
+	<result column="subBankName" property="subBankName"/>
+	<result column="loadBeginDate" property="loadBeginDate"/>
+	<result column="delayEndDate" property="delayEndDate"/>
+	<result column="machinesNumber" property="machinesNumber"/>
+	<result column="companyOnceName" property="companyOnceName"/>
+	
+  </resultMap>
+  <sql id="Base_Column_List" >
+    optGuaranty_ID, apply_ID, applyDetail_ID, contractDoc_ID, guarantyTypeID, guarantyTypeName, 
+    optTypeID, optTypeName, optName, ownerName, oldValue, buyValue, optValue, registeAuthority, 
+    certificateNum, houseArea, useArea, havingArea, createDate, useYear, otherYear, houseAddress, 
+    preposePledgee, preposeSum, preposePledgeeOne, preposeOneSum, preposePledgeeTwo, 
+    preposeTwoSum, preposePledgeeThree, preposeThreeSum, landCode, landProperty, landArea, 
+    adderss, count, stockRegisteNum, stockRegisteAuthority, clientID, guararelationship, 
+    otherDesc, sortNum, coverageRatio, optPeriod, optBeginDate, optEndDate, optGuarDesc, 
+    isRegister, finishDate, isDispose, disposeTypeID, disposeTypeName, disposeSum, chargeAgainstSum, 
+    disposeUserId, disposeUserName, disposeDate, freeDate, unit_uid, unit_uidName, updateUserName, 
+    updateDateTime, landSource, pledgeLandArea, assessValue, isOther, otherType, isWorkable,
+    legalDsputeDesc, cashabilityDesc, disposeRemark,
+    isProxy,proxyName,proxyPhone,proxyCode,actualValue,otherOwnerID,
+    
+    pledgePart,carBrandAndType,carBuyDate,carCode,carEngineCode,carFrame,keepType,invoiceValue,isInsurance,
+    insuranceCompany,insuranceCode,insuranceBeginDate,insuranceEndDate,isLocal,trafficViolation,isUseOther,
+    otherUseName,otherUseCode,otherUsePhone,specifications,unitName,guaranteeSum,bankName,bankNumber,isMarried,
+    spouseName,spouseCode,guaranteePattern,guaranteeScale,ipoSite,ipoName,stockCode,stockCount,landOwnerName,
+    leaseName,leasePeriod,yearRent,payPattern,payDate,alreadyTime,residueTime,residueRent,companyContractCode,
+    companyContractName,billNumber,billCode,payPerson,leaseCode,firstOwner,firstOwnerCode,secondOwner,secondOwnerCode,
+    depositType,depositCode,depositName,depositAccounts,depositDate,depositPeriod,depositSum,yearScale,patentName,
+    patentCode,appalyDate,certificateDate,validPeriod,patentDuty,custodyCost,brandCode,useCommodity,totalAmount,
+    repertoryBalance,insuranceCost,superviseCost,leaseCost,otherCost,
+    guaranteePatternID,
+    pledgeDepart,pledgeFile,pledgeFileCount,receivePerson,realizeUserName,realizeUserID,realizeDate,
+    freeUserName,freeUserID,guaranteeRemark,
+    isFree,
+    isCompanyStock,
+    
+    custodyStatus,putStockUserName,putStockDate,versions,versions_id,isGuarantyMaxSum,machinesNumber,companyOnceName
+    
+  </sql>
+  
+  <sql id="rongyu_Column">
+  	busiCode,projectName,clientName,otherOwner,otherCreditCode,otherLegalPerson,otherLegalPhone,otherLegalAddress,
+  	otherPersonNum,otherPersonPhone,otherPersonAddress,otherPostCode,otherFax
+  </sql>
+  
+  <!-- 添加一条 担保措施信息 -->
+  <insert id="insertOneOptGuarantyInfo" parameterType="com.zjm.pro.db.model.Pro_optGuaranty" >
+     insert into pro_optguaranty (optGuaranty_ID, apply_ID, applyDetail_ID, 
+	      contractDoc_ID, guarantyTypeID, guarantyTypeName, 
+	      optTypeID, optTypeName, optName, 
+	      ownerName, oldValue, buyValue, 
+	      optValue, registeAuthority, certificateNum, 
+	      houseArea, useArea, havingArea, 
+	      createDate, useYear, otherYear, 
+	      houseAddress, preposePledgee, preposeSum, 
+	      preposePledgeeOne, preposeOneSum, preposePledgeeTwo, 
+	      preposeTwoSum, preposePledgeeThree, preposeThreeSum, 
+	      landCode, landProperty, landArea, 
+	      adderss, count, stockRegisteNum, 
+	      stockRegisteAuthority, clientID, guararelationship, 
+	      otherDesc, sortNum, coverageRatio, 
+	      optPeriod, optBeginDate, optEndDate, 
+	      optGuarDesc, isRegister, finishDate, 
+	      isDispose, disposeTypeID, disposeTypeName, 
+	      disposeSum, chargeAgainstSum, disposeUserId, 
+	      disposeUserName, disposeDate, freeDate, 
+	      unit_uid, unit_uidName, updateUserName, 
+	      updateDateTime, landSource, pledgeLandArea, 
+	      assessValue, isOther, otherType, 
+	      isWorkable, isProxy, proxyName, 
+	      proxyPhone, proxyCode, actualValue, 
+	      otherOwnerID, pledgePart, carBrandAndType, 
+	      carBuyDate, carCode, carEngineCode, 
+	      carFrame, keepType, invoiceValue, 
+	      isInsurance, insuranceCompany, insuranceCode, 
+	      insuranceBeginDate, insuranceEndDate, isLocal, 
+	      isUseOther, otherUseName, otherUseCode, 
+	      otherUsePhone, specifications, unitName, 
+	      guaranteeSum, bankName, bankNumber, 
+	      isMarried, spouseName, spouseCode, 
+	      guaranteePattern, guaranteeScale, ipoSite, 
+	      ipoName, stockCode, stockCount, 
+	      landOwnerName, leaseName, leasePeriod, 
+	      YearRent, payPattern, payDate, 
+	      alreadyTime, residueTime, residueRent, 
+	      companyContractCode, companyContractName, 
+	      billNumber, billCode, payPerson, 
+	      leaseCode, firstOwner, firstOwnerCode, 
+	      secondOwner, secondOwnerCode, depositType, 
+	      depositCode, depositName, depositAccounts, 
+	      depositDate, depositPeriod, depositSum, 
+	      yearScale, patentName, patentCode, 
+	      appalyDate, certificateDate, validPeriod, 
+	      patentDuty, custodyCost, brandCode, 
+	      useCommodity, totalAmount, repertoryBalance, 
+	      insuranceCost, superviseCost, leaseCost, 
+	      otherCost, legalDsputeDesc, cashabilityDesc, 
+	      disposeRemark, trafficViolation,
+	      guaranteePatternID, pledgeDepart,
+	      pledgeFile,pledgeFileCount,receivePerson,
+	      realizeUserName,realizeUserID,realizeDate,
+   		  freeUserName,freeUserID,guaranteeRemark,
+   		  isFree,
+   		  isCompanyStock,
+   		  custodyStatus,putStockUserName,putStockDate,
+   		  deposit_type_id,versions,versions_id,isGuarantyMaxSum,machinesNumber,companyOnceName
+      )
+    values (#{optGuaranty_ID}, #{apply_ID}, #{applyDetail_ID}, 
+	      #{contractDoc_ID}, #{guarantyTypeID}, #{guarantyTypeName}, 
+	      #{optTypeID}, #{optTypeName}, #{optName}, 
+	      #{ownerName}, #{oldValue}, #{buyValue}, 
+	      #{optValue}, #{registeAuthority}, #{certificateNum}, 
+	      #{houseArea}, #{useArea}, #{havingArea}, 
+	      #{createDate}, #{useYear}, #{otherYear}, 
+	      #{houseAddress}, #{preposePledgee}, #{preposeSum}, 
+	      #{preposePledgeeOne}, #{preposeOneSum}, #{preposePledgeeTwo}, 
+	      #{preposeTwoSum}, #{preposePledgeeThree}, #{preposeThreeSum}, 
+	      #{landCode}, #{landProperty}, #{landArea}, 
+	      #{adderss}, #{count}, #{stockRegisteNum}, 
+	      #{stockRegisteAuthority}, #{clientID}, #{guararelationship}, 
+	      #{otherDesc}, #{sortNum}, #{coverageRatio}, 
+	      #{optPeriod}, #{optBeginDate}, #{optEndDate}, 
+	      #{optGuarDesc}, #{isRegister}, #{finishDate}, 
+	      #{isDispose}, #{disposeTypeID}, #{disposeTypeName}, 
+	      #{disposeSum}, #{chargeAgainstSum}, #{disposeUserId}, 
+	      #{disposeUserName}, #{disposeDate}, #{freeDate}, 
+	      #{unit_uid}, #{unit_uidName}, #{updateUserName}, 
+	      NOW(), #{landSource}, #{pledgeLandArea}, 
+	      #{assessValue}, #{isOther}, #{otherType}, 
+	      #{isWorkable}, #{isProxy}, #{proxyName}, 
+	      #{proxyPhone}, #{proxyCode}, #{actualValue}, 
+	      #{otherOwnerID}, #{pledgePart}, #{carBrandAndType}, 
+	      #{carBuyDate}, #{carCode}, #{carEngineCode}, 
+	      #{carFrame}, #{keepType}, #{invoiceValue}, 
+	      #{isInsurance}, #{insuranceCompany}, #{insuranceCode}, 
+	      #{insuranceBeginDate}, #{insuranceEndDate}, #{isLocal}, 
+	      #{isUseOther}, #{otherUseName}, #{otherUseCode}, 
+	      #{otherUsePhone}, #{specifications}, #{unitName}, 
+	      #{guaranteeSum}, #{bankName}, #{bankNumber}, 
+	      #{isMarried}, #{spouseName}, #{spouseCode}, 
+	      #{guaranteePattern}, #{guaranteeScale}, #{ipoSite}, 
+	      #{ipoName}, #{stockCode}, #{stockCount,jdbcType=BIGINT}, 
+	      #{landOwnerName}, #{leaseName}, #{leasePeriod}, 
+	      #{yearRent}, #{payPattern}, #{payDate}, 
+	      #{alreadyTime}, #{residueTime}, #{residueRent}, 
+	      #{companyContractCode}, #{companyContractName}, 
+	      #{billNumber}, #{billCode}, #{payPerson}, 
+	      #{leaseCode}, #{firstOwner}, #{firstOwnerCode}, 
+	      #{secondOwner}, #{secondOwnerCode}, #{depositType}, 
+	      #{depositCode}, #{depositName}, #{depositAccounts}, 
+	      #{depositDate}, #{depositPeriod}, #{depositSum}, 
+	      #{yearScale}, #{patentName}, #{patentCode}, 
+	      #{appalyDate}, #{certificateDate}, #{validPeriod}, 
+	      #{patentDuty}, #{custodyCost}, #{brandCode}, 
+	      #{useCommodity}, #{totalAmount}, #{repertoryBalance}, 
+	      #{insuranceCost}, #{superviseCost}, #{leaseCost}, 
+	      #{otherCost}, #{legalDsputeDesc}, #{cashabilityDesc}, 
+	      #{disposeRemark}, #{trafficViolation},
+	      #{guaranteePatternID},
+	      #{pledgeDepart},#{pledgeFile},#{pledgeFileCount},#{receivePerson},
+	      #{realizeUserName},#{realizeUserID},#{realizeDate},#{freeUserName},#{freeUserID},#{guaranteeRemark},
+	      #{isFree},
+	      #{isCompanyStock},
+	      #{custodyStatus},#{putStockUserName},#{putStockDate},
+	      #{depositTypeId},#{versions},#{versionsId},#{isGuarantyMaxSum},#{machinesNumber},#{companyOnceName}
+      )
+  </insert>
+  
+  <!-- 删除保证措施信息 -->
+  <delete id="deleteOneOptGuarantyInfo" parameterType="java.lang.String" >
+    delete from pro_optguaranty
+    where optGuaranty_ID = #{optGuaranty_ID}
+  </delete>
+  
+  <!-- 修改保证措施信息 -->
+  <update id="updateOneOptGuarantyInfo" parameterType="com.zjm.pro.db.model.Pro_optGuaranty" >
+       update pro_optguaranty
+    <set >
+      <if test="apply_ID != null" >
+        apply_ID = #{apply_ID},
+      </if>
+      <if test="applyDetail_ID != null" >
+        applyDetail_ID = #{applyDetail_ID},
+      </if>
+      <if test="contractDoc_ID != null" >
+        contractDoc_ID = #{contractDoc_ID},
+      </if>
+      <if test="guarantyTypeID != null" >
+        guarantyTypeID = #{guarantyTypeID},
+      </if>
+      <if test="guarantyTypeName != null" >
+        guarantyTypeName = #{guarantyTypeName},
+      </if>
+      <if test="optTypeID != null" >
+        optTypeID = #{optTypeID},
+      </if>
+      <if test="optTypeName != null" >
+        optTypeName = #{optTypeName},
+      </if>
+      <if test="optName != null" >
+        optName = #{optName},
+      </if>
+      <if test="ownerName != null" >
+        ownerName = #{ownerName},
+      </if>
+      <if test="oldValue != null" >
+        oldValue = #{oldValue},
+      </if>
+      <if test="buyValue != null" >
+        buyValue = #{buyValue},
+      </if>
+      <if test="optValue != null" >
+        optValue = #{optValue},
+      </if>
+      <if test="registeAuthority != null" >
+        registeAuthority = #{registeAuthority},
+      </if>
+      <if test="certificateNum != null" >
+        certificateNum = #{certificateNum},
+      </if>
+      <if test="houseArea != null" >
+        houseArea = #{houseArea},
+      </if>
+      <if test="useArea != null" >
+        useArea = #{useArea},
+      </if>
+      <if test="havingArea != null" >
+        havingArea = #{havingArea},
+      </if>
+      <if test="createDate != null" >
+        createDate = #{createDate},
+      </if>
+      <if test="useYear != null" >
+        useYear = #{useYear},
+      </if>
+      <if test="otherYear != null" >
+        otherYear = #{otherYear},
+      </if>
+      <if test="houseAddress != null" >
+        houseAddress = #{houseAddress},
+      </if>
+      <if test="preposePledgee != null" >
+        preposePledgee = #{preposePledgee},
+      </if>
+      <if test="preposeSum != null" >
+        preposeSum = #{preposeSum},
+      </if>
+      <if test="preposePledgeeOne != null" >
+        preposePledgeeOne = #{preposePledgeeOne},
+      </if>
+      <if test="preposeOneSum != null" >
+        preposeOneSum = #{preposeOneSum},
+      </if>
+      <if test="preposePledgeeTwo != null" >
+        preposePledgeeTwo = #{preposePledgeeTwo},
+      </if>
+      <if test="preposeTwoSum != null" >
+        preposeTwoSum = #{preposeTwoSum},
+      </if>
+      <if test="preposePledgeeThree != null" >
+        preposePledgeeThree = #{preposePledgeeThree},
+      </if>
+      <if test="preposeThreeSum != null" >
+        preposeThreeSum = #{preposeThreeSum},
+      </if>
+      <if test="landCode != null" >
+        landCode = #{landCode},
+      </if>
+      <if test="landProperty != null" >
+        landProperty = #{landProperty},
+      </if>
+      <if test="landArea != null" >
+        landArea = #{landArea},
+      </if>
+      <if test="adderss != null" >
+        adderss = #{adderss},
+      </if>
+      <if test="count != null" >
+        count = #{count},
+      </if>
+      <if test="stockRegisteNum != null" >
+        stockRegisteNum = #{stockRegisteNum},
+      </if>
+      <if test="stockRegisteAuthority != null" >
+        stockRegisteAuthority = #{stockRegisteAuthority},
+      </if>
+      <if test="clientID != null" >
+        clientID = #{clientID},
+      </if>
+      <if test="guararelationship != null" >
+        guararelationship = #{guararelationship},
+      </if>
+      <if test="otherDesc != null" >
+        otherDesc = #{otherDesc},
+      </if>
+      <if test="sortNum != null" >
+        sortNum = #{sortNum},
+      </if>
+      <if test="coverageRatio != null" >
+        coverageRatio = #{coverageRatio},
+      </if>
+      <if test="optPeriod != null" >
+        optPeriod = #{optPeriod},
+      </if>
+      <if test="optBeginDate != null" >
+        optBeginDate = #{optBeginDate},
+      </if>
+      <if test="optEndDate != null" >
+        optEndDate = #{optEndDate},
+      </if>
+      <if test="optGuarDesc != null" >
+        optGuarDesc = #{optGuarDesc},
+      </if>
+      <if test="isRegister != null" >
+        isRegister = #{isRegister},
+      </if>
+      <if test="finishDate != null" >
+        finishDate = #{finishDate},
+      </if>
+      <if test="isDispose != null" >
+        isDispose = #{isDispose},
+      </if>
+      <if test="disposeTypeID != null" >
+        disposeTypeID = #{disposeTypeID},
+      </if>
+      <if test="disposeTypeName != null" >
+        disposeTypeName = #{disposeTypeName},
+      </if>
+      <if test="disposeSum != null" >
+        disposeSum = #{disposeSum},
+      </if>
+      <if test="chargeAgainstSum != null" >
+        chargeAgainstSum = #{chargeAgainstSum},
+      </if>
+      <if test="disposeUserId != null" >
+        disposeUserId = #{disposeUserId},
+      </if>
+      <if test="disposeUserName != null" >
+        disposeUserName = #{disposeUserName},
+      </if>
+      <if test="disposeDate != null" >
+        disposeDate = #{disposeDate},
+      </if>
+      <if test="freeDate != null" >
+        freeDate = #{freeDate},
+      </if>
+      <if test="unit_uid != null" >
+        unit_uid = #{unit_uid},
+      </if>
+      <if test="unit_uidName != null" >
+        unit_uidName = #{unit_uidName},
+      </if>
+      <if test="updateUserName != null" >
+        updateUserName = #{updateUserName},
+      </if>
+        updateDateTime =NOW(),
+      
+      <if test="landSource != null" >
+        landSource = #{landSource},
+      </if>
+      <if test="pledgeLandArea != null" >
+        pledgeLandArea = #{pledgeLandArea},
+      </if>
+      <if test="assessValue != null" >
+        assessValue = #{assessValue},
+      </if>
+      <if test="isOther != null" >
+        isOther = #{isOther},
+      </if>
+      <if test="otherType != null" >
+        otherType = #{otherType},
+      </if>
+      <if test="isWorkable != null" >
+        isWorkable = #{isWorkable},
+      </if>
+      <if test="isProxy != null" >
+        isProxy = #{isProxy},
+      </if>
+      <if test="proxyName != null" >
+        proxyName = #{proxyName},
+      </if>
+      <if test="proxyPhone != null" >
+        proxyPhone = #{proxyPhone},
+      </if>
+      <if test="proxyCode != null" >
+        proxyCode = #{proxyCode},
+      </if>
+      <if test="actualValue != null" >
+        actualValue = #{actualValue},
+      </if>
+      <if test="otherOwnerID != null" >
+        otherOwnerID = #{otherOwnerID},
+      </if>
+      <if test="pledgePart != null" >
+        pledgePart = #{pledgePart},
+      </if>
+      <if test="carBrandAndType != null" >
+        carBrandAndType = #{carBrandAndType},
+      </if>
+      <if test="carBuyDate != null" >
+        carBuyDate = #{carBuyDate},
+      </if>
+      <if test="carCode != null" >
+        carCode = #{carCode},
+      </if>
+      <if test="carEngineCode != null" >
+        carEngineCode = #{carEngineCode},
+      </if>
+      <if test="carFrame != null" >
+        carFrame = #{carFrame},
+      </if>
+      <if test="keepType != null" >
+        keepType = #{keepType},
+      </if>
+      <if test="invoiceValue != null" >
+        invoiceValue = #{invoiceValue},
+      </if>
+      <if test="isInsurance != null" >
+        isInsurance = #{isInsurance},
+      </if>
+      <if test="insuranceCompany != null" >
+        insuranceCompany = #{insuranceCompany},
+      </if>
+      <if test="insuranceCode != null" >
+        insuranceCode = #{insuranceCode},
+      </if>
+      <if test="insuranceBeginDate != null" >
+        insuranceBeginDate = #{insuranceBeginDate},
+      </if>
+      <if test="insuranceEndDate != null" >
+        insuranceEndDate = #{insuranceEndDate},
+      </if>
+      <if test="isLocal != null" >
+        isLocal = #{isLocal},
+      </if>
+      <if test="isUseOther != null" >
+        isUseOther = #{isUseOther},
+      </if>
+      <if test="otherUseName != null" >
+        otherUseName = #{otherUseName},
+      </if>
+      <if test="otherUseCode != null" >
+        otherUseCode = #{otherUseCode},
+      </if>
+      <if test="otherUsePhone != null" >
+        otherUsePhone = #{otherUsePhone},
+      </if>
+      <if test="specifications != null" >
+        specifications = #{specifications},
+      </if>
+      <if test="unitName != null" >
+        unitName = #{unitName},
+      </if>
+      <if test="guaranteeSum != null" >
+        guaranteeSum = #{guaranteeSum},
+      </if>
+      <if test="bankName != null" >
+        bankName = #{bankName},
+      </if>
+      <if test="bankNumber != null" >
+        bankNumber = #{bankNumber},
+      </if>
+      <if test="isMarried != null" >
+        isMarried = #{isMarried},
+      </if>
+      <if test="spouseName != null" >
+        spouseName = #{spouseName},
+      </if>
+      <if test="spouseCode != null" >
+        spouseCode = #{spouseCode},
+      </if>
+      <if test="guaranteePattern != null" >
+        guaranteePattern = #{guaranteePattern},
+      </if>
+      <if test="guaranteeScale != null" >
+        guaranteeScale = #{guaranteeScale},
+      </if>
+      <if test="ipoSite != null" >
+        ipoSite = #{ipoSite},
+      </if>
+      <if test="ipoName != null" >
+        ipoName = #{ipoName},
+      </if>
+      <if test="stockCode != null" >
+        stockCode = #{stockCode},
+      </if>
+      <if test="stockCount != null" >
+        stockCount = #{stockCount,jdbcType=BIGINT},
+      </if>
+      <if test="landOwnerName != null" >
+        landOwnerName = #{landOwnerName},
+      </if>
+      <if test="leaseName != null" >
+        leaseName = #{leaseName},
+      </if>
+      <if test="leasePeriod != null" >
+        leasePeriod = #{leasePeriod},
+      </if>
+      <if test="yearRent != null" >
+        YearRent = #{yearRent},
+      </if>
+      <if test="payPattern != null" >
+        payPattern = #{payPattern},
+      </if>
+      <if test="payDate != null" >
+        payDate = #{payDate},
+      </if>
+      <if test="alreadyTime != null" >
+        alreadyTime = #{alreadyTime},
+      </if>
+      <if test="residueTime != null" >
+        residueTime = #{residueTime},
+      </if>
+      <if test="residueRent != null" >
+        residueRent = #{residueRent},
+      </if>
+      <if test="companyContractCode != null" >
+        companyContractCode = #{companyContractCode},
+      </if>
+      <if test="companyContractName != null" >
+        companyContractName = #{companyContractName},
+      </if>
+      <if test="billNumber != null" >
+        billNumber = #{billNumber},
+      </if>
+      <if test="billCode != null" >
+        billCode = #{billCode},
+      </if>
+      <if test="payPerson != null" >
+        payPerson = #{payPerson},
+      </if>
+      <if test="leaseCode != null" >
+        leaseCode = #{leaseCode},
+      </if>
+      <if test="firstOwner != null" >
+        firstOwner = #{firstOwner},
+      </if>
+      <if test="firstOwnerCode != null" >
+        firstOwnerCode = #{firstOwnerCode},
+      </if>
+      <if test="secondOwner != null" >
+        secondOwner = #{secondOwner},
+      </if>
+      <if test="secondOwnerCode != null" >
+        secondOwnerCode = #{secondOwnerCode},
+      </if>
+      <if test="depositType != null" >
+        depositType = #{depositType},
+      </if>
+      <if test="depositCode != null" >
+        depositCode = #{depositCode},
+      </if>
+      <if test="depositName != null" >
+        depositName = #{depositName},
+      </if>
+      <if test="depositAccounts != null" >
+        depositAccounts = #{depositAccounts},
+      </if>
+      <if test="depositDate != null" >
+        depositDate = #{depositDate},
+      </if>
+      <if test="depositPeriod != null" >
+        depositPeriod = #{depositPeriod},
+      </if>
+      <if test="depositSum != null" >
+        depositSum = #{depositSum},
+      </if>
+      <if test="yearScale != null" >
+        yearScale = #{yearScale},
+      </if>
+      <if test="patentName != null" >
+        patentName = #{patentName},
+      </if>
+      <if test="patentCode != null" >
+        patentCode = #{patentCode},
+      </if>
+      <if test="appalyDate != null" >
+        appalyDate = #{appalyDate},
+      </if>
+      <if test="certificateDate != null" >
+        certificateDate = #{certificateDate},
+      </if>
+      <if test="validPeriod != null" >
+        validPeriod = #{validPeriod},
+      </if>
+      <if test="patentDuty != null" >
+        patentDuty = #{patentDuty},
+      </if>
+      <if test="custodyCost != null" >
+        custodyCost = #{custodyCost},
+      </if>
+      <if test="brandCode != null" >
+        brandCode = #{brandCode},
+      </if>
+      <if test="useCommodity != null" >
+        useCommodity = #{useCommodity},
+      </if>
+      <if test="totalAmount != null" >
+        totalAmount = #{totalAmount},
+      </if>
+      <if test="repertoryBalance != null" >
+        repertoryBalance = #{repertoryBalance},
+      </if>
+      <if test="insuranceCost != null" >
+        insuranceCost = #{insuranceCost},
+      </if>
+      <if test="superviseCost != null" >
+        superviseCost = #{superviseCost},
+      </if>
+      <if test="leaseCost != null" >
+        leaseCost = #{leaseCost},
+      </if>
+      <if test="otherCost != null" >
+        otherCost = #{otherCost},
+      </if>
+      <if test="legalDsputeDesc != null" >
+        legalDsputeDesc = #{legalDsputeDesc},
+      </if>
+      <if test="cashabilityDesc != null" >
+        cashabilityDesc = #{cashabilityDesc},
+      </if>
+      <if test="disposeRemark != null" >
+        disposeRemark = #{disposeRemark},
+      </if>
+      <if test="trafficViolation != null" >
+        trafficViolation = #{trafficViolation},
+      </if>
+       <if test="guaranteePatternID != null" >
+        guaranteePatternID = #{guaranteePatternID},
+      </if>
+      <if test="pledgeDepart != null" >
+        pledgeDepart = #{pledgeDepart},
+      </if>
+      <if test="pledgeFile != null" >
+        pledgeFile = #{pledgeFile},
+      </if>
+      <if test="pledgeFileCount != null" >
+        pledgeFileCount = #{pledgeFileCount},
+      </if>
+      <if test="receivePerson != null" >
+        receivePerson = #{receivePerson},
+      </if>
+      <if test="realizeUserName != null" >
+        realizeUserName = #{realizeUserName},
+      </if>
+      <if test="realizeUserID != null" >
+        realizeUserID = #{realizeUserID},
+      </if>
+      
+      <if test="realizeDate != null" >
+        realizeDate = #{realizeDate},
+      </if>
+      <if test="freeUserName != null" >
+        freeUserName = #{freeUserName},
+      </if>
+      <if test="freeUserID != null" >
+        freeUserID = #{freeUserID},
+      </if>
+      <if test="guaranteeRemark != null" >
+        guaranteeRemark = #{guaranteeRemark},
+      </if>
+       <if test="isFree != null" >
+        isFree = #{isFree},
+      </if>
+      <if test="isCompanyStock != null" >
+        isCompanyStock = #{isCompanyStock},
+      </if>
+      <if test="custodyStatus != null" >
+       		custodyStatus = #{custodyStatus},
+      </if>
+       <if test="putStockUserName != null" >
+        	putStockUserName = #{putStockUserName},
+      </if>
+       <if test="putStockDate != null" >
+        	putStockDate = #{putStockDate},
+      </if>
+      <if test="versionsId != null and versionsId != '' ">
+      		versions_id = #{versionsId},
+      </if>
+       <if test="versions != null and versions != '' " >
+        	versions = #{versions},
+      </if>
+       <if test="isGuarantyMaxSum != null" >
+        	isGuarantyMaxSum = #{isGuarantyMaxSum},
+      </if>
+      <if test="depositTypeId != null and depositTypeId != '' ">
+      		deposit_type_id = #{depositTypeId},
+      </if>
+      <if test="machinesNumber != null and machinesNumber != '' ">
+      		machinesNumber = #{machinesNumber},
+      </if>
+      <if test="companyOnceName != null and companyOnceName != '' ">
+      		companyOnceName = #{companyOnceName},
+      </if>
+    </set>
+    where optGuaranty_ID = #{optGuaranty_ID}
+    
+  </update>
+ 
+ <!-- 查询一条保证措施信息 -->
+  <select id="selectOneOptGuarantyInfo" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+		
+			case when third.clientName is null then third.personName  else third.clientName   end  as thirdOwnerName,
+			third.certificateCode as thirdrCreditCode,third.legalPerson as thirdLegalPerson,third.phoneOne as thirdLegalPhone,
+		  third.workAddress as thirdLegalAddress,third.zipCode as thirdPostCode,third.fax as thirdFax,
+		  third.personNum as thirdPersonNum,third.phone as thirdPersonPhone,third.houseAddress as  thirdPersonAddress,
+
+		 c.clientName,c.personName,c.clientTypeID,c.certificateCode as otherCreditCode ,c.personNum as otherPersonNum,
+		 c.legalPerson as otherLegalPerson,c.phoneOne as otherLegalPhone,c.workAddress as otherLegalAddress,
+	     c.zipCode as otherPostCode,c.fax as otherFax,c.phone as otherPersonPhone,c.houseAddress as otherPersonAddress,
+	     po.optGuaranty_ID,  po.apply_ID,  po.applyDetail_ID,  po.contractDoc_ID,  po.guarantyTypeID,  po.guarantyTypeName, 
+	     po.optTypeID,  po.optTypeName,  po.optName,  po.ownerName,  po.oldValue,  po.buyValue,  po.optValue,  po.registeAuthority, 
+	     po.certificateNum,  po.houseArea,  po.useArea,  po.havingArea,  po.createDate,  po.useYear,  po.otherYear,  po.houseAddress, 
+	     po.preposePledgee,  po.preposeSum,  po.preposePledgeeOne,  po.preposeOneSum,  po.preposePledgeeTwo, 
+	     po.preposeTwoSum,  po.preposePledgeeThree,  po.preposeThreeSum,  po.landCode,  po.landProperty,  po.landArea, 
+	     po.adderss,  po.count,  po.stockRegisteNum,  po.stockRegisteAuthority,  po.clientID,  po.guararelationship, 
+	     po.otherDesc,  po.sortNum,  po.coverageRatio,  po.optPeriod,  po.optBeginDate,  po.optEndDate,  po.optGuarDesc, 
+	     po.isRegister,  po.finishDate,  po.isDispose,  po.disposeTypeID,  po.disposeTypeName,  po.disposeSum,  po.chargeAgainstSum, 
+	     po.disposeUserId,  po.disposeUserName,  po.disposeDate,  po.freeDate,  po.unit_uid,  po.unit_uidName,  po.updateUserName, 
+	     po.updateDateTime,  po.landSource,  po.pledgeLandArea,  po.assessValue,  po.isOther,  po.otherType,  po.isWorkable,
+	     po.legalDsputeDesc,  po.cashabilityDesc,  po.disposeRemark,
+	     po.isProxy,po.proxyName,po.proxyPhone,po.proxyCode,po.actualValue,po.otherOwnerID,
+	     po.pledgePart,po.carBrandAndType,po.carBuyDate,po.carCode,po.carEngineCode,po.carFrame,po.keepType,po.invoiceValue,po.isInsurance,
+	     po.insuranceCompany,po.insuranceCode,po.insuranceBeginDate,po.insuranceEndDate,po.isLocal,po.trafficViolation,po.isUseOther,
+	     po.otherUseName,po.otherUseCode,po.otherUsePhone,po.specifications,po.unitName,po.guaranteeSum,po.bankName,po.bankNumber,po.isMarried,
+	     po.spouseName,po.spouseCode,po.guaranteePattern,po.guaranteeScale,po.ipoSite,po.ipoName,po.stockCode,po.stockCount,po.landOwnerName,
+	     po.leaseName,po.leasePeriod,po.yearRent,po.payPattern,po.payDate,po.alreadyTime,po.residueTime,po.residueRent,po.companyContractCode,
+	     po.companyContractName,po.billNumber,po.billCode,po.payPerson,po.leaseCode,po.firstOwner,po.firstOwnerCode,po.secondOwner,po.secondOwnerCode,
+	     po.depositType,po.depositCode,po.depositName,po.depositAccounts,po.depositDate,po.depositPeriod,po.depositSum,po.yearScale,po.patentName,
+	     po.patentCode,po.appalyDate,po.certificateDate,po.validPeriod,po.patentDuty,po.custodyCost,po.brandCode,po.useCommodity,po.totalAmount,
+	     po.repertoryBalance,po.insuranceCost,po.superviseCost,po.leaseCost,po.otherCost,
+	     po.guaranteePatternID,
+	     po.pledgeDepart,po.pledgeFile,po.pledgeFileCount,po.receivePerson,po.realizeUserName,po.realizeUserID,po.realizeDate,
+   		 po.freeUserName,po.freeUserID,po.guaranteeRemark,
+   		 po.isFree,
+   		 po.isCompanyStock,
+		 po.custodyStatus,po.putStockUserName,po.putStockDate,
+		 po.deposit_type_id,
+		 po.versions,
+		 po.versions_id,
+		 po.isGuarantyMaxSum,
+		 machinesNumber,
+		 companyOnceName
+				 
+	 from pro_optguaranty po 
+	 LEFT JOIN crm_client c on  c.client_ID = po.clientID 
+   	LEFT JOIN crm_client third on third.client_ID = po.otherOwnerID
+  	 where po.optGuaranty_ID=#{optGuaranty_ID}
+  </select>
+  
+  <!-- 获取保证措施分页列表  -->
+  <select id="selectOptGuarantyPageTables" parameterType="com.zjm.common.db.model.PageTable" resultMap="BaseResultMap">
+  	 select 
+  	 	 pa.busiCode,pa.clientName,
+  	 	 pa.projectName, 
+	     po.optGuaranty_ID,  po.apply_ID,  po.applyDetail_ID,  po.contractDoc_ID,  po.guarantyTypeID,  po.guarantyTypeName, 
+	     po.optTypeID,  po.optTypeName,  po.optName,  po.ownerName,  po.oldValue,  po.buyValue,  po.optValue,  po.registeAuthority, 
+	     po.certificateNum,  po.houseArea,  po.useArea,  po.havingArea,  po.createDate,  po.useYear,  po.otherYear,  po.houseAddress, 
+	     po.preposePledgee,  po.preposeSum,  po.preposePledgeeOne,  po.preposeOneSum,  po.preposePledgeeTwo, 
+	     po.preposeTwoSum,  po.preposePledgeeThree,  po.preposeThreeSum,  po.landCode,  po.landProperty,  po.landArea, 
+	     po.adderss,  po.count,  po.stockRegisteNum,  po.stockRegisteAuthority,  po.clientID,  po.guararelationship, 
+	     po.otherDesc,  po.sortNum,  po.coverageRatio,  po.optPeriod,  po.optBeginDate,  po.optEndDate,  po.optGuarDesc, 
+	     po.isRegister,  po.finishDate,  po.isDispose,  po.disposeTypeID,  po.disposeTypeName,  po.disposeSum,  po.chargeAgainstSum, 
+	     po.disposeUserId,  po.disposeUserName,  po.disposeDate,  po.freeDate,  po.unit_uid,  po.unit_uidName,  po.updateUserName, 
+	     po.updateDateTime,  po.landSource,  po.pledgeLandArea,  po.assessValue,  po.isOther,  po.otherType,  po.isWorkable,
+	     po.legalDsputeDesc,  po.cashabilityDesc,  po.disposeRemark,
+	     po.isProxy,po.proxyName,po.proxyPhone,po.proxyCode,po.actualValue,po.otherOwnerID,
+	     po.pledgePart,po.carBrandAndType,po.carBuyDate,po.carCode,po.carEngineCode,po.carFrame,po.keepType,po.invoiceValue,po.isInsurance,
+	     po.insuranceCompany,po.insuranceCode,po.insuranceBeginDate,po.insuranceEndDate,po.isLocal,po.trafficViolation,po.isUseOther,
+	     po.otherUseName,po.otherUseCode,po.otherUsePhone,po.specifications,po.unitName,po.guaranteeSum,po.bankName,po.bankNumber,po.isMarried,
+	     po.spouseName,po.spouseCode,po.guaranteePattern,po.guaranteeScale,po.ipoSite,po.ipoName,po.stockCode,po.stockCount,po.landOwnerName,
+	     po.leaseName,po.leasePeriod,po.yearRent,po.payPattern,po.payDate,po.alreadyTime,po.residueTime,po.residueRent,po.companyContractCode,
+	     po.companyContractName,po.billNumber,po.billCode,po.payPerson,po.leaseCode,po.firstOwner,po.firstOwnerCode,po.secondOwner,po.secondOwnerCode,
+	     po.depositType,po.depositCode,po.depositName,po.depositAccounts,po.depositDate,po.depositPeriod,po.depositSum,po.yearScale,po.patentName,
+	     po.patentCode,po.appalyDate,po.certificateDate,po.validPeriod,po.patentDuty,po.custodyCost,po.brandCode,po.useCommodity,po.totalAmount,
+	     po.repertoryBalance,po.insuranceCost,po.superviseCost,po.leaseCost,po.otherCost,
+	     po.guaranteePatternID,
+	     po.pledgeDepart,po.pledgeFile,po.pledgeFileCount,po.receivePerson,po.realizeUserName,po.realizeUserID,po.realizeDate,
+   		 po.freeUserName,po.freeUserID,po.guaranteeRemark,
+   		 po.isFree,
+   		 po.isCompanyStock,
+   		 po.custodyStatus,po.putStockUserName,po.putStockDate,
+   		 po.deposit_type_id,po.versions,po.versions_id,  
+   		 po.isGuarantyMaxSum,
+   		 <!-- 融投项目反担保物列表显示增加字段 -->
+   		  pp.guarantySum,
+   		 pa.fundChinese,
+   		 pa.fundName,
+   		 pp.bankName as hzbankName,
+   		 pp.subBankName,
+   		 pp.loadBeginDate,
+   		 pp.delayEndDate,
+   		 machinesNumber,
+   		 companyOnceName 
+	 from pro_optguaranty po 
+	 LEFT JOIN pro_apply  pa on pa.apply_ID = po.apply_ID
+	 LEFT JOIN pro_project pp on pp.apply_ID = pa.apply_ID 
+	 where 1=1 ${wheresql}  limit #{pageNumber},#{pageSize}
+	 
+  </select>
+  
+  <!-- 计算分页列表 总记录数 -->
+  <select id="selectOptGuarantyPageTables_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="java.lang.Integer">
+  	select 
+  	count(po.optGuaranty_ID)
+  	from pro_optguaranty po
+	LEFT JOIN pro_apply  pa on pa.apply_ID = po.apply_ID
+  	where 1=1 ${wheresql}
+  </select>
+  
+  <select id="selectGuarantySumByWheresql" parameterType="string" resultType="java.lang.Double">
+  	select sum(guaranteeSum) from pro_optguaranty where 1=1 ${wheresql}
+  </select>
+  
+  <delete id="deleteOptGuarantyByApply_Id" parameterType="string">
+  	delete 
+  	from pro_optguaranty
+  	where apply_ID = #{apply_ID}
+  </delete>
+  
+  <!-- 根据查询条件查询一个展期表信息-->
+	<select id="selectOptGuarantyByWheresql" parameterType="java.lang.String"  resultMap="BaseResultMap">
+	<![CDATA[
+		SELECT 
+	       	optGuaranty_ID, apply_ID, applyDetail_ID, contractDoc_ID, guarantyTypeID, guarantyTypeName, 
+		    optTypeID, optTypeName, optName, ownerName, oldValue, buyValue, optValue, registeAuthority, 
+		    certificateNum, houseArea, useArea, havingArea, createDate, useYear, otherYear, houseAddress, 
+		    preposePledgee, preposeSum, preposePledgeeOne, preposeOneSum, preposePledgeeTwo, 
+		    preposeTwoSum, preposePledgeeThree, preposeThreeSum, landCode, landProperty, landArea, 
+		    adderss, count, stockRegisteNum, stockRegisteAuthority, clientID, guararelationship, 
+		    otherDesc, sortNum, coverageRatio, optPeriod, optBeginDate, optEndDate, optGuarDesc, 
+		    isRegister, finishDate, isDispose, disposeTypeID, disposeTypeName, disposeSum, chargeAgainstSum, 
+		    disposeUserId, disposeUserName, disposeDate, freeDate, unit_uid, unit_uidName, updateUserName, 
+		    updateDateTime, landSource, pledgeLandArea, assessValue, isOther, otherType, isWorkable,
+		    legalDsputeDesc, cashabilityDesc, disposeRemark,
+		    isProxy,proxyName,proxyPhone,proxyCode,actualValue,otherOwnerID,
+		    
+		    pledgePart,carBrandAndType,carBuyDate,carCode,carEngineCode,carFrame,keepType,invoiceValue,isInsurance,
+		    insuranceCompany,insuranceCode,insuranceBeginDate,insuranceEndDate,isLocal,trafficViolation,isUseOther,
+		    otherUseName,otherUseCode,otherUsePhone,specifications,unitName,guaranteeSum,bankName,bankNumber,isMarried,
+		    spouseName,spouseCode,guaranteePattern,guaranteeScale,ipoSite,ipoName,stockCode,stockCount,landOwnerName,
+		    leaseName,leasePeriod,yearRent,payPattern,payDate,alreadyTime,residueTime,residueRent,companyContractCode,
+		    companyContractName,billNumber,billCode,payPerson,leaseCode,firstOwner,firstOwnerCode,secondOwner,secondOwnerCode,
+		    depositType,depositCode,depositName,depositAccounts,depositDate,depositPeriod,depositSum,yearScale,patentName,
+		    patentCode,appalyDate,certificateDate,validPeriod,patentDuty,custodyCost,brandCode,useCommodity,totalAmount,
+		    repertoryBalance,insuranceCost,superviseCost,leaseCost,otherCost,
+		    guaranteePatternID,
+		    pledgeDepart,pledgeFile,pledgeFileCount,receivePerson,realizeUserName,realizeUserID,realizeDate,
+		    freeUserName,freeUserID,guaranteeRemark,
+		    isFree,
+		    isCompanyStock,
+		    custodyStatus,putStockUserName,putStockDate,versions,versions_id,isGuarantyMaxSum,
+		    machinesNumber,
+		    companyOnceName
+	    FROM 
+	         pro_optguaranty 
+		WHERE 1=1 ${value}
+		]]> 				 
+	</select>
+  <!-- 根据查询条件查询项目所属担保措施所有备注-->
+	<select id="getGuaranteeRemarkByWheresql" parameterType="java.lang.String"  resultType="java.lang.String">
+	<![CDATA[
+		SELECT 
+	       group_concat(disposeRemark)
+	    FROM 
+	         pro_optguaranty 
+		WHERE 1=1 ${value}
+		]]> 				 
+	</select>
+  
+  
+</mapper>

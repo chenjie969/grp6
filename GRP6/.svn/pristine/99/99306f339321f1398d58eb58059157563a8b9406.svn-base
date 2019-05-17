@@ -1,0 +1,559 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<%@ include file="/common_timestamp.jsp" %>
+<%@ include file="/common_head.jsp" %>
+
+<!-- <script type="text/javascript">
+$('.date-picker').datepicker({autoclose:true}).next().on(ace.click_event, function(){
+	$(this).prev().focus();
+});
+</script> -->
+
+<div class="page-content">   
+      <!--  <input type="hidden" id="singleAppleAddPage" class="pageType" name="singleAppleAddPage" value="0">
+     
+       -->
+     
+      <div class="row">
+		<div class="col-xs-12">
+		<form class="form-horizontal" role="form" id="projectAfterAdd_form">
+          <input type="hidden" id="projectType" class="" name="projectType" value="单笔"><!--是否单笔业务  -->
+          <input type="hidden" id="projectStageID" name="projectStageID" value="保后阶段">	 <!--项目阶段id -->		 			
+    	  <input type="hidden" id="projectStageName" name="projectStageName"  value="保后阶段">	 <!--项目阶段名称 -->
+    	  <input type="hidden" id="clientGUID" name="clientGUID"/><!-- 客户唯一标示 -->		 			
+		 <input type="hidden" id="busiNatureName" class="busiNatureName" name="busiNatureName" value="存量业务">
+		 <input type="hidden" id="busiNatureID" class="busiNatureID" name="busiNatureID" value="f11443ed9b444a2db6242925c4f5a1dd">
+         <input type="hidden" id="busiClass" name="busiClass" value="${busiClass}"><!-- 业务类型 -->
+         
+         <%-- <div class="space-4"></div>
+         <div class="form-group">
+			<label class="col-md-2 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>业务性质： </label>
+			<div class="col-md-6">期限
+				<input type="hidden" id="busiNatureName" class="busiNatureName" name="busiNatureName" >
+					<select id="busiNatureList" class="selectList col-sm-6 col-md-6 validate[required]"  name="busiNatureID"  >		
+							<option value="">&nbsp;请选择</option>
+							<c:forEach items="${busiNatureList}" var="busiNature">
+								<option value="${busiNature.dicTypeID}">${busiNature.dicTypeName}</option>
+							</c:forEach>
+				    </select>
+			</div>
+      	</div>
+ --%>
+       <%--  <div class="space-4"></div>
+        <div class="form-group">
+		   	<label class="col-md-2 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>项目类型： </label>
+	        <div class="col-md-6">
+	       		  <input type="hidden" id="projectTypeName" class="projectTypeName" name="projectTypeName1" >
+				  <select id="projectTypeList" class="selectList col-sm-6 col-md-6 validate[required]"  name="projectTypeID1"  >		
+							<option value="">&nbsp;请选择</option>
+							<c:forEach items="${projectTypeList}" var="projectType">
+								<option value="${projectType.dicTypeID}">${projectType.dicTypeName}</option>
+							</c:forEach>
+				  </select>
+			</div>
+         </div>
+ --%>
+          <div class="space-4"></div>
+            <div class="form-group">
+				<label class="col-md-2 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>客户类型： </label>
+				<div class="col-md-6">
+					<input type="hidden" id="clientTypeName" class="clientTypeName" name="clientTypeName" >
+					  <select id="clientTypeList" class="selectList col-sm-6 col-md-6 validate[required]"  name="clientTypeID" >  		
+								<option value="">&nbsp;请选择</option>                                    
+								<c:forEach items="${clientTypeList}" var="clientType">
+									<option value="${clientType.dicTypeID}">${clientType.dicTypeName}</option>
+								</c:forEach>
+					  </select>
+				</div>
+           </div>
+            <div class="space-4"></div>
+            <div class="form-group">
+				<label class="col-md-2 control-label no-padding-right" for="form-field-1"> <i class="icon-asterisk orange"></i>客户名称： </label>
+				<div class="col-md-10">
+				   
+					<input type="text" id="clientName"  name="clientName"  placeholder="请选择客户名称" class="col-md-5 col-sm-6 validate[required]" readonly="readonly"/>
+	                <input type="hidden" id="clientID"  name="client_ID" >
+	                <div class="col-md-7 col-sm-6">           
+	                	<button class="btn btn-xs btn-info" type="button" name="button" id="selectClient" data-toggle="modal" data-target="#select">选择已有</button>
+	          		 </div>
+				</div>
+			</div>
+
+          <div class="space-4"></div>
+          <div class="form-group">
+          <label class="col-md-2 control-label no-padding-right" for="form-field-1"> <i class="icon-asterisk orange"></i>项目名称： </label>
+				<div class="col-md-10">
+	            	<input type="text" id="projectName" name="projectName"  class="col-md-5 col-sm-6 validate[required,maxSize[50]]" readonly="readonly" />
+				</div>
+          </div>
+ <%--
+           <div class="space-4"></div>
+           <div class="form-group">
+				<label class="col-md-2 control-label no-padding-right" for="form-input">项目来源： </label>
+				<div class="col-md-6">
+	                 	<input type="hidden" id="projectSourceName" class="projectSourceName" name="projectSourceName" >
+						<select id="projectSourceList" class="selectList col-sm-6 col-md-6 "  name="projectSourceID"  >		
+								<option value="">&nbsp;请选择</option>
+								<c:forEach items="${projectSourceList}" var="projectSource">
+									<option value="${projectSource.dicTypeID}">${projectSource.dicTypeName}</option>
+								</c:forEach>
+					    </select>
+				</select>
+				</div>
+          </div>
+
+          <div class="space-4"></div>
+           <div class="form-group">
+			   <label class="col-md-2 control-label no-padding-right" for="form-input">来源说明： </label>
+	           <div class="col-md-6">
+	               <textarea class="col-md-12 col-sm-8 limited validate[maxSize[250]]" rows="5" id="sourceDesc"  name="sourceDesc"></textarea>
+	           </div>
+	           <div class="col-md-8 col-sm-8">
+	                 <span class="light-grey" style="float:right;">限制250个字符</span>
+	            </div>
+			</div> --%>
+             <div class="space-4"></div>
+              <div class="form-group">
+			   	<label class="col-md-2 control-label no-padding-right" for="form-field-1"><i class="icon-asterisk orange"></i>业务品种： </label>
+		        <div class="col-md-6">
+					<div class="col-md-6 col-sm-6 input-group busiSortDicTree">
+							<input  type="text"  class="form-control validate[required]" autoField="busiTypeID"   id="busiSortDicTree"  value="" dataValue="" name="busiTypeName"  readonly="readonly"/>
+							<span class="input-group-addon ">
+								<i class="icon-caret-down bigger-110"></i>
+							</span>
+				    </div>
+				</div>
+	           </div>
+		   <%-- <div class="space-4"></div>
+           <div class="form-group">
+			   <label class="col-md-2 control-label no-padding-right" for="form-input">绿色通道： </label>
+				<div class="col-md-6">
+						<input type="hidden" id="greenChannelName" class="greenChannelName" name="greenChannelName" >
+						<select id="greenChannelList" class="selectList col-sm-6 col-md-6 "  name="greenChannelID"  >		
+								<option value="">&nbsp;请选择</option>
+								<c:forEach items="${greenChannelList}" var="greenChannel">
+									<option value="${greenChannel.dicTypeID}">${greenChannel.dicTypeName}</option>
+								</c:forEach>
+					    </select>
+				</div>
+           </div> --%>
+          
+		   <div class="space-4"></div>
+           <div class="form-group">
+           	 <label class="col-md-2 control-label no-padding-right" for="form-field-1"> <i class="icon-asterisk orange"></i>项目金额： </label>
+             <div class="col-md-10">
+                 <input type="text" id="loadSum" name="loadSum" class="col-md-2 col-lg-1 validate[required,maxSize[18],custom[number]]" />
+                 <span class="col-md-10 col-lg-11" style="line-height:28px;">万元</span>
+             </div>
+			</div>
+			<div class="space-4"></div>
+            <!-- <div class="form-group">
+              <label class="col-md-2 control-label no-padding-right" for="form-field-1"> <i class="icon-asterisk orange"></i>期限： </label>
+				 <div class="col-md-10">
+	                 <div class="col-md-6 no-padding-left">
+	                  <input type="text" id="periodMonth" class="validate[required,maxSize[6],custom[integer]]" name="periodMonth"  style="width:4em;" />
+	                   &nbsp;个月&nbsp;
+	                  <input type="text" id="periodDay" class="validate[required,maxSize[6],custom[integer]]" name="periodDay" value="0" style="width:4em;" />
+	                   &nbsp;天&nbsp;
+	                 </div>
+              	 </div>
+		   </div> -->
+		    <div class="space-4"></div>
+           <div class="form-group">
+				<label class="col-md-2 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>资金来源： </label>
+				<div class="col-md-6">
+	                 	<!-- <input type="hidden" id="projectSourceName" class="projectSourceName" name="projectSourceName"> -->
+						<select id="fundSourceList" class=" col-sm-6 col-md-6 validate[required] selectList"  name="fundSource"  >		
+								<option value="">&nbsp;请选择</option>
+								<c:forEach items="${fundSourceList}" var="fundSource">
+									<option value="${fundSource.dicTypeName}">${fundSource.dicTypeName}</option>
+								</c:forEach>
+					    </select>
+				</select>
+				</div>
+          </div>
+		  <div class="space-4"></div>
+           <div class="form-group">
+			   <label class="col-md-2 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>资金方类型： </label>
+				<div class="col-md-6">
+						<input type="hidden" id="fundTypeName" class="" name="fundType" >
+						<select id="fundTypeList" class="selectList validate[required]  col-sm-6 col-md-6 "  name="fundTypeID"  >		
+								<option value="">&nbsp;请选择</option>
+								<c:forEach items="${fundTypeList}" var="fundType">
+									<option value="${fundType.dicTypeID}">${fundType.dicTypeName}</option>
+								</c:forEach>
+					    </select>
+				</div>
+           </div> 
+           <div class="space-4"></div>
+		    <div class="form-group" id="cooperation">
+		   		<label class="col-md-2 control-label no-padding-right" for="form-field-1"><i class="icon-asterisk orange"></i>资金方名称： </label>
+		        <div class="col-md-6">
+					<div class="col-sm-6 col-md-6 input-group fundChineseTree">
+							<input  type="text"  class="form-control validate[required]" autoField="fundID"   id="fundChineseTree"  value="" dataValue="" name="fundChinese"  readonly="readonly"/>
+							<span class="input-group-addon ">
+								<i class="icon-caret-down bigger-110"></i>
+							</span>
+				    </div>
+				</div>
+           	</div>
+          <div class="space-4"></div>
+          <div class="form-group fundNameGroup">
+          		<label class="col-md-2 control-label no-padding-right" for="form-field-1"> <i class="icon-asterisk orange"></i>资金方子机构： </label>
+				<div class="col-md-10">
+	            	<input type="text" id="fundName" name="fundName"  class="col-md-5 col-sm-6 validate[required,maxSize[50]]" />
+				</div>
+          </div>
+          <!-- <div class="space-4"></div>
+          <div class="form-group ">
+						<label class="col-sm-2 control-label no-padding-right" for="form-input">是否敏感债权人： </label>                            
+						<div class="radio col-sm-6">
+                            <label style="margin-top:-5px;">
+                                <input type="radio" name="isSensitiveCreditor" value="1" class="ace" >
+                                <span class="lbl">是</span>
+                            </label>
+                            <label style="margin-top:-5px;">
+                                <input type="radio" name="isSensitiveCreditor" value="0" class="ace" checked="checked">
+                                <span class="lbl">否</span>
+                            </label>
+                        </div>
+					</div>
+		  <div class="space-4"></div>
+          <div class="form-group">
+          	<label class="col-md-2 control-label no-padding-right" for="form-field-1">敏感债权人數： </label>
+				<div class="col-md-10">
+	            	<input type="text" id="sensitiveCreditorNumber" name="sensitiveCreditorNumber"  class="col-md-2 col-lg-1 validate[maxSize[6]]" />
+				</div>
+          </div> -->
+		    <div class="space-4"></div>
+		    <div class="form-group" id="cooperation">
+		   		<label class="col-md-2 control-label no-padding-right" for="form-field-1"><i class="icon-asterisk orange"></i>合作机构： </label>
+		        <div class="col-md-6">
+					<div class="col-sm-6 col-md-6 input-group cooperationTree">
+							<input  type="text"  class="form-control validate[required]" autoField="bankID"   id="cooperationTree"  value="" dataValue="" name="bankName"  readonly="readonly"/>
+							<span class="input-group-addon ">
+								<i class="icon-caret-down bigger-110"></i>
+							</span>
+				    </div>
+				</div>
+           	</div>
+          <div class="space-4"></div>
+          <div class="form-group subBankGroup">
+          		<label class="col-md-2 control-label no-padding-right" for="form-field-1"><i class="icon-asterisk orange"></i>合作子机构： </label>
+				<div class="col-md-10">
+	            	<input type="text" id="subBankName" name="subBankName"  class="col-md-5 col-sm-6 validate[required,maxSize[50]]" />
+				</div>
+          </div>
+        <!--    <div class="space-4"></div>
+          <div class="form-group">
+          <label class="col-md-2 control-label no-padding-right" for="form-field-1"><i class="icon-asterisk orange"></i>担保费率： </label>
+				<div class="col-md-10">
+	            	<input type="text" id="guarantyRate" name="guarantyRate"  class="col-md-2 col-lg-1 validate[required,maxSize[6]]" />
+	            	 <span class="col-md-10 col-lg-11" style="line-height:28px;">%</span>
+				</div>
+          </div> -->
+           <div class="space-4"></div>
+          <div class="form-group">
+          <label class="col-md-2 control-label no-padding-right" for="form-field-1"><i class="icon-asterisk orange"></i>贷款（委贷）利率： </label>
+				<div class="col-md-10">
+	            	<input type="text" id="bankRate" name="bankRate"  class="col-md-2 col-lg-1 validate[required,maxSize[6]]" />
+	            	<span class="col-md-10 col-lg-11" style="line-height:28px;">%</span>
+				</div>
+          </div>
+       <!--     <div class="space-4"></div>
+          <div class="form-group">
+          <label class="col-md-2 control-label no-padding-right" for="form-field-1"><i class="icon-asterisk orange"></i>评审费率： </label>
+				<div class="col-md-10">
+	            	<input type="text" id="reviewRate" name="reviewRate"  class="col-md-2 col-lg-1 validate[required,maxSize[6]]" />
+	            	<span class="col-md-10 col-lg-11" style="line-height:28px;">‰</span>
+				</div>
+          </div> -->
+       <!--     <div class="space-4"></div>
+          <div class="form-group">
+          <label class="col-md-2 control-label no-padding-right" for="form-field-1"><i class="icon-asterisk orange"></i>金融服务费率： </label>
+				<div class="col-md-10">
+	            	<input type="text" id="serviceRate" name="serviceRate"  class="col-md-2 col-lg-1 validate[required,maxSize[6]]" />
+	            	<span class="col-md-10 col-lg-11" style="line-height:28px;">%</span>
+				</div>
+          </div> -->
+           <div class="space-4"></div>
+          <div class="form-group">
+          <label class="col-md-2 control-label no-padding-right" for="form-field-1"><i class="icon-asterisk orange"></i>罚息利率： </label>
+				<div class="col-md-10">
+	            	<input type="text" id="punishRate" name="punishRate"  class="col-md-2 col-lg-1 validate[required,maxSize[50]]" />
+	            	<span class="col-md-10 col-lg-11" style="line-height:28px;">%</span>
+	            	
+				</div>
+          </div>
+           	
+          <!--  <div class="space-4"></div>
+           <div class="form-group">
+			   <label class="col-md-2 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>委托担保（委贷）合同号： </label>
+	           <div class="col-md-6">
+	               <textarea class="col-md-12 col-sm-8 limited validate[required,maxSize[2000]]" rows="5" id="dcontractCode"  name="dcontractCode"></textarea>
+	           </div>
+	           <div class="col-md-8 col-sm-8">
+	                 <span class="light-grey" style="float:right;">限制2000个字符</span>
+	            </div>
+			</div> -->
+           <div class="space-4"></div>
+           <div class="form-group">
+			   <label class="col-md-2 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>借款合同号： </label>
+	           <div class="col-md-6">
+	               <textarea class="col-md-12 col-sm-8 limited validate[required,maxSize[2000]]" rows="5" id="jcontractCode"  name="jcontractCode"></textarea>
+	           </div>
+	           <div class="col-md-8 col-sm-8">
+	                 <span class="light-grey" style="float:right;">限制2000个字符</span>
+	            </div>
+			</div>
+           <div class="space-4"></div>
+           <div class="form-group">
+			   <label class="col-md-2 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>保证合同号： </label>
+	           <div class="col-md-6">
+	               <textarea class="col-md-12 col-sm-8 limited validate[required,maxSize[2000]]" rows="5" id="bcontractCode"  name="bcontractCode"></textarea>
+	           </div>
+	           <div class="col-md-8 col-sm-8">
+	                 <span class="light-grey" style="float:right;">限制2000个字符</span>
+	            </div>
+			</div>
+			
+		   <div class="space-4"></div>
+           <div class="form-group">
+				<label class="col-md-2 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>报送机构： </label>
+				<div class="col-md-6">
+				<input type="hidden" id="oprationCompanyName" class="oprationCompanyName" name="oprationCompanyName" value="">
+						<select id="oprationCompanyList" class="selectList col-sm-6 col-md-6 validate[required] "  name="oprationCompanyID"  >		
+								<option value="">&nbsp;请选择</option>
+								<c:forEach items="${oprationCompanyList}" var="oprationCompany">
+									<option value="${oprationCompany.dicTypeID}">${oprationCompany.dicTypeName}</option>
+								</c:forEach>
+					    </select>
+				</div>
+          </div>
+		   <div class="space-4"></div>
+           <div class="form-group">
+				<label class="col-md-2 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>承贷机构： </label>
+				<div class="col-md-6">
+				       <input type="hidden" id="guarantyOrgName" class="guarantyOrgName" name="guarantyOrgName" value="">
+						<select id="guarantyOrgList" class="col-sm-6 col-md-6  validate[required] selectList"  name="guarantyOrgID"  >		
+								<option value="">&nbsp;请选择</option>
+								<c:forEach items="${guarantyOrgList}" var="guarantyOrg">
+									<option value="${guarantyOrg.dicTypeID}" >${guarantyOrg.dicTypeName}</option>
+								</c:forEach>
+					    </select>
+				</div>
+          </div>
+		   <div class="space-4"></div>
+           <div class="form-group">
+				<label class="col-md-2 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>属地划分： </label>
+				<div class="col-md-6">
+				        <input type="hidden" id="attributionName" class="attributionName" name="attributionName" value="">
+						<select id="attributionList" class="col-sm-6 col-md-6  validate[required] selectList"  name="attributionID"  >		
+								<option value="">&nbsp;请选择</option>
+								<c:forEach items="${attributionList}" var="attribution">
+									<option value="${attribution.dicTypeID}" >${attribution.dicTypeName}</option>
+								</c:forEach>
+					    </select>
+				</div>
+          </div>
+		   <div class="space-4"></div>
+           <div class="form-group">
+				<label class="col-md-2 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>承贷地区： </label>
+				<div class="col-md-6">
+				        <input type="hidden" id="hostAreaName" class="hostAreaName" name="hostAreaName" value="">
+						<select id="hostAreaList" class="col-sm-6 col-md-6  validate[required] selectList"  name="hostAreaID"  >		
+								<option value="">&nbsp;请选择</option>
+								<c:forEach items="${hostAreaList}" var="hostArea">
+									<option value="${hostArea.dicTypeID}" >${hostArea.dicTypeName}</option>
+								</c:forEach>
+					    </select>
+				</div>
+          </div>
+		
+		
+            <div class="space-4"></div>
+           	<div class="form-group ">
+				<label class="col-md-2 control-label no-padding-right" for="form-field-1"><i class="icon-asterisk orange"></i>A角： </label>		
+					<div class="col-md-6">
+						<div class="col-md-6 col-sm-6 input-group amanNameTree">
+							<input  type="text"  class="form-control validate[required]" autoField="amanID"   id="amanNameTree"  value="" dataValue="" name="amanName"  readonly="readonly"/>
+							
+							<span class="input-group-addon ">
+								<i class="icon-caret-down bigger-110"></i>
+							</span>
+						</div>
+					</div>
+		</div>
+            <div class="space-4"></div>
+           	<div class="form-group">
+				<label class="col-md-2 control-label no-padding-right" for="form-field-1"><i class="icon-asterisk orange"></i>B角： </label>		
+					<div class="col-md-6">
+						<div class="col-md-6 col-sm-6 input-group bmanNameTree">
+							<input  type="text"  class="form-control validate[required]" autoField="bmanID"   id="bmanNameTree"  value="" dataValue="" name="bmanName"  readonly="readonly"/>
+							
+							<span class="input-group-addon ">
+								<i class="icon-caret-down bigger-110"></i>
+							</span>
+						</div>
+					</div>
+		</div>
+       <!--  <div class="space-4"></div>
+			<div class="form-group">
+		   	    <label class="col-md-2 control-label no-padding-right" for="form-input">受理日期： </label>
+	         	<div class="col-md-6">
+					<div class="input-group col-sm-6 col-md-6">
+						<input class="form-control date-picker validate[custom[date]]" id="createDate" name="createDate" type="text" data-date-format="yyyy-mm-dd" />
+						<span class="input-group-addon">
+							<i class="icon-calendar bigger-110"></i>
+						</span>
+					</div>
+				</div>
+	        </div> -->
+        <div class="space-4"></div>
+			<div class="form-group">
+		   	    <label class="col-md-2 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>上报日期： </label>
+	         	<div class="col-md-6">
+					<div class="input-group col-sm-6 col-md-6">
+						<input class="form-control date-picker validate[required,custom[date]]" id="reportDate" name="reportDate" type="text" data-date-format="yyyy-mm-dd" />
+						<span class="input-group-addon">
+							<i class="icon-calendar bigger-110"></i>
+						</span>
+					</div>
+				</div>
+	        </div>
+        <div class="space-4"></div>
+			<div class="form-group">
+		   	    <label class="col-md-2 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>起始日期： </label>
+	         	<div class="col-md-6">
+					<div class="input-group col-sm-6 col-md-6">
+						<input class="form-control date-picker validate[required,custom[date]]" id="loadBeginDate" name="loadBeginDate" type="text" data-date-format="yyyy-mm-dd" />
+						<span class="input-group-addon">
+							<i class="icon-calendar bigger-110"></i>
+						</span>
+					</div>
+				</div>
+	        </div>
+	        
+        <div class="space-4"></div>
+			<div class="form-group">
+		   	    <label class="col-md-2 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>结束日期： </label>
+	         	<div class="col-md-6">
+					<div class="input-group col-sm-6 col-md-6">
+						<input class="form-control date-picker validate[required,custom[date]]" id="loadEndDate" name="loadEndDate" type="text" data-date-format="yyyy-mm-dd" />
+						<span class="input-group-addon">
+							<i class="icon-calendar bigger-110"></i>
+						</span>
+					</div>
+				</div>
+	        </div>
+	        
+	 <!--    <div class="space-4"></div>
+			<div class="form-group">
+		   	    <label class="col-md-2 control-label no-padding-right" for="form-input"><i class="icon-asterisk orange"></i>代偿到期日期： </label>
+	         	<div class="col-md-6">
+					<div class="input-group col-sm-6 col-md-6">
+						<input class="form-control date-picker validate[required,custom[date]]" id="replaceOverDate" name="replaceOverDate" type="text" data-date-format="yyyy-mm-dd" />
+						<span class="input-group-addon">
+							<i class="icon-calendar bigger-110"></i>
+						</span>
+					</div>
+				</div>
+	        </div> -->
+        </form>
+      <div class="clearfix form-actions">
+			<div class="col-md-offset-3 col-md-9">
+		       <button class="btn btn-primary btn_projectAfterAdd" type="button"  value="0"><i class="icon-ok bigger-110"></i>保存</button>
+		        &nbsp; &nbsp; &nbsp;
+		      <!--  <button class="btn btn-primary btn_agreeAdd" type="button" value="0"><i class="icon-ok bigger-110"></i>同意立项</button>
+		        &nbsp; &nbsp; &nbsp; -->
+		       <button class="btn btn_colse" id="btn_closeProjectAfterAdd" type="button" ><i class="icon-remove bigger-110 "></i>关闭</button>
+            </div>
+      </div>     
+     </div>
+    </div>
+</div>
+<%@ include file="/common_foot.jsp" %>
+<%@ include file="/project/apply/clientList.jsp" %>
+<script src="<%=path %>/project/apply/projectAfterAdd.js?v=<%=vardate%>"></script> 
+<script>
+//选择客户
+    $("body").on("keyup", "#fundNameTree", function() {
+			var pbankSortID = $("#fundID").val();
+			var bankSortName = $("#fundNameTree").val();
+			var busiClass = $("#busiClass").val(); //获取业务类型
+			$.ajax({type:'POST',url:'/crm/cooperation/selectAllFundListTree',data:JSON.stringify({"bankSortName":bankSortName,"pbanksortid":pbankSortID,"banksortid":pbankSortID, "busiClass":busiClass, "fundType":"02"}),contentType:'application/json; charset=UTF-8',dataType:'json',
+				success:function(data){
+					$("#fundNameTree").selectTreeWidgets({
+						width : "46%",//设置控件宽度
+						multiple : false,//是否多选
+						data : data.obj//数据源
+					});
+				}
+			});
+    })
+    $("body").on("click", "#tree-fundChineseTree", function() {
+			var pbankSortID = $("#fundID").val();//获取资金方名称;
+			var busiClass = $("#busiClass").val(); //获取业务类型
+			//获取资金方子机构下拉树;
+			$.ajax({type:'POST',url:'/crm/cooperation/selectAllFundListTree',data:JSON.stringify({"pbanksortid":pbankSortID,"banksortid":pbankSortID, "busiClass":busiClass, "fundType":"02"}),contentType:'application/json; charset=UTF-8',dataType:'json',
+				success:function(data){
+					$("#fundNameTree").selectTreeWidgets({
+						width : "46%",//设置控件宽度
+						multiple : false,//是否多选
+						data : data.obj//数据源
+					});
+				}
+			});
+    });
+    var cooperationData = [];
+    $.ajax({type:'POST',url:'/crm/cooperation/selectAllCooperationListTree',data:JSON.stringify({}),contentType:'application/json; charset=UTF-8',dataType:'json',
+		success:function(data){	
+			data.obj.map(function(item){
+				if(item.pId == "49618632db614f99a7e45c4f09c50c18"){
+					cooperationData.push(item)
+				}
+			})
+		}
+	});
+    
+    $("body").on("click", "#tree-cooperationTree", function(e) {
+			var pbankSortID = $("#bankID").val();//获取合作机构名称;
+			var subBankFormat = false;
+			//获取合作机构子机构下拉树;
+			cooperationData.map(function(it){
+				if(it.id == pbankSortID){
+					subBankFormat = true;
+				}
+			})
+			if(subBankFormat){
+				$(".subBankGroup").children("div").remove();
+		　　    	 $(".subBankGroup").append(
+		　　    			 "<div class='col-md-6'> "+
+						 "	<div class='col-sm-6 col-md-6 input-group subBankTree'> "+
+						 "	     <input  type='text'  class='form-control validate[required]' autoField='subBankID'   id='subBankTree'  value='' dataValue='' name='subBank' readonly='readonly' /> "+
+						 "	     <span class='input-group-addon'> "+
+						 "		   <i class='icon-caret-down bigger-110'></i> "+
+						 "	     </span> "+
+						 "   </div> "+
+						 "</div> "
+		　　    			 )
+			}else{
+				$(".subBankGroup").children("div").remove();
+		　　    	$(".subBankGroup").append(
+		　　    			 "<div class='col-md-10'>"+
+			             "	<input type='text' id='subBankName' name='subBankName'  class='col-md-5 col-sm-6 validate[required,maxSize[50]]' />"+
+	    				 "</div>"
+		　　    			 )
+			}
+			
+			$.ajax({type:'POST',url:'/crm/cooperation/selectAllCooperationListTree',data:JSON.stringify({"pbanksortid":pbankSortID}),contentType:'application/json; charset=UTF-8',dataType:'json',
+				success:function(data){	
+					$("#subBankTree").selectTreeWidgets({
+						width : "46%",//设置控件宽度
+						multiple : false,//是否多选
+						data : data.obj//数据源
+					});
+				}
+			});
+	})
+</script>

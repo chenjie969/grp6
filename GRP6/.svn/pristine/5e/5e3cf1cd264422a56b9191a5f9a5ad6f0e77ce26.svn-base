@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjm.crm.db.map.Crm_financeDescMapper" >
+  
+	<resultMap id="financeDescResultMap" type="com.zjm.crm.db.model.Crm_financeDesc" >
+		<result column="financeDesc_ID" property="financeDesc_ID"  />
+		<result column="client_ID" property="client_ID"  />
+		<result column="receivableDesc" property="receivableDesc"  />
+		<result column="otherReceivableDesc" property="otherReceivableDesc"  />
+		<result column="inventoryDesc" property="inventoryDesc"  />
+		<result column="longtermInvestDesc" property="longtermInvestDesc"  />
+		<result column="fixedAssetsDesc" property="fixedAssetsDesc"  />
+		<result column="loanChangeDesc" property="loanChangeDesc"  />
+		<result column="incurDebtDesc" property="incurDebtDesc"  />
+		<result column="profitDesc" property="profitDesc"  />
+		<result column="unit_uid" property="unit_uid"  />
+		<result column="unit_uidName" property="unit_uidName"  />
+		<result column="updateUserName" property="updateUserName"  />
+		<result column="updateDateTime" property="updateDateTime"  />
+	</resultMap>
+
+	<!-- 查询一条财务状况说明-->  
+	<select id="selectOneFinanceDesc" parameterType="com.zjm.crm.db.model.Crm_financeDesc" resultMap="financeDescResultMap">
+		SELECT 
+			financeDesc_ID,
+			client_ID,
+			receivableDesc,
+			otherReceivableDesc,
+			inventoryDesc,
+			longtermInvestDesc,
+			fixedAssetsDesc,
+			loanChangeDesc,
+			incurDebtDesc,
+			profitDesc,
+			unit_uid, 
+			unit_uidName, 
+			updateUserName,
+			updateDateTime   
+		FROM crm_financeDesc
+		WHERE unit_uid = #{unit_uid}
+		<if test="financeDesc_ID!=null and financeDesc_ID!=''">AND financeDesc_ID = #{financeDesc_ID}</if>
+		<if test="client_ID!=null and client_ID!=''">AND client_ID = #{client_ID}</if>
+	</select>
+	
+	<!-- 插入一条财务状况说明 -->
+	<insert id="insertOneFinanceDesc" parameterType="com.zjm.crm.db.model.Crm_financeDesc">
+		INSERT INTO crm_financeDesc(
+			financeDesc_ID,
+			client_ID,
+			receivableDesc,
+			otherReceivableDesc,
+			inventoryDesc,
+			longtermInvestDesc,
+			fixedAssetsDesc,
+			loanChangeDesc,
+			incurDebtDesc,
+			profitDesc,
+			unit_uid, 
+			unit_uidName, 
+			updateUserName,
+			updateDateTime       
+		) VALUES(
+			#{financeDesc_ID},
+			#{client_ID},
+			#{receivableDesc},
+			#{otherReceivableDesc},
+			#{inventoryDesc},
+			#{longtermInvestDesc},
+			#{fixedAssetsDesc},
+			#{loanChangeDesc},
+			#{incurDebtDesc},
+			#{profitDesc},
+			#{unit_uid}, 
+			#{unit_uidName}, 
+			#{updateUserName},
+			NOW()
+		)
+	</insert>
+	
+	<!-- 修改一条财务状况说明 -->
+	<update id="updateOneFinanceDesc" parameterType="com.zjm.crm.db.model.Crm_financeDesc">
+		UPDATE crm_financeDesc
+		<set>
+			<if test="receivableDesc != null">receivableDesc = #{receivableDesc},</if>
+			<if test="otherReceivableDesc != null">otherReceivableDesc = #{otherReceivableDesc},</if>
+			<if test="inventoryDesc != null">inventoryDesc = #{inventoryDesc},</if>
+			<if test="longtermInvestDesc != null">longtermInvestDesc = #{longtermInvestDesc},</if>
+			<if test="fixedAssetsDesc != null">fixedAssetsDesc = #{fixedAssetsDesc},</if>
+			<if test="loanChangeDesc != null">loanChangeDesc = #{loanChangeDesc},</if>
+			<if test="incurDebtDesc != null">incurDebtDesc = #{incurDebtDesc},</if>
+			<if test="profitDesc != null">profitDesc = #{profitDesc},</if>
+			updateUserName = #{updateUserName},
+			updateDateTime = NOW(0)
+		</set>
+		WHERE unit_uid = #{unit_uid}
+		<if test="financeDesc_ID!=null and financeDesc_ID!=''">AND financeDesc_ID = #{financeDesc_ID}</if>
+		<if test="client_ID!=null and client_ID!=''">AND client_ID = #{client_ID}</if>
+	</update>
+	
+	 <select id="selectFinanceDescListByWhereSql" parameterType="string"  resultMap="financeDescResultMap">
+	 	SELECT 
+			financeDesc_ID,
+			client_ID,
+			receivableDesc,
+			otherReceivableDesc,
+			inventoryDesc,
+			longtermInvestDesc,
+			fixedAssetsDesc,
+			loanChangeDesc,
+			incurDebtDesc,
+			profitDesc,
+			unit_uid, 
+			unit_uidName, 
+			updateUserName,
+			updateDateTime   
+		FROM crm_financeDesc 
+		where 1=1 ${value}
+	 </select>
+	 
+	 
+	 <delete id="deleteFinanceDescByWhereSql" parameterType="string">
+	 	delete from crm_financeDesc
+	 	where 1=1  ${value}
+	 </delete>
+	
+</mapper>

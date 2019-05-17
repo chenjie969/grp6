@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.gbpm.db.map.Gbpm_dicTaskManagerMapper">
+
+	<resultMap type="com.zjm.gbpm.db.model.Gbpm_dicTaskManager" id="taskManagerResultMap">
+		<result column="taskManager_ID" property="taskManager_ID"  />
+		<!-- <result column="taskTypeID" property="taskTypeID"  /> -->
+		<result column="taskName" property="taskName"  />
+		<result column="taskCode" property="taskCode"  />
+		<result column="taskUrl" property="taskUrl"  />
+		<result column="viewTaskUrl" property="viewTaskUrl"  />
+		<result column="remark" property="remark"  />
+		<result column="unit_uid" property="unit_uid"  />
+		<result column="unit_uidName" property="unit_uidName"  />
+		<result column="updatedatetime" property="updatedatetime"  />
+		<!-- <result column="updateUserName" property="updateUserName"  /> -->
+		<result column="update_user" property="update_user"  />
+		<result column="taskmanagerSort" property="taskmanagerSort"  />
+		<result column="isPersonTask" property="isPersonTask"  />
+		<result column="taskTypeName" property="taskTypeName"  />
+	</resultMap>
+	
+	<!-- 分页查询任务事项管理列表 -->
+	<select id="selectTaskManagerPageTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="taskManagerResultMap">
+		SELECT 
+			taskManager.taskManager_ID,
+			taskName,
+			taskCode,
+			taskUrl,
+   			viewTaskUrl,
+			taskManager.remark,  
+			taskManager.unit_uid, 
+			taskManager.unit_uidName,  
+			taskManager.update_user, 
+			taskmanagerSort, 
+			isPersonTask, 
+			taskManager.updatedatetime
+		FROM gbpm_dic_taskManager taskManager
+	
+		LEFT JOIN gbpm_tasktype_task taskTypeTask ON taskTypeTask.taskManager_ID = taskManager.taskManager_ID
+		LEFT JOIN gbpm_taskType taskType ON taskType.taskType_ID = taskTypeTask.taskType_ID
+	
+		WHERE 1=1 ${wheresql}
+		LIMIT #{pageNumber},#{pageSize}  
+	</select>
+	
+	<!-- 分页查询任务事项管理列表-查询总记录数 -->
+	<select id="selectTaskManagerPageTable_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="long">
+	 	SELECT 
+	 		COUNT(1) 
+	 	FROM 
+	 		gbpm_dic_taskManager taskManager
+ 		LEFT JOIN gbpm_tasktype_task taskTypeTask ON taskTypeTask.taskManager_ID = taskManager.taskManager_ID
+		LEFT JOIN gbpm_taskType taskType ON taskType.taskType_ID = taskTypeTask.taskType_ID
+	
+		WHERE 1=1 ${wheresql} 
+	</select>
+	
+	<!-- 查询一条任务事项管理-->  
+	<select id="selectOneTaskManager" parameterType="com.zjm.gbpm.db.model.Gbpm_dicTaskManager" resultMap="taskManagerResultMap">
+		SELECT 
+			taskManager.taskManager_ID,
+			taskManager.taskName,
+			taskManager.taskCode,
+			taskManager.taskUrl,
+   			taskManager.viewTaskUrl,
+			taskManager.remark,  
+			taskManager.unit_uid, 
+			taskManager.unit_uidName,  
+			taskManager.update_user, 
+			taskManager.taskmanagerSort, 
+			taskManager.isPersonTask, 
+			taskManager.updatedatetime,
+			taskType.taskTypeName
+		FROM gbpm_dic_taskManager taskManager
+	
+		LEFT JOIN gbpm_tasktype_task taskTypeTask ON taskTypeTask.taskManager_ID = taskManager.taskManager_ID
+		LEFT JOIN gbpm_taskType taskType ON taskType.taskType_ID = taskTypeTask.taskType_ID
+		WHERE 
+		taskManager.taskManager_ID = #{taskManager_ID}
+	</select>
+	
+	<!-- 插入一条任务事项管理 -->
+	<insert id="insertOneTaskManager" parameterType="com.zjm.gbpm.db.model.Gbpm_dicTaskManager">
+		INSERT INTO gbpm_dic_taskManager(
+			taskManager_ID,
+			taskName,
+			taskCode,
+			taskUrl, 
+   			viewTaskUrl,
+			remark, 
+			unit_uid, 
+			unit_uidName,  
+			update_user,  
+			taskmanagerSort,  
+			isPersonTask,  
+			updatedatetime    
+		) VALUES(
+			#{taskManager_ID},
+			#{taskName},
+			#{taskCode},
+			#{taskUrl}, 
+			#{viewTaskUrl}, 
+			#{remark}, 
+			#{unit_uid}, 
+			#{unit_uidName},  
+			#{update_user},  
+			#{taskmanagerSort},  
+			#{isPersonTask},  
+			NOW()
+		)
+	</insert>
+	
+	<!-- 修改一条任务事项管理 -->
+	<update id="updateOneTaskManager" parameterType="com.zjm.gbpm.db.model.Gbpm_dicTaskManager">
+		UPDATE gbpm_dic_taskManager
+		SET
+			<if test="taskName!=null">taskName = #{taskName},</if>
+			<if test="taskCode!=null">taskCode = #{taskCode},</if>
+			<if test="viewTaskUrl!=null">viewTaskUrl = #{viewTaskUrl}, </if>
+			<if test="taskUrl!=null">taskUrl = #{taskUrl}, </if>
+			<if test="remark!=null">remark = #{remark},</if>
+			<if test="unit_uid!=null">unit_uid = #{unit_uid},</if>
+			<if test="unit_uidName!=null">unit_uidName = #{unit_uidName}, </if>
+			<if test="update_user!=null">update_user = #{update_user}, </if>
+			<if test="taskmanagerSort!=null">taskmanagerSort = #{taskmanagerSort},</if>
+			<if test="isPersonTask!=null">isPersonTask = #{isPersonTask},</if>
+			updatedatetime = NOW()
+			
+		WHERE taskManager_ID = #{taskManager_ID}
+	</update>
+	
+	<!-- 删除一条任务事项管理 -->
+	<delete id="deleteOneTaskManager" parameterType="com.zjm.gbpm.db.model.Gbpm_dicTaskManager">
+		DELETE FROM 
+			gbpm_dic_taskManager
+		WHERE
+			unit_uid = #{unit_uid}
+		AND taskManager_ID = #{taskManager_ID}
+	</delete>
+ 
+ 	<!-- 判断任务事项名称是否存在 ，如果有taskManagerID，说明是更新数据，要排除与自身的taskName比较-->
+	<select id="isExistTaskName" parameterType="com.zjm.gbpm.db.model.Gbpm_dicTaskManager" resultType="java.lang.Integer">
+		<![CDATA[
+			SELECT 
+				COUNT(1) 
+			FROM 
+				gbpm_dic_taskManager 
+			WHERE 
+				unit_uid = #{unit_uid} 
+			AND taskName = #{taskName}
+		]]>
+			<if test="taskManager_ID != null">
+				AND taskManager_ID != #{taskManager_ID}
+			</if>
+	</select>
+	
+	<!-- 判断任务事项编号是否存在 ，如果有taskManagerID，说明是更新数据，要排除与自身的taskName比较-->
+	<select id="isExistTaskCode" parameterType="com.zjm.gbpm.db.model.Gbpm_dicTaskManager" resultType="java.lang.Integer">
+		<![CDATA[
+			SELECT 
+				COUNT(1) 
+			FROM 
+				gbpm_dic_taskManager 
+			WHERE 
+				unit_uid = #{unit_uid} 
+			AND taskCode = #{taskCode}
+		]]>
+			<if test="taskManager_ID != null">
+				AND taskManager_ID != #{taskManager_ID}
+			</if>
+	</select>
+	
+	
+	
+	<!-- 查询任务事项List -->
+	<select id="selectTaskManagerList" parameterType="java.lang.String" resultMap="taskManagerResultMap">
+		SELECT 
+			taskManager.taskManager_ID,
+			taskManager.taskName,
+			taskManager.taskCode,
+			taskManager.taskUrl,
+   			taskManager.viewTaskUrl,
+			taskManager.remark,  
+			taskManager.unit_uid, 
+			taskManager.unit_uidName,  
+			taskManager.update_user, 
+			taskManager.taskmanagerSort, 
+			taskManager.isPersonTask, 
+			taskManager.updatedatetime,
+			taskType.taskType_ID,
+			taskType.taskTypeName,
+			taskType.pTaskType_ID
+			
+		FROM gbpm_dic_taskManager taskManager
+	
+		LEFT JOIN gbpm_tasktype_task taskTypeTask ON taskTypeTask.taskManager_ID = taskManager.taskManager_ID
+		LEFT JOIN gbpm_taskType taskType ON taskType.taskType_ID = taskTypeTask.taskType_ID 
+		WHERE 1=1 ${value}
+		order by taskManager.taskManagerSort,taskManager.taskCode
+	</select>
+</mapper>

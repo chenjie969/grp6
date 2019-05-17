@@ -1,0 +1,279 @@
+package com.zjm.common.sysDicData.web;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.zjm.common.db.model.AjaxRes;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.zjm.common.db.model.SysDicData;
+import com.zjm.common.sysDicData.service.SysDicDataService;
+import com.zjm.sys.db.model.C_busiSort;
+import com.zjm.util.Tool;
+/**
+ * 系统字典
+ * @author mashuo add 20170515
+ *
+ */
+@Controller
+public class SysDicDataAction {
+	@Resource
+	private SysDicDataService sysDicDataService;
+	/***
+	 * 多级字典树形方法
+	 * @return
+	 */
+	@RequestMapping(value="/sys/dic/selectMultiLevelSortDicTree", method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes selectMultiLevelSortDicTree(@RequestBody String obj){
+		JSONObject sort=JSON.parseObject(obj);
+		List<SysDicData> list=sysDicDataService.selectMultiLevelSortDicNoEableList("",(String) sort.get("id"));//multilevelsortid
+		List<Map<String, Object>> mapList = new ArrayList<Map<String,Object>>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		for (SysDicData info : list) {
+			map = new HashMap<String, Object>();
+			map.put("id", info.getId());
+			map.put("pId", info.getPid());
+			map.put("name", info.getName());
+			mapList.add(map);
+		}
+		AjaxRes ar=new AjaxRes();
+		ar.setSucceed(mapList);
+		return ar;
+	}
+	
+	
+	
+	
+	/***
+	 * 业务品种树形方法
+	 * @return
+	 */
+	@RequestMapping(value="/sys/dic/selectBusiSortDicTree", method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes selectBusiSortDicTree(@RequestBody C_busiSort busiSort){
+		String whereSql = "";
+		if (busiSort.getBusiClass() != null && !"".equals(busiSort.getBusiClass())) {
+			whereSql = " and (busiClass = \'"+busiSort.getBusiClass()+"\' or busiClass is null)";
+		}
+		List<SysDicData> list=sysDicDataService.selectBusiSortDicNoEableList(whereSql);
+		List<Map<String, Object>> mapList = new ArrayList<Map<String,Object>>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		for (SysDicData info : list) {
+			map = new HashMap<String, Object>();
+			map.put("id", info.getId());
+			map.put("pId", info.getPid());
+			map.put("name", info.getName());
+			mapList.add(map);
+		}
+		AjaxRes ar=new AjaxRes();
+		ar.setSucceed(mapList);
+		return ar;
+	}
+	
+	
+	/***
+	 * 银行字典树形方法
+	 * @return
+	 */
+	@RequestMapping(value="/sys/dic/selectBankSortDicTree", method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes selectBankSortDicTree(){
+		List<SysDicData> list=sysDicDataService.selectBankSortDicNoEableList("");
+		List<Map<String, Object>> mapList = new ArrayList<Map<String,Object>>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		for (SysDicData info : list) {
+			map = new HashMap<String, Object>();
+			map.put("id", info.getId());
+			map.put("pId", info.getPid());
+			map.put("name", info.getName());
+			mapList.add(map);
+		}
+		AjaxRes ar=new AjaxRes();
+		ar.setSucceed(mapList);
+		return ar;
+	}
+	
+	
+	
+	/***
+	 * 部门用户树形方法
+	 * @return
+	 */
+	@RequestMapping(value="/sys/dic/selectDepartsUserTree", method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes selectDepartsUserTree(){
+		List<Map<String, Object>> list=sysDicDataService.selectDepartsUserTree("");
+		AjaxRes ar=new AjaxRes();
+		ar.setSucceed(list);
+		return ar;
+	}
+	
+	/***
+	 * 只显示可用部门的树形方法
+	 * @return
+	 */
+	@RequestMapping(value="/sys/dic/selectAllDepartsTree", method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes selectAllDepartsTree(){
+		List<Map<String, Object>> list=sysDicDataService.selectAllDepartsTree("");
+		AjaxRes ar=new AjaxRes();
+		ar.setSucceed(list);
+		return ar;
+	}
+	/***
+	 * 部门的树形方法 授权共享人用
+	 * @return
+	 */
+	@RequestMapping(value="/sys/dic/selectDepartsUserTreeTwo", method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes selectAllDepartsTreeTwo(){
+		List<Map<String, Object>> list=sysDicDataService.selectDepartsUserTreeTwo("");
+		AjaxRes ar=new AjaxRes();
+		ar.setSucceed(list);
+		return ar;
+	}
+	
+	/**
+	 * 岗位树方法
+	 * @return
+	 */
+	@RequestMapping(value="/sys/dic/selectPostDicTree", method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes selectPostDicTree(){
+		List<SysDicData> list=sysDicDataService.selectPostDicList("");
+		List<Map<String, Object>> mapList = new ArrayList<Map<String,Object>>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		for (SysDicData info : list) {
+			map = new HashMap<String, Object>();
+			map.put("id", info.getId());
+			map.put("pId", info.getPid());
+			map.put("name", info.getName());
+			mapList.add(map);
+		}
+		AjaxRes ar=new AjaxRes();
+		ar.setSucceed(mapList);
+		return ar;
+	}
+	/**
+	 * 项目组树方法
+	 * @return
+	 */
+	@RequestMapping(value="/sys/dic/selectUserGroupDicTree", method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes selectUserGroupDicTree(){
+		List<SysDicData> list=sysDicDataService.selectUserGroupDicList("");
+		List<Map<String, Object>> mapList = new ArrayList<Map<String,Object>>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		for (SysDicData info : list) {
+			map = new HashMap<String, Object>();
+			map.put("id", info.getId());
+			map.put("pId", info.getPid());
+			map.put("name", info.getName());
+			mapList.add(map);
+		}
+		AjaxRes ar=new AjaxRes();
+		ar.setSucceed(mapList);
+		return ar;
+	}
+	/**
+	 * 菜单树方法
+	 * @return
+	 */
+	@RequestMapping(value="/sys/dic/selectModulesDicTree", method=RequestMethod.POST)
+	@ResponseBody
+	public AjaxRes selectModulesDicTree(){
+		List<SysDicData> list=sysDicDataService.selectModulesDicList("");
+		List<Map<String, Object>> mapList = new ArrayList<Map<String,Object>>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("id", "ac0f1a8e29964a808e5a26509222171b");
+		map.put("pId", "-1");
+		map.put("name", "流程管理");
+		map.put("open",true);
+		map.put("mod_type","3");
+		mapList.add(map);
+		map = new HashMap<String, Object>();
+		map.put("id", "9cf65ae4911a4e7bac532be9e492af23");
+		map.put("pId", "-1");
+		map.put("name", "担保管理");
+		map.put("open",true);
+		map.put("mod_type","1");
+		mapList.add(map);
+		map = new HashMap<String, Object>();
+		map.put("id", "361afd038b914df597e546e2625ff9c4");
+		map.put("pId", "-1");
+		map.put("name", "OA");
+		map.put("open",true);
+		map.put("mod_type","2");
+		mapList.add(map);
+		map = new HashMap<String, Object>();
+		map.put("id", "88196758091d4b80949f917355845716");
+		map.put("pId", "-1");
+		map.put("name", "系统管理");
+		map.put("open",true);
+		map.put("mod_type","4");
+		mapList.add(map);
+		for (SysDicData info : list) {
+			map = new HashMap<String, Object>();
+			map.put("id", info.getId());
+			map.put("pId", info.getPid());
+			map.put("name", info.getName());
+			mapList.add(map);
+		}
+		AjaxRes ar=new AjaxRes();
+		ar.setSucceed(mapList);
+		return ar;
+	}
+	
+	
+	
+	
+	
+	/***
+	 * 用户Map方法
+	 * @return
+	 */
+	@RequestMapping(value="/sys/dic/selectUsersDicNoEableList")
+	@ResponseBody
+	public AjaxRes selectUsersDicNoEableList(){
+		List<SysDicData> map=sysDicDataService.selectUsersDicNoEableList("");
+		AjaxRes ar=new AjaxRes();
+		ar.setSucceed(map);
+		return ar;
+	}
+	/***
+	 * 角色Map方法
+	 * @return
+	 */
+	@RequestMapping(value="/sys/dic/selectRoleDicList")
+	@ResponseBody
+	public AjaxRes selectRoleDicList(){
+		List<SysDicData> map=sysDicDataService.selectRoleDicList("");
+		AjaxRes ar=new AjaxRes();
+		ar.setSucceed(map);
+		return ar;
+	}
+	
+	/***
+	 * 获取一个uuid
+	 * @return
+	 */
+	@RequestMapping(value="/sys/dic/selectOneUUID")
+	@ResponseBody
+	public AjaxRes selectOneUUID(){
+		AjaxRes ar=new AjaxRes();
+		ar.setSucceed(Tool.createUUID32());
+		return ar;
+	}
+}

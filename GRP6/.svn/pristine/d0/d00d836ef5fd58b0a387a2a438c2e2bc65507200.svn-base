@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="IBatisWorkflowFactory">
+
+        <typeAlias alias="WorkflowConfigData" type="com.opensymphony.workflow.spi.ibatis.WorkflowConfigData"/>
+        
+        <cacheModel id="workflowconfig-cache" type="LRU">
+                <flushInterval minutes="30"/>
+                <property name="size" value="1000" />
+                <flushOnExecute statement="insertWorkflowConfig"/>
+                <flushOnExecute statement="updateWorkflowConfig"/>
+                <flushOnExecute statement="deleteWorkflowConfig"/>
+        </cacheModel>
+        
+        <resultMap id="WorkflowConfigDataResult" class="WorkflowConfigData">
+                <result property="name" column="WF_NAME"/>
+                <result property="descriptor" column="WF_DEFINITION"/>
+        </resultMap>
+        
+        <select id="selectWorkflowConfig" parameterClass="String" resultMap="WorkflowConfigDataResult" cacheModel="workflowconfig-cache">
+                SELECT `WF_NAME`, `WF_DEFINITION`
+                FROM `os_workflowdefs`
+                <dynamic prepend="WHERE">
+                        <isNotNull prepend="" property="value">
+                                `WF_NAME`=#value#
+                        </isNotNull>
+                </dynamic>
+        </select>
+        
+        <insert id="insertWorkflowConfig" parameterClass="WorkflowConfigData">
+                INSERT INTO `os_workflowdefs` (
+                        `WF_NAME`, `WF_DEFINITION`
+                ) VALUES (
+                        #name#, #descriptor#
+                )
+        </insert>
+        
+        <update id="updateWorkflowConfig" parameterClass="WorkflowConfigData">
+                UPDATE `os_workflowdefs`
+                SET
+                        `WF_DEFINITION`=#descriptor#
+                WHERE 
+                        `WF_NAME`=#name#
+        </update>
+        
+        <delete id="deleteWorkflowConfig" parameterClass="String">
+                DELETE FROM 
+                        `os_workflowdefs`
+                WHERE 
+                        `WF_NAME`=#value#
+        </delete>
+
+</sqlMap>

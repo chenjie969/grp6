@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><jatools Class="jatools.ReportDocument" Name="jatools report template"><VariableContext/><Page><Children ItemClass="PagePanel"><Item0><Width>785</Width><Height>127</Height><Children><Item0 Class="Label"><Text>担保集团担保/委贷业务五级分类明细</Text><Font><Face>宋体</Face><Style>1</Style><Size>36</Size></Font><HorizontalAlignment>1</HorizontalAlignment><X>26</X><Y>9</Y><Width>725</Width><Height>59</Height></Item0><Item1 Class="Label"><Text>金额单位：万元</Text><HorizontalAlignment>2</HorizontalAlignment><X>644</X><Y>103</Y><Width>110</Width><Height>23</Height></Item1><Item2 Class="Label"><Text>统计年月：</Text><HorizontalAlignment>1</HorizontalAlignment><X>298</X><Y>83</Y><Width>65</Width><Height>23</Height></Item2><Item3 Class="Text"><Variable>=if(has(endyearmonthsql)) return endyearmonthsql;else return ($today+"").substring(0,7)</Variable><X>362</X><Y>83</Y><Width>110</Width><Height>23</Height></Item3></Children><Type>100</Type></Item0><Item1><Y>1320</Y><Width>785</Width><Height>34</Height><Type>103</Type></Item1><Item2><Y>127</Y><Width>785</Width><Height>1193</Height><Children ItemClass="Table"><Item0><X>29</X><Y>4</Y><Children><Item0 Class="Label"><Text>序号</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>0</Row><Col>0</Col></Cell></Item0><Item1 Class="Label"><Text>户名</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>0</Row><Col>1</Col></Cell></Item1><Item2 Class="Label"><Text>合计</Text><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><PrintStyle>auto-size:height;</PrintStyle><Cell><Row>2</Row><Col>0</Col><ColSpan>2</ColSpan></Cell></Item2><Item3 Class="RowPanel"><Cell><Row>1</Row><Col>0</Col><ColSpan>5</ColSpan></Cell><Children ItemClass="RowPanel"><Item0><Cell><Row>1</Row><Col>0</Col><ColSpan>5</ColSpan></Cell><Children ItemClass="Text"><Item0><Variable>=if(has(index_column5.entrustSum{$.clientGUID})) return (index_column5.entrustSum{$.clientGUID});else return 0;</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>4</Col></Cell></Item0><Item1><Variable>=if(has(index_column4.guarantySum{$.clientGUID})) return (index_column4.guarantySum{$.clientGUID});else return 0;</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>3</Col></Cell></Item1><Item2><Variable>=$.riskLevelName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>2</Col></Cell></Item2><Item3><Variable>=$.clientName</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>1</Col></Cell></Item3><Item4><Variable>=$.position+1</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Wordwrap>true</Wordwrap><Cell><Row>1</Row><Col>0</Col></Cell></Item4></Children><NodePath>Row</NodePath></Item0></Children><NodePath>tab_project_detail</NodePath></Item3><Item4 Class="Text"><Variable>=if(has(endyearmonthsql)) return endyearmonthsql+"五级分类结果"; else return ($today+"").substring(0,7).replace("-",".")+"五级分类结果";</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>2</Col></Cell></Item4><Item5 Class="Text"><Variable>=if(has(endyearmonthsql)) return endyearmonthsql+"在保余额"; else return ($today+"").substring(0,7).replace("-",".")+"在保余额";</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>3</Col></Cell></Item5><Item6 Class="Text"><Variable>=if(has(endyearmonthsql)) return endyearmonthsql+"委贷余额"; else return ($today+"").substring(0,7).replace("-",".")+"委贷余额";</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>0</Row><Col>4</Col></Cell></Item6><Item7 Class="Label"><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Cell><Row>2</Row><Col>2</Col></Cell></Item7><Item8 Class="Text"><Variable>=index_column4.guarantySum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>2</Row><Col>3</Col></Cell></Item8><Item9 Class="Text"><Variable>=index_column5.entrustSum.sum()</Variable><Border><StyleText>border:1.0px solid #000000</StyleText></Border><Font><Face>宋体</Face><Style>1</Style><Size>12</Size></Font><HorizontalAlignment>1</HorizontalAlignment><Format Class="DecimalFormat"><Pattern>#,##0.000000</Pattern></Format><Cell><Row>2</Row><Col>4</Col></Cell></Item9></Children><ColumnWidths>87,244,130,129,135</ColumnWidths><RowHeights>30,30,30</RowHeights></Item0></Children><Type>102</Type></Item2></Children><PageFormat><Width>831</Width><Height>1390</Height><Left>12</Left><Top>18</Top><Right>34</Right><Bottom>18</Bottom><Orientation>0</Orientation></PageFormat></Page><NodeSource><Children ItemClass="DatasetNodeSource"><Item0><Children ItemClass="RowNodeSource"><Item0/></Children><Reader Class="SqlReader"><Name>tab_project_detail</Name><Sql>SELECT 
+   distinct cc.clientGUID,
+   cc.clientName,
+   cc.riskLevelName
+FROM  pro_project  pp
+LEFT JOIN  pro_apply  pa  ON pa.`apply_ID` = pp.`apply_ID`
+LEFT JOIN  crm_client  cc  ON  cc.`client_ID`=pa.`client_ID`
+LEFT JOIN c_dicType dic ON dic.dicTypeID=cc.riskLevelID
+WHERE pp.busiClass is not null and cc.clientName is not null
+and pp.finishDate is null
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.delayBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+ORDER BY  dic.order_id</Sql><Description>SELECT 
+   distinct cc.clientGUID,
+   cc.clientName,
+   cc.riskLevelName
+FROM  pro_project  pp
+LEFT JOIN  pro_apply  pa  ON pa.`apply_ID` = pp.`apply_ID`
+LEFT JOIN  crm_client  cc  ON  cc.`client_ID`=pa.`client_ID`
+LEFT JOIN c_dicType dic ON dic.dicTypeID=cc.riskLevelID
+WHERE pp.busiClass is not null and cc.clientName is not null
+and pp.finishDate is null
+${has(endyearmonthsql)?(" and  DATE_FORMAT(pp.delayBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+ORDER BY  dic.order_id</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><TagName>tab_project_detail</TagName></Item0><Item1><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">clientGUID</IndexFields><TagName>index_column4</TagName></Item0></Children><Reader Class="SqlReader"><Name>column_4</Name><Sql>SELECT
+	SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0))) AS guarantySum,
+	pa.clientGUID
+FROM pro_project pp
+LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+LEFT JOIN (
+	SELECT 
+	
+		pfp.project_ID,
+		SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM
+		pro_factpay pfp
+	WHERE 	1=1 
+		${has(endyearmonthsql)?(" and DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} 	
+	GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+LEFT JOIN (
+	SELECT 
+		pre.project_ID,        
+		SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum         
+	FROM
+		pro_replace pre
+	WHERE 	1=1   
+		${has(endyearmonthsql)?(" and DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} 	
+	GROUP BY pre.project_ID 
+)tab2 ON tab2.project_ID =  pp.project_ID 
+
+WHERE	pp.busiClass= '01'  
+and pp.finishDate is null
+	${has(endyearmonthsql)?(" and DATE_FORMAT(pp.delayBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+GROUP BY pa.clientGUID
+
+
+
+
+
+
+</Sql><Description>SELECT
+	SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0)-IFNULL(tab2.replaceCapitalSum,0))) AS guarantySum,
+	pa.clientGUID
+FROM pro_project pp
+LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+LEFT JOIN (
+	SELECT 
+	
+		pfp.project_ID,
+		SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM
+		pro_factpay pfp
+	WHERE 	1=1 
+		${has(endyearmonthsql)?(" and DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} 	
+	GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+LEFT JOIN (
+	SELECT 
+		pre.project_ID,        
+		SUM(IFNULL(pre.replaceCapitalSum,0)) AS replaceCapitalSum         
+	FROM
+		pro_replace pre
+	WHERE 	1=1   
+		${has(endyearmonthsql)?(" and DATE_FORMAT(pre.replaceDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} 	
+	GROUP BY pre.project_ID 
+)tab2 ON tab2.project_ID =  pp.project_ID 
+
+WHERE	pp.busiClass= '01'  
+and pp.finishDate is null
+	${has(endyearmonthsql)?(" and DATE_FORMAT(pp.delayBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+GROUP BY pa.clientGUID
+
+
+
+
+
+
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">clientGUID</IndexFields><TagName>column_4</TagName></Item1><Item2><Children ItemClass="IndexNodeSource"><Item0><IndexFields Len="1">clientGUID</IndexFields><TagName>index_column5</TagName></Item0></Children><Reader Class="SqlReader"><Name>column_5</Name><Sql>SELECT
+	SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0))) AS entrustSum,
+	pa.clientGUID
+FROM pro_project pp
+LEFT JOIN (
+	SELECT 
+	
+		pfp.project_ID,
+		SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM
+		pro_factpay pfp
+	WHERE 	1=1 
+		${has(endyearmonthsql)?(" and DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} 	
+	GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+WHERE	pp.busiClass= '02'  
+and pp.finishDate is null
+	${has(endyearmonthsql)?(" and DATE_FORMAT(pp.delayBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+GROUP BY pa.clientGUID
+
+
+
+
+
+
+</Sql><Description>SELECT
+	SUM((IFNULL(pp.loadSum,0)-IFNULL(tab1.payCapitalSum,0))) AS entrustSum,
+	pa.clientGUID
+FROM pro_project pp
+LEFT JOIN (
+	SELECT 
+	
+		pfp.project_ID,
+		SUM(IFNULL(pfp.payCapitalSum,0)) AS payCapitalSum         
+	FROM
+		pro_factpay pfp
+	WHERE 	1=1 
+		${has(endyearmonthsql)?(" and DATE_FORMAT(pfp.payDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""} 	
+	GROUP BY pfp.project_ID
+)tab1 ON tab1.project_ID =  pp.project_ID
+LEFT JOIN  pro_apply  pa ON pp.apply_ID=pa.apply_ID
+WHERE	pp.busiClass= '02'  
+and pp.finishDate is null
+	${has(endyearmonthsql)?(" and DATE_FORMAT(pp.delayBeginDate,'%Y-%m')&lt;='"+endyearmonthsql+"'"):""}
+GROUP BY pa.clientGUID
+
+
+
+
+
+
+</Description><Connection><Driver>${property("proxool.driverClassName")}</Driver><User>${property("proxool.username")}</User><Password>${property("proxool.password")}</Password><Url>${property("proxool.url")}</Url></Connection></Reader><IndexFields Len="1">clientGUID</IndexFields><TagName>column_5</TagName></Item2></Children></NodeSource></jatools>

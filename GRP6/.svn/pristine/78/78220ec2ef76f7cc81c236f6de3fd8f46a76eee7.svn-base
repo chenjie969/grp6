@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.gbpm.db.map.Gbpm_runNodeMapper">
+
+	<resultMap type="com.zjm.gbpm.db.model.Gbpm_runNode" id="runNodeResultMap">
+		<result column="runNode_ID" property="runNode_ID"  />
+		<result column="productInstanceID" property="productInstanceID"  />
+		<result column="nodeNames" property="nodeNames"  />
+		<result column="isDelete" property="isDelete"  />
+		<result column="limitDay" property="limitDay"  />
+		<result column="nodeSort" property="nodeSort"  />
+		<result column="transferResultID" property="transferResultID"  />
+		<result column="transferResultName" property="transferResultName"  />
+		<result column="assignDateTime" property="assignDateTime"  />
+		<result column="unit_uid" property="unit_uid"  />
+		<result column="unit_uidName" property="unit_uidName"  />
+		<result column="updateUserName" property="updateUserName"  />
+		<result column="updateDateTime" property="updateDateTime"  />
+	</resultMap>
+	
+	
+	
+	<!-- 查询一条运行中节点-->  
+	<select id="selectOneRunNodeByWhereSql" parameterType="java.lang.String" resultMap="runNodeResultMap">
+		<![CDATA[
+		SELECT 
+			runNode_ID,
+			productInstanceID,
+			nodeNames,
+			isDelete,
+			limitDay,
+			nodeSort,
+			transferResultID,
+			transferResultName,
+			assignDateTime,
+			unit_uid,
+			unit_uidName,
+			updateUserName,
+			updateDateTime
+			
+		FROM gbpm_runNode
+		WHERE  1=1
+		   ${value}
+		   limit 1
+		
+		]]>
+	</select>
+	
+	<!-- 修改一条运行中节点 -->
+	<update id="updateOneRunNodeInfo" parameterType="com.zjm.gbpm.db.model.Gbpm_runNode">
+		UPDATE gbpm_runNode
+		SET
+			isDelete= #{isDelete},
+			updateUserName = #{updateUserName},  
+			updateDateTime = NOW() 
+		WHERE runNode_ID = #{runNode_ID}
+	</update>
+	
+	<!-- 插入一条运行中节点 -->
+	<insert id="insertOneRunNodeInfo" parameterType="com.zjm.gbpm.db.model.Gbpm_runNode">
+		INSERT INTO gbpm_runNode(
+			runNode_ID,
+			productInstanceID,
+			nodeNames,
+			isDelete,
+			limitDay,
+			nodeSort,
+			transferResultID,
+			transferResultName,
+			assignDateTime,
+			unit_uid,
+			unit_uidName,
+			updateUserName,
+			updateDateTime   
+		) VALUES(
+			#{runNode_ID},
+			#{productInstanceID},
+			#{nodeNames}, 
+			#{isDelete}, 
+			#{limitDay}, 
+			#{nodeSort}, 
+			#{transferResultID}, 
+			#{transferResultName}, 
+			NOW(), 
+			#{unit_uid}, 
+			#{unit_uidName},  
+			#{updateUserName},  
+			NOW()
+		)
+	</insert>
+	
+	<!-- 删除 -->
+	<delete id="deleteRunNodeByWheresql" parameterType="java.lang.String">
+		<![CDATA[
+			delete from gbpm_runNode
+			where 1=1 ${value}
+		]]>
+	</delete>
+	
+</mapper>

@@ -1,0 +1,1 @@
+ALTER TABLE pro_factpay ADD COLUMN interest decimal(18,6) DEFAULT NULL COMMENT '还款后的累计利息';

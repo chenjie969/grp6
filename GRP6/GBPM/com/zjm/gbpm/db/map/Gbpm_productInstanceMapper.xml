@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjm.gbpm.db.map.Gbpm_productInstanceMapper">
+
+	<resultMap type="com.zjm.gbpm.db.model.Gbpm_productInstance" id="productInstanceResultMap">
+		<result column="productInstance_ID" property="productInstance_ID"  />
+		<result column="entityType" property="entityType"  />
+		<result column="entityID" property="entityID"  />
+		<result column="entityName" property="entityName"  />
+		<result column="productID" property="productID"  />
+		<result column="productName" property="productName"  />
+		<result column="createUserID" property="createUserID"  />
+		<result column="createUserName" property="createUserName"  />
+		<result column="createDateTime" property="createDateTime"  />
+		<result column="productStatus" property="productStatus"  />
+		<result column="isReturn" property="isReturn"  />
+		<result column="returnType" property="returnType"  />
+		<result column="returnDesc" property="returnDesc"  />
+		<result column="returnBeforeNodeID" property="returnBeforeNodeID"  />
+		<result column="unit_uid" property="unit_uid"  />
+		<result column="unit_uidName" property="unit_uidName"  />
+		<result column="updateUserName" property="updateUserName"  />
+		<result column="updateDateTime" property="updateDateTime"  />
+		
+	</resultMap>
+	
+	<!-- 分页查询我发起的流程列表 -->
+	<select id="selectProductMyBuildInstancePageTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="productInstanceResultMap">
+		<![CDATA[
+		SELECT 
+			productInstance_ID,
+			entityType,
+			entityID,
+			entityName,
+			productID,
+			productName,
+			createUserID,
+			createUserName,
+			createDateTime,
+			productStatus,
+			isReturn,
+			returnType,
+			returnDesc,
+			returnBeforeNodeID,
+			unit_uid,
+			unit_uidName,
+			updateUserName,
+			updateDateTime
+		FROM gbpm_productInstance 
+		WHERE 1=1
+			  ${wheresql}
+		LIMIT #{pageNumber},#{pageSize}  
+		]]>
+	</select>
+	
+	<!-- 分页查询我发起的流程列表-查询总记录数 -->
+	<select id="selectProductMyBuildInstancePageTable_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="long">
+	<![CDATA[
+	 	SELECT 
+	 		COUNT(1) 
+	 	FROM 
+	 		gbpm_productInstance 
+	 	WHERE 1=1
+	 		${wheresql}
+	 	]]>	
+	</select>
+	
+	<!-- 分页查询我参与的流程列表 -->
+	<select id="selectProductMyJoinInstancePageTable" parameterType="com.zjm.common.db.model.PageTable" resultMap="productInstanceResultMap">
+		<![CDATA[
+		SELECT 
+			productInstance_ID,
+			entityType,
+			entityID,
+			entityName,
+			productID,
+			productName,
+			createUserID,
+			createUserName,
+			createDateTime,
+			productStatus,
+			isReturn,
+			returnType,
+			returnDesc,
+			returnBeforeNodeID,
+			unit_uid,
+			unit_uidName,
+			updateUserName,
+			updateDateTime
+		FROM gbpm_productInstance 
+		WHERE 1=1
+			  ${wheresql}
+		LIMIT #{pageNumber},#{pageSize}  
+		]]>
+	</select>
+	
+	<!-- 分页查询我参与的流程列表-查询总记录数 -->
+	<select id="selectProductMyJoinInstancePageTable_Count" parameterType="com.zjm.common.db.model.PageTable" resultType="long">
+	<![CDATA[
+	 	SELECT 
+	 		COUNT(1) 
+	 	FROM 
+	 		gbpm_productInstance 
+	 	WHERE 1=1
+	 		${wheresql}
+	 	]]>	
+	</select>
+	
+	<!-- 查询一条实例化-->  
+	<select id="selectOneProductInstanceByWhereSql" parameterType="java.lang.String" resultMap="productInstanceResultMap">
+	<![CDATA[
+		SELECT 
+			productInstance_ID,
+			entityType,
+			entityID,
+			entityName,
+			productID,
+			productName,
+			createUserID,
+			createUserName,
+			createDateTime,
+			productStatus,
+			isReturn,
+			returnType,
+			returnDesc,
+			returnBeforeNodeID,
+			unit_uid,
+			unit_uidName,
+			updateUserName,
+			updateDateTime
+			
+		FROM gbpm_productInstance
+		WHERE  1=1
+		   ${value}
+		limit 1
+		
+		]]>
+	</select>
+	
+	<!-- 插入一条实例化流程 -->
+	<insert id="insertOneProductInstanceInfo" parameterType="com.zjm.gbpm.db.model.Gbpm_productInstance">
+		INSERT INTO gbpm_productinstance(
+			productInstance_ID,
+			entityType,
+			entityID,
+			entityName,
+			productID,
+			productName,
+			createUserID,
+			createUserName,
+			createDateTime,
+			productStatus,
+			isReturn,
+			returnType,
+			returnDesc,
+			returnBeforeNodeID,
+			unit_uid,
+			unit_uidName,
+			updateUserName,
+			updateDateTime    
+		) VALUES(
+			#{productInstance_ID},
+			#{entityType},
+			#{entityID},
+			#{entityName},
+			#{productID}, 
+			#{productName}, 
+			#{createUserID}, 
+			#{createUserName}, 
+			NOW(), 
+			#{productStatus}, 
+			isReturn,
+			returnType,
+			returnDesc,
+			returnBeforeNodeID,
+			#{unit_uid}, 
+			#{unit_uidName},  
+			#{updateUserName},  
+			NOW()
+		)
+	</insert>
+	
+	<!-- 查询产品流程模板是否被实例化-->  
+	<select id="isExistProductInstance" parameterType="java.lang.String" resultType="java.lang.Integer">
+	<![CDATA[
+		SELECT 
+			count(productID)
+		FROM gbpm_productInstance
+		WHERE  1=1
+		   ${value}
+		
+		]]>
+	</select>
+	
+	<!-- 更新一个保后（贷后）产品放款明细表信息 -->	
+	<update id="updateProductInstanceInfo" parameterType="com.zjm.gbpm.db.model.Gbpm_productInstance">
+		UPDATE 
+		     gbpm_productInstance
+		<set >
+      		<if test="entityType != null" >entityType= #{entityType},</if>
+	  		<if test="entityID != null">entityID= #{entityID},</if>	
+  	 		<if test="entityName != null" >entityName= #{entityName},</if>
+			<if test="productStatus != null" >productStatus= #{productStatus},</if>
+			<if test="isReturn != null" >isReturn= #{isReturn},</if>
+			<if test="returnType != null" >returnType= #{returnType},</if>
+			<if test="returnDesc != null" >returnDesc= #{returnDesc},</if>
+			<if test="returnBeforeNodeID != null" >returnBeforeNodeID= #{returnBeforeNodeID},</if>
+			<if test="updateUserName != null" >updateUserName= #{updateUserName},</if>
+		  	updateDateTime = NOW()		
+		</set>
+			 
+		WHERE productInstance_ID=#{productInstance_ID} 
+	</update>
+	
+	<delete id="delProductInstanceInfo" parameterType="java.lang.String">
+		<![CDATA[
+			delete from gbpm_productInstance
+			where 1=1 ${value}
+		]]>
+	</delete>
+	
+	
+</mapper>
